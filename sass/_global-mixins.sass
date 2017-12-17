@@ -1,0 +1,44 @@
+/**
+ * Units
+ * */
+$base-font-size: 16px !default
+
+@function rem($size: $base-font-size)
+    @return (strip-units($size)/strip-units($base-font-size))+rem
+
+@function em($size: $font_size, $target: $base-font-size)
+    @return (strip-units($size)/strip-units($target))+em
+
+@function strip-units($value)
+    @return $value / ($value * 0 + 1)
+
+/**
+ * Vertical alignment transformation
+ * */
+=vertical-align($position: relative)
+    transform: translateY(-50%)
+    position: $position
+    top: 50%
+
+
+/**
+ * Horizontal alignment transformation
+ * */
+=horizontal-align($position: relative, $additionalTransforms: false)
+
+    @if $additionalTransforms != false
+        transform: translateX(-50%) $additionalTransforms
+    @else
+        transform: translateX(-50%)
+
+
+    position: $position
+    left: 50%
+
+
+=center-align($position: absolute)
+    transform: translate(-50%, -50%)
+
+    top: 50%
+    left: 50%
+    position: $position
