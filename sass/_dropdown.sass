@@ -1,0 +1,20 @@
+$dropdown-content-background-color: $blue
+$dropdown-item-color: $white
+$dropdown-item-hover-color: $white
+$dropdown-item-hover-background-color: #2568ef
+$dropdown-item-active-color: $white
+
+
+@import '../node_modules/bulma/sass/components/dropdown'
+
+
+.dropdown-content
+  padding-bottom: unset
+  padding-top: unset
+
+.dropdown-item
+  border-bottom: 1px solid #2057c5
+  border-left: 3px solid $blue
+
+  &.is-active
+    border-left: 3px solid $green
