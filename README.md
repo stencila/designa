@@ -1,4 +1,4 @@
-## `stencila/style` : Stencila's style guide and resources
+## `stencila/style` : Stencila's visual design resources and style guide
 
 This is the place for Stencila's visual design resources (e.g. CSS, icons, logos) and [style guide](https://stencila.github.io/stencila/style/guide). The resources here are resused across a number of other repositores including the main application interfaces ([`stencila/stencila`](https://github.com/stencila/stencila)), the hub ([`stencila/hub`](https://github.com/stencila/hub)) and documentation sites ([`stencila/docket`](https://github.com/stencila/docket)).
 
