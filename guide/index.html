@@ -10,7 +10,7 @@
   </head>
   <body>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar is-sticky" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item">
       <img src="img/stencila-logo.png">
@@ -29,22 +29,28 @@
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link" href="#buttons">Buttons</a>
         <div class="navbar-dropdown is-right">
-          <a class="navbar-item" href="#text-only-button">Text only</a>
-          <a class="navbar-item" href="#icon-only-button">Icon only</a>
+          <a class="navbar-item" href="#text-button">Text only</a>
+          <a class="navbar-item" href="#icon-button">Icon only</a>
           <a class="navbar-item" href="#text-icon-button">Text and icon</a>
         </div>
       </div>
-      <div class="navbar-item">
-        <a class="navbar-link" href="content">Fields</a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" href="#forms">Forms</a>
+        <div class="navbar-dropdown is-right">
+          <a class="navbar-item" href="#form-text-field">Text field</a>
+          <a class="navbar-item" href="#form-select-field">Select field</a>
+          <a class="navbar-item" href="#form-label-help">Labels and help</a>
+        </div>
       </div>
-      <a class="navbar-item" href="#forms">Forms</a>
-      <a class="navbar-item" href="#toolbars">Toolbars</a>
+      <a class="navbar-item" href="#modals">Modals</a>
       <a class="navbar-item" href="#menus">Menus</a>
-      <a class="navbar-item" href="#navigation">Navigation</a>
+      <a class="navbar-item" href="#toolbars">Toolbars</a>
+      <a class="navbar-item" href="#navbars">Navbars</a>
     </div>
   </div>
 </nav>
 
+  <section class="section">
     <div class="container">
 
 <section class="hero">
@@ -123,19 +129,57 @@
 <section class="section">
   <h1 class="title" id="button">Buttons</h1>
 
-  <p>A <code>.button</code>:</p>
+  <h2 class="title is-4" id="text-button">Text button</h1>
+
+  <p>A plain text button</p>
   <div class="example">
     <a class="button">Button</a>
   </div>
 
-  <p>A <code>.button.is-primary</code>:</p>
+  <p>A primary text button (e.g. a "Save" button in a modal dialog)</p>
   <div class="example">
     <a class="button is-primary">Primary</a>
   </div>
+
+  <h2 class="title is-4" id="icon-button">Icon button</h2>
+
+  <p>An icon button (e.g. the bold tool in a document toolbar)</p>
+  <div class="example">
+    <a class="button">
+      <span class="icon">
+        <i class="fa fa-bold"></i>
+      </span>
+    </a>
+  </div>
+
+  <p>An active icon button (e.g. when the bold tool is active</p>
+  <div class="example">
+    <a class="button is-active">
+      <span class="icon">
+        <i class="fa fa-bold"></i>
+      </span>
+    </a>
+  </div>
+
+  <h2 class="title is-4" id="text-icon-button">Text and icon button</h2>
+
+  <p>A button with both text and an icon</p>
+  <div class="example">
+    <a class="button">
+      <span>Save</span>
+      <span class="icon">
+        <i class="fa fa-save"></i>
+      </span>
+    </a>
+  </div>
+
 </section>
 
-<section class="section">
-  <h1 class="title">Fields</h1>
+
+<section class="section" id="forms">
+  <h1 class="title">Forms</h1>
+
+  <h2 class="title is-4" id="form-text-field">Text field</h2>
 
   A <code>input[type="text"]</code> field:
   <div class="example">
@@ -145,6 +189,8 @@
       </div>
     </div>
   </div>
+
+  <h2 class="title is-4" id="form-select-field">Select field</h2>
 
   A <code>select</code> field:
   <div class="example">
@@ -160,7 +206,9 @@
     </div>
   </div>
 
-  <p>A field with a <code>.label</code>:</p>
+  <h2 class="title is-4" id="form-text-field">Labels and help</h2>
+
+  A field with a <code>.label</code>:
   <div class="example">
     <div class="field">
       <label class="label">Label</label>
@@ -170,7 +218,7 @@
     </div>
   </div>
 
-  <p>A field with a <code>.label</code> and a <code>.help</code>:</p>
+  A field with a <code>.label</code> and a <code>.help</code>:
   <div class="example">
     <div class="field">
       <label class="label">Label</label>
@@ -180,11 +228,15 @@
       <p class="help">This is a help text</p>
     </div>
   </div>
-
 </section>
 
-<section class="section">
-  <h1 class="title">Menu</h1>
+<section class="section" id="modals">
+  <h1 class="title">Modals</h1>
+  <p>See <a href="modal-card.html" target="_blank">modal-card.html</a> for an example.
+</section>
+
+<section class="section" id="menus">
+  <h1 class="title">Menus</h1>
 
   <div class="example" style="height: 20em">
     <div class="dropdown is-active is-hoverable">
@@ -208,6 +260,18 @@
   </div>
 </section>
 
+
+<section class="section" id="toolbars">
+  <h1 class="title">Toolbars</h1>
+</section>
+
+
+<section class="section" id="navbars">
+  <h1 class="title">Navbars</h1>
+</section>
+
+
+      </div>
     </div>
   </body>
 </html>
