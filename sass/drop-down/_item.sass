@@ -1,0 +1,39 @@
+// Individual dropdown menu items
+a.dropdown-item
+    border-bottom: 1px solid $mariner
+    position: relative
+    display: inline-flex
+    justify-content: space-between
+    align-items: center
+    width: 100%
+    padding: rem(10) rem(20)
+    font-weight: $weight-heavy
+    font-size: rem(14)
+    line-height: 1em
+
+    &:before
+        position: absolute
+        left: 0
+        top: 0
+        width: 0
+        height: 100%
+        background: transparent
+        content: ''
+        transition: all .25s ease
+
+    &:hover
+        &:before
+            background: $green
+            width: 4px
+
+    &:first-child
+        border-top-left-radius: 3px
+        border-top-right-radius: 3px
+
+    &:last-child
+        border-bottom: none
+        border-bottom-left-radius: 3px
+        border-bottom-right-radius: 3px
+
+    .icon
+        margin-left: rem(40)

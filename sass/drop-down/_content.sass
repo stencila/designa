@@ -1,0 +1,15 @@
+// Dropdown content (containre for main menu items)
+.dropdown-content
+    padding-bottom: unset
+    padding-top: unset
+    position: relative
+    box-shadow: 2px 2px 20px rgba($black, .2)
+
+    &:before
+        content: ''
+        display: block
+        position: absolute
+        top: -8px
+        left: 50%
+        transform: translateX(-50%)
+        @include triangle($width: 16px, $height: 8px, $color: $blue, $direction: up)

@@ -1,0 +1,34 @@
+// Drop down is new menu (variation for creating new elements)
+.dropdown
+    &.is-new-menu
+        header
+            color: $white
+            background: $blue
+            display: flex
+            align-items: center
+            justify-content: space-between
+            border-top-left-radius: 3px
+            border-top-right-radius: 3px
+            font-size: rem(14)
+            line-height: 1em
+            font-weight: $weight-medium
+            padding: rem(10) rem(20)
+
+        a.dropdown-item
+            background: $white-smoke
+            border-bottom-color: $white-lilac
+            color: $blue
+            font-weight: $weight-heavy
+            font-size: rem(18)
+            line-height: 1em
+            justify-content: flex-start
+
+            &:hover,
+            &.is-active
+                background: $white
+
+            &:first-child
+                border-radius: unset
+
+            .logo
+                margin-right: rem(10)
