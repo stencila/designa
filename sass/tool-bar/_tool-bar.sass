@@ -1,0 +1,24 @@
+
+.tool-bar
+    border-radius: 3px
+    border-top: 4px solid $blue
+    background: $white-smoke
+    padding-top: rem(12)
+    display: inline-block
+
+    @import './button'
+    @import './drop-down'
+
+    &.is-vertical
+        width: rem(100)
+
+    .buttons
+        display: flex
+        flex-wrap: wrap
+        margin-bottom: 0
+
+    hr
+        background-color: $white-lilac
+        border-top: 1px solid $white-lilac
+        border-bottom: 1px solid $white
+        margin: 0

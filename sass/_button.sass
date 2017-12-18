@@ -7,6 +7,7 @@
 
     &.is-toolbar
         border-radius: 50%
+        background-color: $white
         border-color: rgba($charcoal, .1)
         font-weight: $weight-bold
         font-size: rem(16)
@@ -15,14 +16,28 @@
         width: rem(32)
         height: rem(32)
         color: rgba($charcoal, .6)
+        transition: all .25s ease
 
         &:hover
-            color: $white
-            background: $blue
-            border-color: $blue
+            color: $blue
 
         span
             @include center-align
 
-        sub
+        sub,
+        sup
             font-size: rem(10)
+
+    &.is-active
+        background: $blue
+        border-color: $blue
+        color: $white
+
+        &:hover
+            background: $blue
+            border-color: $blue
+            color: $white
+
+    .icon
+        margin-left: 0
+        margin-right: 0

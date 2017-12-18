@@ -20,7 +20,6 @@ $base-font-size: 16px !default
     position: $position
     top: 50%
 
-
 /**
  * Horizontal alignment transformation
  * */
@@ -42,3 +41,39 @@ $base-font-size: 16px !default
     top: 50%
     left: 50%
     position: $position
+
+/**
+ * Triangle generation
+ * */
+=triangle($width: 10px, $height: 5px, $color: $black, $direction: down)
+    width: 0
+    height: 0
+    border-style: solid
+
+    @if $direction == down
+        border-width: $height ($width/2) 0 ($width/2)
+        border-color: $color transparent transparent transparent
+
+    @if $direction == up
+        border-width: 0 ($width/2) $height ($width/2)
+        border-color: transparent transparent $color transparent
+
+    @if $direction == left
+        border-width: ($height/2) $width ($height/2) 0
+        border-color: transparent $color transparent transparent
+
+    @if $direction == right
+        border-width: ($height/2) 0 ($height/2) $width
+        border-color: transparent transparent transparent $color
+
+    @if $direction == topleft
+        border-width: $height $width 0 0
+        border-color: $color transparent transparent transparent
+
+    @if $direction == bottomright
+        border-width: 0 0 $height $width
+        border-color: transparent transparent $color transparent
+
+    @if $direction == bottomleft
+        border-width: $height 0 0 $width
+        border-color: transparent transparent transparent $color

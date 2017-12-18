@@ -1,0 +1,37 @@
+// Toll bar drop down
+.drop-down
+    padding: rem(12)
+    color: $charcoal
+    font-size: rem(14)
+    font-weight: $weight-medium
+    line-height: 1em
+    display: block
+    display: flex
+    justify-content: space-between
+    align-items: center
+    transition: all .25s ease
+    position: relative
+
+    &:hover
+        color: $blue
+
+        &:before
+            width: 3px
+            background: $green
+
+    &:before
+        display: block
+        width: 0
+        height: 110%
+        left: 0
+        top: -5%
+        content: ''
+        position: absolute
+        background: transparent
+        transition: all .25s ease
+
+    &.is-active
+        color: $blue
+
+        &:before
+            display: none
