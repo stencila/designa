@@ -7,15 +7,16 @@
   "author": "https://github.com/stencila/style/graphs/contributors",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@storybook/addon-storysource": "^4.0.2",
+    "@storybook/addons": "^4.0.2",
+    "@storybook/html": "^4.0.2",
     "autoprefixer": "^7.2.3",
+    "babel-loader": "^8.0.4",
     "bulma": "^0.6.1",
     "http-server": "^0.10.0",
-    "jquery": "^3.2.1",
-    "js-beautify": "^1.7.5",
     "node-sass": "^4.7.2",
-    "postcss-cli": "^4.1.1",
-    "prismjs": "^1.9.0",
-    "uglify-js": "^3.2.2"
+    "postcss-cli": "^4.1.1"
   },
   "scripts": {
     "watch": "npm run css-watch",
@@ -27,8 +28,6 @@
     "css-postcss": "postcss --use autoprefixer --output css/stencila.css css/stencila.css",
     "css-gzip": "gzip -c css/stencila.css > css/stencila.css.gz",
     "css-deploy": "npm run css-build && npm run css-postcss && npm run css-gzip",
-    "guide-build-css": "cat node_modules/prismjs/themes/prism-tomorrow.css guide/guide.css | node-sass --output-style compressed > guide/guide.min.css",
-    "guide-build-js": "cat node_modules/jquery/dist/jquery.min.js node_modules/prismjs/prism.js guide/guide.js | uglifyjs --comments --compress --mangle -- > guide/guide.min.js",
-    "guide-build": "npm run guide-build-css && npm run guide-build-js"
+    "storybook": "start-storybook --port 9001 --static-dir .storybook --static-dir ."
   }
 }
