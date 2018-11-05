@@ -1,6 +1,6 @@
 ## `stencila/style` : Stencila's visual design resources and style guide
 
-This is the place for Stencila's visual design resources (e.g. CSS, icons, logos) and [style guide](https://stencila.github.io/style/guide). The resources here are resused across a number of other repositores including the main application interfaces ([`stencila/stencila`](https://github.com/stencila/stencila)), the hub ([`stencila/hub`](https://github.com/stencila/hub)) and documentation sites ([`stencila/docket`](https://github.com/stencila/docket)).
+This is the place for Stencila's visual design resources (e.g. CSS, icons, logos) and style guide. The resources here will be reused across a number of other repositores including our main website ([`stencila/website`](https://github.com/stencila/website)) and the hub ([`stencila/hub`](https://github.com/stencila/hub)).
 
 To get started with development, clone this repo:
 
@@ -20,8 +20,8 @@ Build SASS into CSS using the `watch` NPM script:
 npm run watch
 ```
 
-In a separate console, run the local server to view the style guide, including examples, in your browser and `Crtl+R` to refresh when you make changes:
+In a separate console, run Storybook and refresh your browser when you make changes to the CSS (Storybook automatically refreshes when you make changes to the stories):
 
 ```bash
-npm run serve
+npm run storybook
 ```
