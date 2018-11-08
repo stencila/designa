@@ -77,3 +77,16 @@ $base-font-size: 16px !default
     @if $direction == bottomleft
         border-width: $height 0 0 $width
         border-color: transparent transparent transparent $color
+
+////
+/// Generate list styles
+////
+=generate-list-styles($padding-left: 20)
+    $list-styles: disc, circle
+
+    @each $style in $list-styles
+        ul.list-style--#{$style}
+            list-style: #{$style}
+            padding-left: rem($padding-left)
+
+@include generate-list-styles
