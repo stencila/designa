@@ -1,0 +1,63 @@
+////
+/// Overrides for Bulma navbar component
+////
+.navbar,
+.navbar-menu
+    align-items: center
+
+.navbar-start
+    height: 100%
+    align-items: flex-end
+
+    .navbar-item
+        padding-bottom: rem(30)
+
+.navbar-end
+    margin-top: auto
+    margin-bottom: rem(20)
+
+.navbar-item,
+.navbar-link
+  padding-left: rem(20)
+  padding-right: rem(20)
+
+.navbar-item
+    font-size: rem(22)
+    line-height: em(18, 22)
+    font-weight: $weight-semibold
+    position: relative
+    margin-left: rem(20)
+    margin-right: rem(20)
+
+    &:after
+        content: ''
+        display: block
+        width: 0
+        height: 3px
+        position: absolute
+        left: 0
+        bottom: 0
+        background: $link
+
+    &:hover
+        &:after
+            width: 100%
+
+    &.is-active
+        pointer-events: none
+
+        &:after
+            width: 100%
+
+.navbar-logo
+    &:hover
+        &:after
+            display: none
+
+.navbar-call-to-action
+    &.button
+        font-size: rem(16)
+        font-weight: $weight-semibold
+        line-height: 1em
+        text-transform: uppercase
+        padding: rem(20) rem(40)

@@ -13,20 +13,24 @@ storiesOf('Config', module)
         <h2 class="has-text-weight-bold storybook-section__header">Brand Colours</h2>
         <div class="columns">
             <div class="colour-swatch column is-flex flex-direction-column align-centre">
-                <div class="swatch has-background-blue"></div>
-                <span class="tag is-blue">blue</span>
+                <div class="swatch has-background-cobalt-blue"></div>
+                <span class="tag is-cobalt-blue">cobalt-blue</span>
             </div>
             <div class="colour-swatch column is-flex flex-direction-column align-centre">
-                <div class="swatch has-background-denim"></div>
-                <span class="tag is-denim">denim</span>
+                <div class="swatch has-background-navy-blue"></div>
+                <span class="tag is-navy-blue">navy-blue</span>
             </div>
             <div class="colour-swatch column is-flex flex-direction-column align-centre">
-                <div class="swatch has-background-mariner"></div>
-                <span class="tag is-mariner">mariner</span>
+                <div class="swatch has-background-blend"></div>
+                <span class="tag is-blend">blend</span>
             </div>
             <div class="colour-swatch column is-flex flex-direction-column align-centre">
-                <div class="swatch has-background-green"></div>
-                <span class="tag is-green">green</span>
+                <div class="swatch has-background-apple-green"></div>
+                <span class="tag is-apple-green">apple-green</span>
+            </div>
+            <div class="colour-swatch column is-flex flex-direction-column align-centre">
+                <div class="swatch has-background-toxic-green"></div>
+                <span class="tag is-toxic-green">toxic-green</span>
             </div>
             <div class="colour-swatch column is-flex flex-direction-column align-centre">
                 <div class="swatch has-background-pink"></div>

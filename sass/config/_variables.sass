@@ -5,10 +5,16 @@ $weight-heavy: 900
 
 // Overrides of derived variables
 // See https://bulma.io/documentation/overview/variables/#derived-variables for a list
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,600,600i,700,700i')
 
-// $primary: $blue
-
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,700,700i,900,900i')
-
-$family-sans-serif: 'Montserrat', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+$family-sans-serif: 'Poppins', sans-serif
 $family-monospace: monospace
+
+$family-primary: $family-sans-serif
+
+
+////
+/// Component specific overrides.
+////
+@import 'bulma-overrides/navbar'
+@import 'bulma-overrides/buttons'
