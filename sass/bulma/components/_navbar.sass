@@ -1,6 +1,37 @@
 ////
 /// Overrides for Bulma navbar component
 ////
+
+/// Variables to overide
+$stencila-navbar-item-padding-right: 20 !default
+$stencila-navbar-item-padding-bottom: 30 !default
+$stencila-navbar-item-padding-left: 20 !default
+$stencila-navbar-item-font-size: 22 !default
+$stencila-navbar-item-line-height: 18 !default
+$stencila-navbar-end-margin-right: 10 !default
+$stencila-navbar-end-margin-bottom: 20 !default
+$stencila-navbar-end-margin-left: 10 !default
+$stencila-navbar-active-background-line: $toxic-green !default
+
+.navbar
+    box-shadow: 0 15px 30px rgba($black, 0.1)
+
+    +touch
+        min-height: 0
+
+    > .container
+        +touch
+            min-height: 0
+
+        .navbar-brand
+            margin-left: 0
+
+            +touch
+                min-height: 0
+
+        .navbar-menu
+          margin-right: 0
+
 .navbar,
 .navbar-menu
     align-items: center
@@ -10,24 +41,30 @@
     align-items: flex-end
 
     .navbar-item
-        padding-bottom: rem(30)
+        padding-bottom: rem($stencila-navbar-item-padding-bottom)
 
 .navbar-end
     margin-top: auto
-    margin-bottom: rem(20)
+    margin-bottom: rem($stencila-navbar-end-margin-bottom)
+
+    +touch
+        text-align: center
 
 .navbar-item,
 .navbar-link
-  padding-left: rem(20)
-  padding-right: rem(20)
+  padding-left: rem($stencila-navbar-item-padding-left)
+  padding-right: rem($stencila-navbar-item-padding-right)
 
 .navbar-item
-    font-size: rem(22)
-    line-height: em(18, 22)
+    font-size: rem($stencila-navbar-item-font-size)
+    line-height: em($stencila-navbar-item-line-height, $stencila-navbar-item-font-size)
     font-weight: $weight-semibold
     position: relative
-    margin-left: rem(20)
-    margin-right: rem(20)
+    margin-left: rem($stencila-navbar-end-margin-left)
+    margin-right: rem($stencila-navbar-end-margin-right)
+
+    +touch
+        text-align: center
 
     &:after
         content: ''
@@ -37,7 +74,10 @@
         position: absolute
         left: 0
         bottom: 0
-        background: $link
+        background: $stencila-navbar-active-background-line
+
+        +touch
+            display: none
 
     &:hover
         &:after
@@ -50,14 +90,21 @@
             width: 100%
 
 .navbar-logo
+    margin-left: rem($stencila-navbar-item-padding-left)
+    padding: 0
+    line-height: 0
+    font-size: 0
+
+    +desktop
+        margin-left: 0
+
+    +touch
+        width: rem(120)
+
     &:hover
         &:after
             display: none
 
-.navbar-call-to-action
-    &.button
-        font-size: rem(16)
-        font-weight: $weight-semibold
-        line-height: 1em
-        text-transform: uppercase
-        padding: rem(20) rem(40)
+.navbar-burger
+    +touch
+      +hamburger(80px)

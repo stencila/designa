@@ -1,0 +1,69 @@
+////
+/// Overrides for Bulma footer layout
+////
+$footer-section-color: #1C3FA2 !default
+
+.footer
+    font-weight: $weight-light
+    color: $white
+
+    +mobile
+        text-align: center
+
+    a
+        color: $white
+        font-weight: $weight-semibold
+        position: relative
+        padding-bottom: rem(3)
+
+        &:after
+            position: absolute
+            left: 0
+            bottom: 0
+            width: 0%
+            height: rem(3)
+            background: $footer-section-color
+            content: ''
+            display: block
+
+        &:hover
+            color: $footer-section-color
+
+            &:after
+                width: 100%
+
+        &.button,
+        &.footer-logo
+            &:after
+                display: none
+
+        &.footer-logo
+            line-height: 0
+            font-size: 0
+            display: block
+
+    .button.call-to-action
+        &:hover
+            color: $primary
+
+
+    .title
+        color: $footer-section-color
+        margin-bottom: 0
+
+    a,
+    .title
+        font-size: rem(16)
+        line-height: em(36, 16)
+
+    &-colophon
+        text-align: right
+
+        +mobile
+            text-align: center
+
+    &-links
+        padding-bottom: rem(120)
+
+        +mobile
+            padding-bottom: rem(40)
