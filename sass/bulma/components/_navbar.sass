@@ -6,12 +6,16 @@
 $stencila-navbar-item-padding-right: 20 !default
 $stencila-navbar-item-padding-bottom: 30 !default
 $stencila-navbar-item-padding-left: 20 !default
+$stencila-navbar-item-margin-right: 10 !default
+$stencila-navbar-item-margin-left: 10 !default
 $stencila-navbar-item-font-size: 22 !default
 $stencila-navbar-item-line-height: 18 !default
-$stencila-navbar-end-margin-right: 10 !default
-$stencila-navbar-end-margin-bottom: 20 !default
+$stencila-navbar-start-margin-left: 40 !default
+$stencila-navbar-end-margin-right: 40 !default
+$stencila-navbar-end-margin-bottom: 25 !default
 $stencila-navbar-end-margin-left: 10 !default
 $stencila-navbar-active-background-line: $toxic-green !default
+$stencila-navbar-burger-height: 80px !default
 
 .navbar
     box-shadow: 0 15px 30px rgba($black, 0.1)
@@ -19,22 +23,26 @@ $stencila-navbar-active-background-line: $toxic-green !default
     +touch
         min-height: 0
 
-    > .container
+    .navbar-brand
         +touch
             min-height: 0
 
-        .navbar-brand
-            margin-left: 0
-
-            +touch
-                min-height: 0
-
-        .navbar-menu
-          margin-right: 0
-
-.navbar,
-.navbar-menu
+.navbar
     align-items: center
+
+.navbar-inner
+    width: 100%
+    max-width: $fullhd
+    display: flex
+    margin: 0 auto
+    overflow: auto
+
+    +touch
+        flex-direction: column
+
+.navbar-menu
+    min-height: $navbar-height
+    align-items: flex-end
 
 .navbar-start
     height: 100%
@@ -46,9 +54,15 @@ $stencila-navbar-active-background-line: $toxic-green !default
 .navbar-end
     margin-top: auto
     margin-bottom: rem($stencila-navbar-end-margin-bottom)
+    margin-right: rem(10)
+
+    +until-fullhd
+        margin-right: rem($stencila-navbar-end-margin-right)
 
     +touch
         text-align: center
+        margin-right: 0
+        //rem($stencila-navbar-item-padding-right)
 
 .navbar-item,
 .navbar-link
@@ -60,8 +74,8 @@ $stencila-navbar-active-background-line: $toxic-green !default
     line-height: em($stencila-navbar-item-line-height, $stencila-navbar-item-font-size)
     font-weight: $weight-semibold
     position: relative
-    margin-left: rem($stencila-navbar-end-margin-left)
-    margin-right: rem($stencila-navbar-end-margin-right)
+    margin-left: rem($stencila-navbar-item-margin-left)
+    margin-right: rem($stencila-navbar-item-margin-right)
 
     +touch
         text-align: center
@@ -90,16 +104,16 @@ $stencila-navbar-active-background-line: $toxic-green !default
             width: 100%
 
 .navbar-logo
-    margin-left: rem($stencila-navbar-item-padding-left)
     padding: 0
     line-height: 0
     font-size: 0
 
-    +desktop
-        margin-left: 0
+    +until-fullhd
+        margin-left: rem($stencila-navbar-start-margin-left)
 
     +touch
         width: rem(120)
+        margin-left: rem($stencila-navbar-item-padding-left)
 
     &:hover
         &:after
@@ -107,4 +121,10 @@ $stencila-navbar-active-background-line: $toxic-green !default
 
 .navbar-burger
     +touch
-      +hamburger(80px)
+      +hamburger($stencila-navbar-burger-height)
+
+html,
+body
+    &.has-navbar-fixed-top-touch
+        +touch
+            padding-top: rem($stencila-navbar-burger-height)

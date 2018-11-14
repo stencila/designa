@@ -3,11 +3,30 @@
 ////
 $stencila-call-to-action-font-size: 16 !default
 $stencila-call-to-action-padding: rem(20) rem(40) !default
+$stencila-call-to-action-padding-large: rem(20) rem(80) !default
 
 .call-to-action
+    &-with-text
+        margin: rem(40) 0
+
+        +mobile
+            text-align: center
+
+        .call-to-action-text
+            color: $grey
+            font-size: rem(14)
+            line-height: em(18, 14)
+
+        .button
+            + .call-to-action-text
+                margin-top: rem(40)
+
     &.button
         font-size: rem($stencila-call-to-action-font-size)
         font-weight: $weight-semibold
         line-height: 1em
         text-transform: uppercase
         padding: $stencila-call-to-action-padding
+
+        &.is-large
+            padding: $stencila-call-to-action-padding-large

@@ -1,0 +1,9 @@
+////
+/// Overrides for Bulma button
+////
+.button
+    @each $name, $pair in $colors
+        $color: nth($pair, 1)
+        &.has-text-hover-#{$name}
+            &:hover
+                color: $color !important
