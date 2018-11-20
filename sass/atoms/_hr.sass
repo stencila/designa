@@ -6,3 +6,8 @@ hr
         width: rem(60)
         height: 3px
         background: $toxic-green
+
+        @each $name, $pair in $colors
+            $color: nth($pair, 1)
+            &.has-background-#{$name}
+                background: $color

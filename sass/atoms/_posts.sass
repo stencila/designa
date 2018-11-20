@@ -1,0 +1,12 @@
+////
+/// Posts - a container to hold posts - e.g. blog landing page.
+////
+.posts
+    @import "post"
+
+    &.tile
+        &.is-ancestor
+            display: flex
+            flex-wrap: wrap
+            justify-content: space-between
+            margin-top: rem(100)

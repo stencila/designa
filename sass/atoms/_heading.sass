@@ -42,3 +42,9 @@
                 height: 3px
                 width: rem(60)
                 background: $toxic-green
+
+            @each $name, $pair in $colors
+                $color: nth($pair, 1)
+                &--is-#{$name}
+                    &:after
+                        background: $color
