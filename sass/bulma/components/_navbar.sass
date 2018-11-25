@@ -70,6 +70,7 @@ $stencila-navbar-burger-height: 80px !default
   padding-right: rem($stencila-navbar-item-padding-right)
 
 .navbar-item
+    +transition
     font-size: rem($stencila-navbar-item-font-size)
     line-height: em($stencila-navbar-item-line-height, $stencila-navbar-item-font-size)
     font-weight: $weight-semibold
@@ -81,6 +82,7 @@ $stencila-navbar-burger-height: 80px !default
         text-align: center
 
     &:after
+        +transition($delay: 0.1s, $speed: $slow-speed)
         content: ''
         display: block
         width: 0

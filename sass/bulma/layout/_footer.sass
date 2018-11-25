@@ -12,13 +12,16 @@ $footer-section-color: #1C3FA2 !default
     +mobile
         text-align: center
 
+
     a
+        +transition
         color: $white
         font-weight: $weight-semibold
         position: relative
         padding-bottom: rem(3)
 
         &:after
+            +transition($attr: width, $delay: 0.1s)
             position: absolute
             left: 0
             bottom: 0

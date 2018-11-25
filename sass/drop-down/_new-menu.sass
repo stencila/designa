@@ -2,6 +2,7 @@
 .dropdown
     &.is-new-menu
         header
+            +transition($speed: $fast-speed)
             color: $white
             background: $blue
             display: flex
@@ -13,7 +14,6 @@
             line-height: 1em
             font-weight: $weight-medium
             padding: rem(10) rem(20)
-            transition: all .25s ease
 
             &:hover
                 background: $denim
@@ -23,15 +23,16 @@
             position: relative
 
             &:after
+                +transition($speed: $fast-speed)
+                +vertical-align($position: absolute)
                 right: rem(-20)
                 height: rem(36)
                 width: 0
                 background: transparent
                 display: block
                 content: ''
-                transition: all .25s ease
                 border-top-right-radius: 2px
-                @include vertical-align($position: absolute)
+
 
             &:hover
                 &:after

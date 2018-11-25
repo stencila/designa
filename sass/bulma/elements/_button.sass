@@ -2,6 +2,7 @@
 /// Overrides for Bulma button
 ////
 .button
+    +transition
     @each $name, $pair in $colors
         $color: nth($pair, 1)
         &.has-text-hover-#{$name}

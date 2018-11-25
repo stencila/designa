@@ -7,22 +7,18 @@
 
     &.is-toolbar
         border-radius: 50%
-        // background-color: $white
-        // border-color: rgba($charcoal, .1)
+        background-color: $white
+        border-color: rgba($dark, .1)
         font-weight: $weight-bold
         font-size: rem(16)
         display: inline-block
         position: relative
         width: rem(32)
         height: rem(32)
-        // color: rgba($charcoal, .6)
-        transition: all .25s ease
-
-        // &:hover
-        //     color: $blue
+        +transition
 
         span
-            @include center-align
+            +center-align
 
         sub,
         sup
