@@ -15,7 +15,8 @@
         position: relative
         width: rem(32)
         height: rem(32)
-        +transition
+
+        transition: background-color $normal-speed, color $normal-speed, border-color $normal-speed
 
         span
             +center-align
@@ -28,17 +29,6 @@
         .icon:first-child:last-child
             margin-left: 0
             margin-right: 0
-
-    // &.is-active
-    //     background: $blue
-    //     border-color: $blue
-    //     color: $white
-    //
-    //     &:hover
-    //         background: $blue
-    //         border-color: $blue
-    //         color: $white
-
 
     &.is-plain
         background: unset

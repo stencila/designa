@@ -17,44 +17,90 @@ $stencila-navbar-end-margin-left: 10 !default
 $stencila-navbar-active-background-line: $toxic-green !default
 $stencila-navbar-burger-height: 80px !default
 
-.navbar
-    box-shadow: 0 15px 30px rgba($black, 0.1)
-
-    +touch
-        min-height: 0
-
-    .navbar-brand
-        +touch
-            min-height: 0
+$stencila-navbar-transition: height $slow-speed $ease-out-cubic
 
 .navbar
     align-items: center
-
-.navbar-inner
-    width: 100%
-    max-width: $fullhd
-    display: flex
-    margin: 0 auto
-    overflow: auto
+    box-shadow: 0 0 0 rgba($black, 0)
+    transition: box-shadow $slow-speed 0.1s $ease-out-cubic
 
     +touch
-        flex-direction: column
+        min-height: 0
+        box-shadow: 0 15px 30px rgba($black, 0.05)
+
+    .container,
+    .navbar-brand,
+    .navbar-menu
+        transition: $stencila-navbar-transition
+        max-height: $navbar-height
+
+    .navbar-brand
+        transition: $stencila-navbar-transition
+        transform-origin: left center
+
+        +touch
+            min-height: 0
+
+    .container
+        display: flex
+        margin: 0 auto
+        min-height: 0
+
+        +touch
+            flex-direction: column
+            max-height: 100vh
+
+    &.is-active
+        min-height: 0
+        box-shadow: 0 15px 30px rgba($black, 0.05)
+
+        .container,
+        .navbar-brand,
+        .navbar-menu
+            max-height: rem(80)
+            min-height: 0
+
+        .container,
+        .navbar-brand
+            height: 100%
+
+        .navbar-start
+            .navbar-item
+                height: 100%
+                padding-top: 0
+                padding-bottom: 0
+
+        .navbar-brand
+            transform: scale(.5)
+            +touch
+                transform: scale(1)
+
+        .navbar-end
+            margin-bottom: 0
+            height: 100%
+            align-items: center
+
+            .button
+                font-size: rem(12)
+                padding: rem(16) rem(20)
+
 
 .navbar-menu
-    min-height: $navbar-height
+    min-height: 0
     align-items: flex-end
 
 .navbar-start
     height: 100%
-    align-items: flex-end
+    align-items: center
 
     .navbar-item
-        padding-bottom: rem($stencila-navbar-item-padding-bottom)
+        height: 100%
 
 .navbar-end
-    margin-top: auto
-    margin-bottom: rem($stencila-navbar-end-margin-bottom)
+    height: 100%
     margin-right: rem(10)
+    transition: height 0.25s ease
+    align-items: center
 
     +until-fullhd
         margin-right: rem($stencila-navbar-end-margin-right)
@@ -62,7 +108,6 @@ $stencila-navbar-burger-height: 80px !default
     +touch
         text-align: center
         margin-right: 0
-        //rem($stencila-navbar-item-padding-right)
 
 .navbar-item,
 .navbar-link
@@ -70,10 +115,10 @@ $stencila-navbar-burger-height: 80px !default
   padding-right: rem($stencila-navbar-item-padding-right)
 
 .navbar-item
-    +transition
+    // +transition
     font-size: rem($stencila-navbar-item-font-size)
     line-height: em($stencila-navbar-item-line-height, $stencila-navbar-item-font-size)
-    font-weight: $weight-semibold
+    font-weight: $weight-normal
     position: relative
     margin-left: rem($stencila-navbar-item-margin-left)
     margin-right: rem($stencila-navbar-item-margin-right)
