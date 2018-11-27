@@ -4,127 +4,83 @@
 
 /// Variables to overide
 $stencila-navbar-item-padding-right: 20 !default
-$stencila-navbar-item-padding-bottom: 30 !default
 $stencila-navbar-item-padding-left: 20 !default
-$stencila-navbar-item-margin-right: 10 !default
-$stencila-navbar-item-margin-left: 10 !default
-$stencila-navbar-item-font-size: 22 !default
+$stencila-navbar-item-font-size: 16 !default
 $stencila-navbar-item-line-height: 18 !default
-$stencila-navbar-start-margin-left: 40 !default
-$stencila-navbar-end-margin-right: 40 !default
-$stencila-navbar-end-margin-bottom: 25 !default
-$stencila-navbar-end-margin-left: 10 !default
 $stencila-navbar-active-background-line: $toxic-green !default
 $stencila-navbar-burger-height: 80px !default
 
-$stencila-navbar-transition: height $slow-speed $ease-out-cubic
-
 .navbar
     align-items: center
-    box-shadow: 0 0 0 rgba($black, 0)
-    transition: box-shadow $slow-speed 0.1s $ease-out-cubic
+    box-shadow: 0 rem(6) rem(12) rgba($black, 0.1)
 
     +touch
         min-height: 0
-        box-shadow: 0 15px 30px rgba($black, 0.05)
-
-    .container,
-    .navbar-brand,
-    .navbar-menu
-        transition: $stencila-navbar-transition
-        max-height: $navbar-height
-
-    .navbar-brand
-        transition: $stencila-navbar-transition
-        transform-origin: left center
-
-        +touch
-            min-height: 0
 
     .container
         display: flex
         margin: 0 auto
-        min-height: 0
+        position: relative
 
         +touch
             flex-direction: column
-            max-height: 100vh
-
-    &.is-active
-        min-height: 0
-        box-shadow: 0 15px 30px rgba($black, 0.05)
-
-        .container,
-        .navbar-brand,
-        .navbar-menu
-            max-height: rem(80)
-            min-height: 0
-
-        .container,
-        .navbar-brand
-            height: 100%
-
-        .navbar-start
-            .navbar-item
-                height: 100%
-                padding-top: 0
-                padding-bottom: 0
-
-        .navbar-brand
-            transform: scale(.5)
-            +touch
-                transform: scale(1)
-
-        .navbar-end
-            margin-bottom: 0
-            height: 100%
-            align-items: center
-
-            .button
-                font-size: rem(12)
-                padding: rem(16) rem(20)
 
 
 .navbar-menu
-    min-height: 0
-    align-items: flex-end
+    align-items: center
+
+    +touch
+        position: relative
+        min-height: 100%
+        height: 100%
 
 .navbar-start
+    margin: 0 rem(40)
+    justify-content: center
     height: 100%
-    align-items: center
+
+    +touch
+        position: relative
+        justify-content: center
 
     .navbar-item
         height: 100%
 
 .navbar-end
     height: 100%
-    margin-right: rem(10)
-    transition: height 0.25s ease
     align-items: center
+    margin-right: 0
 
-    +until-fullhd
-        margin-right: rem($stencila-navbar-end-margin-right)
+    .button
+        transition: border-color $fast-speed, color $fast-speed
 
     +touch
         text-align: center
         margin-right: 0
+        margin-bottom: rem(20)
+
+        .button
+            margin-left: auto
+            margin-right: auto
 
 .navbar-item,
 .navbar-link
   padding-left: rem($stencila-navbar-item-padding-left)
   padding-right: rem($stencila-navbar-item-padding-right)
 
+.navbar-brand
+  min-height: 0
+
 .navbar-item
-    // +transition
     font-size: rem($stencila-navbar-item-font-size)
     line-height: em($stencila-navbar-item-line-height, $stencila-navbar-item-font-size)
-    font-weight: $weight-normal
+    font-weight: $weight-semibold
     position: relative
-    margin-left: rem($stencila-navbar-item-margin-left)
-    margin-right: rem($stencila-navbar-item-margin-right)
 
     +touch
         text-align: center
+        margin-bottom: rem(20)
+        margin-top: rem(10)
 
     &:after
         +transition($delay: 0.1s, $speed: $slow-speed)
@@ -151,16 +107,15 @@ $stencila-navbar-transition: height $slow-speed $ease-out-cubic
             width: 100%
 
 .navbar-logo
-    padding: 0
+    padding: rem(18) 0
     line-height: 0
     font-size: 0
-
-    +until-fullhd
-        margin-left: rem($stencila-navbar-start-margin-left)
+    margin-left: 0
 
     +touch
         width: rem(120)
-        margin-left: rem($stencila-navbar-item-padding-left)
+        padding: 0
+        margin: 0 0 0 rem($stencila-navbar-item-padding-left)
 
     &:hover
         &:after
