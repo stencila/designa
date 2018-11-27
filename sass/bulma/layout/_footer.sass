@@ -15,6 +15,8 @@ $footer-section-color: #08225E !default
 
     a
         +transition
+        font-size: rem(18)
+        line-height: em(36, 18)
         color: $white
         font-weight: $weight-semibold
         position: relative
@@ -57,9 +59,11 @@ $footer-section-color: #08225E !default
         font-size: rem(18)
         line-height: em(36, 18)
 
-    a
-        font-size: rem(18)
-        line-height: em(36, 18)
+    &-buttons
+        text-align: right
+
+        +mobile
+            text-align: center
 
     &-colophon
         background-color: rgba($footer-section-color, 0.4)
@@ -72,24 +76,37 @@ $footer-section-color: #08225E !default
             &:hover
                 color: $white
 
+        .button
+            max-width: rem(100)
 
-        +touch
+        +mobile
             padding-bottom: rem(60)
 
-            .button
-                max-width: rem(200)
+    &-copyright
+        padding-left: rem(80)
+
+        +mobile
+            padding-left: 0
 
     &-links
         padding-bottom: rem(60)
 
     &-logo
-        +horizontal-align($position: absolute)
-        top: rem(-50)
+        position: absolute
+        top: 0
+
+        +mobile
+            position: relative
+            padding-top: rem(60)
 
     &-social
+        padding: 0
+
         a
             font-size: rem(24)
             margin-right: rem(20)
+            display: inline
+            padding-bottom: rem(8)
 
             &:last-child
                 margin-right: 0
