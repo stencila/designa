@@ -25,6 +25,12 @@ $stencila-navbar-burger-height: 80px !default
         +touch
             flex-direction: column
 
+        .navbar-brand
+          margin-left: 0
+
+        .navbar-menu
+          margin-right: 0
+
 
 .navbar-menu
     align-items: center
@@ -72,6 +78,7 @@ $stencila-navbar-burger-height: 80px !default
   min-height: 0
 
 .navbar-item
+    // +transition($speed: 0.1s)
     font-size: rem($stencila-navbar-item-font-size)
     line-height: em($stencila-navbar-item-line-height, $stencila-navbar-item-font-size)
     font-weight: $weight-semibold
@@ -83,7 +90,7 @@ $stencila-navbar-burger-height: 80px !default
         margin-top: rem(10)
 
     &:after
-        +transition($delay: 0.1s, $speed: $slow-speed)
+        // +transition($speed: 0.1s)
         content: ''
         display: block
         width: 0

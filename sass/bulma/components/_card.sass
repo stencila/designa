@@ -9,7 +9,18 @@
         margin-bottom: rem(20)
         background-color: transparent
 
+        +touch
+            hr
+                margin-left: auto
+                margin-right: auto
+
         .card-image
+            +touch
+                .image
+                    img
+                        margin-left: auto
+                        margin-right: auto
+
             + .card-content
                 margin-top: rem(60)
 
@@ -18,6 +29,9 @@
             padding-right: 0
             font-size: rem(16)
             line-height: em(24, 16)
+
+            +touch
+                text-align: center
 
     &-grid-container
         margin-top: rem(140)
