@@ -1,20 +1,36 @@
 // Main Stencila style sheet
+@charset "utf-8"
 
-@import './variables'
-
-// Currently we import all of Bulma here before
-// element specific overrides below. This unoptimal
-// and in the future will be removed and only what is used will be imported
+////
+/// Bluma setup & initial variables.
+////
+@import 'config/colours'
+@import 'config/variables'
+@import '../node_modules/bulma/sass/utilities/initial-variables'
+@import '../node_modules/bulma/sass/utilities/functions'
+@import '../node_modules/bulma/sass/utilities/derived-variables'
+@import 'config/colour-maps'
 @import '../node_modules/bulma/bulma'
 
-@import './global-mixins'
-@import './global-modifiers'
 
-@import './icon'
-@import './button'
-@import './drop-down/drop-down'
-@import './modal'
-@import './navbar'
-@import './swatch'
-@import './tool-bar/tool-bar'
-@import './tool-tip'
+////
+/// Global mixins/modifiers/functions
+////
+@import 'modifiers/global-modifiers'
+@import 'modifiers/positional'
+@import 'mixins/easing'
+@import 'mixins/global-mixins'
+@import 'config/functions'
+
+@import 'drop-down/drop-down'
+@import 'tool-bar/tool-bar'
+
+////
+/// atoms
+////
+@import 'imports/atoms'
+
+////
+/// Bulma overrides
+////
+@import 'imports/bulma-overrides'

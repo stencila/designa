@@ -1,0 +1,21 @@
+////
+/// Logos layout - for use in a 3 column container
+////
+.logos
+    margin-top: rem(40)
+
+    & + .logos
+        margin-top: rem(20)
+
+    a
+        display: block
+        width: 100%
+
+    img
+        width: 100%
+        max-width: rem(260)
+
+    .column
+        +touch
+            text-align: center !important
+            margin-bottom: rem(20)
