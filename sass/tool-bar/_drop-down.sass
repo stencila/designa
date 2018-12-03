@@ -1,5 +1,6 @@
-// Toll bar drop down
+// Tool bar drop down
 .drop-down
+    +transition($speed: $fast-speed)
     padding: rem(12)
     color: $charcoal
     font-size: rem(14)
@@ -9,7 +10,6 @@
     display: flex
     justify-content: space-between
     align-items: center
-    transition: all .25s ease
     position: relative
 
     &:hover
@@ -20,6 +20,7 @@
             background: $green
 
     &:before
+        +transition($speed: $fast-speed)
         display: block
         width: 0
         height: 110%
@@ -28,7 +29,6 @@
         content: ''
         position: absolute
         background: transparent
-        transition: all .25s ease
 
     &.is-active
         color: $blue

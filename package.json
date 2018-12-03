@@ -20,6 +20,7 @@
     "node-sass": "^4.10.0",
     "postcss-cli": "^4.1.1"
   },
+  "style": "sass/stencila.sass",
   "scripts": {
     "watch": "npm run css-watch",
     "serve": "http-server ./ -a 127.0.0.1 -c-1",

@@ -30,6 +30,10 @@
         line-height: em(42, 36)
         margin-bottom: rem(36)
 
+        +touch
+            br
+                display: none
+
         &.has-line
             position: relative
             margin-bottom: rem(70)
@@ -42,3 +46,9 @@
                 height: 3px
                 width: rem(60)
                 background: $toxic-green
+
+            @each $name, $pair in $colors
+                $color: nth($pair, 1)
+                &--is-#{$name}
+                    &:after
+                        background: $color

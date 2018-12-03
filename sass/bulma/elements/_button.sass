@@ -1,9 +1,20 @@
 ////
 /// Overrides for Bulma button
 ////
+
+/// Variables to override
+$button-mini-font-size: rem(12) !default
+$button-mini-padding: rem(14) rem(20) !default
+
 .button
+    +transition
+
     @each $name, $pair in $colors
         $color: nth($pair, 1)
         &.has-text-hover-#{$name}
             &:hover
                 color: $color !important
+
+    &.is-mini
+        font-size: $button-mini-font-size
+        padding: $button-mini-padding
