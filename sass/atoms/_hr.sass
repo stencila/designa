@@ -1,11 +1,15 @@
 ////
 /// Horizontal rule variations
 ////
+$hr-small-width: 60 !default
+$hr-small-height: 3px !default
+$hr-small-default-bg: $toxic-green !default
+
 hr
     &.is-small
-        width: rem(60)
-        height: 3px
-        background: $toxic-green
+        width: rem($hr-small-width)
+        height: $hr-small-height
+        background: $hr-small-default-bg
 
         @each $name, $pair in $colors
             $color: nth($pair, 1)

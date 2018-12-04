@@ -1,6 +1,8 @@
 import { storiesOf } from '@storybook/html'
+import { withNotes } from '@storybook/addon-notes'
 
 storiesOf('Config', module)
+  .addDecorator(withNotes)
   .add('Colours', () => `
   <div class="container">
     <h1 class="is-size-1 has-text-weight-bold">Colours</h1>
@@ -128,4 +130,9 @@ storiesOf('Config', module)
         </div>
     </section>
   </div>
-  `)
+  `, {
+    notes: { markdown: `
+## Usage
+All brand colours have been added to the Bulma color map. You can \
+therefore use the colour classes such as \`has-text-cobalt-blue\` \`has-background-toxic-green\`
+  `}})
