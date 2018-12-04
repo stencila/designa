@@ -22,6 +22,7 @@
     "bulma": "^0.7.2",
     "node-sass": "^4.10.0",
     "postcss-cli": "^4.1.1",
+    "sass-module-importer": "^1.4.0",
     "semantic-release": "^15.12.4"
   },
   "style": "sass/stencila.sass",
@@ -30,7 +31,7 @@
     "serve": "http-server ./ -a 127.0.0.1 -c-1",
     "build": "npm run css-build",
     "deploy": "npm run css-deploy",
-    "css-build": "node-sass --output-style compressed sass/stencila.sass dist/css/stencila.min.css",
+    "css-build": "node-sass --importer ./node_modules/sass-module-importer --output-style compressed sass/stencila.sass dist/css/stencila.min.css",
     "css-watch": "npm run css-build -- --watch",
     "css-postcss": "postcss --use autoprefixer --output dist/css/stencila.css dist/css/stencila.css",
     "css-gzip": "gzip -c dist/css/stencila.css > dist/css/stencila.css.gz",
