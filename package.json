@@ -20,7 +20,6 @@
     "babel-loader": "^8.0.4",
     "babel-runtime": "^6.26.0",
     "bulma": "^0.7.2",
-    "http-server": "^0.10.0",
     "node-sass": "^4.10.0",
     "postcss-cli": "^4.1.1",
     "semantic-release": "^15.12.4"
