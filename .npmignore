@@ -1,0 +1,5 @@
+# Don't package all folders (only really need dist)
+/.cache
+/docs
+/guide
+/icon*
