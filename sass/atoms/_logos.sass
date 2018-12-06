@@ -1,11 +1,14 @@
 ////
 /// Logos layout - for use in a 3 column container
 ////
+$logos-margin-top: 40 !default
+$logo-img-max-width: 260 !default
+
 .logos
-    margin-top: rem(40)
+    margin-top: rem($logos-margin-top)
 
     & + .logos
-        margin-top: rem(20)
+        margin-top: rem($logos-margin-top/2)
 
     a
         display: block
@@ -13,9 +16,9 @@
 
     img
         width: 100%
-        max-width: rem(260)
+        max-width: rem($logo-img-max-width)
 
     .column
         +touch
             text-align: center !important
-            margin-bottom: rem(20)
+            margin-bottom: rem($logos-margin-top/2)
