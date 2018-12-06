@@ -5,62 +5,12 @@
     flex-grow: 0
     margin-bottom: rem(12)
 
-    &:nth-child(odd)
-        margin-left: rem(12)
-        margin-right: rem(12)
+    &:first-child
+        margin-left: rem(10)
+    &:last-child
+        margin-right: rem(10)
 
-        &:before
-            +transition($speed: $fast-speed)
-            position: absolute
-            left: rem(-13)
-            top: -5%
-            width: 0
-            height: 110%
-            content: ''
-            display: block
-            background: tranparent
-
-        &:hover
-            &:before
-                width: 3px
-                background: $green
-
-    &:nth-child(even)
-
-        &:after
-            +transition($speed: $fast-speed)
-            position: absolute
-            right: rem(-13)
-            top: -5%
-            width: 0
-            height: 110%
-            content: ''
-            display: block
-            background: tranparent
-
-        &:hover
-            &:after
-                width: 3px
-                background: $green
-
-    &.last-button
-        margin-left: auto
-
-        &:before
-            display: none
-
-        &:after
-            +transition($speed: $fast-speed)
-            position: absolute
-            right: rem(-12)
-            top: -5%
-            width: 0
-            height: 110%
-            content: ''
-            display: block
-            background: tranparent
-
-        &:hover
-            &:after
-                width: 3px
-                background: $green
+    &:hover,
+    &.is-active
+        color: $primary
+        border-color: $primary

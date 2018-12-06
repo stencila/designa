@@ -102,7 +102,7 @@ Can be displayed vertically by adding a \`is-vertical\` class.
             <span>P</span>
           </a>
 
-          <a class="button is-toolbar">
+          <a class="button is-toolbar is-active">
             <span>x<sup>2</sup></span>
           </a>
 
@@ -124,4 +124,14 @@ Can be displayed vertically by adding a \`is-vertical\` class.
           </a>
       </div>
     </div>
-  </div>`)
+  </div>`, {
+    notes: { markdown: `
+## Usage
+Vertical option for the toolbar.
+
+## Options
+--
+
+## Variables
+--
+  `}})

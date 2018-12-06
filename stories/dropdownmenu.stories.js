@@ -20,9 +20,9 @@ storiesOf('Component/Dropdown', module)
                     <button class="button is-plain icon lnr lnr-cross close-button"></button>
                 </header>
                 <div class="dropdown-items">
-                    <a href="#" class="dropdown-item"><img src="../images/doc-icon.svg" width="26" height="30" alt="" class="logo"> <span>Doc</span></a>
-                    <a class="dropdown-item"><img src="../images/sheet-icon.svg" width="26" height="30" alt="" class="logo"> <span>Sheet</span></a>
-                    <a href="#" class="dropdown-item is-active"><img src="../images/slide-icon.svg" width="26" height="30" alt="" class="logo"> <span>Slide</span></a>
+                    <a href="#" class="dropdown-item"><img src="images/doc-icon.svg" width="26" height="30" alt="" class="logo"> <span>Doc</span></a>
+                    <a class="dropdown-item"><img src="images/sheet-icon.svg" width="26" height="30" alt="" class="logo"> <span>Sheet</span></a>
+                    <a href="#" class="dropdown-item is-active"><img src="images/slide-icon.svg" width="26" height="30" alt="" class="logo"> <span>Slide</span></a>
                 </div>
             </div>
         </div>
@@ -55,11 +55,21 @@ Can be aligned to the right via use of the \`is-right-aligned\` class on the \`d
                     <button class="button is-plain icon lnr lnr-cross close-button"></button>
                 </header>
                 <div class="dropdown-items">
-                    <a href="#" class="dropdown-item"><img src="../images/doc-icon.svg" width="26" height="30" alt="" class="logo"> <span>Doc</span></a>
-                    <a class="dropdown-item"><img src="../images/sheet-icon.svg" width="26" height="30" alt="" class="logo"> <span>Sheet</span></a>
-                    <a href="#" class="dropdown-item is-active"><img src="../images/slide-icon.svg" width="26" height="30" alt="" class="logo"> <span>Slide</span></a>
+                    <a href="#" class="dropdown-item"><img src="images/doc-icon.svg" width="26" height="30" alt="" class="logo"> <span>Doc</span></a>
+                    <a class="dropdown-item"><img src="images/sheet-icon.svg" width="26" height="30" alt="" class="logo"> <span>Sheet</span></a>
+                    <a href="#" class="dropdown-item is-active"><img src="images/slide-icon.svg" width="26" height="30" alt="" class="logo"> <span>Slide</span></a>
                 </div>
             </div>
         </div>
     </div>
-</div>`)
+</div>`, {
+  notes: { markdown: `
+## Usage
+A dropdown menu with the menu aligned to the right of the trigger
+
+## Options
+--
+
+## Variables
+--
+`}})

@@ -12,9 +12,21 @@
     &.is-vertical
         width: rem(100)
 
+        .buttons
+            justify-content: space-between
+
+            .button
+                &:nth-child(odd)
+                    margin-left: rem(10)
+                    margin-right: 0
+                &:nth-child(even)
+                    margin-right: rem(10)
+                    margin-left: 0
+
     .buttons
         display: flex
         flex-wrap: wrap
+        justify-content: center
         margin-bottom: 0
 
     hr

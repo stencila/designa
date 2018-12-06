@@ -21,7 +21,10 @@
     "babel-loader": "^8.0.4",
     "babel-runtime": "^6.26.0",
     "bulma": "^0.7.2",
-    "node-sass": "^4.10.0",
+    "gulp": "^4.0.0",
+    "gulp-copy": "^4.0.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-watch": "^5.0.1",
     "postcss-cli": "^4.1.1",
     "sass-module-importer": "^1.4.0",
     "semantic-release": "^15.12.4"
@@ -32,13 +35,16 @@
     "serve": "http-server ./ -a 127.0.0.1 -c-1",
     "build": "npm run css-build",
     "deploy": "npm run css-deploy",
-    "css-build": "node-sass --importer ./node_modules/sass-module-importer --output-style compressed sass/stencila.sass dist/css/stencila.min.css",
-    "css-watch": "npm run css-build -- --watch",
+    "css-build": "gulp build",
+    "css-watch": "gulp watch",
     "css-postcss": "postcss --use autoprefixer --output dist/css/stencila.css dist/css/stencila.css",
     "css-gzip": "gzip -c dist/css/stencila.css > dist/css/stencila.css.gz",
     "css-deploy": "npm run css-build && npm run css-postcss && npm run css-gzip",
     "storybook": "start-storybook --port 9001 --static-dir .storybook --static-dir dist",
     "storybook-build": "build-storybook --static-dir .storybook --static-dir dist --output-dir docs",
     "semantic-release": "semantic-release"
+  },
+  "dependencies": {
+    "gulp-rename": "^1.4.0"
   }
 }
