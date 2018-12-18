@@ -18,6 +18,7 @@ A series of global modifiers to manipulate elements regardless of context.
 | \`margin-{dirction}-auto\`           || Sets margin of an element to auto in supplied direction     |
 | \`is-full-width\`                    || Sets element width to 100%                                  |
 | \`border-{direction}-{colour-name}\` || Adds a 1px border of \`colour-name\` in specified direction |
+| \`is-borderless\`                    || removes all borders                                         |
 `}
   })
 

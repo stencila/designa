@@ -38,3 +38,30 @@ The call to action uses the following variables:
       markdown: `A call to action button with an additional class of \`is-large\``
     }
   })
+  .add('Square button', () => `
+  <button class="button is-square">
+    <span class="icon is-small">
+      <i class="fas fa-plus"></i>
+    </span>
+  </button>
+  `, {
+    notes: {
+      markdown: `
+      A square button (to be used with an icon)
+
+      ## Usage
+
+      Can hava an \`is-rounded\` class to create a circlular button.
+
+      ## Variables
+
+      The square button has the following variables:
+
+      | Variable name                              || Default value        |
+      |:-------------------------------------------||---------------------:|
+      | \`$button-square-width\`                   ||               \`28\` |
+      | \`$button-square-height\`                  ||               \`28\` |
+      | \`$button-square-icon-size\`               ||               \`12\` |
+      `
+    }
+  })

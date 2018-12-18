@@ -3,8 +3,8 @@
     &.is-new-menu
         header
             +transition($speed: $fast-speed)
-            color: $white
-            background: $blue
+            color: $stencila-dropdown-header-color
+            background: $stencila-dropdown-header-background
             display: flex
             align-items: center
             justify-content: space-between
@@ -12,11 +12,14 @@
             border-top-right-radius: 3px
             font-size: rem(14)
             line-height: 1em
-            font-weight: $weight-medium
+            font-weight: $stencila-dropdown-font-weight
             padding: rem(10) rem(20)
 
             &:hover
                 background: $denim
+
+        .dropdown-menu
+            margin-top: -5px
 
         .close-button
             color: $white
@@ -39,21 +42,5 @@
                     background: $green
                     width: 4px
 
-        a.dropdown-item
-            background: $white-smoke
-            border-bottom-color: $white-lilac
-            color: $blue
-            font-weight: $weight-heavy
-            font-size: rem(18)
-            line-height: 1em
-            justify-content: flex-start
-
-            &:hover,
-            &.is-active
-                background: $white
-
-            &:first-child
-                border-radius: unset
-
-            .logo
-                margin-right: rem(10)
+        @import './content'
+        @import './item'

@@ -38,6 +38,27 @@ Can be aligned to the right via use of the \`is-right-aligned\` class on the \`d
 
 ## Variables
 --
+
+
+The drop down uses the following variables:
+
+| Variable name                                       || Default value                      |
+|:----------------------------------------------------||-----------------------------------:|
+| \`$stencila-dropdown-content-background-color\`     || \`$blue\`                          |
+| \`$stencila-dropdown-header-triangle\`              || \`$blue\`                          |
+| \`$stencila-dropdown-header-background\`            || \`$blue\`                          |
+| \`$stencila-dropdown-header-hover\`                 || \`$denim\`                         |
+| \`$stencila-dropdown-header-color\`                 || \`$white\`                         |
+| \`$stencila-dropdown-item-color\`                   || \`$black\`                         |
+| \`$stencila-dropdown-item-background-color\`        || \`$white\`                         |
+| \`$stencila-dropdown-item-hover-border-color\`      || \`$green\`                         |
+| \`$stencila-dropdown-item-border-color\`            || \`$white-lilac\`                   |
+| \`$stencila-dropdown-item-active-color\`            || \`$blue\`                          |
+| \`$stencila-dropdown-item-active-background-color\` || \`$white-smoke\`                   |
+| \`$stencila-dropdown-item-active-border-color\`     || \`$blue\`                          |
+| \`$stencila-dropdown-content-shadow\`               || \`2px 2px 20px rgba($black, 0.1)\` |
+| \`$stencila-dropdown-font-weight\`                  || \`$weight-normal\`                 |
+| \`$stencila-dropdown-close-color\`                  || \`$white\`                         |
   `}})
   .add('Dropdown menu - right aligned', () => `
 <div class="container">

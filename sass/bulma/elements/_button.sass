@@ -5,6 +5,9 @@
 /// Variables to override
 $button-mini-font-size: rem(12) !default
 $button-mini-padding: rem(14) rem(20) !default
+$button-square-width: 28 !default
+$button-square-height: 28 !default
+$button-square-icon-size: 12 !default
 
 .button
     +transition
@@ -15,6 +18,29 @@ $button-mini-padding: rem(14) rem(20) !default
             &:hover
                 color: $color !important
 
+    /// Small variation of a button
     &.is-mini
         font-size: $button-mini-font-size
         padding: $button-mini-padding
+
+
+    /// Square version of a button
+    /// - should be used with an icon inside the button
+    &.is-square
+        +transition($attr: border-radius)
+
+        height: rem($button-square-height)
+        width: rem($button-square-width)
+        padding-left: 0
+        padding-right: 0
+        font-size: 0
+        line-height: 0
+
+        &.is-rounded
+            border-radius: 50%
+
+        .icon
+            font-size: rem($button-square-icon-size)
+            line-height: 1em
+            width: 1em
+            height: 1em

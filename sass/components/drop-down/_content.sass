@@ -1,9 +1,9 @@
-// Dropdown content (containre for main menu items)
+/// Dropdown content (container for main menu items)
 .dropdown-content
+    position: relative
     padding-bottom: unset
     padding-top: unset
-    position: relative
-    box-shadow: 2px 2px 20px rgba($black, .2)
+    box-shadow: $stencila-dropdown-content-shadow
 
     &:before
         content: ''
@@ -12,4 +12,4 @@
         top: -8px
         left: 50%
         transform: translateX(-50%)
-        @include triangle($width: 16px, $height: 8px, $color: $blue, $direction: up)
+        @include triangle($width: 16px, $height: 8px, $color: $stencila-dropdown-header-triangle, $direction: up)
