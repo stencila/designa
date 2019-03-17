@@ -12,4 +12,9 @@
         top: -8px
         left: 50%
         transform: translateX(-50%)
-        @include triangle($width: 16px, $height: 8px, $color: $stencila-dropdown-header-triangle, $direction: up)
+        @include triangle($width: 16px, $height: 8px, $color:  $stencila-dropdown-item-background-color, $direction: up)
+
+    &:hover,
+    &.is-active
+        &:before
+            @include triangle($width: 16px, $height: 8px, $color: $stencila-dropdown-item-active-background-color, $direction: up)
