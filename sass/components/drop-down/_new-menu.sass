@@ -1,6 +1,9 @@
 // Drop down is new menu (variation for creating new elements)
 .dropdown
     &.is-new-menu
+        @import './content'
+        @import './item'
+
         header
             +transition($speed: $fast-speed)
             color: $stencila-dropdown-header-color
@@ -14,9 +17,6 @@
             line-height: 1em
             font-weight: $stencila-dropdown-font-weight
             padding: rem(10) rem(20)
-
-            &:hover
-                background: $denim
 
         .dropdown-menu
             margin-top: -5px
@@ -36,11 +36,16 @@
                 content: ''
                 border-top-right-radius: 2px
 
-
             &:hover
                 &:after
                     background: $green
                     width: 4px
 
-        @import './content'
-        @import './item'
+        .dropdown-content
+            &:before
+                @include triangle($width: 16px, $height: 8px, $color: $stencila-dropdown-header-triangle, $direction: up)
+
+            &.is-active,
+            &:hover
+                &:before
+                    @include triangle($width: 16px, $height: 8px, $color: $stencila-dropdown-header-triangle, $direction: up)
