@@ -3,6 +3,8 @@
 ////
 
 /// Variables to override
+$button-padding-vertical: calc(0.375em - #{$button-border-width}) !default
+$button-padding-horizontal: 0.75em !default
 $button-mini-font-size: rem(12) !default
 $button-mini-padding: rem(14) rem(20) !default
 $button-square-width: 28 !default
@@ -17,6 +19,8 @@ $button-square-icon-size: 12 !default
         &.has-text-hover-#{$name}
             &:hover
                 color: $color !important
+
+    padding: $button-padding-vertical $button-padding-horizontal
 
     /// Small variation of a button
     &.is-mini
