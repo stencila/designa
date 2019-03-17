@@ -2,8 +2,9 @@
 /// Call to action button
 ////
 $stencila-call-to-action-font-size: 16 !default
-$stencila-call-to-action-padding: rem(20) rem(40) !default
+$stencila-call-to-action-padding: rem(18) rem(22) !default
 $stencila-call-to-action-padding-large: rem(20) rem(80) !default
+$stencila-call-to-action-color: $navy-blue
 
 .call-to-action
     &-with-text
@@ -37,12 +38,12 @@ $stencila-call-to-action-padding-large: rem(20) rem(80) !default
         /// override the default bulma darken on hover of primary
         &.is-primary
             &:hover
-                background-color: $navy-blue
+                background-color: $stencila-call-to-action-color
 
             &.is-outlined
                 &:hover
-                    border-color: $navy-blue
-                    color: $navy-blue
+                    border-color: $stencila-call-to-action-color
+                    color: $stencila-call-to-action-color
                     background: transparent
 
 .buttons
