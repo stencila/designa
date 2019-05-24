@@ -1,0 +1,13 @@
+[
+  {
+    "palette": "brand",
+    "colors": [
+      { "$blue": "#1d63f3" },
+      { "$sapphire": "#174cb8" },
+      { "$screamin-green": "#5eff5d" },
+      { "$mantis": "#62ce61" },
+      { "$blue-stone": "#066860" },
+      { "$light-crimson": "#ff6498" }
+    ]
+  }
+]

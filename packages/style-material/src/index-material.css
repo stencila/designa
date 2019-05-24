@@ -1,0 +1,10 @@
+@import "@stencila/style-core";
+@import "@stencila/style-core/dist/another";
+
+button {
+  @apply bg-gray-300 text-black py-2 px-4 text-sm rounded tracking-wide shadow-md uppercase;
+
+  &:hover {
+    @apply bg-blue-700 text-white;
+  }
+}

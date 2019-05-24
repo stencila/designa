@@ -1,0 +1,34 @@
+{
+  "name": "@stencila/style-core",
+  "version": "0.1.0",
+  "description": "The front-end CSS framework for all Stencila projects",
+  "keywords": [
+    "Stencila",
+    "design",
+    "CSS",
+    "framework"
+  ],
+  "author": "Alex Ketch <alex@ketch.me>",
+  "homepage": "https://stenci.la",
+  "license": "Apache-2.0",
+  "main": "dist/index.css",
+  "files": [
+    "dist/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stencila/style.git"
+  },
+  "scripts": {
+    "start": "parcel ./src/index.css",
+    "build": "parcel build ./src/**/*.css",
+    "postcss:build": "postcss ./src/*.css --dir ./dist",
+    "postcss:watch": "postcss ./src/*.css --dir ./dist --watch"
+  },
+  "bugs": {
+    "url": "https://github.com/stencila/style/issues"
+  }
+}

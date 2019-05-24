@@ -1,0 +1,35 @@
+{
+  "name": "@stencila/brand",
+  "version": "0.1.0",
+  "description": "Stencila brand assets",
+  "keywords": [
+    "Stencila",
+    "design",
+    "brand",
+    "identity"
+  ],
+  "author": "Alex Ketch <alex@ketch.me>",
+  "homepage": "https://stenci.la",
+  "license": "Apache-2.0",
+  "main": "src/index.ts",
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stencila/style.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/stencila/style/issues"
+  }
+}
