@@ -1,0 +1,7 @@
+button {
+  @apply rounded-full bg-primary text-stock px-4 py-2 font-medium;
+}
+
+button.secondary {
+  @apply bg-transparent text-primary border-2 border-primary;
+}

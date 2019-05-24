@@ -1,0 +1,3 @@
+ul[role="tablist"] {
+  @apply flex flex-row bg-neutral-100;
+}

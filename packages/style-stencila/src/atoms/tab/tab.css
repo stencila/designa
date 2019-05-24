@@ -1,0 +1,23 @@
+ul[role="tablist"] li {
+  @apply capitalize flex flex-row text-center border border-neutral-400;
+
+  &:first-of-type {
+    @apply rounded-l;
+  }
+
+  &:last-of-type {
+    @apply rounded-r;
+  }
+
+  &:hover:not([aria-selected="true"]) {
+    @apply bg-stock border-neutral-300;
+  }
+
+  &[aria-selected="true"] {
+    @apply bg-neutral-300;
+  }
+
+  a {
+    @apply block w-full py-2 px-4;
+  }
+}

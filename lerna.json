@@ -1,0 +1,10 @@
+{
+  "create": {
+    "homepage": "https://stenci.la",
+    "keywords": ["Stencila"],
+    "license": "Apache-2.0",
+    "version": "0.1.0"
+  },
+  "packages": ["packages/*"],
+  "version": "independent"
+}

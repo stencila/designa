@@ -1,0 +1,11 @@
+@import "@stencila/style-core/src";
+@import "@stencila/brand/src/fonts/fonts";
+
+@import "./atoms/atoms";
+@import "./molecules/tabList";
+
+html,
+body {
+  @apply font-body;
+  color: #4a4a4a;
+}

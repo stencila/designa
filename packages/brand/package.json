@@ -1,0 +1,40 @@
+{
+  "name": "@stencila/brand",
+  "version": "0.1.0",
+  "description": "Stencila brand assets",
+  "keywords": [
+    "Stencila",
+    "design",
+    "brand",
+    "identity"
+  ],
+  "author": "Alex Ketch <alex@ketch.me>",
+  "homepage": "https://stenci.la",
+  "license": "Apache-2.0",
+  "main": "src/index.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stencila/style.git"
+  },
+  "scripts": {
+    "build": "npm run build:package",
+    "build:package": "parcel build ./src/**/* -d ./dist --public-url ./ && npm run mvFonts",
+    "build:watch": "parcel watch ./src/**/* -d ./dist --public-url ./ && npm run mvFonts",
+    "mvFonts": "mv ./dist/*.woff* ./dist/fonts"
+  },
+  "bugs": {
+    "url": "https://github.com/stencila/style/issues"
+  },
+  "devDependencies": {
+    "@abide-community/parcel-plugin-clean-out-dir": "^1.0.0",
+    "concurrently": "^4.1.1",
+    "parcel-plugin-css-pretransform": "^1.0.0"
+  }
+}

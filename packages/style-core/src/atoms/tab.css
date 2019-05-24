@@ -1,0 +1,3 @@
+ul[role="tablist"] li {
+  @apply list-none flex-auto text-center;
+}

@@ -1,0 +1,53 @@
+{
+  "name": "@stencila/style-material",
+  "version": "0.1.0",
+  "description": "Material Design theme for Stencila components",
+  "keywords": [
+    "Stencila",
+    "material",
+    "design",
+    "theme"
+  ],
+  "author": "Alex Ketch <alex@ketch.me>",
+  "homepage": "https://stenci.la",
+  "license": "Apache-2.0",
+  "main": "dist/index-material.css",
+  "directories": {
+    "src": "src"
+  },
+  "style": "./dist/index-material.css",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stencila/style.git"
+  },
+  "scripts": {
+    "build": "npm run build:package && npm run build:css",
+    "build:watch": "concurrently \"npm run build:package:watch\" \"npm run build:css:watch\"",
+    "build:package": "parcel build ./src/index-material.css --public-url ./",
+    "build:package:watch": "parcel watch ./src/index-material.css  --public-url ./",
+    "build:css": "postcss ./src/*.css --dir ./dist",
+    "build:css:watch": "postcss ./src/*.css --dir ./dist --watch"
+  },
+  "bugs": {
+    "url": "https://github.com/stencila/style/issues"
+  },
+  "dependencies": {
+    "@stencila/brand": "file:../brand",
+    "@stencila/style-core": "file:../style-core",
+    "postcss": "^7.0.17",
+    "postcss-cli": "^6.1.2",
+    "postcss-insert": "^1.0.0",
+    "tailwindcss": "^1.0.4"
+  },
+  "devDependencies": {
+    "@abide-community/parcel-plugin-clean-out-dir": "^1.0.0",
+    "concurrently": "^4.1.1",
+    "parcel-plugin-css-pretransform": "^1.0.0"
+  }
+}
