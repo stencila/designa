@@ -24,8 +24,9 @@
     "url": "git+https://github.com/stencila/style.git"
   },
   "scripts": {
-    "build:package": "parcel build ./src/**/* -d ./dist --public-url ./",
     "build": "npm run build:package && npm run mvFonts",
+    "build:package": "parcel build ./src/**/* -d ./dist --public-url ./ && npm run mvFonts",
+    "build:watch": "parcel watch ./src/**/* -d ./dist --public-url ./ && npm run mvFonts",
     "mvFonts": "mv ./dist/*.woff* ./dist/fonts"
   },
   "bugs": {
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@abide-community/parcel-plugin-clean-out-dir": "^1.0.0",
+    "concurrently": "^4.1.1",
     "parcel-plugin-css-pretransform": "^1.0.0"
   }
 }

@@ -16,11 +16,6 @@ let plugins = [
   require("autoprefixer")
 ];
 
-console.log(
-  process.env.INIT_CWD,
-  process.env.INIT_CWD.indexOf("packages/brand") === -1
-);
-
 if (process.env.INIT_CWD.indexOf("packages/brand") === -1) {
   plugins = [
     require("postcss-import"),

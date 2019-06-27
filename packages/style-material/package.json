@@ -28,7 +28,9 @@
   },
   "scripts": {
     "build": "npm run build:package && npm run build:css",
-    "build:package": "parcel build ./src/index-material.css",
+    "build:watch": "concurrently \"npm run build:package:watch\" \"npm run build:css:watch\"",
+    "build:package": "parcel build ./src/index-material.css --public-url ./",
+    "build:package:watch": "parcel watch ./src/index-material.css  --public-url ./",
     "build:css": "postcss ./src/*.css --dir ./dist",
     "build:css:watch": "postcss ./src/*.css --dir ./dist --watch"
   },
@@ -45,6 +47,7 @@
   },
   "devDependencies": {
     "@abide-community/parcel-plugin-clean-out-dir": "^1.0.0",
+    "concurrently": "^4.1.1",
     "parcel-plugin-css-pretransform": "^1.0.0"
   }
 }

@@ -3,8 +3,9 @@ node_js: 10
 
 # Build CSS and Storybook
 script:
-  - npm run css-build
-  - npm run storybook-build
+  - npm ci
+  - npm run bootstrap
+  - npm run storybook:build
 
 # Prevent Github Pages from using Jekyll
 before_deploy:
