@@ -11,7 +11,8 @@
     "build": "npx lerna run build",
     "build:css:watch": "npx lerna run build:css:watch --stream --parallel",
     "bootstrap": "npx lerna exec npm install",
-    "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-core/dist,./packages/style-material/dist,./packages/style-stencila/dist"
+    "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-core/dist,./packages/style-material/dist,./packages/style-stencila/dist",
+    "storybook:build": "build-storybook -o docs -s ./packages/brand/dist,./packages/style-core/dist,./packages/style-material/dist,./packages/style-stencila/dist"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
