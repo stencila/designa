@@ -1,11 +1,5 @@
-import { withA11y } from "@storybook/addon-a11y"
 import { storiesOf } from "@storybook/html"
 
-storiesOf("Atoms/Button", module)
-  .addDecorator(withA11y)
+storiesOf("Atoms/Button/Primary", module)
   .add("with text", () => `<button class="myClass">Hello World</button>`)
-  .add("with emoji", () => {
-    const button = document.createElement("button")
-    button.innerText = "😀 😎 👍 💯"
-    return button
-  })
+  .add("with emoji", () => `<button class="myClass">😀 😎 👍 💯</button>`)

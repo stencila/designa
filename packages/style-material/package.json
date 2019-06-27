@@ -11,7 +11,7 @@
   "author": "Alex Ketch <alex@ketch.me>",
   "homepage": "https://stenci.la",
   "license": "Apache-2.0",
-  "main": "dist/index.css",
+  "main": "dist/index-material.css",
   "directories": {
     "src": "src"
   },
@@ -28,18 +28,24 @@
   },
   "scripts": {
     "start": "parcel ./src/index.pcss",
-    "build": "parcel build ./src/index-material.pcss",
+    "build": "parcel build ./src/index-material.css",
     "postcss:build": "postcss ./src/*.css --dir ./dist",
-    "postcss:watch": "postcss ./src/*.css --dir ./dist --watch"
+    "postcss:watch": "postcss ./src/*.css --dir ./dist --watch",
+    "storybook": "npx storybook"
   },
   "bugs": {
     "url": "https://github.com/stencila/style/issues"
   },
   "dependencies": {
-    "@stencila/style-core": "^0.1.0",
-    "postcss": "^7.0.16",
+    "@stencila/brand": "file:../brand",
+    "@stencila/style-core": "file:../style-core",
+    "postcss": "^7.0.17",
     "postcss-cli": "^6.1.2",
     "postcss-insert": "^1.0.0",
-    "tailwindcss": "^1.0.1"
+    "tailwindcss": "^1.0.4"
+  },
+  "devDependencies": {
+    "@abide-community/parcel-plugin-clean-out-dir": "^1.0.0",
+    "parcel-plugin-css-pretransform": "^1.0.0"
   }
 }

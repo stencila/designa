@@ -1,7 +1,20 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import "@stencila/brand/dist/fonts/fonts";
+
+@import "./atoms/tab";
 
 button {
   transition: all 200ms ease-in-out;
+}
+
+fieldset,
+pre {
+  @apply my-3;
+}
+
+input:focus,
+input:active {
+  outline: none;
 }

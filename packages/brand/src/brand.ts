@@ -1,4 +1,4 @@
-import foo from "./data/colors.json"
+import { colors } from "./data/colors"
 
 export const brand = () =>
-  console.log("yp, this brand", JSON.stringify(foo, null, 2))
+  console.log("yp, this brand", JSON.stringify(colors, null, 2))

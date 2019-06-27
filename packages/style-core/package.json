@@ -13,7 +13,8 @@
   "license": "Apache-2.0",
   "main": "dist/index.css",
   "files": [
-    "dist/"
+    "dist/",
+    "tailwind.config.js"
   ],
   "publishConfig": {
     "access": "public"
@@ -23,12 +24,20 @@
     "url": "git+https://github.com/stencila/style.git"
   },
   "scripts": {
-    "start": "parcel ./src/index.css",
-    "build": "parcel build ./src/**/*.css",
-    "postcss:build": "postcss ./src/*.css --dir ./dist",
-    "postcss:watch": "postcss ./src/*.css --dir ./dist --watch"
+    "dev": "npm run build:css:watch && parcel ./src/index.css",
+    "build": "npm run build:css && npm run build:package",
+    "build:package": "parcel build ./src/*.css -d ./dist --public-url ./",
+    "build:css": "postcss ./src/*.css --dir ./dist",
+    "build:css:watch": "postcss ./src/*.css --dir ./dist --watch"
   },
   "bugs": {
     "url": "https://github.com/stencila/style/issues"
+  },
+  "dependencies": {
+    "@stencila/brand": "file:../brand"
+  },
+  "devDependencies": {
+    "@abide-community/parcel-plugin-clean-out-dir": "^1.0.0",
+    "parcel-plugin-css-pretransform": "^1.0.0"
   }
 }

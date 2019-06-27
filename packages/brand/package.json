@@ -12,11 +12,8 @@
   "homepage": "https://stenci.la",
   "license": "Apache-2.0",
   "main": "src/index.ts",
-  "directories": {
-    "src": "src",
-    "test": "__tests__"
-  },
   "files": [
+    "dist",
     "src"
   ],
   "publishConfig": {
@@ -27,9 +24,15 @@
     "url": "git+https://github.com/stencila/style.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build:package": "parcel build ./src/**/* -d ./dist --public-url ./ --detailed-report",
+    "build": "npm run build:package && npm run mvFonts",
+    "mvFonts": "mv ./dist/*.woff* ./dist/fonts"
   },
   "bugs": {
     "url": "https://github.com/stencila/style/issues"
+  },
+  "devDependencies": {
+    "@abide-community/parcel-plugin-clean-out-dir": "^1.0.0",
+    "parcel-plugin-css-pretransform": "^1.0.0"
   }
 }

@@ -1,0 +1,3 @@
+li.tab {
+  @apply list-none flex-auto text-center;
+}

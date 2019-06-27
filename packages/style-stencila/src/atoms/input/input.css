@@ -1,0 +1,8 @@
+input {
+  @apply border border-neutral-300 w-full bg-stock rounded py-1 px-2;
+}
+
+input:focus {
+  @apply border-primary;
+  outline: none;
+}

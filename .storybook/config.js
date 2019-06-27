@@ -6,7 +6,7 @@ import { create } from "@storybook/theming"
 const cssresources = [
   {
     id: `Stencila`,
-    code: `<link rel="stylesheet" type="text/css" href="/index.css"></link>`,
+    code: `<link rel="stylesheet" type="text/css" href="/index-stencila.css"></link>`,
     picked: false
   },
   {
