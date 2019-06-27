@@ -1,4 +1,4 @@
-import { storiesOf } from "@storybook/html"
+import { storiesOf } from "@storybook/html";
 
 var entityMap = {
   "&": "&amp;",
@@ -9,12 +9,12 @@ var entityMap = {
   "/": "&#x2F;",
   "`": "&#x60;",
   "=": "&#x3D;"
-}
+};
 
 function escapeHtml(string) {
   return String(string).replace(/[&<>"'`=\/]/g, function(s) {
-    return entityMap[s]
-  })
+    return entityMap[s];
+  });
 }
 
 storiesOf("Demo/Gcloud", module).add(
@@ -22,8 +22,8 @@ storiesOf("Demo/Gcloud", module).add(
   () =>
     `
       <aside>
-      <ul role="tablist"><li role="presentation" class="tab"><a role="tab" tabindex="-1" href="#">Code</a></li>
-      <li role="presentation" class="tab active"><a role="tab" tabindex="-1" href="#">Files</a></li>
+      <ul role="tablist"><li role="presentation" ><a role="tab" tabindex="-1" href="#">Code</a></li>
+      <li role="presentation" aria-selected="true"><a role="tab" tabindex="-1" href="#">Files</a></li>
       </ul>
 
       <form>
@@ -53,4 +53,4 @@ rename('Species'=species, 'Individuals'=n)`) +
       </form>
       </aside>
     `
-)
+);

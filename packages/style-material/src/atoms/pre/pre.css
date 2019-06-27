@@ -1,11 +1,11 @@
-li.tab {
+ul[role="tablist"] li {
   @apply uppercase py-4 px-4 text-sm tracking-wider font-bold flex flex-row text-center;
 
   &:hover {
     @apply bg-neutral-100;
   }
 
-  &.active {
+  &[aria-selected="true"] {
     @apply border-b-2 border-primary;
   }
 

@@ -1,15 +1,15 @@
-li.tab {
-  @apply uppercase py-4 px-4 text-sm tracking-wider font-medium flex flex-row text-center border-b-2 border-neutral-300 mb-4;
+ul[role="tablist"] li {
+  @apply uppercase text-sm tracking-wider font-medium flex flex-row text-center border-b-2 border-neutral-300 mb-4;
 
   &:hover {
     @apply bg-neutral-100;
   }
 
-  &.active {
+  &[aria-selected="true"] {
     @apply border-b-2 border-primary text-primary;
   }
 
   a {
-    @apply block w-full;
+    @apply block w-full py-4 px-4;
   }
 }
