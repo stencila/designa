@@ -46,7 +46,13 @@ To get started with development, clone this repo:
 
 Then install the necessary Node packages:
 
-`npm install`
+`npm install && npm run bootstrap`
+
+Start Storybook and watch for CSS changes inside `/packages/*`
+
+`npm run dev`
+
+> 😩 Note that you will currently have to manually reload, or disable/enable the desired "CSS Resource" in Storybook after making changes to see the results. A fix for this is high on the priority list.
 
 ### Commit Messages
 
