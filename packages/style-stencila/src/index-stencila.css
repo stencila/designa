@@ -1,5 +1,5 @@
-@import "@stencila/style-core";
-@import "@stencila/brand/dist/fonts/fonts";
+@import "@stencila/style-core/src";
+@import "@stencila/brand/src/fonts/fonts";
 
 @import "./atoms/atoms";
 @import "./molecules/tabList";

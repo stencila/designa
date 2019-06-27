@@ -7,6 +7,7 @@
   "author": "https://github.com/stencila/style/graphs/contributors",
   "license": "Apache-2.0",
   "scripts": {
+    "build": "npx lerna run build",
     "bootstrap": "npx lerna exec npm install",
     "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-core/dist,./packages/style-material/dist,./packages/style-stencila/dist"
   },

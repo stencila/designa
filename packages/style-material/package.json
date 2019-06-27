@@ -27,11 +27,10 @@
     "url": "git+https://github.com/stencila/style.git"
   },
   "scripts": {
-    "start": "parcel ./src/index.pcss",
-    "build": "parcel build ./src/index-material.css",
-    "postcss:build": "postcss ./src/*.css --dir ./dist",
-    "postcss:watch": "postcss ./src/*.css --dir ./dist --watch",
-    "storybook": "npx storybook"
+    "build": "npm run build:package && npm run build:css",
+    "build:package": "parcel build ./src/index-material.css",
+    "build:css": "postcss ./src/*.css --dir ./dist",
+    "build:css:watch": "postcss ./src/*.css --dir ./dist --watch"
   },
   "bugs": {
     "url": "https://github.com/stencila/style/issues"

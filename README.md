@@ -1,10 +1,6 @@
-# Stencila's visual design resources and style guide
+# Styla
 
-[![Build](https://travis-ci.org/stencila/schema.svg?branch=master)](https://travis-ci.org/stencila/style)
-[![NPM](https://img.shields.io/npm/v/@stencila/style.svg?style=flat)](https://www.npmjs.com/package/@stencila/style)
-[![Docs](https://img.shields.io/badge/style-guide-blue.svg)](https://stencila.github.io/style/)
-[![Community](https://img.shields.io/badge/join-community-green.svg)](https://community.stenci.la)
-[![Chat](https://badges.gitter.im/stencila/stencila.svg)](https://gitter.im/stencila/stencila)
+> 🎨 Stencila's visual design resources and style guide
 
 This is the place for Stencila's visual design resources (e.g. CSS, icons,
 logos) and style guide. The resources here will be reused across a number of
@@ -16,12 +12,12 @@ other repositories including our main website
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
-- [Design Philosophy](#design-philosophy)
-- [Quick Start](#quick-start)
-- [Development](#development)
-  - [Commit Messages](#commit-messages)
-- [Browser Support](#browser-support)
+- [Table of Contents](#Table-of-Contents)
+- [Design Philosophy](#Design-Philosophy)
+- [Quick Start](#Quick-Start)
+- [Development](#Development)
+  - [Commit Messages](#Commit-Messages)
+- [Browser Support](#Browser-Support)
 
 ---
 
@@ -36,19 +32,21 @@ issue](https://github.com/stencila/style/issues/9).
 
 ## Quick Start
 
-> ✨ Coming soon!
+1. `git clone git@github.com:stencila/style.git styla && cd styla`
+2. `npm install`
+3. `npm run bootstrap`
+4. `npm run build`
+5. `npm run storybook`
 
 ## Development
 
 To get started with development, clone this repo:
 
-`bash git clone git@github.com:stencila/style.git`
+`git clone git@github.com:stencila/style.git`
 
 Then install the necessary Node packages:
 
-`bash npm install`
-
-> ✨ Coming soon!
+`npm install`
 
 ### Commit Messages
 

@@ -27,9 +27,9 @@
   },
   "scripts": {
     "start": "parcel ./src/index.css",
-    "build": "parcel build ./src/index-stencila.css",
-    "postcss:build": "postcss ./src/*.css --dir ./dist",
-    "postcss:watch": "postcss ./src/*.css --dir ./dist --watch"
+    "build": "parcel build ./src/index-stencila.css && npm run build:css",
+    "build:css": "postcss ./src/*.css --dir ./dist",
+    "build:csswatch": "postcss ./src/*.css --dir ./dist --watch"
   },
   "bugs": {
     "url": "https://github.com/stencila/style/issues"

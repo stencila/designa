@@ -9,13 +9,29 @@ try {
 
 const tailwindConfigPath = path.join(packagePath, "tailwind.config.js");
 
-module.exports = {
-  modules: false,
-  plugins: [
+let plugins = [
+  require("postcss-import"),
+  require("postcss-nested"),
+  require("postcss-custom-properties"),
+  require("autoprefixer")
+];
+
+console.log(
+  process.env.INIT_CWD,
+  process.env.INIT_CWD.indexOf("packages/brand") === -1
+);
+
+if (process.env.INIT_CWD.indexOf("packages/brand") === -1) {
+  plugins = [
     require("postcss-import"),
     require("tailwindcss")(tailwindConfigPath),
     require("postcss-nested"),
     require("postcss-custom-properties"),
     require("autoprefixer")
-  ]
+  ];
+}
+
+module.exports = {
+  modules: false,
+  plugins
 };
