@@ -16,8 +16,10 @@ other repositories including our main website
 - [Design Philosophy](#Design-Philosophy)
 - [Quick Start](#Quick-Start)
 - [Development](#Development)
+  - [Adding Components](#Adding-Components)
   - [Commit Messages](#Commit-Messages)
 - [Browser Support](#Browser-Support)
+- [External Resources](#External-Resources)
 
 ---
 
@@ -54,6 +56,19 @@ Start Storybook and watch for CSS changes inside `/packages/*`
 
 > 😩 Note that you will currently have to manually reload, or disable/enable the desired "CSS Resource" in Storybook after making changes to see the results. A fix for this is high on the priority list.
 
+### Adding Components
+
+Create a [new Storybook story](https://storybook.js.org/docs/basics/writing-stories/)
+and avoid using CSS classes as much as possible. Use semantic HTML tags and WAI-ARIA
+attributes instead. See the [External Resources](#External-Resources) section
+below for useful references.
+
+Once the story is written, you will need to add appropriate styles for each design system.
+Currently we support:
+
+- Stencila's own design system
+- Material Design system
+
 ### Commit Messages
 
 Please use [conventional
@@ -79,3 +94,9 @@ according to CanIUse, including IE9 and above.
 > React supports all popular browsers, including Internet Explorer 9 and
 > above, although some polyfills are required for older browsers such as IE 9
 > and IE 10. > _https://reactjs.org/docs/react-dom.html#browser-support_
+
+## External Resources
+
+- [WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.1)
+- [Inclusive Components](https://inclusive-components.design)
+- [TailwindCSS](https://tailwindcss.com)
