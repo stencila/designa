@@ -1,5 +1,8 @@
-@import "@stencila/style-core/src";
-@import "@stencila/brand/src/fonts/fonts";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "@stencila/brand/src/fonts/IBM-Plex-Mono/IBM-Plex-Mono.css";
 
 @import "./atoms/atoms";
 @import "./molecules/tabList";

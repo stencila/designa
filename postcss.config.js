@@ -1,32 +1,20 @@
 const path = require("path");
+const fs = require("fs");
 
-let packagePath;
-try {
-  packagePath = require.resolve("@stencila/style-core");
-} catch (error) {
-  packagePath = path.join(__dirname, "packages", "style-core");
-}
-
-const tailwindConfigPath = path.join(packagePath, "tailwind.config.js");
-
-let plugins = [
-  require("postcss-import"),
-  require("postcss-nested"),
-  require("postcss-custom-properties"),
-  require("autoprefixer")
-];
-
-if (process.env.INIT_CWD.indexOf("packages/brand") === -1) {
-  plugins = [
-    require("postcss-import"),
-    require("tailwindcss")(tailwindConfigPath),
-    require("postcss-nested"),
-    require("postcss-custom-properties"),
-    require("autoprefixer")
-  ];
-}
+const tailwindConfigPath = path.join(
+  process.env.INIT_CWD,
+  "tailwind.config.js"
+);
+const conf = fs.existsSync(tailwindConfigPath) ? tailwindConfigPath : undefined;
 
 module.exports = {
   modules: false,
-  plugins
+  plugins: [
+    require("postcss-import"),
+    require("postcss-import-url")({ modernBrowser: true }),
+    require("tailwindcss")(conf),
+    require("postcss-nested"),
+    require("postcss-custom-properties"),
+    require("autoprefixer")
+  ]
 };

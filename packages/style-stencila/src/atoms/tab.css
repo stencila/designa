@@ -1,5 +1,5 @@
 ul[role="tablist"] li {
-  @apply capitalize flex flex-row text-center border border-neutral-400;
+  @apply capitalize list-none text-center flex flex-row text-center border border-neutral-400;
 
   &:first-of-type {
     @apply rounded-l;

@@ -1,6 +1,6 @@
 {
   "name": "@stencila/style",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Stencila's visual design resources and style guide",
   "main": "index.js",
   "repository": "https://github.com/stencila/style",
@@ -11,11 +11,11 @@
     "build": "npx lerna run build",
     "build:css:watch": "npx lerna run build:css:watch --stream --parallel",
     "bootstrap": "npx lerna exec npm install",
-    "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-core/dist,./packages/style-material/dist,./packages/style-stencila/dist",
-    "storybook:build": "build-storybook -o docs -s ./packages/brand/dist,./packages/style-core/dist,./packages/style-material/dist,./packages/style-stencila/dist"
+    "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist",
+    "storybook:build": "build-storybook -o docs -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
+    "@babel/core": "^7.5.0",
     "@semantic-release/commit-analyzer": "^6.2.0",
     "@semantic-release/git": "^7.0.14",
     "@semantic-release/github": "^5.4.0",
@@ -27,20 +27,18 @@
     "autoprefixer": "^9.6.0",
     "babel-loader": "^8.0.6",
     "concurrently": "^4.1.1",
-    "core-js": "^3.1.4",
     "lerna": "^3.15.0",
     "parcel-bundler": "^1.12.3",
     "postcss-cli": "^6.1.2",
     "postcss-custom-properties": "^8.0.11",
     "postcss-import": "^12.0.1",
+    "postcss-import-url": "^4.0.0",
     "postcss-modules": "^1.4.1",
     "postcss-nested": "^4.1.2",
     "postcss-parcel-import": "0.0.2",
-    "sass": "^1.22.0",
     "semantic-release": "^15.13.18",
     "tailwindcss": "^1.0.4",
     "typescript": "^3.5.2"
   },
-  "style": "sass/stencila.sass",
   "dependencies": {}
 }

@@ -10,7 +10,7 @@
   "author": "Alex Ketch <alex@ketch.me>",
   "homepage": "https://stenci.la",
   "license": "Apache-2.0",
-  "main": "dist/index.css",
+  "main": "dist/index-stencila.css",
   "directories": {
     "src": "src"
   },
@@ -29,17 +29,16 @@
     "start": "parcel ./src/index.css",
     "build": "npm run build:package && npm run build:css",
     "build:watch": "concurrently \"npm run build:package:watch\" \"npm run build:css:watch\"",
-    "build:package": "parcel build ./src/index-stencila.css",
-    "build:package:watch": "parcel watch ./src/index-stencila.css",
-    "build:css": "postcss ./src/*.css --dir ./dist",
-    "build:css:watch": "postcss ./src/*.css --dir ./dist --watch"
+    "build:package": "parcel build 'src/*.css' 'src/**/*.css' --public-url ./",
+    "build:package:watch": "parcel watch 'src/*.css' 'src/**/*.css'  --public-url ./",
+    "build:css": "postcss 'dist/*.css' 'dist/**/*.css' -r",
+    "build:css:watch": "postcss 'dist/*.css' 'dist/**/*.css' --watch -r"
   },
   "bugs": {
     "url": "https://github.com/stencila/style/issues"
   },
   "dependencies": {
     "@stencila/brand": "file:../brand",
-    "@stencila/style-core": "file:../style-core",
     "postcss": "^7.0.17",
     "postcss-cli": "^6.1.2",
     "postcss-insert": "^1.0.0",

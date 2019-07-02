@@ -25,9 +25,9 @@
   },
   "scripts": {
     "build": "npm run build:package",
-    "build:package": "parcel build ./src/**/* -d ./dist --public-url ./ && npm run mvFonts",
-    "build:watch": "parcel watch ./src/**/* -d ./dist --public-url ./ && npm run mvFonts",
-    "mvFonts": "mv ./dist/*.woff* ./dist/fonts"
+    "build:package": "parcel build ./src/* ./src/**/* ./src/**/**/* -d ./dist --public-url ./",
+    "build:watch": "parcel watch ./src/* ./src/**/* ./src/**/**/* -d ./dist --public-url ./",
+    "moveFonts": "mv ./dist/*.woff* ./dist/fonts"
   },
   "bugs": {
     "url": "https://github.com/stencila/style/issues"
