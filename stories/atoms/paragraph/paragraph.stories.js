@@ -1,7 +1,7 @@
-import { storiesOf } from "@storybook/html"
+import { storiesOf } from '@storybook/html'
 
-storiesOf("Atoms/Paragraph", module).add(
-  "default",
+storiesOf('Atoms/Paragraph', module).add(
+  'default',
   () => `<p>To control the font family of an element at a specific
   breakpoint, add a {screen}: prefix to any existing font family utility
   class. For example, use md:font-serif to apply the font-serif utility at

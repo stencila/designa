@@ -1,14 +1,8 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-@import "@stencila/brand/src/fonts/IBM-Plex-Mono/IBM-Plex-Mono.css";
+@import './global';
 
-@import "./atoms/atoms";
-@import "./molecules/tabList";
-
-html,
-body {
-  @apply font-body;
-  color: #4a4a4a;
-}
+@import './atoms/atoms';
+@import './molecules/tabList';

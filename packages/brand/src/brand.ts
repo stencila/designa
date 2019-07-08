@@ -1,1 +1,1 @@
-export { colors } from "./data/colors";
+export { colors } from './data/colors'

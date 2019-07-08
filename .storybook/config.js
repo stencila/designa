@@ -1,7 +1,7 @@
-import { withA11y } from "@storybook/addon-a11y"
-import { withCssResources } from "@storybook/addon-cssresources"
-import { addDecorator, addParameters, configure } from "@storybook/html"
-import { create } from "@storybook/theming"
+import { withA11y } from '@storybook/addon-a11y'
+import { withCssResources } from '@storybook/addon-cssresources'
+import { addDecorator, addParameters, configure } from '@storybook/html'
+import { create } from '@storybook/theming'
 
 const cssresources = [
   {
@@ -33,7 +33,7 @@ const theme = create({
 
   // // Typography
   fontBase: 'Nunito, "Open Sans", sans-serif',
-  fontCode: "monospace",
+  fontCode: 'monospace',
 
   // // Text colors
   // textColor: "#333333",
@@ -50,8 +50,8 @@ const theme = create({
   // inputTextColor: "black",
   // inputBorderRadius: 4,
 
-  brandTitle: "Stencila Style - Core",
-  brandUrl: "https://stenci.la"
+  brandTitle: 'Stencila Style - Core',
+  brandUrl: 'https://stenci.la'
   // brandImage: "https://stenci.la/img/logo.svg"
 })
 
@@ -59,7 +59,7 @@ addParameters({
   a11y: {
     config: {},
     options: {
-      checks: { "color-contrast": { options: { noScroll: true } } },
+      checks: { 'color-contrast': { options: { noScroll: true } } },
       restoreScroll: true
     }
   },
@@ -69,7 +69,7 @@ addParameters({
   }
 })
 
-const req = require.context("../stories", true, /\.stories\.js$/)
+const req = require.context('../stories', true, /\.stories\.js$/)
 const loadStories = () => {
   // Make welcome story default
   // require('../stories/index.stories');

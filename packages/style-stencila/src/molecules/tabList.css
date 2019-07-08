@@ -1,3 +1,4 @@
-ul[role="tablist"] {
-  @apply flex flex-row bg-neutral-100;
+:host ul,
+ul[role='tablist'] {
+  @apply flex flex-row bg-neutral-100 p-0 m-0;
 }

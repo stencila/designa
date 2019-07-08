@@ -1,5 +1,5 @@
-const { colors } = require("@stencila/brand/dist/data/colors");
-const tailwind = require("tailwindcss/defaultTheme");
+const { colors } = require('@stencila/brand/dist/data/colors')
+const tailwind = require('tailwindcss/defaultTheme')
 
 module.exports = {
   theme: {
@@ -10,9 +10,9 @@ module.exports = {
     //   xl: "1280px"
     // },
     fontFamily: {
-      display: ["Roboto", "sans-serif"],
-      body: ["Roboto", "sans-serif"],
-      mono: ["IBM Plex Mono", "Fira Code", "monospace"]
+      display: ['Roboto', 'sans-serif'],
+      body: ['Roboto', 'sans-serif'],
+      mono: ['IBM Plex Mono', 'Fira Code', 'monospace']
     },
     // borderWidth: {
     //   default: "1px",
@@ -37,4 +37,4 @@ module.exports = {
       // }
     }
   }
-};
+}

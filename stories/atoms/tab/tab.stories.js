@@ -1,13 +1,13 @@
-import { storiesOf } from "@storybook/html";
+import { storiesOf } from '@storybook/html'
 
-storiesOf("Atoms/Tab", module)
+storiesOf('Atoms/Tab', module)
   .add(
-    "default",
+    'default',
     () =>
       `<ul role="tablist"><li role="presentation" ><a role="tab" tabindex="-1" href="#">Hello World</a></li></ul>`
   )
   .add(
-    "active",
+    'active',
     () =>
       `<ul role="tablist"><li role="presentation" aria-selected="true"><a role="tab" tabindex="-1" href="#">Hello World</a></li></ul>`
-  );
+  )

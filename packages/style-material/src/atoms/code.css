@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i&display=swap');
 
 code {
-  font-family: "Roboto Mono", monospace;
+  font-family: 'Roboto Mono', monospace;
   font-size: 75%;
 }

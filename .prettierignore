@@ -1,0 +1,15 @@
+**/.cache
+**/dist
+/docs
+**/node_modules
+**/.DS_Store
+**/.stencil
+*.woff
+*.woff2
+*.svg
+*.eot
+*.ttf
+*.txt
+*.png
+*.gif
+*.ai

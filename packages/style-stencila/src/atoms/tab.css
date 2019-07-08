@@ -1,5 +1,7 @@
-ul[role="tablist"] li {
-  @apply capitalize list-none text-center flex flex-row text-center border border-neutral-400;
+@import './anchor';
+
+ul[role='tablist'] li {
+  @apply capitalize list-none text-center flex flex-row text-center border border-neutral-400 m-0;
 
   &:first-of-type {
     @apply rounded-l;
@@ -9,11 +11,11 @@ ul[role="tablist"] li {
     @apply rounded-r;
   }
 
-  &:hover:not([aria-selected="true"]) {
+  &:hover:not([aria-selected='true']) {
     @apply bg-stock border-neutral-300;
   }
 
-  &[aria-selected="true"] {
+  &[aria-selected='true'] {
     @apply bg-neutral-300;
   }
 

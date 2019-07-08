@@ -1,14 +1,14 @@
-import { storiesOf } from "@storybook/html"
+import { storiesOf } from '@storybook/html'
 
 var entityMap = {
-  "&": "&amp;",
-  "<": "&lt;",
-  ">": "&gt;",
-  '"': "&quot;",
-  "'": "&#39;",
-  "/": "&#x2F;",
-  "`": "&#x60;",
-  "=": "&#x3D;"
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;',
+  '/': '&#x2F;',
+  '`': '&#x60;',
+  '=': '&#x3D;'
 }
 
 function escapeHtml(string) {
@@ -17,8 +17,8 @@ function escapeHtml(string) {
   })
 }
 
-storiesOf("Molecules/Code Block", module).add(
-  "default",
+storiesOf('Molecules/Code Block', module).add(
+  'default',
   () =>
     '<pre class="language-html line-numbers"> <code>' +
     escapeHtml(`<p class="column is-full"> <p class="columns is-centered">
@@ -47,5 +47,5 @@ storiesOf("Molecules/Code Block", module).add(
     </div>
     </div>
     </p>`) +
-    "</code> </pre>"
+    '</code> </pre>'
 )
