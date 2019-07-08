@@ -21,6 +21,7 @@
     "@semantic-release/github": "^5.4.0",
     "@semantic-release/npm": "^5.1.13",
     "@semantic-release/release-notes-generator": "^7.2.0",
+    "@stencila/dev-config": "^1.1.0",
     "@storybook/addon-a11y": "^5.1.9",
     "@storybook/addon-cssresources": "^5.1.9",
     "@storybook/html": "^5.1.9",
@@ -40,5 +41,34 @@
     "tailwindcss": "^1.0.4",
     "typescript": "^3.5.2"
   },
-  "dependencies": {}
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "scope-case": [
+        2,
+        "always",
+        "sentence-case"
+      ],
+      "subject-case": [
+        2,
+        "always",
+        "sentence-case"
+      ]
+    }
+  },
+  "eslintConfig": {
+    "extends": "@stencila/eslint-config"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "prettier": "@stencila/dev-config/prettier-config.json",
+  "release": {
+    "extends": "@stencila/semantic-release-config"
+  }
 }
