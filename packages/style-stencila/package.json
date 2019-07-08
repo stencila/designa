@@ -31,8 +31,7 @@
     "build:watch": "concurrently \"npm run build:package:watch\" \"npm run build:css:watch\"",
     "build:package": "parcel build 'src/*.css' 'src/**/*.css' --public-url ./",
     "build:package:watch": "parcel watch 'src/*.css' 'src/**/*.css'  --public-url ./",
-    "build:css": "postcss 'dist/*.css' 'dist/**/*.css' -r",
-    "build:css:watch": "postcss 'dist/*.css' 'dist/**/*.css' --watch -r"
+    "build:css": "postcss 'dist/*.css' 'dist/**/*.css' -r"
   },
   "bugs": {
     "url": "https://github.com/stencila/style/issues"
