@@ -3,5 +3,5 @@
 @import 'tailwindcss/utilities';
 
 @import './global';
-@import './atoms/atoms';
-@import './molecules/molecules';
+@import './atoms';
+@import './molecules';

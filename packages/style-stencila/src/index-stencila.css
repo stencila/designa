@@ -4,5 +4,5 @@
 
 @import './global';
 
-@import './atoms/atoms';
-@import './molecules/tabList';
+@import './atoms';
+@import './molecules';

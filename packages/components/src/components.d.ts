@@ -31,6 +31,16 @@ export namespace Components {
      */
     label: string
   }
+  interface StencilaToc {
+    /**
+     * Where to grab the headings to build the table of contents.
+     */
+    contentSelector: string
+    /**
+     * Which headings to grab inside of the contentSelector element.
+     */
+    headingSelector: string
+  }
 }
 
 declare global {
@@ -49,9 +59,18 @@ declare global {
     prototype: HTMLStencilaTabListElement
     new (): HTMLStencilaTabListElement
   }
+
+  interface HTMLStencilaTocElement
+    extends Components.StencilaToc,
+      HTMLStencilElement {}
+  var HTMLStencilaTocElement: {
+    prototype: HTMLStencilaTocElement
+    new (): HTMLStencilaTocElement
+  }
   interface HTMLElementTagNameMap {
     'stencila-tab': HTMLStencilaTabElement
     'stencila-tab-list': HTMLStencilaTabListElement
+    'stencila-toc': HTMLStencilaTocElement
   }
 }
 
@@ -81,10 +100,21 @@ declare namespace LocalJSX {
      */
     label?: string
   }
+  interface StencilaToc extends JSXBase.HTMLAttributes<HTMLStencilaTocElement> {
+    /**
+     * Where to grab the headings to build the table of contents.
+     */
+    contentSelector?: string
+    /**
+     * Which headings to grab inside of the contentSelector element.
+     */
+    headingSelector?: string
+  }
 
   interface IntrinsicElements {
     'stencila-tab': StencilaTab
     'stencila-tab-list': StencilaTabList
+    'stencila-toc': StencilaToc
   }
 }
 

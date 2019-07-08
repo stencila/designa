@@ -1,0 +1,15 @@
+@import '@stencila/brand/src/fonts/IBM-Plex-Mono/IBM-Plex-Mono.css';
+
+* {
+  @apply font-body;
+  color: #4a4a4a;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-display;
+}

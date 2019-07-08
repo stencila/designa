@@ -6,8 +6,8 @@ const tabs = ['Tab 1', 'Tab 2', 'Tab 3']
 @Component({
   tag: 'stencila-tab-list',
   styleUrls: {
-    default: 'tab-list.css',
-    material: 'tab-list.material.css'
+    default: 'tabList.css',
+    material: 'tabList.material.css'
   },
   shadow: true
 })
