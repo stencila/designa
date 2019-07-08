@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "npm run build && concurrently \"npm run storybook\" \"npm run build:css:watch\"",
     "build": "npx lerna run build",
+    "build:watch": "npx lerna run build:watch --stream --parallel",
     "build:css:watch": "npx lerna run build:css:watch --stream --parallel",
     "bootstrap": "npx lerna exec npm install",
     "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist",
