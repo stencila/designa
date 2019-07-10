@@ -2,6 +2,7 @@ import { withA11y } from '@storybook/addon-a11y'
 import { withCssResources } from '@storybook/addon-cssresources'
 import { addDecorator, addParameters, configure } from '@storybook/html'
 import { create } from '@storybook/theming'
+import { withRootAttribute } from 'storybook-addon-root-attribute'
 
 const cssresources = [
   {
@@ -18,6 +19,7 @@ const cssresources = [
 
 addDecorator(withA11y)
 addDecorator(withCssResources)
+addDecorator(withRootAttribute)
 
 const theme = create({
   // base: "normal",
@@ -50,7 +52,7 @@ const theme = create({
   // inputTextColor: "black",
   // inputBorderRadius: 4,
 
-  brandTitle: 'Stencila Style - Core',
+  brandTitle: 'Stencila Designa',
   brandUrl: 'https://stenci.la'
   // brandImage: "https://stenci.la/img/logo.svg"
 })
@@ -66,13 +68,27 @@ addParameters({
   cssresources,
   options: {
     theme
+  },
+  rootAttribute: {
+    attribute: 'mode',
+    defaultState: {
+      name: 'Stencila',
+      value: null
+    },
+    states: [
+      {
+        name: 'Material',
+        value: 'material'
+      }
+    ]
   }
 })
 
 const req = require.context('../stories', true, /\.stories\.js$/)
 const loadStories = () => {
-  // Make welcome story default
-  // require('../stories/index.stories');
+  // NOTE: Commment/Uncomment the following line to compare different WebComponent themes
+  //  document.documentElement.setAttribute('mode', 'material')
+
   req.keys().forEach(filename => req(filename))
 }
 

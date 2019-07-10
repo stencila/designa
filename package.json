@@ -13,8 +13,8 @@
     "build:package": "npx lerna run build:package:watch --stream --parallel",
     "build:css": "npx lerna run build:css --stream --parallel",
     "bootstrap": "npx lerna exec npm install",
-    "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist",
-    "storybook:build": "build-storybook -o docs -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist"
+    "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist",
+    "storybook:build": "build-storybook -o docs -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
@@ -30,6 +30,13 @@
     "autoprefixer": "^9.6.0",
     "babel-loader": "^8.0.6",
     "concurrently": "^4.1.1",
+    "copy-webpack-plugin": "^5.0.3",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-react-hooks": "^1.6.1",
+    "globby": "^10.0.1",
     "lerna": "^3.15.0",
     "parcel-bundler": "^1.12.3",
     "postcss-cli": "^6.1.2",
@@ -39,9 +46,12 @@
     "postcss-modules": "^1.4.1",
     "postcss-nested": "^4.1.2",
     "postcss-parcel-import": "0.0.2",
+    "postcss-url": "^8.0.0",
     "semantic-release": "^15.13.18",
+    "storybook-addon-root-attribute": "^0.2.1",
     "tailwindcss": "^1.0.4",
     "typescript": "^3.5.2"
+    "write-file-webpack-plugin": "^4.5.0"
   },
   "commitlint": {
     "extends": [
