@@ -12,14 +12,14 @@ export class TableOfContents {
   /**
    * Where to grab the headings to build the table of contents.
    */
-  @Prop() contentSelector: string
+  @Prop() public contentSelector: string = 'article'
 
   /**
    * Which headings to grab inside of the contentSelector element.
    */
-  @Prop() headingSelector: string = 'h1, h2, h3, h4'
+  @Prop() public headingSelector: string = 'h1, h2, h3, h4'
 
-  private initTOC = () => {
+  private initTOC = (): void => {
     tocbot.init({
       tocSelector: '.toc',
       positionFixedSelector: '.toc',
@@ -28,7 +28,7 @@ export class TableOfContents {
     })
   }
 
-  componentDidLoad() {
+  public componentDidLoad(): void {
     if (
       document.readyState === 'interactive' ||
       (document.readyState === 'complete' &&
@@ -40,11 +40,11 @@ export class TableOfContents {
     }
   }
 
-  componentDidUnload() {
+  public componentDidUnload(): void {
     document.removeEventListener('DOMContentLoaded', this.initTOC)
   }
 
-  render() {
+  public render(): HTMLElement {
     return <nav class="toc" />
   }
 }
