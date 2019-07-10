@@ -7,11 +7,9 @@
   "author": "https://github.com/stencila/style/graphs/contributors",
   "license": "Apache-2.0",
   "scripts": {
-    "dev": "npm run build && concurrently \"npm run storybook\" \"npm run build:css:watch\"",
+    "dev": "npm run build && concurrently \"npm run storybook\" \"npm run build:watch\"",
     "build": "npx lerna run build",
     "build:watch": "npx lerna run build:watch --stream --parallel",
-    "build:package": "npx lerna run build:package:watch --stream --parallel",
-    "build:css": "npx lerna run build:css --stream --parallel",
     "bootstrap": "npx lerna exec npm install",
     "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist",
     "storybook:build": "build-storybook -o docs -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist"
@@ -50,7 +48,7 @@
     "semantic-release": "^15.13.18",
     "storybook-addon-root-attribute": "^0.2.1",
     "tailwindcss": "^1.0.4",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.2",
     "write-file-webpack-plugin": "^4.5.0"
   },
   "commitlint": {
