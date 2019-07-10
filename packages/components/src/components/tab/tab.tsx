@@ -12,22 +12,26 @@ export class Tab {
   /**
    * The link the tab should navigate to
    */
-  @Prop() href: string = '#'
+  @Prop() public href: string = '#'
 
   /**
    * The displayed text of the Tab
    */
-  @Prop() label: string
+  @Prop() public label: string
 
   /**
    * Indicates whether the current tab is "selected"
    */
-  @Prop({ attribute: 'selected' }) isSelected: boolean = false
+  @Prop({ attribute: 'selected' }) public isSelected: boolean = false
 
-  render() {
+  public render(): HTMLLIElement {
     return (
-      <li role="presentation" aria-selected={this.isSelected.toString()}>
-        <a role="tab" tabindex="-1" href={this.label}>
+      <li role="presentation">
+        <a
+          aria-selected={this.isSelected.toString()}
+          href={this.label}
+          role="tab"
+        >
           {this.label}
         </a>
       </li>

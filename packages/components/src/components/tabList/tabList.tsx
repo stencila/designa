@@ -1,8 +1,6 @@
 import { Component, h, Prop, State } from '@stencil/core'
 import { ord } from 'fp-ts'
 
-const tabs = ['Tab 1', 'Tab 2', 'Tab 3']
-
 @Component({
   tag: 'stencila-tab-list',
   styleUrls: {
@@ -15,39 +13,45 @@ export class TabList {
   /**
    * The displayed text of the Tab
    */
-  @Prop() label: string
+  @Prop() public label: string
 
   /**
    * The link the tab should navigate to
    */
-  @Prop() href: string = '#'
+  @Prop() public href: string = '#'
 
-  @State() activeTabIndex: number = 0
+  /**
+   * A list of string values to use as tab labels
+   */
+  @Prop() public tabs!: string[]
+  // private children: Element[]
 
-  private selectTab(index: number) {
+  @State() private activeTabIndex: number = 0
+
+  private selectTab(index: number): void {
     this.activeTabIndex = index
   }
 
-  private onTabClick = (index: number) => (e: MouseEvent) => {
+  private onTabClick = (index: number) => (e: MouseEvent): void => {
     e.preventDefault()
     this.selectTab(index)
   }
 
-  private onKeyboardNavigateTabs = (e: KeyboardEvent) => {
+  private onKeyboardNavigateTabs = (e: KeyboardEvent): void => {
     let dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0
-    const constrain = ord.clamp(ord.ordNumber)(0, tabs.length - 1)
+    const constrain = ord.clamp(ord.ordNumber)(0, this.tabs.length - 1)
     this.selectTab(constrain(this.activeTabIndex + dir))
   }
 
-  render() {
+  public render(): HTMLUListElement {
     return (
       <ul role="tablist" onKeyDown={this.onKeyboardNavigateTabs}>
-        {tabs.map((tab, index) => (
+        {this.tabs.map((tab, index): HTMLElement[] => (
           <stencila-tab
-            label={tab}
-            tabIndex={index === this.activeTabIndex ? 0 : -1}
             isSelected={index === this.activeTabIndex}
+            label={tab}
             onClick={this.onTabClick(index)}
+            tabIndex={index === this.activeTabIndex ? 0 : -1}
           />
         ))}
       </ul>

@@ -5,6 +5,7 @@
  */
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal'
+import { CreativeWork } from '@stencila/schema'
 
 export namespace Components {
   interface StencilaTab {
@@ -30,6 +31,10 @@ export namespace Components {
      * The displayed text of the Tab
      */
     label: string
+    /**
+     * A list of string values to use as tab labels
+     */
+    tabs: string[]
   }
   interface StencilaToc {
     /**
@@ -40,6 +45,9 @@ export namespace Components {
      * Which headings to grab inside of the contentSelector element.
      */
     headingSelector: string
+  }
+  interface StencilaVerticalNav {
+    collection?: CreativeWork
   }
 }
 
@@ -67,10 +75,19 @@ declare global {
     prototype: HTMLStencilaTocElement
     new (): HTMLStencilaTocElement
   }
+
+  interface HTMLStencilaVerticalNavElement
+    extends Components.StencilaVerticalNav,
+      HTMLStencilElement {}
+  var HTMLStencilaVerticalNavElement: {
+    prototype: HTMLStencilaVerticalNavElement
+    new (): HTMLStencilaVerticalNavElement
+  }
   interface HTMLElementTagNameMap {
     'stencila-tab': HTMLStencilaTabElement
     'stencila-tab-list': HTMLStencilaTabListElement
     'stencila-toc': HTMLStencilaTocElement
+    'stencila-vertical-nav': HTMLStencilaVerticalNavElement
   }
 }
 
@@ -99,6 +116,10 @@ declare namespace LocalJSX {
      * The displayed text of the Tab
      */
     label?: string
+    /**
+     * A list of string values to use as tab labels
+     */
+    tabs: string[]
   }
   interface StencilaToc extends JSXBase.HTMLAttributes<HTMLStencilaTocElement> {
     /**
@@ -110,11 +131,16 @@ declare namespace LocalJSX {
      */
     headingSelector?: string
   }
+  interface StencilaVerticalNav
+    extends JSXBase.HTMLAttributes<HTMLStencilaVerticalNavElement> {
+    collection?: CreativeWork
+  }
 
   interface IntrinsicElements {
     'stencila-tab': StencilaTab
     'stencila-tab-list': StencilaTabList
     'stencila-toc': StencilaToc
+    'stencila-vertical-nav': StencilaVerticalNav
   }
 }
 
