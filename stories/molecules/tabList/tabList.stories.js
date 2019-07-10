@@ -1,26 +1,32 @@
 import { storiesOf } from '@storybook/html'
+import readme from '../../../packages/components/src/components/tabList/readme.md'
 
 const storyName = 'Molecules/Tab List'
 
 storiesOf(storyName, module)
+  .addParameters({
+    readme: {
+      sidebar: readme
+    }
+  })
   .add(
     'Single Tab',
     () =>
-      `<ul role="tablist"><li role="presentation" ><a role="tab" tabindex="-1" href="#">Overview</a></li>
+      `<ul role="tablist"><li role="presentation"  aria-selected="true"><a role="tab" tabindex="-1" href="#">Overview</a></li>
       </ul>`
   )
   .add(
     'Two Tabs',
     () =>
       `<ul role="tablist"><li role="presentation" ><a role="tab" tabindex="-1" href="#">Overview</a></li>
-      <li role="presentation"><a  aria-selected="true" role="tab" tabindex="-1" href="#">Files</a></li>
+      <li role="presentation" aria-selected="true"><a role="tab" tabindex="-1" href="#">Files</a></li>
       </ul>`
   )
   .add(
     'Multiple Tabs',
     () =>
       `<ul role="tablist"><li role="presentation" ><a role="tab" tabindex="-1" href="#">Overview</a></li>
-      <li role="presentation"><a aria-selected="true" role="tab" tabindex="-1" href="#">Files</a></li>
+      <li role="presentation" aria-selected="true"><a role="tab" tabindex="-1" href="#">Files</a></li>
       <li role="presentation" ><a role="tab" tabindex="-1" href="#">Activity</a></li>
       <li role="presentation" ><a role="tab" tabindex="-1" href="#">Sharing</a></li>
       <li role="presentation" ><a role="tab" tabindex="-1" href="#">Settings</a></li></ul>`

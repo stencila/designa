@@ -38,5 +38,8 @@
     "fp-ts": "^2.0.1",
     "tocbot": "^4.7.0",
     "webfontloader": "^1.6.28"
+  },
+  "eslintConfig": {
+    "extends": "@stencila/eslint-config/eslint-config-stencil"
   }
 }

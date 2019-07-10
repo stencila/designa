@@ -26,12 +26,8 @@ export class Tab {
 
   public render(): HTMLLIElement {
     return (
-      <li role="presentation">
-        <a
-          aria-selected={this.isSelected.toString()}
-          href={this.label}
-          role="tab"
-        >
+      <li role="presentation" aria-selected={this.isSelected.toString()}>
+        <a href={this.label} role="tab">
           {this.label}
         </a>
       </li>

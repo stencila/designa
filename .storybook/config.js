@@ -3,6 +3,7 @@ import { withCssResources } from '@storybook/addon-cssresources'
 import { addDecorator, addParameters, configure } from '@storybook/html'
 import { create } from '@storybook/theming'
 import { withRootAttribute } from 'storybook-addon-root-attribute'
+import { addReadme } from 'storybook-readme/html'
 
 const cssresources = [
   {
@@ -17,6 +18,7 @@ const cssresources = [
   }
 ]
 
+addDecorator(addReadme)
 addDecorator(withA11y)
 addDecorator(withCssResources)
 addDecorator(withRootAttribute)

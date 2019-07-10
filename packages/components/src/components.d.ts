@@ -12,7 +12,7 @@ export namespace Components {
     /**
      * The link the tab should navigate to
      */
-    href: string
+    hrefsdfsd: string
     /**
      * Indicates whether the current tab is "selected"
      */
@@ -96,7 +96,7 @@ declare namespace LocalJSX {
     /**
      * The link the tab should navigate to
      */
-    href?: string
+    hrefsdfsd?: string
     /**
      * Indicates whether the current tab is "selected"
      */

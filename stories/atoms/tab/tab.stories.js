@@ -1,6 +1,12 @@
 import { storiesOf } from '@storybook/html'
+import readme from '../../../packages/components/src/components/tab/readme.md'
 
 storiesOf('Atoms/Tab', module)
+  .addParameters({
+    readme: {
+      sidebar: readme
+    }
+  })
   .add(
     'default',
     () =>
