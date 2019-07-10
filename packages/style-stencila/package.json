@@ -26,21 +26,14 @@
     "url": "git+https://github.com/stencila/style.git"
   },
   "scripts": {
-    "start": "parcel ./src/index.css",
-    "build": "npm run build:package && npm run build:css",
-    "build:watch": "concurrently \"npm run build:package:watch\" \"npm run build:css:watch\"",
-    "build:package": "parcel build 'src/*.css' 'src/**/*.css' --public-url ./",
-    "build:package:watch": "parcel watch 'src/*.css' 'src/**/*.css'  --public-url ./",
-    "build:css": "postcss 'dist/*.css' 'dist/**/*.css' -r"
+    "build": "parcel build 'src/*.css' 'src/**/*.css' --public-url ./",
+    "build:watch": "parcel watch 'src/*.css' 'src/**/*.css'  --public-url ./"
   },
   "bugs": {
     "url": "https://github.com/stencila/style/issues"
   },
   "dependencies": {
     "@stencila/brand": "file:../brand",
-    "postcss": "^7.0.17",
-    "postcss-cli": "^6.1.2",
-    "postcss-insert": "^1.0.0",
     "tailwindcss": "^1.0.4"
   },
   "devDependencies": {

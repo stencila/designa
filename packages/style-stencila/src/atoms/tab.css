@@ -2,7 +2,7 @@
 
 :host li,
 ul[role='tablist'] li {
-  @apply capitalize list-none text-center flex flex-row text-center border border-neutral-400 m-0;
+  @apply capitalize list-none text-center flex flex-row text-center border border-neutral-400 m-0 p-0;
 
   &:first-of-type {
     @apply rounded-l;
@@ -12,6 +12,7 @@ ul[role='tablist'] li {
     @apply rounded-r;
   }
 
+  /* TODO: Move BG to anchor element */
   &:hover:not([aria-selected='true']) {
     @apply bg-stock border-neutral-300;
   }

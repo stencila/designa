@@ -1,7 +1,9 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap';
+@import '@stencila/brand/src/fonts/IBM-Plex-Mono/IBM-Plex-Mono.css';
 
 * {
   @apply font-body;
+  color: #4a4a4a;
 }
 
 h1,

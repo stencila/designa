@@ -9,6 +9,7 @@ module.exports = {
   plugins: [
     require('postcss-import'),
     require('postcss-import-url')({ modernBrowser: true }),
+    require('postcss-url')({ url: 'rebase' }),
     require('tailwindcss')(conf),
     require('postcss-nested'),
     require('postcss-custom-properties'),

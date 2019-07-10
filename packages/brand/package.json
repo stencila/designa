@@ -24,9 +24,8 @@
     "url": "git+https://github.com/stencila/style.git"
   },
   "scripts": {
-    "build": "npm run build:package",
-    "build:package": "parcel build ./src/* ./src/**/* ./src/**/**/* -d ./dist --public-url ./",
-    "build:watch": "parcel watch ./src/* ./src/**/* ./src/**/**/* -d ./dist --public-url ./",
+    "build": "parcel build ./src/* ./src/**/* ./src/**/**/* -d ./dist --public-url ./",
+    "build:watch:brand": "parcel watch ./src/* ./src/**/* ./src/**/**/* -d ./dist --public-url ./",
     "moveFonts": "mv ./dist/*.woff* ./dist/fonts"
   },
   "bugs": {

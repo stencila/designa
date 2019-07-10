@@ -1,5 +1,6 @@
 /* Styles based on https://github.com/tscanlin/tocbot/tree/master/src/scss */
 @import 'tocbot';
+@import '../atoms/anchor';
 
 .toc {
   @apply overflow-y-auto;
@@ -9,7 +10,7 @@
   @apply overflow-hidden relative;
 
   li {
-    @apply list-none;
+    @apply list-none leading-relaxed;
   }
 }
 
