@@ -16,6 +16,7 @@ const purgeCSS =
 export const config: Config = {
   namespace: 'stencila-components',
   globalScript: './src/globals/global.ts',
+  globalStyle: './src/globals/global.css',
   outputTargets: [
     {
       type: 'dist',
