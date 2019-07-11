@@ -5,14 +5,14 @@
  */
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal'
-import { CreativeWork } from '@stencila/schema'
+import { Collection } from '@stencila/schema'
 
 export namespace Components {
   interface StencilaTab {
     /**
      * The link the tab should navigate to
      */
-    hrefsdfsd: string
+    href: string
     /**
      * Indicates whether the current tab is "selected"
      */
@@ -47,7 +47,7 @@ export namespace Components {
     headingSelector: string
   }
   interface StencilaVerticalNav {
-    collection?: CreativeWork
+    collection?: Collection
   }
 }
 
@@ -96,7 +96,7 @@ declare namespace LocalJSX {
     /**
      * The link the tab should navigate to
      */
-    hrefsdfsd?: string
+    href?: string
     /**
      * Indicates whether the current tab is "selected"
      */
@@ -133,7 +133,7 @@ declare namespace LocalJSX {
   }
   interface StencilaVerticalNav
     extends JSXBase.HTMLAttributes<HTMLStencilaVerticalNavElement> {
-    collection?: CreativeWork
+    collection?: Collection
   }
 
   interface IntrinsicElements {

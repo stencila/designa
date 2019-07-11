@@ -50,7 +50,7 @@ Then install the necessary Node packages:
 
 `npm install && npm run bootstrap`
 
-Start Storybook and watch for CSS changes inside `/packages/*`
+Start Storybook and watch for changes inside `/packages/*`
 
 `npm run dev`
 

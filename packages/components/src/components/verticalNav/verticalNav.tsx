@@ -1,5 +1,5 @@
 import { Component, h, Prop } from '@stencil/core'
-import { CreativeWork, Node } from '@stencila/schema'
+import { Collection, CreativeWork, Node } from '@stencila/schema'
 
 const parseCreativeWorks = (
   c: CreativeWork[],
@@ -11,13 +11,13 @@ const parseCreativeWorks = (
         <li>
           <details open>
             <summary>{part.name}</summary>
-            {parseCreativeWorks(part.parts, part.name + '/')}
+            {parseCreativeWorks(part.parts, (part.name || '') + '/')}
           </details>
         </li>
       ) : (
         <li>
-          <a class="toc-link" href={path + part.name}>
-            {part.name} (<code>{path + part.name}</code>)
+          <a class="toc-link" href={path + (part.name || '')}>
+            {part.name} (<code>{path + (part.name || '')}</code>)
           </a>
         </li>
       )
@@ -34,30 +34,41 @@ const parseCreativeWorks = (
   shadow: true
 })
 export class VerticalNav {
-  private _collection: CreativeWork
-  @Prop() public collection?: CreativeWork
+  @Prop() public collection?: Collection
+  private _collection: Collection = this.collection
+
+  // TODO: Move these helpers from Encoda to Schema
+  private isCollection = (node: Node): node is Collection =>
+    node &&
+    typeof node !== 'boolean' &&
+    typeof node !== 'number' &&
+    typeof node !== 'string' &&
+    !Array.isArray(node) &&
+    node.type === 'Collection'
 
   public componentWillLoad(): void {
+    // Use the collection Prop if one exists, otherwise try to read it from the HTML head
     if (this.collection) {
       return
     }
 
-    // @ts-ignore
-    this._collection = Array.from(
+    const _col: Collection[] = Array.from(
       document.querySelectorAll('script[type="application/ld+json"]')
-    )
-      .map((el): Node => JSON.parse(el.innerHTML))
-      // @ts-ignore
-      .filter((script): boolean => script.type === 'Collection')
+    ).reduce((scripts: Collection[], el) => {
+      let contents: {}
+      try {
+        contents = JSON.parse(el.innerHTML)
+      } catch (e) {
+        return scripts
+      }
+
+      return this.isCollection(contents) ? [...scripts, contents] : scripts
+    }, [])
+
+    this._collection = _col[0]
   }
 
   public render(): HTMLElement {
-    return (
-      <nav class="toc">
-        {this.collection
-          ? parseCreativeWorks(this.collection.parts)
-          : parseCreativeWorks(this._collection[0].parts)}
-      </nav>
-    )
+    return <nav class="toc">{parseCreativeWorks(this._collection.parts)}</nav>
   }
 }
