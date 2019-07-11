@@ -16,7 +16,8 @@ deploy:
   - provider: script
     skip_cleanup: true
     script:
-      - npm run semantic-release
+      - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+      - npx lerna publish --yes
 
   # Deploy Storybook to Github Pages
   # See https://docs.travis-ci.com/user/deployment/pages/
