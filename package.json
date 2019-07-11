@@ -21,7 +21,7 @@
     "@semantic-release/github": "^5.4.0",
     "@semantic-release/npm": "^5.1.13",
     "@semantic-release/release-notes-generator": "^7.2.0",
-    "@stencila/dev-config": "^1.1.1-alpha.5",
+    "@stencila/dev-config": "^1.1.1",
     "@storybook/addon-a11y": "^5.1.9",
     "@storybook/addon-cssresources": "^5.1.9",
     "@storybook/html": "^5.1.9",
