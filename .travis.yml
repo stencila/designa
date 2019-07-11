@@ -1,10 +1,11 @@
 language: node_js
 node_js: 10
 
-# Build CSS and Storybook
+# Build Packages and Storybook
 script:
   - npm ci
   - npm run bootstrap
+  - npm run build
   - npm run storybook:build
 
 # Prevent Github Pages from using Jekyll
@@ -12,9 +13,11 @@ before_deploy:
   - touch docs/.nojekyll
 
 deploy:
-  # Deploy a new version of NPM package and create a Github release
+  # Deploy a new version of NPM packages and create a Github releases
   - provider: script
     skip_cleanup: true
+    on:
+      branch: master
     script:
       - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
       - npx lerna publish --yes
