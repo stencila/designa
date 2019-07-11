@@ -1,17 +1,26 @@
-# Styla
+# Designa
 
 > 🎨 Stencila's visual design resources and style guide
 
 This is the place for Stencila's visual design resources (e.g. CSS, icons,
 logos) and style guide. The resources here will be reused across a number of
-other repositories including our main website
-([`stencila/website`](https://github.com/stencila/website)) and the hub
-([`stencila/hub`](https://github.com/stencila/hub)).
+other repositories including our main [`website`](https://github.com/stencila/website), the
+[`hub`](https://github.com/stencila/hub), and [`thema`](https://github.com/stencila/thema).
+
+## Packages
+
+This repository is a [monorepo](https://en.wikipedia.org/wiki/Monorepo), and contains the following packages:
+
+- [brand](./packages/brand): Stencila branding elements such as fonts, logos, and illustrations.
+- [style-stencila](./packages/style-stencila): CSS for styling semantic HTML markup in Stencila's proprietary visual language.
+- [style-material](./packages/style-material): CSS for styling semantic HTML markup in Google's Material Design visual language.
+- [components](./packages/components): Web Components built using [StencilJS](https://stenciljs.com), styled using the `style-*` packages listed above.
 
 ---
 
 ## Table of Contents
 
+- [Packages](#Packages)
 - [Table of Contents](#Table-of-Contents)
 - [Design Philosophy](#Design-Philosophy)
 - [Quick Start](#Quick-Start)
@@ -88,7 +97,7 @@ Releases](https://github.com/stencila/style/releases).
 
 ## Browser Support
 
-We aim to maintain browser support parity with React, namely popualr browsers
+We aim to maintain browser support parity with React, namely popular browsers
 according to CanIUse, including IE9 and above.
 
 > React supports all popular browsers, including Internet Explorer 9 and
