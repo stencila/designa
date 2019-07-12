@@ -1,5 +1,6 @@
 language: node_js
-node_js: 10
+node_js: ['10']
+os: linux
 
 # Build Packages and Storybook
 script:
@@ -12,21 +13,27 @@ script:
 before_deploy:
   - touch docs/.nojekyll
 
+after_success:
+  - git config --global user.email ${GIT_COMMITTER_EMAIL}
+  - git config --global user.name stencila-ci
+  - git remote set-url origin "https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git" > /dev/null 2>&1
+  - git checkout master
+  - git checkout .
+  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+
 deploy:
   # Deploy a new version of NPM packages and create a Github releases
   - provider: script
     skip_cleanup: true
     on:
       branch: master
-    script:
-      - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-      - npx lerna publish --yes
+    script: npx lerna publish --yes
 
   # Deploy Storybook to Github Pages
   # See https://docs.travis-ci.com/user/deployment/pages/
   - provider: pages
-    skip-cleanup: true
-    github-token: $GITHUB_TOKEN
-    local-dir: docs
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    local_dir: docs
     on:
       branch: master
