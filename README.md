@@ -39,11 +39,11 @@ presentational markup, i.e. HTML, remain unchanged as we apply different
 themes to it.
 
 For in depth outline, please see [this
-issue](https://github.com/stencila/style/issues/9).
+issue](https://github.com/stencila/designa/issues/9).
 
 ## Quick Start
 
-1. `git clone git@github.com:stencila/style.git styla && cd styla`
+1. `git clone git@github.com:stencila/designa.git && cd designa`
 2. `npm install`
 3. `npm run bootstrap`
 4. `npm run build`
@@ -53,7 +53,7 @@ issue](https://github.com/stencila/style/issues/9).
 
 To get started with development, clone this repo:
 
-`git clone git@github.com:stencila/style.git`
+`git clone git@github.com:stencila/designa.git`
 
 Then install the necessary Node packages:
 
@@ -91,9 +91,8 @@ specifications](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) for
 full details.
 
 Package builds and Storybook generation are done on [Travis
-CI](https://travis-ci.org/stencila/style). Releases are made to
-[NPM](https://www.npmjs.com/package/@stencila/style) and [Github
-Releases](https://github.com/stencila/style/releases).
+CI](https://travis-ci.org/stencila/designa). Releases are made to the sub-packages
+found inside the packages directory.
 
 ## Browser Support
 
