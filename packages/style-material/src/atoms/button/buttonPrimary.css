@@ -1,0 +1,11 @@
+button {
+  @apply rounded;
+}
+
+button:not(.secondary) {
+  @apply bg-primary text-stock py-2 px-4 text-sm tracking-wide shadow-md uppercase font-bold;
+
+  &:hover {
+    @apply bg-sapphire text-stock;
+  }
+}

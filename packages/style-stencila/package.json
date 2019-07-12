@@ -1,0 +1,45 @@
+{
+  "name": "@stencila/style-stencila",
+  "version": "0.1.0",
+  "description": "Custom designed theme for Stencila components",
+  "keywords": [
+    "Stencila",
+    "design",
+    "theme"
+  ],
+  "author": "Stencila <hello@stenci.la>",
+  "homepage": "https://stenci.la",
+  "license": "Apache-2.0",
+  "main": "dist/index-stencila.css",
+  "directories": {
+    "src": "src"
+  },
+  "style": "./dist/index-stencila.css",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stencila/style.git"
+  },
+  "scripts": {
+    "build": "parcel build 'src/*.css' 'src/**/*.css' --public-url ./",
+    "build:watch": "parcel watch 'src/*.css' 'src/**/*.css'  --public-url ./"
+  },
+  "bugs": {
+    "url": "https://github.com/stencila/style/issues"
+  },
+  "dependencies": {
+    "@stencila/brand": "file:../brand",
+    "tailwindcss": "^1.0.4"
+  },
+  "devDependencies": {
+    "@abide-community/parcel-plugin-clean-out-dir": "^1.0.0",
+    "concurrently": "^4.1.1",
+    "parcel-plugin-css-pretransform": "^1.0.0",
+    "tocbot": "^4.7.0"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "@stencila/style-material",
+  "version": "0.1.0",
+  "description": "Material Design theme for Stencila components",
+  "keywords": [
+    "Stencila",
+    "material",
+    "design",
+    "theme"
+  ],
+  "author": "Stencila <hello@stenci.la>",
+  "homepage": "https://stenci.la",
+  "license": "Apache-2.0",
+  "main": "dist/index-material.css",
+  "directories": {
+    "src": "src"
+  },
+  "style": "./dist/index-material.css",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stencila/style.git"
+  },
+  "scripts": {
+    "build": "parcel build 'src/*.css' 'src/**/*.css' --public-url ./",
+    "build:watch": "parcel watch 'src/*.css' 'src/**/*.css'  --public-url ./"
+  },
+  "bugs": {
+    "url": "https://github.com/stencila/style/issues"
+  },
+  "dependencies": {
+    "@stencila/brand": "file:../brand",
+    "tailwindcss": "^1.0.4"
+  },
+  "devDependencies": {
+    "@abide-community/parcel-plugin-clean-out-dir": "^1.0.0",
+    "concurrently": "^4.1.1",
+    "parcel-plugin-css-pretransform": "^1.0.0",
+    "tocbot": "^4.7.0"
+  }
+}

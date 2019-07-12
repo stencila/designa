@@ -1,0 +1,9 @@
+/* Due to issues in Parcel with nested PostCSS imports and the requirement that
+ * @import statements must be listed at the top of the file, we import the
+ * Tailwind requirements in this special file.
+ * - https://github.com/parcel-bundler/parcel/issues/1165
+ * - https://github.com/parcel-bundler/parcel/issues/2157
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

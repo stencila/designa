@@ -1,0 +1,4 @@
+:host ul,
+ul[role='tablist'] {
+  @apply flex flex-row p-0 m-0;
+}

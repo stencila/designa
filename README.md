@@ -1,64 +1,110 @@
-## Stencila's visual design resources and style guide
+# Designa
 
-[![Build](https://travis-ci.org/stencila/schema.svg?branch=master)](https://travis-ci.org/stencila/style)
-[![NPM](http://img.shields.io/npm/v/@stencila/style.svg?style=flat)](https://www.npmjs.com/package/@stencila/style)
-[![Docs](https://img.shields.io/badge/style-guide-blue.svg)](https://stencila.github.io/style/)
-[![Community](https://img.shields.io/badge/join-community-green.svg)](https://community.stenci.la)
-[![Chat](https://badges.gitter.im/stencila/stencila.svg)](https://gitter.im/stencila/stencila)
+> 🎨 Stencila's visual design resources and style guide
 
+This is the place for Stencila's visual design resources (e.g. CSS, icons,
+logos) and style guide. The resources here will be reused across a number of
+other repositories including our main [`website`](https://github.com/stencila/website), the
+[`hub`](https://github.com/stencila/hub), and [`thema`](https://github.com/stencila/thema).
 
-This is the place for Stencila's visual design resources (e.g. CSS, icons, logos) and style guide. The resources here will be reused across a number of other repositores including our main website ([`stencila/website`](https://github.com/stencila/website)) and the hub ([`stencila/hub`](https://github.com/stencila/hub)).
+## Packages
+
+This repository is a [monorepo](https://en.wikipedia.org/wiki/Monorepo), and contains the following packages:
+
+- [brand](./packages/brand): Stencila branding elements such as fonts, logos, and illustrations.
+- [style-stencila](./packages/style-stencila): CSS for styling semantic HTML markup in Stencila's proprietary visual language.
+- [style-material](./packages/style-material): CSS for styling semantic HTML markup in Google's Material Design visual language.
+- [components](./packages/components): Web Components built using [StencilJS](https://stenciljs.com), styled using the `style-*` packages listed above.
+
+---
+
+## Table of Contents
+
+- [Packages](#Packages)
+- [Table of Contents](#Table-of-Contents)
+- [Design Philosophy](#Design-Philosophy)
+- [Quick Start](#Quick-Start)
+- [Development](#Development)
+  - [Adding Components](#Adding-Components)
+  - [Commit Messages](#Commit-Messages)
+- [Browser Support](#Browser-Support)
+- [External Resources](#External-Resources)
+
+---
+
+## Design Philosophy
+
+A goal that we strive to achieve is to have semantic and accessible
+presentational markup, i.e. HTML, remain unchanged as we apply different
+themes to it.
+
+For in depth outline, please see [this
+issue](https://github.com/stencila/designa/issues/9).
+
+## Quick Start
+
+1. `git clone git@github.com:stencila/designa.git && cd designa`
+2. `npm install`
+3. `npm run bootstrap`
+4. `npm run build`
+5. `npm run storybook`
+
+## Development
 
 To get started with development, clone this repo:
 
-```bash
-git clone git@github.com:stencila/style.git
-```
+`git clone git@github.com:stencila/designa.git`
 
 Then install the necessary Node packages:
 
-```bash
-npm install
-```
+`npm install && npm run bootstrap`
 
-Build SASS into CSS using the `watch` NPM script:
+Start Storybook and watch for changes inside `/packages/*`
 
-```bash
-npm run watch
-```
+`npm run dev`
 
-In a separate console, run Storybook and refresh your browser when you make changes to the CSS (Storybook automatically refreshes when you make changes to the stories):
+> 😩 Note that you will currently have to manually reload, or disable/enable the desired "CSS Resource" in Storybook after making changes to see the results. A fix for this is high on the priority list.
 
-```bash
-npm run storybook
-```
+### Adding Components
 
-When you want to use this style from another repo, but do active dev here, `npm link` can be very useful. Setup this repo to be linked to from other repos:
+Create a [new Storybook story](https://storybook.js.org/docs/basics/writing-stories/)
+and avoid using CSS classes as much as possible. Use semantic HTML tags and WAI-ARIA
+attributes instead. See the [External Resources](#External-Resources) section
+below for useful references.
 
-```bash
-sudo npm link
-```
+Once the story is written, you will need to add appropriate styles for each design system.
+Currently we support:
 
-Then in the other repo link to this repo: 
+- Stencila's own design system
+- Material Design system
 
-```bash
-npm link @stencila/style
-```
+### Commit Messages
 
-When you have finished making the changes you need in this repo, commit with a `feat` or `fix` commit so that a new version gets published on NPM:
+Please use [conventional
+changelog](https://github.com/conventional-changelog/conventional-changelog)
+style commit messages e.g. `docs(readme): fixed spelling mistake`.
+[`semantic-release`](https://github.com/semantic-release/semantic-release) is
+enabled to automate version management: minor version releases are done if
+any `feat(...)` commits are pushed, patch version releases are done if any
+`fix(...)` commits are pushed. See [the
+specifications](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) for
+full details.
 
-```bash
-git add .
-git commit -m 'fix:....'
-```
+Package builds and Storybook generation are done on [Travis
+CI](https://travis-ci.org/stencila/designa). Releases are made to the sub-packages
+found inside the packages directory.
 
-Wait for the CI build to finish and the new version to be published (click the NPM badge above), then reinstall `@stencila/style` in the other repo so that the link is broken and the new version added to your `package.json`:
+## Browser Support
 
-```bash
-npm install --save @stencila/style
-```
+We aim to maintain browser support parity with React, namely popular browsers
+according to CanIUse, including IE9 and above.
 
+> React supports all popular browsers, including Internet Explorer 9 and
+> above, although some polyfills are required for older browsers such as IE 9
+> and IE 10. > _https://reactjs.org/docs/react-dom.html#browser-support_
 
-Please use [conventional changelog](https://github.com/conventional-changelog/conventional-changelog) style commit messages e.g. `docs(readme): fixed spelling mistake`. [`semantic-release`](https://github.com/semantic-release/semantic-release) is enabled to automate version management: minor version releases are done if any `feat(...)` commits are pushed, patch version releases are done if any `fix(...)` commits are pushed. See [the specifications](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) for full details.
+## External Resources
 
-Package builds and Storybook generation are done on [Travis CI](https://travis-ci.org/stencila/style). Releases are made to [NPM](https://www.npmjs.com/package/@stencila/style) and [Github Releases](https://github.com/stencila/style/releases).
+- [WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.1)
+- [Inclusive Components](https://inclusive-components.design)
+- [TailwindCSS](https://tailwindcss.com)

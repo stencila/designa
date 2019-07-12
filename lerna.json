@@ -1,0 +1,19 @@
+{
+  "create": {
+    "homepage": "https://stenci.la",
+    "keywords": ["Stencila"],
+    "license": "Apache-2.0",
+    "version": "0.1.0"
+  },
+  "packages": ["packages/*"],
+  "version": "independent",
+  "ignoreChanges": ["**/__tests__/**", "**/tests/**", "**/*.md"],
+  "command": {
+    "version": {
+      "allowBranch": "master",
+      "conventionalCommits": true,
+      "exact": true,
+      "message": "chore(Release): Publish packages [skip ci]"
+    }
+  }
+}
