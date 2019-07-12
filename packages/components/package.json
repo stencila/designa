@@ -1,7 +1,7 @@
 {
   "name": "@stencila/components",
   "version": "0.1.0",
-  "description": "Stencil Component Starter",
+  "description": "Stencila Web Components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
@@ -32,6 +32,9 @@
     "puppeteer": "^1.18.1"
   },
   "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@stencila/style-material": "file:../style-material",
     "@stencila/style-stencila": "file:../style-stencila",
