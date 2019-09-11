@@ -1,9 +1,9 @@
 module.exports = {
   theme: {
     fontFamily: {
-      display: 'var(--fontFamily-display)',
-      body: 'var(--fontFamily-body)',
-      mono: 'var(--fontFamily-mono)'
+      display: 'var(--font-family-display)',
+      body: 'var(--font-family-body)',
+      mono: 'var(--font-family-mono)'
     },
     colors: {
       transparent: 'transparent',

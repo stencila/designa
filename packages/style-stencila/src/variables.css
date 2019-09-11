@@ -1,18 +1,7 @@
 :root {
-  --fontFamily-display: 'Nunito', 'sans-serif';
-  --fontFamily-body: 'Nunito', 'sans-serif';
-  --fontFamily-mono: 'IBM Plex Mono', 'Fira Code', 'monospace';
-
-  /* --font-size-h1: ;
-  --font-size-h2: ;
-  --font-size-h3: ;
-  --font-size-h4: ;
-  --font-size-h5: ;
-  --font-size-h6: ;
-  --font-size-body: ;
-  --font-size-caption: ;
-  --font-size-small: ;
-  --font-size-xs: ; */
+  --font-family-display: 'Nunito', 'sans-serif';
+  --font-family-body: 'Nunito', 'sans-serif';
+  --font-family-mono: 'IBM Plex Mono', 'Fira Code', 'monospace';
 
   --color-stock: #fff;
   --color-key: #4a4a4a;
