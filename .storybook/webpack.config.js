@@ -11,6 +11,7 @@ module.exports = async ({ config }) => {
       [
         'packages/{style-stencila,style-material}/dist/**/*',
         'packages/components/dist/stencila-components.js',
+        // 'packages/components/dist/stencila-components.css',
         // 'packages/components/dist/stencila-components/stencila-components.esm.js',
         'packages/components/dist/collection/components/**',
         '!packages/{style-stencila,style-material}/dist/**/*.js',

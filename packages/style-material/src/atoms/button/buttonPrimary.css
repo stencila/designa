@@ -1,11 +1,10 @@
-button {
-  @apply rounded;
-}
+@import './_base';
 
+:host,
 button:not(.secondary) {
-  @apply bg-primary text-stock py-2 px-4 text-sm tracking-wide shadow-md uppercase font-bold;
+  @apply bg-primary-500 text-stock py-2 px-4 text-sm tracking-wide shadow-md uppercase font-bold;
 
   &:hover {
-    @apply bg-sapphire text-stock;
+    @apply bg-success-500 text-stock;
   }
 }

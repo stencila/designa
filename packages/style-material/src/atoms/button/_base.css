@@ -1,0 +1,10 @@
+:host,
+button {
+  border-style: none;
+  padding: 0;
+  @apply rounded;
+
+  [slot='icon'] {
+    @aply inline-block;
+  }
+}

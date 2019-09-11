@@ -2,12 +2,14 @@
 
 <!-- Auto Generated Below -->
 
+
 ## Properties
 
-| Property     | Attribute | Description | Type           | Default     |
-| ------------ | --------- | ----------- | -------------- | ----------- |
-| `collection` | --        |             | `CreativeWork` | `undefined` |
+| Property     | Attribute | Description | Type         | Default     |
+| ------------ | --------- | ----------- | ------------ | ----------- |
+| `collection` | --        |             | `Collection` | `undefined` |
 
----
 
-_Built with [StencilJS](https://stenciljs.com/)_
+----------------------------------------------
+
+*Built with [StencilJS](https://stenciljs.com/)*

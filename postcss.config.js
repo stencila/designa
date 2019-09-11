@@ -1,8 +1,4 @@
 const path = require('path')
-const fs = require('fs')
-
-const tailwindConfigPath = path.join(process.env.INIT_CWD, 'tailwind.config.js')
-const conf = fs.existsSync(tailwindConfigPath) ? tailwindConfigPath : undefined
 
 module.exports = {
   modules: false,
@@ -10,9 +6,9 @@ module.exports = {
     require('postcss-import'),
     require('postcss-import-url')({ modernBrowser: true }),
     require('postcss-url')({ url: 'rebase' }),
-    require('tailwindcss')(conf),
+    require('tailwindcss')(path.join(__dirname, 'tailwind.config.js')),
     require('postcss-nested'),
-    require('postcss-custom-properties'),
+    require('postcss-custom-properties')(),
     require('autoprefixer')
   ]
 }

@@ -1,3 +1,7 @@
 button {
-  @apply rounded-full bg-primary text-stock px-4 py-2 font-medium;
+  @apply rounded-full bg-primary-500 text-stock px-4 py-2 font-medium;
+
+  &:hover {
+    @apply bg-primary-700;
+  }
 }

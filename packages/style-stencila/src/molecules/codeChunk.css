@@ -1,0 +1,59 @@
+@import '../atoms/code.css';
+@import '../atoms/pre.css';
+
+.preReset {
+  @apply border-0 m-0 p-0;
+}
+
+.customPre {
+  @apply border border-solid border-neutral-300 rounded p-2 m-2;
+}
+
+:host,
+stencila-codechunk {
+  @apply block relative w-full my-4 border border-solid border-neutral-300 rounded;
+}
+
+::slotted([slot='outputs']) pre,
+.codeContainer::slotted(pre) {
+  @apply preReset;
+}
+
+.codeContainer {
+  @apply customPre bg-neutral-100 m-0 rounded-none border-b border-l-0 border-r-0 border-t-0;
+
+  &.hidden {
+    @apply hidden;
+  }
+}
+
+::slotted([slot='outputs']) {
+  @apply m-0 p-2;
+
+  pre {
+    @apply customPre preReset;
+  }
+
+  & * + *:not(figcaption) {
+    @apply my-3 pt-3 border-t border-neutral-300;
+
+    &:last-child {
+      @apply mb-0;
+    }
+  }
+}
+
+@screen lg {
+  :host,
+  stencila-codechunk {
+    @apply flex flex-row w-full items-stretch;
+  }
+
+  .codeContainer {
+    @apply w-1/2 border-l border-b-0;
+  }
+
+  ::slotted([slot='outputs']) {
+    @apply w-1/2 flex-grow order-first;
+  }
+}

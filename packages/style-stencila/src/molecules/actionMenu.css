@@ -1,0 +1,16 @@
+stencila-actionmenu,
+:host {
+  @apply absolute right-0 top-0 bg-neutral-200 rounded-bl font-mono border-l border-b border-t-0 border-r-0 border-solid border-neutral-300;
+
+  ul {
+    @apply list-none m-0 p-0;
+  }
+
+  li {
+    @apply inline pr-1;
+
+    &:last-child {
+      @apply pr-0;
+    }
+  }
+}

@@ -1,3 +1,4 @@
+.tag-pre,
 pre {
-  @apply border border-neutral-300 rounded p-2;
+  @apply border border-solid border-neutral-300 rounded p-2 m-2;
 }
