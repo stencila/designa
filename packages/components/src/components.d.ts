@@ -4,150 +4,225 @@
  * It contains typing information for all components that exist in this project.
  */
 
-import { HTMLStencilElement, JSXBase } from '@stencil/core/internal'
-import { Collection } from '@stencila/schema'
+
+import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
+import {
+  Collection,
+} from '@stencila/schema';
 
 export namespace Components {
+  interface StencilaActionmenu {
+    /**
+    * List of buttons to include in Action Menu
+    */
+    'actions': HTMLButtonElement[];
+  }
+  interface StencilaButton {
+    /**
+    * The link the button should navigate to
+    */
+    'href'?: string;
+    /**
+    * The displayed text of the Tab
+    */
+    'isSecondary': boolean;
+    /**
+    * The displayed text of the Tab
+    */
+    'label': string;
+  }
+  interface StencilaCodechunk {
+    /**
+    * Whether the code section is visible or not
+    */
+    'isCodeCollapsedProp': boolean;
+  }
   interface StencilaTab {
     /**
-     * The link the tab should navigate to
-     */
-    href: string
+    * The link the tab should navigate to
+    */
+    'href': string;
     /**
-     * Indicates whether the current tab is "selected"
-     */
-    isSelected: boolean
+    * Indicates whether the current tab is "selected"
+    */
+    'isSelected': boolean;
     /**
-     * The displayed text of the Tab
-     */
-    label: string
+    * The displayed text of the Tab
+    */
+    'label': string;
   }
   interface StencilaTabList {
     /**
-     * The link the tab should navigate to
-     */
-    href: string
+    * The link the tab should navigate to
+    */
+    'href': string;
     /**
-     * The displayed text of the Tab
-     */
-    label: string
+    * The displayed text of the Tab
+    */
+    'label': string;
     /**
-     * A list of string values to use as tab labels
-     */
-    tabs: string[]
+    * A list of string values to use as tab labels
+    */
+    'tabs': string[];
   }
   interface StencilaToc {
     /**
-     * Where to grab the headings to build the table of contents.
-     */
-    contentSelector: string
+    * Where to grab the headings to build the table of contents.
+    */
+    'contentSelector': string;
     /**
-     * Which headings to grab inside of the contentSelector element.
-     */
-    headingSelector: string
+    * Which headings to grab inside of the contentSelector element.
+    */
+    'headingSelector': string;
   }
   interface StencilaVerticalNav {
-    collection?: Collection
+    'collection'?: Collection;
   }
 }
 
 declare global {
-  interface HTMLStencilaTabElement
-    extends Components.StencilaTab,
-      HTMLStencilElement {}
+
+
+  interface HTMLStencilaActionmenuElement extends Components.StencilaActionmenu, HTMLStencilElement {}
+  var HTMLStencilaActionmenuElement: {
+    prototype: HTMLStencilaActionmenuElement;
+    new (): HTMLStencilaActionmenuElement;
+  };
+
+  interface HTMLStencilaButtonElement extends Components.StencilaButton, HTMLStencilElement {}
+  var HTMLStencilaButtonElement: {
+    prototype: HTMLStencilaButtonElement;
+    new (): HTMLStencilaButtonElement;
+  };
+
+  interface HTMLStencilaCodechunkElement extends Components.StencilaCodechunk, HTMLStencilElement {}
+  var HTMLStencilaCodechunkElement: {
+    prototype: HTMLStencilaCodechunkElement;
+    new (): HTMLStencilaCodechunkElement;
+  };
+
+  interface HTMLStencilaTabElement extends Components.StencilaTab, HTMLStencilElement {}
   var HTMLStencilaTabElement: {
-    prototype: HTMLStencilaTabElement
-    new (): HTMLStencilaTabElement
-  }
+    prototype: HTMLStencilaTabElement;
+    new (): HTMLStencilaTabElement;
+  };
 
-  interface HTMLStencilaTabListElement
-    extends Components.StencilaTabList,
-      HTMLStencilElement {}
+  interface HTMLStencilaTabListElement extends Components.StencilaTabList, HTMLStencilElement {}
   var HTMLStencilaTabListElement: {
-    prototype: HTMLStencilaTabListElement
-    new (): HTMLStencilaTabListElement
-  }
+    prototype: HTMLStencilaTabListElement;
+    new (): HTMLStencilaTabListElement;
+  };
 
-  interface HTMLStencilaTocElement
-    extends Components.StencilaToc,
-      HTMLStencilElement {}
+  interface HTMLStencilaTocElement extends Components.StencilaToc, HTMLStencilElement {}
   var HTMLStencilaTocElement: {
-    prototype: HTMLStencilaTocElement
-    new (): HTMLStencilaTocElement
-  }
+    prototype: HTMLStencilaTocElement;
+    new (): HTMLStencilaTocElement;
+  };
 
-  interface HTMLStencilaVerticalNavElement
-    extends Components.StencilaVerticalNav,
-      HTMLStencilElement {}
+  interface HTMLStencilaVerticalNavElement extends Components.StencilaVerticalNav, HTMLStencilElement {}
   var HTMLStencilaVerticalNavElement: {
-    prototype: HTMLStencilaVerticalNavElement
-    new (): HTMLStencilaVerticalNavElement
-  }
+    prototype: HTMLStencilaVerticalNavElement;
+    new (): HTMLStencilaVerticalNavElement;
+  };
   interface HTMLElementTagNameMap {
-    'stencila-tab': HTMLStencilaTabElement
-    'stencila-tab-list': HTMLStencilaTabListElement
-    'stencila-toc': HTMLStencilaTocElement
-    'stencila-vertical-nav': HTMLStencilaVerticalNavElement
+    'stencila-actionmenu': HTMLStencilaActionmenuElement;
+    'stencila-button': HTMLStencilaButtonElement;
+    'stencila-codechunk': HTMLStencilaCodechunkElement;
+    'stencila-tab': HTMLStencilaTabElement;
+    'stencila-tab-list': HTMLStencilaTabListElement;
+    'stencila-toc': HTMLStencilaTocElement;
+    'stencila-vertical-nav': HTMLStencilaVerticalNavElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface StencilaActionmenu extends JSXBase.HTMLAttributes<HTMLStencilaActionmenuElement> {
+    /**
+    * List of buttons to include in Action Menu
+    */
+    'actions'?: HTMLButtonElement[];
+  }
+  interface StencilaButton extends JSXBase.HTMLAttributes<HTMLStencilaButtonElement> {
+    /**
+    * The link the button should navigate to
+    */
+    'href'?: string;
+    /**
+    * The displayed text of the Tab
+    */
+    'isSecondary'?: boolean;
+    /**
+    * The displayed text of the Tab
+    */
+    'label'?: string;
+  }
+  interface StencilaCodechunk extends JSXBase.HTMLAttributes<HTMLStencilaCodechunkElement> {
+    /**
+    * Whether the code section is visible or not
+    */
+    'isCodeCollapsedProp'?: boolean;
+    'onCollapseAllCode'?: (event: CustomEvent<any>) => void;
+  }
   interface StencilaTab extends JSXBase.HTMLAttributes<HTMLStencilaTabElement> {
     /**
-     * The link the tab should navigate to
-     */
-    href?: string
+    * The link the tab should navigate to
+    */
+    'href'?: string;
     /**
-     * Indicates whether the current tab is "selected"
-     */
-    isSelected?: boolean
+    * Indicates whether the current tab is "selected"
+    */
+    'isSelected'?: boolean;
     /**
-     * The displayed text of the Tab
-     */
-    label?: string
+    * The displayed text of the Tab
+    */
+    'label'?: string;
   }
-  interface StencilaTabList
-    extends JSXBase.HTMLAttributes<HTMLStencilaTabListElement> {
+  interface StencilaTabList extends JSXBase.HTMLAttributes<HTMLStencilaTabListElement> {
     /**
-     * The link the tab should navigate to
-     */
-    href?: string
+    * The link the tab should navigate to
+    */
+    'href'?: string;
     /**
-     * The displayed text of the Tab
-     */
-    label?: string
+    * The displayed text of the Tab
+    */
+    'label'?: string;
     /**
-     * A list of string values to use as tab labels
-     */
-    tabs: string[]
+    * A list of string values to use as tab labels
+    */
+    'tabs': string[];
   }
   interface StencilaToc extends JSXBase.HTMLAttributes<HTMLStencilaTocElement> {
     /**
-     * Where to grab the headings to build the table of contents.
-     */
-    contentSelector?: string
+    * Where to grab the headings to build the table of contents.
+    */
+    'contentSelector'?: string;
     /**
-     * Which headings to grab inside of the contentSelector element.
-     */
-    headingSelector?: string
+    * Which headings to grab inside of the contentSelector element.
+    */
+    'headingSelector'?: string;
   }
-  interface StencilaVerticalNav
-    extends JSXBase.HTMLAttributes<HTMLStencilaVerticalNavElement> {
-    collection?: Collection
+  interface StencilaVerticalNav extends JSXBase.HTMLAttributes<HTMLStencilaVerticalNavElement> {
+    'collection'?: Collection;
   }
 
   interface IntrinsicElements {
-    'stencila-tab': StencilaTab
-    'stencila-tab-list': StencilaTabList
-    'stencila-toc': StencilaToc
-    'stencila-vertical-nav': StencilaVerticalNav
+    'stencila-actionmenu': StencilaActionmenu;
+    'stencila-button': StencilaButton;
+    'stencila-codechunk': StencilaCodechunk;
+    'stencila-tab': StencilaTab;
+    'stencila-tab-list': StencilaTabList;
+    'stencila-toc': StencilaToc;
+    'stencila-vertical-nav': StencilaVerticalNav;
   }
 }
 
-export { LocalJSX as JSX }
+export { LocalJSX as JSX };
 
-declare module '@stencil/core' {
+
+declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements extends LocalJSX.IntrinsicElements {}
   }
 }
+
+

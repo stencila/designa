@@ -24,10 +24,14 @@ export class Tab {
    */
   @Prop({ attribute: 'selected' }) public isSelected: boolean = false
 
-  public render(): HTMLLIElement {
+  public render() {
     return (
-      <li role="presentation" aria-selected={this.isSelected.toString()}>
-        <a href={this.label} role="tab">
+      <li role="presentation">
+        <a
+          aria-selected={this.isSelected.toString()}
+          href={this.label}
+          role="tab"
+        >
           {this.label}
         </a>
       </li>

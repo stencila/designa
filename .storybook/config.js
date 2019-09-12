@@ -9,12 +9,12 @@ const cssresources = [
   {
     id: `Stencila`,
     code: `<link rel="stylesheet" type="text/css" href="/index-stencila.css"></link>`,
-    picked: false
+    picked: true
   },
   {
     id: `Material`,
     code: `<link rel="stylesheet" type="text/css" href="/index-material.css"></link>`,
-    picked: true
+    picked: false
   }
 ]
 

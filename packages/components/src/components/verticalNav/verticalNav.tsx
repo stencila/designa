@@ -31,7 +31,7 @@ const parseCreativeWorks = (
     default: './verticalNav.css',
     material: './verticalNav.material.css'
   },
-  shadow: true
+  scoped: true
 })
 export class VerticalNav {
   @Prop() public collection?: Collection

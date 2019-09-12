@@ -1,7 +1,9 @@
+@import './_base';
+
 button.secondary {
-  @apply bg-stock text-primary text-sm shadow-none font-bold tracking-wide py-1 px-2 uppercase;
+  @apply bg-stock text-primary-500 text-sm shadow-none font-bold tracking-wide py-1 px-2 uppercase;
 }
 
 button.secondary:hover {
-  @apply bg-primary text-stock;
+  @apply bg-primary-500 text-stock;
 }

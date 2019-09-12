@@ -3,6 +3,6 @@ input {
 }
 
 input:focus {
-  @apply border-primary;
+  @apply border-primary-500;
   outline: none;
 }

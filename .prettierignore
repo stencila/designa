@@ -4,6 +4,8 @@
 **/node_modules
 **/.DS_Store
 **/.stencil
+packages/components/src/components.d.ts
+packages/components/src/**/*.md
 *.woff
 *.woff2
 *.svg

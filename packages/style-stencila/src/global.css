@@ -1,8 +1,7 @@
 @import '@stencila/brand/src/fonts/IBM-Plex-Mono/IBM-Plex-Mono.css';
 
 * {
-  @apply font-body;
-  color: #4a4a4a;
+  @apply font-body text-key;
 }
 
 h1,
