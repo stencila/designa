@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/stencila/style/compare/@stencila/style-material@0.2.0...@stencila/style-material@0.3.0) (2019-09-12)
+
+
+### Features
+
+* **Components:** Add initial version of CodeChunk component ([6bf496a](https://github.com/stencila/style/commit/6bf496a))
+
+
+
+
+
 # 0.2.0 (2019-07-12)
 
 
