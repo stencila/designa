@@ -23,6 +23,11 @@ interface CollapseEvent extends CustomEvent {
   scoped: true
 })
 export class CodeChunk {
+  public static slots = {
+    text: 'text',
+    output: 'output'
+  }
+
   /**
    * Whether the code section is visible or not
    */
@@ -83,10 +88,10 @@ export class CodeChunk {
             this.isCodeCollapsed === true ? 'hidden' : ''
           }`}
         >
-          <slot name="code" />
+          <slot name={CodeChunk.slots.text} />
         </div>
 
-        <slot name="outputs" />
+        <slot name={CodeChunk.slots.output} />
       </Host>
     )
   }

@@ -37,6 +37,7 @@ export namespace Components {
     */
     'isCodeCollapsedProp': boolean;
   }
+  interface StencilaCodeexpression {}
   interface StencilaTab {
     /**
     * The link the tab should navigate to
@@ -101,6 +102,12 @@ declare global {
     new (): HTMLStencilaCodechunkElement;
   };
 
+  interface HTMLStencilaCodeexpressionElement extends Components.StencilaCodeexpression, HTMLStencilElement {}
+  var HTMLStencilaCodeexpressionElement: {
+    prototype: HTMLStencilaCodeexpressionElement;
+    new (): HTMLStencilaCodeexpressionElement;
+  };
+
   interface HTMLStencilaTabElement extends Components.StencilaTab, HTMLStencilElement {}
   var HTMLStencilaTabElement: {
     prototype: HTMLStencilaTabElement;
@@ -128,6 +135,7 @@ declare global {
     'stencila-actionmenu': HTMLStencilaActionmenuElement;
     'stencila-button': HTMLStencilaButtonElement;
     'stencila-codechunk': HTMLStencilaCodechunkElement;
+    'stencila-codeexpression': HTMLStencilaCodeexpressionElement;
     'stencila-tab': HTMLStencilaTabElement;
     'stencila-tab-list': HTMLStencilaTabListElement;
     'stencila-toc': HTMLStencilaTocElement;
@@ -163,6 +171,7 @@ declare namespace LocalJSX {
     'isCodeCollapsedProp'?: boolean;
     'onCollapseAllCode'?: (event: CustomEvent<any>) => void;
   }
+  interface StencilaCodeexpression extends JSXBase.HTMLAttributes<HTMLStencilaCodeexpressionElement> {}
   interface StencilaTab extends JSXBase.HTMLAttributes<HTMLStencilaTabElement> {
     /**
     * The link the tab should navigate to
@@ -209,6 +218,7 @@ declare namespace LocalJSX {
     'stencila-actionmenu': StencilaActionmenu;
     'stencila-button': StencilaButton;
     'stencila-codechunk': StencilaCodechunk;
+    'stencila-codeexpression': StencilaCodeexpression;
     'stencila-tab': StencilaTab;
     'stencila-tab-list': StencilaTabList;
     'stencila-toc': StencilaToc;

@@ -9,6 +9,11 @@ import { Component, h, Prop } from '@stencil/core'
   shadow: true
 })
 export class Tab {
+  public static slots = {
+    default: undefined,
+    icon: 'icon'
+  }
+
   /**
    * The link the button should navigate to
    */
@@ -29,8 +34,8 @@ export class Tab {
 
     return (
       <TagType href={this.href} class={{ secondary: this.isSecondary }}>
-        <slot name="icon" />
-        <slot />
+        <slot name={Tab.slots.icon} />
+        <slot name={Tab.slots.default} />
       </TagType>
     )
   }

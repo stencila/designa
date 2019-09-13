@@ -14,7 +14,7 @@ stencila-codechunk {
   @apply block relative w-full my-4 border border-solid border-neutral-300 rounded;
 }
 
-::slotted([slot='outputs']) pre,
+::slotted([slot='output']) pre,
 .codeContainer::slotted(pre) {
   @apply preReset;
 }
@@ -27,7 +27,7 @@ stencila-codechunk {
   }
 }
 
-::slotted([slot='outputs']) {
+::slotted([slot='output']) {
   @apply m-0 p-2;
 
   pre {
@@ -53,7 +53,7 @@ stencila-codechunk {
     @apply w-1/2 border-l border-b-0;
   }
 
-  ::slotted([slot='outputs']) {
+  ::slotted([slot='output']) {
     @apply w-1/2 flex-grow order-first;
   }
 }
