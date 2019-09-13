@@ -1,4 +1,6 @@
 @import './codeChunk';
+@import './codeExpression';
+@import './codeChunk';
 @import './tableOfContents';
 @import './tabList';
 @import './verticalNav';
