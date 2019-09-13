@@ -89,9 +89,11 @@ export class CodeChunk {
           }`}
         >
           <slot name={CodeChunk.slots.text} />
+          <slot name="code" />
         </div>
 
         <slot name={CodeChunk.slots.output} />
+        <slot name={CodeChunk.slots.output + 's'} />
       </Host>
     )
   }

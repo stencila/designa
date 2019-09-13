@@ -14,6 +14,7 @@ export class CodeExpression {
     return (
       <stencila-codechunk>
         <slot name={CodeExpression.slots.text} />
+        <slot name="code" />
         <slot name={CodeExpression.slots.output} />
       </stencila-codechunk>
     )
