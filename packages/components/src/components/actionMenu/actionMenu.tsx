@@ -11,7 +11,7 @@ export class ActionMenu {
   public static readonly elementName = 'stencila-action-menu'
 
   /**
-   * List of buttons to include in Action Menu
+   * List of buttons to include in Action Menu.
    */
   @Prop()
   public actions: HTMLButtonElement[]

@@ -7,9 +7,9 @@
 
 ## Properties
 
-| Property  | Attribute | Description                               | Type                  | Default     |
-| --------- | --------- | ----------------------------------------- | --------------------- | ----------- |
-| `actions` | --        | List of buttons to include in Action Menu | `HTMLButtonElement[]` | `undefined` |
+| Property  | Attribute | Description                                | Type                  | Default     |
+| --------- | --------- | ------------------------------------------ | --------------------- | ----------- |
+| `actions` | --        | List of buttons to include in Action Menu. | `HTMLButtonElement[]` | `undefined` |
 
 
 ## Dependencies

@@ -13,6 +13,7 @@
 ```mermaid
 graph TD;
   stencila-code-expression --> stencila-code-chunk
+  stencila-code-chunk --> stencila-button
   stencila-code-chunk --> stencila-action-menu
   style stencila-code-expression fill:#f9f,stroke:#333,stroke-width:4px
 ```

@@ -3,6 +3,11 @@ import { storiesOf } from '@storybook/html'
 storiesOf('Atoms/Button/Primary', module)
   .add('with text', () => `<button>Hello World</button>`)
   .add('with emoji', () => `<button>😀 😎 👍 💯</button>`)
+  .add('small', () => `<button data-size="small">A small step</button>`)
+  .add(
+    'Extra Small',
+    () => `<button data-size="xsmall">A very small step</button>`
+  )
   .add('Web Component', () => `<stencila-button>Hello World!</stencila-button>`)
   .add(
     'Web Component - With an icon',

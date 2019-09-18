@@ -3,8 +3,15 @@ stencila-button,
 button {
   @apply border-none p-0;
 
-  ::slotted([slot='icon']),
+  &:hover {
+    @apply cursor-pointer;
+  }
+
   [slot='icon'] {
     @apply inline-block pr-2;
+  }
+
+  [disabled] {
+    @apply cursor-not-allowed;
   }
 }

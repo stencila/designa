@@ -18,6 +18,8 @@ stencila-code-chunk {
     transition: opacity 120ms ease-out;
   }
 
+  &:active,
+  &:focus,
   &:hover {
     stencila-action-menu {
       @apply opacity-100;
@@ -33,12 +35,17 @@ stencila-code-chunk {
 .codeContainer {
   @apply customPre bg-neutral-100 m-0 rounded-none border-b border-l-0 border-r-0 border-t-0;
 
+  pre,
+  pre[class*='language-'] {
+    @apply bg-neutral-100;
+  }
+
   &.hidden {
     @apply hidden;
   }
 }
 
-::slotted([slot='output']) {
+::slotted([slot='outputs']) {
   @apply m-0 p-2;
 
   pre {
@@ -64,7 +71,7 @@ stencila-code-chunk {
     @apply w-1/2 border-l border-b-0;
   }
 
-  ::slotted([slot='output']) {
+  ::slotted([slot='outputs']) {
     @apply w-1/2 flex-grow order-first;
   }
 }

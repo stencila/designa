@@ -13,23 +13,35 @@ import {
 export namespace Components {
   interface StencilaActionMenu {
     /**
-    * List of buttons to include in Action Menu
+    * List of buttons to include in Action Menu.
     */
     'actions': HTMLButtonElement[];
   }
   interface StencilaButton {
     /**
-    * The link the button should navigate to
+    * The type of button to render, options correspond to HTML Button `type` attribute. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
+    */
+    'buttonType': 'button' | 'submit' | 'reset';
+    /**
+    * If true, prevents the user from interacting with the button.
+    */
+    'disabled': boolean;
+    /**
+    * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
     */
     'href'?: string;
     /**
-    * The displayed text of the Tab
+    * The displayed text of the Tab.
     */
     'isSecondary': boolean;
     /**
-    * The displayed text of the Tab
+    * The displayed text of the Button.
     */
     'label': string;
+    /**
+    * The displayed text of the Button.
+    */
+    'size': 'xsmall' | 'small' | 'default' | 'large';
   }
   interface StencilaCodeChunk {
     /**
@@ -146,23 +158,35 @@ declare global {
 declare namespace LocalJSX {
   interface StencilaActionMenu extends JSXBase.HTMLAttributes<HTMLStencilaActionMenuElement> {
     /**
-    * List of buttons to include in Action Menu
+    * List of buttons to include in Action Menu.
     */
     'actions'?: HTMLButtonElement[];
   }
   interface StencilaButton extends JSXBase.HTMLAttributes<HTMLStencilaButtonElement> {
     /**
-    * The link the button should navigate to
+    * The type of button to render, options correspond to HTML Button `type` attribute. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
+    */
+    'buttonType'?: 'button' | 'submit' | 'reset';
+    /**
+    * If true, prevents the user from interacting with the button.
+    */
+    'disabled'?: boolean;
+    /**
+    * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
     */
     'href'?: string;
     /**
-    * The displayed text of the Tab
+    * The displayed text of the Tab.
     */
     'isSecondary'?: boolean;
     /**
-    * The displayed text of the Tab
+    * The displayed text of the Button.
     */
     'label'?: string;
+    /**
+    * The displayed text of the Button.
+    */
+    'size'?: 'xsmall' | 'small' | 'default' | 'large';
   }
   interface StencilaCodeChunk extends JSXBase.HTMLAttributes<HTMLStencilaCodeChunkElement> {
     /**
