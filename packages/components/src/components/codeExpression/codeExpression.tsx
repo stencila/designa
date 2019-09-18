@@ -5,6 +5,8 @@ import { Component, h } from '@stencil/core'
   styleUrl: 'codeExpression.css'
 })
 export class CodeExpression {
+  public static readonly elementName = 'stencila-code-expression'
+
   public static slots = {
     text: 'text',
     output: 'output'

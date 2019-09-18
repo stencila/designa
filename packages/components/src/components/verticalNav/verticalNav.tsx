@@ -34,7 +34,10 @@ const parseCreativeWorks = (
   scoped: true
 })
 export class VerticalNav {
+  public static readonly elementName = 'stencila-vertical-nav'
+
   @Prop() public collection?: Collection
+
   private _collection: Collection = this.collection
 
   // TODO: Move these helpers from Encoda to Schema

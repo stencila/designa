@@ -9,7 +9,7 @@ storiesOf('Molecules/CodeChunk', module)
       itemtype="stencila:CodeChunk"
     >
       <pre slot="text"><code>print(a)</code></pre>
-      <figure slot="output">
+      <figure slot="outputs">
         <pre><output>10</output></pre>
       </figure>
     </stencila-code-chunk>
@@ -23,7 +23,7 @@ storiesOf('Molecules/CodeChunk', module)
       itemtype="stencila:CodeChunk"
     >
       <pre slot="text"><code>print(a)</code></pre>
-      <figure slot="output">
+      <figure slot="outputs">
         <pre><output>10</output></pre>
       </figure>
     </stencila-code-chunk>
@@ -42,7 +42,7 @@ storiesOf('Molecules/CodeChunk', module)
     >
       <pre slot="text" itemprop="code"><code>print(second)</code></pre>
 
-      <figure slot="output">
+      <figure slot="outputs">
         <img alt="This is a sample output image" src="https://via.placeholder.com/350x500" />
       </figure>
     </stencila-code-chunk>
@@ -58,7 +58,7 @@ storiesOf('Molecules/CodeChunk', module)
     >
       <pre slot="text" itemprop="code"><code>print(second)</code></pre>
 
-      <figure slot="output">
+      <figure slot="outputs">
         <pre><output>10</output></pre>
 
         <img alt="This is a sample output image" src="https://via.placeholder.com/350x500" />

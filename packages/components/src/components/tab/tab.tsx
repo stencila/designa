@@ -9,6 +9,8 @@ import { Component, h, Prop } from '@stencil/core'
   shadow: true
 })
 export class Tab {
+  public static readonly elementName = 'stencila-tab'
+
   /**
    * The link the tab should navigate to
    */

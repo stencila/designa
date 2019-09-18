@@ -10,6 +10,8 @@ import { ord } from 'fp-ts'
   shadow: true
 })
 export class TabList {
+  public static readonly elementName = 'stencila-tab-list'
+
   /**
    * The displayed text of the Tab
    */
@@ -38,7 +40,7 @@ export class TabList {
   }
 
   private onKeyboardNavigateTabs = (e: KeyboardEvent): void => {
-    let dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0
+    const dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0
     const constrain = ord.clamp(ord.ordNumber)(0, this.tabs.length - 1)
     this.selectTab(constrain(this.activeTabIndex + dir))
   }

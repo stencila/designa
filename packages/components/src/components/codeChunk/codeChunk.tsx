@@ -23,9 +23,11 @@ interface CollapseEvent extends CustomEvent {
   scoped: true
 })
 export class CodeChunk {
-  public static slots = {
+  public static readonly elementName = 'stencila-code-chunk'
+
+  public static readonly slots = {
     text: 'text',
-    output: 'output'
+    outputs: 'outputs'
   }
 
   /**
@@ -89,11 +91,9 @@ export class CodeChunk {
           }`}
         >
           <slot name={CodeChunk.slots.text} />
-          <slot name="code" />
         </div>
 
-        <slot name={CodeChunk.slots.output} />
-        <slot name={CodeChunk.slots.output + 's'} />
+        <slot name={CodeChunk.slots.outputs} />
       </Host>
     )
   }

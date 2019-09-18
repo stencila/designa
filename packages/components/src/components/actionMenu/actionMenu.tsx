@@ -8,6 +8,8 @@ import { Component, h, Prop } from '@stencil/core'
   shadow: true
 })
 export class ActionMenu {
+  public static readonly elementName = 'stencila-action-menu'
+
   /**
    * List of buttons to include in Action Menu
    */

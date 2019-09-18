@@ -9,6 +9,8 @@ import tocbot from 'tocbot'
   }
 })
 export class TableOfContents {
+  public static readonly elementName = 'stencila-toc'
+
   /**
    * Where to grab the headings to build the table of contents.
    */

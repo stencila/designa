@@ -9,6 +9,8 @@ import { Component, h, Prop } from '@stencil/core'
   shadow: true
 })
 export class Tab {
+  public static readonly elementName = 'stencila-button'
+
   public static slots = {
     default: undefined,
     icon: 'icon'
