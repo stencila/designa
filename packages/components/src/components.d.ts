@@ -19,6 +19,10 @@ export namespace Components {
   }
   interface StencilaButton {
     /**
+    * Screen-reader accessible label to read out.
+    */
+    'ariaLabel': string;
+    /**
     * The type of button to render, options correspond to HTML Button `type` attribute. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
     */
     'buttonType': 'button' | 'submit' | 'reset';
@@ -30,6 +34,7 @@ export namespace Components {
     * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
     */
     'href'?: string;
+    'iconName': string;
     /**
     * The displayed text of the Tab.
     */
@@ -164,6 +169,10 @@ declare namespace LocalJSX {
   }
   interface StencilaButton extends JSXBase.HTMLAttributes<HTMLStencilaButtonElement> {
     /**
+    * Screen-reader accessible label to read out.
+    */
+    'ariaLabel'?: string;
+    /**
     * The type of button to render, options correspond to HTML Button `type` attribute. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
     */
     'buttonType'?: 'button' | 'submit' | 'reset';
@@ -175,6 +184,7 @@ declare namespace LocalJSX {
     * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
     */
     'href'?: string;
+    'iconName'?: string;
     /**
     * The displayed text of the Tab.
     */

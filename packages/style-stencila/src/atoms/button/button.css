@@ -3,16 +3,15 @@
 button {
   @apply rounded-full bg-primary-500 text-stock px-4 py-2 font-medium;
 
+  &:active,
   &:hover {
     @apply bg-primary-700;
   }
 
-  &[disabled] {
-    @apply bg-primary-100 text-primary-400;
-
-    &:hover {
-      @apply bg-primary-100 text-primary-400;
-    }
+  &[disabled],
+  &[disabled]:active,
+  &[disabled]:hover {
+    @apply bg-primary-100 text-neutral-500;
   }
 
   &[data-size='small'],

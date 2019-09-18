@@ -70,22 +70,30 @@ export class CodeChunk {
 
   public render() {
     const actions = [
-      <stencila-button isSecondary={true} size="xsmall" disabled>
+      <stencila-button
+        iconName="play"
+        isSecondary={true}
+        size="xsmall"
+        ariaLabel="Run Code"
+        disabled
+      >
         Run
       </stencila-button>,
       <stencila-button
         isSecondary={true}
+        iconName="eye-off"
         size="xsmall"
         onClick={this.toggleCodeVisibility}
       >
-        {this.isCodeCollapsed ? 'Show' : 'Hide'} Code
+        {this.isCodeCollapsed ? 'Show' : 'Hide'} Source
       </stencila-button>,
       <stencila-button
         isSecondary={true}
+        iconName="eye-off"
         size="xsmall"
         onClick={() => this.collapseAllCodeHandler(!this.isCodeCollapsed)}
       >
-        {this.isCodeCollapsed ? 'Show' : 'Hide'} All Code Cells
+        {this.isCodeCollapsed ? 'Show' : 'Hide'} All Sources
       </stencila-button>
     ]
 

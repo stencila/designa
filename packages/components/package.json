@@ -41,6 +41,7 @@
     "@stencila/style-material": "file:../style-material",
     "@stencila/style-stencila": "file:../style-stencila",
     "chokidar-cli": "^2.0.0",
+    "feather-icons": "^4.24.1",
     "fp-ts": "^2.0.5",
     "tailwindcss": "^1.1.2",
     "tocbot": "^4.8.0",

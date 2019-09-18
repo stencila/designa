@@ -18,8 +18,7 @@ stencila-code-chunk {
     transition: opacity 120ms ease-out;
   }
 
-  &:active,
-  &:focus,
+  &:focus-within,
   &:hover {
     stencila-action-menu {
       @apply opacity-100;
