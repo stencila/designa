@@ -15,7 +15,7 @@ interface CollapseEvent extends CustomEvent {
 }
 
 @Component({
-  tag: 'stencila-codechunk',
+  tag: 'stencila-code-chunk',
   styleUrls: {
     default: 'codeChunk.css',
     material: 'codeChunk.material.css'
@@ -81,7 +81,7 @@ export class CodeChunk {
 
     return (
       <Host>
-        <stencila-actionmenu actions={actions} />
+        <stencila-action-menu actions={actions} />
 
         <div
           class={`codeContainer ${

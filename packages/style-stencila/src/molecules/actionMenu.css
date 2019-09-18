@@ -1,4 +1,4 @@
-stencila-actionmenu,
+stencila-action-menu,
 :host {
   @apply absolute right-0 top-0 bg-neutral-200 rounded-bl font-mono border-l border-b border-t-0 border-r-0 border-solid border-neutral-300;
 

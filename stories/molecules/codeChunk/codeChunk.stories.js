@@ -4,7 +4,7 @@ storiesOf('Molecules/CodeChunk', module)
   .add(
     'Single CodeChunk',
     () => `<div>
-    <stencila-codechunk
+    <stencila-code-chunk
       data-collapsed="false"
       itemtype="stencila:CodeChunk"
     >
@@ -12,13 +12,13 @@ storiesOf('Molecules/CodeChunk', module)
       <figure slot="output">
         <pre><output>10</output></pre>
       </figure>
-    </stencila-codechunk>
+    </stencila-code-chunk>
   `
   )
   .add(
     'Multiple CodeChunks',
     () => `<div>
-    <stencila-codechunk
+    <stencila-code-chunk
       data-collapsed="false"
       itemtype="stencila:CodeChunk"
     >
@@ -26,7 +26,7 @@ storiesOf('Molecules/CodeChunk', module)
       <figure slot="output">
         <pre><output>10</output></pre>
       </figure>
-    </stencila-codechunk>
+    </stencila-code-chunk>
 
     <p>
       First and foremost, the Jupyter Notebook is an interactive environment for
@@ -36,7 +36,7 @@ storiesOf('Molecules/CodeChunk', module)
       Python code.
     </p>
 
-    <stencila-codechunk
+    <stencila-code-chunk
       data-collapsed="false"
       itemtype="stencila:CodeChunk"
     >
@@ -45,14 +45,14 @@ storiesOf('Molecules/CodeChunk', module)
       <figure slot="output">
         <img alt="This is a sample output image" src="https://via.placeholder.com/350x500" />
       </figure>
-    </stencila-codechunk>
+    </stencila-code-chunk>
   </div>
   `
   )
   .add(
     'CodeChunk with multiple Outputs',
     () => `<div>
-    <stencila-codechunk
+    <stencila-code-chunk
       data-collapsed="false"
       itemtype="stencila:CodeChunk"
     >
@@ -69,7 +69,7 @@ storiesOf('Molecules/CodeChunk', module)
 
         <pre><output>30</output></pre>
       </figure>
-    </stencila-codechunk>
+    </stencila-code-chunk>
   </div>
   `
   )

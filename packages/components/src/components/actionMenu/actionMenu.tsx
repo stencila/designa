@@ -1,7 +1,7 @@
 import { Component, h, Prop } from '@stencil/core'
 
 @Component({
-  tag: 'stencila-actionmenu',
+  tag: 'stencila-action-menu',
   styleUrls: {
     default: 'actionMenu.css'
   },

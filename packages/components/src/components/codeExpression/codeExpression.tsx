@@ -1,7 +1,7 @@
 import { Component, h } from '@stencil/core'
 
 @Component({
-  tag: 'stencila-codeexpression',
+  tag: 'stencila-code-expression',
   styleUrl: 'codeExpression.css'
 })
 export class CodeExpression {
@@ -12,11 +12,11 @@ export class CodeExpression {
 
   public render() {
     return (
-      <stencila-codechunk>
+      <stencila-code-chunk>
         <slot name={CodeExpression.slots.text} />
         <slot name="code" />
         <slot name={CodeExpression.slots.output} />
-      </stencila-codechunk>
+      </stencila-code-chunk>
     )
   }
 }

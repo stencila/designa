@@ -1,6 +1,6 @@
 @import './codeChunk.css';
 
-stencila-codeexpression {
+stencila-code-expression {
   pre[slot='output'] {
     @apply border-none;
   }

@@ -7,14 +7,14 @@
 
 ### Depends on
 
-- [stencila-codechunk](../codeChunk)
+- [stencila-code-chunk](../codeChunk)
 
 ### Graph
 ```mermaid
 graph TD;
-  stencila-codeexpression --> stencila-codechunk
-  stencila-codechunk --> stencila-actionmenu
-  style stencila-codeexpression fill:#f9f,stroke:#333,stroke-width:4px
+  stencila-code-expression --> stencila-code-chunk
+  stencila-code-chunk --> stencila-action-menu
+  style stencila-code-expression fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

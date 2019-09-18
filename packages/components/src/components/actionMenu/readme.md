@@ -16,13 +16,13 @@
 
 ### Used by
 
- - [stencila-codechunk](../codeChunk)
+ - [stencila-code-chunk](../codeChunk)
 
 ### Graph
 ```mermaid
 graph TD;
-  stencila-codechunk --> stencila-actionmenu
-  style stencila-actionmenu fill:#f9f,stroke:#333,stroke-width:4px
+  stencila-code-chunk --> stencila-action-menu
+  style stencila-action-menu fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------
