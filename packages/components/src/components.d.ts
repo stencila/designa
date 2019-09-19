@@ -7,6 +7,12 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
+  IconNames,
+} from './components/icon/icon';
+import {
+  IconNames as IconNames1,
+} from './components/icon/icon';
+import {
   Collection,
 } from '@stencila/schema';
 
@@ -34,7 +40,7 @@ export namespace Components {
     * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
     */
     'href'?: string;
-    'iconName': string;
+    'icon': IconNames;
     /**
     * The displayed text of the Tab.
     */
@@ -55,6 +61,9 @@ export namespace Components {
     'isCodeCollapsedProp': boolean;
   }
   interface StencilaCodeExpression {}
+  interface StencilaIcon {
+    'icon': IconNames;
+  }
   interface StencilaTab {
     /**
     * The link the tab should navigate to
@@ -125,6 +134,12 @@ declare global {
     new (): HTMLStencilaCodeExpressionElement;
   };
 
+  interface HTMLStencilaIconElement extends Components.StencilaIcon, HTMLStencilElement {}
+  var HTMLStencilaIconElement: {
+    prototype: HTMLStencilaIconElement;
+    new (): HTMLStencilaIconElement;
+  };
+
   interface HTMLStencilaTabElement extends Components.StencilaTab, HTMLStencilElement {}
   var HTMLStencilaTabElement: {
     prototype: HTMLStencilaTabElement;
@@ -153,6 +168,7 @@ declare global {
     'stencila-button': HTMLStencilaButtonElement;
     'stencila-code-chunk': HTMLStencilaCodeChunkElement;
     'stencila-code-expression': HTMLStencilaCodeExpressionElement;
+    'stencila-icon': HTMLStencilaIconElement;
     'stencila-tab': HTMLStencilaTabElement;
     'stencila-tab-list': HTMLStencilaTabListElement;
     'stencila-toc': HTMLStencilaTocElement;
@@ -184,7 +200,7 @@ declare namespace LocalJSX {
     * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
     */
     'href'?: string;
-    'iconName'?: string;
+    'icon'?: IconNames;
     /**
     * The displayed text of the Tab.
     */
@@ -206,6 +222,9 @@ declare namespace LocalJSX {
     'onCollapseAllCode'?: (event: CustomEvent<any>) => void;
   }
   interface StencilaCodeExpression extends JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement> {}
+  interface StencilaIcon extends JSXBase.HTMLAttributes<HTMLStencilaIconElement> {
+    'icon'?: IconNames;
+  }
   interface StencilaTab extends JSXBase.HTMLAttributes<HTMLStencilaTabElement> {
     /**
     * The link the tab should navigate to
@@ -253,6 +272,7 @@ declare namespace LocalJSX {
     'stencila-button': StencilaButton;
     'stencila-code-chunk': StencilaCodeChunk;
     'stencila-code-expression': StencilaCodeExpression;
+    'stencila-icon': StencilaIcon;
     'stencila-tab': StencilaTab;
     'stencila-tab-list': StencilaTabList;
     'stencila-toc': StencilaToc;

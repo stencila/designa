@@ -18,7 +18,7 @@ storiesOf('Atoms/Button/Primary', module)
   )
   .add(
     'Web Component - With a Feather icon',
-    () => `<stencila-button icon-name="circle">
+    () => `<stencila-button icon="command">
         Hello World!
       </stencila-button>`
   )

@@ -1,5 +1,5 @@
 import { Component, h, Prop } from '@stencil/core'
-import feather from 'feather-icons'
+import { IconNames } from '../icon/icon'
 
 @Component({
   tag: 'stencila-button',
@@ -53,15 +53,10 @@ export class Button {
    */
   @Prop() public disabled: boolean = false
 
-  @Prop() public iconName: string
+  @Prop() public icon: IconNames
 
   public render() {
     const TagType = this.href != null ? 'a' : 'button' // eslint-disable-line @typescript-eslint/no-unused-vars
-    console.log(
-      feather.icons,
-      feather.icons.play.toSvg(),
-      feather.icons.play.toString()
-    )
 
     return (
       <TagType
@@ -76,13 +71,9 @@ export class Button {
         }}
       >
         {<slot name={Button.slots.icon} />}
-        {this.iconName !== undefined &&
-          feather.icons[this.iconName] != null && (
-            <span
-              innerHTML={feather.icons[this.iconName].toSvg()}
-              aria-hidden="true"
-            ></span>
-          )}
+        {this.icon !== undefined && (
+          <stencila-icon icon={this.icon}></stencila-icon>
+        )}
         <slot name={Button.slots.default} />
       </TagType>
     )

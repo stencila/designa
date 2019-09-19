@@ -19,10 +19,6 @@
 
 ## Dependencies
 
-### Used by
-
- - [stencila-code-expression](../codeExpression)
-
 ### Depends on
 
 - [stencila-button](../button)
@@ -33,7 +29,7 @@
 graph TD;
   stencila-code-chunk --> stencila-button
   stencila-code-chunk --> stencila-action-menu
-  stencila-code-expression --> stencila-code-chunk
+  stencila-button --> stencila-icon
   style stencila-code-chunk fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -71,7 +71,7 @@ export class CodeChunk {
   public render() {
     const actions = [
       <stencila-button
-        iconName="play"
+        icon="play"
         isSecondary={true}
         size="xsmall"
         ariaLabel="Run Code"
@@ -81,7 +81,7 @@ export class CodeChunk {
       </stencila-button>,
       <stencila-button
         isSecondary={true}
-        iconName="eye-off"
+        icon={this.isCodeCollapsed ? 'eye' : 'eye-off'}
         size="xsmall"
         onClick={this.toggleCodeVisibility}
       >
@@ -89,7 +89,7 @@ export class CodeChunk {
       </stencila-button>,
       <stencila-button
         isSecondary={true}
-        iconName="eye-off"
+        icon={this.isCodeCollapsed ? 'eye' : 'eye-off'}
         size="xsmall"
         onClick={() => this.collapseAllCodeHandler(!this.isCodeCollapsed)}
       >
