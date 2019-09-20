@@ -4,35 +4,29 @@ storiesOf('Molecules/CodeChunk', module)
   .add(
     'Single CodeChunk',
     () => `<div>
-    <stencila-codechunk
+    <stencila-code-chunk
       data-collapsed="false"
-      data-execution_count="3"
-      isSecondary="true"
       itemtype="stencila:CodeChunk"
-      class="firsty"
     >
-      <pre slot="code"><code>print(a)</code></pre>
+      <pre slot="text"><code>print(a)</code></pre>
       <figure slot="outputs">
         <pre><output>10</output></pre>
       </figure>
-    </stencila-codechunk>
+    </stencila-code-chunk>
   `
   )
   .add(
     'Multiple CodeChunks',
     () => `<div>
-    <stencila-codechunk
+    <stencila-code-chunk
       data-collapsed="false"
-      data-execution_count="3"
-      isSecondary="true"
       itemtype="stencila:CodeChunk"
-      class="firsty"
     >
-      <pre slot="code"><code>print(a)</code></pre>
+      <pre slot="text"><code>print(a)</code></pre>
       <figure slot="outputs">
         <pre><output>10</output></pre>
       </figure>
-    </stencila-codechunk>
+    </stencila-code-chunk>
 
     <p>
       First and foremost, the Jupyter Notebook is an interactive environment for
@@ -42,36 +36,32 @@ storiesOf('Molecules/CodeChunk', module)
       Python code.
     </p>
 
-    <stencila-codechunk
+    <stencila-code-chunk
       data-collapsed="false"
-      data-execution_count="3"
-      isSecondary="true"
       itemtype="stencila:CodeChunk"
     >
-      <pre slot="code" itemprop="code"><code>print(second)</code></pre>
+      <pre slot="text" itemprop="code"><code>print(second)</code></pre>
 
       <figure slot="outputs">
-        <img src="https://via.placeholder.com/350x500" />
+        <img alt="This is a sample output image" src="https://via.placeholder.com/350x500" />
       </figure>
-    </stencila-codechunk>
+    </stencila-code-chunk>
   </div>
   `
   )
   .add(
     'CodeChunk with multiple Outputs',
     () => `<div>
-    <stencila-codechunk
+    <stencila-code-chunk
       data-collapsed="false"
-      data-execution_count="3"
-      isSecondary="true"
       itemtype="stencila:CodeChunk"
     >
-      <pre slot="code" itemprop="code"><code>print(second)</code></pre>
+      <pre slot="text" itemprop="code"><code>print(second)</code></pre>
 
       <figure slot="outputs">
         <pre><output>10</output></pre>
 
-        <img src="https://via.placeholder.com/350x500" />
+        <img alt="This is a sample output image" src="https://via.placeholder.com/350x500" />
 
         <pre><output>10</output></pre>
 
@@ -79,7 +69,7 @@ storiesOf('Molecules/CodeChunk', module)
 
         <pre><output>30</output></pre>
       </figure>
-    </stencila-codechunk>
+    </stencila-code-chunk>
   </div>
   `
   )

@@ -1,0 +1,73 @@
+@import './codeChunk.css';
+
+:host,
+stencila-code-expression {
+  @apply inline-flex items-stretch rounded border border-neutral-500 p-0 leading-none align-bottom overflow-hidden;
+
+  .source {
+    @apply inline-flex flex-initial bg-neutral-300 whitespace-no-wrap rounded-l;
+  }
+
+  [slot='text'] {
+    @apply inline-block pt-1 px-2;
+    transition: width 120ms ease-out;
+    width: var(--source-width);
+  }
+
+  [slot='output'] {
+    @apply border-none bg-stock py-1 pr-2 pl-1;
+    transition: padding 120ms ease-out;
+  }
+
+  svg.divider {
+    @apply w-2 inline-block self-center;
+    max-height: 1em;
+    fill: var(--color-neutral-300);
+  }
+
+  stencila-icon {
+    @apply inline-flex self-stretch overflow-hidden w-0  cursor-pointer items-stretch;
+    max-width: 0;
+    transition: padding 120ms ease-out, width 120ms ease-out;
+
+    &:active,
+    &:hover {
+      @apply bg-neutral-400;
+    }
+  }
+
+  &.sourceHidden {
+    stencila-icon,
+    [slot='text'],
+    .divider {
+      @apply w-0 pl-0 pr-0;
+    }
+
+    [slot='output'] {
+      @apply pr-1;
+    }
+
+    &:hover,
+    &:hover {
+      [slot='text'] {
+        @apply px-2;
+        width: var(--source-width);
+      }
+
+      .divider {
+        @apply w-2;
+      }
+
+      [slot='output'] {
+        @apply pr-2;
+      }
+    }
+  }
+
+  &:active,
+  &:hover {
+    stencila-icon {
+      @apply max-w-full w-6 px-1 border-r border-neutral-500;
+    }
+  }
+}

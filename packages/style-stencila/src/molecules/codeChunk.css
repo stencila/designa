@@ -10,17 +10,34 @@
 }
 
 :host,
-stencila-codechunk {
+stencila-code-chunk {
   @apply block relative w-full my-4 border border-solid border-neutral-300 rounded;
+
+  stencila-action-menu {
+    @apply opacity-0;
+    transition: opacity 120ms ease-out;
+  }
+
+  &:focus-within,
+  &:hover {
+    stencila-action-menu {
+      @apply opacity-100;
+    }
+  }
 }
 
-::slotted([slot='outputs']) pre,
+::slotted([slot='output']) pre,
 .codeContainer::slotted(pre) {
   @apply preReset;
 }
 
 .codeContainer {
   @apply customPre bg-neutral-100 m-0 rounded-none border-b border-l-0 border-r-0 border-t-0;
+
+  pre,
+  pre[class*='language-'] {
+    @apply bg-neutral-100;
+  }
 
   &.hidden {
     @apply hidden;
@@ -45,7 +62,7 @@ stencila-codechunk {
 
 @screen lg {
   :host,
-  stencila-codechunk {
+  stencila-code-chunk {
     @apply flex flex-row w-full items-stretch;
   }
 

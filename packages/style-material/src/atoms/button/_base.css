@@ -1,10 +1,10 @@
 :host,
+stencila-button,
 button {
-  border-style: none;
-  padding: 0;
-  @apply rounded;
+  @apply border-none p-0;
 
+  ::slotted([slot='icon']),
   [slot='icon'] {
-    @aply inline-block;
+    @apply inline-block pr-2;
   }
 }

@@ -1,0 +1,33 @@
+:host,
+stencila-button,
+button {
+  @apply border-none p-0 leading-none;
+  transition: color 120ms ease-out, background-color 120ms ease-out;
+
+  &:hover {
+    @apply cursor-pointer;
+  }
+
+  [slot='icon'] {
+    @apply inline-block pr-2;
+  }
+
+  [disabled] {
+    @apply cursor-not-allowed;
+  }
+
+  & > * {
+    @apply align-middle;
+  }
+
+  svg {
+    width: 1.125em;
+    height: 1.125em;
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    @apply pr-1;
+  }
+}

@@ -7,35 +7,62 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
+  IconNames,
+} from './components/icon/icon';
+import {
+  IconNames as IconNames1,
+} from './components/icon/icon';
+import {
   Collection,
 } from '@stencila/schema';
 
 export namespace Components {
-  interface StencilaActionmenu {
+  interface StencilaActionMenu {
     /**
-    * List of buttons to include in Action Menu
+    * List of buttons to include in Action Menu.
     */
     'actions': HTMLButtonElement[];
   }
   interface StencilaButton {
     /**
-    * The link the button should navigate to
+    * Screen-reader accessible label to read out.
+    */
+    'ariaLabel': string;
+    /**
+    * The type of button to render, options correspond to HTML Button `type` attribute. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
+    */
+    'buttonType': 'button' | 'submit' | 'reset';
+    /**
+    * If true, prevents the user from interacting with the button.
+    */
+    'disabled': boolean;
+    /**
+    * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
     */
     'href'?: string;
+    'icon': IconNames;
     /**
-    * The displayed text of the Tab
+    * The displayed text of the Tab.
     */
     'isSecondary': boolean;
     /**
-    * The displayed text of the Tab
+    * The displayed text of the Button.
     */
     'label': string;
+    /**
+    * The displayed text of the Button.
+    */
+    'size': 'xsmall' | 'small' | 'default' | 'large';
   }
-  interface StencilaCodechunk {
+  interface StencilaCodeChunk {
     /**
     * Whether the code section is visible or not
     */
     'isCodeCollapsedProp': boolean;
+  }
+  interface StencilaCodeExpression {}
+  interface StencilaIcon {
+    'icon': IconNames;
   }
   interface StencilaTab {
     /**
@@ -83,10 +110,10 @@ export namespace Components {
 declare global {
 
 
-  interface HTMLStencilaActionmenuElement extends Components.StencilaActionmenu, HTMLStencilElement {}
-  var HTMLStencilaActionmenuElement: {
-    prototype: HTMLStencilaActionmenuElement;
-    new (): HTMLStencilaActionmenuElement;
+  interface HTMLStencilaActionMenuElement extends Components.StencilaActionMenu, HTMLStencilElement {}
+  var HTMLStencilaActionMenuElement: {
+    prototype: HTMLStencilaActionMenuElement;
+    new (): HTMLStencilaActionMenuElement;
   };
 
   interface HTMLStencilaButtonElement extends Components.StencilaButton, HTMLStencilElement {}
@@ -95,10 +122,22 @@ declare global {
     new (): HTMLStencilaButtonElement;
   };
 
-  interface HTMLStencilaCodechunkElement extends Components.StencilaCodechunk, HTMLStencilElement {}
-  var HTMLStencilaCodechunkElement: {
-    prototype: HTMLStencilaCodechunkElement;
-    new (): HTMLStencilaCodechunkElement;
+  interface HTMLStencilaCodeChunkElement extends Components.StencilaCodeChunk, HTMLStencilElement {}
+  var HTMLStencilaCodeChunkElement: {
+    prototype: HTMLStencilaCodeChunkElement;
+    new (): HTMLStencilaCodeChunkElement;
+  };
+
+  interface HTMLStencilaCodeExpressionElement extends Components.StencilaCodeExpression, HTMLStencilElement {}
+  var HTMLStencilaCodeExpressionElement: {
+    prototype: HTMLStencilaCodeExpressionElement;
+    new (): HTMLStencilaCodeExpressionElement;
+  };
+
+  interface HTMLStencilaIconElement extends Components.StencilaIcon, HTMLStencilElement {}
+  var HTMLStencilaIconElement: {
+    prototype: HTMLStencilaIconElement;
+    new (): HTMLStencilaIconElement;
   };
 
   interface HTMLStencilaTabElement extends Components.StencilaTab, HTMLStencilElement {}
@@ -125,9 +164,11 @@ declare global {
     new (): HTMLStencilaVerticalNavElement;
   };
   interface HTMLElementTagNameMap {
-    'stencila-actionmenu': HTMLStencilaActionmenuElement;
+    'stencila-action-menu': HTMLStencilaActionMenuElement;
     'stencila-button': HTMLStencilaButtonElement;
-    'stencila-codechunk': HTMLStencilaCodechunkElement;
+    'stencila-code-chunk': HTMLStencilaCodeChunkElement;
+    'stencila-code-expression': HTMLStencilaCodeExpressionElement;
+    'stencila-icon': HTMLStencilaIconElement;
     'stencila-tab': HTMLStencilaTabElement;
     'stencila-tab-list': HTMLStencilaTabListElement;
     'stencila-toc': HTMLStencilaTocElement;
@@ -136,32 +177,53 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface StencilaActionmenu extends JSXBase.HTMLAttributes<HTMLStencilaActionmenuElement> {
+  interface StencilaActionMenu extends JSXBase.HTMLAttributes<HTMLStencilaActionMenuElement> {
     /**
-    * List of buttons to include in Action Menu
+    * List of buttons to include in Action Menu.
     */
     'actions'?: HTMLButtonElement[];
   }
   interface StencilaButton extends JSXBase.HTMLAttributes<HTMLStencilaButtonElement> {
     /**
-    * The link the button should navigate to
+    * Screen-reader accessible label to read out.
+    */
+    'ariaLabel'?: string;
+    /**
+    * The type of button to render, options correspond to HTML Button `type` attribute. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
+    */
+    'buttonType'?: 'button' | 'submit' | 'reset';
+    /**
+    * If true, prevents the user from interacting with the button.
+    */
+    'disabled'?: boolean;
+    /**
+    * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
     */
     'href'?: string;
+    'icon'?: IconNames;
     /**
-    * The displayed text of the Tab
+    * The displayed text of the Tab.
     */
     'isSecondary'?: boolean;
     /**
-    * The displayed text of the Tab
+    * The displayed text of the Button.
     */
     'label'?: string;
+    /**
+    * The displayed text of the Button.
+    */
+    'size'?: 'xsmall' | 'small' | 'default' | 'large';
   }
-  interface StencilaCodechunk extends JSXBase.HTMLAttributes<HTMLStencilaCodechunkElement> {
+  interface StencilaCodeChunk extends JSXBase.HTMLAttributes<HTMLStencilaCodeChunkElement> {
     /**
     * Whether the code section is visible or not
     */
     'isCodeCollapsedProp'?: boolean;
     'onCollapseAllCode'?: (event: CustomEvent<any>) => void;
+  }
+  interface StencilaCodeExpression extends JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement> {}
+  interface StencilaIcon extends JSXBase.HTMLAttributes<HTMLStencilaIconElement> {
+    'icon'?: IconNames;
   }
   interface StencilaTab extends JSXBase.HTMLAttributes<HTMLStencilaTabElement> {
     /**
@@ -206,9 +268,11 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
-    'stencila-actionmenu': StencilaActionmenu;
+    'stencila-action-menu': StencilaActionMenu;
     'stencila-button': StencilaButton;
-    'stencila-codechunk': StencilaCodechunk;
+    'stencila-code-chunk': StencilaCodeChunk;
+    'stencila-code-expression': StencilaCodeExpression;
+    'stencila-icon': StencilaIcon;
     'stencila-tab': StencilaTab;
     'stencila-tab-list': StencilaTabList;
     'stencila-toc': StencilaToc;

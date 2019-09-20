@@ -21,13 +21,16 @@
 
 ### Depends on
 
-- [stencila-actionmenu](../actionMenu)
+- [stencila-button](../button)
+- [stencila-action-menu](../actionMenu)
 
 ### Graph
 ```mermaid
 graph TD;
-  stencila-codechunk --> stencila-actionmenu
-  style stencila-codechunk fill:#f9f,stroke:#333,stroke-width:4px
+  stencila-code-chunk --> stencila-button
+  stencila-code-chunk --> stencila-action-menu
+  stencila-button --> stencila-icon
+  style stencila-code-chunk fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

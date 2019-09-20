@@ -15,7 +15,7 @@ interface CollapseEvent extends CustomEvent {
 }
 
 @Component({
-  tag: 'stencila-codechunk',
+  tag: 'stencila-code-chunk',
   styleUrls: {
     default: 'codeChunk.css',
     material: 'codeChunk.material.css'
@@ -23,6 +23,13 @@ interface CollapseEvent extends CustomEvent {
   scoped: true
 })
 export class CodeChunk {
+  public static readonly elementName = 'stencila-code-chunk'
+
+  public static readonly slots = {
+    text: 'text',
+    outputs: 'outputs'
+  }
+
   /**
    * Whether the code section is visible or not
    */
@@ -63,30 +70,46 @@ export class CodeChunk {
 
   public render() {
     const actions = [
-      <button disabled>Run</button>,
-      <button onClick={this.toggleCodeVisibility}>
-        {this.isCodeCollapsed ? 'Show' : 'Hide'} Code
-      </button>,
-      <button
+      <stencila-button
+        icon="play"
+        isSecondary={true}
+        size="xsmall"
+        ariaLabel="Run Code"
+        disabled
+      >
+        Run
+      </stencila-button>,
+      <stencila-button
+        isSecondary={true}
+        icon={this.isCodeCollapsed ? 'eye' : 'eye-off'}
+        size="xsmall"
+        onClick={this.toggleCodeVisibility}
+      >
+        {this.isCodeCollapsed ? 'Show' : 'Hide'} Source
+      </stencila-button>,
+      <stencila-button
+        isSecondary={true}
+        icon={this.isCodeCollapsed ? 'eye' : 'eye-off'}
+        size="xsmall"
         onClick={() => this.collapseAllCodeHandler(!this.isCodeCollapsed)}
       >
-        {this.isCodeCollapsed ? 'Show' : 'Hide'} All Code Cells
-      </button>
+        {this.isCodeCollapsed ? 'Show' : 'Hide'} All Sources
+      </stencila-button>
     ]
 
     return (
       <Host>
-        <stencila-actionmenu actions={actions} />
+        <stencila-action-menu actions={actions} />
 
         <div
           class={`codeContainer ${
             this.isCodeCollapsed === true ? 'hidden' : ''
           }`}
         >
-          <slot name="code" />
+          <slot name={CodeChunk.slots.text} />
         </div>
 
-        <slot name="outputs" />
+        <slot name={CodeChunk.slots.outputs} />
       </Host>
     )
   }
