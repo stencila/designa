@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/stencila/style/compare/@stencila/style-material@0.3.0...@stencila/style-material@0.4.0) (2019-09-20)
+
+
+### Bug Fixes
+
+* **Components:** Fix button icon alignment ([1c88db5](https://github.com/stencila/style/commit/1c88db5))
+
+
+### Features
+
+* **Button:** Add icon button variant ([51a0cbc](https://github.com/stencila/style/commit/51a0cbc))
+
+
+
+
+
 # [0.3.0](https://github.com/stencila/style/compare/@stencila/style-material@0.2.0...@stencila/style-material@0.3.0) (2019-09-12)
 
 

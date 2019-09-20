@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/stencila/style/compare/@stencila/brand@0.2.0...@stencila/brand@0.3.0) (2019-09-20)
+
+
+### Features
+
+* **Button:** Add icon button variant ([51a0cbc](https://github.com/stencila/style/commit/51a0cbc))
+
+
+
+
+
 # [0.2.0](https://github.com/stencila/style/compare/@stencila/brand@0.1.1...@stencila/brand@0.2.0) (2019-09-12)
 
 

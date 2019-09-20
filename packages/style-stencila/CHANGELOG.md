@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.3.0...@stencila/style-stencila@0.4.0) (2019-09-20)
+
+
+### Bug Fixes
+
+* **Components:** Fix button icon alignment ([1c88db5](https://github.com/stencila/style/commit/1c88db5))
+
+
+### Features
+
+* **Button:** Add icon button variant ([51a0cbc](https://github.com/stencila/style/commit/51a0cbc))
+* **CodeExpression:** Add Code Expression component ([e083394](https://github.com/stencila/style/commit/e083394))
+* **Components:** Add CodeExpression component ([73aefa1](https://github.com/stencila/style/commit/73aefa1))
+* **Components:** Expose slot names from components ([29e000a](https://github.com/stencila/style/commit/29e000a))
+* **Components:** Hide CodeChunk actions, reveal on hover ([ce5937b](https://github.com/stencila/style/commit/ce5937b))
+
+
+
+
+
 # [0.3.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.2.0...@stencila/style-stencila@0.3.0) (2019-09-12)
 
 

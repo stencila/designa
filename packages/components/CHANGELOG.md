@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/stencila/designa/compare/@stencila/components@0.2.0...@stencila/components@0.3.0) (2019-09-20)
+
+
+### Features
+
+* **Button:** Add icon button variant ([51a0cbc](https://github.com/stencila/designa/commit/51a0cbc))
+* **CodeExpression:** Add Code Expression component ([e083394](https://github.com/stencila/designa/commit/e083394))
+* **Components:** Add CodeExpression component ([73aefa1](https://github.com/stencila/designa/commit/73aefa1))
+* **Components:** Expose slot names from components ([29e000a](https://github.com/stencila/designa/commit/29e000a))
+* **Components:** Make CodeChunk slot names changes backwards compatible ([0f329fd](https://github.com/stencila/designa/commit/0f329fd))
+
+
+
+
+
 # [0.2.0](https://github.com/stencila/designa/compare/@stencila/components@0.1.1...@stencila/components@0.2.0) (2019-09-12)
 
 
