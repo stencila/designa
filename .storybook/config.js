@@ -8,12 +8,12 @@ import { addReadme } from 'storybook-readme/html'
 const cssresources = [
   {
     id: `Stencila`,
-    code: `<link rel="stylesheet" type="text/css" href="/index-stencila.css"></link>`,
+    code: `<link rel="stylesheet" type="text/css" href="./index-stencila.css"></link>`,
     picked: true
   },
   {
     id: `Material`,
-    code: `<link rel="stylesheet" type="text/css" href="/index-material.css"></link>`,
+    code: `<link rel="stylesheet" type="text/css" href="./index-material.css"></link>`,
     picked: false
   }
 ]
