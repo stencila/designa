@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/stencila/style/compare/@stencila/style-stencila@0.4.0...@stencila/style-stencila@0.4.1) (2019-09-24)
+
+
+### Bug Fixes
+
+* **Action Menu:** Ensure CodeChunk action menu isn't obscured ([8ed4df9](https://github.com/stencila/style/commit/8ed4df9))
+* **CodeExpression:** Ensure border is visible for code-expressions ([383c139](https://github.com/stencila/style/commit/383c139))
+
+
+
+
+
 # [0.4.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.3.0...@stencila/style-stencila@0.4.0) (2019-09-20)
 
 
