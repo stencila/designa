@@ -2,7 +2,7 @@
 
 :host,
 stencila-code-expression {
-  @apply inline-flex items-stretch rounded border border-neutral-500 p-0 leading-none align-bottom overflow-hidden;
+  @apply inline-flex items-stretch rounded border border-neutral-500 border-solid p-0 leading-none align-bottom overflow-hidden;
 
   .source {
     @apply inline-flex flex-initial bg-neutral-300 whitespace-no-wrap rounded-l;
