@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i&display=swap');
 
-code {
+code,
+code[class *='language-'],
+output {
   font-family: 'Roboto Mono', monospace;
   font-size: 75%;
 }
