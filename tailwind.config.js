@@ -1,3 +1,10 @@
+const {
+  inset,
+  maxHeight,
+  maxWidth,
+  minWidth
+} = require('tailwindcss/defaultTheme')
+
 module.exports = {
   theme: {
     fontFamily: {
@@ -65,6 +72,22 @@ module.exports = {
         '800': 'var(--color-destroy-800)',
         '900': 'var(--color-destroy-900)'
       }
+    },
+    inset: {
+      ...inset,
+      '1/2': '50%'
+    },
+    maxHeight: {
+      ...maxHeight,
+      em: '1em'
+    },
+    maxWidth: {
+      ...maxWidth,
+      0: '0'
+    },
+    minWidth: {
+      ...minWidth,
+      em: '1em'
     }
   }
 }
