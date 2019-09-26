@@ -57,3 +57,12 @@ storiesOf('Molecules/CodeExpression', module)
       </stencila-code-expression>.
     </p>`
   )
+  .add(
+    'CodeExpression with no output',
+    () => `<p>
+      This is a paragraph with a code expresssion inside it
+      <stencila-code-expression
+        data-collapsed="false"
+        itemtype="stencila:CodeChunk"
+      ><code slot="text">x * y</code><output slot="output"></output></stencila-code-expression> followed by some more text.</p>`
+  )
