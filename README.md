@@ -20,15 +20,16 @@ This repository is a [monorepo](https://en.wikipedia.org/wiki/Monorepo), and con
 
 ## Table of Contents
 
-- [Packages](#Packages)
-- [Table of Contents](#Table-of-Contents)
-- [Design Philosophy](#Design-Philosophy)
-- [Quick Start](#Quick-Start)
-- [Development](#Development)
-  - [Adding Components](#Adding-Components)
-  - [Commit Messages](#Commit-Messages)
-- [Browser Support](#Browser-Support)
-- [External Resources](#External-Resources)
+- [Packages](#packages)
+- [Table of Contents](#table-of-contents)
+- [Design Philosophy](#design-philosophy)
+- [Quick Start](#quick-start)
+- [Development](#development)
+  - [Adding Components](#adding-components)
+  - [Commit Messages](#commit-messages)
+- [Browser Support](#browser-support)
+- [External Resources](#external-resources)
+- [Acknowledgments](#acknowledgments)
 
 ---
 
@@ -108,3 +109,11 @@ according to CanIUse, including IE9 and above.
 - [WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.1)
 - [Inclusive Components](https://inclusive-components.design)
 - [TailwindCSS](https://tailwindcss.com)
+
+## Acknowledgments
+
+We rely on many tools and services for which we are grateful ❤ to their developers and contributors for all their time and energy.
+
+| Tool                                                                                                                    | Use                                                                                                |
+| ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| <a href="Sauce Labs"><img src="./.github/PoweredBySauceLabs.svg" width="150" alt="Testing powered by Sauce Labs" /></a> | Cross-browser Testing Platform and Open Source <3 Provided by [Sauce Labs](https://saucelabs.com). |
