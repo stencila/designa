@@ -2,7 +2,7 @@
 @import '@stencila/brand/src/fonts/IBM-Plex-Mono/IBM-Plex-Mono.css';
 
 * {
-  @apply font-body text-key;
+  @apply font-body;
 }
 
 h1,

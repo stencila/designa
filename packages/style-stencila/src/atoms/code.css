@@ -1,6 +1,7 @@
 @import '@stencila/brand/src/fonts/IBM-Plex-Mono/IBM-Plex-Mono.css';
 
 code,
+code[class *='language-'],
 output {
   @apply font-mono;
   font-size: 75%;

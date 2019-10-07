@@ -102,6 +102,13 @@ export namespace Components {
     */
     'headingSelector': string;
   }
+  interface StencilaTooltip {
+    /**
+    * The text content of the Tooltip.
+    */
+    'text': string;
+  }
+  interface StencilaTooltipElement {}
   interface StencilaVerticalNav {
     'collection'?: Collection;
   }
@@ -158,6 +165,18 @@ declare global {
     new (): HTMLStencilaTocElement;
   };
 
+  interface HTMLStencilaTooltipElement extends Components.StencilaTooltip, HTMLStencilElement {}
+  var HTMLStencilaTooltipElement: {
+    prototype: HTMLStencilaTooltipElement;
+    new (): HTMLStencilaTooltipElement;
+  };
+
+  interface HTMLStencilaTooltipElementElement extends Components.StencilaTooltipElement, HTMLStencilElement {}
+  var HTMLStencilaTooltipElementElement: {
+    prototype: HTMLStencilaTooltipElementElement;
+    new (): HTMLStencilaTooltipElementElement;
+  };
+
   interface HTMLStencilaVerticalNavElement extends Components.StencilaVerticalNav, HTMLStencilElement {}
   var HTMLStencilaVerticalNavElement: {
     prototype: HTMLStencilaVerticalNavElement;
@@ -172,6 +191,8 @@ declare global {
     'stencila-tab': HTMLStencilaTabElement;
     'stencila-tab-list': HTMLStencilaTabListElement;
     'stencila-toc': HTMLStencilaTocElement;
+    'stencila-tooltip': HTMLStencilaTooltipElement;
+    'stencila-tooltip-element': HTMLStencilaTooltipElementElement;
     'stencila-vertical-nav': HTMLStencilaVerticalNavElement;
   }
 }
@@ -263,6 +284,13 @@ declare namespace LocalJSX {
     */
     'headingSelector'?: string;
   }
+  interface StencilaTooltip extends JSXBase.HTMLAttributes<HTMLStencilaTooltipElement> {
+    /**
+    * The text content of the Tooltip.
+    */
+    'text': string;
+  }
+  interface StencilaTooltipElement extends JSXBase.HTMLAttributes<HTMLStencilaTooltipElementElement> {}
   interface StencilaVerticalNav extends JSXBase.HTMLAttributes<HTMLStencilaVerticalNavElement> {
     'collection'?: Collection;
   }
@@ -276,6 +304,8 @@ declare namespace LocalJSX {
     'stencila-tab': StencilaTab;
     'stencila-tab-list': StencilaTabList;
     'stencila-toc': StencilaToc;
+    'stencila-tooltip': StencilaTooltip;
+    'stencila-tooltip-element': StencilaTooltipElement;
     'stencila-vertical-nav': StencilaVerticalNav;
   }
 }

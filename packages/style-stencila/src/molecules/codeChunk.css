@@ -24,6 +24,10 @@ stencila-code-chunk {
       @apply opacity-100;
     }
   }
+
+  .emptyContentMessage {
+    @apply text-neutral-600;
+  }
 }
 
 ::slotted([slot='output']) pre,
@@ -32,11 +36,11 @@ stencila-code-chunk {
 }
 
 .codeContainer {
-  @apply customPre bg-neutral-100 m-0 rounded-none border-b border-l-0 border-r-0 border-t-0;
+  @apply customPre bg-neutral-200 m-0 rounded-none border-b border-l-0 border-r-0 border-t-0;
 
   pre,
   pre[class*='language-'] {
-    @apply bg-neutral-100;
+    @apply bg-transparent;
   }
 
   &.hidden {

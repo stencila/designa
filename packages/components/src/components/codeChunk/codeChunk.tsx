@@ -1,5 +1,6 @@
 import {
   Component,
+  Element,
   Event,
   EventEmitter,
   h,
@@ -30,13 +31,15 @@ export class CodeChunk {
     outputs: 'outputs'
   }
 
+  @Element() private el: HTMLElement
+
   /**
    * Whether the code section is visible or not
    */
   @Prop({
     attr: 'data-collapsed'
   })
-  public isCodeCollapsedProp: boolean = false
+  public isCodeCollapsedProp: boolean = true
 
   @State() private isCodeCollapsed: boolean = this.isCodeCollapsedProp
 
@@ -57,8 +60,31 @@ export class CodeChunk {
     this.isCodeCollapsed = e.detail.isCollapsed
   }
 
+  @State() isOutputEmpty: boolean = true
+
+  private emptyOutputMessage = 'No output to show'
+
+  private outputExists = () => {
+    const output: HTMLElement = this.el.querySelector(
+      `[slot=${CodeChunk.slots.outputs}]`
+    )
+
+    const isEmpty =
+      output === null ? true : output.innerText === '' ? true : false
+
+    this.isOutputEmpty = isEmpty
+
+    if (isEmpty) {
+      output.innerHTML = `<em class="emptyContentMessage">${this.emptyOutputMessage}</em>`
+    }
+  }
+
   protected componentWillLoad() {
     document.addEventListener('collapseAllCode', this.collapseAllListenHandler)
+  }
+
+  protected componentDidLoad() {
+    this.outputExists()
   }
 
   protected componentDidUnload() {

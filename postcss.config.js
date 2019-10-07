@@ -9,6 +9,7 @@ module.exports = {
     require('tailwindcss')(path.join(__dirname, 'tailwind.config.js')),
     require('postcss-nested'),
     require('postcss-custom-properties')(),
+    require('postcss-host'),
     require('autoprefixer')
   ]
 }

@@ -1,73 +1,82 @@
-@import './codeChunk.css';
+@import '../base.css';
 
 :host,
 stencila-code-expression {
-  @apply inline-flex items-stretch rounded border border-neutral-500 border-solid p-0 leading-none align-bottom overflow-hidden;
+  @apply inline-flex items-stretch rounded border border-neutral-300 border-solid p-0 leading-none align-bottom overflow-hidden;
 
   .source {
-    @apply inline-flex flex-initial bg-neutral-300 whitespace-no-wrap rounded-l;
+    @apply inline-flex flex-initial bg-neutral-200 whitespace-no-wrap rounded-l;
   }
 
+  ::slotted([slot='text']),
   [slot='text'] {
-    @apply inline-block pt-1 px-2;
+    @apply inline-block py-1 px-2;
     transition: width 120ms ease-out;
     width: var(--source-width);
   }
 
   [slot='output'] {
-    @apply border-none bg-stock py-1 pr-2 pl-1;
+    @apply border-none bg-stock py-1 pr-2 pl-1 min-w-em;
     transition: padding 120ms ease-out;
+
+    stencila-icon {
+      --height: 1rem;
+      @apply h-4;
+
+      svg {
+        @apply h-4 stroke-warn-700;
+      }
+    }
   }
 
-  svg.divider {
-    @apply w-2 inline-block self-center;
-    max-height: 1em;
-    fill: var(--color-neutral-300);
+  .divider {
+    @apply max-h-em w-2 inline-block self-center;
+    fill: var(--color-neutral-200);
   }
 
-  stencila-icon {
-    @apply inline-flex self-stretch overflow-hidden w-0  cursor-pointer items-stretch;
-    max-width: 0;
+  .source stencila-icon {
+    @apply inline-flex self-stretch overflow-hidden w-0 max-w-0 cursor-pointer items-stretch;
     transition: padding 120ms ease-out, width 120ms ease-out;
 
-    &:active,
+    &:focus,
     &:hover {
-      @apply bg-neutral-400;
+      @apply bg-neutral-300;
     }
   }
 
   &.sourceHidden {
-    stencila-icon,
+    .source stencila-icon,
+    ::slotted([slot='text']),
     [slot='text'],
     .divider {
       @apply w-0 pl-0 pr-0;
     }
 
+    ::slotted([slot='output']),
     [slot='output'] {
       @apply pr-1;
     }
-
-    &:hover,
-    &:hover {
-      [slot='text'] {
-        @apply px-2;
-        width: var(--source-width);
-      }
-
-      .divider {
-        @apply w-2;
-      }
-
-      [slot='output'] {
-        @apply pr-2;
-      }
-    }
   }
 
-  &:active,
+  &:focus,
   &:hover {
-    stencila-icon {
-      @apply max-w-full w-6 px-1 border-r border-neutral-500;
+    ::slotted([slot='text']),
+    [slot='text'] {
+      @apply px-2;
+      width: var(--source-width);
+    }
+
+    .divider {
+      @apply w-2;
+    }
+
+    ::slotted([slot='output']),
+    [slot='output'] {
+      @apply pr-2;
+    }
+
+    .source stencila-icon {
+      @apply max-w-full w-6 px-1 border-r border-neutral-300;
     }
   }
 }
