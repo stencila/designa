@@ -3,6 +3,10 @@
 button {
   @apply rounded-full bg-primary-500 text-stock px-4 py-2 font-medium;
 
+  .vertical-offset {
+    @apply pt-px;
+  }
+
   &:active,
   &:hover {
     @apply bg-primary-700;

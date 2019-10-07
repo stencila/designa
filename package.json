@@ -8,7 +8,7 @@
   "author": "https://github.com/stencila/style/graphs/contributors",
   "license": "Apache-2.0",
   "scripts": {
-    "dev": "npm run build && concurrently \"npm run storybook\" \"npm run build:watch\"",
+    "dev": "concurrently \"npm run storybook\" \"npm run build:watch\"",
     "build": "npx lerna run build",
     "build:watch": "npx lerna run build:watch --stream --parallel",
     "bootstrap": "npx lerna exec npm install",

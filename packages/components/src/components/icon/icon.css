@@ -1,8 +1,1 @@
-:host,
-stencila-icon {
-  @apply align-middle;
-}
-
-svg {
-  @apply inline-block w-full h-auto;
-}
+@import '~@stencila/style-stencila/dist/atoms/icon.css';

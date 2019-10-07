@@ -73,3 +73,55 @@ storiesOf('Molecules/CodeChunk', module)
   </div>
   `
   )
+  .add(
+    'CodeChunk with no outputs',
+    () => `<div>
+    <stencila-code-chunk
+      itemtype="stencila:CodeChunk"
+    >
+      <pre slot="text" itemprop="code"><code>print(second)</code></pre>
+
+      <figure slot="outputs">
+      </figure>
+    </stencila-code-chunk>
+  </div>
+  `
+  )
+  .add(
+    'CodeChunk and a CodeExpression',
+    () => `<div>
+    <p>
+      This is a paragraph with a code expresssion inside it
+      <stencila-code-expression
+        data-collapsed="false"
+        itemtype="stencila:CodeChunk"
+      ><code slot="text">x * y</code><output slot="output">42</output></stencila-code-expression> followed by some more text and
+      another <stencila-code-expression
+        data-collapsed="false"
+        itemtype="stencila:CodeChunk"
+      >
+        <code slot="text">x * y - 128 * (212 - 2)</code>
+        <output slot="output">Reaaaaalllyyyyyyyy loooongggggggggggggggggggg output</output>
+      </stencila-code-expression>.
+    </p>
+    <stencila-code-chunk
+      data-collapsed="false"
+      itemtype="stencila:CodeChunk"
+    >
+      <pre slot="text" itemprop="code"><code>print(second)</code></pre>
+
+      <figure slot="outputs">
+        <pre><output>10</output></pre>
+
+        <img alt="This is a sample output image" src="https://via.placeholder.com/350x500" />
+
+        <pre><output>10</output></pre>
+
+        <pre><output>20</output></pre>
+
+        <pre><output>30</output></pre>
+      </figure>
+    </stencila-code-chunk>
+  </div>
+  `
+  )

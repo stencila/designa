@@ -40,6 +40,10 @@ export class CodeExpression {
 
     this.isOutputEmpty =
       output === null ? true : output.innerText === '' ? true : false
+
+    if (this.isOutputEmpty) {
+      output.innerHTML = `…`
+    }
   }
 
   protected componentWillLoad() {

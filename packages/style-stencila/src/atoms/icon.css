@@ -1,0 +1,13 @@
+:host,
+stencila-icon {
+  --height: 1.25em;
+  --width: 1.25em;
+
+  @apply align-middle inline-block;
+
+  svg {
+    @apply inline-block w-full h-auto max-h-full;
+    height: var(--height);
+    width: var(--width);
+  }
+}

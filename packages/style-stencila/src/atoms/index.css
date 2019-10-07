@@ -1,7 +1,9 @@
 @import './button';
 @import './code';
+@import './icon';
 @import './input';
 @import './label';
 @import './pre';
 @import './summary';
 @import './tab';
+@import './tooltip';

@@ -74,6 +74,7 @@ export class Button {
         {this.icon !== undefined && (
           <stencila-icon icon={this.icon}></stencila-icon>
         )}
+
         <slot name={Button.slots.default} />
       </TagType>
     )
