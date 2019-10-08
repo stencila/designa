@@ -40,7 +40,6 @@ export class CodeExpression {
 
     this.isOutputEmpty =
       output === null ? true : output.innerText === '' ? true : false
-
     if (this.isOutputEmpty) {
       output.innerHTML = `…`
     }
@@ -83,7 +82,12 @@ export class CodeExpression {
     ]
 
     return (
-      <Host class={{ sourceHidden: !this.isSourceVisible }}>
+      <Host
+        class={{
+          sourceHidden: !this.isSourceVisible,
+          isOutputEmpty: this.isOutputEmpty
+        }}
+      >
         {this.isOutputEmpty ? (
           <stencila-tooltip text={this.emptyOutputMessage}>
             {content}

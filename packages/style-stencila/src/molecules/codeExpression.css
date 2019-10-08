@@ -1,4 +1,5 @@
 @import '../base.css';
+@import '../atoms/code.css';
 
 :host,
 stencila-code-expression {
@@ -55,6 +56,13 @@ stencila-code-expression {
     ::slotted([slot='output']),
     [slot='output'] {
       @apply pr-1;
+    }
+  }
+
+  &.isOutputEmpty {
+    ::slotted([slot='output']),
+    [slot='output'] {
+      @apply text-neutral-600;
     }
   }
 

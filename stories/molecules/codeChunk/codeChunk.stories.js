@@ -88,6 +88,17 @@ storiesOf('Molecules/CodeChunk', module)
   `
   )
   .add(
+    'CodeChunk with no output slot',
+    () => `<div>
+    <stencila-code-chunk
+      itemtype="stencila:CodeChunk"
+    >
+      <pre slot="text" itemprop="code"><code>print(second)</code></pre>
+    </stencila-code-chunk>
+  </div>
+  `
+  )
+  .add(
     'CodeChunk and a CodeExpression',
     () => `<div>
     <p>
