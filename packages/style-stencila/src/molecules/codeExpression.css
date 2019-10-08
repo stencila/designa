@@ -11,13 +11,14 @@ stencila-code-expression {
 
   ::slotted([slot='text']),
   [slot='text'] {
-    @apply inline-block py-1 px-2;
+    @apply inline-block py-1 px-2 font-mono;
     transition: width 120ms ease-out;
     width: var(--source-width);
   }
 
+  ::slotted([slot='output']),
   [slot='output'] {
-    @apply border-none bg-stock py-1 pr-2 pl-1 min-w-em;
+    @apply border-none bg-stock py-1 pr-2 pl-1 min-w-em font-mono;
     transition: padding 120ms ease-out;
 
     stencila-icon {
