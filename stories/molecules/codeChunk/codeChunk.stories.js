@@ -136,3 +136,27 @@ storiesOf('Molecules/CodeChunk', module)
   </div>
   `
   )
+  .add(
+    'CodeChunk with only an image output',
+    () => `
+      <stencila-code-chunk>
+        <pre slot="text"><code>import numpy as np
+import matplotlib.pyplot as plt
+
+N = 50
+N = min(N, 1000) # Prevent generation of too many numbers :)
+x = np.random.rand(N)
+y = np.random.rand(N)
+colors = np.random.rand(N)
+area = np.pi * (15 * np.random.rand(N))**2  # 0 to 15 point radii
+
+plt.scatter(x, y, s=area, c=colors, alpha=0.5)</code></pre>
+        <figure slot="outputs">
+          <img
+            src="https://via.placeholder.com/350x500"
+            itemprop="image"
+          />
+        </figure>
+      </stencila-code-chunk>
+    `
+  )
