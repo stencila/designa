@@ -70,7 +70,7 @@ export class CodeChunk {
     )
 
     const isEmpty =
-      output === null ? true : output.innerText === '' ? true : false
+      output === null ? true : output.innerHTML.trim() === '' ? true : false
 
     this.isOutputEmpty = isEmpty
 

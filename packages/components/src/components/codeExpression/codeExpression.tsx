@@ -39,7 +39,7 @@ export class CodeExpression {
     )
 
     this.isOutputEmpty =
-      output === null ? true : output.innerText === '' ? true : false
+      output === null ? true : output.innerHTML.trim() === '' ? true : false
     if (this.isOutputEmpty) {
       output.innerHTML = `…`
     }
