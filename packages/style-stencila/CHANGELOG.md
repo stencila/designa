@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.2](https://github.com/stencila/style/compare/@stencila/style-stencila@0.5.1...@stencila/style-stencila@0.5.2) (2019-10-08)
+
+
+### Bug Fixes
+
+* **CodeExpression:** Fix slotted element styles ([4bda891](https://github.com/stencila/style/commit/4bda891))
+
+
+
+
+
 ## [0.5.1](https://github.com/stencila/style/compare/@stencila/style-stencila@0.5.0...@stencila/style-stencila@0.5.1) (2019-10-08)
 
 
