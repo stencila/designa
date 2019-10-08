@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1](https://github.com/stencila/style/compare/@stencila/style-stencila@0.5.0...@stencila/style-stencila@0.5.1) (2019-10-08)
+
+
+### Bug Fixes
+
+* **CodeChunk:** Fix component rendering when outputs slot is missing ([64203dd](https://github.com/stencila/style/commit/64203dd))
+
+
+
+
+
 # [0.5.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.4.1...@stencila/style-stencila@0.5.0) (2019-10-07)
 
 

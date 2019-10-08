@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/stencila/designa/compare/@stencila/components@0.4.0...@stencila/components@0.4.1) (2019-10-08)
+
+
+### Bug Fixes
+
+* **CodeChunk:** Fix component rendering when outputs slot is missing ([64203dd](https://github.com/stencila/designa/commit/64203dd))
+* **CodeChunk:** Fix empty output detection logic ([e5b82d9](https://github.com/stencila/designa/commit/e5b82d9))
+
+
+
+
+
 # [0.4.0](https://github.com/stencila/designa/compare/@stencila/components@0.3.1...@stencila/components@0.4.0) (2019-10-07)
 
 
