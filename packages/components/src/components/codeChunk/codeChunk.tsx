@@ -39,7 +39,7 @@ export class CodeChunk {
   @Prop({
     attr: 'data-collapsed'
   })
-  public isCodeCollapsedProp: boolean = true
+  public isCodeCollapsedProp: boolean = false
 
   @State() private isCodeCollapsed: boolean = this.isCodeCollapsedProp
 
@@ -74,8 +74,13 @@ export class CodeChunk {
 
     this.isOutputEmpty = isEmpty
 
-    if (isEmpty) {
+    if (output && isEmpty) {
       output.innerHTML = `<em class="emptyContentMessage">${this.emptyOutputMessage}</em>`
+    } else if (isEmpty) {
+      const child = document.createElement('figure')
+      child.setAttribute('slot', CodeChunk.slots.outputs)
+      this.el.appendChild(child)
+      child.innerHTML = `<em class="emptyContentMessage">${this.emptyOutputMessage}</em>`
     }
   }
 

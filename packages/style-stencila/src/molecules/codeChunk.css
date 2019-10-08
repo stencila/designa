@@ -24,13 +24,9 @@ stencila-code-chunk {
       @apply opacity-100;
     }
   }
-
-  .emptyContentMessage {
-    @apply text-neutral-600;
-  }
 }
 
-::slotted([slot='output']) pre,
+::slotted([slot='outputs']) pre,
 .codeContainer::slotted(pre) {
   @apply preReset;
 }
@@ -61,6 +57,10 @@ stencila-code-chunk {
     &:last-child {
       @apply mb-0;
     }
+  }
+
+  .emptyContentMessage {
+    @apply text-neutral-600;
   }
 }
 

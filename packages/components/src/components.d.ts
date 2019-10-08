@@ -198,13 +198,13 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface StencilaActionMenu extends JSXBase.HTMLAttributes<HTMLStencilaActionMenuElement> {
+  interface StencilaActionMenu {
     /**
     * List of buttons to include in Action Menu.
     */
     'actions'?: HTMLButtonElement[];
   }
-  interface StencilaButton extends JSXBase.HTMLAttributes<HTMLStencilaButtonElement> {
+  interface StencilaButton {
     /**
     * Screen-reader accessible label to read out.
     */
@@ -235,18 +235,18 @@ declare namespace LocalJSX {
     */
     'size'?: 'xsmall' | 'small' | 'default' | 'large';
   }
-  interface StencilaCodeChunk extends JSXBase.HTMLAttributes<HTMLStencilaCodeChunkElement> {
+  interface StencilaCodeChunk {
     /**
     * Whether the code section is visible or not
     */
     'isCodeCollapsedProp'?: boolean;
     'onCollapseAllCode'?: (event: CustomEvent<any>) => void;
   }
-  interface StencilaCodeExpression extends JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement> {}
-  interface StencilaIcon extends JSXBase.HTMLAttributes<HTMLStencilaIconElement> {
+  interface StencilaCodeExpression {}
+  interface StencilaIcon {
     'icon'?: IconNames;
   }
-  interface StencilaTab extends JSXBase.HTMLAttributes<HTMLStencilaTabElement> {
+  interface StencilaTab {
     /**
     * The link the tab should navigate to
     */
@@ -260,7 +260,7 @@ declare namespace LocalJSX {
     */
     'label'?: string;
   }
-  interface StencilaTabList extends JSXBase.HTMLAttributes<HTMLStencilaTabListElement> {
+  interface StencilaTabList {
     /**
     * The link the tab should navigate to
     */
@@ -274,7 +274,7 @@ declare namespace LocalJSX {
     */
     'tabs': string[];
   }
-  interface StencilaToc extends JSXBase.HTMLAttributes<HTMLStencilaTocElement> {
+  interface StencilaToc {
     /**
     * Where to grab the headings to build the table of contents.
     */
@@ -284,14 +284,14 @@ declare namespace LocalJSX {
     */
     'headingSelector'?: string;
   }
-  interface StencilaTooltip extends JSXBase.HTMLAttributes<HTMLStencilaTooltipElement> {
+  interface StencilaTooltip {
     /**
     * The text content of the Tooltip.
     */
     'text': string;
   }
-  interface StencilaTooltipElement extends JSXBase.HTMLAttributes<HTMLStencilaTooltipElementElement> {}
-  interface StencilaVerticalNav extends JSXBase.HTMLAttributes<HTMLStencilaVerticalNavElement> {
+  interface StencilaTooltipElement {}
+  interface StencilaVerticalNav {
     'collection'?: Collection;
   }
 
@@ -315,7 +315,19 @@ export { LocalJSX as JSX };
 
 declare module "@stencil/core" {
   export namespace JSX {
-    interface IntrinsicElements extends LocalJSX.IntrinsicElements {}
+    interface IntrinsicElements {
+      'stencila-action-menu': LocalJSX.StencilaActionMenu & JSXBase.HTMLAttributes<HTMLStencilaActionMenuElement>;
+      'stencila-button': LocalJSX.StencilaButton & JSXBase.HTMLAttributes<HTMLStencilaButtonElement>;
+      'stencila-code-chunk': LocalJSX.StencilaCodeChunk & JSXBase.HTMLAttributes<HTMLStencilaCodeChunkElement>;
+      'stencila-code-expression': LocalJSX.StencilaCodeExpression & JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement>;
+      'stencila-icon': LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
+      'stencila-tab': LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
+      'stencila-tab-list': LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;
+      'stencila-toc': LocalJSX.StencilaToc & JSXBase.HTMLAttributes<HTMLStencilaTocElement>;
+      'stencila-tooltip': LocalJSX.StencilaTooltip & JSXBase.HTMLAttributes<HTMLStencilaTooltipElement>;
+      'stencila-tooltip-element': LocalJSX.StencilaTooltipElement & JSXBase.HTMLAttributes<HTMLStencilaTooltipElementElement>;
+      'stencila-vertical-nav': LocalJSX.StencilaVerticalNav & JSXBase.HTMLAttributes<HTMLStencilaVerticalNavElement>;
+    }
   }
 }
 
