@@ -86,12 +86,4 @@ addParameters({
   }
 })
 
-const req = require.context('../stories', true, /\.stories\.js$/)
-const loadStories = () => {
-  // NOTE: Commment/Uncomment the following line to compare different WebComponent themes
-  //  document.documentElement.setAttribute('mode', 'material')
-
-  req.keys().forEach(filename => req(filename))
-}
-
-configure(loadStories, module)
+configure(require.context('../stories', true, /\.stories\.js$/), module)

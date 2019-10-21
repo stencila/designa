@@ -55,6 +55,8 @@ export class Button {
 
   @Prop() public icon: IconNames
 
+  @Prop() public iconOnly: boolean
+
   public render() {
     const TagType = this.href != null ? 'a' : 'button' // eslint-disable-line @typescript-eslint/no-unused-vars
 
@@ -67,6 +69,7 @@ export class Button {
         aria-label={this.ariaLabel}
         class={{
           secondary: this.isSecondary,
+          iconOnly: this.iconOnly,
           [this.size]: this.size !== undefined
         }}
       >

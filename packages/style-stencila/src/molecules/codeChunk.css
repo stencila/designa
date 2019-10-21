@@ -12,18 +12,6 @@
 :host,
 stencila-code-chunk {
   @apply block relative w-full my-4 border border-solid border-neutral-300 rounded;
-
-  stencila-action-menu {
-    @apply opacity-0;
-    transition: opacity 120ms ease-out;
-  }
-
-  &:focus-within,
-  &:hover {
-    stencila-action-menu {
-      @apply opacity-100;
-    }
-  }
 }
 
 ::slotted([slot='outputs']) pre,
