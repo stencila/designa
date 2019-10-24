@@ -1,9 +1,41 @@
-import { storiesOf } from '@storybook/html'
+export default {
+  title: 'Molecules/Code Chunk'
+}
 
-storiesOf('Molecules/CodeChunk', module)
-  .add(
-    'Single CodeChunk',
-    () => `<div>
+const delay = cb => {
+  return new Promise(res => {
+    window.setTimeout(() => {
+      res(cb())
+    }, 1500)
+  })
+}
+
+const makeCodeChunk = (source, outputs, props = {}) => {
+  const component = document.createElement('stencila-code-chunk')
+  Object.entries(props).map(([k, v]) => {
+    component[k] = v
+  })
+
+  const text = document.createElement('pre')
+  text.setAttribute('slot', 'text')
+  text.innerText = source
+
+  const out = document.createElement('figure')
+  out.setAttribute('slot', 'outputs')
+  out.innerHTML = outputs
+
+  component.appendChild(text)
+  component.appendChild(out)
+
+  return component
+}
+
+export const withExecuteHandler = () =>
+  makeCodeChunk('print(a)', '<pre><output>10</output></pre>', {
+    executeHandler: t => delay(() => console.log(t) || t)
+  })
+
+export const singleCodeChunk = () => `<div>
     <stencila-code-chunk
       data-collapsed="false"
       itemtype="stencila:CodeChunk"
@@ -14,10 +46,7 @@ storiesOf('Molecules/CodeChunk', module)
       </figure>
     </stencila-code-chunk>
   `
-  )
-  .add(
-    'Multiple CodeChunks',
-    () => `<div>
+export const multipleCodeChunks = () => `<div>
     <stencila-code-chunk
       data-collapsed="false"
       itemtype="stencila:CodeChunk"
@@ -48,10 +77,8 @@ storiesOf('Molecules/CodeChunk', module)
     </stencila-code-chunk>
   </div>
   `
-  )
-  .add(
-    'CodeChunk with multiple Outputs',
-    () => `<div>
+
+export const withMultipleOutputs = () => `<div>
     <stencila-code-chunk
       data-collapsed="false"
       itemtype="stencila:CodeChunk"
@@ -72,10 +99,7 @@ storiesOf('Molecules/CodeChunk', module)
     </stencila-code-chunk>
   </div>
   `
-  )
-  .add(
-    'CodeChunk with no outputs',
-    () => `<div>
+export const withNoOutputContent = () => `<div>
     <stencila-code-chunk
       itemtype="stencila:CodeChunk"
     >
@@ -86,10 +110,8 @@ storiesOf('Molecules/CodeChunk', module)
     </stencila-code-chunk>
   </div>
   `
-  )
-  .add(
-    'CodeChunk with no output slot',
-    () => `<div>
+
+export const withNoOutputSlot = () => `<div>
     <stencila-code-chunk
       itemtype="stencila:CodeChunk"
     >
@@ -97,10 +119,8 @@ storiesOf('Molecules/CodeChunk', module)
     </stencila-code-chunk>
   </div>
   `
-  )
-  .add(
-    'CodeChunk and a CodeExpression',
-    () => `<div>
+
+export const alongsideACodeExpression = () => `<div>
     <p>
       This is a paragraph with a code expresssion inside it
       <stencila-code-expression
@@ -135,10 +155,8 @@ storiesOf('Molecules/CodeChunk', module)
     </stencila-code-chunk>
   </div>
   `
-  )
-  .add(
-    'CodeChunk with only an image output',
-    () => `
+
+export const withASingleImageOutput = () => `
       <stencila-code-chunk>
         <pre slot="text"><code>import numpy as np
 import matplotlib.pyplot as plt
@@ -159,4 +177,3 @@ plt.scatter(x, y, s=area, c=colors, alpha=0.5)</code></pre>
         </figure>
       </stencila-code-chunk>
     `
-  )
