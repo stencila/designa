@@ -11,6 +11,9 @@ import {
   IconNames,
 } from './components/icon/icon';
 import {
+  ICodeChunk,
+} from './components/codeChunk/codeChunk';
+import {
   IconNames as IconNames1,
 } from './components/icon/icon';
 import {
@@ -72,6 +75,7 @@ export namespace Components {
     'size': 'xsmall' | 'small' | 'default' | 'large';
   }
   interface StencilaCodeChunk {
+    'executeHandler': (text: string) => Promise<ICodeChunk>;
     /**
     * Whether the code section is visible or not
     */
@@ -269,6 +273,7 @@ declare namespace LocalJSX {
     'size'?: 'xsmall' | 'small' | 'default' | 'large';
   }
   interface StencilaCodeChunk {
+    'executeHandler'?: (text: string) => Promise<ICodeChunk>;
     /**
     * Whether the code section is visible or not
     */

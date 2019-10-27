@@ -5,9 +5,10 @@
 
 ## Properties
 
-| Property              | Attribute        | Description                                | Type      | Default |
-| --------------------- | ---------------- | ------------------------------------------ | --------- | ------- |
-| `isCodeCollapsedProp` | `data-collapsed` | Whether the code section is visible or not | `boolean` | `false` |
+| Property              | Attribute        | Description                                | Type                             | Default     |
+| --------------------- | ---------------- | ------------------------------------------ | -------------------------------- | ----------- |
+| `executeHandler`      | --               |                                            | `(text: string) => Promise<any>` | `undefined` |
+| `isCodeCollapsedProp` | `data-collapsed` | Whether the code section is visible or not | `boolean`                        | `false`     |
 
 
 ## Events
@@ -21,14 +22,15 @@
 
 ### Depends on
 
-- [stencila-button](../button)
 - [stencila-action-menu](../actionMenu)
+- [stencila-button](../button)
 
 ### Graph
 ```mermaid
 graph TD;
-  stencila-code-chunk --> stencila-button
   stencila-code-chunk --> stencila-action-menu
+  stencila-code-chunk --> stencila-button
+  stencila-action-menu --> stencila-button
   stencila-button --> stencila-icon
   style stencila-code-chunk fill:#f9f,stroke:#333,stroke-width:4px
 ```

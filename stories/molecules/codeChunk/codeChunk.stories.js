@@ -32,7 +32,7 @@ const makeCodeChunk = (source, outputs, props = {}) => {
 
 export const withExecuteHandler = () =>
   makeCodeChunk('print(a)', '<pre><output>10</output></pre>', {
-    executeHandler: t => delay(() => console.log(t) || t)
+    executeHandler: t => delay(() => console.log(t) || { outputs: [t, t, t] })
   })
 
 export const singleCodeChunk = () => `<div>
