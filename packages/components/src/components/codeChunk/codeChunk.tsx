@@ -182,25 +182,43 @@ export class CodeChunk {
   @State() codeErrors: ICodeChunk['errors']
 
   private updateOutputs = (outputs: ICodeChunk['outputs'] = []) => {
-    const output = this.el.querySelector(`[slot=${CodeChunk.slots.outputs}]`)
+    let output = this.el.querySelector(`[slot=${CodeChunk.slots.outputs}]`)
 
-    if (output) {
-      output.innerHTML = ''
+    if (!output) {
+      output = document.createElement('figure')
+      output.setAttribute('slot', CodeChunk.slots.outputs)
+      this.el.appendChild(output)
+    }
 
-      outputs.map(o => {
-        if (typeof o === 'string' || typeof o === 'number') {
-          const node = document.createElement('pre')
-          const res = document.createElement('output')
-          res.textContent = o.toString()
-          node.appendChild(res)
+    output.innerHTML = ''
+
+    outputs.map(o => {
+      if (typeof o === 'string' || typeof o === 'number') {
+        const node = document.createElement('pre')
+        const res = document.createElement('output')
+        res.textContent = o.toString()
+        node.appendChild(res)
+        if (output) {
           output.appendChild(node)
         }
-      })
+      }
+    })
+
+    if (outputs.length === 0) {
+      this.el.removeChild(output)
     }
   }
 
   private updateErrors = (errors: ICodeChunk['errors'] = []) => {
-    errors.map(error => <stencila-code-error>{error}</stencila-code-error>)
+    this.codeErrors = errors.map(error => (
+      <stencila-code-error
+        kind={(error.kind as unknown) as 'error' | 'warning' | 'incapable'}
+        hasStacktrace={error.trace !== undefined}
+      >
+        {error.message}
+        <pre slot="stacktrace">{error.trace}</pre>
+      </stencila-code-error>
+    ))
   }
 
   protected componentDidUnload() {

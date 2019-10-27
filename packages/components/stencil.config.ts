@@ -40,7 +40,7 @@ export const config: Config = {
     },
     {
       type: 'dist-global-styles',
-      file: 'dist/stencila-components-styles.css'
+      file: './dist/stencila-components-styles.css'
     }
   ],
   plugins: [

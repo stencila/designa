@@ -81,6 +81,11 @@ export namespace Components {
     */
     'isCodeCollapsedProp': boolean;
   }
+  interface StencilaCodeError {
+    'hasStacktrace': boolean;
+    'kind': 'incapable' | 'warning' | 'error';
+    'open': boolean;
+  }
   interface StencilaCodeExpression {}
   interface StencilaDetails {
     'open': boolean;
@@ -159,6 +164,12 @@ declare global {
     new (): HTMLStencilaCodeChunkElement;
   };
 
+  interface HTMLStencilaCodeErrorElement extends Components.StencilaCodeError, HTMLStencilElement {}
+  var HTMLStencilaCodeErrorElement: {
+    prototype: HTMLStencilaCodeErrorElement;
+    new (): HTMLStencilaCodeErrorElement;
+  };
+
   interface HTMLStencilaCodeExpressionElement extends Components.StencilaCodeExpression, HTMLStencilElement {}
   var HTMLStencilaCodeExpressionElement: {
     prototype: HTMLStencilaCodeExpressionElement;
@@ -216,6 +227,7 @@ declare global {
     'stencila-action-menu': HTMLStencilaActionMenuElement;
     'stencila-button': HTMLStencilaButtonElement;
     'stencila-code-chunk': HTMLStencilaCodeChunkElement;
+    'stencila-code-error': HTMLStencilaCodeErrorElement;
     'stencila-code-expression': HTMLStencilaCodeExpressionElement;
     'stencila-details': HTMLStencilaDetailsElement;
     'stencila-icon': HTMLStencilaIconElement;
@@ -290,6 +302,11 @@ declare namespace LocalJSX {
     'isCodeCollapsedProp'?: boolean;
     'onCollapseAllCode'?: (event: CustomEvent<any>) => void;
   }
+  interface StencilaCodeError {
+    'hasStacktrace'?: boolean;
+    'kind'?: 'incapable' | 'warning' | 'error';
+    'open'?: boolean;
+  }
   interface StencilaCodeExpression {}
   interface StencilaDetails {
     'open'?: boolean;
@@ -350,6 +367,7 @@ declare namespace LocalJSX {
     'stencila-action-menu': StencilaActionMenu;
     'stencila-button': StencilaButton;
     'stencila-code-chunk': StencilaCodeChunk;
+    'stencila-code-error': StencilaCodeError;
     'stencila-code-expression': StencilaCodeExpression;
     'stencila-details': StencilaDetails;
     'stencila-icon': StencilaIcon;
@@ -371,6 +389,7 @@ declare module "@stencil/core" {
       'stencila-action-menu': LocalJSX.StencilaActionMenu & JSXBase.HTMLAttributes<HTMLStencilaActionMenuElement>;
       'stencila-button': LocalJSX.StencilaButton & JSXBase.HTMLAttributes<HTMLStencilaButtonElement>;
       'stencila-code-chunk': LocalJSX.StencilaCodeChunk & JSXBase.HTMLAttributes<HTMLStencilaCodeChunkElement>;
+      'stencila-code-error': LocalJSX.StencilaCodeError & JSXBase.HTMLAttributes<HTMLStencilaCodeErrorElement>;
       'stencila-code-expression': LocalJSX.StencilaCodeExpression & JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement>;
       'stencila-details': LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
       'stencila-icon': LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
