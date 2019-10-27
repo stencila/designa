@@ -16,12 +16,14 @@
 
  - [stencila-button](../button)
  - [stencila-code-expression](../codeExpression)
+ - [stencila-details](../details)
 
 ### Graph
 ```mermaid
 graph TD;
   stencila-button --> stencila-icon
   stencila-code-expression --> stencila-icon
+  stencila-details --> stencila-icon
   style stencila-icon fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

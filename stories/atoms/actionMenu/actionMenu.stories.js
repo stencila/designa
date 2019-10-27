@@ -1,5 +1,5 @@
 export default {
-  title: 'Atoms/Action Menu'
+  title: 'Molecules/Action Menu'
 }
 
 const buttons = ['Action 1', 'Action 2', 'Action 3'].map(label => {

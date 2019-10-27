@@ -82,6 +82,9 @@ export namespace Components {
     'isCodeCollapsedProp': boolean;
   }
   interface StencilaCodeExpression {}
+  interface StencilaDetails {
+    'open': boolean;
+  }
   interface StencilaIcon {
     'icon': IconNames;
   }
@@ -162,6 +165,12 @@ declare global {
     new (): HTMLStencilaCodeExpressionElement;
   };
 
+  interface HTMLStencilaDetailsElement extends Components.StencilaDetails, HTMLStencilElement {}
+  var HTMLStencilaDetailsElement: {
+    prototype: HTMLStencilaDetailsElement;
+    new (): HTMLStencilaDetailsElement;
+  };
+
   interface HTMLStencilaIconElement extends Components.StencilaIcon, HTMLStencilElement {}
   var HTMLStencilaIconElement: {
     prototype: HTMLStencilaIconElement;
@@ -208,6 +217,7 @@ declare global {
     'stencila-button': HTMLStencilaButtonElement;
     'stencila-code-chunk': HTMLStencilaCodeChunkElement;
     'stencila-code-expression': HTMLStencilaCodeExpressionElement;
+    'stencila-details': HTMLStencilaDetailsElement;
     'stencila-icon': HTMLStencilaIconElement;
     'stencila-tab': HTMLStencilaTabElement;
     'stencila-tab-list': HTMLStencilaTabListElement;
@@ -281,6 +291,9 @@ declare namespace LocalJSX {
     'onCollapseAllCode'?: (event: CustomEvent<any>) => void;
   }
   interface StencilaCodeExpression {}
+  interface StencilaDetails {
+    'open'?: boolean;
+  }
   interface StencilaIcon {
     'icon'?: IconNames;
   }
@@ -338,6 +351,7 @@ declare namespace LocalJSX {
     'stencila-button': StencilaButton;
     'stencila-code-chunk': StencilaCodeChunk;
     'stencila-code-expression': StencilaCodeExpression;
+    'stencila-details': StencilaDetails;
     'stencila-icon': StencilaIcon;
     'stencila-tab': StencilaTab;
     'stencila-tab-list': StencilaTabList;
@@ -358,6 +372,7 @@ declare module "@stencil/core" {
       'stencila-button': LocalJSX.StencilaButton & JSXBase.HTMLAttributes<HTMLStencilaButtonElement>;
       'stencila-code-chunk': LocalJSX.StencilaCodeChunk & JSXBase.HTMLAttributes<HTMLStencilaCodeChunkElement>;
       'stencila-code-expression': LocalJSX.StencilaCodeExpression & JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement>;
+      'stencila-details': LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
       'stencila-icon': LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
       'stencila-tab': LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
       'stencila-tab-list': LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;

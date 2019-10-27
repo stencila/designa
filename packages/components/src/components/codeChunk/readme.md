@@ -5,10 +5,10 @@
 
 ## Properties
 
-| Property              | Attribute        | Description                                | Type                             | Default     |
-| --------------------- | ---------------- | ------------------------------------------ | -------------------------------- | ----------- |
-| `executeHandler`      | --               |                                            | `(text: string) => Promise<any>` | `undefined` |
-| `isCodeCollapsedProp` | `data-collapsed` | Whether the code section is visible or not | `boolean`                        | `false`     |
+| Property              | Attribute        | Description                                | Type                                   | Default     |
+| --------------------- | ---------------- | ------------------------------------------ | -------------------------------------- | ----------- |
+| `executeHandler`      | --               |                                            | `(text: string) => Promise<CodeChunk>` | `undefined` |
+| `isCodeCollapsedProp` | `data-collapsed` | Whether the code section is visible or not | `boolean`                              | `false`     |
 
 
 ## Events
