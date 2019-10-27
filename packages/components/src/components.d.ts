@@ -34,9 +34,13 @@ export namespace Components {
     */
     'ariaLabel': string;
     /**
-    * The type of button to render, options correspond to HTML Button `type` attribute. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
+    * The type of button to render, options correspond to HTML Button `type` attribute. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button Only applies if the button is not an anchor link.
     */
     'buttonType': 'button' | 'submit' | 'reset';
+    /**
+    * Function to be called when clicking the button. Passed function will be wrapped in a Promise, and the result returned.
+    */
+    'clickHandlerProp': (e?: MouseEvent) => unknown;
     /**
     * If true, prevents the user from interacting with the button.
     */
@@ -45,16 +49,23 @@ export namespace Components {
     * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
     */
     'href'?: string;
+    /**
+    * Name of the icon to render inside the button
+    * @see Icon component for possible values
+    */
     'icon': IconNames;
+    /**
+    * If true, removes extra padding from Icon inside the button TODO: See if we can automatically infer removal of padding through CSS
+    */
     'iconOnly': boolean;
+    /**
+    * If true, disables the button, shows a loading icon, and prevents the click handler from firing
+    */
+    'isLoading': boolean;
     /**
     * The displayed text of the Tab.
     */
     'isSecondary': boolean;
-    /**
-    * The displayed text of the Button.
-    */
-    'label': string;
     /**
     * The displayed text of the Button.
     */
@@ -220,9 +231,13 @@ declare namespace LocalJSX {
     */
     'ariaLabel'?: string;
     /**
-    * The type of button to render, options correspond to HTML Button `type` attribute. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
+    * The type of button to render, options correspond to HTML Button `type` attribute. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button Only applies if the button is not an anchor link.
     */
     'buttonType'?: 'button' | 'submit' | 'reset';
+    /**
+    * Function to be called when clicking the button. Passed function will be wrapped in a Promise, and the result returned.
+    */
+    'clickHandlerProp'?: (e?: MouseEvent) => unknown;
     /**
     * If true, prevents the user from interacting with the button.
     */
@@ -231,16 +246,23 @@ declare namespace LocalJSX {
     * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
     */
     'href'?: string;
+    /**
+    * Name of the icon to render inside the button
+    * @see Icon component for possible values
+    */
     'icon'?: IconNames;
+    /**
+    * If true, removes extra padding from Icon inside the button TODO: See if we can automatically infer removal of padding through CSS
+    */
     'iconOnly'?: boolean;
+    /**
+    * If true, disables the button, shows a loading icon, and prevents the click handler from firing
+    */
+    'isLoading'?: boolean;
     /**
     * The displayed text of the Tab.
     */
     'isSecondary'?: boolean;
-    /**
-    * The displayed text of the Button.
-    */
-    'label'?: string;
     /**
     * The displayed text of the Button.
     */
