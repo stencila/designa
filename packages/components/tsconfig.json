@@ -4,14 +4,15 @@
     "allowSyntheticDefaultImports": true,
     "declaration": false,
     "experimentalDecorators": true,
+    "jsx": "react",
+    "jsxFactory": "h",
     "lib": ["dom", "es2017"],
-    "moduleResolution": "node",
     "module": "esnext",
-    "target": "es2017",
+    "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "jsx": "react",
-    "jsxFactory": "h"
+    "strictPropertyInitialization": false,
+    "target": "es2017"
   },
   "include": ["src", "types/jsx.d.ts"],
   "exclude": ["node_modules"]

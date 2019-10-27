@@ -135,67 +135,67 @@ declare global {
 
 
   interface HTMLStencilaActionMenuElement extends Components.StencilaActionMenu, HTMLStencilElement {}
-  const HTMLStencilaActionMenuElement: {
+  var HTMLStencilaActionMenuElement: {
     prototype: HTMLStencilaActionMenuElement;
     new (): HTMLStencilaActionMenuElement;
   };
 
   interface HTMLStencilaButtonElement extends Components.StencilaButton, HTMLStencilElement {}
-  const HTMLStencilaButtonElement: {
+  var HTMLStencilaButtonElement: {
     prototype: HTMLStencilaButtonElement;
     new (): HTMLStencilaButtonElement;
   };
 
   interface HTMLStencilaCodeChunkElement extends Components.StencilaCodeChunk, HTMLStencilElement {}
-  const HTMLStencilaCodeChunkElement: {
+  var HTMLStencilaCodeChunkElement: {
     prototype: HTMLStencilaCodeChunkElement;
     new (): HTMLStencilaCodeChunkElement;
   };
 
   interface HTMLStencilaCodeExpressionElement extends Components.StencilaCodeExpression, HTMLStencilElement {}
-  const HTMLStencilaCodeExpressionElement: {
+  var HTMLStencilaCodeExpressionElement: {
     prototype: HTMLStencilaCodeExpressionElement;
     new (): HTMLStencilaCodeExpressionElement;
   };
 
   interface HTMLStencilaIconElement extends Components.StencilaIcon, HTMLStencilElement {}
-  const HTMLStencilaIconElement: {
+  var HTMLStencilaIconElement: {
     prototype: HTMLStencilaIconElement;
     new (): HTMLStencilaIconElement;
   };
 
   interface HTMLStencilaTabElement extends Components.StencilaTab, HTMLStencilElement {}
-  const HTMLStencilaTabElement: {
+  var HTMLStencilaTabElement: {
     prototype: HTMLStencilaTabElement;
     new (): HTMLStencilaTabElement;
   };
 
   interface HTMLStencilaTabListElement extends Components.StencilaTabList, HTMLStencilElement {}
-  const HTMLStencilaTabListElement: {
+  var HTMLStencilaTabListElement: {
     prototype: HTMLStencilaTabListElement;
     new (): HTMLStencilaTabListElement;
   };
 
   interface HTMLStencilaTocElement extends Components.StencilaToc, HTMLStencilElement {}
-  const HTMLStencilaTocElement: {
+  var HTMLStencilaTocElement: {
     prototype: HTMLStencilaTocElement;
     new (): HTMLStencilaTocElement;
   };
 
   interface HTMLStencilaTooltipElement extends Components.StencilaTooltip, HTMLStencilElement {}
-  const HTMLStencilaTooltipElement: {
+  var HTMLStencilaTooltipElement: {
     prototype: HTMLStencilaTooltipElement;
     new (): HTMLStencilaTooltipElement;
   };
 
   interface HTMLStencilaTooltipElementElement extends Components.StencilaTooltipElement, HTMLStencilElement {}
-  const HTMLStencilaTooltipElementElement: {
+  var HTMLStencilaTooltipElementElement: {
     prototype: HTMLStencilaTooltipElementElement;
     new (): HTMLStencilaTooltipElementElement;
   };
 
   interface HTMLStencilaVerticalNavElement extends Components.StencilaVerticalNav, HTMLStencilElement {}
-  const HTMLStencilaVerticalNavElement: {
+  var HTMLStencilaVerticalNavElement: {
     prototype: HTMLStencilaVerticalNavElement;
     new (): HTMLStencilaVerticalNavElement;
   };
