@@ -157,7 +157,7 @@ export const alongsideACodeExpression = () => `<div>
   `
 
 export const withASingleImageOutput = () => `
-      <stencila-code-chunk>
+      <stencila-code-chunk data-programmingLanguage="python">
         <pre slot="text"><code>import numpy as np
 import matplotlib.pyplot as plt
 

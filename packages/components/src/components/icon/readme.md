@@ -15,17 +15,17 @@
 ### Used by
 
  - [stencila-button](../button)
+ - [stencila-code-error](../error)
  - [stencila-code-expression](../codeExpression)
  - [stencila-details](../details)
- - [stencila-error](../error)
 
 ### Graph
 ```mermaid
 graph TD;
   stencila-button --> stencila-icon
+  stencila-code-error --> stencila-icon
   stencila-code-expression --> stencila-icon
   stencila-details --> stencila-icon
-  stencila-error --> stencila-icon
   style stencila-icon fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -14,7 +14,7 @@
 
 ### Used by
 
- - [stencila-error](../error)
+ - [stencila-code-error](../error)
 
 ### Depends on
 
@@ -24,7 +24,7 @@
 ```mermaid
 graph TD;
   stencila-details --> stencila-icon
-  stencila-error --> stencila-details
+  stencila-code-error --> stencila-details
   style stencila-details fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

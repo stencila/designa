@@ -24,7 +24,8 @@ import {
   Host,
   Prop,
   State,
-  Listen
+  Listen,
+  Method
 } from '@stencil/core'
 import { codeChunk } from '@stencila/schema'
 
@@ -56,6 +57,26 @@ export class CodeChunk {
   @Element() private el: HTMLElement
 
   private codeEditorRef: EditorView
+
+  /**
+   * Programming language of the CodeChunk
+   */
+  @Prop({
+    attribute: 'data-programmingLanguage'
+  })
+  public programmingLanguageProp: string
+
+  @State() programmingLanguage = this.programmingLanguageProp || undefined
+
+  private programmingLanguages = ['JavaScript', 'Python']
+
+  private setProgrammingLanguage = (e: Event) => {
+    // @ts-ignore
+    if (e.currentTarget && typeof e.currentTarget['value'] === 'string') {
+      // @ts-ignore
+      this.programmingLanguage = e.currentTarget.value.toLowerCase()
+    }
+  }
 
   /**
    * Whether the code section is visible or not
@@ -113,11 +134,11 @@ export class CodeChunk {
 
   private getCodeContent = () => this.codeEditorRef.state.toJSON().doc
 
-  @Prop() public executeHandler: (text: string) => Promise<ICodeChunk>
+  @Prop() public executeHandler: (codeChunk: ICodeChunk) => Promise<ICodeChunk>
 
   private onExecuteHandler_ = () =>
     this.executeHandler &&
-    this.executeHandler(this.getCodeContent()).then(res => {
+    this.executeHandler(this.makeCodeChunkSchema()).then(res => {
       this.updateErrors(res.errors)
       this.updateOutputs(res.outputs)
     })
@@ -179,6 +200,14 @@ export class CodeChunk {
 
   @State() codeErrors: ICodeChunk['errors']
 
+  private makeOutput = (text: string): HTMLPreElement => {
+    const node = document.createElement('pre')
+    const res = document.createElement('output')
+    res.textContent = text
+    node.appendChild(res)
+    return node
+  }
+
   private updateOutputs = (outputs: ICodeChunk['outputs'] = []) => {
     let output = this.el.querySelector(`[slot=${CodeChunk.slots.outputs}]`)
 
@@ -191,13 +220,19 @@ export class CodeChunk {
     output.innerHTML = ''
 
     outputs.map(o => {
-      if (typeof o === 'string' || typeof o === 'number') {
-        const node = document.createElement('pre')
-        const res = document.createElement('output')
-        res.textContent = o.toString()
-        node.appendChild(res)
-        if (output) {
-          output.appendChild(node)
+      if (output) {
+        if (typeof o === 'string' || typeof o === 'number') {
+          output.appendChild(this.makeOutput(o.toString()))
+        } else if (Array.isArray(o)) {
+          output.appendChild(this.makeOutput(JSON.stringify(o)))
+        } else if (o !== null && typeof o === 'object') {
+          // @ts-ignore
+          if (o.text) {
+            // @ts-ignore
+            output.appendChild(this.makeOutput(o.text))
+          } else {
+            output.appendChild(this.makeOutput(JSON.stringify(o, null, 2)))
+          }
         }
       }
     })
@@ -217,6 +252,16 @@ export class CodeChunk {
         <pre slot="stacktrace">{error.trace}</pre>
       </stencila-code-error>
     ))
+  }
+
+  private makeCodeChunkSchema = (): ICodeChunk =>
+    codeChunk(this.getCodeContent(), {
+      programmingLanguage: this.programmingLanguage
+    })
+
+  @Method()
+  public async getJSON(): Promise<unknown> {
+    return this.makeCodeChunkSchema()
   }
 
   public render() {
@@ -260,6 +305,20 @@ export class CodeChunk {
           }`}
         >
           <slot name={CodeChunk.slots.text} />
+
+          <select onChange={this.setProgrammingLanguage}>
+            <option disabled selected={this.programmingLanguage === undefined}>
+              Programming Language
+            </option>
+            {this.programmingLanguages.map(language => (
+              <option
+                value={language.toLowerCase()}
+                selected={language.toLowerCase() === this.programmingLanguage}
+              >
+                {language}
+              </option>
+            ))}
+          </select>
         </div>
 
         <slot name={CodeChunk.slots.outputs} />

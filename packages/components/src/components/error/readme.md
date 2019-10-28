@@ -26,11 +26,11 @@
 ### Graph
 ```mermaid
 graph TD;
-  stencila-error --> stencila-icon
-  stencila-error --> stencila-details
+  stencila-code-error --> stencila-icon
+  stencila-code-error --> stencila-details
   stencila-details --> stencila-icon
-  stencila-code-chunk --> stencila-error
-  style stencila-error fill:#f9f,stroke:#333,stroke-width:4px
+  stencila-code-chunk --> stencila-code-error
+  style stencila-code-error fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

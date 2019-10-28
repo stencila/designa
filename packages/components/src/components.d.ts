@@ -75,11 +75,16 @@ export namespace Components {
     'size': 'xsmall' | 'small' | 'default' | 'large';
   }
   interface StencilaCodeChunk {
-    'executeHandler': (text: string) => Promise<ICodeChunk>;
+    'executeHandler': (codeChunk: ICodeChunk) => Promise<ICodeChunk>;
+    'getJSON': () => Promise<unknown>;
     /**
     * Whether the code section is visible or not
     */
     'isCodeCollapsedProp': boolean;
+    /**
+    * Programming language of the CodeChunk
+    */
+    'programmingLanguageProp': string;
   }
   interface StencilaCodeError {
     'hasStacktrace': boolean;
@@ -295,12 +300,16 @@ declare namespace LocalJSX {
     'size'?: 'xsmall' | 'small' | 'default' | 'large';
   }
   interface StencilaCodeChunk {
-    'executeHandler'?: (text: string) => Promise<ICodeChunk>;
+    'executeHandler'?: (codeChunk: ICodeChunk) => Promise<ICodeChunk>;
     /**
     * Whether the code section is visible or not
     */
     'isCodeCollapsedProp'?: boolean;
     'onCollapseAllCode'?: (event: CustomEvent<any>) => void;
+    /**
+    * Programming language of the CodeChunk
+    */
+    'programmingLanguageProp'?: string;
   }
   interface StencilaCodeError {
     'hasStacktrace'?: boolean;

@@ -5,10 +5,11 @@
 
 ## Properties
 
-| Property              | Attribute        | Description                                | Type                                   | Default     |
-| --------------------- | ---------------- | ------------------------------------------ | -------------------------------------- | ----------- |
-| `executeHandler`      | --               |                                            | `(text: string) => Promise<CodeChunk>` | `undefined` |
-| `isCodeCollapsedProp` | `data-collapsed` | Whether the code section is visible or not | `boolean`                              | `false`     |
+| Property                  | Attribute                  | Description                                | Type                                           | Default     |
+| ------------------------- | -------------------------- | ------------------------------------------ | ---------------------------------------------- | ----------- |
+| `executeHandler`          | --                         |                                            | `(codeChunk: CodeChunk) => Promise<CodeChunk>` | `undefined` |
+| `isCodeCollapsedProp`     | `data-collapsed`           | Whether the code section is visible or not | `boolean`                                      | `false`     |
+| `programmingLanguageProp` | `data-programminglanguage` | Programming language of the CodeChunk      | `string`                                       | `undefined` |
 
 
 ## Events
@@ -18,22 +19,35 @@
 | `collapseAllCode` |             | `CustomEvent<any>` |
 
 
+## Methods
+
+### `getJSON() => Promise<unknown>`
+
+
+
+#### Returns
+
+Type: `Promise<unknown>`
+
+
+
+
 ## Dependencies
 
 ### Depends on
 
-- [stencila-error](../error)
+- [stencila-code-error](../error)
 - [stencila-action-menu](../actionMenu)
 - [stencila-button](../button)
 
 ### Graph
 ```mermaid
 graph TD;
-  stencila-code-chunk --> stencila-error
+  stencila-code-chunk --> stencila-code-error
   stencila-code-chunk --> stencila-action-menu
   stencila-code-chunk --> stencila-button
-  stencila-error --> stencila-icon
-  stencila-error --> stencila-details
+  stencila-code-error --> stencila-icon
+  stencila-code-error --> stencila-details
   stencila-details --> stencila-icon
   stencila-action-menu --> stencila-button
   stencila-button --> stencila-icon
