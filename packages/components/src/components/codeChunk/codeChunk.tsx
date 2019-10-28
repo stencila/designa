@@ -23,7 +23,8 @@ import {
   h,
   Host,
   Prop,
-  State
+  State,
+  Listen
 } from '@stencil/core'
 import { codeChunk } from '@stencila/schema'
 
@@ -83,6 +84,11 @@ export class CodeChunk {
     this.isCodeCollapsed = e.detail.isCollapsed
   }
 
+  @Listen('collapseAllCode', { target: 'window' })
+  collapseAllListenHandlerTwo(event: CollapseEvent) {
+    this.collapseAllListenHandler(event)
+  }
+
   @State() isOutputEmpty: boolean = true
 
   private emptyOutputMessage = 'No output to show'
@@ -129,14 +135,6 @@ export class CodeChunk {
       this.executeCodeState = 'RESOLVED'
       return res
     })
-  }
-
-  protected componentWillLoad() {
-    // TODO: Look into changing to @Listen decorator is more performant
-    document.addEventListener(
-      'collapseAllCode',
-      () => this.collapseAllListenHandler
-    )
   }
 
   protected componentDidLoad() {
@@ -219,13 +217,6 @@ export class CodeChunk {
         <pre slot="stacktrace">{error.trace}</pre>
       </stencila-code-error>
     ))
-  }
-
-  protected componentDidUnload() {
-    document.removeEventListener(
-      'collapseAllCode',
-      () => this.collapseAllListenHandler
-    )
   }
 
   public render() {
