@@ -1,3 +1,20 @@
+import { baseKeymap, indentSelection } from '@codemirror/next/commands'
+import { lineNumbers } from '@codemirror/next/gutter'
+import { defaultHighlighter } from '@codemirror/next/highlight'
+import {
+  history,
+  redo,
+  redoSelection,
+  undo,
+  undoSelection
+} from '@codemirror/next/history'
+import { keymap } from '@codemirror/next/keymap'
+import { html } from '@codemirror/next/lang-html'
+import { javascript } from '@codemirror/next/lang-javascript'
+import { bracketMatching } from '@codemirror/next/matchbrackets'
+import { specialChars } from '@codemirror/next/special-chars'
+import { EditorState } from '@codemirror/next/state'
+import { EditorView, ViewCommand } from '@codemirror/next/view'
 import {
   Component,
   Element,
@@ -6,8 +23,14 @@ import {
   h,
   Host,
   Prop,
-  State
+  State,
+  Listen,
+  Method
 } from '@stencil/core'
+import { codeChunk } from '@stencila/schema'
+
+// Workaround for Stencil build issues
+export type ICodeChunk = ReturnType<typeof codeChunk>
 
 interface CollapseEvent extends CustomEvent {
   detail: {
@@ -33,11 +56,33 @@ export class CodeChunk {
 
   @Element() private el: HTMLElement
 
+  private codeEditorRef: EditorView
+
+  /**
+   * Programming language of the CodeChunk
+   */
+  @Prop({
+    attribute: 'data-programmingLanguage'
+  })
+  public programmingLanguageProp: string
+
+  @State() programmingLanguage = this.programmingLanguageProp || undefined
+
+  private programmingLanguages = ['JavaScript', 'Python']
+
+  private setProgrammingLanguage = (e: Event) => {
+    // @ts-ignore
+    if (e.currentTarget && typeof e.currentTarget['value'] === 'string') {
+      // @ts-ignore
+      this.programmingLanguage = e.currentTarget.value.toLowerCase()
+    }
+  }
+
   /**
    * Whether the code section is visible or not
    */
   @Prop({
-    attr: 'data-collapsed'
+    attribute: 'data-collapsed'
   })
   public isCodeCollapsedProp: boolean = false
 
@@ -60,14 +105,17 @@ export class CodeChunk {
     this.isCodeCollapsed = e.detail.isCollapsed
   }
 
+  @Listen('collapseAllCode', { target: 'window' })
+  collapseAllListenHandlerTwo(event: CollapseEvent) {
+    this.collapseAllListenHandler(event)
+  }
+
   @State() isOutputEmpty: boolean = true
 
   private emptyOutputMessage = 'No output to show'
 
   private outputExists = () => {
-    const output: HTMLElement = this.el.querySelector(
-      `[slot=${CodeChunk.slots.outputs}]`
-    )
+    const output = this.el.querySelector(`[slot=${CodeChunk.slots.outputs}]`)
 
     const isEmpty =
       output === null ? true : output.innerHTML.trim() === '' ? true : false
@@ -84,53 +132,172 @@ export class CodeChunk {
     }
   }
 
-  protected componentWillLoad() {
-    document.addEventListener('collapseAllCode', this.collapseAllListenHandler)
+  private getCodeContent = () => this.codeEditorRef.state.toJSON().doc
+
+  @Prop() public executeHandler: (codeChunk: ICodeChunk) => Promise<ICodeChunk>
+
+  private onExecuteHandler_ = () =>
+    this.executeHandler &&
+    this.executeHandler(this.makeCodeChunkSchema()).then(res => {
+      this.updateErrors(res.errors)
+      this.updateOutputs(res.outputs)
+    })
+
+  runCodeView: ViewCommand = () => {
+    this.executeCode()
+    return true
+  }
+
+  @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED'
+
+  private executeCode = () => {
+    this.executeCodeState = 'PENDING'
+    this.onExecuteHandler_().then(res => {
+      this.executeCodeState = 'RESOLVED'
+      return res
+    })
   }
 
   protected componentDidLoad() {
     this.outputExists()
+    const textContent = this.el.querySelector<HTMLElement>(
+      `[slot="${CodeChunk.slots.text}"]`
+    )
+
+    if (textContent) {
+      let isMac = /Mac/.test(navigator.platform)
+
+      this.codeEditorRef = new EditorView({
+        state: EditorState.create({
+          doc: textContent ? textContent.innerText : '',
+          extensions: [
+            history(),
+            bracketMatching(),
+            lineNumbers(),
+            defaultHighlighter,
+            javascript(),
+            html(),
+            specialChars(),
+            keymap({
+              'Mod-z': undo,
+              'Mod-Shift-z': redo,
+              'Mod-u': view => undoSelection(view) || true,
+              [isMac ? 'Mod-Shift-u' : 'Alt-u']: redoSelection,
+              'Ctrl-y': isMac ? undefined : redo,
+              'Shift-Tab': indentSelection,
+              'Mod-Enter': this.runCodeView
+            }),
+            keymap(baseKeymap)
+          ]
+        })
+      })
+
+      textContent.replaceWith(this.codeEditorRef.dom)
+    }
   }
 
-  protected componentDidUnload() {
-    document.removeEventListener(
-      'collapseAllCode',
-      this.collapseAllListenHandler
-    )
+  @State() outputs: ICodeChunk['outputs']
+
+  @State() codeErrors: ICodeChunk['errors']
+
+  private makeOutput = (text: string): HTMLPreElement => {
+    const node = document.createElement('pre')
+    const res = document.createElement('output')
+    res.textContent = text
+    node.appendChild(res)
+    return node
+  }
+
+  private updateOutputs = (outputs: ICodeChunk['outputs'] = []) => {
+    let output = this.el.querySelector(`[slot=${CodeChunk.slots.outputs}]`)
+
+    if (!output) {
+      output = document.createElement('figure')
+      output.setAttribute('slot', CodeChunk.slots.outputs)
+      this.el.appendChild(output)
+    }
+
+    output.innerHTML = ''
+
+    outputs.map(o => {
+      if (output) {
+        if (typeof o === 'string' || typeof o === 'number') {
+          output.appendChild(this.makeOutput(o.toString()))
+        } else if (Array.isArray(o)) {
+          output.appendChild(this.makeOutput(JSON.stringify(o)))
+        } else if (o !== null && typeof o === 'object') {
+          // @ts-ignore
+          if (o.text) {
+            // @ts-ignore
+            output.appendChild(this.makeOutput(o.text))
+          } else {
+            output.appendChild(this.makeOutput(JSON.stringify(o, null, 2)))
+          }
+        }
+      }
+    })
+
+    if (outputs.length === 0) {
+      this.el.removeChild(output)
+    }
+  }
+
+  private updateErrors = (errors: ICodeChunk['errors'] = []) => {
+    this.codeErrors = errors.map(error => (
+      <stencila-code-error
+        kind={(error.kind as unknown) as 'error' | 'warning' | 'incapable'}
+        hasStacktrace={error.trace !== undefined}
+      >
+        {error.message}
+        <pre slot="stacktrace">{error.trace}</pre>
+      </stencila-code-error>
+    ))
+  }
+
+  private makeCodeChunkSchema = (): ICodeChunk =>
+    codeChunk(this.getCodeContent(), {
+      programmingLanguage: this.programmingLanguage
+    })
+
+  @Method()
+  public async getJSON(): Promise<unknown> {
+    return this.makeCodeChunkSchema()
   }
 
   public render() {
-    const actions = [
-      <stencila-button
-        icon="play"
-        isSecondary={true}
-        size="xsmall"
-        ariaLabel="Run Code"
-        disabled
-      >
-        Run
-      </stencila-button>,
-      <stencila-button
-        isSecondary={true}
-        icon={this.isCodeCollapsed ? 'eye' : 'eye-off'}
-        size="xsmall"
-        onClick={this.toggleCodeVisibility}
-      >
-        {this.isCodeCollapsed ? 'Show' : 'Hide'} Source
-      </stencila-button>,
-      <stencila-button
-        isSecondary={true}
-        icon={this.isCodeCollapsed ? 'eye' : 'eye-off'}
-        size="xsmall"
-        onClick={() => this.collapseAllCodeHandler(!this.isCodeCollapsed)}
-      >
-        {this.isCodeCollapsed ? 'Show' : 'Hide'} All Sources
-      </stencila-button>
-    ]
-
     return (
       <Host>
-        <stencila-action-menu actions={actions} />
+        <stencila-action-menu expandable={true}>
+          <stencila-button
+            isSecondary={true}
+            onClick={this.toggleCodeVisibility}
+            icon={this.isCodeCollapsed ? 'eye' : 'eye-off'}
+            size="xsmall"
+          >
+            {this.isCodeCollapsed ? 'Show' : 'Hide'} Source
+          </stencila-button>
+          <stencila-button
+            isSecondary={true}
+            icon={this.isCodeCollapsed ? 'eye' : 'eye-off'}
+            size="xsmall"
+            onClick={() => this.collapseAllCodeHandler(!this.isCodeCollapsed)}
+          >
+            {this.isCodeCollapsed ? 'Show' : 'Hide'} All Sources
+          </stencila-button>
+          {this.executeHandler && (
+            <stencila-button
+              icon="play"
+              isSecondary={true}
+              size="xsmall"
+              ariaLabel="Run Code"
+              slot="persistentActions"
+              clickHandlerProp={this.executeCode}
+              isLoading={this.executeCodeState === 'PENDING'}
+            >
+              Run
+            </stencila-button>
+          )}
+        </stencila-action-menu>
 
         <div
           class={`codeContainer ${
@@ -138,9 +305,25 @@ export class CodeChunk {
           }`}
         >
           <slot name={CodeChunk.slots.text} />
+
+          <select onChange={this.setProgrammingLanguage}>
+            <option disabled selected={this.programmingLanguage === undefined}>
+              Programming Language
+            </option>
+            {this.programmingLanguages.map(language => (
+              <option
+                value={language.toLowerCase()}
+                selected={language.toLowerCase() === this.programmingLanguage}
+              >
+                {language}
+              </option>
+            ))}
+          </select>
         </div>
 
         <slot name={CodeChunk.slots.outputs} />
+
+        {this.codeErrors}
       </Host>
     )
   }

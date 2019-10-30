@@ -20,7 +20,8 @@ button {
     @apply align-middle;
   }
 
-  svg {
+  stencila-icon svg {
+    @apply pr-1;
     width: 1.125em;
     height: 1.125em;
     stroke: currentColor;
@@ -28,6 +29,9 @@ button {
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
-    @apply pr-1;
+  }
+
+  &.iconOnly stencila-icon svg {
+    @apply pr-0;
   }
 }

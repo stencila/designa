@@ -1,0 +1,40 @@
+@import '../base.css';
+
+:host,
+stencila-code-error {
+  @apply block p-2 relative border-warn-500 rounded bg-warn-100 text-warn-900 w-full;
+
+  .overview {
+    * {
+      @apply align-middle;
+    }
+
+    stencila-icon {
+      @apply mr-2;
+    }
+  }
+
+  [slot='summary'] {
+    @apply text-xs uppercase tracking-wider;
+  }
+
+  stencila-details {
+    @apply block;
+  }
+
+  [slot='stacktrace'] {
+    @apply m-0 bg-stock border-warn-500 text-key;
+  }
+}
+
+:host,
+stencila-code-error {
+  &.error,
+  &.incapable {
+    @apply border-destroy-500 bg-destroy-100 text-destroy-900;
+
+    [slot='stacktrace'] {
+      @apply border-destroy-500;
+    }
+  }
+}

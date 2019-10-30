@@ -13,4 +13,18 @@ stencila-action-menu,
       @apply pr-0;
     }
   }
+
+  .actionContainer {
+    @apply inline-block overflow-hidden whitespace-no-wrap align-middle;
+    width: var(--max-width);
+    transition: width 120ms ease-in-out;
+
+    &:not(.isAnimating):not(.isCollapsed) {
+      @apply w-auto;
+    }
+  }
+
+  &:not(:hover):not(:focus) .actionContainer.isCollapsed {
+    @apply w-0;
+  }
 }

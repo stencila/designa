@@ -1,0 +1,33 @@
+:host,
+stencila-details {
+  @apply block relative;
+
+  .contents {
+    @apply overflow-hidden;
+
+    &.hidden {
+      @apply hidden;
+    }
+  }
+
+  .disclosure-toggle {
+    @apply absolute right-0 top-0 cursor-pointer;
+    transition: transform 120ms ease-in-out;
+    transform: rotateZ(0deg);
+
+    svg {
+      @apply stroke-neutral-500;
+    }
+  }
+
+  &[isopen='true'] .disclosure-toggle {
+    transform: rotateZ(180deg);
+  }
+
+  &:hover,
+  &:focus {
+    .disclosure-toggle svg {
+      @apply stroke-neutral-700;
+    }
+  }
+}
