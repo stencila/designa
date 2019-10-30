@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.5.2...@stencila/style-stencila@0.6.0) (2019-10-30)
+
+
+### Features
+
+* **Action Menu:** Add "persistent actions" slot to Action Menu ([ae609b0](https://github.com/stencila/style/commit/ae609b0a13e0854c90dc644849c1c6e407e7ce32))
+* **CodeChunk:** Add ability to change programming language ([4a24f86](https://github.com/stencila/style/commit/4a24f86f4d016f0d083999d5f953e367cc21a7ee))
+* **Components:** Add Error message component ([d28ff01](https://github.com/stencila/style/commit/d28ff01e3d06346734811b75f4c4f241b131cbaf))
+* **Components:** Add stencila-details component ([bb43f54](https://github.com/stencila/style/commit/bb43f54c7c5b5c38469070cb76291d2df580804d))
+
+
+
+
+
 ## [0.5.2](https://github.com/stencila/style/compare/@stencila/style-stencila@0.5.1...@stencila/style-stencila@0.5.2) (2019-10-08)
 
 

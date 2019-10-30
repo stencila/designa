@@ -1,6 +1,6 @@
 {
   "name": "@stencila/style-stencila",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "Custom designed theme for Stencila components",
   "keywords": [
     "Stencila",

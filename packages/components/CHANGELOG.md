@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/stencila/designa/compare/@stencila/components@0.4.2...@stencila/components@0.5.0) (2019-10-30)
+
+
+### Features
+
+* **Action Menu:** Add "persistent actions" slot to Action Menu ([ae609b0](https://github.com/stencila/designa/commit/ae609b0a13e0854c90dc644849c1c6e407e7ce32))
+* **CodeChunk:** Add ability to change programming language ([4a24f86](https://github.com/stencila/designa/commit/4a24f86f4d016f0d083999d5f953e367cc21a7ee))
+* **CodeChunk:** Render CodeChunk evaluated outputs in the Outputs area ([4af8171](https://github.com/stencila/designa/commit/4af81717edc6304dab2a0e0631cb06c1fccb4ed4))
+* **Components:** Add Error message component ([d28ff01](https://github.com/stencila/designa/commit/d28ff01e3d06346734811b75f4c4f241b131cbaf))
+* **Components:** Add stencila-details component ([bb43f54](https://github.com/stencila/designa/commit/bb43f54c7c5b5c38469070cb76291d2df580804d))
+
+
+
+
+
 ## [0.4.2](https://github.com/stencila/designa/compare/@stencila/components@0.4.1...@stencila/components@0.4.2) (2019-10-08)
 
 **Note:** Version bump only for package @stencila/components
