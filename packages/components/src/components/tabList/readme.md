@@ -5,11 +5,9 @@
 
 ## Properties
 
-| Property            | Attribute | Description                                  | Type       | Default     |
-| ------------------- | --------- | -------------------------------------------- | ---------- | ----------- |
-| `href`              | `href`    | The link the tab should navigate to          | `string`   | `'#'`       |
-| `label`             | `label`   | The displayed text of the Tab                | `string`   | `undefined` |
-| `tabs` _(required)_ | --        | A list of string values to use as tab labels | `string[]` | `undefined` |
+| Property            | Attribute | Description                                  | Type         | Default     |
+| ------------------- | --------- | -------------------------------------------- | ------------ | ----------- |
+| `tabs` _(required)_ | --        | A list of string values to use as tab labels | `ChildTab[]` | `undefined` |
 
 
 ## Dependencies

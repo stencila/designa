@@ -114,17 +114,9 @@ export namespace Components {
   }
   interface StencilaTabList {
     /**
-    * The link the tab should navigate to
-    */
-    'href': string;
-    /**
-    * The displayed text of the Tab
-    */
-    'label': string;
-    /**
     * A list of string values to use as tab labels
     */
-    'tabs': string[];
+    'tabs': ChildTab[];
   }
   interface StencilaToc {
     /**
@@ -339,17 +331,9 @@ declare namespace LocalJSX {
   }
   interface StencilaTabList {
     /**
-    * The link the tab should navigate to
-    */
-    'href'?: string;
-    /**
-    * The displayed text of the Tab
-    */
-    'label'?: string;
-    /**
     * A list of string values to use as tab labels
     */
-    'tabs': string[];
+    'tabs': ChildTab[];
   }
   interface StencilaToc {
     /**
