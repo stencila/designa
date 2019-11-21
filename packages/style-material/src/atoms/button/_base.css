@@ -1,10 +1,65 @@
-:host,
 stencila-button,
-button {
-  @apply border-none p-0;
+button,
+a.button {
+  @apply border-none p-0 inline-block font-bold font-body text-sm rounded;
+  transition: color 120ms ease-out, background-color 120ms ease-out;
 
   ::slotted([slot='icon']),
   [slot='icon'] {
     @apply inline-block pr-2;
   }
+
+  &:hover {
+    @apply cursor-pointer;
+  }
+
+  [slot='icon'] {
+    @apply inline-block pr-2;
+  }
+
+  [disabled] {
+    @apply cursor-not-allowed;
+  }
+
+  &[data-size='small'],
+  &[size='small'] {
+    @apply p-2;
+  }
+
+  &[data-size='xsmall'],
+  &[size='xsmall'] {
+    @apply text-xs px-2 py-1 rounded-sm;
+  }
+
+  & > * {
+    @apply align-middle;
+  }
+
+  & > svg,
+  & > img {
+    @apply pr-1 inline-block;
+    width: 1.125em;
+    height: 1.125em;
+  }
+
+  stencila-icon svg {
+    @apply pr-1;
+    width: 1.125em;
+    height: 1.125em;
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+
+  &.iconOnly stencila-icon svg {
+    @apply pr-0;
+  }
+}
+
+a.button,
+a:visited.button {
+  @apply no-underline;
+  color: inherit;
 }

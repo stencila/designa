@@ -1,7 +1,7 @@
-:host,
-stencila-button,
-button {
-  @apply border-none p-0 leading-none;
+stencia-button > button,
+button,
+a.button {
+  @apply border-none p-0 leading-none no-underline inline-block text-sm font-body;
   transition: color 120ms ease-out, background-color 120ms ease-out;
 
   &:hover {
@@ -20,6 +20,13 @@ button {
     @apply align-middle;
   }
 
+  & > svg,
+  & > img {
+    @apply pr-1 inline-block;
+    width: 1.125em;
+    height: 1.125em;
+  }
+
   stencila-icon svg {
     @apply pr-1;
     width: 1.125em;
@@ -34,4 +41,10 @@ button {
   &.iconOnly stencila-icon svg {
     @apply pr-0;
   }
+}
+
+a.button,
+a:visited.button {
+  @apply no-underline;
+  color: inherit;
 }

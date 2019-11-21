@@ -1,6 +1,8 @@
 @import './_base.css';
 
-button {
+button:not(.secondary),
+stencila-button > button:not(.secondary),
+a.button:not(.secondary) {
   @apply rounded-full bg-primary-500 text-stock px-4 py-2 font-medium;
 
   .vertical-offset {

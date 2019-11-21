@@ -22,3 +22,9 @@ storiesOf('Atoms/Button/Primary', module)
         Hello World!
       </stencila-button>`
   )
+  .add(
+    'Web Component - Link',
+    () => `<stencila-button icon="command" href="#">
+        Hello World!
+      </stencila-button>`
+  )
