@@ -1,3 +1,5 @@
+import readme from '../../../packages/components/src/components/error/readme.md'
+
 export default {
   title: 'Objects/Error'
 }
@@ -13,6 +15,14 @@ export const warning = () => {
   return component
 }
 
+warning.story = {
+  parameters: {
+    readme: {
+      sidebar: readme
+    }
+  }
+}
+
 export const error = () => {
   const component = document.createElement('stencila-code-error')
   component.kind = 'error'
@@ -22,4 +32,12 @@ export const error = () => {
     </pre>
     `
   return component
+}
+
+error.story = {
+  parameters: {
+    readme: {
+      sidebar: readme
+    }
+  }
 }

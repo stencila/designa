@@ -1,3 +1,5 @@
+import readme from '../../../packages/components/src/components/codeChunk/readme.md'
+
 export default {
   title: 'Molecules/Code Chunk'
 }
@@ -34,6 +36,14 @@ export const withExecuteHandler = () =>
   makeCodeChunk('print(a)', '<pre><output>10</output></pre>', {
     executeHandler: t => delay(() => console.log(t) || { outputs: [t, t, t] })
   })
+
+withExecuteHandler.story = {
+  parameters: {
+    readme: {
+      sidebar: readme
+    }
+  }
+}
 
 export const singleCodeChunk = () => `<div>
     <stencila-code-chunk
