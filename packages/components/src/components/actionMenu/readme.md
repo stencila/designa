@@ -1,4 +1,4 @@
-# stencila-actionmenu
+# stencila-action-menu
 
 
 

@@ -1,4 +1,4 @@
-# stencila-button
+# stencila-code-expression
 
 <!-- Auto Generated Below -->
 

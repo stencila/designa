@@ -1,4 +1,4 @@
-# stencila-tooltip
+# stencila-tooltip-element
 
 
 

@@ -1,4 +1,4 @@
-# stencila-button
+# stencila-code-chunk
 
 <!-- Auto Generated Below -->
 

@@ -1,4 +1,4 @@
-# stencila-button
+# stencila-icon
 
 <!-- Auto Generated Below -->
 
