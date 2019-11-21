@@ -103,10 +103,12 @@ export class Button {
           [this.size]: this.size !== undefined
         }}
       >
-        {this.icon !== undefined && (
+        {this.icon === undefined ? null : typeof this.icon === 'string' ? (
           <stencila-icon
             icon={this.ioPending || this.isLoading ? 'loader' : this.icon}
           ></stencila-icon>
+        ) : (
+          this.icon
         )}
 
         <slot name={Button.slots.default} />
