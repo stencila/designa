@@ -17,6 +17,9 @@ import {
   IconNames as IconNames1,
 } from './components/icon/icon';
 import {
+  ChildTab,
+} from './components/tabList/tabList';
+import {
   Collection,
 } from '@stencila/schema';
 
@@ -56,7 +59,7 @@ export namespace Components {
     * Name of the icon to render inside the button
     * @see Icon component for possible values
     */
-    'icon': IconNames;
+    'icon': HTMLElement | IconNames;
     /**
     * If true, removes extra padding from Icon inside the button TODO: See if we can automatically infer removal of padding through CSS
     */
@@ -66,13 +69,17 @@ export namespace Components {
     */
     'isLoading': boolean;
     /**
-    * The displayed text of the Tab.
+    * Renders the button using a secondory, and usually less visually prominent, Button CSS stylesheet.
     */
     'isSecondary': boolean;
     /**
-    * The displayed text of the Button.
+    * The overall size of the Button.
     */
     'size': 'xsmall' | 'small' | 'default' | 'large';
+    /**
+    * Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute. Only applies if the button is an anchor link. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target
+    */
+    'target'?: HTMLAnchorElement['target'];
   }
   interface StencilaCodeChunk {
     'executeHandler': (codeChunk: ICodeChunk) => Promise<ICodeChunk>;
@@ -273,7 +280,7 @@ declare namespace LocalJSX {
     * Name of the icon to render inside the button
     * @see Icon component for possible values
     */
-    'icon'?: IconNames;
+    'icon'?: HTMLElement | IconNames;
     /**
     * If true, removes extra padding from Icon inside the button TODO: See if we can automatically infer removal of padding through CSS
     */
@@ -283,13 +290,17 @@ declare namespace LocalJSX {
     */
     'isLoading'?: boolean;
     /**
-    * The displayed text of the Tab.
+    * Renders the button using a secondory, and usually less visually prominent, Button CSS stylesheet.
     */
     'isSecondary'?: boolean;
     /**
-    * The displayed text of the Button.
+    * The overall size of the Button.
     */
     'size'?: 'xsmall' | 'small' | 'default' | 'large';
+    /**
+    * Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute. Only applies if the button is an anchor link. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target
+    */
+    'target'?: HTMLAnchorElement['target'];
   }
   interface StencilaCodeChunk {
     'executeHandler'?: (codeChunk: ICodeChunk) => Promise<ICodeChunk>;

@@ -1,4 +1,4 @@
-import { Component, h, Prop, State } from '@stencil/core'
+import { Component, h, Prop, State, Element } from '@stencil/core'
 import { IconNames } from '../icon/icon'
 
 @Component({
@@ -16,10 +16,19 @@ export class Button {
     default: undefined
   }
 
+  @Element() private el: HTMLElement
+
   /**
    * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
    */
   @Prop() public href?: string
+
+  /**
+   * Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute.
+   * Only applies if the button is an anchor link.
+   * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target
+   */
+  @Prop() public target?: HTMLAnchorElement['target']
 
   /**
    * Screen-reader accessible label to read out.
@@ -27,12 +36,12 @@ export class Button {
   @Prop() public ariaLabel: string
 
   /**
-   * The displayed text of the Button.
+   * The overall size of the Button.
    */
   @Prop() public size: 'xsmall' | 'small' | 'default' | 'large'
 
   /**
-   * The displayed text of the Tab.
+   * Renders the button using a secondory, and usually less visually prominent, Button CSS stylesheet.
    */
   @Prop() public isSecondary: boolean = false
 
@@ -52,7 +61,7 @@ export class Button {
    * Name of the icon to render inside the button
    * @see Icon component for possible values
    */
-  @Prop() public icon: IconNames
+  @Prop() public icon: HTMLElement | IconNames
 
   /**
    * If true, removes extra padding from Icon inside the button
@@ -66,7 +75,7 @@ export class Button {
   @Prop() public isLoading: boolean = false
 
   /**
-   * State keeping track of when
+   * State keeping track of when asynchronous action is in flight
    */
   @State() private ioPending: boolean = false
 
@@ -80,10 +89,26 @@ export class Button {
   public clickHandlerProp: (e?: MouseEvent) => unknown
 
   private onClick = async (e?: MouseEvent): Promise<unknown> => {
-    this.ioPending = true
-    const result = await Promise.resolve(this.clickHandlerProp(e))
-    this.ioPending = false
-    return result
+    if (
+      (this.buttonType === 'button' || !this.buttonType) &&
+      this.clickHandlerProp
+    ) {
+      this.ioPending = true
+      const result = await Promise.resolve(this.clickHandlerProp(e))
+      this.ioPending = false
+      return result
+    }
+
+    return Promise.resolve(
+      // TODO: Add polyfill for el.closest for IE
+      this.el.closest('form')?.dispatchEvent(
+        new Event(this.buttonType, {
+          cancelable: true,
+          bubbles: true,
+          composed: true
+        })
+      )
+    )
   }
 
   public render() {
@@ -92,14 +117,16 @@ export class Button {
     return (
       <TagType
         href={this.href}
+        target={this.target}
         type={this.buttonType}
         data-size={this.size}
         disabled={this.ioPending || this.isLoading || this.disabled}
         aria-label={this.ariaLabel}
-        onClick={this.clickHandlerProp && this.onClick}
+        onClick={this.onClick}
         class={{
           secondary: this.isSecondary,
           iconOnly: this.iconOnly,
+          button: this.href !== undefined,
           [this.size]: this.size !== undefined
         }}
       >
@@ -111,7 +138,7 @@ export class Button {
           this.icon
         )}
 
-        <slot name={Button.slots.default} />
+        <slot />
       </TagType>
     )
   }
