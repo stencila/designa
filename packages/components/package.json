@@ -28,9 +28,11 @@
     "@fullhuman/postcss-purgecss": "^1.3.0",
     "@stencil/core": "^1.8.1",
     "@stencil/postcss": "^1.0.1",
-    "@stencila/schema": "^0.30.5",
     "@types/feather-icons": "^4.7.0",
     "@types/jest": "^24.0.23",
+    "@types/puppeteer": "1.20.3",
+    "jest": "24.9.0",
+    "jest-cli": "24.9.0",
     "postcss-custom-properties": "^9.0.2",
     "postcss-import": "^12.0.1",
     "puppeteer": "^1.20.0"
@@ -40,7 +42,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@codemirror/next": "^0.1.0",
+    "@codemirror/next": "^0.2.0",
+    "@stencila/schema": "^0.31.0",
     "@stencila/style-material": "file:../style-material",
     "@stencila/style-stencila": "file:../style-stencila",
     "chokidar-cli": "^2.1.0",

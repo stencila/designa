@@ -14,7 +14,7 @@ import { javascript } from '@codemirror/next/lang-javascript'
 import { bracketMatching } from '@codemirror/next/matchbrackets'
 import { specialChars } from '@codemirror/next/special-chars'
 import { EditorState } from '@codemirror/next/state'
-import { EditorView, ViewCommand } from '@codemirror/next/view'
+import { EditorView, Command } from '@codemirror/next/view'
 import {
   Component,
   Element,
@@ -143,7 +143,7 @@ export class CodeChunk {
       this.updateOutputs(res.outputs)
     })
 
-  runCodeView: ViewCommand = () => {
+  runCodeView: Command = () => {
     this.executeCode()
     return true
   }
