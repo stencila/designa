@@ -21,13 +21,13 @@
 
 ## Methods
 
-### `getJSON() => Promise<unknown>`
+### `getJSON() => Promise<import("/Users/ketch/Work/Stencila/designa/packages/components/node_modules/@stencila/schema/dist/types").CodeChunk>`
 
 
 
 #### Returns
 
-Type: `Promise<unknown>`
+Type: `Promise<CodeChunk>`
 
 
 
@@ -39,6 +39,7 @@ Type: `Promise<unknown>`
 - [stencila-code-error](../error)
 - [stencila-action-menu](../actionMenu)
 - [stencila-button](../button)
+- [stencila-code-editor](../codeEditor)
 
 ### Graph
 ```mermaid
@@ -46,6 +47,7 @@ graph TD;
   stencila-code-chunk --> stencila-code-error
   stencila-code-chunk --> stencila-action-menu
   stencila-code-chunk --> stencila-button
+  stencila-code-chunk --> stencila-code-editor
   stencila-code-error --> stencila-icon
   stencila-code-error --> stencila-details
   stencila-details --> stencila-icon

@@ -6,22 +6,13 @@
   @apply border-0 m-0 p-0;
 }
 
-.customPre {
-  @apply border border-solid border-neutral-300 rounded p-2 m-2;
-}
-
 :host,
 stencila-code-chunk {
   @apply block relative w-full my-4 border border-solid border-neutral-300 rounded;
 }
 
-::slotted([slot='outputs']) pre,
-.codeContainer::slotted(pre) {
-  @apply preReset;
-}
-
 .codeContainer {
-  @apply relative customPre bg-neutral-200 m-0 rounded-none border-b border-l-0 border-r-0 border-t-0;
+  @apply relative bg-neutral-200 m-0 rounded-none border-neutral-300 border-b border-l-0 border-r-0 border-t-0;
 
   pre,
   pre[class*='language-'] {
@@ -31,27 +22,13 @@ stencila-code-chunk {
   &.hidden {
     @apply hidden;
   }
-
-  select {
-    @apply absolute right-0 bottom-0 mr-2 text-xs text-neutral-600 text-right bg-transparent appearance-none font-body;
-
-    option {
-      @apply font-body;
-    }
-
-    &:active,
-    &:focus,
-    &:hover {
-      @apply text-neutral-900;
-    }
-  }
 }
 
 ::slotted([slot='outputs']) {
   @apply m-0 p-2;
 
   pre {
-    @apply customPre preReset;
+    @apply border-0 p-0 m-0;
   }
 
   & * + *:not(figcaption) {
