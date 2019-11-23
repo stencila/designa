@@ -14,6 +14,9 @@ import {
   ICodeChunk,
 } from './components/codeChunk/codeChunk';
 import {
+  ICodeChunk as ICodeChunk1,
+} from './components/codeEditor/codeEditor';
+import {
   IconNames as IconNames1,
 } from './components/icon/icon';
 import {
@@ -83,7 +86,7 @@ export namespace Components {
   }
   interface StencilaCodeChunk {
     'executeHandler': (codeChunk: ICodeChunk) => Promise<ICodeChunk>;
-    'getJSON': () => Promise<unknown>;
+    'getJSON': () => Promise<import("/Users/ketch/Work/Stencila/designa/packages/components/node_modules/@stencila/schema/dist/types").CodeChunk>;
     /**
     * Whether the code section is visible or not
     */
@@ -92,6 +95,28 @@ export namespace Components {
     * Programming language of the CodeChunk
     */
     'programmingLanguageProp': string;
+  }
+  interface StencilaCodeEditor {
+    /**
+    * Function to be evaluated over the contents of the CodeChunk.
+    */
+    'executeHandler': (codeChunk: ICodeChunk) => Promise<ICodeChunk>;
+    /**
+    * Public method, returning the CodeChunk contents as Stencila JSON.
+    */
+    'getJSON': () => Promise<import("/Users/ketch/Work/Stencila/designa/packages/components/node_modules/@stencila/schema/dist/types").CodeChunk>;
+    /**
+    * Determines the visibility of line numbers
+    */
+    'lineNumbers': boolean;
+    /**
+    * Programming language of the CodeEditor
+    */
+    'programmingLanguage': string;
+    /**
+    * List of all supported programming languages
+    */
+    'programmingLanguages': string[];
   }
   interface StencilaCodeError {
     'hasStacktrace': boolean;
@@ -168,6 +193,12 @@ declare global {
     new (): HTMLStencilaCodeChunkElement;
   };
 
+  interface HTMLStencilaCodeEditorElement extends Components.StencilaCodeEditor, HTMLStencilElement {}
+  var HTMLStencilaCodeEditorElement: {
+    prototype: HTMLStencilaCodeEditorElement;
+    new (): HTMLStencilaCodeEditorElement;
+  };
+
   interface HTMLStencilaCodeErrorElement extends Components.StencilaCodeError, HTMLStencilElement {}
   var HTMLStencilaCodeErrorElement: {
     prototype: HTMLStencilaCodeErrorElement;
@@ -231,6 +262,7 @@ declare global {
     'stencila-action-menu': HTMLStencilaActionMenuElement;
     'stencila-button': HTMLStencilaButtonElement;
     'stencila-code-chunk': HTMLStencilaCodeChunkElement;
+    'stencila-code-editor': HTMLStencilaCodeEditorElement;
     'stencila-code-error': HTMLStencilaCodeErrorElement;
     'stencila-code-expression': HTMLStencilaCodeExpressionElement;
     'stencila-details': HTMLStencilaDetailsElement;
@@ -314,6 +346,24 @@ declare namespace LocalJSX {
     */
     'programmingLanguageProp'?: string;
   }
+  interface StencilaCodeEditor {
+    /**
+    * Function to be evaluated over the contents of the CodeChunk.
+    */
+    'executeHandler'?: (codeChunk: ICodeChunk) => Promise<ICodeChunk>;
+    /**
+    * Determines the visibility of line numbers
+    */
+    'lineNumbers'?: boolean;
+    /**
+    * Programming language of the CodeEditor
+    */
+    'programmingLanguage'?: string;
+    /**
+    * List of all supported programming languages
+    */
+    'programmingLanguages'?: string[];
+  }
   interface StencilaCodeError {
     'hasStacktrace'?: boolean;
     'kind'?: 'incapable' | 'warning' | 'error';
@@ -371,6 +421,7 @@ declare namespace LocalJSX {
     'stencila-action-menu': StencilaActionMenu;
     'stencila-button': StencilaButton;
     'stencila-code-chunk': StencilaCodeChunk;
+    'stencila-code-editor': StencilaCodeEditor;
     'stencila-code-error': StencilaCodeError;
     'stencila-code-expression': StencilaCodeExpression;
     'stencila-details': StencilaDetails;
@@ -393,6 +444,7 @@ declare module "@stencil/core" {
       'stencila-action-menu': LocalJSX.StencilaActionMenu & JSXBase.HTMLAttributes<HTMLStencilaActionMenuElement>;
       'stencila-button': LocalJSX.StencilaButton & JSXBase.HTMLAttributes<HTMLStencilaButtonElement>;
       'stencila-code-chunk': LocalJSX.StencilaCodeChunk & JSXBase.HTMLAttributes<HTMLStencilaCodeChunkElement>;
+      'stencila-code-editor': LocalJSX.StencilaCodeEditor & JSXBase.HTMLAttributes<HTMLStencilaCodeEditorElement>;
       'stencila-code-error': LocalJSX.StencilaCodeError & JSXBase.HTMLAttributes<HTMLStencilaCodeErrorElement>;
       'stencila-code-expression': LocalJSX.StencilaCodeExpression & JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement>;
       'stencila-details': LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
