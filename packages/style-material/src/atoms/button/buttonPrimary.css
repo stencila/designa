@@ -1,7 +1,7 @@
 @import './_base';
 
-stencila-button:not(.secondary),
 button:not(.secondary),
+stencila-button > button:not(.secondary),
 a.button:not(.secondary) {
   @apply text-base font-body bg-primary-500 text-stock py-2 px-4 text-sm tracking-wide shadow-md uppercase font-bold;
 

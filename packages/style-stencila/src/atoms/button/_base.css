@@ -16,6 +16,16 @@ a.button {
     @apply cursor-not-allowed;
   }
 
+  &[data-size='small'],
+  &[size='small'] {
+    @apply p-2;
+  }
+
+  &[data-size='xsmall'],
+  &[size='xsmall'] {
+    @apply text-xs px-2 py-1 rounded-sm;
+  }
+
   & > * {
     @apply align-middle;
   }

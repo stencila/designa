@@ -1,4 +1,4 @@
-stencila-button,
+stencila-button > button,
 button,
 a.button {
   @apply border-none p-0 inline-block font-bold font-body text-sm rounded;
