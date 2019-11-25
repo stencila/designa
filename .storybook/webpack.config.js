@@ -7,6 +7,7 @@ const WriteFilePlugin = require('write-file-webpack-plugin')
 
 const files = [
   'packages/{style-stencila,style-material}/dist/**/*',
+  'packages/components/dist/stencila-components/stencila-components.css',
   'packages/components/dist/stencila-components.js',
   '!packages/{style-stencila,style-material}/dist/**/*.js',
   '!**/*.{png,ai,map,woff,woff2,svg,css}',

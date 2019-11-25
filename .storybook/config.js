@@ -15,6 +15,11 @@ const cssresources = [
     id: `Material`,
     code: `<link rel="stylesheet" type="text/css" href="./index-material.css"></link>`,
     picked: false
+  },
+  {
+    id: `CSS Variables`,
+    code: `<link rel="stylesheet" type="text/css" href="./stencila-components/stencila-components.css"></link>`,
+    picked: false
   }
 ]
 
