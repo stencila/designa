@@ -154,11 +154,22 @@ export class CodeChunk {
     e.stopPropagation()
   }
 
+  /**
+   * Brings DOM focus to the code editor
+   */
+  private focusEditor = (): void => {
+    this.codeEditorRef.focus()
+  }
+
   public render() {
     return (
       <Host>
         <div class="codeContainer">
-          <div onKeyDown={this.stopEventPropagation}>
+          <div
+            class="codeEditor"
+            onKeyDown={this.stopEventPropagation}
+            onClick={this.focusEditor}
+          >
             <slot />
           </div>
 
