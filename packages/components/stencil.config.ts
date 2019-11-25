@@ -28,7 +28,7 @@ export const config: Config = {
   globalStyle: './src/globals/variables.css',
   commonjs: {
     namedExports: {
-      '@stencila/schema': ['codeChunk']
+      '@stencila/schema': ['codeChunk', 'isPrimitive', 'isCode']
     }
   },
   outputTargets: [

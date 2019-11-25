@@ -81,28 +81,6 @@ export class CodeChunk {
     this.collapseAllListenHandler(event)
   }
 
-  @State() isOutputEmpty: boolean = true
-
-  private emptyOutputMessage = 'No output to show'
-
-  private outputExists = () => {
-    const output = this.el.querySelector(`[slot=${CodeChunk.slots.outputs}]`)
-
-    const isEmpty =
-      output === null ? true : output.innerHTML.trim() === '' ? true : false
-
-    this.isOutputEmpty = isEmpty
-
-    if (output && isEmpty) {
-      output.innerHTML = `<em class="emptyContentMessage">${this.emptyOutputMessage}</em>`
-    } else if (isEmpty) {
-      const child = document.createElement('figure')
-      child.setAttribute('slot', CodeChunk.slots.outputs)
-      this.el.appendChild(child)
-      child.innerHTML = `<em class="emptyContentMessage">${this.emptyOutputMessage}</em>`
-    }
-  }
-
   @Prop() public executeHandler: (codeChunk: ICodeChunk) => Promise<ICodeChunk>
 
   private onExecuteHandler_ = async () => {
@@ -111,7 +89,7 @@ export class CodeChunk {
     if (this.executeHandler) {
       const computed = await this.executeHandler(node)
       this.updateErrors(computed.errors)
-      this.updateOutputs(computed.outputs)
+      this.outputs = computed.outputs
       return computed
     }
 
@@ -129,55 +107,12 @@ export class CodeChunk {
   }
 
   protected componentDidLoad() {
-    this.outputExists()
     this.codeEditorRef = this.el.querySelector('stencila-code-editor')
   }
 
   @State() outputs: ICodeChunk['outputs']
 
   @State() codeErrors: ICodeChunk['errors']
-
-  private makeOutput = (text: string): HTMLPreElement => {
-    const node = document.createElement('pre')
-    const res = document.createElement('output')
-    res.textContent = text
-    node.appendChild(res)
-    return node
-  }
-
-  private updateOutputs = (outputs: ICodeChunk['outputs'] = []) => {
-    let output = this.el.querySelector(`[slot=${CodeChunk.slots.outputs}]`)
-
-    if (!output) {
-      output = document.createElement('figure')
-      output.setAttribute('slot', CodeChunk.slots.outputs)
-      this.el.appendChild(output)
-    }
-
-    output.innerHTML = ''
-
-    outputs.map(o => {
-      if (output) {
-        if (typeof o === 'string' || typeof o === 'number') {
-          output.appendChild(this.makeOutput(o.toString()))
-        } else if (Array.isArray(o)) {
-          output.appendChild(this.makeOutput(JSON.stringify(o)))
-        } else if (o !== null && typeof o === 'object') {
-          // @ts-ignore
-          if (o.text) {
-            // @ts-ignore
-            output.appendChild(this.makeOutput(o.text))
-          } else {
-            output.appendChild(this.makeOutput(JSON.stringify(o, null, 2)))
-          }
-        }
-      }
-    })
-
-    if (outputs.length === 0) {
-      this.el.removeChild(output)
-    }
-  }
 
   private updateErrors = (errors: ICodeChunk['errors'] = []) => {
     this.codeErrors = errors.map(error => (
@@ -243,7 +178,9 @@ export class CodeChunk {
           </stencila-code-editor>
         </div>
 
-        <slot name={CodeChunk.slots.outputs} />
+        <stencila-node-list nodes={this.outputs}>
+          <slot name={CodeChunk.slots.outputs} />
+        </stencila-node-list>
 
         {this.codeErrors}
       </Host>

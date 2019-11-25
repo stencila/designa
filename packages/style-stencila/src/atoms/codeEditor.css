@@ -2,11 +2,18 @@
 
 :host,
 stencila-code-editor {
-  @apply block;
+  @apply flex;
+  --border-width: 1px;
+  --background-color: transparent;
 
   .codeContainer {
-    @apply relative block rounded border border-neutral-300;
+    @apply flex flex-col flex-grow rounded border border-neutral-300;
     background-color: var(--background-color);
+    border-width: var(--border-width);
+  }
+
+  .codeEditor {
+    @apply flex-grow cursor-text;
   }
 
   .codemirror-focused {

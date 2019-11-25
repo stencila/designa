@@ -9,6 +9,15 @@
 :host,
 stencila-code-chunk {
   @apply block relative w-full my-4 border border-solid border-neutral-300 rounded;
+
+  stencila-code-editor {
+    @apply h-full;
+    --border-width: 0;
+  }
+
+  stencila-node-list {
+    @apply m-0 p-2;
+  }
 }
 
 .codeContainer {
@@ -24,30 +33,6 @@ stencila-code-chunk {
   }
 }
 
-::slotted([slot='outputs']) {
-  @apply m-0 p-2;
-
-  pre {
-    @apply border-0 p-0 m-0;
-  }
-
-  & * + *:not(figcaption) {
-    @apply my-3 pt-3 border-t border-neutral-300;
-
-    &:last-child {
-      @apply mb-0;
-    }
-  }
-
-  .emptyContentMessage {
-    @apply text-neutral-600;
-  }
-
-  stencila-code-error {
-    @apply border-0;
-  }
-}
-
 @screen lg {
   :host,
   stencila-code-chunk {
@@ -58,7 +43,7 @@ stencila-code-chunk {
     @apply w-1/2 border-l border-b-0;
   }
 
-  ::slotted([slot='outputs']) {
+  stencila-node-list {
     @apply w-1/2 flex-grow order-first;
   }
 }

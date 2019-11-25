@@ -20,11 +20,12 @@ import {
   IconNames as IconNames1,
 } from './components/icon/icon';
 import {
+  Collection,
+  Node,
+} from '@stencila/schema';
+import {
   ChildTab,
 } from './components/tabList/tabList';
-import {
-  Collection,
-} from '@stencila/schema';
 
 export namespace Components {
   interface StencilaActionMenu {
@@ -130,6 +131,9 @@ export namespace Components {
   interface StencilaIcon {
     'icon': IconNames;
   }
+  interface StencilaNodeList {
+    'nodes': Node[];
+  }
   interface StencilaTab {
     /**
     * The link the tab should navigate to
@@ -223,6 +227,12 @@ declare global {
     new (): HTMLStencilaIconElement;
   };
 
+  interface HTMLStencilaNodeListElement extends Components.StencilaNodeList, HTMLStencilElement {}
+  var HTMLStencilaNodeListElement: {
+    prototype: HTMLStencilaNodeListElement;
+    new (): HTMLStencilaNodeListElement;
+  };
+
   interface HTMLStencilaTabElement extends Components.StencilaTab, HTMLStencilElement {}
   var HTMLStencilaTabElement: {
     prototype: HTMLStencilaTabElement;
@@ -267,6 +277,7 @@ declare global {
     'stencila-code-expression': HTMLStencilaCodeExpressionElement;
     'stencila-details': HTMLStencilaDetailsElement;
     'stencila-icon': HTMLStencilaIconElement;
+    'stencila-node-list': HTMLStencilaNodeListElement;
     'stencila-tab': HTMLStencilaTabElement;
     'stencila-tab-list': HTMLStencilaTabListElement;
     'stencila-toc': HTMLStencilaTocElement;
@@ -376,6 +387,9 @@ declare namespace LocalJSX {
   interface StencilaIcon {
     'icon'?: IconNames;
   }
+  interface StencilaNodeList {
+    'nodes'?: Node[];
+  }
   interface StencilaTab {
     /**
     * The link the tab should navigate to
@@ -426,6 +440,7 @@ declare namespace LocalJSX {
     'stencila-code-expression': StencilaCodeExpression;
     'stencila-details': StencilaDetails;
     'stencila-icon': StencilaIcon;
+    'stencila-node-list': StencilaNodeList;
     'stencila-tab': StencilaTab;
     'stencila-tab-list': StencilaTabList;
     'stencila-toc': StencilaToc;
@@ -449,6 +464,7 @@ declare module "@stencil/core" {
       'stencila-code-expression': LocalJSX.StencilaCodeExpression & JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement>;
       'stencila-details': LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
       'stencila-icon': LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
+      'stencila-node-list': LocalJSX.StencilaNodeList & JSXBase.HTMLAttributes<HTMLStencilaNodeListElement>;
       'stencila-tab': LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
       'stencila-tab-list': LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;
       'stencila-toc': LocalJSX.StencilaToc & JSXBase.HTMLAttributes<HTMLStencilaTocElement>;
