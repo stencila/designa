@@ -1,43 +1,26 @@
-import readme from '../../../packages/components/src/components/error/readme.md'
+import { html } from 'lit-html'
 
 export default {
-  title: 'Objects/Error'
+  title: 'Objects/Error',
+  component: 'stencila-code-error'
 }
 
-export const warning = () => {
-  const component = document.createElement('stencila-code-error')
-  component.kind = 'warning'
-  component.innerHTML = `We’re sorry, something has gone wrong...
-    <pre slot="stacktrace">
-<code>Some stack trace goes here...</code>
-    </pre>
-    `
-  return component
-}
+export const warning = () =>
+  html`
+    <stencila-code-error kind="warning" has-stacktrace="true">
+      We’re sorry, something has gone wrong...
+      <pre slot="stacktrace">
+        <code>Some stack trace goes here...</code>
+      </pre>
+    </stencila-code-error>
+  `
 
-warning.story = {
-  parameters: {
-    readme: {
-      sidebar: readme
-    }
-  }
-}
-
-export const error = () => {
-  const component = document.createElement('stencila-code-error')
-  component.kind = 'error'
-  component.innerHTML = `We’re sorry, something has gone wrong...
-    <pre slot="stacktrace">
-<code>Some stack trace goes here...</code>
-    </pre>
-    `
-  return component
-}
-
-error.story = {
-  parameters: {
-    readme: {
-      sidebar: readme
-    }
-  }
-}
+export const error = () =>
+  html`
+    <stencila-code-error kind="error" has-stacktrace="true">
+      We’re sorry, something has gone wrong...
+      <pre slot="stacktrace">
+    <code>Some stack trace goes here...</code>
+  </pre>
+    </stencila-code-error>
+  `

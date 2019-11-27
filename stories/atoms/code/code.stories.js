@@ -1,6 +1,10 @@
-import { storiesOf } from '@storybook/html'
+import { html } from 'lit-html'
 
-storiesOf('Atoms/Code', module).add(
-  'default',
-  () => '<code>const id = (x: unknown) => x</code>'
-)
+export default {
+  title: 'Atoms/Code'
+}
+
+export const code = () =>
+  html`
+    <code>const id = (x: unknown) => x</code>
+  `

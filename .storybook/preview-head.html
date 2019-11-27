@@ -1,4 +1,61 @@
 <link
-    href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i,500,500i,600,600i,700|Nunito:400,400i,600,600i,700,700i,800,800i,900,900i|Roboto:400,400i,500,500i,700,700i,900,900i&display=swap"
+    href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i,500,500i,600,600i,700|Nunito:400,400i,600,600i,700,700i,800,800i,900,900i|Montserrat:400,700|Lato:400,400i,700,700i&display=swap"
     rel="stylesheet"
 />
+
+<link rel="stylesheet" href="./stencila-components/stencila-components.css" />
+<link rel="stylesheet" href="./index-stencila.css" />
+
+<script
+    type="module"
+    src="/stencila-components/stencila-components.esm.js"
+></script>
+<script nomodule src="/stencila-components/stencila-components.js"></script>
+
+<style>
+    /*
+   * These styles rest styles for the Storybook UI elements broken
+   * by the Style Stencila CSS
+   */
+
+    .simplebar-content button {
+        background-color: transparent !important;
+        color: inherit !important;
+        padding: 0 !important;
+    }
+
+    .simplebar-content button svg {
+        padding: 0 !important;
+    }
+
+    .css-11xgcgt button,
+    .css-1xxxe71 button {
+        background-color: transparent !important;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        border-top-left-radius: 4px !important;
+        border-top-right-radius: 0 !important;
+        color: inherit !important;
+        padding: 4px 10px !important;
+    }
+
+    .simplebar-content button:hover svg,
+    .css-11xgcgt button:hover {
+        color: #1d63f3 !important;
+    }
+
+    .simplebar-wrapper pre,
+    .simplebar-wrapper code {
+        font-size: 14px !important;
+    }
+
+    .css-1xxxe71 {
+        bottom: 1px !important;
+        right: 1px !important;
+    }
+
+    .css-1xxxe71 button {
+        border-bottom: 0 none !important;
+        border-right: 0 none !important;
+    }
+</style>

@@ -1,3 +1,10 @@
-import { storiesOf } from '@storybook/html'
+import { html } from 'lit-html'
 
-storiesOf('Atoms/Pre', module).add('default', () => '<pre>Hello World</pre>')
+export default {
+  title: 'Atoms/Pre'
+}
+
+export const pre = () =>
+  html`
+    <pre>Hello World</pre>
+  `

@@ -5,8 +5,11 @@ import WebFont from 'webfontloader'
 
 // Global mode (theme) configuration based on https://stackoverflow.com/a/56530775
 const getMode = (el: HTMLElement): string => {
-  const elMode = el.getAttribute('mode')
-  return elMode === null ? 'default' : elMode
+  return (
+    el.getAttribute('mode') ||
+    document.querySelector('html')?.getAttribute('mode') ||
+    'default'
+  )
 }
 
 setMode(el => getMode(el))
@@ -16,7 +19,7 @@ const mode = getMode(document.documentElement)
 const families =
   mode === 'material'
     ? ['Roboto', 'IBM Plex Mono']
-    : ['Nunito', 'IBM Plex Mono']
+    : ['Montserrat', 'IBM Plex Mono']
 
 WebFont.load({
   google: {
