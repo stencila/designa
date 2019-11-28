@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/stencila/style/compare/@stencila/style-stencila@0.7.0...@stencila/style-stencila@0.7.1) (2019-11-28)
+
+
+### Bug Fixes
+
+* **NodeList:** Remove dashed border around the sides of images ([4712dc3](https://github.com/stencila/style/commit/4712dc3fd95a0e4074f22f8ba0cd32e49d29454a))
+
+
+
+
+
 # [0.7.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.6.0...@stencila/style-stencila@0.7.0) (2019-11-28)
 
 
