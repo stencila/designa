@@ -26,11 +26,6 @@ export const config: Config = {
   namespace: 'stencila-components',
   globalScript: './src/globals/global.ts',
   globalStyle: './src/globals/variables.css',
-  commonjs: {
-    namedExports: {
-      '@stencila/schema': ['codeChunk', 'isPrimitive', 'isCode']
-    }
-  },
   outputTargets: [
     {
       type: 'dist',

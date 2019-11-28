@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@codemirror/next": "^0.2.0",
-    "@stencila/schema": "^0.31.0",
+    "@stencila/schema": "^0.31.1",
     "@stencila/style-material": "file:../style-material",
     "@stencila/style-stencila": "file:../style-stencila",
     "chokidar-cli": "^2.1.0",

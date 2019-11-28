@@ -10,10 +10,7 @@ import {
   Prop,
   State
 } from '@stencil/core'
-import { codeChunk } from '@stencila/schema'
-
-// Workaround for Stencil build issues
-export type ICodeChunk = ReturnType<typeof codeChunk>
+import { codeChunk, CodeChunk } from '@stencila/schema'
 
 interface CollapseEvent extends CustomEvent {
   detail: {
@@ -29,7 +26,7 @@ interface CollapseEvent extends CustomEvent {
   },
   scoped: true
 })
-export class CodeChunk {
+export class CodeChunkComponent {
   public static readonly elementName = 'stencila-code-chunk'
 
   public static readonly slots = {
@@ -81,7 +78,7 @@ export class CodeChunk {
     this.collapseAllListenHandler(event)
   }
 
-  @Prop() public executeHandler: (codeChunk: ICodeChunk) => Promise<ICodeChunk>
+  @Prop() public executeHandler: (codeChunk: CodeChunk) => Promise<CodeChunk>
 
   private onExecuteHandler_ = async () => {
     const node = await this.getJSON()
@@ -110,11 +107,11 @@ export class CodeChunk {
     this.codeEditorRef = this.el.querySelector('stencila-code-editor')
   }
 
-  @State() outputs: ICodeChunk['outputs']
+  @State() outputs: CodeChunk['outputs']
 
-  @State() codeErrors: ICodeChunk['errors']
+  @State() codeErrors: CodeChunk['errors']
 
-  private updateErrors = (errors: ICodeChunk['errors'] = []) => {
+  private updateErrors = (errors: CodeChunk['errors'] = []) => {
     this.codeErrors = errors.map(error => (
       <stencila-code-error
         kind={(error.kind as unknown) as 'error' | 'warning' | 'incapable'}
@@ -127,7 +124,7 @@ export class CodeChunk {
   }
 
   @Method()
-  public async getJSON(): Promise<ICodeChunk> {
+  public async getJSON(): Promise<CodeChunk> {
     return this.codeEditorRef?.getJSON() || codeChunk('')
   }
 
@@ -174,12 +171,12 @@ export class CodeChunk {
           <stencila-code-editor
             programmingLanguage={this.programmingLanguageProp}
           >
-            <slot name={CodeChunk.slots.text} />
+            <slot name={CodeChunkComponent.slots.text} />
           </stencila-code-editor>
         </div>
 
         <stencila-node-list nodes={this.outputs}>
-          <slot name={CodeChunk.slots.outputs} />
+          <slot name={CodeChunkComponent.slots.outputs} />
         </stencila-node-list>
 
         {this.codeErrors}

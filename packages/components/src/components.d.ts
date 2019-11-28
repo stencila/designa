@@ -11,18 +11,14 @@ import {
   IconNames,
 } from './components/icon/icon';
 import {
-  ICodeChunk,
-} from './components/codeChunk/codeChunk';
-import {
-  ICodeChunk as ICodeChunk1,
-} from './components/codeEditor/codeEditor';
-import {
-  IconNames as IconNames1,
-} from './components/icon/icon';
-import {
+  CodeChunk,
+  CodeError,
   Collection,
   Node,
 } from '@stencila/schema';
+import {
+  IconNames as IconNames1,
+} from './components/icon/icon';
 import {
   ChildTab,
 } from './components/tabList/tabList';
@@ -86,8 +82,8 @@ export namespace Components {
     'target'?: HTMLAnchorElement['target'];
   }
   interface StencilaCodeChunk {
-    'executeHandler': (codeChunk: ICodeChunk) => Promise<ICodeChunk>;
-    'getJSON': () => Promise<import("/Users/ketch/Work/Stencila/designa/packages/components/node_modules/@stencila/schema/dist/types").CodeChunk>;
+    'executeHandler': (codeChunk: CodeChunk) => Promise<CodeChunk>;
+    'getJSON': () => Promise<CodeChunk>;
     /**
     * Whether the code section is visible or not
     */
@@ -101,11 +97,11 @@ export namespace Components {
     /**
     * Function to be evaluated over the contents of the CodeChunk.
     */
-    'executeHandler': (codeChunk: ICodeChunk) => Promise<ICodeChunk>;
+    'executeHandler': (codeChunk: CodeChunk) => Promise<CodeChunk>;
     /**
     * Public method, returning the CodeChunk contents as Stencila JSON.
     */
-    'getJSON': () => Promise<import("/Users/ketch/Work/Stencila/designa/packages/components/node_modules/@stencila/schema/dist/types").CodeChunk>;
+    'getJSON': () => Promise<CodeChunk>;
     /**
     * Determines the visibility of line numbers
     */
@@ -346,7 +342,7 @@ declare namespace LocalJSX {
     'target'?: HTMLAnchorElement['target'];
   }
   interface StencilaCodeChunk {
-    'executeHandler'?: (codeChunk: ICodeChunk) => Promise<ICodeChunk>;
+    'executeHandler'?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
     /**
     * Whether the code section is visible or not
     */
@@ -361,7 +357,7 @@ declare namespace LocalJSX {
     /**
     * Function to be evaluated over the contents of the CodeChunk.
     */
-    'executeHandler'?: (codeChunk: ICodeChunk) => Promise<ICodeChunk>;
+    'executeHandler'?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
     /**
     * Determines the visibility of line numbers
     */

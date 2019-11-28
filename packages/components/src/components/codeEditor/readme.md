@@ -15,7 +15,7 @@
 
 ## Methods
 
-### `getJSON() => Promise<import("/Users/ketch/Work/Stencila/designa/packages/components/node_modules/@stencila/schema/dist/types").CodeChunk>`
+### `getJSON() => Promise<CodeChunk>`
 
 Public method, returning the CodeChunk contents as Stencila JSON.
 

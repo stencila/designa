@@ -16,12 +16,9 @@ import { specialChars } from '@codemirror/next/special-chars'
 import { EditorState } from '@codemirror/next/state'
 import { Command, EditorView } from '@codemirror/next/view'
 import { Component, Element, h, Host, Method, Prop, State } from '@stencil/core'
-import { codeChunk } from '@stencila/schema'
+import { codeChunk, CodeChunk } from '@stencila/schema'
 // @ts-ignore
 import { patch as selectPolyfill } from 'shadow-root-get-selection-polyfill'
-
-// Workaround for Stencil build issues
-export type ICodeChunk = ReturnType<typeof codeChunk>
 
 @Component({
   tag: 'stencila-code-editor',
@@ -31,7 +28,7 @@ export type ICodeChunk = ReturnType<typeof codeChunk>
   },
   shadow: true
 })
-export class CodeChunk {
+export class CodeEditor {
   public static readonly elementName = 'stencila-code-editor'
 
   public static readonly slots = {
@@ -67,7 +64,7 @@ export class CodeChunk {
   /**
    * Function to be evaluated over the contents of the CodeChunk.
    */
-  @Prop() public executeHandler: (codeChunk: ICodeChunk) => Promise<ICodeChunk>
+  @Prop() public executeHandler: (codeChunk: CodeChunk) => Promise<CodeChunk>
 
   /**
    * Wrapper around the `executeHandler` function, needed to run using CodeMirror keyboard shortcuts.
@@ -140,7 +137,7 @@ export class CodeChunk {
    * Public method, returning the CodeChunk contents as Stencila JSON.
    */
   @Method()
-  public async getJSON(): Promise<ICodeChunk> {
+  public async getJSON(): Promise<CodeChunk> {
     return codeChunk(this.getCodeContent(), {
       programmingLanguage: this.activeProgrammingLanguage
     })
