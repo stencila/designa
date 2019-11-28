@@ -1,4 +1,4 @@
-# stencila-button
+# stencila-error
 
 <!-- Auto Generated Below -->
 

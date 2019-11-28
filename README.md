@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/stencila/designa.svg?branch=master)](https://travis-ci.org/stencila/designa)
+
 # Designa
 
 > 🎨 Stencila's visual design resources and style guide

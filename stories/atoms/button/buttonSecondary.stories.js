@@ -1,5 +1,15 @@
-import { storiesOf } from '@storybook/html'
+import { html } from 'lit-html'
 
-storiesOf('Atoms/Button/Secondary', module)
-  .add('with text', () => `<button class="secondary">Hello World</button>`)
-  .add('with emoji', () => `<button class="secondary">😀 😎 👍 💯</button>`)
+export default {
+  title: 'Atoms/Button/Secondary',
+  component: 'stencila-button'
+}
+
+export const withText = () =>
+  html`
+    <button class="secondary">Hello World</button>
+  `
+export const withEmoji = () =>
+  html`
+    <button class="secondary">😀 😎 👍 💯</button>
+  `

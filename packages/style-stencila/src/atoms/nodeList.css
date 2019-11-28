@@ -1,0 +1,58 @@
+@import '../base.css';
+@import '../atoms/code.css';
+@import '../atoms/pre.css';
+
+:host,
+stencila-node-list {
+  @apply block;
+
+  *:first-child,
+  .hidden + *:nth-child(2) {
+    @apply pt-0 mt-0 border-t-0;
+  }
+
+  *:last-child {
+    @apply mb-0;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .emptyContentMessage {
+    @apply text-neutral-600;
+  }
+
+  stencila-code-error {
+    @apply border-0;
+  }
+
+  ::slotted([slot='outputs']),
+  figure {
+    @apply m-0 p-0;
+
+    &:first-child {
+      @apply mt-0;
+    }
+
+    &:last-child {
+      @apply mb-0;
+    }
+
+    pre {
+      @apply border-0 p-0 m-0;
+    }
+
+    & > *:not(figcaption) {
+      @apply my-3 pt-3 border-dashed border-t border-neutral-300;
+
+      &:first-child {
+        @apply mt-0 pt-0 border-t-0;
+      }
+
+      &:last-child {
+        @apply mb-0;
+      }
+    }
+  }
+}

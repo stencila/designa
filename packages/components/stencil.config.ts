@@ -26,11 +26,6 @@ export const config: Config = {
   namespace: 'stencila-components',
   globalScript: './src/globals/global.ts',
   globalStyle: './src/globals/variables.css',
-  commonjs: {
-    namedExports: {
-      '@stencila/schema': ['codeChunk']
-    }
-  },
   outputTargets: [
     {
       type: 'dist',
@@ -38,6 +33,10 @@ export const config: Config = {
     },
     {
       type: 'docs-readme'
+    },
+    {
+      type: 'docs-json',
+      file: 'dist/stencila-components.json'
     },
     {
       type: 'www',

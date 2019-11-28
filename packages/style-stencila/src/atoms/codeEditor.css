@@ -1,0 +1,44 @@
+@import '../base.css';
+
+:host,
+stencila-code-editor {
+  @apply flex;
+  --border-width: 1px;
+  --background-color: transparent;
+
+  .codeContainer {
+    @apply flex flex-col flex-grow rounded border border-neutral-300;
+    background-color: var(--background-color);
+    border-width: var(--border-width);
+  }
+
+  .codeEditor {
+    @apply flex-grow cursor-text;
+  }
+
+  .codemirror-focused {
+    @apply outline-none;
+  }
+
+  .codemirror-scroller {
+    @apply overflow-auto;
+  }
+
+  menu {
+    @apply border-t border-neutral-300 m-0 p-0 py-px flex justify-end;
+
+    select {
+      @apply appearance-none border-none mr-2 text-xs text-neutral-600 text-right bg-transparent font-body;
+
+      option {
+        @apply font-body text-right;
+      }
+
+      &:active,
+      &:focus,
+      &:hover {
+        @apply text-neutral-900;
+      }
+    }
+  }
+}

@@ -1,11 +1,20 @@
 @import './_base';
 
-button.secondary {
+button.secondary,
+a.button.secondary {
   @apply bg-stock text-primary-500 text-sm shadow-none font-bold tracking-wide py-1 px-2 uppercase;
-
 
   &:active,
   &:hover {
     @apply bg-primary-500 text-stock;
+  }
+}
+
+:host.color-stock button.secondary,
+:host.color-stock a.button.secondary {
+  @apply bg-stock text-key;
+
+  &:hover {
+    @apply bg-neutral-200 text-key;
   }
 }

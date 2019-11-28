@@ -3,7 +3,8 @@ import { Component, Element, h, Prop, State } from '@stencil/core'
 @Component({
   tag: 'stencila-action-menu',
   styleUrls: {
-    default: 'actionMenu.css'
+    default: 'actionMenu.css',
+    material: 'actionMenu.css'
   },
   shadow: true
 })

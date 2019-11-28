@@ -1,3 +1,11 @@
-import { storiesOf } from '@storybook/html'
+import { html } from 'lit-html'
 
-storiesOf('Atoms/Label', module).add('default', () => `<label>Preview</label>`)
+export default {
+  title: 'Atoms/Label',
+  component: 'stencila-button'
+}
+
+export const label = () =>
+  html`
+    <label>Preview</label>
+  `

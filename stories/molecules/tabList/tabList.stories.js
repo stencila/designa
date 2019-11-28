@@ -1,52 +1,48 @@
-import { storiesOf } from '@storybook/html'
-import readme from '../../../packages/components/src/components/tabList/readme.md'
+import { html } from 'lit-html'
 
-const storyName = 'Molecules/Tab List'
+export default {
+  title: 'Molecules/Tab List',
+  component: 'stencila-tab-list'
+}
 
-storiesOf(storyName, module)
-  .addParameters({
-    readme: {
-      sidebar: readme
-    }
-  })
-  .add(
-    'Single Tab',
-    () =>
-      `<ul role="tablist"><li role="presentation"><a role="tab" aria-selected="true" tabindex="0" href="#">Overview</a></li>
-      </ul>`
-  )
-  .add(
-    'Two Tabs',
-    () =>
-      `<ul role="tablist"><li role="presentation" ><a role="tab" tabindex="-1" href="#">Overview</a></li>
-      <li role="presentation"><a role="tab" aria-selected="true" tabindex="0" href="#">Files</a></li>
-      </ul>`
-  )
-  .add(
-    'Multiple Tabs',
-    () =>
-      `<ul role="tablist"><li role="presentation" ><a role="tab" tabindex="-1" href="#">Overview</a></li>
-      <li role="presentation"><a role="tab" aria-selected="true" tabindex="0" href="#">Files</a></li>
-      <li role="presentation" ><a role="tab" tabindex="-1" href="#">Activity</a></li>
-      <li role="presentation" ><a role="tab" tabindex="-1" href="#">Sharing</a></li>
-      <li role="presentation" ><a role="tab" tabindex="-1" href="#">Settings</a></li></ul>`
-  )
+export const singleTab = () =>
+  html`
+    <ul role="tablist">
+      <li role="presentation">
+        <a role="tab" aria-selected="true" tabindex="0" href="#">Overview</a>
+      </li>
+    </ul>
+  `
 
-const tabs = ['Overview', 'Files', 'Activity', 'Sharing', 'Settings']
+export const twoTabs = () =>
+  html`
+    <ul role="tablist">
+      <li role="presentation">
+        <a role="tab" tabindex="-1" href="#">Overview</a>
+      </li>
+      <li role="presentation">
+        <a role="tab" aria-selected="true" tabindex="0" href="#">Files</a>
+      </li>
+    </ul>
+  `
 
-storiesOf(storyName + '/Web Components', module)
-  .add('Single Tab', () => {
-    const el = document.createElement('stencila-tab-list')
-    el.tabs = [tabs[0]]
-    return el
-  })
-  .add('Two Tabs', () => {
-    const el = document.createElement('stencila-tab-list')
-    el.tabs = tabs.slice(0, 2)
-    return el
-  })
-  .add('Multiple Tabs', () => {
-    const el = document.createElement('stencila-tab-list')
-    el.tabs = tabs
-    return el
-  })
+export const multipleTabs = () =>
+  html`
+    <ul role="tablist">
+      <li role="presentation">
+        <a role="tab" tabindex="-1" href="#">Overview</a>
+      </li>
+      <li role="presentation">
+        <a role="tab" aria-selected="true" tabindex="0" href="#">Files</a>
+      </li>
+      <li role="presentation">
+        <a role="tab" tabindex="-1" href="#">Activity</a>
+      </li>
+      <li role="presentation">
+        <a role="tab" tabindex="-1" href="#">Sharing</a>
+      </li>
+      <li role="presentation">
+        <a role="tab" tabindex="-1" href="#">Settings</a>
+      </li>
+    </ul>
+  `

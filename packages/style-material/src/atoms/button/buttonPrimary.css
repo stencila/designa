@@ -1,10 +1,20 @@
 @import './_base';
 
-:host,
-button:not(.secondary) {
+button:not(.secondary),
+stencila-button > button:not(.secondary),
+a.button:not(.secondary) {
   @apply text-base font-body bg-primary-500 text-stock py-2 px-4 text-sm tracking-wide shadow-md uppercase font-bold;
 
   &:hover {
     @apply bg-success-500 text-stock;
+  }
+}
+
+:host.color-stock button:not(.secondary),
+:host.color-stock a.button:not(.secondary) {
+  @apply bg-stock text-key;
+
+  &:hover {
+    @apply bg-neutral-200 text-key;
   }
 }

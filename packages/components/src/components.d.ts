@@ -11,14 +11,17 @@ import {
   IconNames,
 } from './components/icon/icon';
 import {
-  ICodeChunk,
-} from './components/codeChunk/codeChunk';
+  CodeChunk,
+  CodeError,
+  Collection,
+  Node,
+} from '@stencila/schema';
 import {
   IconNames as IconNames1,
 } from './components/icon/icon';
 import {
-  Collection,
-} from '@stencila/schema';
+  ChildTab,
+} from './components/tabList/tabList';
 
 export namespace Components {
   interface StencilaActionMenu {
@@ -56,7 +59,7 @@ export namespace Components {
     * Name of the icon to render inside the button
     * @see Icon component for possible values
     */
-    'icon': IconNames;
+    'icon': HTMLElement | IconNames;
     /**
     * If true, removes extra padding from Icon inside the button TODO: See if we can automatically infer removal of padding through CSS
     */
@@ -66,17 +69,21 @@ export namespace Components {
     */
     'isLoading': boolean;
     /**
-    * The displayed text of the Tab.
+    * Renders the button using a secondory, and usually less visually prominent, Button CSS stylesheet.
     */
     'isSecondary': boolean;
     /**
-    * The displayed text of the Button.
+    * The overall size of the Button.
     */
     'size': 'xsmall' | 'small' | 'default' | 'large';
+    /**
+    * Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute. Only applies if the button is an anchor link. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target
+    */
+    'target'?: HTMLAnchorElement['target'];
   }
   interface StencilaCodeChunk {
-    'executeHandler': (codeChunk: ICodeChunk) => Promise<ICodeChunk>;
-    'getJSON': () => Promise<unknown>;
+    'executeHandler': (codeChunk: CodeChunk) => Promise<CodeChunk>;
+    'getJSON': () => Promise<CodeChunk>;
     /**
     * Whether the code section is visible or not
     */
@@ -85,6 +92,28 @@ export namespace Components {
     * Programming language of the CodeChunk
     */
     'programmingLanguageProp': string;
+  }
+  interface StencilaCodeEditor {
+    /**
+    * Function to be evaluated over the contents of the CodeChunk.
+    */
+    'executeHandler': (codeChunk: CodeChunk) => Promise<CodeChunk>;
+    /**
+    * Public method, returning the CodeChunk contents as Stencila JSON.
+    */
+    'getJSON': () => Promise<CodeChunk>;
+    /**
+    * Determines the visibility of line numbers
+    */
+    'lineNumbers': boolean;
+    /**
+    * Programming language of the CodeEditor
+    */
+    'programmingLanguage': string;
+    /**
+    * List of all supported programming languages
+    */
+    'programmingLanguages': string[];
   }
   interface StencilaCodeError {
     'hasStacktrace': boolean;
@@ -97,6 +126,9 @@ export namespace Components {
   }
   interface StencilaIcon {
     'icon': IconNames;
+  }
+  interface StencilaNodeList {
+    'nodes': Node[];
   }
   interface StencilaTab {
     /**
@@ -114,17 +146,9 @@ export namespace Components {
   }
   interface StencilaTabList {
     /**
-    * The link the tab should navigate to
-    */
-    'href': string;
-    /**
-    * The displayed text of the Tab
-    */
-    'label': string;
-    /**
     * A list of string values to use as tab labels
     */
-    'tabs': string[];
+    'tabs': ChildTab[];
   }
   interface StencilaToc {
     /**
@@ -169,6 +193,12 @@ declare global {
     new (): HTMLStencilaCodeChunkElement;
   };
 
+  interface HTMLStencilaCodeEditorElement extends Components.StencilaCodeEditor, HTMLStencilElement {}
+  var HTMLStencilaCodeEditorElement: {
+    prototype: HTMLStencilaCodeEditorElement;
+    new (): HTMLStencilaCodeEditorElement;
+  };
+
   interface HTMLStencilaCodeErrorElement extends Components.StencilaCodeError, HTMLStencilElement {}
   var HTMLStencilaCodeErrorElement: {
     prototype: HTMLStencilaCodeErrorElement;
@@ -191,6 +221,12 @@ declare global {
   var HTMLStencilaIconElement: {
     prototype: HTMLStencilaIconElement;
     new (): HTMLStencilaIconElement;
+  };
+
+  interface HTMLStencilaNodeListElement extends Components.StencilaNodeList, HTMLStencilElement {}
+  var HTMLStencilaNodeListElement: {
+    prototype: HTMLStencilaNodeListElement;
+    new (): HTMLStencilaNodeListElement;
   };
 
   interface HTMLStencilaTabElement extends Components.StencilaTab, HTMLStencilElement {}
@@ -232,10 +268,12 @@ declare global {
     'stencila-action-menu': HTMLStencilaActionMenuElement;
     'stencila-button': HTMLStencilaButtonElement;
     'stencila-code-chunk': HTMLStencilaCodeChunkElement;
+    'stencila-code-editor': HTMLStencilaCodeEditorElement;
     'stencila-code-error': HTMLStencilaCodeErrorElement;
     'stencila-code-expression': HTMLStencilaCodeExpressionElement;
     'stencila-details': HTMLStencilaDetailsElement;
     'stencila-icon': HTMLStencilaIconElement;
+    'stencila-node-list': HTMLStencilaNodeListElement;
     'stencila-tab': HTMLStencilaTabElement;
     'stencila-tab-list': HTMLStencilaTabListElement;
     'stencila-toc': HTMLStencilaTocElement;
@@ -281,7 +319,7 @@ declare namespace LocalJSX {
     * Name of the icon to render inside the button
     * @see Icon component for possible values
     */
-    'icon'?: IconNames;
+    'icon'?: HTMLElement | IconNames;
     /**
     * If true, removes extra padding from Icon inside the button TODO: See if we can automatically infer removal of padding through CSS
     */
@@ -291,16 +329,20 @@ declare namespace LocalJSX {
     */
     'isLoading'?: boolean;
     /**
-    * The displayed text of the Tab.
+    * Renders the button using a secondory, and usually less visually prominent, Button CSS stylesheet.
     */
     'isSecondary'?: boolean;
     /**
-    * The displayed text of the Button.
+    * The overall size of the Button.
     */
     'size'?: 'xsmall' | 'small' | 'default' | 'large';
+    /**
+    * Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute. Only applies if the button is an anchor link. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target
+    */
+    'target'?: HTMLAnchorElement['target'];
   }
   interface StencilaCodeChunk {
-    'executeHandler'?: (codeChunk: ICodeChunk) => Promise<ICodeChunk>;
+    'executeHandler'?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
     /**
     * Whether the code section is visible or not
     */
@@ -310,6 +352,24 @@ declare namespace LocalJSX {
     * Programming language of the CodeChunk
     */
     'programmingLanguageProp'?: string;
+  }
+  interface StencilaCodeEditor {
+    /**
+    * Function to be evaluated over the contents of the CodeChunk.
+    */
+    'executeHandler'?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
+    /**
+    * Determines the visibility of line numbers
+    */
+    'lineNumbers'?: boolean;
+    /**
+    * Programming language of the CodeEditor
+    */
+    'programmingLanguage'?: string;
+    /**
+    * List of all supported programming languages
+    */
+    'programmingLanguages'?: string[];
   }
   interface StencilaCodeError {
     'hasStacktrace'?: boolean;
@@ -322,6 +382,9 @@ declare namespace LocalJSX {
   }
   interface StencilaIcon {
     'icon'?: IconNames;
+  }
+  interface StencilaNodeList {
+    'nodes'?: Node[];
   }
   interface StencilaTab {
     /**
@@ -339,17 +402,9 @@ declare namespace LocalJSX {
   }
   interface StencilaTabList {
     /**
-    * The link the tab should navigate to
-    */
-    'href'?: string;
-    /**
-    * The displayed text of the Tab
-    */
-    'label'?: string;
-    /**
     * A list of string values to use as tab labels
     */
-    'tabs': string[];
+    'tabs': ChildTab[];
   }
   interface StencilaToc {
     /**
@@ -376,10 +431,12 @@ declare namespace LocalJSX {
     'stencila-action-menu': StencilaActionMenu;
     'stencila-button': StencilaButton;
     'stencila-code-chunk': StencilaCodeChunk;
+    'stencila-code-editor': StencilaCodeEditor;
     'stencila-code-error': StencilaCodeError;
     'stencila-code-expression': StencilaCodeExpression;
     'stencila-details': StencilaDetails;
     'stencila-icon': StencilaIcon;
+    'stencila-node-list': StencilaNodeList;
     'stencila-tab': StencilaTab;
     'stencila-tab-list': StencilaTabList;
     'stencila-toc': StencilaToc;
@@ -398,10 +455,12 @@ declare module "@stencil/core" {
       'stencila-action-menu': LocalJSX.StencilaActionMenu & JSXBase.HTMLAttributes<HTMLStencilaActionMenuElement>;
       'stencila-button': LocalJSX.StencilaButton & JSXBase.HTMLAttributes<HTMLStencilaButtonElement>;
       'stencila-code-chunk': LocalJSX.StencilaCodeChunk & JSXBase.HTMLAttributes<HTMLStencilaCodeChunkElement>;
+      'stencila-code-editor': LocalJSX.StencilaCodeEditor & JSXBase.HTMLAttributes<HTMLStencilaCodeEditorElement>;
       'stencila-code-error': LocalJSX.StencilaCodeError & JSXBase.HTMLAttributes<HTMLStencilaCodeErrorElement>;
       'stencila-code-expression': LocalJSX.StencilaCodeExpression & JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement>;
       'stencila-details': LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
       'stencila-icon': LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
+      'stencila-node-list': LocalJSX.StencilaNodeList & JSXBase.HTMLAttributes<HTMLStencilaNodeListElement>;
       'stencila-tab': LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
       'stencila-tab-list': LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;
       'stencila-toc': LocalJSX.StencilaToc & JSXBase.HTMLAttributes<HTMLStencilaTocElement>;

@@ -1,4 +1,4 @@
-# stencila-button
+# stencila-code-chunk
 
 <!-- Auto Generated Below -->
 
@@ -21,13 +21,13 @@
 
 ## Methods
 
-### `getJSON() => Promise<unknown>`
+### `getJSON() => Promise<CodeChunk>`
 
 
 
 #### Returns
 
-Type: `Promise<unknown>`
+Type: `Promise<CodeChunk>`
 
 
 
@@ -39,6 +39,8 @@ Type: `Promise<unknown>`
 - [stencila-code-error](../error)
 - [stencila-action-menu](../actionMenu)
 - [stencila-button](../button)
+- [stencila-code-editor](../codeEditor)
+- [stencila-node-list](../nodeList)
 
 ### Graph
 ```mermaid
@@ -46,6 +48,8 @@ graph TD;
   stencila-code-chunk --> stencila-code-error
   stencila-code-chunk --> stencila-action-menu
   stencila-code-chunk --> stencila-button
+  stencila-code-chunk --> stencila-code-editor
+  stencila-code-chunk --> stencila-node-list
   stencila-code-error --> stencila-icon
   stencila-code-error --> stencila-details
   stencila-details --> stencila-icon

@@ -1,6 +1,11 @@
 import { Component, h, Prop, State } from '@stencil/core'
 import { ord } from 'fp-ts'
 
+export interface ChildTab {
+  label: string
+  onClick?: (e: MouseEvent) => unknown
+}
+
 @Component({
   tag: 'stencila-tab-list',
   styleUrls: {
@@ -13,30 +18,14 @@ export class TabList {
   public static readonly elementName = 'stencila-tab-list'
 
   /**
-   * The displayed text of the Tab
-   */
-  @Prop() public label: string
-
-  /**
-   * The link the tab should navigate to
-   */
-  @Prop() public href: string = '#'
-
-  /**
    * A list of string values to use as tab labels
    */
-  @Prop() public tabs!: string[]
-  // private children: Element[]
+  @Prop() public tabs!: ChildTab[]
 
   @State() private activeTabIndex: number = 0
 
   private selectTab(index: number): void {
     this.activeTabIndex = index
-  }
-
-  private onTabClick = (index: number) => (e: MouseEvent): void => {
-    e.preventDefault()
-    this.selectTab(index)
   }
 
   private onKeyboardNavigateTabs = (e: KeyboardEvent): void => {
@@ -51,8 +40,12 @@ export class TabList {
         {this.tabs.map((tab, index): HTMLElement[] => (
           <stencila-tab
             isSelected={index === this.activeTabIndex}
-            label={tab}
-            onClick={this.onTabClick(index)}
+            label={tab.label}
+            onClick={e => {
+              e.preventDefault()
+              this.selectTab(index)
+              tab.onClick && tab.onClick(e)
+            }}
             tabIndex={index === this.activeTabIndex ? 0 : -1}
           />
         ))}

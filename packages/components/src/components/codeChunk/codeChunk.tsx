@@ -1,20 +1,3 @@
-import { baseKeymap, indentSelection } from '@codemirror/next/commands'
-import { lineNumbers } from '@codemirror/next/gutter'
-import { defaultHighlighter } from '@codemirror/next/highlight'
-import {
-  history,
-  redo,
-  redoSelection,
-  undo,
-  undoSelection
-} from '@codemirror/next/history'
-import { keymap } from '@codemirror/next/keymap'
-import { html } from '@codemirror/next/lang-html'
-import { javascript } from '@codemirror/next/lang-javascript'
-import { bracketMatching } from '@codemirror/next/matchbrackets'
-import { specialChars } from '@codemirror/next/special-chars'
-import { EditorState } from '@codemirror/next/state'
-import { EditorView, ViewCommand } from '@codemirror/next/view'
 import {
   Component,
   Element,
@@ -22,15 +5,12 @@ import {
   EventEmitter,
   h,
   Host,
-  Prop,
-  State,
   Listen,
-  Method
+  Method,
+  Prop,
+  State
 } from '@stencil/core'
-import { codeChunk } from '@stencila/schema'
-
-// Workaround for Stencil build issues
-export type ICodeChunk = ReturnType<typeof codeChunk>
+import { codeChunk, CodeChunk } from '@stencila/schema'
 
 interface CollapseEvent extends CustomEvent {
   detail: {
@@ -46,7 +26,7 @@ interface CollapseEvent extends CustomEvent {
   },
   scoped: true
 })
-export class CodeChunk {
+export class CodeChunkComponent {
   public static readonly elementName = 'stencila-code-chunk'
 
   public static readonly slots = {
@@ -56,7 +36,7 @@ export class CodeChunk {
 
   @Element() private el: HTMLElement
 
-  private codeEditorRef: EditorView
+  private codeEditorRef: HTMLStencilaCodeEditorElement | null
 
   /**
    * Programming language of the CodeChunk
@@ -65,18 +45,6 @@ export class CodeChunk {
     attribute: 'data-programmingLanguage'
   })
   public programmingLanguageProp: string
-
-  @State() programmingLanguage = this.programmingLanguageProp || undefined
-
-  private programmingLanguages = ['JavaScript', 'Python']
-
-  private setProgrammingLanguage = (e: Event) => {
-    // @ts-ignore
-    if (e.currentTarget && typeof e.currentTarget['value'] === 'string') {
-      // @ts-ignore
-      this.programmingLanguage = e.currentTarget.value.toLowerCase()
-    }
-  }
 
   /**
    * Whether the code section is visible or not
@@ -110,42 +78,19 @@ export class CodeChunk {
     this.collapseAllListenHandler(event)
   }
 
-  @State() isOutputEmpty: boolean = true
+  @Prop() public executeHandler: (codeChunk: CodeChunk) => Promise<CodeChunk>
 
-  private emptyOutputMessage = 'No output to show'
+  private onExecuteHandler_ = async () => {
+    const node = await this.getJSON()
 
-  private outputExists = () => {
-    const output = this.el.querySelector(`[slot=${CodeChunk.slots.outputs}]`)
-
-    const isEmpty =
-      output === null ? true : output.innerHTML.trim() === '' ? true : false
-
-    this.isOutputEmpty = isEmpty
-
-    if (output && isEmpty) {
-      output.innerHTML = `<em class="emptyContentMessage">${this.emptyOutputMessage}</em>`
-    } else if (isEmpty) {
-      const child = document.createElement('figure')
-      child.setAttribute('slot', CodeChunk.slots.outputs)
-      this.el.appendChild(child)
-      child.innerHTML = `<em class="emptyContentMessage">${this.emptyOutputMessage}</em>`
+    if (this.executeHandler) {
+      const computed = await this.executeHandler(node)
+      this.updateErrors(computed.errors)
+      this.outputs = computed.outputs
+      return computed
     }
-  }
 
-  private getCodeContent = () => this.codeEditorRef.state.toJSON().doc
-
-  @Prop() public executeHandler: (codeChunk: ICodeChunk) => Promise<ICodeChunk>
-
-  private onExecuteHandler_ = () =>
-    this.executeHandler &&
-    this.executeHandler(this.makeCodeChunkSchema()).then(res => {
-      this.updateErrors(res.errors)
-      this.updateOutputs(res.outputs)
-    })
-
-  runCodeView: ViewCommand = () => {
-    this.executeCode()
-    return true
+    return node
   }
 
   @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED'
@@ -159,90 +104,14 @@ export class CodeChunk {
   }
 
   protected componentDidLoad() {
-    this.outputExists()
-    const textContent = this.el.querySelector<HTMLElement>(
-      `[slot="${CodeChunk.slots.text}"]`
-    )
-
-    if (textContent) {
-      let isMac = /Mac/.test(navigator.platform)
-
-      this.codeEditorRef = new EditorView({
-        state: EditorState.create({
-          doc: textContent ? textContent.innerText : '',
-          extensions: [
-            history(),
-            bracketMatching(),
-            lineNumbers(),
-            defaultHighlighter,
-            javascript(),
-            html(),
-            specialChars(),
-            keymap({
-              'Mod-z': undo,
-              'Mod-Shift-z': redo,
-              'Mod-u': view => undoSelection(view) || true,
-              [isMac ? 'Mod-Shift-u' : 'Alt-u']: redoSelection,
-              'Ctrl-y': isMac ? undefined : redo,
-              'Shift-Tab': indentSelection,
-              'Mod-Enter': this.runCodeView
-            }),
-            keymap(baseKeymap)
-          ]
-        })
-      })
-
-      textContent.replaceWith(this.codeEditorRef.dom)
-    }
+    this.codeEditorRef = this.el.querySelector('stencila-code-editor')
   }
 
-  @State() outputs: ICodeChunk['outputs']
+  @State() outputs: CodeChunk['outputs']
 
-  @State() codeErrors: ICodeChunk['errors']
+  @State() codeErrors: CodeChunk['errors']
 
-  private makeOutput = (text: string): HTMLPreElement => {
-    const node = document.createElement('pre')
-    const res = document.createElement('output')
-    res.textContent = text
-    node.appendChild(res)
-    return node
-  }
-
-  private updateOutputs = (outputs: ICodeChunk['outputs'] = []) => {
-    let output = this.el.querySelector(`[slot=${CodeChunk.slots.outputs}]`)
-
-    if (!output) {
-      output = document.createElement('figure')
-      output.setAttribute('slot', CodeChunk.slots.outputs)
-      this.el.appendChild(output)
-    }
-
-    output.innerHTML = ''
-
-    outputs.map(o => {
-      if (output) {
-        if (typeof o === 'string' || typeof o === 'number') {
-          output.appendChild(this.makeOutput(o.toString()))
-        } else if (Array.isArray(o)) {
-          output.appendChild(this.makeOutput(JSON.stringify(o)))
-        } else if (o !== null && typeof o === 'object') {
-          // @ts-ignore
-          if (o.text) {
-            // @ts-ignore
-            output.appendChild(this.makeOutput(o.text))
-          } else {
-            output.appendChild(this.makeOutput(JSON.stringify(o, null, 2)))
-          }
-        }
-      }
-    })
-
-    if (outputs.length === 0) {
-      this.el.removeChild(output)
-    }
-  }
-
-  private updateErrors = (errors: ICodeChunk['errors'] = []) => {
+  private updateErrors = (errors: CodeChunk['errors'] = []) => {
     this.codeErrors = errors.map(error => (
       <stencila-code-error
         kind={(error.kind as unknown) as 'error' | 'warning' | 'incapable'}
@@ -254,14 +123,9 @@ export class CodeChunk {
     ))
   }
 
-  private makeCodeChunkSchema = (): ICodeChunk =>
-    codeChunk(this.getCodeContent(), {
-      programmingLanguage: this.programmingLanguage
-    })
-
   @Method()
-  public async getJSON(): Promise<unknown> {
-    return this.makeCodeChunkSchema()
+  public async getJSON(): Promise<CodeChunk> {
+    return this.codeEditorRef?.getJSON() || codeChunk('')
   }
 
   public render() {
@@ -304,24 +168,16 @@ export class CodeChunk {
             this.isCodeCollapsed === true ? 'hidden' : ''
           }`}
         >
-          <slot name={CodeChunk.slots.text} />
-
-          <select onChange={this.setProgrammingLanguage}>
-            <option disabled selected={this.programmingLanguage === undefined}>
-              Programming Language
-            </option>
-            {this.programmingLanguages.map(language => (
-              <option
-                value={language.toLowerCase()}
-                selected={language.toLowerCase() === this.programmingLanguage}
-              >
-                {language}
-              </option>
-            ))}
-          </select>
+          <stencila-code-editor
+            programmingLanguage={this.programmingLanguageProp}
+          >
+            <slot name={CodeChunkComponent.slots.text} />
+          </stencila-code-editor>
         </div>
 
-        <slot name={CodeChunk.slots.outputs} />
+        <stencila-node-list nodes={this.outputs}>
+          <slot name={CodeChunkComponent.slots.outputs} />
+        </stencila-node-list>
 
         {this.codeErrors}
       </Host>
