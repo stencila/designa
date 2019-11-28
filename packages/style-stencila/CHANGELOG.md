@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.6.0...@stencila/style-stencila@0.7.0) (2019-11-28)
+
+
+### Bug Fixes
+
+* **Button:** Fix small and xsmall button style ([3ae4b62](https://github.com/stencila/style/commit/3ae4b62cee53afbe52e59f3dc657fcd04aaccc7d))
+* **Style Stencila:** Update theme font families ([e2e6240](https://github.com/stencila/style/commit/e2e62400395b488ecf7891299b1da8a1539724fe))
+* **Tooltip:** Don't style element being wrapped by Tooltip component ([dff6969](https://github.com/stencila/style/commit/dff6969829c192ec356cc0c25ce7adacbeb714ef))
+
+
+### Features
+
+* **Button:** Add styles for button anchor elements ([ffd813c](https://github.com/stencila/style/commit/ffd813c817888b31743633384535f2d86b495fea))
+* **CodeEditor:** Add CodeEditor component ([41cf357](https://github.com/stencila/style/commit/41cf357eba238a804891858b9e1f2152c4b0839f))
+* **NodeList:** Add stencila-node-list component ([2c960f5](https://github.com/stencila/style/commit/2c960f509d8d148230c367fbdfa30299dbe17871))
+
+
+
+
+
 # [0.6.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.5.2...@stencila/style-stencila@0.6.0) (2019-10-30)
 
 

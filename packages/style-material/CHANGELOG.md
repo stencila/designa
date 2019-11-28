@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/stencila/style/compare/@stencila/style-material@0.5.1...@stencila/style-material@0.6.0) (2019-11-28)
+
+
+### Bug Fixes
+
+* **Button:** Fix small and xsmall button style ([3ae4b62](https://github.com/stencila/style/commit/3ae4b62cee53afbe52e59f3dc657fcd04aaccc7d))
+* **Tab:** Remove stray style added for debugging purposes ([c32c783](https://github.com/stencila/style/commit/c32c783bdfea7e4e9365cd88d1c9163463ebda51))
+
+
+### Features
+
+* **Button:** Add styles for button anchor elements ([ffd813c](https://github.com/stencila/style/commit/ffd813c817888b31743633384535f2d86b495fea))
+
+
+
+
+
 ## [0.5.1](https://github.com/stencila/style/compare/@stencila/style-material@0.5.0...@stencila/style-material@0.5.1) (2019-10-30)
 
 **Note:** Version bump only for package @stencila/style-material

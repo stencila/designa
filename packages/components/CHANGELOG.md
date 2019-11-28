@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/stencila/designa/compare/@stencila/components@0.5.0...@stencila/components@0.6.0) (2019-11-28)
+
+
+### Bug Fixes
+
+* **ActionMenu:** Fix rendering error when in Material mode ([111228f](https://github.com/stencila/designa/commit/111228f0ada9156cbc6db0924afe733884d8c8c8))
+* **Error:** Fix incorrect component title in README ([0eb19f0](https://github.com/stencila/designa/commit/0eb19f08f3a9aa02ea83f08fac583bffdb93094e))
+
+
+### Features
+
+* **Button:**  Allow Buttons to trigger Form events across Shadow DOM ([72e8121](https://github.com/stencila/designa/commit/72e8121863588f5ea20fb3471dac2bb58c6e9ab6))
+* **Button:** Add ability to render HTML elements as Button icons ([8533a4e](https://github.com/stencila/designa/commit/8533a4e3b25fdc30c69a04a5a31e0cb18f514961))
+* **CodeEditor:** Add CodeEditor component ([41cf357](https://github.com/stencila/designa/commit/41cf357eba238a804891858b9e1f2152c4b0839f))
+* **CodeEditor:** Focus text editor when clicking empty space below it ([a4f56d3](https://github.com/stencila/designa/commit/a4f56d3e34a6e90fd4d4bf329b3a66d9949cf412))
+* **NodeList:** Add stencila-node-list component ([2c960f5](https://github.com/stencila/designa/commit/2c960f509d8d148230c367fbdfa30299dbe17871))
+
+
+
+
+
 # [0.5.0](https://github.com/stencila/designa/compare/@stencila/components@0.4.2...@stencila/components@0.5.0) (2019-10-30)
 
 
