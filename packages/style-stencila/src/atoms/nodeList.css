@@ -43,6 +43,10 @@ stencila-node-list {
       @apply border-0 p-0 m-0;
     }
 
+    img {
+      @apply border-l-0 border-r-0 border-b-0;
+    }
+
     & > *:not(figcaption) {
       @apply my-3 pt-3 border-dashed border-t border-neutral-300;
 
