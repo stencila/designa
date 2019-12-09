@@ -17,7 +17,7 @@
   "scripts": {
     "build": "stencil build --docs",
     "build:watch": "concurrently \"npm run dev\" \"chokidar '../style-*/dist/*.css' -c 'npm run kill; npm run clean && npm run dev'\"",
-    "dev": "stencil build --dev --watch",
+    "dev": "stencil build --dev --watch --docs",
     "kill": "pkill -f \"Stencil: stencila-components\"",
     "clean": "rimraf .stencil",
     "test": "stencil test --spec --e2e",

@@ -6,9 +6,20 @@
  * This generator implements this standard, which is used by Storybook to display
  * documentation.
  */
-export const transformJSONDocs = docsData => {
+
+export async function generateJsonDocs(
+  config,
+  compilerCtx,
+  _buildCtx,
+  docsData
+) {
+  const jsonOutputTargets = config.outputTargets.filter(
+    isOutputTargetCustomElementDocsJson
+  )
+
   const { components, ...docsDataWithoutComponents } = docsData
-  return {
+
+  const json = {
     ...docsDataWithoutComponents,
     tags: components.map(cmp => ({
       filePath: cmp.filePath,
@@ -43,4 +54,26 @@ export const transformJSONDocs = docsData => {
       deprecation: cmp.deprecation
     }))
   }
+
+  const jsonContent = JSON.stringify(json, null, 2)
+
+  await Promise.all(
+    jsonOutputTargets.map(() => {
+      return writeDocsOutput(compilerCtx, jsonContent, config.rootDir)
+    })
+  )
+}
+
+const isOutputTargetCustomElementDocsJson = o =>
+  o.name === 'custom-element-docs'
+
+export const writeDocsOutput = async (
+  compilerCtx,
+  jsonContent: string,
+  root: string
+) => {
+  return compilerCtx.fs.writeFile(
+    `${root}/dist/custom-elements.json`,
+    jsonContent
+  )
 }

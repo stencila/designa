@@ -9,7 +9,7 @@ import {
   setCustomElements
 } from '@storybook/web-components'
 import { withRootAttribute } from 'storybook-addon-root-attribute'
-import customElements from '../packages/components/dist/stencila-components.json'
+import customElements from '../packages/components/dist/custom-elements.json'
 import { transformJSONDocs } from './jsonDocTransformer'
 
 const cssresources = [

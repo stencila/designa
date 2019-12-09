@@ -4,6 +4,7 @@ import { postcss } from '@stencil/postcss'
 import path from 'path'
 import cssImport from 'postcss-import'
 import tailwind from 'tailwindcss'
+import { generateJsonDocs } from './jsonDocTransformer'
 
 const tailwindConfigPath = path.join(
   __dirname,
@@ -35,8 +36,9 @@ export const config: Config = {
       type: 'docs-readme'
     },
     {
-      type: 'docs-json',
-      file: 'dist/stencila-components.json'
+      type: 'custom',
+      generator: generateJsonDocs,
+      name: 'custom-element-docs'
     },
     {
       type: 'www',
