@@ -1,6 +1,11 @@
 @import '../tailwind/base';
 @import './anchor';
 
+:host,
+stencila-tab {
+  @apply flex-grow;
+}
+
 :host li,
 ul[role='tablist'] li {
   @apply list-none text-center uppercase text-sm tracking-wider font-medium flex flex-row text-center mb-4 m-0;

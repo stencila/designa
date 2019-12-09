@@ -12,7 +12,6 @@ import {
 } from './components/icon/icon';
 import {
   CodeChunk,
-  CodeError,
   Collection,
   Node,
 } from '@stencila/schema';

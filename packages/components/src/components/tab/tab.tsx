@@ -31,7 +31,7 @@ export class Tab {
       <li role="presentation">
         <a
           aria-selected={this.isSelected.toString()}
-          href={this.label}
+          href={this.href}
           role="tab"
         >
           {this.label}
