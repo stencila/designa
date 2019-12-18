@@ -12,7 +12,7 @@ a.button {
     @apply inline-block pr-2;
   }
 
-  [disabled] {
+  &[disabled] {
     @apply cursor-not-allowed;
   }
 
@@ -37,10 +37,13 @@ a.button {
     height: 1.125em;
   }
 
-  stencila-icon svg {
+  stencila-icon span {
     @apply pr-1;
     width: 1.125em;
     height: 1.125em;
+  }
+
+  stencila-icon svg {
     stroke: currentColor;
     stroke-width: 3;
     stroke-linecap: round;
@@ -48,7 +51,7 @@ a.button {
     fill: none;
   }
 
-  &.iconOnly stencila-icon svg {
+  &.iconOnly stencila-icon span {
     @apply pr-0;
   }
 }

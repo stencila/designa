@@ -299,6 +299,10 @@ export class Icon {
   @Prop() public readonly icon: IconNames
 
   public render() {
-    return <Host innerHTML={feather.icons[this.icon].toSvg()}></Host>
+    return (
+      <Host>
+        <span innerHTML={feather.icons[this.icon].toSvg()}></span>
+      </Host>
+    )
   }
 }
