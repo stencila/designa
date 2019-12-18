@@ -6,3 +6,11 @@
   border-style: solid;
   border-color: theme('borderColor.default', currentColor);
 }
+
+html {
+  font-size: 16px;
+}
+
+.hidden {
+  display: none;
+}
