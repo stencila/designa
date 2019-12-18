@@ -7,14 +7,26 @@ export default {
 
 export const codeEditor = () =>
   html`
-    <stencila-code-editor
-      >print(2 + 2); &lt;a href="#"&gt;test&lt;/a&gt;</stencila-code-editor
-    >
+    <stencila-code-editor>
+      <pre slot="text">
+<code>print(2 + 2);
+  &lt;a href="#"&gt;test&lt;/a&gt;
+
+const f = (a) => {
+  return a * 2;
+}</code></pre>
+    </stencila-code-editor>
   `
 
 export const withoutLineNumbers = () =>
   html`
-    <stencila-code-editor line-numbers="false"
-      >print(2 + 2); &lt;a href="#"&gt;test&lt;/a&gt;</stencila-code-editor
-    >
+    <stencila-code-editor line-numbers="false">
+      <pre slot="text">
+<code>print(2 + 2);
+  &lt;a href="#"&gt;test&lt;/a&gt;
+
+const f = (a) => {
+  return a * 2;
+}</code></pre>
+    </stencila-code-editor>
   `

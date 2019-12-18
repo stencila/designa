@@ -2,6 +2,8 @@
 
 :host,
 stencila-code-editor {
+  all: initial;
+
   @apply flex;
   --border-width: 1px;
   --background-color: transparent;
@@ -10,18 +12,27 @@ stencila-code-editor {
     @apply flex flex-col flex-grow rounded border border-neutral-300;
     background-color: var(--background-color);
     border-width: var(--border-width);
+
+    &:focus-within {
+      box-shadow: inset 0px 0px 0px 2px var(--color-neutral-400);
+    }
   }
 
   .codeEditor {
-    @apply flex-grow cursor-text;
-  }
+    @apply flex-grow cursor-text font-mono;
 
-  .codemirror-focused {
-    @apply outline-none;
-  }
+    .codemirror-content *,
+    .gutterElement * {
+      @apply font-mono text-sm;
+    }
 
-  .codemirror-scroller {
-    @apply overflow-auto;
+    .codemirror-focused {
+      @apply outline-none;
+    }
+
+    .codemirror-scroller {
+      @apply overflow-auto;
+    }
   }
 
   menu {

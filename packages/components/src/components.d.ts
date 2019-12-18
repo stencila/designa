@@ -96,7 +96,7 @@ export namespace Components {
     /**
     * Function to be evaluated over the contents of the CodeChunk.
     */
-    'executeHandler': (codeChunk: CodeChunk) => Promise<CodeChunk>;
+    'executeHandler': (codeChunk: CodeChunk) => Promise<unknown>;
     /**
     * Public method, returning the CodeChunk contents as Stencila JSON.
     */
@@ -356,7 +356,7 @@ declare namespace LocalJSX {
     /**
     * Function to be evaluated over the contents of the CodeChunk.
     */
-    'executeHandler'?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
+    'executeHandler'?: (codeChunk: CodeChunk) => Promise<unknown>;
     /**
     * Determines the visibility of line numbers
     */
