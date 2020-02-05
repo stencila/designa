@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@abide-community/parcel-plugin-clean-out-dir": "^1.0.0",
-    "concurrently": "^4.1.2",
+    "concurrently": "^5.1.0",
     "parcel-plugin-css-pretransform": "^1.0.0"
   }
 }

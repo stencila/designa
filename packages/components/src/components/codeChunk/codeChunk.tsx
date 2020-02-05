@@ -114,18 +114,18 @@ export class CodeChunkComponent {
   private updateErrors = (errors: CodeChunk['errors'] = []) => {
     this.codeErrors = errors.map(error => (
       <stencila-code-error
-        kind={(error.kind as unknown) as 'error' | 'warning' | 'incapable'}
-        hasStacktrace={error.trace !== undefined}
+        kind={(error.errorType as unknown) as 'error' | 'warning' | 'incapable'}
+        hasStacktrace={error.stackTrace !== undefined}
       >
-        {error.message}
-        <pre slot="stacktrace">{error.trace}</pre>
+        {error.errorMessage}
+        <pre slot="stacktrace">{error.stackTrace}</pre>
       </stencila-code-error>
     ))
   }
 
   @Method()
   public async getJSON(): Promise<CodeChunk> {
-    return this.codeEditorRef?.getJSON() || codeChunk('')
+    return this.codeEditorRef?.getJSON() ?? codeChunk({ text: '' })
   }
 
   public render() {
