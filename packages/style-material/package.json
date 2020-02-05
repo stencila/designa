@@ -35,12 +35,12 @@
   },
   "dependencies": {
     "@stencila/brand": "file:../brand",
-    "tailwindcss": "^1.1.2"
+    "tailwindcss": "^1.1.4"
   },
   "devDependencies": {
     "@abide-community/parcel-plugin-clean-out-dir": "^1.0.0",
-    "concurrently": "^4.1.2",
+    "concurrently": "^5.1.0",
     "parcel-plugin-css-pretransform": "^1.0.0",
-    "tocbot": "^4.8.0"
+    "tocbot": "^4.10.0"
   }
 }

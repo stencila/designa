@@ -10,7 +10,7 @@ export const withPassedObject = () => html`
   <stencila-vertical-nav .collection=${collection}></stencila-vertical-nav>
 `
 
-export const readingFromHTMLhead = () =>
+export const readingFromHTMLHead = () =>
   html`
     <html>
       <head>
