@@ -1,5 +1,5 @@
 import { Component, Element, h, Host, Prop, State } from '@stencil/core'
-import { isCode, isPrimitive, Node } from '@stencila/schema'
+import { isA, isCode, isPrimitive, Node } from '@stencila/schema'
 import { isEmpty } from 'fp-ts/lib/Array'
 
 /* const elementName = 'stencila-node-list' */
@@ -79,6 +79,8 @@ export class OutputsList {
           <output>{node.text}</output>
         </pre>
       )
+    } else if (isA('ImageObject', node)) {
+      return <stencila-image-object image={node}></stencila-image-object>
     }
 
     return JSON.stringify(node)
