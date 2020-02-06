@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/stencila/style/compare/@stencila/style-material@0.6.0...@stencila/style-material@0.7.0) (2020-02-06)
+
+
+### Bug Fixes
+
+* **Button:** Fix disabled button styles ([14fed9b](https://github.com/stencila/style/commit/14fed9bceeb8bcd9a6b630607bee532f6ae9746d))
+* **Tab:** Allow tab components to grow in width ([556ea7f](https://github.com/stencila/style/commit/556ea7fb4bc78099cf7b410a7bfd710cf5459123))
+
+
+### Features
+
+* **Icon:** Animate loading spinner ([4dc5f00](https://github.com/stencila/style/commit/4dc5f00361197114b386e766f06b7c8bbd729382))
+
+
+
+
+
 # [0.6.0](https://github.com/stencila/style/compare/@stencila/style-material@0.5.1...@stencila/style-material@0.6.0) (2019-11-28)
 
 

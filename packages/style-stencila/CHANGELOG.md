@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.7.1...@stencila/style-stencila@0.8.0) (2020-02-06)
+
+
+### Bug Fixes
+
+* **Base:** Declare root font size & global hidden class ([a9dfe83](https://github.com/stencila/style/commit/a9dfe83abff467ddf606fdae9c57e48a6a383d18))
+* **Tab:** Allow tab components to grow in width ([556ea7f](https://github.com/stencila/style/commit/556ea7fb4bc78099cf7b410a7bfd710cf5459123))
+
+
+### Features
+
+* **Icon:** Animate loading spinner ([4dc5f00](https://github.com/stencila/style/commit/4dc5f00361197114b386e766f06b7c8bbd729382))
+
+
+
+
+
 ## [0.7.1](https://github.com/stencila/style/compare/@stencila/style-stencila@0.7.0...@stencila/style-stencila@0.7.1) (2019-11-28)
 
 
