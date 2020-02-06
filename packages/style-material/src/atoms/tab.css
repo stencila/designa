@@ -11,7 +11,7 @@ ul[role='tablist'] li {
   @apply list-none text-center uppercase text-sm tracking-wider font-medium flex flex-row text-center mb-4 m-0;
 
   a {
-    @apply block border-b-2 border-neutral-300 w-full py-4 px-4;
+    @apply block border-b-2 border-neutral-300 leading-none w-full py-4 px-4;
 
     &[aria-selected='true'] {
       @apply border-b-2 border-primary-500 text-primary-500;

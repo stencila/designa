@@ -19,7 +19,7 @@ ul[role='tablist'] li {
   }
 
   a {
-    @apply block w-full py-2 px-4;
+    @apply block leading-none w-full py-2 px-4;
 
     &[aria-selected='true'] {
       @apply bg-neutral-300;
