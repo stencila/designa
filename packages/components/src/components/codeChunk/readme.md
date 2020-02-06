@@ -55,6 +55,7 @@ graph TD;
   stencila-details --> stencila-icon
   stencila-action-menu --> stencila-button
   stencila-button --> stencila-icon
+  stencila-node-list --> stencila-image-object
   style stencila-code-chunk fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

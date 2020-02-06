@@ -13,6 +13,7 @@ import {
 import {
   CodeChunk,
   Collection,
+  ImageObject,
   Node,
 } from '@stencila/schema';
 import {
@@ -141,6 +142,12 @@ export namespace Components {
   interface StencilaIcon {
     'icon': IconNames;
   }
+  interface StencilaImageObject {
+    /**
+    * The `ImageObject` node to render
+    */
+    'image': ImageObject;
+  }
   interface StencilaNodeList {
     /**
     * Array of nodes to render.
@@ -240,6 +247,12 @@ declare global {
     new (): HTMLStencilaIconElement;
   };
 
+  interface HTMLStencilaImageObjectElement extends Components.StencilaImageObject, HTMLStencilElement {}
+  var HTMLStencilaImageObjectElement: {
+    prototype: HTMLStencilaImageObjectElement;
+    new (): HTMLStencilaImageObjectElement;
+  };
+
   interface HTMLStencilaNodeListElement extends Components.StencilaNodeList, HTMLStencilElement {}
   var HTMLStencilaNodeListElement: {
     prototype: HTMLStencilaNodeListElement;
@@ -290,6 +303,7 @@ declare global {
     'stencila-code-expression': HTMLStencilaCodeExpressionElement;
     'stencila-details': HTMLStencilaDetailsElement;
     'stencila-icon': HTMLStencilaIconElement;
+    'stencila-image-object': HTMLStencilaImageObjectElement;
     'stencila-node-list': HTMLStencilaNodeListElement;
     'stencila-tab': HTMLStencilaTabElement;
     'stencila-tab-list': HTMLStencilaTabListElement;
@@ -415,6 +429,12 @@ declare namespace LocalJSX {
   interface StencilaIcon {
     'icon'?: IconNames;
   }
+  interface StencilaImageObject {
+    /**
+    * The `ImageObject` node to render
+    */
+    'image'?: ImageObject;
+  }
   interface StencilaNodeList {
     /**
     * Array of nodes to render.
@@ -471,6 +491,7 @@ declare namespace LocalJSX {
     'stencila-code-expression': StencilaCodeExpression;
     'stencila-details': StencilaDetails;
     'stencila-icon': StencilaIcon;
+    'stencila-image-object': StencilaImageObject;
     'stencila-node-list': StencilaNodeList;
     'stencila-tab': StencilaTab;
     'stencila-tab-list': StencilaTabList;
@@ -495,6 +516,7 @@ declare module "@stencil/core" {
       'stencila-code-expression': LocalJSX.StencilaCodeExpression & JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement>;
       'stencila-details': LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
       'stencila-icon': LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
+      'stencila-image-object': LocalJSX.StencilaImageObject & JSXBase.HTMLAttributes<HTMLStencilaImageObjectElement>;
       'stencila-node-list': LocalJSX.StencilaNodeList & JSXBase.HTMLAttributes<HTMLStencilaNodeListElement>;
       'stencila-tab': LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
       'stencila-tab-list': LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;
