@@ -21,6 +21,13 @@ import { EditorState } from '@codemirror/next/state'
 import { Command, EditorView } from '@codemirror/next/view'
 import { Component, Element, h, Host, Method, Prop, State } from '@stencil/core'
 import { codeChunk, CodeChunk } from '@stencila/schema'
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import { patch as selectPolyfill } from 'shadow-root-get-selection-polyfill'
+
+const slots = {
+  text: 'text'
+}
 
 @Component({
   tag: 'stencila-code-editor',
@@ -31,20 +38,21 @@ import { codeChunk, CodeChunk } from '@stencila/schema'
   scoped: true
 })
 export class CodeEditor {
-  public static readonly elementName = 'stencila-code-editor'
+  /* private static readonly elementName = 'stencila-code-editor' */
 
-  public static readonly slots = {
-    text: 'text'
-  }
-
-  @Element() private el: HTMLElement
+  @Element() private el: HTMLStencilaCodeEditorElement
 
   private codeEditorRef: EditorView
 
   /**
    * List of all supported programming languages
    */
-  @Prop() public programmingLanguages: string[] = ['Python', 'JavaScript']
+  @Prop() public programmingLanguages: string[] = [
+    'Bash',
+    'JavaScript',
+    'R',
+    'Python'
+  ]
 
   /**
    * Changes the active programming language of the editor.
@@ -58,10 +66,10 @@ export class CodeEditor {
   /**
    * Programming language of the CodeEditor
    */
-  @Prop() public programmingLanguage: string
+  @Prop() public programmingLanguage: string | undefined
 
   @State() activeProgrammingLanguage =
-    this.programmingLanguage || this.programmingLanguages[0]?.toLowerCase()
+    this.programmingLanguage ?? this.programmingLanguages[0]?.toLowerCase()
 
   /**
    * Function to be evaluated over the contents of the CodeChunk.
@@ -71,23 +79,29 @@ export class CodeEditor {
   /**
    * Wrapper around the `executeHandler` function, needed to run using CodeMirror keyboard shortcuts.
    */
-  runCodeView: Command = () => {
-    this.getJSON().then(codeChunk => {
-      this.executeHandler(codeChunk)
-    })
+  private runCodeView: Command = () => {
+    this.getJSON()
+      .then(codeChunk => {
+        return this.executeHandler(codeChunk)
+      })
+      .catch(err => {
+        console.error(err)
+        return false
+      })
+
     return true
   }
 
   /**
    * Determines the visibility of line numbers
    */
-  @Prop() public lineNumbers: boolean = true
+  @Prop() public lineNumbers = true
 
   private initCodeMirror = () => {
-    let isMac = /Mac/.test(navigator.platform)
+    const isMac = navigator.platform.includes('Mac')
 
     const root = this.el
-    const slot = root?.querySelector('[slot]')
+    const slot = root.querySelector('[slot]')
     const textContent =
       slot?.textContent ||
       root?.querySelector('#codeEditorTarget')?.textContent ||
@@ -128,7 +142,7 @@ export class CodeEditor {
       })
     })
 
-    root
+    return root
       ?.querySelector('#codeEditorTarget')
       ?.replaceWith(this.codeEditorRef.dom)
   }
@@ -144,9 +158,12 @@ export class CodeEditor {
    */
   @Method()
   public async getJSON(): Promise<CodeChunk> {
-    return codeChunk(this.getCodeContent(), {
-      programmingLanguage: this.activeProgrammingLanguage
-    })
+    return Promise.resolve(
+      codeChunk({
+        text: this.getCodeContent(),
+        programmingLanguage: this.activeProgrammingLanguage
+      })
+    )
   }
 
   /**
@@ -174,21 +191,18 @@ export class CodeEditor {
             onClick={this.focusEditor}
           >
             <div class="hidden">
-              <slot name={CodeEditor.slots.text} />
+              <slot name={slots.text} />
             </div>
             <div id="codeEditorTarget" />
           </div>
 
           <menu>
             <select onChange={this.setProgrammingLanguage}>
-              {this.programmingLanguages.map((language, idx) => (
+              {this.programmingLanguages.map(language => (
                 <option
                   value={language.toLowerCase()}
                   selected={
-                    !this.activeProgrammingLanguage
-                      ? idx === 0
-                      : language.toLowerCase() ===
-                        this.activeProgrammingLanguage
+                    language.toLowerCase() === this.activeProgrammingLanguage
                   }
                 >
                   {language}

@@ -27,14 +27,14 @@ interface CollapseEvent extends CustomEvent {
   scoped: true
 })
 export class CodeChunkComponent {
-  public static readonly elementName = 'stencila-code-chunk'
+  /* private static readonly elementName = 'stencila-code-chunk' */
 
-  public static readonly slots = {
+  private static readonly slots = {
     text: 'text',
     outputs: 'outputs'
   }
 
-  @Element() private el: HTMLElement
+  @Element() private el: HTMLStencilaCodeChunkElement
 
   private codeEditorRef: HTMLStencilaCodeEditorElement | null
 
@@ -52,7 +52,7 @@ export class CodeChunkComponent {
   @Prop({
     attribute: 'data-collapsed'
   })
-  public isCodeCollapsedProp: boolean = false
+  public isCodeCollapsedProp = false
 
   @State() private isCodeCollapsed: boolean = this.isCodeCollapsedProp
 
@@ -64,6 +64,10 @@ export class CodeChunkComponent {
     this.collapseAllCode.emit({ isCollapsed })
   }
 
+  /**
+   * Trigger a global DOM event to collapse all `CodeChunk` and `CodeFragment` component code expressions,
+   * leaving only the results visible.
+   */
   @Event({
     eventName: 'collapseAllCode'
   })
@@ -78,12 +82,18 @@ export class CodeChunkComponent {
     this.collapseAllListenHandler(event)
   }
 
+  private collapseAllCodeTrigger = () =>
+    this.collapseAllCodeHandler(!this.isCodeCollapsed)
+
+  /**
+   * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
+   */
   @Prop() public executeHandler: (codeChunk: CodeChunk) => Promise<CodeChunk>
 
   private onExecuteHandler_ = async () => {
     const node = await this.getJSON()
 
-    if (this.executeHandler) {
+    if (this.executeHandler !== undefined) {
       const computed = await this.executeHandler(node)
       this.updateErrors(computed.errors)
       this.outputs = computed.outputs
@@ -97,10 +107,15 @@ export class CodeChunkComponent {
 
   private executeCode = () => {
     this.executeCodeState = 'PENDING'
-    this.onExecuteHandler_().then(res => {
-      this.executeCodeState = 'RESOLVED'
-      return res
-    })
+    this.onExecuteHandler_()
+      .then(res => {
+        this.executeCodeState = 'RESOLVED'
+        return res
+      })
+      .catch(err => {
+        console.error(err)
+        return err
+      })
   }
 
   protected componentDidLoad() {
@@ -123,6 +138,9 @@ export class CodeChunkComponent {
     ))
   }
 
+  /**
+   * Returns the `CodeChunk` node with the updated `text` content from the editor.
+   */
   @Method()
   public async getJSON(): Promise<CodeChunk> {
     return this.codeEditorRef?.getJSON() ?? codeChunk({ text: '' })
@@ -144,11 +162,11 @@ export class CodeChunkComponent {
             isSecondary={true}
             icon={this.isCodeCollapsed ? 'eye' : 'eye-off'}
             size="xsmall"
-            onClick={() => this.collapseAllCodeHandler(!this.isCodeCollapsed)}
+            onClick={this.collapseAllCodeTrigger}
           >
             {this.isCodeCollapsed ? 'Show' : 'Hide'} All Sources
           </stencila-button>
-          {this.executeHandler && (
+          {this.executeHandler !== undefined && (
             <stencila-button
               icon="play"
               isSecondary={true}

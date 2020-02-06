@@ -5,25 +5,25 @@
 
 ## Properties
 
-| Property                  | Attribute                  | Description                                | Type                                           | Default     |
-| ------------------------- | -------------------------- | ------------------------------------------ | ---------------------------------------------- | ----------- |
-| `executeHandler`          | --                         |                                            | `(codeChunk: CodeChunk) => Promise<CodeChunk>` | `undefined` |
-| `isCodeCollapsedProp`     | `data-collapsed`           | Whether the code section is visible or not | `boolean`                                      | `false`     |
-| `programmingLanguageProp` | `data-programminglanguage` | Programming language of the CodeChunk      | `string`                                       | `undefined` |
+| Property                  | Attribute                  | Description                                                                                            | Type                                           | Default     |
+| ------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------- | ----------- |
+| `executeHandler`          | --                         | A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`. | `(codeChunk: CodeChunk) => Promise<CodeChunk>` | `undefined` |
+| `isCodeCollapsedProp`     | `data-collapsed`           | Whether the code section is visible or not                                                             | `boolean`                                      | `false`     |
+| `programmingLanguageProp` | `data-programminglanguage` | Programming language of the CodeChunk                                                                  | `string`                                       | `undefined` |
 
 
 ## Events
 
-| Event             | Description | Type               |
-| ----------------- | ----------- | ------------------ |
-| `collapseAllCode` |             | `CustomEvent<any>` |
+| Event             | Description                                                                                                                             | Type               |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `collapseAllCode` | Trigger a global DOM event to collapse all `CodeChunk` and `CodeFragment` component code expressions, leaving only the results visible. | `CustomEvent<any>` |
 
 
 ## Methods
 
 ### `getJSON() => Promise<CodeChunk>`
 
-
+Returns the `CodeChunk` node with the updated `text` content from the editor.
 
 #### Returns
 
