@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/stencila/style/compare/@stencila/style-material@0.7.0...@stencila/style-material@0.7.1) (2020-02-06)
+
+
+### Bug Fixes
+
+* **Tab:** Make tab content align with icons ([db2e1fd](https://github.com/stencila/style/commit/db2e1fdcbb250ed2ac7e8acc9f979b486b0de89c))
+
+
+
+
+
 # [0.7.0](https://github.com/stencila/style/compare/@stencila/style-material@0.6.0...@stencila/style-material@0.7.0) (2020-02-06)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/stencila/designa/compare/@stencila/components@0.7.0...@stencila/components@0.8.0) (2020-02-06)
+
+
+### Features
+
+* **ImageObject:** Add stencila-image-object component ([c69b2c7](https://github.com/stencila/designa/commit/c69b2c7f18ffa9c96021b918630e7537bca7d9ee))
+
+
+
+
+
 # [0.7.0](https://github.com/stencila/designa/compare/@stencila/components@0.6.1...@stencila/components@0.7.0) (2020-02-06)
 
 
