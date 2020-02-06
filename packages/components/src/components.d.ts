@@ -81,7 +81,13 @@ export namespace Components {
     'target'?: HTMLAnchorElement['target'];
   }
   interface StencilaCodeChunk {
+    /**
+    * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
+    */
     'executeHandler': (codeChunk: CodeChunk) => Promise<CodeChunk>;
+    /**
+    * Returns the `CodeChunk` node with the updated `text` content from the editor.
+    */
     'getJSON': () => Promise<CodeChunk>;
     /**
     * Whether the code section is visible or not
@@ -108,15 +114,24 @@ export namespace Components {
     /**
     * Programming language of the CodeEditor
     */
-    'programmingLanguage': string;
+    'programmingLanguage': string | undefined;
     /**
     * List of all supported programming languages
     */
     'programmingLanguages': string[];
   }
   interface StencilaCodeError {
+    /**
+    * The severity of the error message
+    */
     'hasStacktrace': boolean;
+    /**
+    * The severity of the error message
+    */
     'kind': 'incapable' | 'warning' | 'error';
+    /**
+    * Determines whether the stacktrace is visible or not
+    */
     'open': boolean;
   }
   interface StencilaCodeExpression {}
@@ -127,7 +142,10 @@ export namespace Components {
     'icon': IconNames;
   }
   interface StencilaNodeList {
-    'nodes': Node[];
+    /**
+    * Array of nodes to render.
+    */
+    'nodes': Node[] | undefined;
   }
   interface StencilaTab {
     /**
@@ -341,11 +359,17 @@ declare namespace LocalJSX {
     'target'?: HTMLAnchorElement['target'];
   }
   interface StencilaCodeChunk {
+    /**
+    * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
+    */
     'executeHandler'?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
     /**
     * Whether the code section is visible or not
     */
     'isCodeCollapsedProp'?: boolean;
+    /**
+    * Trigger a global DOM event to collapse all `CodeChunk` and `CodeFragment` component code expressions, leaving only the results visible.
+    */
     'onCollapseAllCode'?: (event: CustomEvent<any>) => void;
     /**
     * Programming language of the CodeChunk
@@ -364,15 +388,24 @@ declare namespace LocalJSX {
     /**
     * Programming language of the CodeEditor
     */
-    'programmingLanguage'?: string;
+    'programmingLanguage'?: string | undefined;
     /**
     * List of all supported programming languages
     */
     'programmingLanguages'?: string[];
   }
   interface StencilaCodeError {
+    /**
+    * The severity of the error message
+    */
     'hasStacktrace'?: boolean;
+    /**
+    * The severity of the error message
+    */
     'kind'?: 'incapable' | 'warning' | 'error';
+    /**
+    * Determines whether the stacktrace is visible or not
+    */
     'open'?: boolean;
   }
   interface StencilaCodeExpression {}
@@ -383,7 +416,10 @@ declare namespace LocalJSX {
     'icon'?: IconNames;
   }
   interface StencilaNodeList {
-    'nodes'?: Node[];
+    /**
+    * Array of nodes to render.
+    */
+    'nodes'?: Node[] | undefined;
   }
   interface StencilaTab {
     /**

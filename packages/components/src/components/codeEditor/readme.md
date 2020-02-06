@@ -5,12 +5,12 @@
 
 ## Properties
 
-| Property               | Attribute              | Description                                                  | Type                                         | Default                    |
-| ---------------------- | ---------------------- | ------------------------------------------------------------ | -------------------------------------------- | -------------------------- |
-| `executeHandler`       | --                     | Function to be evaluated over the contents of the CodeChunk. | `(codeChunk: CodeChunk) => Promise<unknown>` | `undefined`                |
-| `lineNumbers`          | `line-numbers`         | Determines the visibility of line numbers                    | `boolean`                                    | `true`                     |
-| `programmingLanguage`  | `programming-language` | Programming language of the CodeEditor                       | `string`                                     | `undefined`                |
-| `programmingLanguages` | --                     | List of all supported programming languages                  | `string[]`                                   | `['Python', 'JavaScript']` |
+| Property               | Attribute              | Description                                                  | Type                                         | Default                                                     |
+| ---------------------- | ---------------------- | ------------------------------------------------------------ | -------------------------------------------- | ----------------------------------------------------------- |
+| `executeHandler`       | --                     | Function to be evaluated over the contents of the CodeChunk. | `(codeChunk: CodeChunk) => Promise<unknown>` | `undefined`                                                 |
+| `lineNumbers`          | `line-numbers`         | Determines the visibility of line numbers                    | `boolean`                                    | `true`                                                      |
+| `programmingLanguage`  | `programming-language` | Programming language of the CodeEditor                       | `string`                                     | `undefined`                                                 |
+| `programmingLanguages` | --                     | List of all supported programming languages                  | `string[]`                                   | `[     'Bash',     'JavaScript',     'R',     'Python'   ]` |
 
 
 ## Methods

@@ -5,11 +5,11 @@
 
 ## Properties
 
-| Property        | Attribute        | Description | Type                                  | Default     |
-| --------------- | ---------------- | ----------- | ------------------------------------- | ----------- |
-| `hasStacktrace` | `has-stacktrace` |             | `boolean`                             | `undefined` |
-| `kind`          | `kind`           |             | `"error" \| "incapable" \| "warning"` | `'warning'` |
-| `open`          | `open`           |             | `boolean`                             | `false`     |
+| Property        | Attribute        | Description                                         | Type                                  | Default     |
+| --------------- | ---------------- | --------------------------------------------------- | ------------------------------------- | ----------- |
+| `hasStacktrace` | `has-stacktrace` | The severity of the error message                   | `boolean`                             | `undefined` |
+| `kind`          | `kind`           | The severity of the error message                   | `"error" \| "incapable" \| "warning"` | `'warning'` |
+| `open`          | `open`           | Determines whether the stacktrace is visible or not | `boolean`                             | `false`     |
 
 
 ## Dependencies

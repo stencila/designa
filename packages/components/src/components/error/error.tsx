@@ -6,19 +6,19 @@ import { Component, h, Host, Prop } from '@stencil/core'
   shadow: true
 })
 export class Error {
-  public static readonly elementName = 'stencila-code-error'
+  /* public static readonly elementName = 'stencila-code-error' */
 
-  /*
+  /**
    * Determines whether the stacktrace is visible or not
    */
-  @Prop() open: boolean = false
+  @Prop() open = false
 
-  /*
+  /**
    * The severity of the error message
    */
   @Prop() kind: 'incapable' | 'warning' | 'error' = 'warning'
 
-  /*
+  /**
    * The severity of the error message
    */
   @Prop() hasStacktrace: boolean
