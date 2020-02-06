@@ -1,4 +1,8 @@
-import { baseKeymap, indentSelection } from '@codemirror/next/commands'
+import {
+  baseKeymap,
+  moveLineEnd,
+  moveLineStart
+} from '@codemirror/next/commands'
 import { lineNumbers } from '@codemirror/next/gutter'
 import { defaultHighlighter } from '@codemirror/next/highlight'
 import {
@@ -17,8 +21,6 @@ import { EditorState } from '@codemirror/next/state'
 import { Command, EditorView } from '@codemirror/next/view'
 import { Component, Element, h, Host, Method, Prop, State } from '@stencil/core'
 import { codeChunk, CodeChunk } from '@stencila/schema'
-// @ts-ignore
-import { patch as selectPolyfill } from 'shadow-root-get-selection-polyfill'
 
 @Component({
   tag: 'stencila-code-editor',
@@ -26,13 +28,13 @@ import { patch as selectPolyfill } from 'shadow-root-get-selection-polyfill'
     default: 'codeEditor.css',
     material: 'codeEditor.material.css'
   },
-  shadow: true
+  scoped: true
 })
 export class CodeEditor {
   public static readonly elementName = 'stencila-code-editor'
 
   public static readonly slots = {
-    default: undefined
+    text: 'text'
   }
 
   @Element() private el: HTMLElement
@@ -64,7 +66,7 @@ export class CodeEditor {
   /**
    * Function to be evaluated over the contents of the CodeChunk.
    */
-  @Prop() public executeHandler: (codeChunk: CodeChunk) => Promise<CodeChunk>
+  @Prop() public executeHandler: (codeChunk: CodeChunk) => Promise<unknown>
 
   /**
    * Wrapper around the `executeHandler` function, needed to run using CodeMirror keyboard shortcuts.
@@ -82,12 +84,14 @@ export class CodeEditor {
   @Prop() public lineNumbers: boolean = true
 
   private initCodeMirror = () => {
-    const textContent = this.el.textContent || ''
-
     let isMac = /Mac/.test(navigator.platform)
 
-    const root = this.el?.shadowRoot
-    const slot = root?.querySelector('slot')
+    const root = this.el
+    const slot = root?.querySelector('[slot]')
+    const textContent =
+      slot?.textContent ||
+      root?.querySelector('#codeEditorTarget')?.textContent ||
+      ''
 
     const extensions = [
       history(),
@@ -102,8 +106,13 @@ export class CodeEditor {
         'Mod-u': view => undoSelection(view) || true,
         [isMac ? 'Mod-Shift-u' : 'Alt-u']: redoSelection,
         'Ctrl-y': isMac ? undefined : redo,
-        'Shift-Tab': indentSelection,
-        'Mod-Enter': this.runCodeView
+        'Mod-Enter': this.runCodeView,
+        'Mod-ArrowLeft': moveLineStart,
+        'Mod-ArrowRight': moveLineEnd
+        // FIXME: The following commands have no effect
+        /* 'Mod-]': indentSelection, */
+        /* 'Mod-Shift-ArrowLeft': selectDocStart, */
+        /* 'Mod-Shift-ArrowRight': selectDocEnd, */
       }),
       keymap(baseKeymap)
     ]
@@ -113,18 +122,15 @@ export class CodeEditor {
     }
 
     this.codeEditorRef = new EditorView({
-      root: root || undefined,
       state: EditorState.create({
         doc: textContent,
         extensions
       })
     })
 
-    slot?.replaceWith(this.codeEditorRef.dom)
-  }
-
-  protected componentWillLoad() {
-    selectPolyfill()
+    root
+      ?.querySelector('#codeEditorTarget')
+      ?.replaceWith(this.codeEditorRef.dom)
   }
 
   protected componentDidLoad() {
@@ -167,7 +173,10 @@ export class CodeEditor {
             onKeyDown={this.stopEventPropagation}
             onClick={this.focusEditor}
           >
-            <slot />
+            <div class="hidden">
+              <slot name={CodeEditor.slots.text} />
+            </div>
+            <div id="codeEditorTarget" />
           </div>
 
           <menu>

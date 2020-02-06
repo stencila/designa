@@ -17,7 +17,7 @@
   "scripts": {
     "build": "stencil build --docs",
     "build:watch": "concurrently \"npm run dev\" \"chokidar '../style-*/dist/*.css' -c 'npm run kill; npm run clean && npm run dev'\"",
-    "dev": "stencil build --dev --watch",
+    "dev": "stencil build --dev --watch --docs",
     "kill": "pkill -f \"Stencil: stencila-components\"",
     "clean": "rimraf .stencil",
     "test": "stencil test --spec --e2e",
@@ -29,7 +29,7 @@
     "@stencil/core": "^1.8.1",
     "@stencil/postcss": "^1.0.1",
     "@types/feather-icons": "^4.7.0",
-    "@types/jest": "^24.0.23",
+    "@types/jest": "^24.0.24",
     "@types/puppeteer": "1.20.3",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",
@@ -42,14 +42,13 @@
     "access": "public"
   },
   "dependencies": {
-    "@codemirror/next": "^0.2.0",
-    "@stencila/schema": "^0.31.1",
+    "@codemirror/next": "^0.3.0",
+    "@stencila/schema": "^0.32.0",
     "@stencila/style-material": "file:../style-material",
     "@stencila/style-stencila": "file:../style-stencila",
     "chokidar-cli": "^2.1.0",
-    "feather-icons": "^4.24.1",
-    "fp-ts": "^2.2.0",
-    "shadow-root-get-selection-polyfill": "^1.0.2",
+    "feather-icons": "^4.25.0",
+    "fp-ts": "^2.3.1",
     "tailwindcss": "^1.1.4",
     "tocbot": "^4.10.0",
     "webfontloader": "^1.6.28"

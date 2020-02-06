@@ -8,6 +8,11 @@ a.button:not(.secondary) {
   &:hover {
     @apply bg-success-500 text-stock;
   }
+
+  &[disabled]:active,
+  &[disabled]:hover {
+    @apply bg-primary-100 text-neutral-500;
+  }
 }
 
 :host.color-stock button:not(.secondary),
@@ -16,5 +21,10 @@ a.button:not(.secondary) {
 
   &:hover {
     @apply bg-neutral-200 text-key;
+  }
+
+  &[disabled]:active,
+  &[disabled]:hover {
+    @apply bg-neutral-200 text-neutral-500;
   }
 }

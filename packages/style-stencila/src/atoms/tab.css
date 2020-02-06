@@ -1,5 +1,10 @@
 @import './anchor';
 
+:host,
+stencila-tab {
+  @apply flex-grow;
+}
+
 :host li,
 stencila-tab li,
 ul[role='tablist'] li {

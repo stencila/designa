@@ -8,13 +8,27 @@ a.button.secondary {
   &:hover {
     @apply bg-primary-500 text-stock;
   }
+
+  &[disabled],
+  &[disabled]:active,
+  &[disabled]:hover {
+    @apply bg-neutral-200 text-neutral-500;
+  }
 }
 
+button.secondary.color-stock,
+a.button.secondary.color-stock,
 :host.color-stock button.secondary,
 :host.color-stock a.button.secondary {
   @apply bg-stock text-key;
 
   &:hover {
     @apply bg-neutral-200 text-key;
+  }
+
+  &[disabled],
+  &[disabled]:active,
+  &[disabled]:hover {
+    @apply bg-neutral-200 text-neutral-500;
   }
 }

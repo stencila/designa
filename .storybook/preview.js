@@ -9,8 +9,7 @@ import {
   setCustomElements
 } from '@storybook/web-components'
 import { withRootAttribute } from 'storybook-addon-root-attribute'
-import customElements from '../packages/components/dist/stencila-components.json'
-import { transformJSONDocs } from './jsonDocTransformer'
+import customElements from '../packages/components/dist/custom-elements.json'
 
 const cssresources = [
   {
@@ -71,7 +70,7 @@ const atomicSort = ([a], [b]) => {
   return 0
 }
 
-setCustomElements(transformJSONDocs(customElements))
+setCustomElements(customElements)
 
 addDecorator(withA11y)
 addDecorator(withCssResources)

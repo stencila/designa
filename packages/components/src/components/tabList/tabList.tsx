@@ -1,8 +1,8 @@
 import { Component, h, Prop, State } from '@stencil/core'
 import { ord } from 'fp-ts'
+import { Components } from '../../components'
 
-export interface ChildTab {
-  label: string
+export interface ChildTab extends Components.StencilaTab {
   onClick?: (e: MouseEvent) => unknown
 }
 
@@ -39,7 +39,10 @@ export class TabList {
       <ul role="tablist" onKeyDown={this.onKeyboardNavigateTabs}>
         {this.tabs.map((tab, index): HTMLElement[] => (
           <stencila-tab
-            isSelected={index === this.activeTabIndex}
+            isSelected={
+              tab.isSelected === true ||
+              (tab.isSelected === undefined && index === this.activeTabIndex)
+            }
             label={tab.label}
             onClick={e => {
               e.preventDefault()

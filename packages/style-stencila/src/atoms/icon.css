@@ -1,3 +1,12 @@
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 :host,
 stencila-icon {
   --height: 1.25em;
@@ -5,9 +14,17 @@ stencila-icon {
 
   @apply align-middle inline-block;
 
-  svg {
+  span {
     @apply inline-block w-full h-auto max-h-full;
     height: var(--height);
     width: var(--width);
+  }
+
+  svg {
+    @apply inline-block w-full h-auto max-h-full;
+  }
+
+  &.spin svg {
+    animation: spin 3000ms linear infinite;
   }
 }
