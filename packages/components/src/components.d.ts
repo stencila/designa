@@ -13,6 +13,7 @@ import {
 import {
   CodeChunk,
   Collection,
+  Datatable,
   ImageObject,
   Node,
 } from '@stencila/schema';
@@ -136,6 +137,12 @@ export namespace Components {
     'open': boolean;
   }
   interface StencilaCodeExpression {}
+  interface StencilaDataTable {
+    /**
+    * The `Datatable` node to render
+    */
+    'table': Datatable;
+  }
   interface StencilaDetails {
     'open': boolean;
   }
@@ -235,6 +242,12 @@ declare global {
     new (): HTMLStencilaCodeExpressionElement;
   };
 
+  interface HTMLStencilaDataTableElement extends Components.StencilaDataTable, HTMLStencilElement {}
+  var HTMLStencilaDataTableElement: {
+    prototype: HTMLStencilaDataTableElement;
+    new (): HTMLStencilaDataTableElement;
+  };
+
   interface HTMLStencilaDetailsElement extends Components.StencilaDetails, HTMLStencilElement {}
   var HTMLStencilaDetailsElement: {
     prototype: HTMLStencilaDetailsElement;
@@ -301,6 +314,7 @@ declare global {
     'stencila-code-editor': HTMLStencilaCodeEditorElement;
     'stencila-code-error': HTMLStencilaCodeErrorElement;
     'stencila-code-expression': HTMLStencilaCodeExpressionElement;
+    'stencila-data-table': HTMLStencilaDataTableElement;
     'stencila-details': HTMLStencilaDetailsElement;
     'stencila-icon': HTMLStencilaIconElement;
     'stencila-image-object': HTMLStencilaImageObjectElement;
@@ -423,6 +437,12 @@ declare namespace LocalJSX {
     'open'?: boolean;
   }
   interface StencilaCodeExpression {}
+  interface StencilaDataTable {
+    /**
+    * The `Datatable` node to render
+    */
+    'table'?: Datatable;
+  }
   interface StencilaDetails {
     'open'?: boolean;
   }
@@ -489,6 +509,7 @@ declare namespace LocalJSX {
     'stencila-code-editor': StencilaCodeEditor;
     'stencila-code-error': StencilaCodeError;
     'stencila-code-expression': StencilaCodeExpression;
+    'stencila-data-table': StencilaDataTable;
     'stencila-details': StencilaDetails;
     'stencila-icon': StencilaIcon;
     'stencila-image-object': StencilaImageObject;
@@ -514,6 +535,7 @@ declare module "@stencil/core" {
       'stencila-code-editor': LocalJSX.StencilaCodeEditor & JSXBase.HTMLAttributes<HTMLStencilaCodeEditorElement>;
       'stencila-code-error': LocalJSX.StencilaCodeError & JSXBase.HTMLAttributes<HTMLStencilaCodeErrorElement>;
       'stencila-code-expression': LocalJSX.StencilaCodeExpression & JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement>;
+      'stencila-data-table': LocalJSX.StencilaDataTable & JSXBase.HTMLAttributes<HTMLStencilaDataTableElement>;
       'stencila-details': LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
       'stencila-icon': LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
       'stencila-image-object': LocalJSX.StencilaImageObject & JSXBase.HTMLAttributes<HTMLStencilaImageObjectElement>;

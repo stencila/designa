@@ -19,11 +19,13 @@
 ### Depends on
 
 - [stencila-image-object](../imageObject)
+- [stencila-data-table](../dataTable)
 
 ### Graph
 ```mermaid
 graph TD;
   stencila-node-list --> stencila-image-object
+  stencila-node-list --> stencila-data-table
   stencila-code-chunk --> stencila-node-list
   style stencila-node-list fill:#f9f,stroke:#333,stroke-width:4px
 ```
