@@ -4,12 +4,12 @@
 stencila-code-editor {
   all: initial;
 
-  @apply flex;
+  @apply flex max-w-full;
   --border-width: 1px;
   --background-color: transparent;
 
   .codeContainer {
-    @apply flex flex-col flex-grow rounded border border-neutral-300;
+    @apply flex flex-col flex-grow max-w-full border rounded border-neutral-300;
     background-color: var(--background-color);
     border-width: var(--border-width);
 
@@ -19,7 +19,7 @@ stencila-code-editor {
   }
 
   .codeEditor {
-    @apply flex-grow cursor-text font-mono;
+    @apply flex-grow max-w-full overflow-auto font-mono cursor-text;
 
     .codemirror-content *,
     .gutterElement * {
@@ -36,13 +36,13 @@ stencila-code-editor {
   }
 
   menu {
-    @apply border-t border-neutral-300 m-0 p-0 py-px flex justify-end;
+    @apply flex justify-end p-0 py-px m-0 border-t border-neutral-300;
 
     select {
-      @apply appearance-none border-none mr-2 text-xs text-neutral-600 text-right bg-transparent font-body;
+      @apply mr-2 text-xs text-right bg-transparent border-none appearance-none text-neutral-600 font-body;
 
       option {
-        @apply font-body text-right;
+        @apply text-right font-body;
       }
 
       &:active,
