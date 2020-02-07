@@ -3,6 +3,7 @@
 @import './code';
 @import './codeEditor';
 @import './icon';
+@import './imageObject';
 @import './input';
 @import './label';
 @import './nodeList';

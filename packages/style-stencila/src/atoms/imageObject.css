@@ -1,0 +1,4 @@
+:host img,
+stencila-image-object img {
+  @apply h-auto max-w-full;
+}
