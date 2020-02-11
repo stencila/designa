@@ -8,6 +8,6 @@ module.exports = {
     '@storybook/addon-storysource/register',
     '@storybook/addon-viewport/register',
     '@storybook/addon-cssresources/register',
-    'storybook-addon-root-attribute/registerToolbar'
+    'storybook-addon-root-attribute/register'
   ]
 }
