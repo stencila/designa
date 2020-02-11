@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.8.1...@stencila/style-stencila@0.9.0) (2020-02-11)
+
+
+### Bug Fixes
+
+* **CodeEditor:** Constrain editor max-width to parent ([c81d0fb](https://github.com/stencila/style/commit/c81d0fbd692fb4dea899d2e68384a563ce1306f0))
+
+
+### Features
+
+* **Datatable:** Add Datatable renderer component ([8e94533](https://github.com/stencila/style/commit/8e9453352433764ecb23812421322fe815324e72))
+
+
+
+
+
 ## [0.8.1](https://github.com/stencila/style/compare/@stencila/style-stencila@0.8.0...@stencila/style-stencila@0.8.1) (2020-02-06)
 
 
