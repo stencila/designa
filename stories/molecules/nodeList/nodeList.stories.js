@@ -7,7 +7,22 @@ export default {
 
 const nodes = [
   'Text result',
-  { type: 'ImageObject', contentUrl: 'https://via.placeholder.com/150' }
+  { type: 'ImageObject', contentUrl: 'https://via.placeholder.com/150' },
+  {
+    type: 'Datatable',
+    columns: [
+      {
+        type: 'DatatableColumn',
+        name: 'A',
+        values: ['1', '2', '3']
+      },
+      {
+        type: 'DatatableColumn',
+        name: 'B',
+        values: ['4', '5', '6']
+      }
+    ]
+  }
 ]
 
 export const emptyState = () => html`
@@ -22,5 +37,10 @@ export const signleNode = () => html`
 `
 export const multipleNodes = () => html`
   <stencila-node-list .nodes=${nodes}>
+  </stencila-code-chunk>
+`
+
+export const dataTable = () => html`
+  <stencila-node-list .nodes=${[nodes[2]]}>
   </stencila-code-chunk>
 `

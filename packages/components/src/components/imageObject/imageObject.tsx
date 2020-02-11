@@ -3,6 +3,10 @@ import { ImageObject } from '@stencila/schema'
 
 @Component({
   tag: 'stencila-image-object',
+  styleUrls: {
+    default: 'imageObject.css',
+    material: 'imageObject.css'
+  },
   scoped: true
 })
 export class ImageObjectComponent {

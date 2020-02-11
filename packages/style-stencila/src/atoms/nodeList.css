@@ -6,12 +6,12 @@
 stencila-node-list {
   @apply block;
 
-  *:first-child,
+  & > *:first-child,
   .hidden + *:nth-child(2) {
     @apply pt-0 mt-0 border-t-0;
   }
 
-  *:last-child {
+  & > *:last-child {
     @apply mb-0;
   }
 
@@ -27,9 +27,14 @@ stencila-node-list {
     @apply border-0;
   }
 
+  stencila-image-object {
+    @apply block h-auto max-w-full;
+  }
+
+  & > *,
   ::slotted([slot='outputs']),
   figure {
-    @apply m-0 p-0;
+    @apply p-0 m-0;
 
     &:first-child {
       @apply mt-0;
@@ -40,18 +45,18 @@ stencila-node-list {
     }
 
     pre {
-      @apply border-0 p-0 m-0;
+      @apply p-0 m-0 border-0;
     }
 
     img {
-      @apply border-l-0 border-r-0 border-b-0;
+      @apply border-b-0 border-l-0 border-r-0;
     }
 
     & > *:not(figcaption) {
-      @apply my-3 pt-3 border-dashed border-t border-neutral-300;
+      @apply pt-3 my-3 border-t border-dashed border-neutral-300;
 
       &:first-child {
-        @apply mt-0 pt-0 border-t-0;
+        @apply pt-0 mt-0 border-t-0;
       }
 
       &:last-child {

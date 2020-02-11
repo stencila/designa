@@ -81,6 +81,8 @@ export class OutputsList {
       )
     } else if (isA('ImageObject', node)) {
       return <stencila-image-object image={node}></stencila-image-object>
+    } else if (isA('Datatable', node)) {
+      return <stencila-data-table table={node}></stencila-data-table>
     }
 
     return JSON.stringify(node)
