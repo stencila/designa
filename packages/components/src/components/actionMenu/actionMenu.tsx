@@ -9,9 +9,7 @@ import { Component, Element, h, Prop, State } from '@stencil/core'
   shadow: true
 })
 export class ActionMenu {
-  public static readonly elementName = 'stencila-action-menu'
-
-  @Element() private el: HTMLElement
+  @Element() private el: HTMLStencilaActionMenuElement
 
   /**
    * List of buttons to include in Action Menu.
@@ -23,34 +21,35 @@ export class ActionMenu {
    * Defines whether the Action Menu can be collapsed and expanded
    */
   @Prop()
-  public expandable: boolean = false
+  public expandable = false
 
   @State() private isCollapsed = false
 
   private toggleActionMenu = () => (this.isCollapsed = !this.isCollapsed)
 
-  @State() private width: string = 'auto'
-  @State() private isAnimating: boolean = false
+  @State() private width = 'auto'
+  @State() private isAnimating = false
 
   private actionContainerRef: HTMLSpanElement | null
-  private isTransitioning: boolean = false
+  private isTransitioning = false
 
   private calculateWidth = () => {
-    if (this.actionContainerRef && this.isTransitioning === false) {
+    if (this.actionContainerRef !== null && this.isTransitioning === false) {
       this.width = 'auto'
       const w = this.actionContainerRef.getBoundingClientRect().width
-      this.width = w + 'px'
+      this.width = `${w}px`
     }
   }
 
-  private observer = new MutationObserver(this.calculateWidth)
+  private observer = new window.MutationObserver(this.calculateWidth)
 
   protected componentDidLoad() {
-    if (this.expandable) {
+    if (this.expandable && this.el.shadowRoot !== null) {
       this.actionContainerRef = this.el.shadowRoot.querySelector(
         '.actionContainer'
       )
-      if (this.actionContainerRef) {
+
+      if (this.actionContainerRef !== null) {
         this.actionContainerRef.addEventListener(
           'transitionstart',
           () => (this.isTransitioning = true)

@@ -1,4 +1,9 @@
-import { Component, h, Host, State, Element } from '@stencil/core'
+import { Component, Element, h, Host, State } from '@stencil/core'
+
+const slots = {
+  text: 'text',
+  output: 'output'
+}
 
 @Component({
   tag: 'stencila-code-expression',
@@ -6,41 +11,36 @@ import { Component, h, Host, State, Element } from '@stencil/core'
   shadow: true
 })
 export class CodeExpression {
-  public static readonly elementName = 'stencila-code-expression'
+  @Element() private el: HTMLStencilaCodeExpressionElement
 
-  public static slots = {
-    text: 'text',
-    output: 'output'
-  }
+  @State() sourceWidth = 'auto'
 
-  @Element() private el: HTMLElement
-
-  @State() sourceWidth: string = 'auto'
-
-  @State() isSourceVisible: boolean = true
+  @State() isSourceVisible = true
 
   private toggleSourceVisibility = () =>
     (this.isSourceVisible = !this.isSourceVisible)
 
   private calculateSourceWidth = () => {
-    const source: HTMLElement = this.el.querySelector(
-      `[slot=${CodeExpression.slots.text}]`
+    const source: HTMLElement | null = this.el.querySelector(
+      `[slot=${slots.text}]`
     )
-    source.style.width = 'auto'
-    this.sourceWidth = source !== null ? source.offsetWidth + 'px' : 'auto'
-    source.style.width = ''
+    if (source !== null) {
+      source.style.width = 'auto'
+      this.sourceWidth = source !== null ? `${source.offsetWidth}px` : 'auto'
+      source.style.width = ''
+    }
   }
 
-  @State() isOutputEmpty: boolean = true
+  @State() isOutputEmpty = true
 
   private outputExists = () => {
-    const output: HTMLElement = this.el.querySelector(
-      `[slot=${CodeExpression.slots.output}]`
+    const output: HTMLElement | null = this.el.querySelector(
+      `[slot=${slots.output}]`
     )
 
-    this.isOutputEmpty =
-      output === null ? true : output.innerHTML.trim() === '' ? true : false
-    if (this.isOutputEmpty) {
+    this.isOutputEmpty = output === null ? true : output.innerHTML.trim() === ''
+
+    if (this.isOutputEmpty && output !== null) {
       output.innerHTML = `…`
     }
   }
@@ -75,10 +75,10 @@ export class CodeExpression {
           icon={this.isSourceVisible ? 'eye' : 'eye-off'}
           onClick={this.toggleSourceVisibility}
         ></stencila-icon>
-        <slot name={CodeExpression.slots.text} />
+        <slot name={slots.text} />
       </span>,
       this.dividerArrow,
-      <slot name={CodeExpression.slots.output} />
+      <slot name={slots.output} />
     ]
 
     return (

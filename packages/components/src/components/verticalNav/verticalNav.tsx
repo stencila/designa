@@ -1,5 +1,5 @@
 import { Component, h, Prop } from '@stencil/core'
-import { Collection, CreativeWork, Node } from '@stencila/schema'
+import { Collection, CreativeWork, isA } from '@stencila/schema'
 
 const parseCreativeWorks = (
   c: CreativeWork[],
@@ -7,17 +7,17 @@ const parseCreativeWorks = (
 ): HTMLUListElement => (
   <ul class="toc-list">
     {c.map((part): HTMLLIElement[] =>
-      part.parts ? (
+      part.parts !== undefined ? (
         <li>
           <details open>
             <summary>{part.name}</summary>
-            {parseCreativeWorks(part.parts, (part.name || '') + '/')}
+            {parseCreativeWorks(part.parts, (part.name ?? '') + '/')}
           </details>
         </li>
       ) : (
         <li>
-          <a class="toc-link" href={path + (part.name || '')}>
-            {part.name} (<code>{path + (part.name || '')}</code>)
+          <a class="toc-link" href={path + (part.name ?? '')}>
+            {part.name} (<code>{path + (part.name ?? '')}</code>)
           </a>
         </li>
       )
@@ -34,24 +34,16 @@ const parseCreativeWorks = (
   scoped: true
 })
 export class VerticalNav {
-  public static readonly elementName = 'stencila-vertical-nav'
-
+  /**
+   * Collection schema from which to generate a table of contents
+   */
   @Prop() public collection?: Collection
 
-  private _collection: Collection = this.collection
-
-  // TODO: Move these helpers from Encoda to Schema
-  private isCollection = (node: Node): node is Collection =>
-    node &&
-    typeof node !== 'boolean' &&
-    typeof node !== 'number' &&
-    typeof node !== 'string' &&
-    !Array.isArray(node) &&
-    node.type === 'Collection'
+  private _collection?: Collection = this.collection
 
   public componentWillLoad(): void {
     // Use the collection Prop if one exists, otherwise try to read it from the HTML head
-    if (this.collection) {
+    if (this.collection !== undefined) {
       return
     }
 
@@ -65,13 +57,15 @@ export class VerticalNav {
         return scripts
       }
 
-      return this.isCollection(contents) ? [...scripts, contents] : scripts
+      return isA('Collection', contents) ? [...scripts, contents] : scripts
     }, [])
 
     this._collection = _col[0]
   }
 
   public render(): HTMLElement {
-    return <nav class="toc">{parseCreativeWorks(this._collection.parts)}</nav>
+    return (
+      <nav class="toc">{parseCreativeWorks(this._collection?.parts ?? [])}</nav>
+    )
   }
 }
