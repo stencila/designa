@@ -1,3 +1,7 @@
 label {
-  @apply text-neutral-700 text-xs block mb-1;
+  @apply block mb-1 text-xs text-left text-neutral-700;
+
+  & + & {
+    @apply mt-2;
+  }
 }

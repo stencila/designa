@@ -141,6 +141,43 @@ export namespace Components {
          */
         "image": ImageObject;
     }
+    interface StencilaInput {
+        /**
+          * Automatically bring cursor focus to the input field on render.
+         */
+        "autoFocus": boolean;
+        /**
+          * Visually conceal the input label. Use sparingly for simple forms only with a descriptive action button.
+         */
+        "hideLabel": boolean;
+        "iconStart"?: IconNames;
+        /**
+          * Render the label and input field as inline elements.
+         */
+        "inline": boolean;
+        /**
+          * A hint to the browser for which keyboard to display.
+         */
+        "inputmode"?: "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search";
+        /**
+          * Accessible text label for the input field. Defaults to the input's `name` prop.
+         */
+        "label"?: string;
+        /**
+          * The name of the input, submitted as the value's label inside the form data.
+         */
+        "name": string;
+        "placeholder"?: string;
+        /**
+          * When `true` value must be provided before submitting.
+         */
+        "required": boolean;
+        "type": "text" | "password" | "number" | "search";
+        /**
+          * Text value of the input.
+         */
+        "value"?: number | string;
+    }
     interface StencilaNodeList {
         /**
           * Array of nodes to render.
@@ -253,6 +290,12 @@ declare global {
         prototype: HTMLStencilaImageObjectElement;
         new (): HTMLStencilaImageObjectElement;
     };
+    interface HTMLStencilaInputElement extends Components.StencilaInput, HTMLStencilElement {
+    }
+    var HTMLStencilaInputElement: {
+        prototype: HTMLStencilaInputElement;
+        new (): HTMLStencilaInputElement;
+    };
     interface HTMLStencilaNodeListElement extends Components.StencilaNodeList, HTMLStencilElement {
     }
     var HTMLStencilaNodeListElement: {
@@ -306,6 +349,7 @@ declare global {
         "stencila-details": HTMLStencilaDetailsElement;
         "stencila-icon": HTMLStencilaIconElement;
         "stencila-image-object": HTMLStencilaImageObjectElement;
+        "stencila-input": HTMLStencilaInputElement;
         "stencila-node-list": HTMLStencilaNodeListElement;
         "stencila-tab": HTMLStencilaTabElement;
         "stencila-tab-list": HTMLStencilaTabListElement;
@@ -443,6 +487,43 @@ declare namespace LocalJSX {
          */
         "image"?: ImageObject;
     }
+    interface StencilaInput {
+        /**
+          * Automatically bring cursor focus to the input field on render.
+         */
+        "autoFocus"?: boolean;
+        /**
+          * Visually conceal the input label. Use sparingly for simple forms only with a descriptive action button.
+         */
+        "hideLabel"?: boolean;
+        "iconStart"?: IconNames;
+        /**
+          * Render the label and input field as inline elements.
+         */
+        "inline"?: boolean;
+        /**
+          * A hint to the browser for which keyboard to display.
+         */
+        "inputmode"?: "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search";
+        /**
+          * Accessible text label for the input field. Defaults to the input's `name` prop.
+         */
+        "label"?: string;
+        /**
+          * The name of the input, submitted as the value's label inside the form data.
+         */
+        "name": string;
+        "placeholder"?: string;
+        /**
+          * When `true` value must be provided before submitting.
+         */
+        "required"?: boolean;
+        "type"?: "text" | "password" | "number" | "search";
+        /**
+          * Text value of the input.
+         */
+        "value"?: number | string;
+    }
     interface StencilaNodeList {
         /**
           * Array of nodes to render.
@@ -504,6 +585,7 @@ declare namespace LocalJSX {
         "stencila-details": StencilaDetails;
         "stencila-icon": StencilaIcon;
         "stencila-image-object": StencilaImageObject;
+        "stencila-input": StencilaInput;
         "stencila-node-list": StencilaNodeList;
         "stencila-tab": StencilaTab;
         "stencila-tab-list": StencilaTabList;
@@ -527,6 +609,7 @@ declare module "@stencil/core" {
             "stencila-details": LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
             "stencila-icon": LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
             "stencila-image-object": LocalJSX.StencilaImageObject & JSXBase.HTMLAttributes<HTMLStencilaImageObjectElement>;
+            "stencila-input": LocalJSX.StencilaInput & JSXBase.HTMLAttributes<HTMLStencilaInputElement>;
             "stencila-node-list": LocalJSX.StencilaNodeList & JSXBase.HTMLAttributes<HTMLStencilaNodeListElement>;
             "stencila-tab": LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
             "stencila-tab-list": LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;

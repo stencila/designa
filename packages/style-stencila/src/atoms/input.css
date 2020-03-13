@@ -1,8 +1,27 @@
-input {
-  @apply border border-neutral-300 w-full bg-stock rounded py-1 px-2;
-}
+:host,
+stencila-input {
+  @apply relative block text-base;
 
-input:focus {
-  @apply border-primary-500;
-  outline: none;
+  &.inline {
+    @apply inline-block;
+  }
+
+  stencila-icon {
+    @apply absolute left-0 pl-2 text-neutral-500;
+    top: 50%;
+    transform: translateY(-50%);
+
+    & + input {
+      @apply pl-8;
+    }
+  }
+
+  input {
+    @apply w-full px-2 py-1 text-base border border-solid rounded border-neutral-300 bg-stock;
+
+    &:active,
+    &:focus {
+      @apply outline-none border-primary-500;
+    }
+  }
 }

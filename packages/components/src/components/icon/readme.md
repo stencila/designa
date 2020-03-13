@@ -18,6 +18,7 @@
  - [stencila-code-error](../error)
  - [stencila-code-expression](../codeExpression)
  - [stencila-details](../details)
+ - [stencila-input](../input)
 
 ### Graph
 ```mermaid
@@ -26,6 +27,7 @@ graph TD;
   stencila-code-error --> stencila-icon
   stencila-code-expression --> stencila-icon
   stencila-details --> stencila-icon
+  stencila-input --> stencila-icon
   style stencila-icon fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
