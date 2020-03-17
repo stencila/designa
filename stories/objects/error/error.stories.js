@@ -24,3 +24,10 @@ export const error = () =>
   </pre>
     </stencila-code-error>
   `
+
+export const withoutStacktrace = () =>
+  html`
+    <stencila-code-error kind="warning">
+      We’re sorry, something has gone wrong...
+    </stencila-code-error>
+  `
