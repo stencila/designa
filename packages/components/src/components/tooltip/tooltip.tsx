@@ -1,4 +1,4 @@
-import { Component, h, Element, Host, Prop } from '@stencil/core'
+import { Component, Element, h, Host, Prop, Watch } from '@stencil/core'
 import { clamp, ordNumber } from 'fp-ts/lib/Ord'
 
 @Component({
@@ -41,7 +41,7 @@ export class Tooltip {
     }
   }
 
-  componentDidLoad() {
+  private loadComponent = () => {
     this.el.addEventListener('focus', this.showTooltip)
     this.el.addEventListener('blur', this.destroyTooltip)
 
@@ -49,12 +49,25 @@ export class Tooltip {
     this.el.addEventListener('mouseleave', this.destroyTooltip)
   }
 
-  componentDidUnload() {
+  private unloadComponent = () => {
     this.el.removeEventListener('focus', this.showTooltip)
     this.el.removeEventListener('blur', this.destroyTooltip)
 
     this.el.removeEventListener('mouseenter', this.showTooltip)
     this.el.removeEventListener('mouseleave', this.destroyTooltip)
+  }
+
+  componentDidLoad() {
+    this.loadComponent()
+  }
+
+  componentDidUnload() {
+    this.unloadComponent()
+  }
+
+  @Watch('text')
+  watchHandler(newText: string) {
+    this.tooltipRef.innerText = newText
   }
 
   public render() {
