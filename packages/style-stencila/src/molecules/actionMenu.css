@@ -1,9 +1,12 @@
-stencila-action-menu,
 :host {
-  @apply absolute right-0 top-0 bg-neutral-200 rounded-bl font-mono border-l border-b border-t-0 border-r-0 border-solid border-neutral-300 px-1 z-10;
+  @apply absolute top-0 right-0 z-10 py-px pl-1 pr-1 font-mono text-xs leading-none border-t-0 border-b border-l border-r-0 border-solid rounded-bl bg-neutral-200 border-neutral-300;
+
+  nav > * {
+    @apply align-middle;
+  }
 
   ul {
-    @apply list-none m-0 p-0;
+    @apply p-0 m-0 list-none;
   }
 
   li {
@@ -12,6 +15,10 @@ stencila-action-menu,
     &:last-child {
       @apply pr-0;
     }
+  }
+
+  stencila-button {
+    @apply inline-block;
   }
 
   .actionContainer {
@@ -24,7 +31,7 @@ stencila-action-menu,
     }
   }
 
-  &:not(:hover):not(:focus) .actionContainer.isCollapsed {
+  .secondaryActions:not(:hover):not(:focus) .actionContainer.isCollapsed {
     @apply w-0;
   }
 }

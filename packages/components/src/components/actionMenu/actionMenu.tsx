@@ -36,8 +36,8 @@ export class ActionMenu {
   private calculateWidth = () => {
     if (this.actionContainerRef !== null && this.isTransitioning === false) {
       this.width = 'auto'
-      const w = this.actionContainerRef.getBoundingClientRect().width
-      this.width = `${w}px`
+      const width = this.actionContainerRef.getBoundingClientRect().width
+      this.width = `${width}px`
     }
   }
 
@@ -45,9 +45,7 @@ export class ActionMenu {
 
   protected componentDidLoad() {
     if (this.expandable && this.el) {
-      this.actionContainerRef = this.el.querySelector(
-        '.actionContainer'
-      )
+      this.actionContainerRef = this.el.querySelector('.actionContainer')
 
       if (this.actionContainerRef !== null) {
         this.actionContainerRef.addEventListener(
@@ -75,25 +73,27 @@ export class ActionMenu {
   public render() {
     return (
       <nav>
-        <span
-          class={{
-            actionContainer: true,
-            isAnimating: this.isAnimating,
-            isCollapsed: this.isCollapsed
-          }}
-          style={{ '--max-width': this.width }}
-        >
-          <slot />
-        </span>
+        <span class="secondaryActions">
+          <span
+            class={{
+              actionContainer: true,
+              isAnimating: this.isAnimating,
+              isCollapsed: this.isCollapsed
+            }}
+            style={{ '--max-width': this.width }}
+          >
+            <slot />
+          </span>
 
-        <stencila-button
-          onClick={this.toggleActionMenu}
-          icon="more-horizontal"
-          isSecondary={true}
-          size="xsmall"
-          iconOnly={true}
-          ariaLabel="Toggle Action Menu"
-        ></stencila-button>
+          <stencila-button
+            onClick={this.toggleActionMenu}
+            icon="more-horizontal"
+            isSecondary={true}
+            size="xsmall"
+            iconOnly={true}
+            ariaLabel="Toggle Action Menu"
+          ></stencila-button>
+        </span>
 
         <slot name="persistentActions" />
       </nav>
