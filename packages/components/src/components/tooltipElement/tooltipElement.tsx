@@ -6,7 +6,7 @@ import { Component, h, Host } from '@stencil/core'
     default: 'tooltipElement.css',
     material: 'tooltipElement.material.css'
   },
-  shadow: true
+  scoped: true
 })
 export class TooltipElement {
   public static readonly elementName = 'stencila-tooltip-element'

@@ -3,7 +3,7 @@ import { Component, h, Host, Prop } from '@stencil/core'
 @Component({
   tag: 'stencila-code-error',
   styleUrl: 'error.css',
-  shadow: true
+  scoped: true
 })
 export class Error {
   /* public static readonly elementName = 'stencila-code-error' */

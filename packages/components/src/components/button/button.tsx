@@ -7,7 +7,7 @@ import { IconNames } from '../icon/icon'
     default: 'button.css',
     material: 'button.material.css'
   },
-  shadow: true
+  scoped: true
 })
 export class Button {
   public static readonly elementName = 'stencila-button'

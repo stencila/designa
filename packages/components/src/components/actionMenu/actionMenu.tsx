@@ -6,7 +6,7 @@ import { Component, Element, h, Prop, State } from '@stencil/core'
     default: 'actionMenu.css',
     material: 'actionMenu.css'
   },
-  shadow: true
+  scoped: true
 })
 export class ActionMenu {
   @Element() private el: HTMLStencilaActionMenuElement
@@ -44,8 +44,8 @@ export class ActionMenu {
   private observer = new window.MutationObserver(this.calculateWidth)
 
   protected componentDidLoad() {
-    if (this.expandable && this.el.shadowRoot !== null) {
-      this.actionContainerRef = this.el.shadowRoot.querySelector(
+    if (this.expandable && this.el) {
+      this.actionContainerRef = this.el.querySelector(
         '.actionContainer'
       )
 

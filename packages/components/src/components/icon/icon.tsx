@@ -287,7 +287,8 @@ export type IconNames =
 
 @Component({
   tag: 'stencila-icon',
-  styleUrl: 'icon.css'
+  styleUrl: 'icon.css',
+  scoped: true
 })
 export class Icon {
   public static readonly elementName = 'stencila-icon'

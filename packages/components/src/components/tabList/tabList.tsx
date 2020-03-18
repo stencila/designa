@@ -12,7 +12,7 @@ export interface ChildTab extends Components.StencilaTab {
     default: 'tabList.css',
     material: 'tabList.material.css'
   },
-  shadow: true
+  scoped: true
 })
 export class TabList {
   public static readonly elementName = 'stencila-tab-list'
