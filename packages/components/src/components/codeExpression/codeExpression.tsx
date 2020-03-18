@@ -69,12 +69,16 @@ export class CodeExpression {
   public render() {
     const content = [
       <span class="source" style={{ '--source-width': this.sourceWidth }}>
-        <stencila-icon
-          tabindex="0"
-          aria-label={`${this.isSourceVisible ? 'Hide' : 'Show'} Source`}
-          icon={this.isSourceVisible ? 'eye' : 'eye-off'}
-          onClick={this.toggleSourceVisibility}
-        ></stencila-icon>
+        <stencila-tooltip
+          text={`${this.isSourceVisible ? 'Hide' : 'Show'} Source`}
+        >
+          <stencila-icon
+            tabindex="0"
+            aria-label={`${this.isSourceVisible ? 'Hide' : 'Show'} Source`}
+            icon={this.isSourceVisible ? 'eye' : 'eye-off'}
+            onClick={this.toggleSourceVisibility}
+          ></stencila-icon>
+        </stencila-tooltip>
         <slot name={slots.text} />
       </span>,
       this.dividerArrow,
