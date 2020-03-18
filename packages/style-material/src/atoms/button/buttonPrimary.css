@@ -1,30 +1,31 @@
 @import './_base';
 
 button:not(.secondary),
-stencila-button > button:not(.secondary),
 a.button:not(.secondary) {
-  @apply text-base font-body bg-primary-500 text-stock py-2 px-4 text-sm tracking-wide shadow-md uppercase font-bold;
+  @apply font-bold tracking-wide uppercase shadow-md font-body;
 
   &:hover {
     @apply bg-success-500 text-stock;
   }
 
+  &[disabled],
   &[disabled]:active,
   &[disabled]:hover {
-    @apply bg-primary-100 text-neutral-500;
-  }
-}
-
-:host.color-stock button:not(.secondary),
-:host.color-stock a.button:not(.secondary) {
-  @apply bg-stock text-key;
-
-  &:hover {
-    @apply bg-neutral-200 text-key;
+    @apply cursor-not-allowed pointer-events-none;
   }
 
-  &[disabled]:active,
-  &[disabled]:hover {
-    @apply bg-neutral-200 text-neutral-500;
+  &.color-stock,
+  &.color-stock {
+    @apply bg-stock text-key;
+
+    &:hover {
+      @apply bg-neutral-200 text-key;
+    }
+
+    &[disabled],
+    &[disabled]:active,
+    &[disabled]:hover {
+      @apply bg-neutral-200 text-neutral-500;
+    }
   }
 }

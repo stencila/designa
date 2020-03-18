@@ -287,7 +287,10 @@ export type IconNames =
 
 @Component({
   tag: 'stencila-icon',
-  styleUrl: 'icon.css',
+  styleUrls: {
+    default: 'icon.css',
+    material: 'icon.material.css'
+  },
   scoped: true
 })
 export class Icon {
@@ -302,7 +305,15 @@ export class Icon {
   public render() {
     return (
       <Host>
-        <span innerHTML={feather.icons[this.icon].toSvg()}></span>
+        <span
+          innerHTML={feather.icons[this.icon].toSvg({
+            'stroke-linecap': 'var(--linecap, round)',
+            'stroke-width': 'var(--stroke, 2)',
+            height: 'var(--height, 24)',
+            width: 'var(--width, 24)',
+            class: 'sc-stencila-icon-material sc-stencila-icon-stencila'
+          })}
+        ></span>
       </Host>
     )
   }

@@ -7,7 +7,7 @@ export default {
   excludeStories: ['props']
 }
 
-const defaultText = 'Hello World!'
+const defaultText = 'Sign In'
 const defaultIcon = 'command'
 const icons = [
   'activity',
@@ -295,11 +295,12 @@ const icons = [
 ]
 
 export const props = (overrides = {}) => ({
+  disabled: boolean('disabled', overrides.disabled || false),
+  href: text('href', ''),
   icon: select('icon', icons, overrides.icon || defaultIcon),
+  isLoading: boolean('isLoading', overrides.isLoading || false),
   label: text('Button Text', overrides.label || defaultText),
   secondary: boolean('isSecondary', overrides.isSecondary || false),
-  disabled: boolean('disabled', overrides.disabled || false),
-  isLoading: boolean('isLoading', overrides.isLoading || false),
   size: select(
     'size',
     ['xsmall', 'small', 'default', 'large'],
@@ -308,14 +309,15 @@ export const props = (overrides = {}) => ({
 })
 
 export const withText = () => {
-  const { icon, label, secondary, size, isloading } = props()
+  const { icon, label, secondary, size, isloading, href, disabled } = props()
 
   return html`
     <button
+      disable="{}}"
       icon=${icon}
       is-secondary=${secondary}
       .isloading=${isloading}
-      href="#"
+      .href=${href === '' ? undefined : href}
       size=${size}
     >
       ${label}
@@ -324,16 +326,17 @@ export const withText = () => {
 }
 
 export const withEmoji = () => {
-  const { icon, label, secondary, size, isloading } = props({
+  const { icon, label, secondary, size, isloading, href, disabled } = props({
     label: '😀 😎 👍 💯'
   })
 
   return html`
     <button
+      disabled=${disabled}
       icon=${icon}
       is-secondary=${secondary}
       .isloading=${isloading}
-      href="#"
+      .href=${href === '' ? undefined : href}
       size=${size}
     >
       ${label}
@@ -342,17 +345,18 @@ export const withEmoji = () => {
 }
 
 export const small = () => {
-  const { icon, label, secondary, size, isloading } = props({
+  const { icon, label, secondary, size, isloading, href, disabled } = props({
     label: 'A small step',
     size: 'small'
   })
 
   return html`
     <button
+      disabled=${disabled}
       icon=${icon}
       is-secondary=${secondary}
       .isloading=${isloading}
-      href="#"
+      .href=${href === '' ? undefined : href}
       size=${size}
     >
       ${label}
@@ -361,17 +365,38 @@ export const small = () => {
 }
 
 export const extraSmall = () => {
-  const { icon, label, secondary, size, isloading } = props({
+  const { icon, label, secondary, size, isloading, href, disabled } = props({
     label: 'a very small step',
     size: 'xsmall'
   })
 
   return html`
     <button
+      disabled=${disabled}
       icon=${icon}
       is-secondary=${secondary}
       .isloading=${isloading}
-      href="#"
+      .href=${href === '' ? undefined : href}
+      size=${size}
+    >
+      ${label}
+    </button>
+  `
+}
+
+export const anchorButton = () => {
+  const { icon, label, secondary, size, isloading, href, disabled } = props({
+    label: 'a very small step',
+    size: 'xsmall'
+  })
+
+  return html`
+    <button
+      disabled=${disabled}
+      icon=${icon}
+      is-secondary=${secondary}
+      .isloading=${isloading}
+      .href=${href === '' ? undefined : href}
       size=${size}
     >
       ${label}
@@ -380,14 +405,15 @@ export const extraSmall = () => {
 }
 
 export const webComponent = () => {
-  const { icon, label, secondary, size, isLoading } = props()
+  const { icon, label, secondary, size, isLoading, href, disabled } = props()
 
   return html`
     <stencila-button
+      disabled=${disabled}
       icon=${icon}
       is-secondary=${secondary}
       .isLoading=${isLoading}
-      href="#"
+      .href=${href === '' ? undefined : href}
       size=${size}
     >
       ${label}</stencila-button
@@ -396,14 +422,15 @@ export const webComponent = () => {
 }
 
 export const webComponent_withAnIcon = () => {
-  const { icon, label, secondary, size, isLoading } = props()
+  const { icon, label, secondary, size, isLoading, href, disabled } = props()
 
   return html`
     <stencila-button
+      disabled=${disabled}
       icon=${icon}
       is-secondary=${secondary}
       .isLoading=${isLoading}
-      href="#"
+      .href=${href === '' ? undefined : href}
       size=${size}
     >
       <img src="https://via.placeholder.com/24" slot="icon" />
@@ -413,14 +440,15 @@ export const webComponent_withAnIcon = () => {
 }
 
 export const webComponent_withAFeatherIcon = () => {
-  const { icon, label, secondary, size, isLoading } = props()
+  const { icon, label, secondary, size, isLoading, href, disabled } = props()
 
   return html`
     <stencila-button
+      disabled=${disabled}
       icon=${icon}
       is-secondary=${secondary}
       .isLoading=${isLoading}
-      href="#"
+      .href=${href === '' ? undefined : href}
       size=${size}
     >
       ${label}
@@ -429,10 +457,17 @@ export const webComponent_withAFeatherIcon = () => {
 }
 
 export const webComponent_Link = () => {
-  const { icon, label, secondary, isLoading } = props({ icon: null })
+  const { icon, label, secondary, isLoading, href, disabled } = props({
+    icon: null
+  })
 
   return html`
-    <stencila-button is-secondary=${secondary} .isLoading=${isLoading} href="#">
+    <stencila-button
+      disabled=${disabled}
+      is-secondary=${secondary}
+      .isLoading=${isLoading}
+      .href=${href === '' ? undefined : href}
+    >
       ${label}
     </stencila-button>
   `

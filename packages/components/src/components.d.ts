@@ -45,7 +45,7 @@ export namespace Components {
           * Name of the icon to render inside the button
           * @see Icon component for possible values
          */
-        "icon": HTMLElement | IconNames;
+        "icon"?: HTMLElement | IconNames;
         /**
           * If true, removes extra padding from Icon inside the button TODO: See if we can automatically infer removal of padding through CSS
          */

@@ -1,4 +1,4 @@
-import { Component, h, Prop, State, Element } from '@stencil/core'
+import { Component, h, Host, Prop, State, Element } from '@stencil/core'
 import { IconNames } from '../icon/icon'
 
 @Component({
@@ -38,7 +38,7 @@ export class Button {
   /**
    * The overall size of the Button.
    */
-  @Prop() public size: 'xsmall' | 'small' | 'default' | 'large'
+  @Prop() public size: 'xsmall' | 'small' | 'default' | 'large' = 'default'
 
   /**
    * Renders the button using a secondory, and usually less visually prominent, Button CSS stylesheet.
@@ -61,13 +61,13 @@ export class Button {
    * Name of the icon to render inside the button
    * @see Icon component for possible values
    */
-  @Prop() public icon: HTMLElement | IconNames
+  @Prop() public icon?: HTMLElement | IconNames
 
   /**
    * If true, removes extra padding from Icon inside the button
    * TODO: See if we can automatically infer removal of padding through CSS
    */
-  @Prop() public iconOnly: boolean
+  @Prop() public iconOnly: boolean = false
 
   /**
    * If true, disables the button, shows a loading icon, and prevents the click handler from firing
@@ -115,32 +115,36 @@ export class Button {
     const TagType = this.href != null ? 'a' : 'button'
 
     return (
-      <TagType
-        href={this.href}
-        target={this.target}
-        type={this.buttonType}
-        data-size={this.size}
+      <Host
+        size={this.size}
         disabled={this.ioPending || this.isLoading || this.disabled}
-        aria-label={this.ariaLabel}
-        onClick={this.onClick}
-        class={{
-          secondary: this.isSecondary,
-          iconOnly: this.iconOnly,
-          button: this.href !== undefined,
-          [this.size]: this.size !== undefined
-        }}
       >
-        {this.icon === undefined ? null : typeof this.icon === 'string' ? (
-          <stencila-icon
-            icon={this.ioPending || this.isLoading ? 'loader' : this.icon}
-            class={{ spin: this.isLoading }}
-          ></stencila-icon>
-        ) : (
-          this.icon
-        )}
+        <TagType
+          class={{
+            secondary: this.isSecondary,
+            iconOnly: this.iconOnly,
+            button: this.href !== undefined,
+            [this.size]: this.size !== undefined
+          }}
+          href={this.href}
+          target={this.target}
+          type={this.buttonType}
+          disabled={this.ioPending || this.isLoading || this.disabled}
+          aria-label={this.ariaLabel}
+          onClick={this.onClick}
+        >
+          {this.icon === undefined ? null : typeof this.icon === 'string' ? (
+            <stencila-icon
+              icon={this.ioPending || this.isLoading ? 'loader' : this.icon}
+              class={{ spin: this.isLoading }}
+            ></stencila-icon>
+          ) : (
+            this.icon
+          )}
 
-        <slot />
-      </TagType>
+          <slot />
+        </TagType>
+      </Host>
     )
   }
 }

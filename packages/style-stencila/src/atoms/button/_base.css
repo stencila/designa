@@ -1,8 +1,22 @@
-stencia-button > button,
-button,
-a.button {
-  @apply border-none p-0 leading-none no-underline inline-block text-sm font-body;
+a.button,
+button {
+  @apply inline-block px-4 py-2 text-base leading-none no-underline border-none font-body;
   transition: color 120ms ease-out, background-color 120ms ease-out;
+
+  &.xsmall,
+  &[size='xsmall'] {
+    @apply px-2 py-1 text-xs rounded-sm;
+  }
+
+  &.small,
+  &[size='small'] {
+    @apply p-2 text-sm;
+  }
+
+  &.large,
+  &[size='large'] {
+    @apply px-6 py-3 text-2xl;
+  }
 
   &:hover {
     @apply cursor-pointer;
@@ -16,48 +30,34 @@ a.button {
     @apply cursor-not-allowed;
   }
 
-  &[data-size='small'],
-  &[size='small'] {
-    @apply p-2;
-  }
-
-  &[data-size='xsmall'],
-  &[size='xsmall'] {
-    @apply text-xs px-2 py-1 rounded-sm;
-  }
-
-  & > * {
-    @apply align-middle;
+  * {
+    @apply align-text-bottom;
   }
 
   & > svg,
   & > img {
-    @apply pr-1 inline-block;
-    width: 1.125em;
+    @apply inline-block pr-1;
     height: 1.125em;
-  }
-
-  stencila-icon span {
-    @apply pr-1;
     width: 1.125em;
-    height: 1.125em;
   }
 
-  stencila-icon svg {
-    stroke: currentColor;
-    stroke-width: 3;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
+  stencila-icon {
+    @apply pr-1 mb-px;
+    --width: 1.125em;
+    --height: 1.125em;
   }
 
-  &.iconOnly stencila-icon span {
-    @apply pr-0;
+  &.iconOnly {
+    stencila-icon,
+    & > svg,
+    & > img {
+      @apply pr-0;
+    }
   }
-}
 
-a.button,
-a:visited.button {
-  @apply no-underline;
-  color: inherit;
+  &[size='xsmall'] stencila-icon,
+  &[data-size='xsmall'] stencila-icon {
+    --height: 1em;
+    --width: 1em;
+  }
 }

@@ -1,8 +1,26 @@
-stencila-button > button,
-button,
-a.button {
-  @apply border-none p-0 inline-block font-bold font-body text-sm rounded;
+a.button,
+button {
+  @apply inline-block px-4 py-2 text-base font-bold no-underline border-none rounded font-body;
   transition: color 120ms ease-out, background-color 120ms ease-out;
+
+  &.secondary {
+    @apply px-2 py-1;
+  }
+
+  &.xsmall,
+  &[size='xsmall'] {
+    @apply px-2 py-1 text-xs rounded-sm;
+  }
+
+  &.small,
+  &[size='small'] {
+    @apply p-2 text-sm;
+  }
+
+  &.large,
+  &[size='large'] {
+    @apply px-6 py-3 text-2xl;
+  }
 
   ::slotted([slot='icon']),
   [slot='icon'] {
@@ -21,48 +39,36 @@ a.button {
     @apply cursor-not-allowed;
   }
 
-  &[data-size='small'],
-  &[size='small'] {
-    @apply p-2;
-  }
-
-  &[data-size='xsmall'],
-  &[size='xsmall'] {
-    @apply text-xs px-2 py-1 rounded-sm;
-  }
-
   & > * {
     @apply align-middle;
   }
 
   & > svg,
   & > img {
-    @apply pr-1 inline-block;
+    @apply inline-block pr-1;
     width: 1.125em;
     height: 1.125em;
   }
 
-  stencila-icon span {
-    @apply pr-1;
-    width: 1.125em;
-    height: 1.125em;
+  stencila-icon {
+    @apply pr-1 mb-px;
+    --height: 1.125em;
+    --width: 1.125em;
   }
 
-  stencila-icon svg {
-    stroke: currentColor;
-    stroke-width: 3;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
+  &.iconOnly {
+    stencila-icon,
+    & > svg,
+    & > img {
+      @apply pr-0;
+    }
   }
 
-  &.iconOnly stencila-icon span {
-    @apply pr-0;
+  &.xsmall stencila-icon,
+  &[size='xsmall'] stencila-icon,
+  &.small stencila-icon,
+  &[size='small'] stencila-icon {
+    --height: 1em;
+    --width: 1em;
   }
-}
-
-a.button,
-a:visited.button {
-  @apply no-underline;
-  color: inherit;
 }
