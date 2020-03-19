@@ -1,3 +1,7 @@
+stencila-tab-list {
+  @apply block;
+}
+
 :host ul,
 ul[role='tablist'] {
   @apply flex flex-row p-0 m-0;

@@ -13,14 +13,14 @@ const tabs = [
   { label: 'Settings' }
 ]
 
-export const multipleTabs = () => html`
-  <stencila-tab-list .tabs=${tabs.slice(0, 2)}></stencila-tab-list>
-`
-
 export const singleTab = () => html`
-  <stencila-tab-list .tabs=${tabs[0]}></stencila-tab-list>
+  <stencila-tab-list .tabs=${tabs.slice(0, 1)}></stencila-tab-list>
 `
 
 export const twoTabs = () => html`
   <stencila-tab-list .tabs=${tabs.slice(0, 2)}></stencila-tab-list>
+`
+
+export const multipleTabs = () => html`
+  <stencila-tab-list .tabs=${tabs}></stencila-tab-list>
 `

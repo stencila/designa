@@ -194,17 +194,13 @@ export namespace Components {
          */
         "href": string;
         /**
-          * An icon to show before the label
-         */
-        "icon"?: IconNames;
-        /**
           * Indicates whether the current tab is "selected"
          */
         "isSelected": boolean;
         /**
           * The displayed text of the Tab
          */
-        "label"?: string;
+        "label": string;
     }
     interface StencilaTabList {
         /**
@@ -547,10 +543,6 @@ declare namespace LocalJSX {
           * The link the tab should navigate to
          */
         "href"?: string;
-        /**
-          * An icon to show before the label
-         */
-        "icon"?: IconNames;
         /**
           * Indicates whether the current tab is "selected"
          */
