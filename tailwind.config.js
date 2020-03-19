@@ -54,16 +54,16 @@ const colors = {
     '800': 'var(--color-warn-800)',
     '900': 'var(--color-warn-900)'
   },
-  destroy: {
-    '100': 'var(--color-destroy-100)',
-    '200': 'var(--color-destroy-200)',
-    '300': 'var(--color-destroy-300)',
-    '400': 'var(--color-destroy-400)',
-    '500': 'var(--color-destroy-500)',
-    '600': 'var(--color-destroy-600)',
-    '700': 'var(--color-destroy-700)',
-    '800': 'var(--color-destroy-800)',
-    '900': 'var(--color-destroy-900)'
+  danger: {
+    '100': 'var(--color-danger-100)',
+    '200': 'var(--color-danger-200)',
+    '300': 'var(--color-danger-300)',
+    '400': 'var(--color-danger-400)',
+    '500': 'var(--color-danger-500)',
+    '600': 'var(--color-danger-600)',
+    '700': 'var(--color-danger-700)',
+    '800': 'var(--color-danger-800)',
+    '900': 'var(--color-danger-900)'
   }
 }
 

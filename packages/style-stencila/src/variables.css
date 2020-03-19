@@ -55,14 +55,14 @@
   --color-warn-800: #975a16;
   --color-warn-900: #744210;
 
-  /* --color-destroy: ; */
-  --color-destroy-100: #fff5f5;
-  --color-destroy-200: #fed7d7;
-  --color-destroy-300: #feb2b2;
-  --color-destroy-400: #fc8181;
-  --color-destroy-500: #f56565;
-  --color-destroy-600: #e53e3e;
-  --color-destroy-700: #c53030;
-  --color-destroy-800: #9b2c2c;
-  --color-destroy-900: #742a2a;
+  /* --color-danger: ; */
+  --color-danger-100: #fff5f5;
+  --color-danger-200: #fed7d7;
+  --color-danger-300: #feb2b2;
+  --color-danger-400: #fc8181;
+  --color-danger-500: #f56565;
+  --color-danger-600: #e53e3e;
+  --color-danger-700: #c53030;
+  --color-danger-800: #9b2c2c;
+  --color-danger-900: #742a2a;
 }

@@ -2,7 +2,7 @@
 
 :host,
 stencila-code-error {
-  @apply block p-2 relative border-warn-500 rounded bg-warn-100 text-warn-900 w-full;
+  @apply relative block w-full p-2 rounded border-warn-500 bg-warn-100 text-warn-900;
 
   .overview {
     * {
@@ -15,7 +15,7 @@ stencila-code-error {
   }
 
   [slot='summary'] {
-    @apply text-xs uppercase tracking-wider;
+    @apply text-xs tracking-wider uppercase;
   }
 
   stencila-details {
@@ -31,10 +31,10 @@ stencila-code-error {
 stencila-code-error {
   &.error,
   &.incapable {
-    @apply border-destroy-500 bg-destroy-100 text-destroy-900;
+    @apply border-danger-500 bg-danger-100 text-danger-900;
 
     [slot='stacktrace'] {
-      @apply border-destroy-500;
+      @apply border-danger-500;
     }
   }
 }
