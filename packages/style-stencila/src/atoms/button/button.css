@@ -16,15 +16,10 @@ button {
       @apply rounded-sm;
     }
 
-    &:active,
-    &:hover {
-      @apply bg-primary-700;
-    }
-
-    &[disabled],
-    &[disabled]:active,
-    &[disabled]:hover {
-      @apply bg-primary-100 text-neutral-500;
-    }
+    @mixin buttonColorVariant danger;
+    @mixin buttonColorVariant neutral;
+    @mixin buttonColorVariant primary;
+    @mixin buttonColorVariant success;
+    @mixin buttonColorVariant warn;
   }
 }

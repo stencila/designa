@@ -34,6 +34,10 @@ export namespace Components {
          */
         "clickHandlerProp": (e?: MouseEvent) => unknown;
         /**
+          * The color of the button
+         */
+        "color": "primary" | "success" | "warn" | "danger" | "neutral" | "stock" | "key" | "brand";
+        /**
           * If true, prevents the user from interacting with the button.
          */
         "disabled": boolean;
@@ -190,13 +194,17 @@ export namespace Components {
          */
         "href": string;
         /**
+          * An icon to show before the label
+         */
+        "icon"?: IconNames;
+        /**
           * Indicates whether the current tab is "selected"
          */
         "isSelected": boolean;
         /**
           * The displayed text of the Tab
          */
-        "label": string;
+        "label"?: string;
     }
     interface StencilaTabList {
         /**
@@ -384,6 +392,10 @@ declare namespace LocalJSX {
          */
         "clickHandlerProp"?: (e?: MouseEvent) => unknown;
         /**
+          * The color of the button
+         */
+        "color"?: "primary" | "success" | "warn" | "danger" | "neutral" | "stock" | "key" | "brand";
+        /**
           * If true, prevents the user from interacting with the button.
          */
         "disabled"?: boolean;
@@ -535,6 +547,10 @@ declare namespace LocalJSX {
           * The link the tab should navigate to
          */
         "href"?: string;
+        /**
+          * An icon to show before the label
+         */
+        "icon"?: IconNames;
         /**
           * Indicates whether the current tab is "selected"
          */

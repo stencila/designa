@@ -14,7 +14,16 @@ a.button:not(.secondary) {
     @apply cursor-not-allowed pointer-events-none;
   }
 
-  &.color-stock,
+  @mixin buttonColorVariant danger;
+  @mixin buttonColorVariant neutral;
+  @mixin buttonColorVariant primary, success;
+  @mixin buttonColorVariant success;
+  @mixin buttonColorVariant warn;
+
+  /* TODO: Enhance colorVariant mixin to work with colors which only have one shade/tint */
+  /* @mixin buttonColorVariant brand; */
+  /* @mixin buttonColorVariant stock; */
+  /* @mixin buttonColorVariant key; */
   &.color-stock {
     @apply bg-stock text-key;
 

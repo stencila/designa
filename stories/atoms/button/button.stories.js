@@ -295,6 +295,20 @@ const icons = [
 ]
 
 export const props = (overrides = {}) => ({
+  color: select(
+    'color',
+    [
+      'primary',
+      'success',
+      'warn',
+      'danger',
+      'neutral',
+      'stock',
+      'key',
+      'brand'
+    ],
+    overrides.color || 'primary'
+  ),
   disabled: boolean('disabled', overrides.disabled || false),
   href: text('href', ''),
   icon: select('icon', icons, overrides.icon || defaultIcon),
@@ -309,14 +323,24 @@ export const props = (overrides = {}) => ({
 })
 
 export const withText = () => {
-  const { icon, label, secondary, size, isloading, href, disabled } = props()
+  const {
+    color,
+    disabled,
+    href,
+    icon,
+    isloading,
+    label,
+    secondary,
+    size
+  } = props()
 
   return html`
     <button
-      disable="{}}"
+      class="color-${color}"
+      ?disabled=${disabled}
       icon=${icon}
-      is-secondary=${secondary}
-      .isloading=${isloading}
+      ?is-secondary=${secondary}
+      ?is-loading=${isloading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >
@@ -326,16 +350,26 @@ export const withText = () => {
 }
 
 export const withEmoji = () => {
-  const { icon, label, secondary, size, isloading, href, disabled } = props({
+  const {
+    color,
+    disabled,
+    href,
+    icon,
+    isloading,
+    label,
+    secondary,
+    size
+  } = props({
     label: '😀 😎 👍 💯'
   })
 
   return html`
     <button
-      disabled=${disabled}
+      class="color-${color}"
+      ?disabled=${disabled}
       icon=${icon}
-      is-secondary=${secondary}
-      .isloading=${isloading}
+      ?is-secondary=${secondary}
+      ?is-loading=${isloading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >
@@ -345,17 +379,27 @@ export const withEmoji = () => {
 }
 
 export const small = () => {
-  const { icon, label, secondary, size, isloading, href, disabled } = props({
+  const {
+    color,
+    disabled,
+    href,
+    icon,
+    isloading,
+    label,
+    secondary,
+    size
+  } = props({
     label: 'A small step',
     size: 'small'
   })
 
   return html`
     <button
-      disabled=${disabled}
+      class="color-${color}"
+      ?disabled=${disabled}
       icon=${icon}
-      is-secondary=${secondary}
-      .isloading=${isloading}
+      ?is-secondary=${secondary}
+      ?is-loading=${isloading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >
@@ -365,17 +409,27 @@ export const small = () => {
 }
 
 export const extraSmall = () => {
-  const { icon, label, secondary, size, isloading, href, disabled } = props({
+  const {
+    color,
+    disabled,
+    href,
+    icon,
+    isloading,
+    label,
+    secondary,
+    size
+  } = props({
     label: 'a very small step',
     size: 'xsmall'
   })
 
   return html`
     <button
-      disabled=${disabled}
+      class="color-${color}"
+      ?disabled=${disabled}
       icon=${icon}
-      is-secondary=${secondary}
-      .isloading=${isloading}
+      ?is-secondary=${secondary}
+      ?is-loading=${isloading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >
@@ -385,17 +439,27 @@ export const extraSmall = () => {
 }
 
 export const anchorButton = () => {
-  const { icon, label, secondary, size, isloading, href, disabled } = props({
+  const {
+    color,
+    disabled,
+    href,
+    icon,
+    isloading,
+    label,
+    secondary,
+    size
+  } = props({
     label: 'a very small step',
     size: 'xsmall'
   })
 
   return html`
     <button
-      disabled=${disabled}
+      class="color-${color}"
+      ?disabled=${disabled}
       icon=${icon}
-      is-secondary=${secondary}
-      .isloading=${isloading}
+      ?is-secondary=${secondary}
+      ?is-loading=${isloading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >
@@ -405,14 +469,24 @@ export const anchorButton = () => {
 }
 
 export const webComponent = () => {
-  const { icon, label, secondary, size, isLoading, href, disabled } = props()
+  const {
+    color,
+    disabled,
+    href,
+    icon,
+    isLoading,
+    label,
+    secondary,
+    size
+  } = props()
 
   return html`
     <stencila-button
-      disabled=${disabled}
+      color=${color}
+      ?disabled=${disabled}
       icon=${icon}
-      is-secondary=${secondary}
-      .isLoading=${isLoading}
+      ?is-secondary=${secondary}
+      ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >
@@ -422,14 +496,24 @@ export const webComponent = () => {
 }
 
 export const webComponent_withAnIcon = () => {
-  const { icon, label, secondary, size, isLoading, href, disabled } = props()
+  const {
+    color,
+    disabled,
+    href,
+    icon,
+    isLoading,
+    label,
+    secondary,
+    size
+  } = props()
 
   return html`
     <stencila-button
-      disabled=${disabled}
+      color=${color}
+      ?disabled=${disabled}
       icon=${icon}
-      is-secondary=${secondary}
-      .isLoading=${isLoading}
+      ?is-secondary=${secondary}
+      ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >
@@ -440,14 +524,24 @@ export const webComponent_withAnIcon = () => {
 }
 
 export const webComponent_withAFeatherIcon = () => {
-  const { icon, label, secondary, size, isLoading, href, disabled } = props()
+  const {
+    icon,
+    label,
+    secondary,
+    size,
+    isLoading,
+    href,
+    disabled,
+    color
+  } = props()
 
   return html`
     <stencila-button
-      disabled=${disabled}
+      color=${color}
+      ?disabled=${disabled}
       icon=${icon}
-      is-secondary=${secondary}
-      .isLoading=${isLoading}
+      ?is-secondary=${secondary}
+      ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >
@@ -457,16 +551,28 @@ export const webComponent_withAFeatherIcon = () => {
 }
 
 export const webComponent_Link = () => {
-  const { icon, label, secondary, isLoading, href, disabled } = props({
+  const {
+    icon,
+    label,
+    secondary,
+    size,
+    isLoading,
+    href,
+    disabled,
+    color
+  } = props({
     icon: null
   })
 
   return html`
     <stencila-button
-      disabled=${disabled}
-      is-secondary=${secondary}
-      .isLoading=${isLoading}
+      color=${color}
+      ?disabled=${disabled}
+      icon=${icon}
+      ?is-secondary=${secondary}
+      ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
+      size=${size}
     >
       ${label}
     </stencila-button>

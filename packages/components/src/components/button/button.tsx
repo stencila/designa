@@ -36,6 +36,19 @@ export class Button {
   @Prop() public ariaLabel: string
 
   /**
+   * The color of the button
+   */
+  @Prop() public color:
+    | 'primary'
+    | 'success'
+    | 'warn'
+    | 'danger'
+    | 'neutral'
+    | 'stock'
+    | 'key'
+    | 'brand' = 'primary'
+
+  /**
    * The overall size of the Button.
    */
   @Prop() public size: 'xsmall' | 'small' | 'default' | 'large' = 'default'
@@ -124,7 +137,8 @@ export class Button {
             secondary: this.isSecondary,
             iconOnly: this.iconOnly,
             button: this.href !== undefined,
-            [this.size]: this.size !== undefined
+            [this.size]: this.size !== undefined,
+            [`color-${this.color}`]: true
           }}
           href={this.href}
           target={this.target}
