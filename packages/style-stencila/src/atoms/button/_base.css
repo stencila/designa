@@ -22,29 +22,53 @@ button {
     @apply cursor-pointer;
   }
 
-  [slot='icon'] {
-    @apply inline-block pr-2;
-  }
-
-  &[disabled] {
+  &[disabled],
+  &[disabled]:active,
+  &[disabled]:hover {
     @apply cursor-not-allowed;
   }
 
-  * {
+  &.fill {
+    @apply w-full;
+  }
+
+  & > * {
     @apply align-text-bottom;
+  }
+
+  stencila-icon {
+    @apply pr-1;
+    --width: 1.125em;
+    --height: 1.125em;
+  }
+
+  &[size='xsmall'] stencila-icon,
+  &[data-size='xsmall'] stencila-icon {
+    --height: 1em;
+    --width: 1em;
   }
 
   & > svg,
   & > img {
     @apply inline-block pr-1;
-    height: 1.125em;
     width: 1.125em;
+    height: 1.125em;
   }
 
-  stencila-icon {
-    @apply pr-1 mb-px;
-    --width: 1.125em;
-    --height: 1.125em;
+  &.xsmall,
+  &[size='xsmall'],
+  &.small,
+  &[size='small'] {
+    stencila-icon {
+      --height: 1em;
+      --width: 1em;
+    }
+
+    & > img,
+    & > svg {
+      height: 1em;
+      width: 1em;
+    }
   }
 
   &.iconOnly {
@@ -54,10 +78,33 @@ button {
       @apply pr-0;
     }
   }
+}
 
-  &[size='xsmall'] stencila-icon,
-  &[data-size='xsmall'] stencila-icon {
-    --height: 1em;
-    --width: 1em;
+:host {
+  &::slotted(bytton > *) {
+    @apply align-text-bottom;
+  }
+
+  &::slotted(button > svg),
+  &::slotted(button > img) {
+    @apply inline-block pr-1;
+    width: 1.125em;
+    height: 1.125em;
+  }
+
+  &[size='xsmall'],
+  &[size='small'] {
+    &::slotted(button > svg),
+    &::slotted(button > img) {
+      height: 1em;
+      width: 1em;
+    }
+  }
+
+  &[icon-only='true'] {
+    &::slotted(button > svg),
+    &::slotted(button > img) {
+      @apply pr-0;
+    }
   }
 }

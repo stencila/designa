@@ -5,12 +5,6 @@ button {
   &:not(.secondary) {
     @apply font-medium rounded-full text-stock;
 
-    &[disabled],
-    &[disabled]:active,
-    &[disabled]:hover {
-      @apply cursor-not-allowed pointer-events-none;
-    }
-
     &.xsmall,
     &[size='xsmall'] {
       @apply rounded-sm;

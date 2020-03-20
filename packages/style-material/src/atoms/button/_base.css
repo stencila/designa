@@ -1,6 +1,6 @@
 a.button,
 button {
-  @apply inline-block px-4 py-2 text-base font-bold no-underline border-none rounded font-body;
+  @apply inline-block px-4 py-2 text-base font-bold leading-none no-underline border-none rounded font-body;
   transition: color 120ms ease-out, background-color 120ms ease-out;
 
   &.secondary {
@@ -22,38 +22,51 @@ button {
     @apply px-6 py-3 text-2xl;
   }
 
-  ::slotted([slot='icon']),
-  [slot='icon'] {
-    @apply inline-block pr-2;
-  }
-
   &:hover {
     @apply cursor-pointer;
   }
 
-  [slot='icon'] {
-    @apply inline-block pr-2;
-  }
-
-  &[disabled] {
+  &[disabled],
+  &[disabled]:active,
+  &[disabled]:hover {
     @apply cursor-not-allowed;
   }
 
+  &.fill {
+    @apply w-full;
+  }
+
   & > * {
-    @apply align-middle;
+    @apply align-text-bottom;
+  }
+
+  stencila-icon {
+    @apply pr-1;
+    --height: 1.25em;
+    --width: 1.25em;
   }
 
   & > svg,
   & > img {
     @apply inline-block pr-1;
-    width: 1.125em;
-    height: 1.125em;
+    width: 1.25em;
+    height: 1.25em;
   }
 
-  stencila-icon {
-    @apply pr-1 mb-px;
-    --height: 1.125em;
-    --width: 1.125em;
+  &.xsmall,
+  &[size='xsmall'],
+  &.small,
+  &[size='small'] {
+    stencila-icon {
+      --height: 1.125em;
+      --width: 1.125em;
+    }
+
+    & > img,
+    & > svg {
+      height: 1.125em;
+      width: 1.125em;
+    }
   }
 
   &.iconOnly {
@@ -63,12 +76,33 @@ button {
       @apply pr-0;
     }
   }
+}
 
-  &.xsmall stencila-icon,
-  &[size='xsmall'] stencila-icon,
-  &.small stencila-icon,
-  &[size='small'] stencila-icon {
-    --height: 1em;
-    --width: 1em;
+:host {
+  &::slotted(button > *) {
+    @apply align-text-bottom;
+  }
+
+  &::slotted(button > svg),
+  &::slotted(button > img) {
+    @apply inline-block pr-1;
+    width: 1.25em;
+    height: 1.25em;
+  }
+
+  &[size='xsmall'],
+  &[size='small'] {
+    &::slotted(button > svg),
+    &::slotted(button > img) {
+      height: 1.125em;
+      width: 1.125em;
+    }
+  }
+
+  &[icon-only='true'] {
+    &::slotted(button > svg),
+    &::slotted(button > img) {
+      @apply pr-0;
+    }
   }
 }

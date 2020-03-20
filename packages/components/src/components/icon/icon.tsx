@@ -305,15 +305,7 @@ export class Icon {
   public render() {
     return (
       <Host>
-        <span
-          innerHTML={feather.icons[this.icon].toSvg({
-            'stroke-linecap': 'var(--linecap, round)',
-            'stroke-width': 'var(--stroke, 2)',
-            height: 'var(--height, 24)',
-            width: 'var(--width, 24)',
-            class: 'sc-stencila-icon-material sc-stencila-icon-stencila'
-          })}
-        ></span>
+        <span innerHTML={feather.icons[this.icon].toSvg()}></span>
       </Host>
     )
   }

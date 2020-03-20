@@ -42,6 +42,10 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * If true, the button will take up the full width of the parent container
+         */
+        "fill": boolean;
+        /**
           * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
          */
         "href"?: string;
@@ -395,6 +399,10 @@ declare namespace LocalJSX {
           * If true, prevents the user from interacting with the button.
          */
         "disabled"?: boolean;
+        /**
+          * If true, the button will take up the full width of the parent container
+         */
+        "fill"?: boolean;
         /**
           * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
          */

@@ -88,6 +88,11 @@ export class Button {
   @Prop() public isLoading: boolean = false
 
   /**
+   * If true, the button will take up the full width of the parent container
+   */
+  @Prop() public fill: boolean = false
+
+  /**
    * State keeping track of when asynchronous action is in flight
    */
   @State() private ioPending: boolean = false
@@ -134,9 +139,10 @@ export class Button {
       >
         <TagType
           class={{
-            secondary: this.isSecondary,
-            iconOnly: this.iconOnly,
             button: this.href !== undefined,
+            fill: this.fill,
+            iconOnly: this.iconOnly,
+            secondary: this.isSecondary,
             [this.size]: this.size !== undefined,
             [`color-${this.color}`]: true
           }}

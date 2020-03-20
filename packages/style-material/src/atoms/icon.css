@@ -9,19 +9,29 @@
 
 :host {
   --height: 1.25em;
-  --linecap: butt;
-  --stroke: 3;
   --width: 1.25em;
 
   @apply inline-block leading-none align-middle;
 
   span {
-    @apply inline-block w-full h-auto max-h-full;
+    @apply block w-full h-auto max-h-full;
     height: var(--height);
     width: var(--width);
   }
-}
 
-:host .feather-loader {
-  animation: spin 3000ms linear infinite;
+  ::slotted(span > svg),
+  &::slotted(span > svg) {
+    @apply block;
+    box-sizing: border-box;
+    height: var(--height);
+    padding: 2px;
+    stroke-linecap: butt;
+    stroke-width: 3px;
+    width: var(--width);
+  }
+
+  ::slotted(span > .feather-loader),
+  &::slotted(span > .feather-loader) {
+    animation: spin 3000ms linear infinite;
+  }
 }
