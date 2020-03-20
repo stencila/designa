@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
-    "@stencila/dev-config": "^1.4.20",
+    "@stencila/dev-config": "^1.4.22",
     "@storybook/addon-a11y": "^6.0.0-alpha.25",
     "@storybook/addon-backgrounds": "^6.0.0-alpha.25",
     "@storybook/addon-cssresources": "^6.0.0-alpha.25",
@@ -38,7 +38,7 @@
     "filewatcher-webpack-plugin": "^1.2.0",
     "globby": "^11.0.0",
     "lerna": "^3.20.2",
-    "lit-html": "^1.1.2",
+    "lit-html": "^1.2.1",
     "parcel-bundler": "^1.12.4",
     "postcss-cli": "^7.1.0",
     "postcss-custom-properties": "^9.1.1",
