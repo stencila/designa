@@ -35,11 +35,7 @@ const theme = create({
   colorSecondary: '#1d63f3',
   fontBase: 'Montserrat, Nunito, "Open Sans", sans-serif',
   fontCode: 'IBM Plex, monospace',
-  textColor: '#363636',
-  textInverseColor: 'rgba(255,255,255,0.9)',
-  barTextColor: '#7a7a7a',
-  barBg: '#fafafa',
-  brandTitle: 'Stencila Designa',
+  brandTitle: 'Stencila',
   brandUrl: 'https://stenci.la'
 })
 
