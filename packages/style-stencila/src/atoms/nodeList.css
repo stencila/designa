@@ -34,7 +34,7 @@ stencila-node-list {
   & > *,
   ::slotted([slot='outputs']),
   figure {
-    @apply p-0 m-0;
+    @apply p-0 m-0 overflow-auto;
 
     &:first-child {
       @apply mt-0;
