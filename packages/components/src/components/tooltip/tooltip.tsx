@@ -27,7 +27,9 @@ export class Tooltip {
       document.querySelector('[data-itemscope="root"]') || document.body
     const { left, bottom, width } = this.el.getBoundingClientRect()
     if (this.tooltipRef === undefined) {
-      this.tooltipRef = document.createElement('stencila-tooltip-element')
+      this.tooltipRef =
+        document.querySelector('stencila-tooltip-element') ??
+        document.createElement('stencila-tooltip-element')
     }
 
     this.tooltipRef.innerText = this.text
