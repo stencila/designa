@@ -22,6 +22,9 @@ export class Tooltip {
   private tooltipRef: HTMLSpanElement
 
   private showTooltip = () => {
+    // TODO: Use Schema helpers once package is updated: https://github.com/stencila/schema/issues/178
+    const target =
+      document.querySelector('[data-itemscope="root"]') || document.body
     const { left, bottom, width } = this.el.getBoundingClientRect()
     if (this.tooltipRef === undefined) {
       this.tooltipRef = document.createElement('stencila-tooltip-element')
@@ -29,7 +32,7 @@ export class Tooltip {
 
     this.tooltipRef.innerText = this.text
     this.tooltipRef.style.top = `${clamp(ordNumber)(0, Infinity)(bottom + 8)}px`
-    document.body.appendChild(this.tooltipRef)
+    target.appendChild(this.tooltipRef)
 
     const tooltip = this.tooltipRef.getBoundingClientRect()
     const maxLeft = window.outerWidth - tooltip.width
