@@ -85,7 +85,9 @@ export class CodeExpression {
         <slot name={slots.text} />
       </span>,
       this.dividerArrow,
-      <slot name={slots.output} />
+      <span>
+        <slot name={slots.output} />
+      </span>
     ]
 
     return (
