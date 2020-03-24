@@ -1,8 +1,6 @@
-@import '../base.css';
-
 :host,
 stencila-code-error {
-  @apply relative block w-full p-2 rounded border-warn-500 bg-warn-100 text-warn-900;
+  @apply relative block w-full p-2 rounded font-body border-warn-500 bg-warn-100 text-warn-900;
 
   .overview {
     * {
@@ -25,12 +23,9 @@ stencila-code-error {
   [slot='stacktrace'] {
     @apply m-0 bg-stock border-warn-500 text-key;
   }
-}
 
-:host,
-stencila-code-error {
-  &.error,
-  &.incapable {
+  &[kind='error'],
+  &[kind='incapable'] {
     @apply border-danger-500 bg-danger-100 text-danger-900;
 
     [slot='stacktrace'] {

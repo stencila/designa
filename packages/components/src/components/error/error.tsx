@@ -28,7 +28,7 @@ export class Error {
 
   public render() {
     return (
-      <Host class={{ [this.kind]: true }}>
+      <Host>
         <div class="overview">
           <stencila-icon icon="alert-triangle"></stencila-icon>
           <slot />
