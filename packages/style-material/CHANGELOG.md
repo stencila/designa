@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/stencila/style/compare/@stencila/style-material@0.7.1...@stencila/style-material@0.8.0) (2020-03-24)
+
+
+### Bug Fixes
+
+* **Material Icon:** Fix rendering issue for icons containing dots ([5873333](https://github.com/stencila/style/commit/587333396a65c3c01a08316ec242edd389e33b4e))
+* **Tab, TabList:** Fix style encapsulation in Tab component ([ba0bf57](https://github.com/stencila/style/commit/ba0bf57eb17ddf0a84c15b2ead8bfc632c10f25b))
+* **Tooltip:** Append tooltip to Encoda Root if it exists, to inherit CSS ([5118997](https://github.com/stencila/style/commit/5118997e812fb0cbdd087a99563c1b85a82c2632))
+* **Tooltip:** Fix tooltip font family styling ([66e8046](https://github.com/stencila/style/commit/66e80463b737e0fcf1bff978d517310e02634e89))
+* **Typography:** Avoid resetting Web Component host font family ([e7a4b23](https://github.com/stencila/style/commit/e7a4b23eff3f88331a9b4bb597bec54d6e3e7625))
+
+
+### Features
+
+* **Button:** Add `fill` prop to allow button to fill parent width ([26cae0f](https://github.com/stencila/style/commit/26cae0fe8baa517d017161671c2b15f2e61b3b73))
+* **Button:** Add button color variations by setting `color` attribute ([e6e7bff](https://github.com/stencila/style/commit/e6e7bff147003117ca99aa2b3c2c1d1dc5f6c0e1))
+* **Input:** Add stencila-input component ([b421caa](https://github.com/stencila/style/commit/b421caa6abcff7822fdc196186bacdd03058c806))
+* **Styles:** Expose a global typography stylesheet ([59b2de1](https://github.com/stencila/style/commit/59b2de1f842276960f383d13a0753e36161f1555))
+
+
+
+
+
 ## [0.7.1](https://github.com/stencila/style/compare/@stencila/style-material@0.7.0...@stencila/style-material@0.7.1) (2020-02-06)
 
 

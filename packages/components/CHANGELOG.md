@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/stencila/designa/compare/@stencila/components@0.9.0...@stencila/components@0.10.0) (2020-03-24)
+
+
+### Bug Fixes
+
+* **Action Menu:** Reveal more actions only when hovering over ellipses ([32837d4](https://github.com/stencila/designa/commit/32837d4f90826fbfd4085416c1ede06d5fa870fa))
+* **Button:** Fix double submission of forms ([e0a6913](https://github.com/stencila/designa/commit/e0a6913e3d3aa074556569669295b400d28795b9))
+* **Code Expression:** Fix styles and arrow positioning ([68a215f](https://github.com/stencila/designa/commit/68a215f25d01206ebe09ef79e6857e33b254fba9))
+* **CodeChunk:** Fix very large CodeChunk heights in iframes in Safari ([c6966bf](https://github.com/stencila/designa/commit/c6966bfe7a4a088c9243afac0be5aedee3745ebe))
+* **Components:** Fix styles not applying to custom components in prod ([bc4850e](https://github.com/stencila/designa/commit/bc4850e84c4687aff3ce0d0ad520a20803a2fb16))
+* **Error:** Fix incorrect font on stencila-code-error component ([79c10e9](https://github.com/stencila/designa/commit/79c10e9d441ad6b4b67bb3b8e97867b702c266b2))
+* **Material Icon:** Fix rendering issue for icons containing dots ([5873333](https://github.com/stencila/designa/commit/587333396a65c3c01a08316ec242edd389e33b4e))
+* **Node List:** Fix rendering of strings containing escape sequences ([dd1b3e2](https://github.com/stencila/designa/commit/dd1b3e27a3b980c5228fbeba55bed1760e3b8a01))
+* **Tab, TabList:** Fix style encapsulation in Tab component ([ba0bf57](https://github.com/stencila/designa/commit/ba0bf57eb17ddf0a84c15b2ead8bfc632c10f25b))
+* **Tooltip:** Append tooltip to Encoda Root if it exists, to inherit CSS ([5118997](https://github.com/stencila/designa/commit/5118997e812fb0cbdd087a99563c1b85a82c2632))
+* **Tooltip:** Update tooltip contents when text prop changes ([702dd64](https://github.com/stencila/designa/commit/702dd64593d76b7e3cb61abf07cd7530b44a23a4))
+
+
+### Features
+
+* **Button:** Add `fill` prop to allow button to fill parent width ([26cae0f](https://github.com/stencila/designa/commit/26cae0fe8baa517d017161671c2b15f2e61b3b73))
+* **Button:** Add button color variations by setting `color` attribute ([e6e7bff](https://github.com/stencila/designa/commit/e6e7bff147003117ca99aa2b3c2c1d1dc5f6c0e1))
+* **Code Expression:** Add help text tooltip to icon button ([5d1170e](https://github.com/stencila/designa/commit/5d1170ef650452a2d12ee2f88ab80fe734f87e6b))
+* **Input:** Add stencila-input component ([b421caa](https://github.com/stencila/designa/commit/b421caa6abcff7822fdc196186bacdd03058c806))
+* **Tooltip:** Limit visible tooltip instances to one ([38411bd](https://github.com/stencila/designa/commit/38411bd4bd9bca2376df462b501f674e98800d97))
+
+
+
+
+
 # [0.9.0](https://github.com/stencila/designa/compare/@stencila/components@0.8.0...@stencila/components@0.9.0) (2020-02-11)
 
 
