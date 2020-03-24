@@ -41,7 +41,7 @@ stencila-code-expression {
   }
 
   .source stencila-icon {
-    @apply inline-flex items-stretch self-stretch w-0 overflow-hidden cursor-pointer max-w-0;
+    @apply inline-flex items-stretch self-stretch w-0 pt-px overflow-hidden cursor-pointer max-w-0;
     transition: padding 120ms ease-out, width 120ms ease-out;
 
     &:focus,
@@ -89,7 +89,7 @@ stencila-code-expression {
     }
 
     .source stencila-icon {
-      @apply max-w-full px-1 pt-px border-r border-neutral-300;
+      @apply max-w-full px-1 border-r border-neutral-300;
       width: 1.75rem;
     }
   }
