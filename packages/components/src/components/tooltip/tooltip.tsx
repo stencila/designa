@@ -3,7 +3,10 @@ import { clamp, ordNumber } from 'fp-ts/lib/Ord'
 
 @Component({
   tag: 'stencila-tooltip',
-  styleUrl: 'tooltip.css',
+  styleUrls: {
+    default: 'tooltip.css',
+    material: 'tooltip.css'
+  },
   scoped: true
 })
 export class Tooltip {

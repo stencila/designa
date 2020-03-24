@@ -2,7 +2,10 @@ import { Component, h, Host, Prop } from '@stencil/core'
 
 @Component({
   tag: 'stencila-code-error',
-  styleUrl: 'error.css',
+  styleUrls: {
+    default: 'error.css',
+    material: 'error.css'
+  },
   scoped: true
 })
 export class Error {

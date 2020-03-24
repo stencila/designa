@@ -7,7 +7,10 @@ const slots = {
 
 @Component({
   tag: 'stencila-code-expression',
-  styleUrl: 'codeExpression.css',
+  styleUrls: {
+    default: 'codeExpression.css',
+    material: 'codeExpression.css'
+  },
   scoped: true
 })
 export class CodeExpression {
