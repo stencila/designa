@@ -25,7 +25,7 @@
     box-sizing: border-box;
     height: var(--height);
     padding: 2px;
-    stroke-linecap: butt;
+    stroke-linecap: round;
     stroke-width: 3px;
     width: var(--width);
   }
