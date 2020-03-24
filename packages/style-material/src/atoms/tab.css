@@ -1,4 +1,3 @@
-@import '../tailwind/base';
 @import './anchor';
 
 :host,
@@ -8,10 +7,10 @@ stencila-tab {
 
 :host li,
 ul[role='tablist'] li {
-  @apply list-none text-center uppercase text-sm tracking-wider font-medium flex flex-row text-center mb-4 m-0;
+  @apply flex flex-row m-0 text-sm font-medium tracking-wider text-center uppercase list-none;
 
   a {
-    @apply block border-b-2 border-neutral-300 leading-none w-full py-4 px-4;
+    @apply block w-full px-4 py-4 leading-none border-0 border-b-2 border-solid border-neutral-300;
 
     &[aria-selected='true'] {
       @apply border-b-2 border-primary-500 text-primary-500;

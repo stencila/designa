@@ -6,7 +6,7 @@ import { Component, h, Prop } from '@stencil/core'
     default: 'tab.css',
     material: 'tab.material.css'
   },
-  shadow: true
+  scoped: true
 })
 export class Tab {
   public static readonly elementName = 'stencila-tab'

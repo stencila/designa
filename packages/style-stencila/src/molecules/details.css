@@ -1,6 +1,6 @@
 :host,
 stencila-details {
-  @apply block relative;
+  @apply relative block font-body;
 
   .contents {
     @apply overflow-hidden;
@@ -10,8 +10,13 @@ stencila-details {
     }
   }
 
+  ::slotted([slot='summary']),
+  &::slotted([slot='summary']) {
+    @apply cursor-pointer;
+  }
+
   .disclosure-toggle {
-    @apply absolute right-0 top-0 cursor-pointer;
+    @apply absolute top-0 right-0 cursor-pointer;
     transition: transform 120ms ease-in-out;
     transform: rotateZ(0deg);
 
@@ -26,7 +31,8 @@ stencila-details {
 
   &:hover,
   &:focus {
-    .disclosure-toggle svg {
+    ::slotted(.disclosure-toggle > svg),
+    &::slotted(.disclosure-toggle > svg) {
       @apply stroke-neutral-700;
     }
   }

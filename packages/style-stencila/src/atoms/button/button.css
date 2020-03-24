@@ -1,32 +1,19 @@
 @import './_base.css';
 
-button:not(.secondary),
-stencila-button > button:not(.secondary),
-a.button:not(.secondary) {
-  @apply rounded-full bg-primary-500 text-stock px-4 py-2 font-medium;
+a.button,
+button {
+  &:not(.secondary) {
+    @apply font-medium rounded-full text-stock;
 
-  .vertical-offset {
-    @apply pt-px;
-  }
+    &.xsmall,
+    &[size='xsmall'] {
+      @apply rounded-sm;
+    }
 
-  &:active,
-  &:hover {
-    @apply bg-primary-700;
-  }
-
-  &[disabled],
-  &[disabled]:active,
-  &[disabled]:hover {
-    @apply bg-primary-100 text-neutral-500;
-  }
-
-  &[data-size='small'],
-  &[size='small'] {
-    @apply p-2;
-  }
-
-  &[data-size='xsmall'],
-  &[size='xsmall'] {
-    @apply text-xs px-2 py-1 rounded-sm;
+    @mixin buttonColorVariant danger;
+    @mixin buttonColorVariant neutral;
+    @mixin buttonColorVariant primary;
+    @mixin buttonColorVariant success;
+    @mixin buttonColorVariant warn;
   }
 }

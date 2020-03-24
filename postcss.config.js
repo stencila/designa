@@ -3,6 +3,9 @@ const path = require('path')
 module.exports = {
   modules: false,
   plugins: [
+    require('postcss-mixins')({
+      mixinsDir: path.join(__dirname, 'utils', 'css', 'mixins')
+    }),
     require('postcss-import'),
     require('postcss-import-url')({ modernBrowser: true }),
     require('postcss-url')({ url: 'rebase' }),

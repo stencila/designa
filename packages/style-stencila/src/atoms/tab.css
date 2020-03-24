@@ -8,7 +8,7 @@ stencila-tab {
 :host li,
 stencila-tab li,
 ul[role='tablist'] li {
-  @apply capitalize list-none text-center flex flex-row text-center border border-neutral-400 m-0 p-0;
+  @apply flex flex-row p-0 m-0 text-center capitalize list-none border border-neutral-400;
 
   &:first-of-type {
     @apply rounded-l;
@@ -19,7 +19,7 @@ ul[role='tablist'] li {
   }
 
   a {
-    @apply block leading-none w-full py-2 px-4;
+    @apply block w-full px-4 py-2 leading-none;
 
     &[aria-selected='true'] {
       @apply bg-neutral-300;

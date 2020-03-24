@@ -1,63 +1,110 @@
-stencia-button > button,
-button,
-a.button {
-  @apply border-none p-0 leading-none no-underline inline-block text-sm font-body;
+a.button,
+button {
+  @apply inline-block px-4 py-2 text-base leading-none no-underline border-none font-body;
   transition: color 120ms ease-out, background-color 120ms ease-out;
+
+  &.xsmall,
+  &[size='xsmall'] {
+    @apply px-2 py-1 text-xs rounded-sm;
+  }
+
+  &.small,
+  &[size='small'] {
+    @apply p-2 text-sm;
+  }
+
+  &.large,
+  &[size='large'] {
+    @apply px-6 py-3 text-2xl;
+  }
 
   &:hover {
     @apply cursor-pointer;
   }
 
-  [slot='icon'] {
-    @apply inline-block pr-2;
-  }
-
-  &[disabled] {
+  &[disabled],
+  &[disabled]:active,
+  &[disabled]:hover {
     @apply cursor-not-allowed;
   }
 
-  &[data-size='small'],
-  &[size='small'] {
-    @apply p-2;
-  }
-
-  &[data-size='xsmall'],
-  &[size='xsmall'] {
-    @apply text-xs px-2 py-1 rounded-sm;
+  &.fill {
+    @apply w-full;
   }
 
   & > * {
-    @apply align-middle;
+    @apply align-text-bottom;
+  }
+
+  stencila-icon {
+    @apply pr-1;
+    --width: 1.125em;
+    --height: 1.125em;
+  }
+
+  &[size='xsmall'] stencila-icon,
+  &[data-size='xsmall'] stencila-icon {
+    --height: 1em;
+    --width: 1em;
   }
 
   & > svg,
   & > img {
-    @apply pr-1 inline-block;
+    @apply inline-block pr-1;
     width: 1.125em;
     height: 1.125em;
   }
 
-  stencila-icon span {
-    @apply pr-1;
-    width: 1.125em;
-    height: 1.125em;
+  &.xsmall,
+  &[size='xsmall'],
+  &.small,
+  &[size='small'] {
+    stencila-icon {
+      --height: 1em;
+      --width: 1em;
+    }
+
+    & > img,
+    & > svg {
+      height: 1em;
+      width: 1em;
+    }
   }
 
-  stencila-icon svg {
-    stroke: currentColor;
-    stroke-width: 3;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
-  }
-
-  &.iconOnly stencila-icon span {
-    @apply pr-0;
+  &.iconOnly {
+    stencila-icon,
+    & > svg,
+    & > img {
+      @apply pr-0;
+    }
   }
 }
 
-a.button,
-a:visited.button {
-  @apply no-underline;
-  color: inherit;
+:host {
+  &::slotted(bytton > *) {
+    @apply align-text-bottom;
+  }
+
+  &::slotted(button > svg),
+  &::slotted(button > img) {
+    @apply inline-block pr-1;
+    width: 1.125em;
+    height: 1.125em;
+  }
+
+  &[size='xsmall'],
+  &[size='small'] {
+    &::slotted(button > svg),
+    &::slotted(button > img) {
+      height: 1em;
+      width: 1em;
+    }
+  }
+
+  &[icon-only='true'] {
+    &::slotted(button > svg),
+    &::slotted(button > img) {
+      @apply pr-0;
+    }
+  }
 }

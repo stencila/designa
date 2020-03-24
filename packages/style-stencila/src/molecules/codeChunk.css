@@ -3,25 +3,26 @@
 @import '../atoms/pre.css';
 
 .preReset {
-  @apply border-0 m-0 p-0;
+  @apply p-0 m-0 border-0;
 }
 
 :host,
 stencila-code-chunk {
-  @apply block relative w-full my-4 border border-solid border-neutral-300 rounded;
+  @apply relative block w-full my-4 border border-solid rounded border-neutral-300;
 
   stencila-code-editor {
-    @apply h-full;
     --border-width: 0;
+    @apply flex-grow;
   }
 
   stencila-node-list {
-    @apply m-0 p-2;
+    @apply p-2 m-0;
   }
 }
 
 .codeContainer {
-  @apply relative bg-neutral-200 m-0 rounded-none border-neutral-300 border-b border-l-0 border-r-0 border-t-0;
+  @apply relative flex flex-col flex-auto m-0 border-t-0 border-b border-l-0 border-r-0 rounded-none bg-neutral-200 border-neutral-300;
+  height: intrinsic;
 
   pre,
   pre[class*='language-'] {
@@ -36,14 +37,14 @@ stencila-code-chunk {
 @screen lg {
   :host,
   stencila-code-chunk {
-    @apply flex flex-row w-full items-stretch;
+    @apply flex flex-row items-stretch w-full;
   }
 
   .codeContainer {
-    @apply w-1/2 border-l border-b-0;
+    @apply w-1/2 border-b-0 border-l;
   }
 
   stencila-node-list {
-    @apply w-1/2 flex-grow order-first;
+    @apply flex-grow order-first w-1/2;
   }
 }

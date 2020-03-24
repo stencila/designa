@@ -1,3 +1,7 @@
 label {
-  @apply text-sm text-neutral-600 block mb-1 font-bold;
+  @apply block mb-1 text-sm font-bold text-left text-neutral-600;
+
+  & + & {
+    @apply mt-2;
+  }
 }

@@ -20,7 +20,9 @@ stencila-code-editor {
 
   .codeEditor {
     @apply flex-grow max-w-full overflow-auto font-mono cursor-text;
+  }
 
+  &::slotted(.codeContainer) {
     .codemirror-content *,
     .gutterElement * {
       @apply font-mono text-sm;

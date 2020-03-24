@@ -182,9 +182,10 @@ export class CodeChunkComponent {
         </stencila-action-menu>
 
         <div
-          class={`codeContainer ${
-            this.isCodeCollapsed === true ? 'hidden' : ''
-          }`}
+          class={{
+            codeContainer: true,
+            hidden: this.isCodeCollapsed
+          }}
         >
           <stencila-code-editor
             programmingLanguage={this.programmingLanguageProp}

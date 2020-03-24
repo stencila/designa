@@ -6,12 +6,10 @@ import { Component, Element, h, Prop, State } from '@stencil/core'
     default: 'actionMenu.css',
     material: 'actionMenu.css'
   },
-  shadow: true
+  scoped: true
 })
 export class ActionMenu {
-  public static readonly elementName = 'stencila-action-menu'
-
-  @Element() private el: HTMLElement
+  @Element() private el: HTMLStencilaActionMenuElement
 
   /**
    * List of buttons to include in Action Menu.
@@ -23,34 +21,33 @@ export class ActionMenu {
    * Defines whether the Action Menu can be collapsed and expanded
    */
   @Prop()
-  public expandable: boolean = false
+  public expandable = false
 
   @State() private isCollapsed = false
 
   private toggleActionMenu = () => (this.isCollapsed = !this.isCollapsed)
 
-  @State() private width: string = 'auto'
-  @State() private isAnimating: boolean = false
+  @State() private width = 'auto'
+  @State() private isAnimating = false
 
   private actionContainerRef: HTMLSpanElement | null
-  private isTransitioning: boolean = false
+  private isTransitioning = false
 
   private calculateWidth = () => {
-    if (this.actionContainerRef && this.isTransitioning === false) {
+    if (this.actionContainerRef !== null && this.isTransitioning === false) {
       this.width = 'auto'
-      const w = this.actionContainerRef.getBoundingClientRect().width
-      this.width = w + 'px'
+      const width = this.actionContainerRef.getBoundingClientRect().width
+      this.width = `${width}px`
     }
   }
 
-  private observer = new MutationObserver(this.calculateWidth)
+  private observer = new window.MutationObserver(this.calculateWidth)
 
   protected componentDidLoad() {
-    if (this.expandable) {
-      this.actionContainerRef = this.el.shadowRoot.querySelector(
-        '.actionContainer'
-      )
-      if (this.actionContainerRef) {
+    if (this.expandable && this.el) {
+      this.actionContainerRef = this.el.querySelector('.actionContainer')
+
+      if (this.actionContainerRef !== null) {
         this.actionContainerRef.addEventListener(
           'transitionstart',
           () => (this.isTransitioning = true)
@@ -76,25 +73,27 @@ export class ActionMenu {
   public render() {
     return (
       <nav>
-        <span
-          class={{
-            actionContainer: true,
-            isAnimating: this.isAnimating,
-            isCollapsed: this.isCollapsed
-          }}
-          style={{ '--max-width': this.width }}
-        >
-          <slot />
-        </span>
+        <span class="secondaryActions">
+          <span
+            class={{
+              actionContainer: true,
+              isAnimating: this.isAnimating,
+              isCollapsed: this.isCollapsed
+            }}
+            style={{ '--max-width': this.width }}
+          >
+            <slot />
+          </span>
 
-        <stencila-button
-          onClick={this.toggleActionMenu}
-          icon="more-horizontal"
-          isSecondary={true}
-          size="xsmall"
-          iconOnly={true}
-          ariaLabel="Toggle Action Menu"
-        ></stencila-button>
+          <stencila-button
+            onClick={this.toggleActionMenu}
+            icon="more-horizontal"
+            isSecondary={true}
+            size="xsmall"
+            iconOnly={true}
+            ariaLabel="Toggle Action Menu"
+          ></stencila-button>
+        </span>
 
         <slot name="persistentActions" />
       </nav>

@@ -1,5 +1,9 @@
+stencila-tab-list {
+  @apply block;
+}
+
 :host ul,
 stencila-tab-list ul,
 ul[role='tablist'] {
-  @apply flex flex-row bg-neutral-100 p-0 m-0;
+  @apply flex flex-row p-0 m-0 bg-neutral-100;
 }

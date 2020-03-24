@@ -5,9 +5,9 @@
 
 ## Properties
 
-| Property     | Attribute | Description | Type         | Default     |
-| ------------ | --------- | ----------- | ------------ | ----------- |
-| `collection` | --        |             | `Collection` | `undefined` |
+| Property     | Attribute | Description                                                  | Type         | Default     |
+| ------------ | --------- | ------------------------------------------------------------ | ------------ | ----------- |
+| `collection` | --        | Collection schema from which to generate a table of contents | `Collection` | `undefined` |
 
 
 ----------------------------------------------

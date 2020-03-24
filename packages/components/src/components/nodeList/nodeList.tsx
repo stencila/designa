@@ -68,9 +68,14 @@ export class OutputsList {
 
   private renderNode = (node: Node): string => {
     if (isPrimitive(node)) {
+      const text =
+        typeof node === 'string' || typeof node === 'number'
+          ? node
+          : JSON.stringify(node)
+
       return (
         <pre>
-          <output>{JSON.stringify(node)}</output>
+          <output>{text}</output>
         </pre>
       )
     } else if (isCode(node)) {

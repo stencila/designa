@@ -22,7 +22,11 @@ const nodes = [
         values: ['4', '5', '6']
       }
     ]
-  }
+  },
+  'bin   dev  home  lib32\tlibx32\tmnt  proc  run\t srv  tmp  var\nboot  etc  lib\t lib64\tmedia\topt  root  sbin  sys  usr',
+  true,
+  20,
+  null
 ]
 
 export const emptyState = () => html`
@@ -30,7 +34,7 @@ export const emptyState = () => html`
   </stencila-code-chunk>
 `
 
-export const signleNode = () => html`
+export const singleNode = () => html`
   <stencila-node-list .nodes=${[nodes[0]]}>
   </stencila-code-chunk>
 

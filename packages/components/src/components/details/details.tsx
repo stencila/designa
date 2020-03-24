@@ -2,8 +2,11 @@ import { Component, h, Prop, State, Host } from '@stencil/core'
 
 @Component({
   tag: 'stencila-details',
-  styleUrl: 'details.css',
-  shadow: true
+  styleUrls: {
+    default: 'details.css',
+    material: 'details.css'
+  },
+  scoped: true
 })
 export class Details {
   public static readonly elementName = 'stencila-details'
