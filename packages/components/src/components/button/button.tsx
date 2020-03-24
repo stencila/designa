@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop, State, Element } from '@stencil/core'
+import { Component, h, Host, Prop, State } from '@stencil/core'
 import { IconNames } from '../icon/icon'
 
 @Component({
@@ -15,8 +15,6 @@ export class Button {
   public static slots = {
     default: undefined
   }
-
-  @Element() private el: HTMLElement
 
   /**
    * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
@@ -107,26 +105,14 @@ export class Button {
   public clickHandlerProp: (e?: MouseEvent) => unknown
 
   private onClick = async (e?: MouseEvent): Promise<unknown> => {
-    if (
-      (this.buttonType === 'button' || !this.buttonType) &&
-      this.clickHandlerProp
-    ) {
+    if (this.clickHandlerProp !== undefined) {
       this.ioPending = true
       const result = await Promise.resolve(this.clickHandlerProp(e))
       this.ioPending = false
       return result
     }
 
-    return Promise.resolve(
-      // TODO: Add polyfill for el.closest for IE
-      this.el.closest('form')?.dispatchEvent(
-        new Event(this.buttonType, {
-          cancelable: true,
-          bubbles: true,
-          composed: true
-        })
-      )
-    )
+    return Promise.resolve()
   }
 
   public render() {
