@@ -11,7 +11,7 @@ a.button:not(.secondary) {
   &[disabled],
   &[disabled]:active,
   &[disabled]:hover {
-    @apply cursor-not-allowed pointer-events-none;
+    @apply cursor-not-allowed;
   }
 
   @mixin buttonColorVariant danger;
