@@ -1,9 +1,4 @@
-const {
-  inset,
-  maxHeight,
-  maxWidth,
-  minWidth
-} = require('tailwindcss/defaultTheme')
+const { inset } = require('tailwindcss/defaultTheme')
 
 const colors = {
   transparent: 'transparent',
@@ -19,7 +14,7 @@ const colors = {
     '600': 'var(--color-primary-600)',
     '700': 'var(--color-primary-700)',
     '800': 'var(--color-primary-800)',
-    '900': 'var(--color-primary-900)'
+    '900': 'var(--color-primary-900)',
   },
   neutral: {
     '100': 'var(--color-neutral-100)',
@@ -30,7 +25,7 @@ const colors = {
     '600': 'var(--color-neutral-600)',
     '700': 'var(--color-neutral-700)',
     '800': 'var(--color-neutral-800)',
-    '900': 'var(--color-neutral-900)'
+    '900': 'var(--color-neutral-900)',
   },
   success: {
     '100': 'var(--color-success-100)',
@@ -41,7 +36,7 @@ const colors = {
     '600': 'var(--color-success-600)',
     '700': 'var(--color-success-700)',
     '800': 'var(--color-success-800)',
-    '900': 'var(--color-success-900)'
+    '900': 'var(--color-success-900)',
   },
   warn: {
     '100': 'var(--color-warn-100)',
@@ -52,7 +47,7 @@ const colors = {
     '600': 'var(--color-warn-600)',
     '700': 'var(--color-warn-700)',
     '800': 'var(--color-warn-800)',
-    '900': 'var(--color-warn-900)'
+    '900': 'var(--color-warn-900)',
   },
   danger: {
     '100': 'var(--color-danger-100)',
@@ -63,8 +58,8 @@ const colors = {
     '600': 'var(--color-danger-600)',
     '700': 'var(--color-danger-700)',
     '800': 'var(--color-danger-800)',
-    '900': 'var(--color-danger-900)'
-  }
+    '900': 'var(--color-danger-900)',
+  },
 }
 
 module.exports = {
@@ -72,32 +67,24 @@ module.exports = {
     fontFamily: {
       display: 'var(--font-family-display)',
       body: 'var(--font-family-body)',
-      mono: 'var(--font-family-mono)'
+      mono: 'var(--font-family-mono)',
     },
     colors,
-    inset: {
-      ...inset,
-      '1/2': '50%'
+    extend: {
+      inset: {
+        '1/2': '50%',
+      },
+      fill: colors,
+      stroke: colors,
+      maxHeight: {
+        em: '1em',
+      },
+      maxWidth: {
+        0: '0',
+      },
+      minWidth: {
+        em: '1em',
+      },
     },
-    fill: {
-      ...colors,
-      current: 'currentColor'
-    },
-    stroke: {
-      ...colors,
-      current: 'currentColor'
-    },
-    maxHeight: {
-      ...maxHeight,
-      em: '1em'
-    },
-    maxWidth: {
-      ...maxWidth,
-      0: '0'
-    },
-    minWidth: {
-      ...minWidth,
-      em: '1em'
-    }
-  }
+  },
 }
