@@ -67,6 +67,10 @@ export namespace Components {
          */
         "isSecondary": boolean;
         /**
+          * Renders the button without initial background color or border.
+         */
+        "minimal": boolean;
+        /**
           * The overall size of the Button.
          */
         "size": "xsmall" | "small" | "default" | "large";
@@ -424,6 +428,10 @@ declare namespace LocalJSX {
           * Renders the button using a secondory, and usually less visually prominent, Button CSS stylesheet.
          */
         "isSecondary"?: boolean;
+        /**
+          * Renders the button without initial background color or border.
+         */
+        "minimal"?: boolean;
         /**
           * The overall size of the Button.
          */

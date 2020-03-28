@@ -4,7 +4,7 @@ import { html } from 'lit-html'
 export default {
   title: 'Atoms/Button/Primary',
   component: 'stencila-button',
-  excludeStories: ['props']
+  excludeStories: ['props'],
 }
 
 const defaultText = 'Sign In'
@@ -291,7 +291,7 @@ const icons = [
   'zap-off',
   'zap',
   'zoom-in',
-  'zoom-out'
+  'zoom-out',
 ]
 
 export const props = (overrides = {}) => ({
@@ -305,7 +305,7 @@ export const props = (overrides = {}) => ({
       'neutral',
       'stock',
       'key',
-      'brand'
+      'brand',
     ],
     overrides.color || 'primary'
   ),
@@ -315,6 +315,7 @@ export const props = (overrides = {}) => ({
   icon: select('icon', icons, overrides.icon || defaultIcon),
   isLoading: boolean('isLoading', overrides.isLoading || false),
   label: text('Button Text', overrides.label || defaultText),
+  minimal: boolean('minimal', overrides.minimal || false),
   secondary: boolean('isSecondary', overrides.isSecondary || false),
   size: select(
     'size',
@@ -333,7 +334,7 @@ export const withText = () => {
     label,
     secondary,
     fill,
-    size
+    size,
   } = props()
 
   return html`
@@ -361,9 +362,9 @@ export const withEmoji = () => {
     label,
     secondary,
     fill,
-    size
+    size,
   } = props({
-    label: '😀 😎 👍 💯'
+    label: '😀 😎 👍 💯',
   })
 
   return html`
@@ -391,10 +392,10 @@ export const small = () => {
     label,
     secondary,
     fill,
-    size
+    size,
   } = props({
     label: 'A small step',
-    size: 'small'
+    size: 'small',
   })
 
   return html`
@@ -422,10 +423,10 @@ export const extraSmall = () => {
     label,
     secondary,
     fill,
-    size
+    size,
   } = props({
     label: 'a very small step',
-    size: 'xsmall'
+    size: 'xsmall',
   })
 
   return html`
@@ -453,10 +454,10 @@ export const anchorButton = () => {
     label,
     secondary,
     fill,
-    size
+    size,
   } = props({
     label: 'a very small step',
-    size: 'xsmall'
+    size: 'xsmall',
   })
 
   return html`
@@ -484,11 +485,13 @@ export const webComponent = () => {
     label,
     secondary,
     fill,
-    size
+    size,
+    minimal,
   } = props()
 
   return html`
     <stencila-button
+      ?minimal=${minimal}
       color=${color}
       ?disabled=${disabled}
       fill=${fill}
@@ -513,11 +516,13 @@ export const webComponent_withAnIcon = () => {
     label,
     secondary,
     fill,
-    size
+    size,
+    minimal,
   } = props({ icon: undefined, color: 'stock', fill: true })
 
   return html`
     <stencila-button
+      ?minimal=${minimal}
       color=${color}
       ?disabled=${disabled}
       fill=${fill}
@@ -563,11 +568,14 @@ export const webComponent_withAFeatherIcon = () => {
     href,
     disabled,
     fill,
-    color
-  } = props()
+    color,
+    tooltip,
+    minimal,
+  } = props({ tooltip: 'Some helpful text' })
 
   return html`
     <stencila-button
+      ?minimal=${minimal}
       color=${color}
       ?disabled=${disabled}
       fill=${fill}
@@ -592,14 +600,16 @@ export const webComponent_Link = () => {
     href,
     disabled,
     fill,
-    color
+    color,
+    minimal,
   } = props({
     icon: null,
-    href: '#'
+    href: '#',
   })
 
   return html`
     <stencila-button
+      ?minimal=${minimal}
       color=${color}
       ?disabled=${disabled}
       fill=${fill}

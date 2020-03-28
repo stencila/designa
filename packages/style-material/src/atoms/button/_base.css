@@ -70,6 +70,8 @@ button {
   }
 
   &.iconOnly {
+    @apply w-8 h-8;
+
     stencila-icon,
     & > svg,
     & > img {

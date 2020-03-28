@@ -5,15 +5,15 @@ import { IconNames } from '../icon/icon'
   tag: 'stencila-button',
   styleUrls: {
     default: 'button.css',
-    material: 'button.material.css'
+    material: 'button.material.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class Button {
   public static readonly elementName = 'stencila-button'
 
   public static slots = {
-    default: undefined
+    default: undefined,
   }
 
   /**
@@ -50,6 +50,11 @@ export class Button {
    * The overall size of the Button.
    */
   @Prop() public size: 'xsmall' | 'small' | 'default' | 'large' = 'default'
+
+  /**
+   * Renders the button without initial background color or border.
+   */
+  @Prop() public minimal: boolean = false
 
   /**
    * Renders the button using a secondory, and usually less visually prominent, Button CSS stylesheet.
@@ -100,7 +105,7 @@ export class Button {
    * Passed function will be wrapped in a Promise, and the result returned.
    */
   @Prop({
-    attribute: 'clickHandler'
+    attribute: 'clickHandler',
   })
   public clickHandlerProp: (e?: MouseEvent) => unknown
 
@@ -128,9 +133,10 @@ export class Button {
             button: this.href !== undefined,
             fill: this.fill,
             iconOnly: this.iconOnly,
+            minimal: this.minimal,
             secondary: this.isSecondary,
             [this.size]: this.size !== undefined,
-            [`color-${this.color}`]: true
+            [`color-${this.color}`]: true,
           }}
           href={this.href}
           target={this.target}
