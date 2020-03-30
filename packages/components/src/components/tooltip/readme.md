@@ -16,6 +16,7 @@
 
 ### Used by
 
+ - [stencila-button](../button)
  - [stencila-code-expression](../codeExpression)
 
 ### Depends on
@@ -26,6 +27,7 @@
 ```mermaid
 graph TD;
   stencila-tooltip --> stencila-tooltip-element
+  stencila-button --> stencila-tooltip
   stencila-code-expression --> stencila-tooltip
   style stencila-tooltip fill:#f9f,stroke:#333,stroke-width:4px
 ```

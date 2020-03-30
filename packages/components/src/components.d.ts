@@ -78,6 +78,10 @@ export namespace Components {
           * Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute. Only applies if the button is an anchor link. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target
          */
         "target"?: HTMLAnchorElement["target"];
+        /**
+          * An optional help text to display for button focus and hover states.
+         */
+        "tooltip"?: string;
     }
     interface StencilaCodeChunk {
         /**
@@ -440,6 +444,10 @@ declare namespace LocalJSX {
           * Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute. Only applies if the button is an anchor link. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target
          */
         "target"?: HTMLAnchorElement["target"];
+        /**
+          * An optional help text to display for button focus and hover states.
+         */
+        "tooltip"?: string;
     }
     interface StencilaCodeChunk {
         /**

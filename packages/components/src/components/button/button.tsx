@@ -96,6 +96,11 @@ export class Button {
   @Prop() public fill: boolean = false
 
   /**
+   * An optional help text to display for button focus and hover states.
+   */
+  @Prop() public tooltip?: string
+
+  /**
    * State keeping track of when asynchronous action is in flight
    */
   @State() private ioPending: boolean = false
@@ -120,42 +125,54 @@ export class Button {
     return Promise.resolve()
   }
 
-  public render() {
+  generateButton = (): HTMLButtonElement | HTMLAnchorElement => {
     const TagType = this.href != null ? 'a' : 'button'
 
+    return (
+      <TagType
+        class={{
+          button: this.href !== undefined,
+          fill: this.fill,
+          iconOnly: this.iconOnly,
+          minimal: this.minimal,
+          secondary: this.isSecondary,
+          [this.size]: this.size !== undefined,
+          [`color-${this.color}`]: true,
+        }}
+        href={this.href}
+        target={this.target}
+        type={this.buttonType}
+        disabled={this.ioPending || this.isLoading || this.disabled}
+        aria-label={this.ariaLabel}
+        onClick={this.onClick}
+      >
+        {this.icon === undefined ? null : typeof this.icon === 'string' ? (
+          <stencila-icon
+            icon={this.ioPending || this.isLoading ? 'loader' : this.icon}
+            class={{ spin: this.isLoading }}
+          ></stencila-icon>
+        ) : (
+          this.icon
+        )}
+
+        <slot />
+      </TagType>
+    )
+  }
+
+  public render() {
     return (
       <Host
         size={this.size}
         disabled={this.ioPending || this.isLoading || this.disabled}
       >
-        <TagType
-          class={{
-            button: this.href !== undefined,
-            fill: this.fill,
-            iconOnly: this.iconOnly,
-            minimal: this.minimal,
-            secondary: this.isSecondary,
-            [this.size]: this.size !== undefined,
-            [`color-${this.color}`]: true,
-          }}
-          href={this.href}
-          target={this.target}
-          type={this.buttonType}
-          disabled={this.ioPending || this.isLoading || this.disabled}
-          aria-label={this.ariaLabel}
-          onClick={this.onClick}
-        >
-          {this.icon === undefined ? null : typeof this.icon === 'string' ? (
-            <stencila-icon
-              icon={this.ioPending || this.isLoading ? 'loader' : this.icon}
-              class={{ spin: this.isLoading }}
-            ></stencila-icon>
-          ) : (
-            this.icon
-          )}
-
-          <slot />
-        </TagType>
+        {this.tooltip === undefined ? (
+          this.generateButton()
+        ) : (
+          <stencila-tooltip text={this.tooltip}>
+            {this.generateButton()}
+          </stencila-tooltip>
+        )}
       </Host>
     )
   }

@@ -321,29 +321,34 @@ export const props = (overrides = {}) => ({
     'size',
     ['xsmall', 'small', 'default', 'large'],
     overrides.size || 'default'
-  )
+  ),
+  tooltip: text('tooltip', overrides.tooltip || undefined),
 })
 
 export const withText = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
-    isloading,
+    isLoading,
     label,
+    minimal,
     secondary,
-    fill,
     size,
+    tooltip,
   } = props()
 
   return html`
     <button
-      class="color-${color} ${fill === true ? 'fill' : ''}"
+      class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
+        ? 'fill'
+        : ''}"
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
-      ?is-loading=${isloading}
+      ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >
@@ -356,20 +361,24 @@ export const withEmoji = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
-    isloading,
+    isLoading,
     label,
+    minimal,
     secondary,
-    fill,
     size,
+    tooltip,
   } = props({
     label: '😀 😎 👍 💯',
   })
 
   return html`
     <button
-      class="color-${color} ${fill === true ? 'fill' : ''}"
+      class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
+        ? 'fill'
+        : ''}"
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
@@ -386,13 +395,15 @@ export const small = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
-    isloading,
+    isLoading,
     label,
+    minimal,
     secondary,
-    fill,
     size,
+    tooltip,
   } = props({
     label: 'A small step',
     size: 'small',
@@ -400,7 +411,9 @@ export const small = () => {
 
   return html`
     <button
-      class="color-${color} ${fill === true ? 'fill' : ''}"
+      class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
+        ? 'fill'
+        : ''}"
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
@@ -417,13 +430,15 @@ export const extraSmall = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
-    isloading,
+    isLoading,
     label,
+    minimal,
     secondary,
-    fill,
     size,
+    tooltip,
   } = props({
     label: 'a very small step',
     size: 'xsmall',
@@ -431,7 +446,9 @@ export const extraSmall = () => {
 
   return html`
     <button
-      class="color-${color} ${fill === true ? 'fill' : ''}"
+      class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
+        ? 'fill'
+        : ''}"
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
@@ -448,13 +465,15 @@ export const anchorButton = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
-    isloading,
+    isLoading,
     label,
+    minimal,
     secondary,
-    fill,
     size,
+    tooltip,
   } = props({
     label: 'a very small step',
     size: 'xsmall',
@@ -462,7 +481,9 @@ export const anchorButton = () => {
 
   return html`
     <button
-      class="color-${color} ${fill === true ? 'fill' : ''}"
+      class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
+        ? 'fill'
+        : ''}"
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
@@ -479,14 +500,15 @@ export const webComponent = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
     isLoading,
     label,
-    secondary,
-    fill,
-    size,
     minimal,
+    secondary,
+    size,
+    tooltip,
   } = props()
 
   return html`
@@ -510,14 +532,15 @@ export const webComponent_withAnIcon = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
     isLoading,
     label,
-    secondary,
-    fill,
-    size,
     minimal,
+    secondary,
+    size,
+    tooltip,
   } = props({ icon: undefined, color: 'stock', fill: true })
 
   return html`
@@ -560,18 +583,18 @@ export const webComponent_withAnIcon = () => {
 
 export const webComponent_withAFeatherIcon = () => {
   const {
-    icon,
-    label,
-    secondary,
-    size,
-    isLoading,
-    href,
+    color,
     disabled,
     fill,
-    color,
-    tooltip,
+    href,
+    icon,
+    isLoading,
+    label,
     minimal,
-  } = props({ tooltip: 'Some helpful text' })
+    secondary,
+    size,
+    tooltip,
+  } = props()
 
   return html`
     <stencila-button
@@ -583,6 +606,7 @@ export const webComponent_withAFeatherIcon = () => {
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
+      .tooltip=${tooltip === '' ? undefined : tooltip}
       size=${size}
     >
       ${label}
@@ -592,16 +616,17 @@ export const webComponent_withAFeatherIcon = () => {
 
 export const webComponent_Link = () => {
   const {
-    icon,
-    label,
-    secondary,
-    size,
-    isLoading,
-    href,
+    color,
     disabled,
     fill,
-    color,
+    href,
+    icon,
+    isLoading,
+    label,
     minimal,
+    secondary,
+    size,
+    tooltip,
   } = props({
     icon: null,
     href: '#',
@@ -617,6 +642,7 @@ export const webComponent_Link = () => {
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
+      .tooltip=${tooltip === '' ? undefined : tooltip}
       size=${size}
     >
       ${label}
