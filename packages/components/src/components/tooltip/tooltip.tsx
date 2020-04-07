@@ -5,9 +5,9 @@ import { clamp, ordNumber } from 'fp-ts/lib/Ord'
   tag: 'stencila-tooltip',
   styleUrls: {
     default: 'tooltip.css',
-    material: 'tooltip.css'
+    material: 'tooltip.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class Tooltip {
   public static readonly elementName = 'stencila-tooltip'
@@ -71,11 +71,14 @@ export class Tooltip {
 
   componentDidUnload() {
     this.unloadComponent()
+    this.destroyTooltip()
   }
 
   @Watch('text')
   watchHandler(newText: string) {
-    this.tooltipRef.innerText = newText
+    if (this.tooltipRef !== undefined) {
+      this.tooltipRef.innerText = newText
+    }
   }
 
   public render() {
