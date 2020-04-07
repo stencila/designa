@@ -6,6 +6,8 @@
 @import './imageObject';
 @import './input';
 @import './label';
+@import './menu';
+@import './menuItem';
 @import './nodeList';
 @import './pre';
 @import './summary';

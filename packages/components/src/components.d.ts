@@ -194,6 +194,15 @@ export namespace Components {
          */
         "value"?: number | string;
     }
+    interface StencilaMenu {
+        /**
+          * Determines whether the Menu is shown or not
+         */
+        "isOpen": boolean;
+    }
+    interface StencilaMenuItem {
+        "icon": IconNames | undefined;
+    }
     interface StencilaNodeList {
         /**
           * Array of nodes to render.
@@ -312,6 +321,18 @@ declare global {
         prototype: HTMLStencilaInputElement;
         new (): HTMLStencilaInputElement;
     };
+    interface HTMLStencilaMenuElement extends Components.StencilaMenu, HTMLStencilElement {
+    }
+    var HTMLStencilaMenuElement: {
+        prototype: HTMLStencilaMenuElement;
+        new (): HTMLStencilaMenuElement;
+    };
+    interface HTMLStencilaMenuItemElement extends Components.StencilaMenuItem, HTMLStencilElement {
+    }
+    var HTMLStencilaMenuItemElement: {
+        prototype: HTMLStencilaMenuItemElement;
+        new (): HTMLStencilaMenuItemElement;
+    };
     interface HTMLStencilaNodeListElement extends Components.StencilaNodeList, HTMLStencilElement {
     }
     var HTMLStencilaNodeListElement: {
@@ -366,6 +387,8 @@ declare global {
         "stencila-icon": HTMLStencilaIconElement;
         "stencila-image-object": HTMLStencilaImageObjectElement;
         "stencila-input": HTMLStencilaInputElement;
+        "stencila-menu": HTMLStencilaMenuElement;
+        "stencila-menu-item": HTMLStencilaMenuItemElement;
         "stencila-node-list": HTMLStencilaNodeListElement;
         "stencila-tab": HTMLStencilaTabElement;
         "stencila-tab-list": HTMLStencilaTabListElement;
@@ -556,6 +579,15 @@ declare namespace LocalJSX {
          */
         "value"?: number | string;
     }
+    interface StencilaMenu {
+        /**
+          * Determines whether the Menu is shown or not
+         */
+        "isOpen"?: boolean;
+    }
+    interface StencilaMenuItem {
+        "icon"?: IconNames | undefined;
+    }
     interface StencilaNodeList {
         /**
           * Array of nodes to render.
@@ -618,6 +650,8 @@ declare namespace LocalJSX {
         "stencila-icon": StencilaIcon;
         "stencila-image-object": StencilaImageObject;
         "stencila-input": StencilaInput;
+        "stencila-menu": StencilaMenu;
+        "stencila-menu-item": StencilaMenuItem;
         "stencila-node-list": StencilaNodeList;
         "stencila-tab": StencilaTab;
         "stencila-tab-list": StencilaTabList;
@@ -642,6 +676,8 @@ declare module "@stencil/core" {
             "stencila-icon": LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
             "stencila-image-object": LocalJSX.StencilaImageObject & JSXBase.HTMLAttributes<HTMLStencilaImageObjectElement>;
             "stencila-input": LocalJSX.StencilaInput & JSXBase.HTMLAttributes<HTMLStencilaInputElement>;
+            "stencila-menu": LocalJSX.StencilaMenu & JSXBase.HTMLAttributes<HTMLStencilaMenuElement>;
+            "stencila-menu-item": LocalJSX.StencilaMenuItem & JSXBase.HTMLAttributes<HTMLStencilaMenuItemElement>;
             "stencila-node-list": LocalJSX.StencilaNodeList & JSXBase.HTMLAttributes<HTMLStencilaNodeListElement>;
             "stencila-tab": LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
             "stencila-tab-list": LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;

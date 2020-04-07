@@ -4,6 +4,8 @@
 @import './icon';
 @import './input';
 @import './label';
+@import './menu';
+@import './menuItem';
 @import './pre';
 @import './summary';
 @import './tab';
