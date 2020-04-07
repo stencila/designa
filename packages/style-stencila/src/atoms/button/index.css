@@ -39,5 +39,12 @@ a.button {
     &.color-neutral {
       @apply text-neutral-500;
     }
+
+    &[disabled],
+    &[disabled]:focus,
+    &[disabled]:active,
+    &[disabled]:hover {
+      @apply opacity-25 bg-neutral-100 text-key;
+    }
   }
 }
