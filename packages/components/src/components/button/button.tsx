@@ -135,8 +135,8 @@ export class Button {
         href={this.href}
         target={this.target}
         type={this.buttonType}
-        disabled={this.ioPending || this.isLoading || this.disabled}
-        aria-label={this.ariaLabel}
+        disabled={this.ioPending || this.isLoading || this.disabled || false}
+        aria-label={this.ariaLabel ?? this.tooltip}
         onClick={this.onClick}
       >
         {this.icon === undefined ? null : typeof this.icon === 'string' ? (
@@ -155,10 +155,7 @@ export class Button {
 
   public render() {
     return (
-      <Host
-        size={this.size}
-        disabled={this.ioPending || this.isLoading || this.disabled}
-      >
+      <Host size={this.size} tabindex="-1">
         {this.tooltip === undefined ? (
           this.generateButton()
         ) : (
