@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Colors, } from "./types";
 import { IconNames, } from "./components/icon/icon";
 import { CodeChunk, Collection, Datatable, ImageObject, Node, } from "@stencila/schema";
 import { IconNames as IconNames1, } from "./components/icon/icon";
@@ -36,7 +37,7 @@ export namespace Components {
         /**
           * The color of the button
          */
-        "color": "primary" | "success" | "warn" | "danger" | "neutral" | "stock" | "key" | "brand";
+        "color": Colors;
         /**
           * If true, prevents the user from interacting with the button.
          */
@@ -425,7 +426,7 @@ declare namespace LocalJSX {
         /**
           * The color of the button
          */
-        "color"?: "primary" | "success" | "warn" | "danger" | "neutral" | "stock" | "key" | "brand";
+        "color"?: Colors;
         /**
           * If true, prevents the user from interacting with the button.
          */

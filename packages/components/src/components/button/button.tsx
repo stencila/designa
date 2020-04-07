@@ -1,5 +1,6 @@
 import { Component, h, Host, Prop, State } from '@stencil/core'
 import { IconNames } from '../icon/icon'
+import { Colors } from '../../types'
 
 @Component({
   tag: 'stencila-button',
@@ -36,15 +37,7 @@ export class Button {
   /**
    * The color of the button
    */
-  @Prop() public color:
-    | 'primary'
-    | 'success'
-    | 'warn'
-    | 'danger'
-    | 'neutral'
-    | 'stock'
-    | 'key'
-    | 'brand' = 'primary'
+  @Prop() public color: Colors = 'primary'
 
   /**
    * The overall size of the Button.
