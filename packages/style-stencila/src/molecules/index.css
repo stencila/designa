@@ -1,8 +1,9 @@
-@import './details';
-@import './dataTable';
+@import './codeChunk';
 @import './codeChunk';
 @import './codeExpression';
-@import './codeChunk';
-@import './tableOfContents';
+@import './dataTable';
+@import './details';
+@import './navbar';
 @import './tabList';
+@import './tableOfContents';
 @import './verticalNav';

@@ -1,2 +1,5 @@
-@import './tableOfContents';
+@import './codeEditor';
+@import './navbar';
 @import './tabList';
+@import './tableOfContents';
+@import './verticalNav';
