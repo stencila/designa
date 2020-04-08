@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@codemirror/next": "^0.4.0",
+    "@popperjs/core": "^2.2.1",
     "@stencila/style-material": "file:../style-material",
     "@stencila/style-stencila": "file:../style-stencila",
     "feather-icons": "^4.25.0",

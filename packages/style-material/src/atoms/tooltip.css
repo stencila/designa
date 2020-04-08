@@ -1,6 +1,5 @@
 :host,
 stencila-tooltip-element {
-  @apply fixed z-50 inline-block px-2 py-1 text-xs whitespace-no-wrap rounded shadow bg-neutral-700 text-stock left-1/2 font-body;
-  transform: translateX(-50%);
+  @apply z-50 inline-block px-2 py-1 text-xs whitespace-no-wrap rounded shadow bg-neutral-700 text-stock font-body;
   transition: left 150ms ease-out, top 150ms ease-out;
 }
