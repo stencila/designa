@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Colors, } from "./types";
 import { IconNames, } from "./components/icon/icon";
 import { CodeChunk, Collection, Datatable, ImageObject, Node, } from "@stencila/schema";
+import { EditorContents, } from "./components/editor/editor";
 import { IconNames as IconNames1, } from "./components/icon/icon";
 import { ChildTab, } from "./components/tabList/tabList";
 export namespace Components {
@@ -102,28 +103,6 @@ export namespace Components {
          */
         "programmingLanguageProp": string;
     }
-    interface StencilaCodeEditor {
-        /**
-          * Function to be evaluated over the contents of the CodeChunk.
-         */
-        "executeHandler": (codeChunk: CodeChunk) => Promise<unknown>;
-        /**
-          * Public method, returning the CodeChunk contents as Stencila JSON.
-         */
-        "getJSON": () => Promise<CodeChunk>;
-        /**
-          * Determines the visibility of line numbers
-         */
-        "lineNumbers": boolean;
-        /**
-          * Programming language of the CodeEditor
-         */
-        "programmingLanguage": string | undefined;
-        /**
-          * List of all supported programming languages
-         */
-        "programmingLanguages": string[];
-    }
     interface StencilaCodeError {
         /**
           * The severity of the error message
@@ -148,6 +127,28 @@ export namespace Components {
     }
     interface StencilaDetails {
         "open": boolean;
+    }
+    interface StencilaEditor {
+        /**
+          * Programming language of the Editor
+         */
+        "activeLanguage": string;
+        /**
+          * Function to be evaluated over the contents of the editor.
+         */
+        "executeHandler": (contents: EditorContents) => Promise<unknown>;
+        /**
+          * Public method, returning the Editor contents and active language.
+         */
+        "getJSON": () => Promise<EditorContents>;
+        /**
+          * List of all supported programming languages
+         */
+        "languageCapabilities": string[];
+        /**
+          * Determines the visibility of line numbers
+         */
+        "lineNumbers": boolean;
     }
     interface StencilaIcon {
         "icon": IconNames;
@@ -284,12 +285,6 @@ declare global {
         prototype: HTMLStencilaCodeChunkElement;
         new (): HTMLStencilaCodeChunkElement;
     };
-    interface HTMLStencilaCodeEditorElement extends Components.StencilaCodeEditor, HTMLStencilElement {
-    }
-    var HTMLStencilaCodeEditorElement: {
-        prototype: HTMLStencilaCodeEditorElement;
-        new (): HTMLStencilaCodeEditorElement;
-    };
     interface HTMLStencilaCodeErrorElement extends Components.StencilaCodeError, HTMLStencilElement {
     }
     var HTMLStencilaCodeErrorElement: {
@@ -313,6 +308,12 @@ declare global {
     var HTMLStencilaDetailsElement: {
         prototype: HTMLStencilaDetailsElement;
         new (): HTMLStencilaDetailsElement;
+    };
+    interface HTMLStencilaEditorElement extends Components.StencilaEditor, HTMLStencilElement {
+    }
+    var HTMLStencilaEditorElement: {
+        prototype: HTMLStencilaEditorElement;
+        new (): HTMLStencilaEditorElement;
     };
     interface HTMLStencilaIconElement extends Components.StencilaIcon, HTMLStencilElement {
     }
@@ -396,11 +397,11 @@ declare global {
         "stencila-action-menu": HTMLStencilaActionMenuElement;
         "stencila-button": HTMLStencilaButtonElement;
         "stencila-code-chunk": HTMLStencilaCodeChunkElement;
-        "stencila-code-editor": HTMLStencilaCodeEditorElement;
         "stencila-code-error": HTMLStencilaCodeErrorElement;
         "stencila-code-expression": HTMLStencilaCodeExpressionElement;
         "stencila-data-table": HTMLStencilaDataTableElement;
         "stencila-details": HTMLStencilaDetailsElement;
+        "stencila-editor": HTMLStencilaEditorElement;
         "stencila-icon": HTMLStencilaIconElement;
         "stencila-image-object": HTMLStencilaImageObjectElement;
         "stencila-input": HTMLStencilaInputElement;
@@ -508,24 +509,6 @@ declare namespace LocalJSX {
          */
         "programmingLanguageProp"?: string;
     }
-    interface StencilaCodeEditor {
-        /**
-          * Function to be evaluated over the contents of the CodeChunk.
-         */
-        "executeHandler"?: (codeChunk: CodeChunk) => Promise<unknown>;
-        /**
-          * Determines the visibility of line numbers
-         */
-        "lineNumbers"?: boolean;
-        /**
-          * Programming language of the CodeEditor
-         */
-        "programmingLanguage"?: string | undefined;
-        /**
-          * List of all supported programming languages
-         */
-        "programmingLanguages"?: string[];
-    }
     interface StencilaCodeError {
         /**
           * The severity of the error message
@@ -550,6 +533,24 @@ declare namespace LocalJSX {
     }
     interface StencilaDetails {
         "open"?: boolean;
+    }
+    interface StencilaEditor {
+        /**
+          * Programming language of the Editor
+         */
+        "activeLanguage"?: string;
+        /**
+          * Function to be evaluated over the contents of the editor.
+         */
+        "executeHandler"?: (contents: EditorContents) => Promise<unknown>;
+        /**
+          * List of all supported programming languages
+         */
+        "languageCapabilities"?: string[];
+        /**
+          * Determines the visibility of line numbers
+         */
+        "lineNumbers"?: boolean;
     }
     interface StencilaIcon {
         "icon"?: IconNames;
@@ -670,11 +671,11 @@ declare namespace LocalJSX {
         "stencila-action-menu": StencilaActionMenu;
         "stencila-button": StencilaButton;
         "stencila-code-chunk": StencilaCodeChunk;
-        "stencila-code-editor": StencilaCodeEditor;
         "stencila-code-error": StencilaCodeError;
         "stencila-code-expression": StencilaCodeExpression;
         "stencila-data-table": StencilaDataTable;
         "stencila-details": StencilaDetails;
+        "stencila-editor": StencilaEditor;
         "stencila-icon": StencilaIcon;
         "stencila-image-object": StencilaImageObject;
         "stencila-input": StencilaInput;
@@ -697,11 +698,11 @@ declare module "@stencil/core" {
             "stencila-action-menu": LocalJSX.StencilaActionMenu & JSXBase.HTMLAttributes<HTMLStencilaActionMenuElement>;
             "stencila-button": LocalJSX.StencilaButton & JSXBase.HTMLAttributes<HTMLStencilaButtonElement>;
             "stencila-code-chunk": LocalJSX.StencilaCodeChunk & JSXBase.HTMLAttributes<HTMLStencilaCodeChunkElement>;
-            "stencila-code-editor": LocalJSX.StencilaCodeEditor & JSXBase.HTMLAttributes<HTMLStencilaCodeEditorElement>;
             "stencila-code-error": LocalJSX.StencilaCodeError & JSXBase.HTMLAttributes<HTMLStencilaCodeErrorElement>;
             "stencila-code-expression": LocalJSX.StencilaCodeExpression & JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement>;
             "stencila-data-table": LocalJSX.StencilaDataTable & JSXBase.HTMLAttributes<HTMLStencilaDataTableElement>;
             "stencila-details": LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
+            "stencila-editor": LocalJSX.StencilaEditor & JSXBase.HTMLAttributes<HTMLStencilaEditorElement>;
             "stencila-icon": LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
             "stencila-image-object": LocalJSX.StencilaImageObject & JSXBase.HTMLAttributes<HTMLStencilaImageObjectElement>;
             "stencila-input": LocalJSX.StencilaInput & JSXBase.HTMLAttributes<HTMLStencilaInputElement>;

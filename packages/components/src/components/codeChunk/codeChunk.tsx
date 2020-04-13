@@ -8,7 +8,7 @@ import {
   Listen,
   Method,
   Prop,
-  State
+  State,
 } from '@stencil/core'
 import { codeChunk, CodeChunk } from '@stencila/schema'
 
@@ -22,27 +22,27 @@ interface CollapseEvent extends CustomEvent {
   tag: 'stencila-code-chunk',
   styleUrls: {
     default: 'codeChunk.css',
-    material: 'codeChunk.material.css'
+    material: 'codeChunk.material.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class CodeChunkComponent {
   /* private static readonly elementName = 'stencila-code-chunk' */
 
   private static readonly slots = {
     text: 'text',
-    outputs: 'outputs'
+    outputs: 'outputs',
   }
 
   @Element() private el: HTMLStencilaCodeChunkElement
 
-  private codeEditorRef: HTMLStencilaCodeEditorElement | null
+  private editorRef: HTMLStencilaEditorElement | null
 
   /**
    * Programming language of the CodeChunk
    */
   @Prop({
-    attribute: 'data-programmingLanguage'
+    attribute: 'data-programmingLanguage',
   })
   public programmingLanguageProp: string
 
@@ -50,7 +50,7 @@ export class CodeChunkComponent {
    * Whether the code section is visible or not
    */
   @Prop({
-    attribute: 'data-collapsed'
+    attribute: 'data-collapsed',
   })
   public isCodeCollapsedProp = false
 
@@ -69,7 +69,7 @@ export class CodeChunkComponent {
    * leaving only the results visible.
    */
   @Event({
-    eventName: 'collapseAllCode'
+    eventName: 'collapseAllCode',
   })
   public collapseAllCode: EventEmitter
 
@@ -108,18 +108,18 @@ export class CodeChunkComponent {
   private executeCode = () => {
     this.executeCodeState = 'PENDING'
     this.onExecuteHandler_()
-      .then(res => {
+      .then((res) => {
         this.executeCodeState = 'RESOLVED'
         return res
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err)
         return err
       })
   }
 
   protected componentDidLoad() {
-    this.codeEditorRef = this.el.querySelector('stencila-code-editor')
+    this.editorRef = this.el.querySelector('stencila-editor')
   }
 
   @State() outputs: CodeChunk['outputs']
@@ -127,7 +127,7 @@ export class CodeChunkComponent {
   @State() codeErrors: CodeChunk['errors']
 
   private updateErrors = (errors: CodeChunk['errors'] = []) => {
-    this.codeErrors = errors.map(error => (
+    this.codeErrors = errors.map((error) => (
       <stencila-code-error
         kind={(error.errorType as unknown) as 'error' | 'warning' | 'incapable'}
         hasStacktrace={error.stackTrace !== undefined}
@@ -143,7 +143,12 @@ export class CodeChunkComponent {
    */
   @Method()
   public async getJSON(): Promise<CodeChunk> {
-    return this.codeEditorRef?.getJSON() ?? codeChunk({ text: '' })
+    if (this.editorRef) {
+      const { text, language } = await this.editorRef?.getJSON()
+      return codeChunk({ text, programmingLanguage: language })
+    }
+
+    return codeChunk({ text: '' })
   }
 
   public render() {
@@ -183,15 +188,13 @@ export class CodeChunkComponent {
 
         <div
           class={{
-            codeContainer: true,
-            hidden: this.isCodeCollapsed
+            editorContainer: true,
+            hidden: this.isCodeCollapsed,
           }}
         >
-          <stencila-code-editor
-            programmingLanguage={this.programmingLanguageProp}
-          >
+          <stencila-editor activeLanguage={this.programmingLanguageProp}>
             <slot name={CodeChunkComponent.slots.text} />
-          </stencila-code-editor>
+          </stencila-editor>
         </div>
 
         <stencila-node-list nodes={this.outputs}>

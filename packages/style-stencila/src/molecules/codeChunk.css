@@ -10,7 +10,7 @@
 stencila-code-chunk {
   @apply relative block w-full my-4 border border-solid rounded border-neutral-300;
 
-  stencila-code-editor {
+  stencila-editor {
     --border-width: 0;
     @apply flex-grow;
   }
@@ -20,7 +20,7 @@ stencila-code-chunk {
   }
 }
 
-.codeContainer {
+.editorContainer {
   @apply relative flex flex-col flex-auto m-0 border-t-0 border-b border-l-0 border-r-0 rounded-none bg-neutral-200 border-neutral-300;
   height: intrinsic;
 
@@ -40,7 +40,7 @@ stencila-code-chunk {
     @apply flex flex-row items-stretch w-full;
   }
 
-  .codeContainer {
+  .editorContainer {
     @apply w-1/2 border-b-0 border-l;
   }
 

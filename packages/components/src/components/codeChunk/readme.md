@@ -39,7 +39,7 @@ Type: `Promise<CodeChunk>`
 - [stencila-code-error](../error)
 - [stencila-action-menu](../actionMenu)
 - [stencila-button](../button)
-- [stencila-code-editor](../codeEditor)
+- [stencila-editor](../editor)
 - [stencila-node-list](../nodeList)
 
 ### Graph
@@ -48,7 +48,7 @@ graph TD;
   stencila-code-chunk --> stencila-code-error
   stencila-code-chunk --> stencila-action-menu
   stencila-code-chunk --> stencila-button
-  stencila-code-chunk --> stencila-code-editor
+  stencila-code-chunk --> stencila-editor
   stencila-code-chunk --> stencila-node-list
   stencila-code-error --> stencila-icon
   stencila-code-error --> stencila-details
