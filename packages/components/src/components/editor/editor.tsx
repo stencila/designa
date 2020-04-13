@@ -12,7 +12,7 @@ import {
   undo,
   undoSelection,
 } from '@codemirror/next/history'
-import { keymap } from '@codemirror/next/keymap'
+import { keymap, Keymap as KeymapI } from '@codemirror/next/keymap'
 import { html } from '@codemirror/next/lang-html'
 import { javascript } from '@codemirror/next/lang-javascript'
 import { bracketMatching } from '@codemirror/next/matchbrackets'
@@ -25,6 +25,8 @@ export interface EditorContents {
   text: string
   language: string
 }
+
+export interface Keymap extends KeymapI {}
 
 const slots = {
   text: 'text',
@@ -101,6 +103,12 @@ export class Editor {
    */
   @Prop() public lineNumbers = true
 
+  /**
+   * Custom keyboard shortcuts to pass along to CodeMirror
+   * @see https://codemirror.net/6/docs/ref/#keymap
+   */
+  @Prop() public keymap: Keymap = {}
+
   private initCodeMirror = () => {
     const isMac = navigator.platform.includes('Mac')
 
@@ -127,6 +135,7 @@ export class Editor {
         'Mod-Enter': this.execute,
         'Mod-ArrowLeft': moveLineStart,
         'Mod-ArrowRight': moveLineEnd,
+        ...this.keymap,
         // FIXME: The following commands have no effect
         /* 'Mod-]': indentSelection, */
         /* 'Mod-Shift-ArrowLeft': selectDocStart, */

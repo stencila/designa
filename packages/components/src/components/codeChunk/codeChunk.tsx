@@ -11,6 +11,7 @@ import {
   State,
 } from '@stencil/core'
 import { codeChunk, CodeChunk } from '@stencila/schema'
+import { Keymap } from '@codemirror/next/keymap'
 
 interface CollapseEvent extends CustomEvent {
   detail: {
@@ -84,6 +85,12 @@ export class CodeChunkComponent {
 
   private collapseAllCodeTrigger = () =>
     this.collapseAllCodeHandler(!this.isCodeCollapsed)
+
+  /**
+   * Custom keyboard shortcuts to pass along to CodeMirror
+   * @see https://codemirror.net/6/docs/ref/#keymap
+   */
+  @Prop() public keymap: Keymap = {}
 
   /**
    * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
@@ -192,7 +199,10 @@ export class CodeChunkComponent {
             hidden: this.isCodeCollapsed,
           }}
         >
-          <stencila-editor activeLanguage={this.programmingLanguageProp}>
+          <stencila-editor
+            activeLanguage={this.programmingLanguageProp}
+            keymap={this.keymap}
+          >
             <slot name={CodeChunkComponent.slots.text} />
           </stencila-editor>
         </div>

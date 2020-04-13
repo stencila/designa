@@ -7,8 +7,9 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Colors, } from "./types";
 import { IconNames, } from "./components/icon/icon";
+import { Keymap, } from "@codemirror/next/keymap";
 import { CodeChunk, Collection, Datatable, ImageObject, Node, } from "@stencila/schema";
-import { EditorContents, } from "./components/editor/editor";
+import { EditorContents, Keymap as Keymap1, } from "./components/editor/editor";
 import { IconNames as IconNames1, } from "./components/icon/icon";
 import { ChildTab, } from "./components/tabList/tabList";
 export namespace Components {
@@ -99,6 +100,11 @@ export namespace Components {
          */
         "isCodeCollapsedProp": boolean;
         /**
+          * Custom keyboard shortcuts to pass along to CodeMirror
+          * @see https://codemirror.net/6/docs/ref/#keymap
+         */
+        "keymap": Keymap;
+        /**
           * Programming language of the CodeChunk
          */
         "programmingLanguageProp": string;
@@ -141,6 +147,11 @@ export namespace Components {
           * Public method, returning the Editor contents and active language.
          */
         "getContents": () => Promise<EditorContents>;
+        /**
+          * Custom keyboard shortcuts to pass along to CodeMirror
+          * @see https://codemirror.net/6/docs/ref/#keymap
+         */
+        "keymap": Keymap;
         /**
           * List of all supported programming languages
          */
@@ -501,6 +512,11 @@ declare namespace LocalJSX {
          */
         "isCodeCollapsedProp"?: boolean;
         /**
+          * Custom keyboard shortcuts to pass along to CodeMirror
+          * @see https://codemirror.net/6/docs/ref/#keymap
+         */
+        "keymap"?: Keymap;
+        /**
           * Trigger a global DOM event to collapse all `CodeChunk` and `CodeFragment` component code expressions, leaving only the results visible.
          */
         "onCollapseAllCode"?: (event: CustomEvent<any>) => void;
@@ -543,6 +559,11 @@ declare namespace LocalJSX {
           * Function to be evaluated over the contents of the editor.
          */
         "executeHandler"?: (contents: EditorContents) => Promise<unknown>;
+        /**
+          * Custom keyboard shortcuts to pass along to CodeMirror
+          * @see https://codemirror.net/6/docs/ref/#keymap
+         */
+        "keymap"?: Keymap;
         /**
           * List of all supported programming languages
          */

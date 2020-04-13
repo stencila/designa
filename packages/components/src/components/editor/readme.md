@@ -9,6 +9,7 @@
 | ---------------------- | ----------------- | --------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------ |
 | `activeLanguage`       | `active-language` | Programming language of the Editor                        | `string`                                         | `this.languageCapabilities[0]?.toLowerCase() ?? ''`          |
 | `executeHandler`       | --                | Function to be evaluated over the contents of the editor. | `(contents: EditorContents) => Promise<unknown>` | `undefined`                                                  |
+| `keymap`               | --                | Custom keyboard shortcuts to pass along to CodeMirror     | `Keymap`                                         | `{}`                                                         |
 | `languageCapabilities` | --                | List of all supported programming languages               | `string[]`                                       | `[     'Bash',     'JavaScript',     'R',     'Python',   ]` |
 | `lineNumbers`          | `line-numbers`    | Determines the visibility of line numbers                 | `boolean`                                        | `true`                                                       |
 
