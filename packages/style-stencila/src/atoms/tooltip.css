@@ -1,5 +1,4 @@
 :host,
 stencila-tooltip-element {
   @apply z-50 px-2 py-1 text-xs rounded-full shadow bg-neutral-900 text-stock font-body;
-  transition: left 150ms ease-out, top 150ms ease-out;
 }
