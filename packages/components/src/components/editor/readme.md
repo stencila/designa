@@ -15,7 +15,7 @@
 
 ## Methods
 
-### `getJSON() => Promise<EditorContents>`
+### `getContents() => Promise<EditorContents>`
 
 Public method, returning the Editor contents and active language.
 

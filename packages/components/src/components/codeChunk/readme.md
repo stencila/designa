@@ -21,7 +21,7 @@
 
 ## Methods
 
-### `getJSON() => Promise<CodeChunk>`
+### `getContents() => Promise<CodeChunk>`
 
 Returns the `CodeChunk` node with the updated `text` content from the editor.
 

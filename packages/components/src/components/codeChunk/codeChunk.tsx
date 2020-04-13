@@ -91,7 +91,7 @@ export class CodeChunkComponent {
   @Prop() public executeHandler: (codeChunk: CodeChunk) => Promise<CodeChunk>
 
   private onExecuteHandler_ = async () => {
-    const node = await this.getJSON()
+    const node = await this.getContents()
 
     if (this.executeHandler !== undefined) {
       const computed = await this.executeHandler(node)
@@ -142,9 +142,9 @@ export class CodeChunkComponent {
    * Returns the `CodeChunk` node with the updated `text` content from the editor.
    */
   @Method()
-  public async getJSON(): Promise<CodeChunk> {
+  public async getContents(): Promise<CodeChunk> {
     if (this.editorRef) {
-      const { text, language } = await this.editorRef?.getJSON()
+      const { text, language } = await this.editorRef?.getContents()
       return codeChunk({ text, programmingLanguage: language })
     }
 

@@ -93,7 +93,7 @@ export namespace Components {
         /**
           * Returns the `CodeChunk` node with the updated `text` content from the editor.
          */
-        "getJSON": () => Promise<CodeChunk>;
+        "getContents": () => Promise<CodeChunk>;
         /**
           * Whether the code section is visible or not
          */
@@ -140,7 +140,7 @@ export namespace Components {
         /**
           * Public method, returning the Editor contents and active language.
          */
-        "getJSON": () => Promise<EditorContents>;
+        "getContents": () => Promise<EditorContents>;
         /**
           * List of all supported programming languages
          */

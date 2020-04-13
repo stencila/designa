@@ -86,7 +86,7 @@ export class Editor {
    * Wrapper around the `executeHandler` function, needed to run using CodeMirror keyboard shortcuts.
    */
   private execute: Command = () => {
-    this.getJSON()
+    this.getContents()
       .then((contents) => this.executeHandler(contents))
       .catch((err) => {
         console.error(err)
@@ -161,7 +161,7 @@ export class Editor {
    * Public method, returning the Editor contents and active language.
    */
   @Method()
-  public async getJSON(): Promise<EditorContents> {
+  public async getContents(): Promise<EditorContents> {
     return Promise.resolve({
       text: this.getContent(),
       language: this.activeLanguage,
