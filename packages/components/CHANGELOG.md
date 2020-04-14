@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/stencila/designa/compare/@stencila/components@0.10.1...@stencila/components@0.11.0) (2020-04-14)
+
+
+### Bug Fixes
+
+* **Button:** Fix state change warnings when calling clickHandlerProp ([516b80b](https://github.com/stencila/designa/commit/516b80b6f00f44f8188d138628588eba9e393444))
+* **Tooltip:** Remove tooltip when unloading component ([12a0f47](https://github.com/stencila/designa/commit/12a0f47f939d648118b89bb49599ddc2287c1d97))
+
+
+### Features
+
+* **Button:** Add ability to set a tooltip on stencila-button elements ([1780195](https://github.com/stencila/designa/commit/17801957f9d9e37cf91d9200bc98498b67c67324))
+* **Button:** Add minimal button variant for usage in upcoming NavBar ([401e854](https://github.com/stencila/designa/commit/401e8545859bac1db83cd996ad846d29c695911c))
+* **Components:** Add Menu & MenuItem components ([e2e3d5c](https://github.com/stencila/designa/commit/e2e3d5c9d81e858dd31cf43261b22b349d26f9f9))
+* **Editor:** Add ability to set custom Keyboard Shortcuts in Editor ([2264b14](https://github.com/stencila/designa/commit/2264b1456aa63c14acacec34a46a078c6c2d0d13))
+* **Navbar:** Add Navbar component ([501b297](https://github.com/stencila/designa/commit/501b2978aaa976048bac08afc14beb9f209b99e8))
+* **Tooltip:** Use PopperJS for auto-repositioning Tooltips ([12010fe](https://github.com/stencila/designa/commit/12010fed11df520b117f0984671f832dfdc92047))
+
+
+
+
+
 ## [0.10.1](https://github.com/stencila/designa/compare/@stencila/components@0.10.0...@stencila/components@0.10.1) (2020-03-27)
 
 **Note:** Version bump only for package @stencila/components

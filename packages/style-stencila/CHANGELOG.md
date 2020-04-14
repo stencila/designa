@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.10.0...@stencila/style-stencila@0.11.0) (2020-04-14)
+
+
+### Bug Fixes
+
+* **Button:** Fix Minimal variant hover styles on disabled buttons ([1da4263](https://github.com/stencila/style/commit/1da4263d365fa6ec6fb3906d15e70f8bed03bc55))
+* **Button:** Remove unnecessary dimension constraints from Buttons ([70a42c1](https://github.com/stencila/style/commit/70a42c1077d910fc947c332cfb34de1f42664f20))
+* **Button:** Reset margin on button elements to match anchor buttons ([0eede7c](https://github.com/stencila/style/commit/0eede7cef52bf2914b84251d5fc0f32f37453717))
+
+
+### Features
+
+* **Button:** Add minimal button variant for usage in upcoming NavBar ([401e854](https://github.com/stencila/style/commit/401e8545859bac1db83cd996ad846d29c695911c))
+* **Components:** Add Menu & MenuItem components ([e2e3d5c](https://github.com/stencila/style/commit/e2e3d5c9d81e858dd31cf43261b22b349d26f9f9))
+* **Navbar:** Add Navbar component ([501b297](https://github.com/stencila/style/commit/501b2978aaa976048bac08afc14beb9f209b99e8))
+* **Tooltip:** Use PopperJS for auto-repositioning Tooltips ([12010fe](https://github.com/stencila/style/commit/12010fed11df520b117f0984671f832dfdc92047))
+
+
+
+
+
 # [0.10.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.9.0...@stencila/style-stencila@0.10.0) (2020-03-24)
 
 
