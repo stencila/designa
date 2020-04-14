@@ -1,19 +1,20 @@
 import { Component, h, Host, Prop, State } from '@stencil/core'
 import { IconNames } from '../icon/icon'
+import { Colors } from '../../types'
 
 @Component({
   tag: 'stencila-button',
   styleUrls: {
     default: 'button.css',
-    material: 'button.material.css'
+    material: 'button.material.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class Button {
   public static readonly elementName = 'stencila-button'
 
   public static slots = {
-    default: undefined
+    default: undefined,
   }
 
   /**
@@ -36,20 +37,17 @@ export class Button {
   /**
    * The color of the button
    */
-  @Prop() public color:
-    | 'primary'
-    | 'success'
-    | 'warn'
-    | 'danger'
-    | 'neutral'
-    | 'stock'
-    | 'key'
-    | 'brand' = 'primary'
+  @Prop() public color: Colors = 'primary'
 
   /**
    * The overall size of the Button.
    */
   @Prop() public size: 'xsmall' | 'small' | 'default' | 'large' = 'default'
+
+  /**
+   * Renders the button without initial background color or border.
+   */
+  @Prop() public minimal: boolean = false
 
   /**
    * Renders the button using a secondory, and usually less visually prominent, Button CSS stylesheet.
@@ -91,6 +89,11 @@ export class Button {
   @Prop() public fill: boolean = false
 
   /**
+   * An optional help text to display for button focus and hover states.
+   */
+  @Prop() public tooltip?: string
+
+  /**
    * State keeping track of when asynchronous action is in flight
    */
   @State() private ioPending: boolean = false
@@ -100,7 +103,7 @@ export class Button {
    * Passed function will be wrapped in a Promise, and the result returned.
    */
   @Prop({
-    attribute: 'clickHandler'
+    attribute: 'clickHandler',
   })
   public clickHandlerProp: (e?: MouseEvent) => unknown
 
@@ -115,41 +118,51 @@ export class Button {
     return Promise.resolve()
   }
 
-  public render() {
+  generateButton = (): HTMLButtonElement | HTMLAnchorElement => {
     const TagType = this.href != null ? 'a' : 'button'
 
     return (
-      <Host
-        size={this.size}
-        disabled={this.ioPending || this.isLoading || this.disabled}
+      <TagType
+        class={{
+          button: this.href !== undefined,
+          fill: this.fill,
+          iconOnly: this.iconOnly,
+          minimal: this.minimal,
+          secondary: this.isSecondary,
+          [this.size]: this.size !== undefined,
+          [`color-${this.color}`]: true,
+        }}
+        href={this.href}
+        target={this.target}
+        type={this.buttonType}
+        disabled={this.ioPending || this.isLoading || this.disabled || false}
+        aria-label={this.ariaLabel ?? this.tooltip}
+        onClick={this.onClick}
       >
-        <TagType
-          class={{
-            button: this.href !== undefined,
-            fill: this.fill,
-            iconOnly: this.iconOnly,
-            secondary: this.isSecondary,
-            [this.size]: this.size !== undefined,
-            [`color-${this.color}`]: true
-          }}
-          href={this.href}
-          target={this.target}
-          type={this.buttonType}
-          disabled={this.ioPending || this.isLoading || this.disabled}
-          aria-label={this.ariaLabel}
-          onClick={this.onClick}
-        >
-          {this.icon === undefined ? null : typeof this.icon === 'string' ? (
-            <stencila-icon
-              icon={this.ioPending || this.isLoading ? 'loader' : this.icon}
-              class={{ spin: this.isLoading }}
-            ></stencila-icon>
-          ) : (
-            this.icon
-          )}
+        {this.icon === undefined ? null : typeof this.icon === 'string' ? (
+          <stencila-icon
+            icon={this.ioPending || this.isLoading ? 'loader' : this.icon}
+            class={{ spin: this.isLoading }}
+          ></stencila-icon>
+        ) : (
+          this.icon
+        )}
 
-          <slot />
-        </TagType>
+        <slot />
+      </TagType>
+    )
+  }
+
+  public render() {
+    return (
+      <Host size={this.size} tabindex="-1">
+        {this.tooltip === undefined ? (
+          this.generateButton()
+        ) : (
+          <stencila-tooltip text={this.tooltip}>
+            {this.generateButton()}
+          </stencila-tooltip>
+        )}
       </Host>
     )
   }

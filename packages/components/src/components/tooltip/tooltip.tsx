@@ -1,13 +1,13 @@
+import { createPopper, Instance } from '@popperjs/core'
 import { Component, Element, h, Host, Prop, Watch } from '@stencil/core'
-import { clamp, ordNumber } from 'fp-ts/lib/Ord'
 
 @Component({
   tag: 'stencila-tooltip',
   styleUrls: {
     default: 'tooltip.css',
-    material: 'tooltip.css'
+    material: 'tooltip.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class Tooltip {
   public static readonly elementName = 'stencila-tooltip'
@@ -20,12 +20,13 @@ export class Tooltip {
   @Prop() text!: string
 
   private tooltipRef: HTMLSpanElement
+  private popperRef: Instance | null = null
 
   private showTooltip = () => {
     // TODO: Use Schema helpers once package is updated: https://github.com/stencila/schema/issues/178
     const target =
       document.querySelector('[data-itemscope="root"]') || document.body
-    const { left, bottom, width } = this.el.getBoundingClientRect()
+
     if (this.tooltipRef === undefined) {
       this.tooltipRef =
         document.querySelector('stencila-tooltip-element') ??
@@ -33,19 +34,32 @@ export class Tooltip {
     }
 
     this.tooltipRef.innerText = this.text
-    this.tooltipRef.style.top = `${clamp(ordNumber)(0, Infinity)(bottom + 8)}px`
     target.appendChild(this.tooltipRef)
 
-    const tooltip = this.tooltipRef.getBoundingClientRect()
-    const maxLeft = window.outerWidth - tooltip.width
-    this.tooltipRef.style.left = `${clamp(ordNumber)(0, maxLeft)(
-      left + width / 2
-    )}px`
+    this.popperRef = createPopper(this.el, this.tooltipRef, {
+      placement: 'bottom',
+      modifiers: [
+        {
+          name: 'offset',
+          options: {
+            offset: [0, 8],
+          },
+        },
+        {
+          name: 'preventOverflow',
+        },
+      ],
+    })
   }
 
   private destroyTooltip = () => {
     if (this.tooltipRef) {
       this.tooltipRef.remove()
+    }
+
+    if (this.popperRef) {
+      this.popperRef.destroy()
+      this.popperRef = null
     }
   }
 
@@ -71,11 +85,14 @@ export class Tooltip {
 
   componentDidUnload() {
     this.unloadComponent()
+    this.destroyTooltip()
   }
 
   @Watch('text')
   watchHandler(newText: string) {
-    this.tooltipRef.innerText = newText
+    if (this.tooltipRef !== undefined) {
+      this.tooltipRef.innerText = newText
+    }
   }
 
   public render() {

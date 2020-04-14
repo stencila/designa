@@ -1,14 +1,14 @@
 @import '../base.css';
 
 :host,
-stencila-code-editor {
+stencila-editor {
   all: initial;
 
   @apply flex max-w-full;
   --border-width: 1px;
   --background-color: transparent;
 
-  .codeContainer {
+  .editorContainer {
     @apply flex flex-col flex-grow max-w-full border rounded border-neutral-300;
     background-color: var(--background-color);
     border-width: var(--border-width);
@@ -18,11 +18,11 @@ stencila-code-editor {
     }
   }
 
-  .codeEditor {
+  .editor {
     @apply flex-grow max-w-full overflow-auto font-mono cursor-text;
   }
 
-  &::slotted(.codeContainer) {
+  &::slotted(.editorContainer) {
     .codemirror-content *,
     .gutterElement * {
       @apply font-mono text-sm;

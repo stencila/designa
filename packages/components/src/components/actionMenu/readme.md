@@ -28,6 +28,8 @@
 graph TD;
   stencila-action-menu --> stencila-button
   stencila-button --> stencila-icon
+  stencila-button --> stencila-tooltip
+  stencila-tooltip --> stencila-tooltip-element
   stencila-code-chunk --> stencila-action-menu
   style stencila-action-menu fill:#f9f,stroke:#333,stroke-width:4px
 ```

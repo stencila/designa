@@ -1,0 +1,11 @@
+:host {
+  @apply flex items-center h-12 px-4 no-underline cursor-pointer text-key font-body;
+
+  &:hover {
+    @apply bg-neutral-200;
+  }
+
+  stencila-icon {
+    @apply mr-2;
+  }
+}

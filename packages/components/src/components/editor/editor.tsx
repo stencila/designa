@@ -1,7 +1,7 @@
 import {
   baseKeymap,
   moveLineEnd,
-  moveLineStart
+  moveLineStart,
 } from '@codemirror/next/commands'
 import { lineNumbers } from '@codemirror/next/gutter'
 import { defaultHighlighter } from '@codemirror/next/highlight'
@@ -10,81 +10,87 @@ import {
   redo,
   redoSelection,
   undo,
-  undoSelection
+  undoSelection,
 } from '@codemirror/next/history'
-import { keymap } from '@codemirror/next/keymap'
+import { keymap, Keymap as KeymapI } from '@codemirror/next/keymap'
 import { html } from '@codemirror/next/lang-html'
 import { javascript } from '@codemirror/next/lang-javascript'
 import { bracketMatching } from '@codemirror/next/matchbrackets'
 import { specialChars } from '@codemirror/next/special-chars'
 import { EditorState } from '@codemirror/next/state'
 import { Command, EditorView } from '@codemirror/next/view'
-import { Component, Element, h, Host, Method, Prop, State } from '@stencil/core'
-import { codeChunk, CodeChunk } from '@stencila/schema'
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import { patch as selectPolyfill } from 'shadow-root-get-selection-polyfill'
+import { Component, Element, h, Host, Method, Prop } from '@stencil/core'
+
+export interface EditorContents {
+  text: string
+  language: string
+}
+
+export interface Keymap extends KeymapI {}
 
 const slots = {
-  text: 'text'
+  text: 'text',
+}
+
+const cssClasses = {
+  container: 'editorContainer',
+  editor: 'editor',
+}
+
+const cssIds = {
+  editorTarget: 'editorTarget',
 }
 
 @Component({
-  tag: 'stencila-code-editor',
+  tag: 'stencila-editor',
   styleUrls: {
-    default: 'codeEditor.css',
-    material: 'codeEditor.material.css'
+    default: 'editor.css',
+    material: 'editor.material.css',
   },
-  scoped: true
+  scoped: true,
 })
-export class CodeEditor {
-  /* private static readonly elementName = 'stencila-code-editor' */
+export class Editor {
+  @Element() private el: HTMLStencilaEditorElement
 
-  @Element() private el: HTMLStencilaCodeEditorElement
-
-  private codeEditorRef: EditorView
+  private editorRef: EditorView
 
   /**
    * List of all supported programming languages
    */
-  @Prop() public programmingLanguages: string[] = [
+  @Prop() public languageCapabilities: string[] = [
     'Bash',
     'JavaScript',
     'R',
-    'Python'
+    'Python',
   ]
 
   /**
    * Changes the active programming language of the editor.
    * Does not affect syntax highlighting.
    */
-  private setProgrammingLanguage = (e: Event) => {
+  private setLanguage = (e: Event) => {
     const target = e.currentTarget as HTMLSelectElement
-    this.activeProgrammingLanguage = target.value.toLowerCase()
+    this.activeLanguage = target.value.toLowerCase()
   }
 
   /**
-   * Programming language of the CodeEditor
+   * Programming language of the Editor
    */
-  @Prop() public programmingLanguage: string | undefined
-
-  @State() activeProgrammingLanguage =
-    this.programmingLanguage ?? this.programmingLanguages[0]?.toLowerCase()
+  @Prop({ mutable: true, reflect: true }) public activeLanguage: string =
+    this.languageCapabilities[0]?.toLowerCase() ?? ''
 
   /**
-   * Function to be evaluated over the contents of the CodeChunk.
+   * Function to be evaluated over the contents of the editor.
    */
-  @Prop() public executeHandler: (codeChunk: CodeChunk) => Promise<unknown>
+  @Prop() public executeHandler: (contents: EditorContents) => Promise<unknown>
 
   /**
    * Wrapper around the `executeHandler` function, needed to run using CodeMirror keyboard shortcuts.
    */
-  private runCodeView: Command = () => {
-    this.getJSON()
-      .then(codeChunk => {
-        return this.executeHandler(codeChunk)
-      })
-      .catch(err => {
+  private execute: Command = () => {
+    this.getContents()
+      .then((contents) => this.executeHandler(contents))
+      .catch((err) => {
         console.error(err)
         return false
       })
@@ -97,6 +103,12 @@ export class CodeEditor {
    */
   @Prop() public lineNumbers = true
 
+  /**
+   * Custom keyboard shortcuts to pass along to CodeMirror
+   * @see https://codemirror.net/6/docs/ref/#keymap
+   */
+  @Prop() public keymap: Keymap = {}
+
   private initCodeMirror = () => {
     const isMac = navigator.platform.includes('Mac')
 
@@ -104,7 +116,7 @@ export class CodeEditor {
     const slot = root.querySelector('[slot]')
     const textContent =
       slot?.textContent ||
-      root?.querySelector('#codeEditorTarget')?.textContent ||
+      root?.querySelector(`#${cssIds.editorTarget}`)?.textContent ||
       ''
 
     const extensions = [
@@ -117,53 +129,52 @@ export class CodeEditor {
       keymap({
         'Mod-z': undo,
         'Mod-Shift-z': redo,
-        'Mod-u': view => undoSelection(view) || true,
+        'Mod-u': (view) => undoSelection(view) || true,
         [isMac ? 'Mod-Shift-u' : 'Alt-u']: redoSelection,
         'Ctrl-y': isMac ? undefined : redo,
-        'Mod-Enter': this.runCodeView,
+        'Mod-Enter': this.execute,
         'Mod-ArrowLeft': moveLineStart,
-        'Mod-ArrowRight': moveLineEnd
+        'Mod-ArrowRight': moveLineEnd,
+        ...this.keymap,
         // FIXME: The following commands have no effect
         /* 'Mod-]': indentSelection, */
         /* 'Mod-Shift-ArrowLeft': selectDocStart, */
         /* 'Mod-Shift-ArrowRight': selectDocEnd, */
       }),
-      keymap(baseKeymap)
+      keymap(baseKeymap),
     ]
 
     if (this.lineNumbers) {
       extensions.push(lineNumbers())
     }
 
-    this.codeEditorRef = new EditorView({
+    this.editorRef = new EditorView({
       state: EditorState.create({
         doc: textContent,
-        extensions
-      })
+        extensions,
+      }),
     })
 
     return root
-      ?.querySelector('#codeEditorTarget')
-      ?.replaceWith(this.codeEditorRef.dom)
+      ?.querySelector(`#${cssIds.editorTarget}`)
+      ?.replaceWith(this.editorRef.dom)
   }
 
   protected componentDidLoad() {
     this.initCodeMirror()
   }
 
-  private getCodeContent = () => this.codeEditorRef.state.toJSON().doc
+  private getContent = () => this.editorRef.state.toJSON().doc
 
   /**
-   * Public method, returning the CodeChunk contents as Stencila JSON.
+   * Public method, returning the Editor contents and active language.
    */
   @Method()
-  public async getJSON(): Promise<CodeChunk> {
-    return Promise.resolve(
-      codeChunk({
-        text: this.getCodeContent(),
-        programmingLanguage: this.activeProgrammingLanguage
-      })
-    )
+  public async getContents(): Promise<EditorContents> {
+    return Promise.resolve({
+      text: this.getContent(),
+      language: this.activeLanguage,
+    })
   }
 
   /**
@@ -175,35 +186,33 @@ export class CodeEditor {
   }
 
   /**
-   * Brings DOM focus to the code editor
+   * Brings DOM focus to the editor
    */
   private focusEditor = (): void => {
-    this.codeEditorRef.focus()
+    this.editorRef.focus()
   }
 
   public render() {
     return (
       <Host>
-        <div class="codeContainer">
+        <div class={cssClasses.container}>
           <div
-            class="codeEditor"
+            class={cssClasses.editor}
             onKeyDown={this.stopEventPropagation}
             onClick={this.focusEditor}
           >
             <div class="hidden">
               <slot name={slots.text} />
             </div>
-            <div id="codeEditorTarget" />
+            <div id={cssIds.editorTarget} />
           </div>
 
           <menu>
-            <select onChange={this.setProgrammingLanguage}>
-              {this.programmingLanguages.map(language => (
+            <select onChange={this.setLanguage}>
+              {this.languageCapabilities.map((language) => (
                 <option
                   value={language.toLowerCase()}
-                  selected={
-                    language.toLowerCase() === this.activeProgrammingLanguage
-                  }
+                  selected={language.toLowerCase() === this.activeLanguage}
                 >
                   {language}
                 </option>

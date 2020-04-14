@@ -1,2 +1,50 @@
 @import './buttonPrimary';
 @import './buttonSecondary';
+
+button,
+a.button {
+  &.minimal:not(.secondary),
+  &.minimal {
+    @apply bg-transparent border-0 shadow-none text-primary-500;
+
+    &:focus,
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    &.color-stock {
+      @apply text-stock;
+    }
+
+    &.color-key {
+      @apply text-key;
+    }
+
+    &.color-danger {
+      @apply text-danger-500;
+    }
+
+    &.color-warn {
+      @apply text-warn-500;
+    }
+
+    &.color-success {
+      @apply text-success-500;
+    }
+
+    &.color-primary {
+      @apply text-primary-500;
+    }
+
+    &.color-neutral {
+      @apply text-neutral-500;
+    }
+
+    &[disabled],
+    &[disabled]:focus,
+    &[disabled]:active,
+    &[disabled]:hover {
+      @apply opacity-25 bg-neutral-100 text-key;
+    }
+  }
+}

@@ -13,13 +13,14 @@ const tailwindConfigPath = path.join(
   'tailwind.config.js'
 )
 
-const purgeCSS =
+const prodPlugins =
   process.env.NODE_ENV === 'production'
     ? [
         purgecss({
           content: ['./src/**/*.html', './src/**/*.tsx'],
-          defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
-        })
+          defaultExtractor: (content) =>
+            content.match(/[A-Za-z0-9-_:/]+/g) || [],
+        }),
       ]
     : []
 
@@ -30,31 +31,31 @@ export const config: Config = {
   outputTargets: [
     {
       type: 'dist',
-      esmLoaderPath: '../loader'
+      esmLoaderPath: '../loader',
     },
     {
-      type: 'docs-readme'
+      type: 'docs-readme',
     },
     {
       type: 'custom',
       generator: generateJsonDocs,
-      name: 'custom-element-docs'
+      name: 'custom-element-docs',
     },
     {
       type: 'www',
-      serviceWorker: null // disable service workers
+      serviceWorker: null, // disable service workers
     },
-    {
-      type: 'dist-global-styles',
-      file: './dist/stencila-components-styles.css'
-    }
   ],
   plugins: [
     postcss({
       // TODO: This is needed to include CSS variables with component styles
       // However it does not currently work with Scoped components
       // injectGlobalPaths: ['src/globals/variables.css'],
-      plugins: [cssImport(), tailwind(tailwindConfigPath), ...purgeCSS]
-    })
-  ]
+      plugins: [
+        require('postcss-import'),
+        require('tailwindcss')(tailwindConfigPath),
+        ...prodPlugins,
+      ],
+    }),
+  ],
 }

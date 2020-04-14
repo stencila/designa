@@ -34,7 +34,7 @@ deploy:
     skip_cleanup: true
     on:
       branch: next
-    script: npx lerna publish --yes --canary --dist-tag next
+    script: npx lerna publish --yes --canary --preid next --dist-tag next
 
   # Deploy Storybook to Github Pages
   # See https://docs.travis-ci.com/user/deployment/pages/

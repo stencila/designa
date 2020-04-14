@@ -5,8 +5,11 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Colors, } from "./types";
 import { IconNames, } from "./components/icon/icon";
+import { Keymap, } from "@codemirror/next/keymap";
 import { CodeChunk, Collection, Datatable, ImageObject, Node, } from "@stencila/schema";
+import { EditorContents, Keymap as Keymap1, } from "./components/editor/editor";
 import { IconNames as IconNames1, } from "./components/icon/icon";
 import { ChildTab, } from "./components/tabList/tabList";
 export namespace Components {
@@ -36,7 +39,7 @@ export namespace Components {
         /**
           * The color of the button
          */
-        "color": "primary" | "success" | "warn" | "danger" | "neutral" | "stock" | "key" | "brand";
+        "color": Colors;
         /**
           * If true, prevents the user from interacting with the button.
          */
@@ -67,6 +70,10 @@ export namespace Components {
          */
         "isSecondary": boolean;
         /**
+          * Renders the button without initial background color or border.
+         */
+        "minimal": boolean;
+        /**
           * The overall size of the Button.
          */
         "size": "xsmall" | "small" | "default" | "large";
@@ -74,6 +81,10 @@ export namespace Components {
           * Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute. Only applies if the button is an anchor link. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target
          */
         "target"?: HTMLAnchorElement["target"];
+        /**
+          * An optional help text to display for button focus and hover states.
+         */
+        "tooltip"?: string;
     }
     interface StencilaCodeChunk {
         /**
@@ -83,37 +94,20 @@ export namespace Components {
         /**
           * Returns the `CodeChunk` node with the updated `text` content from the editor.
          */
-        "getJSON": () => Promise<CodeChunk>;
+        "getContents": () => Promise<CodeChunk>;
         /**
           * Whether the code section is visible or not
          */
         "isCodeCollapsedProp": boolean;
         /**
+          * Custom keyboard shortcuts to pass along to CodeMirror
+          * @see https://codemirror.net/6/docs/ref/#keymap
+         */
+        "keymap": Keymap;
+        /**
           * Programming language of the CodeChunk
          */
         "programmingLanguageProp": string;
-    }
-    interface StencilaCodeEditor {
-        /**
-          * Function to be evaluated over the contents of the CodeChunk.
-         */
-        "executeHandler": (codeChunk: CodeChunk) => Promise<unknown>;
-        /**
-          * Public method, returning the CodeChunk contents as Stencila JSON.
-         */
-        "getJSON": () => Promise<CodeChunk>;
-        /**
-          * Determines the visibility of line numbers
-         */
-        "lineNumbers": boolean;
-        /**
-          * Programming language of the CodeEditor
-         */
-        "programmingLanguage": string | undefined;
-        /**
-          * List of all supported programming languages
-         */
-        "programmingLanguages": string[];
     }
     interface StencilaCodeError {
         /**
@@ -139,6 +133,33 @@ export namespace Components {
     }
     interface StencilaDetails {
         "open": boolean;
+    }
+    interface StencilaEditor {
+        /**
+          * Programming language of the Editor
+         */
+        "activeLanguage": string;
+        /**
+          * Function to be evaluated over the contents of the editor.
+         */
+        "executeHandler": (contents: EditorContents) => Promise<unknown>;
+        /**
+          * Public method, returning the Editor contents and active language.
+         */
+        "getContents": () => Promise<EditorContents>;
+        /**
+          * Custom keyboard shortcuts to pass along to CodeMirror
+          * @see https://codemirror.net/6/docs/ref/#keymap
+         */
+        "keymap": Keymap;
+        /**
+          * List of all supported programming languages
+         */
+        "languageCapabilities": string[];
+        /**
+          * Determines the visibility of line numbers
+         */
+        "lineNumbers": boolean;
     }
     interface StencilaIcon {
         "icon": IconNames;
@@ -185,6 +206,25 @@ export namespace Components {
           * Text value of the input.
          */
         "value"?: number | string;
+    }
+    interface StencilaMenu {
+        /**
+          * Determines whether the Menu is shown or not
+         */
+        "isOpen": boolean;
+    }
+    interface StencilaMenuItem {
+        "icon": IconNames | undefined;
+    }
+    interface StencilaNavBar {
+        /**
+          * The background fill color of the Navbar
+         */
+        "color": Colors;
+        /**
+          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
+         */
+        "position": "static" | "fixed";
     }
     interface StencilaNodeList {
         /**
@@ -256,12 +296,6 @@ declare global {
         prototype: HTMLStencilaCodeChunkElement;
         new (): HTMLStencilaCodeChunkElement;
     };
-    interface HTMLStencilaCodeEditorElement extends Components.StencilaCodeEditor, HTMLStencilElement {
-    }
-    var HTMLStencilaCodeEditorElement: {
-        prototype: HTMLStencilaCodeEditorElement;
-        new (): HTMLStencilaCodeEditorElement;
-    };
     interface HTMLStencilaCodeErrorElement extends Components.StencilaCodeError, HTMLStencilElement {
     }
     var HTMLStencilaCodeErrorElement: {
@@ -286,6 +320,12 @@ declare global {
         prototype: HTMLStencilaDetailsElement;
         new (): HTMLStencilaDetailsElement;
     };
+    interface HTMLStencilaEditorElement extends Components.StencilaEditor, HTMLStencilElement {
+    }
+    var HTMLStencilaEditorElement: {
+        prototype: HTMLStencilaEditorElement;
+        new (): HTMLStencilaEditorElement;
+    };
     interface HTMLStencilaIconElement extends Components.StencilaIcon, HTMLStencilElement {
     }
     var HTMLStencilaIconElement: {
@@ -303,6 +343,24 @@ declare global {
     var HTMLStencilaInputElement: {
         prototype: HTMLStencilaInputElement;
         new (): HTMLStencilaInputElement;
+    };
+    interface HTMLStencilaMenuElement extends Components.StencilaMenu, HTMLStencilElement {
+    }
+    var HTMLStencilaMenuElement: {
+        prototype: HTMLStencilaMenuElement;
+        new (): HTMLStencilaMenuElement;
+    };
+    interface HTMLStencilaMenuItemElement extends Components.StencilaMenuItem, HTMLStencilElement {
+    }
+    var HTMLStencilaMenuItemElement: {
+        prototype: HTMLStencilaMenuItemElement;
+        new (): HTMLStencilaMenuItemElement;
+    };
+    interface HTMLStencilaNavBarElement extends Components.StencilaNavBar, HTMLStencilElement {
+    }
+    var HTMLStencilaNavBarElement: {
+        prototype: HTMLStencilaNavBarElement;
+        new (): HTMLStencilaNavBarElement;
     };
     interface HTMLStencilaNodeListElement extends Components.StencilaNodeList, HTMLStencilElement {
     }
@@ -350,14 +408,17 @@ declare global {
         "stencila-action-menu": HTMLStencilaActionMenuElement;
         "stencila-button": HTMLStencilaButtonElement;
         "stencila-code-chunk": HTMLStencilaCodeChunkElement;
-        "stencila-code-editor": HTMLStencilaCodeEditorElement;
         "stencila-code-error": HTMLStencilaCodeErrorElement;
         "stencila-code-expression": HTMLStencilaCodeExpressionElement;
         "stencila-data-table": HTMLStencilaDataTableElement;
         "stencila-details": HTMLStencilaDetailsElement;
+        "stencila-editor": HTMLStencilaEditorElement;
         "stencila-icon": HTMLStencilaIconElement;
         "stencila-image-object": HTMLStencilaImageObjectElement;
         "stencila-input": HTMLStencilaInputElement;
+        "stencila-menu": HTMLStencilaMenuElement;
+        "stencila-menu-item": HTMLStencilaMenuItemElement;
+        "stencila-nav-bar": HTMLStencilaNavBarElement;
         "stencila-node-list": HTMLStencilaNodeListElement;
         "stencila-tab": HTMLStencilaTabElement;
         "stencila-tab-list": HTMLStencilaTabListElement;
@@ -394,7 +455,7 @@ declare namespace LocalJSX {
         /**
           * The color of the button
          */
-        "color"?: "primary" | "success" | "warn" | "danger" | "neutral" | "stock" | "key" | "brand";
+        "color"?: Colors;
         /**
           * If true, prevents the user from interacting with the button.
          */
@@ -425,6 +486,10 @@ declare namespace LocalJSX {
          */
         "isSecondary"?: boolean;
         /**
+          * Renders the button without initial background color or border.
+         */
+        "minimal"?: boolean;
+        /**
           * The overall size of the Button.
          */
         "size"?: "xsmall" | "small" | "default" | "large";
@@ -432,6 +497,10 @@ declare namespace LocalJSX {
           * Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute. Only applies if the button is an anchor link. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target
          */
         "target"?: HTMLAnchorElement["target"];
+        /**
+          * An optional help text to display for button focus and hover states.
+         */
+        "tooltip"?: string;
     }
     interface StencilaCodeChunk {
         /**
@@ -443,6 +512,11 @@ declare namespace LocalJSX {
          */
         "isCodeCollapsedProp"?: boolean;
         /**
+          * Custom keyboard shortcuts to pass along to CodeMirror
+          * @see https://codemirror.net/6/docs/ref/#keymap
+         */
+        "keymap"?: Keymap;
+        /**
           * Trigger a global DOM event to collapse all `CodeChunk` and `CodeFragment` component code expressions, leaving only the results visible.
          */
         "onCollapseAllCode"?: (event: CustomEvent<any>) => void;
@@ -450,24 +524,6 @@ declare namespace LocalJSX {
           * Programming language of the CodeChunk
          */
         "programmingLanguageProp"?: string;
-    }
-    interface StencilaCodeEditor {
-        /**
-          * Function to be evaluated over the contents of the CodeChunk.
-         */
-        "executeHandler"?: (codeChunk: CodeChunk) => Promise<unknown>;
-        /**
-          * Determines the visibility of line numbers
-         */
-        "lineNumbers"?: boolean;
-        /**
-          * Programming language of the CodeEditor
-         */
-        "programmingLanguage"?: string | undefined;
-        /**
-          * List of all supported programming languages
-         */
-        "programmingLanguages"?: string[];
     }
     interface StencilaCodeError {
         /**
@@ -493,6 +549,29 @@ declare namespace LocalJSX {
     }
     interface StencilaDetails {
         "open"?: boolean;
+    }
+    interface StencilaEditor {
+        /**
+          * Programming language of the Editor
+         */
+        "activeLanguage"?: string;
+        /**
+          * Function to be evaluated over the contents of the editor.
+         */
+        "executeHandler"?: (contents: EditorContents) => Promise<unknown>;
+        /**
+          * Custom keyboard shortcuts to pass along to CodeMirror
+          * @see https://codemirror.net/6/docs/ref/#keymap
+         */
+        "keymap"?: Keymap;
+        /**
+          * List of all supported programming languages
+         */
+        "languageCapabilities"?: string[];
+        /**
+          * Determines the visibility of line numbers
+         */
+        "lineNumbers"?: boolean;
     }
     interface StencilaIcon {
         "icon"?: IconNames;
@@ -539,6 +618,25 @@ declare namespace LocalJSX {
           * Text value of the input.
          */
         "value"?: number | string;
+    }
+    interface StencilaMenu {
+        /**
+          * Determines whether the Menu is shown or not
+         */
+        "isOpen"?: boolean;
+    }
+    interface StencilaMenuItem {
+        "icon"?: IconNames | undefined;
+    }
+    interface StencilaNavBar {
+        /**
+          * The background fill color of the Navbar
+         */
+        "color"?: Colors;
+        /**
+          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
+         */
+        "position"?: "static" | "fixed";
     }
     interface StencilaNodeList {
         /**
@@ -594,14 +692,17 @@ declare namespace LocalJSX {
         "stencila-action-menu": StencilaActionMenu;
         "stencila-button": StencilaButton;
         "stencila-code-chunk": StencilaCodeChunk;
-        "stencila-code-editor": StencilaCodeEditor;
         "stencila-code-error": StencilaCodeError;
         "stencila-code-expression": StencilaCodeExpression;
         "stencila-data-table": StencilaDataTable;
         "stencila-details": StencilaDetails;
+        "stencila-editor": StencilaEditor;
         "stencila-icon": StencilaIcon;
         "stencila-image-object": StencilaImageObject;
         "stencila-input": StencilaInput;
+        "stencila-menu": StencilaMenu;
+        "stencila-menu-item": StencilaMenuItem;
+        "stencila-nav-bar": StencilaNavBar;
         "stencila-node-list": StencilaNodeList;
         "stencila-tab": StencilaTab;
         "stencila-tab-list": StencilaTabList;
@@ -618,14 +719,17 @@ declare module "@stencil/core" {
             "stencila-action-menu": LocalJSX.StencilaActionMenu & JSXBase.HTMLAttributes<HTMLStencilaActionMenuElement>;
             "stencila-button": LocalJSX.StencilaButton & JSXBase.HTMLAttributes<HTMLStencilaButtonElement>;
             "stencila-code-chunk": LocalJSX.StencilaCodeChunk & JSXBase.HTMLAttributes<HTMLStencilaCodeChunkElement>;
-            "stencila-code-editor": LocalJSX.StencilaCodeEditor & JSXBase.HTMLAttributes<HTMLStencilaCodeEditorElement>;
             "stencila-code-error": LocalJSX.StencilaCodeError & JSXBase.HTMLAttributes<HTMLStencilaCodeErrorElement>;
             "stencila-code-expression": LocalJSX.StencilaCodeExpression & JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement>;
             "stencila-data-table": LocalJSX.StencilaDataTable & JSXBase.HTMLAttributes<HTMLStencilaDataTableElement>;
             "stencila-details": LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
+            "stencila-editor": LocalJSX.StencilaEditor & JSXBase.HTMLAttributes<HTMLStencilaEditorElement>;
             "stencila-icon": LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
             "stencila-image-object": LocalJSX.StencilaImageObject & JSXBase.HTMLAttributes<HTMLStencilaImageObjectElement>;
             "stencila-input": LocalJSX.StencilaInput & JSXBase.HTMLAttributes<HTMLStencilaInputElement>;
+            "stencila-menu": LocalJSX.StencilaMenu & JSXBase.HTMLAttributes<HTMLStencilaMenuElement>;
+            "stencila-menu-item": LocalJSX.StencilaMenuItem & JSXBase.HTMLAttributes<HTMLStencilaMenuItemElement>;
+            "stencila-nav-bar": LocalJSX.StencilaNavBar & JSXBase.HTMLAttributes<HTMLStencilaNavBarElement>;
             "stencila-node-list": LocalJSX.StencilaNodeList & JSXBase.HTMLAttributes<HTMLStencilaNodeListElement>;
             "stencila-tab": LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
             "stencila-tab-list": LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;

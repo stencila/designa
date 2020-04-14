@@ -15,9 +15,9 @@
     "loader/"
   ],
   "scripts": {
-    "build": "stencil build --docs",
+    "build": "stencil build --docs --legacy",
     "build:watch": "concurrently \"npm run dev\" \"chokidar '../style-*/dist/*.css' -c 'npm run kill; npm run clean && npm run dev'\"",
-    "dev": "stencil build --dev --watch --docs",
+    "dev": "stencil build --dev --watch --docs --legacy",
     "kill": "pkill -f \"Stencil: stencila-components\"",
     "clean": "rimraf .stencil",
     "test": "stencil test --spec --e2e",
@@ -26,32 +26,32 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
-    "@stencil/core": "^1.9.1",
+    "@stencil/core": "^1.10.0",
     "@stencil/postcss": "^1.0.1",
     "@stencila/schema": "^0.37.3",
     "@types/feather-icons": "^4.7.0",
     "@types/jest": "^25.1.4",
     "@types/puppeteer": "^2.0.1",
-    "jest": "^25.1.0",
-    "jest-cli": "^25.1.0",
+    "chokidar-cli": "^2.1.0",
+    "jest": "^25.2.3",
+    "jest-cli": "^25.2.3",
     "postcss-custom-properties": "^9.1.1",
     "postcss-import": "^12.0.1",
-    "puppeteer": "^2.1.1"
+    "puppeteer": "^2.1.1",
+    "tailwindcss": "^1.2.0"
   },
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@codemirror/next": "^0.3.0",
+    "@codemirror/next": "^0.4.0",
+    "@popperjs/core": "^2.2.1",
     "@stencila/style-material": "file:../style-material",
     "@stencila/style-stencila": "file:../style-stencila",
-    "chokidar-cli": "^2.1.0",
     "feather-icons": "^4.25.0",
     "fp-ts": "^2.4.4",
-    "shadow-root-get-selection-polyfill": "^1.0.2",
-    "tailwindcss": "^1.1.4",
-    "tocbot": "^4.10.0",
+    "tocbot": "^4.10.1",
     "webfontloader": "^1.6.28"
   },
   "peerDependencies": {

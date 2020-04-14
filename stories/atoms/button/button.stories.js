@@ -4,7 +4,7 @@ import { html } from 'lit-html'
 export default {
   title: 'Atoms/Button/Primary',
   component: 'stencila-button',
-  excludeStories: ['props']
+  excludeStories: ['props'],
 }
 
 const defaultText = 'Sign In'
@@ -291,7 +291,7 @@ const icons = [
   'zap-off',
   'zap',
   'zoom-in',
-  'zoom-out'
+  'zoom-out',
 ]
 
 export const props = (overrides = {}) => ({
@@ -305,7 +305,7 @@ export const props = (overrides = {}) => ({
       'neutral',
       'stock',
       'key',
-      'brand'
+      'brand',
     ],
     overrides.color || 'primary'
   ),
@@ -315,34 +315,40 @@ export const props = (overrides = {}) => ({
   icon: select('icon', icons, overrides.icon || defaultIcon),
   isLoading: boolean('isLoading', overrides.isLoading || false),
   label: text('Button Text', overrides.label || defaultText),
+  minimal: boolean('minimal', overrides.minimal || false),
   secondary: boolean('isSecondary', overrides.isSecondary || false),
   size: select(
     'size',
     ['xsmall', 'small', 'default', 'large'],
     overrides.size || 'default'
-  )
+  ),
+  tooltip: text('tooltip', overrides.tooltip || undefined),
 })
 
 export const withText = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
-    isloading,
+    isLoading,
     label,
+    minimal,
     secondary,
-    fill,
-    size
+    size,
+    tooltip,
   } = props()
 
   return html`
     <button
-      class="color-${color} ${fill === true ? 'fill' : ''}"
+      class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
+        ? 'fill'
+        : ''}"
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
-      ?is-loading=${isloading}
+      ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >
@@ -355,20 +361,24 @@ export const withEmoji = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
-    isloading,
+    isLoading,
     label,
+    minimal,
     secondary,
-    fill,
-    size
+    size,
+    tooltip,
   } = props({
-    label: '😀 😎 👍 💯'
+    label: '😀 😎 👍 💯',
   })
 
   return html`
     <button
-      class="color-${color} ${fill === true ? 'fill' : ''}"
+      class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
+        ? 'fill'
+        : ''}"
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
@@ -385,21 +395,25 @@ export const small = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
-    isloading,
+    isLoading,
     label,
+    minimal,
     secondary,
-    fill,
-    size
+    size,
+    tooltip,
   } = props({
     label: 'A small step',
-    size: 'small'
+    size: 'small',
   })
 
   return html`
     <button
-      class="color-${color} ${fill === true ? 'fill' : ''}"
+      class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
+        ? 'fill'
+        : ''}"
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
@@ -416,21 +430,25 @@ export const extraSmall = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
-    isloading,
+    isLoading,
     label,
+    minimal,
     secondary,
-    fill,
-    size
+    size,
+    tooltip,
   } = props({
     label: 'a very small step',
-    size: 'xsmall'
+    size: 'xsmall',
   })
 
   return html`
     <button
-      class="color-${color} ${fill === true ? 'fill' : ''}"
+      class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
+        ? 'fill'
+        : ''}"
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
@@ -447,21 +465,25 @@ export const anchorButton = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
-    isloading,
+    isLoading,
     label,
+    minimal,
     secondary,
-    fill,
-    size
+    size,
+    tooltip,
   } = props({
     label: 'a very small step',
-    size: 'xsmall'
+    size: 'xsmall',
   })
 
   return html`
     <button
-      class="color-${color} ${fill === true ? 'fill' : ''}"
+      class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
+        ? 'fill'
+        : ''}"
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
@@ -478,17 +500,20 @@ export const webComponent = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
     isLoading,
     label,
+    minimal,
     secondary,
-    fill,
-    size
+    size,
+    tooltip,
   } = props()
 
   return html`
     <stencila-button
+      ?minimal=${minimal}
       color=${color}
       ?disabled=${disabled}
       fill=${fill}
@@ -507,17 +532,20 @@ export const webComponent_withAnIcon = () => {
   const {
     color,
     disabled,
+    fill,
     href,
     icon,
     isLoading,
     label,
+    minimal,
     secondary,
-    fill,
-    size
+    size,
+    tooltip,
   } = props({ icon: undefined, color: 'stock', fill: true })
 
   return html`
     <stencila-button
+      ?minimal=${minimal}
       color=${color}
       ?disabled=${disabled}
       fill=${fill}
@@ -555,19 +583,22 @@ export const webComponent_withAnIcon = () => {
 
 export const webComponent_withAFeatherIcon = () => {
   const {
-    icon,
-    label,
-    secondary,
-    size,
-    isLoading,
-    href,
+    color,
     disabled,
     fill,
-    color
+    href,
+    icon,
+    isLoading,
+    label,
+    minimal,
+    secondary,
+    size,
+    tooltip,
   } = props()
 
   return html`
     <stencila-button
+      ?minimal=${minimal}
       color=${color}
       ?disabled=${disabled}
       fill=${fill}
@@ -575,6 +606,7 @@ export const webComponent_withAFeatherIcon = () => {
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
+      .tooltip=${tooltip === '' ? undefined : tooltip}
       size=${size}
     >
       ${label}
@@ -584,22 +616,25 @@ export const webComponent_withAFeatherIcon = () => {
 
 export const webComponent_Link = () => {
   const {
-    icon,
-    label,
-    secondary,
-    size,
-    isLoading,
-    href,
+    color,
     disabled,
     fill,
-    color
+    href,
+    icon,
+    isLoading,
+    label,
+    minimal,
+    secondary,
+    size,
+    tooltip,
   } = props({
     icon: null,
-    href: '#'
+    href: '#',
   })
 
   return html`
     <stencila-button
+      ?minimal=${minimal}
       color=${color}
       ?disabled=${disabled}
       fill=${fill}
@@ -607,6 +642,7 @@ export const webComponent_Link = () => {
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
+      .tooltip=${tooltip === '' ? undefined : tooltip}
       size=${size}
     >
       ${label}
