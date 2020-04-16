@@ -21,7 +21,7 @@ export async function generateJsonDocs(
 
   const json = {
     ...docsDataWithoutComponents,
-    tags: components.map(cmp => ({
+    tags: components.map((cmp) => ({
       filePath: cmp.filePath,
       encapsulation: cmp.encapsulation,
       tag: cmp.tag,
@@ -30,29 +30,31 @@ export async function generateJsonDocs(
       description: cmp.docs,
       docsTags: cmp.docsTags,
       usage: cmp.usage,
-      properties: cmp.props.map(prop => ({
+      properties: cmp.props.map((prop) => ({
         ...prop,
-        description: prop.docs
+        description: prop.docs,
       })),
-      attributes: cmp.props.map(prop => ({
-        ...prop,
-        name: prop.attr,
-        description: prop.docs
-      })),
+      attributes: cmp.props
+        .filter((prop) => prop.attr !== undefined)
+        .map((prop) => ({
+          ...prop,
+          name: prop.attr,
+          description: prop.docs,
+        })),
       methods: cmp.methods,
-      events: cmp.events.map(e => ({
+      events: cmp.events.map((e) => ({
         ...e,
         name: e.event,
         description: e.docs,
-        type: e.detail
+        type: e.detail,
       })),
       styles: cmp.styles,
       slots: cmp.slots,
       dependents: cmp.dependents,
       dependencies: cmp.dependencies,
       dependencyGraph: cmp.dependencyGraph,
-      deprecation: cmp.deprecation
-    }))
+      deprecation: cmp.deprecation,
+    })),
   }
 
   const jsonContent = JSON.stringify(json, null, 2)
@@ -64,7 +66,7 @@ export async function generateJsonDocs(
   )
 }
 
-const isOutputTargetCustomElementDocsJson = o =>
+const isOutputTargetCustomElementDocsJson = (o) =>
   o.name === 'custom-element-docs'
 
 export const writeDocsOutput = async (
