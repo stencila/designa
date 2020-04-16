@@ -144,6 +144,10 @@ export namespace Components {
          */
         "executeHandler": (contents: EditorContents) => Promise<unknown>;
         /**
+          * Enables abiility to fold sections of code
+         */
+        "foldGutter": boolean;
+        /**
           * Public method, returning the Editor contents and active language.
          */
         "getContents": () => Promise<EditorContents>;
@@ -559,6 +563,10 @@ declare namespace LocalJSX {
           * Function to be evaluated over the contents of the editor.
          */
         "executeHandler"?: (contents: EditorContents) => Promise<unknown>;
+        /**
+          * Enables abiility to fold sections of code
+         */
+        "foldGutter"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
