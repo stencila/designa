@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "@stencila/dev-config": "^1.4.23",
+    "@stencila/dev-config": "^1.4.30",
     "@storybook/addon-a11y": "^6.0.0-alpha.29",
     "@storybook/addon-backgrounds": "^6.0.0-alpha.29",
     "@storybook/addon-cssresources": "^6.0.0-alpha.29",
@@ -32,7 +32,6 @@
     "concurrently": "^5.1.0",
     "copy-webpack-plugin": "^5.1.1",
     "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.19.0",
     "filewatcher-webpack-plugin": "^1.2.0",
@@ -51,7 +50,7 @@
     "postcss-parcel-import": "0.0.2",
     "postcss-url": "^8.0.0",
     "storybook-addon-root-attribute": "^0.2.3",
-    "tailwindcss": "^1.2.0",
+    "tailwindcss": "^1.3.5",
     "typescript": "^3.8.3",
     "write-file-webpack-plugin": "^4.5.1"
   },
