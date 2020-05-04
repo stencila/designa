@@ -247,16 +247,19 @@ export class Editor {
           </div>
 
           <menu>
-            <select onChange={this.setLanguage}>
-              {this.languageCapabilities.map((language) => (
-                <option
-                  value={language.toLowerCase()}
-                  selected={language.toLowerCase() === this.activeLanguage}
-                >
-                  {language}
-                </option>
-              ))}
-            </select>
+            <label aria-label="Programming Language">
+              <stencila-icon icon="code"></stencila-icon>
+              <select onChange={this.setLanguage}>
+                {this.languageCapabilities.map((language) => (
+                  <option
+                    value={language.toLowerCase()}
+                    selected={language.toLowerCase() === this.activeLanguage}
+                  >
+                    {language}
+                  </option>
+                ))}
+              </select>
+            </label>
           </menu>
         </div>
       </Host>

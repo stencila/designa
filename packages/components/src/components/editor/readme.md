@@ -34,9 +34,14 @@ Type: `Promise<EditorContents>`
 
  - [stencila-code-chunk](../codeChunk)
 
+### Depends on
+
+- [stencila-icon](../icon)
+
 ### Graph
 ```mermaid
 graph TD;
+  stencila-editor --> stencila-icon
   stencila-code-chunk --> stencila-editor
   style stencila-editor fill:#f9f,stroke:#333,stroke-width:4px
 ```
