@@ -92,6 +92,11 @@ export class Editor {
   ]
 
   /**
+   * Disallow editing of the editor contents when set to `true`
+   */
+  @Prop() public readOnly: boolean = false
+
+  /**
    * Changes the active programming language of the editor.
    * Does not affect syntax highlighting.
    */
@@ -177,6 +182,7 @@ export class Editor {
         ...this.keymap,
       }),
       keymap(baseKeymap),
+      EditorView.editable.of(!this.readOnly),
     ]
 
     if (this.lineNumbers) {

@@ -5,14 +5,15 @@
 
 ## Properties
 
-| Property               | Attribute         | Description                                               | Type                                             | Default                                                      |
-| ---------------------- | ----------------- | --------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------ |
-| `activeLanguage`       | `active-language` | Programming language of the Editor                        | `string`                                         | `this.languageCapabilities[0]?.toLowerCase() ?? ''`          |
-| `executeHandler`       | --                | Function to be evaluated over the contents of the editor. | `(contents: EditorContents) => Promise<unknown>` | `undefined`                                                  |
-| `foldGutter`           | `fold-gutter`     | Enables abiility to fold sections of code                 | `boolean`                                        | `true`                                                       |
-| `keymap`               | --                | Custom keyboard shortcuts to pass along to CodeMirror     | `{ [key: string]: Command; }`                    | `{}`                                                         |
-| `languageCapabilities` | --                | List of all supported programming languages               | `string[]`                                       | `[     'Bash',     'JavaScript',     'R',     'Python',   ]` |
-| `lineNumbers`          | `line-numbers`    | Determines the visibility of line numbers                 | `boolean`                                        | `true`                                                       |
+| Property               | Attribute         | Description                                                | Type                                             | Default                                                      |
+| ---------------------- | ----------------- | ---------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------ |
+| `activeLanguage`       | `active-language` | Programming language of the Editor                         | `string`                                         | `this.languageCapabilities[0]?.toLowerCase() ?? ''`          |
+| `executeHandler`       | --                | Function to be evaluated over the contents of the editor.  | `(contents: EditorContents) => Promise<unknown>` | `undefined`                                                  |
+| `foldGutter`           | `fold-gutter`     | Enables abiility to fold sections of code                  | `boolean`                                        | `true`                                                       |
+| `keymap`               | --                | Custom keyboard shortcuts to pass along to CodeMirror      | `{ [key: string]: Command; }`                    | `{}`                                                         |
+| `languageCapabilities` | --                | List of all supported programming languages                | `string[]`                                       | `[     'Bash',     'JavaScript',     'R',     'Python',   ]` |
+| `lineNumbers`          | `line-numbers`    | Determines the visibility of line numbers                  | `boolean`                                        | `true`                                                       |
+| `readOnly`             | `read-only`       | Disallow editing of the editor contents when set to `true` | `boolean`                                        | `false`                                                      |
 
 
 ## Methods
