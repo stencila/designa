@@ -90,7 +90,7 @@ export namespace Components {
         /**
           * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
          */
-        "executeHandler": (codeChunk: CodeChunk) => Promise<CodeChunk>;
+        "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
         /**
           * Returns the `CodeChunk` node with the updated `text` content from the editor.
          */
@@ -164,6 +164,10 @@ export namespace Components {
           * Determines the visibility of line numbers
          */
         "lineNumbers": boolean;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly": boolean;
     }
     interface StencilaIcon {
         "icon": IconNames;
@@ -580,6 +584,10 @@ declare namespace LocalJSX {
           * Determines the visibility of line numbers
          */
         "lineNumbers"?: boolean;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly"?: boolean;
     }
     interface StencilaIcon {
         "icon"?: IconNames;

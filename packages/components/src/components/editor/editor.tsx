@@ -94,7 +94,7 @@ export class Editor {
   /**
    * Disallow editing of the editor contents when set to `true`
    */
-  @Prop() public readOnly: boolean = false
+  @Prop() public readOnly = false
 
   /**
    * Changes the active programming language of the editor.

@@ -95,7 +95,7 @@ export class CodeChunkComponent {
   /**
    * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
    */
-  @Prop() public executeHandler: (codeChunk: CodeChunk) => Promise<CodeChunk>
+  @Prop() public executeHandler?: (codeChunk: CodeChunk) => Promise<CodeChunk>
 
   private onExecuteHandler_ = async () => {
     const node = await this.getContents()
@@ -202,6 +202,7 @@ export class CodeChunkComponent {
           <stencila-editor
             activeLanguage={this.programmingLanguageProp}
             keymap={this.keymap}
+            readOnly={this.executeHandler === undefined}
           >
             <slot name={CodeChunkComponent.slots.text} />
           </stencila-editor>
