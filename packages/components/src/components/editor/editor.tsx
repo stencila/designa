@@ -153,6 +153,7 @@ export class Editor {
         'Mod-u': (view) => undoSelection(view) || true,
         [isMac ? 'Mod-Shift-u' : 'Alt-u']: redoSelection,
         'Ctrl-y': isMac ? undefined : redo,
+        'Shift-Enter': this.execute,
         'Mod-Enter': this.execute,
         'Mod-ArrowLeft': moveLineStart,
         'Mod-ArrowRight': moveLineEnd,
