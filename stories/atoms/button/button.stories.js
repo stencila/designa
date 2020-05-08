@@ -382,7 +382,7 @@ export const withEmoji = () => {
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
-      ?is-loading=${isloading}
+      ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >
@@ -417,7 +417,7 @@ export const small = () => {
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
-      ?is-loading=${isloading}
+      ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >
@@ -452,7 +452,7 @@ export const extraSmall = () => {
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
-      ?is-loading=${isloading}
+      ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >
@@ -487,7 +487,7 @@ export const anchorButton = () => {
       ?disabled=${disabled}
       icon=${icon}
       ?is-secondary=${secondary}
-      ?is-loading=${isloading}
+      ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
       size=${size}
     >

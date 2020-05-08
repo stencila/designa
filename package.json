@@ -13,7 +13,8 @@
     "build:watch": "npx lerna run build:watch --stream --parallel",
     "bootstrap": "npx lerna exec npm install",
     "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist",
-    "storybook:build": "build-storybook -o docs -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist"
+    "storybook:build": "build-storybook -o docs -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist",
+    "chromatic": "chromatic --storybook-build-dir docs"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -29,6 +30,7 @@
     "@storybook/web-components": "^6.0.0-alpha.29",
     "autoprefixer": "^9.7.6",
     "babel-loader": "^8.1.0",
+    "chromatic": "^4.0.2",
     "concurrently": "^5.1.0",
     "copy-webpack-plugin": "^5.1.1",
     "eslint": "^6.8.0",
