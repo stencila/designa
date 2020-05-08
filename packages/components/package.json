@@ -55,7 +55,7 @@
     "webfontloader": "^1.6.28"
   },
   "peerDependencies": {
-    "@stencila/schema": "^0.37.0"
+    "@stencila/schema": "^0.43.0"
   },
   "eslintConfig": {
     "extends": "@stencila/eslint-config/eslint-config-stencil",

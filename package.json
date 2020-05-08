@@ -89,23 +89,8 @@
   },
   "renovate": {
     "extends": [
-      "@stencila"
-    ],
-    "packageRules": [
-      {
-        "depTypeList": [
-          "dependencies"
-        ],
-        "rangeStrategy": "widen"
-      },
-      {
-        "groupName": "Dev dependencies",
-        "groupSlug": "dev",
-        "depTypeList": [
-          "devDependencies"
-        ],
-        "rangeStrategy": "bump"
-      }
+      "@stencila",
+      ":pinOnlyDevDependencies"
     ]
   },
   "dependencies": {}
