@@ -1,4 +1,4 @@
-import { SelectionRange } from '@codemirror/next/state/src'
+import { SelectionRange } from '@codemirror/next/state'
 import { EditorView } from '@codemirror/next/view/src'
 
 // Collection of CodeMirror Commands
