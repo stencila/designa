@@ -224,6 +224,17 @@ export class Editor {
   }
 
   /**
+   * Public method, to replace the contents of the Editor with a supplied string.
+   */
+  @Method()
+  public setContents(contents: string): Promise<string> {
+    const docState = this.editorRef.state
+    const transaction = docState.t().replace(0, docState.doc.length, contents)
+    this.editorRef.dispatch(transaction)
+    return Promise.resolve(contents)
+  }
+
+  /**
    * Prevents keyboard event listeners attached to parent DOM elements from firing.
    * This is to avoid conflicts when user has focused on the editor.
    */

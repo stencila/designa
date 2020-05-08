@@ -176,6 +176,10 @@ export namespace Components {
           * Disallow editing of the editor contents when set to `true`
          */
         "readOnly": boolean;
+        /**
+          * Public method, to replace the contents of the Editor with a supplied string.
+         */
+        "setContents": (contents: string) => Promise<string>;
     }
     interface StencilaIcon {
         "icon": IconNames;

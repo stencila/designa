@@ -29,6 +29,16 @@ Type: `Promise<EditorContents>`
 
 
 
+### `setContents(contents: string) => Promise<string>`
+
+Public method, to replace the contents of the Editor with a supplied string.
+
+#### Returns
+
+Type: `Promise<string>`
+
+
+
 
 ## Dependencies
 
