@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/stencila/designa/compare/@stencila/components@0.11.0...@stencila/components@0.12.0) (2020-05-08)
+
+
+### Bug Fixes
+
+* **CodeChunk:** Fix compilation of CodeChunk component ([04cc390](https://github.com/stencila/designa/commit/04cc39009ae57ced6995d92c8b162fd469b5dd04))
+* **Editor:** Improve legibility of programming language selector ([ac42d25](https://github.com/stencila/designa/commit/ac42d2576dea45f5d0b9157803e2169282ad5def))
+
+
+### Features
+
+* **CodeChunk:** Make CodeChunk readonly if execution callback isn't set ([2fc78a4](https://github.com/stencila/designa/commit/2fc78a45ab5fa43a47203dc1bf718a6e359c3b9c)), closes [#40](https://github.com/stencila/designa/issues/40)
+* **Editor:** Add a readOnly prop to disable content editing ([cdca8f4](https://github.com/stencila/designa/commit/cdca8f42fa1ec74a0168578b7896a494f33b94ea))
+* **Editor:** Add autofocus attribute to focus Editor on page load ([3df39a2](https://github.com/stencila/designa/commit/3df39a20ac3c68c19e1c2e6649386e58b3b35260))
+* **Editor:** Add code folding, multiple selections, auto bracket insert ([316c679](https://github.com/stencila/designa/commit/316c6791f6ace0fe732eab6551a5f69d145aeb45))
+* **Editor:** Add public Method to update Editor contents ([b02a657](https://github.com/stencila/designa/commit/b02a657c34bddf105e090847242b25f8abeda441))
+* **Editor:** Add second Execute keyboard alias (Shift-Enter) ([c8c9bbe](https://github.com/stencila/designa/commit/c8c9bbe252027604b1f84c16a571e42bcace3a77))
+* **Editor:** Delete whole word when pressing Mod-Backspace ([fa64ccb](https://github.com/stencila/designa/commit/fa64ccb695a0c994c71c1f672abaa3994a5ac721))
+
+
+
+
+
 # [0.11.0](https://github.com/stencila/designa/compare/@stencila/components@0.10.1...@stencila/components@0.11.0) (2020-04-14)
 
 

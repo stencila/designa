@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.1](https://github.com/stencila/style/compare/@stencila/style-stencila@0.11.0...@stencila/style-stencila@0.11.1) (2020-05-08)
+
+
+### Bug Fixes
+
+* **Editor:** Improve legibility of programming language selector ([ac42d25](https://github.com/stencila/style/commit/ac42d2576dea45f5d0b9157803e2169282ad5def))
+
+
+
+
+
 # [0.11.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.10.0...@stencila/style-stencila@0.11.0) (2020-04-14)
 
 
