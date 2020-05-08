@@ -19,6 +19,7 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@stencila/dev-config": "^1.4.30",
+    "@stencila/renovate-config": "^0.3.0",
     "@storybook/addon-a11y": "^5.3.18",
     "@storybook/addon-backgrounds": "^5.3.18",
     "@storybook/addon-cssresources": "^5.3.18",
@@ -85,6 +86,27 @@
   "prettier": "@stencila/dev-config/prettier-config.json",
   "release": {
     "extends": "@stencila/semantic-release-config"
+  },
+  "renovate": {
+    "extends": [
+      "@stencila"
+    ],
+    "packageRules": [
+      {
+        "depTypeList": [
+          "dependencies"
+        ],
+        "rangeStrategy": "widen"
+      },
+      {
+        "groupName": "Dev dependencies",
+        "groupSlug": "dev",
+        "depTypeList": [
+          "devDependencies"
+        ],
+        "rangeStrategy": "bump"
+      }
+    ]
   },
   "dependencies": {}
 }
