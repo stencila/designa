@@ -88,9 +88,13 @@ export namespace Components {
     }
     interface StencilaCodeChunk {
         /**
+          * Autofocus the editor on page load
+         */
+        "autofocus": boolean;
+        /**
           * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
          */
-        "executeHandler": (codeChunk: CodeChunk) => Promise<CodeChunk>;
+        "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
         /**
           * Returns the `CodeChunk` node with the updated `text` content from the editor.
          */
@@ -140,9 +144,17 @@ export namespace Components {
          */
         "activeLanguage": string;
         /**
+          * Autofocus the editor on page load
+         */
+        "autofocus": boolean;
+        /**
           * Function to be evaluated over the contents of the editor.
          */
         "executeHandler": (contents: EditorContents) => Promise<unknown>;
+        /**
+          * Enables abiility to fold sections of code
+         */
+        "foldGutter": boolean;
         /**
           * Public method, returning the Editor contents and active language.
          */
@@ -160,6 +172,14 @@ export namespace Components {
           * Determines the visibility of line numbers
          */
         "lineNumbers": boolean;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly": boolean;
+        /**
+          * Public method, to replace the contents of the Editor with a supplied string.
+         */
+        "setContents": (contents: string) => Promise<string>;
     }
     interface StencilaIcon {
         "icon": IconNames;
@@ -504,6 +524,10 @@ declare namespace LocalJSX {
     }
     interface StencilaCodeChunk {
         /**
+          * Autofocus the editor on page load
+         */
+        "autofocus"?: boolean;
+        /**
           * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
@@ -556,9 +580,17 @@ declare namespace LocalJSX {
          */
         "activeLanguage"?: string;
         /**
+          * Autofocus the editor on page load
+         */
+        "autofocus"?: boolean;
+        /**
           * Function to be evaluated over the contents of the editor.
          */
         "executeHandler"?: (contents: EditorContents) => Promise<unknown>;
+        /**
+          * Enables abiility to fold sections of code
+         */
+        "foldGutter"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
@@ -572,6 +604,10 @@ declare namespace LocalJSX {
           * Determines the visibility of line numbers
          */
         "lineNumbers"?: boolean;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly"?: boolean;
     }
     interface StencilaIcon {
         "icon"?: IconNames;

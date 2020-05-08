@@ -1,8 +1,11 @@
+import { autocomplete, startCompletion } from '@codemirror/next/autocomplete'
+import { closeBrackets } from '@codemirror/next/closebrackets'
 import {
   baseKeymap,
   moveLineEnd,
   moveLineStart,
 } from '@codemirror/next/commands'
+import { foldGutter } from '@codemirror/next/fold'
 import { lineNumbers } from '@codemirror/next/gutter'
 import { defaultHighlighter } from '@codemirror/next/highlight'
 import {
@@ -13,20 +16,21 @@ import {
   undoSelection,
 } from '@codemirror/next/history'
 import { keymap, Keymap as KeymapI } from '@codemirror/next/keymap'
-import { html } from '@codemirror/next/lang-html'
 import { javascript } from '@codemirror/next/lang-javascript'
 import { bracketMatching } from '@codemirror/next/matchbrackets'
+import { multipleSelections } from '@codemirror/next/multiple-selections'
 import { specialChars } from '@codemirror/next/special-chars'
 import { EditorState } from '@codemirror/next/state'
 import { Command, EditorView } from '@codemirror/next/view'
 import { Component, Element, h, Host, Method, Prop } from '@stencil/core'
+import { deleteLine, deleteWord } from './commands'
 
 export interface EditorContents {
   text: string
   language: string
 }
 
-export interface Keymap extends KeymapI {}
+export type Keymap = KeymapI
 
 const slots = {
   text: 'text',
@@ -65,6 +69,11 @@ export class Editor {
   ]
 
   /**
+   * Disallow editing of the editor contents when set to `true`
+   */
+  @Prop() public readOnly = false
+
+  /**
    * Changes the active programming language of the editor.
    * Does not affect syntax highlighting.
    */
@@ -99,9 +108,19 @@ export class Editor {
   }
 
   /**
+   * Autofocus the editor on page load
+   */
+  @Prop() public autofocus = false
+
+  /**
    * Determines the visibility of line numbers
    */
   @Prop() public lineNumbers = true
+
+  /**
+   * Enables abiility to fold sections of code
+   */
+  @Prop() public foldGutter = true
 
   /**
    * Custom keyboard shortcuts to pass along to CodeMirror
@@ -115,16 +134,18 @@ export class Editor {
     const root = this.el
     const slot = root.querySelector('[slot]')
     const textContent =
-      slot?.textContent ||
-      root?.querySelector(`#${cssIds.editorTarget}`)?.textContent ||
+      slot?.textContent ??
+      root?.querySelector(`#${cssIds.editorTarget}`)?.textContent ??
       ''
 
     const extensions = [
       history(),
+      autocomplete(),
       bracketMatching(),
+      closeBrackets,
       defaultHighlighter,
       javascript(),
-      html(),
+      multipleSelections(),
       specialChars(),
       keymap({
         'Mod-z': undo,
@@ -132,20 +153,26 @@ export class Editor {
         'Mod-u': (view) => undoSelection(view) || true,
         [isMac ? 'Mod-Shift-u' : 'Alt-u']: redoSelection,
         'Ctrl-y': isMac ? undefined : redo,
+        'Shift-Enter': this.execute,
         'Mod-Enter': this.execute,
         'Mod-ArrowLeft': moveLineStart,
         'Mod-ArrowRight': moveLineEnd,
+        'Alt-Space': startCompletion,
+        'Alt-Backspace': deleteWord,
+        'Mod-Backspace': deleteLine,
+        // FIXME: Add indentation commands
         ...this.keymap,
-        // FIXME: The following commands have no effect
-        /* 'Mod-]': indentSelection, */
-        /* 'Mod-Shift-ArrowLeft': selectDocStart, */
-        /* 'Mod-Shift-ArrowRight': selectDocEnd, */
       }),
       keymap(baseKeymap),
+      EditorView.editable.of(!this.readOnly),
     ]
 
     if (this.lineNumbers) {
       extensions.push(lineNumbers())
+    }
+
+    if (this.foldGutter) {
+      extensions.push(foldGutter())
     }
 
     this.editorRef = new EditorView({
@@ -158,10 +185,6 @@ export class Editor {
     return root
       ?.querySelector(`#${cssIds.editorTarget}`)
       ?.replaceWith(this.editorRef.dom)
-  }
-
-  protected componentDidLoad() {
-    this.initCodeMirror()
   }
 
   private getContent = () => this.editorRef.state.toJSON().doc
@@ -178,6 +201,17 @@ export class Editor {
   }
 
   /**
+   * Public method, to replace the contents of the Editor with a supplied string.
+   */
+  @Method()
+  public setContents(contents: string): Promise<string> {
+    const docState = this.editorRef.state
+    const transaction = docState.t().replace(0, docState.doc.length, contents)
+    this.editorRef.dispatch(transaction)
+    return Promise.resolve(contents)
+  }
+
+  /**
    * Prevents keyboard event listeners attached to parent DOM elements from firing.
    * This is to avoid conflicts when user has focused on the editor.
    */
@@ -190,6 +224,17 @@ export class Editor {
    */
   private focusEditor = (): void => {
     this.editorRef.focus()
+  }
+
+  protected componentDidLoad() {
+    this.initCodeMirror()
+    if (this.autofocus) {
+      this.focusEditor()
+    }
+  }
+
+  protected componentDidUnload() {
+    this.editorRef.destroy()
   }
 
   public render() {
@@ -208,16 +253,19 @@ export class Editor {
           </div>
 
           <menu>
-            <select onChange={this.setLanguage}>
-              {this.languageCapabilities.map((language) => (
-                <option
-                  value={language.toLowerCase()}
-                  selected={language.toLowerCase() === this.activeLanguage}
-                >
-                  {language}
-                </option>
-              ))}
-            </select>
+            <label aria-label="Programming Language">
+              <stencila-icon icon="code"></stencila-icon>
+              <select onChange={this.setLanguage}>
+                {this.languageCapabilities.map((language) => (
+                  <option
+                    value={language.toLowerCase()}
+                    selected={language.toLowerCase() === this.activeLanguage}
+                  >
+                    {language}
+                  </option>
+                ))}
+              </select>
+            </label>
           </menu>
         </div>
       </Host>

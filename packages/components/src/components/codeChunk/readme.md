@@ -7,6 +7,7 @@
 
 | Property                  | Attribute                  | Description                                                                                            | Type                                           | Default     |
 | ------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------- | ----------- |
+| `autofocus`               | `autofocus`                | Autofocus the editor on page load                                                                      | `boolean`                                      | `false`     |
 | `executeHandler`          | --                         | A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`. | `(codeChunk: CodeChunk) => Promise<CodeChunk>` | `undefined` |
 | `isCodeCollapsedProp`     | `data-collapsed`           | Whether the code section is visible or not                                                             | `boolean`                                      | `false`     |
 | `keymap`                  | --                         | Custom keyboard shortcuts to pass along to CodeMirror                                                  | `{ [key: string]: Command; }`                  | `{}`        |
@@ -58,6 +59,7 @@ graph TD;
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip
   stencila-tooltip --> stencila-tooltip-element
+  stencila-editor --> stencila-icon
   stencila-node-list --> stencila-image-object
   stencila-node-list --> stencila-data-table
   style stencila-code-chunk fill:#f9f,stroke:#333,stroke-width:4px

@@ -7,7 +7,9 @@ script:
   - npm ci
   - npm run bootstrap
   - npm run build
-  - npm run storybook:build
+  - npm run storybook:build -- --quiet
+  # Publish storybook to Chromatic https://www.chromatic.com/
+  - if [[ $TRAVIS_EVENT_TYPE != 'pull_request' ||  $TRAVIS_PULL_REQUEST_SLUG != $TRAVIS_REPO_SLUG ]]; then npm run chromatic -- --exit-zero-on-changes; fi
 
 # Prevent Github Pages from using Jekyll
 before_deploy:

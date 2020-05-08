@@ -40,8 +40,12 @@ stencila-editor {
   menu {
     @apply flex justify-end p-0 py-px m-0 border-t border-neutral-300;
 
+    stencila-icon {
+      @apply mr-1;
+    }
+
     select {
-      @apply mr-2 text-xs text-right bg-transparent border-none appearance-none text-neutral-600 font-body;
+      @apply mr-2 text-xs text-right bg-transparent border-none appearance-none text-neutral-700 font-body;
 
       option {
         @apply text-right font-body;
