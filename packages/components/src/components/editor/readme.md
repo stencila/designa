@@ -8,6 +8,7 @@
 | Property               | Attribute         | Description                                                | Type                                             | Default                                                      |
 | ---------------------- | ----------------- | ---------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------ |
 | `activeLanguage`       | `active-language` | Programming language of the Editor                         | `string`                                         | `this.languageCapabilities[0]?.toLowerCase() ?? ''`          |
+| `autofocus`            | `autofocus`       | Autofocus the editor on page load                          | `boolean`                                        | `false`                                                      |
 | `executeHandler`       | --                | Function to be evaluated over the contents of the editor.  | `(contents: EditorContents) => Promise<unknown>` | `undefined`                                                  |
 | `foldGutter`           | `fold-gutter`     | Enables abiility to fold sections of code                  | `boolean`                                        | `true`                                                       |
 | `keymap`               | --                | Custom keyboard shortcuts to pass along to CodeMirror      | `{ [key: string]: Command; }`                    | `{}`                                                         |

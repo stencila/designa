@@ -40,6 +40,11 @@ export class CodeChunkComponent {
   private editorRef: HTMLStencilaEditorElement | null
 
   /**
+   * Autofocus the editor on page load
+   */
+  @Prop() public autofocus = false
+
+  /**
    * Programming language of the CodeChunk
    */
   @Prop({
@@ -201,6 +206,7 @@ export class CodeChunkComponent {
         >
           <stencila-editor
             activeLanguage={this.programmingLanguageProp}
+            autofocus={this.autofocus}
             keymap={this.keymap}
             readOnly={this.executeHandler === undefined}
           >

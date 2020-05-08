@@ -88,6 +88,10 @@ export namespace Components {
     }
     interface StencilaCodeChunk {
         /**
+          * Autofocus the editor on page load
+         */
+        "autofocus": boolean;
+        /**
           * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
@@ -139,6 +143,10 @@ export namespace Components {
           * Programming language of the Editor
          */
         "activeLanguage": string;
+        /**
+          * Autofocus the editor on page load
+         */
+        "autofocus": boolean;
         /**
           * Function to be evaluated over the contents of the editor.
          */
@@ -512,6 +520,10 @@ declare namespace LocalJSX {
     }
     interface StencilaCodeChunk {
         /**
+          * Autofocus the editor on page load
+         */
+        "autofocus"?: boolean;
+        /**
           * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
@@ -563,6 +575,10 @@ declare namespace LocalJSX {
           * Programming language of the Editor
          */
         "activeLanguage"?: string;
+        /**
+          * Autofocus the editor on page load
+         */
+        "autofocus"?: boolean;
         /**
           * Function to be evaluated over the contents of the editor.
          */

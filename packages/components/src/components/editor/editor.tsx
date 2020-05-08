@@ -131,6 +131,11 @@ export class Editor {
   }
 
   /**
+   * Autofocus the editor on page load
+   */
+  @Prop() public autofocus = false
+
+  /**
    * Determines the visibility of line numbers
    */
   @Prop() public lineNumbers = true
@@ -205,10 +210,6 @@ export class Editor {
       ?.replaceWith(this.editorRef.dom)
   }
 
-  protected componentDidLoad() {
-    this.initCodeMirror()
-  }
-
   private getContent = () => this.editorRef.state.toJSON().doc
 
   /**
@@ -235,6 +236,17 @@ export class Editor {
    */
   private focusEditor = (): void => {
     this.editorRef.focus()
+  }
+
+  protected componentDidLoad() {
+    this.initCodeMirror()
+    if (this.autofocus) {
+      this.focusEditor()
+    }
+  }
+
+  protected componentDidUnload() {
+    this.editorRef.destroy()
   }
 
   public render() {
