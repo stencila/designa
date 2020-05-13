@@ -13,20 +13,20 @@ enum BOUNDARY {
 
 /** CodeMirror command to delete content until a given boundary */
 export const deleteTill = (granularity: BOUNDARY) => (view: EditorView) => {
-  const transaction = view.state.t().forEachRange((range, transaction) => {
+  let changes = view.state.changeByRange((range) => {
     let { from, to } = range
-    if (from === to) {
-      const target = view.movePos(range.head, 'backward', granularity, 'move')
+    if (from == to) {
+      let target = view.movePos(range.head, 'backward', granularity, 'move')
       from = Math.min(from, target)
       to = Math.max(to, target)
     }
-    if (from === to) return range
-    transaction.replace(from, to, '')
-    return new SelectionRange(from)
+    if (from == to) return { range }
+    return { changes: { from, to }, range: new SelectionRange(from) }
   })
-  if (!transaction.docChanged) return false
 
-  view.dispatch(transaction.scrollIntoView())
+  if (changes.changes.empty) return false
+
+  view.dispatch(view.state.update(changes, { scrollIntoView: true }))
   return true
 }
 

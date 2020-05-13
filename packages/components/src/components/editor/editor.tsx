@@ -5,7 +5,8 @@ import {
   moveLineEnd,
   moveLineStart,
 } from '@codemirror/next/commands'
-import { foldGutter } from '@codemirror/next/fold'
+import { toggleBlockComment, toggleLineComment } from '@codemirror/next/comment'
+import { foldCode, foldGutter, unfoldCode } from '@codemirror/next/fold'
 import { lineNumbers } from '@codemirror/next/gutter'
 import { defaultHighlighter } from '@codemirror/next/highlight'
 import {
@@ -16,7 +17,7 @@ import {
   undoSelection,
 } from '@codemirror/next/history'
 import { keymap, Keymap as KeymapI } from '@codemirror/next/keymap'
-import { javascript } from '@codemirror/next/lang-javascript'
+import { python } from '@codemirror/next/lang-python'
 import { bracketMatching } from '@codemirror/next/matchbrackets'
 import { multipleSelections } from '@codemirror/next/multiple-selections'
 import { specialChars } from '@codemirror/next/special-chars'
@@ -144,7 +145,7 @@ export class Editor {
       bracketMatching(),
       closeBrackets,
       defaultHighlighter,
-      javascript(),
+      python(),
       multipleSelections(),
       specialChars(),
       keymap({
@@ -154,12 +155,15 @@ export class Editor {
         [isMac ? 'Mod-Shift-u' : 'Alt-u']: redoSelection,
         'Ctrl-y': isMac ? undefined : redo,
         'Shift-Enter': this.execute,
-        'Mod-Enter': this.execute,
         'Mod-ArrowLeft': moveLineStart,
         'Mod-ArrowRight': moveLineEnd,
-        'Alt-Space': startCompletion,
+        'Ctrl-Space': startCompletion,
         'Alt-Backspace': deleteWord,
         'Mod-Backspace': deleteLine,
+        'Mod-/': toggleLineComment,
+        'Mod-*': toggleBlockComment,
+        'Mod-Alt-[': foldCode,
+        'Mod-Alt-]': unfoldCode,
         // FIXME: Add indentation commands
         ...this.keymap,
       }),
@@ -206,7 +210,15 @@ export class Editor {
   @Method()
   public setContents(contents: string): Promise<string> {
     const docState = this.editorRef.state
-    const transaction = docState.t().replace(0, docState.doc.length, contents)
+    const transaction = docState.update({
+      changes: {
+        from: 0,
+        to: docState.doc.length,
+        insert: contents,
+      },
+      scrollIntoView: true,
+    })
+
     this.editorRef.dispatch(transaction)
     return Promise.resolve(contents)
   }
