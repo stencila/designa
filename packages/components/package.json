@@ -46,11 +46,11 @@
   },
   "dependencies": {
     "@codemirror/next": "^0.6.0",
-    "@popperjs/core": "^2.3.3",
+    "@popperjs/core": "^2.4.0",
     "@stencila/style-material": "file:../style-material",
     "@stencila/style-stencila": "file:../style-stencila",
     "feather-icons": "^4.28.0",
-    "fp-ts": "^2.4.4",
+    "fp-ts": "^2.6.0",
     "tocbot": "^4.11.1",
     "webfontloader": "^1.6.28"
   },
