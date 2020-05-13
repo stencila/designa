@@ -5,7 +5,8 @@ import {
   moveLineEnd,
   moveLineStart,
 } from '@codemirror/next/commands'
-import { foldGutter } from '@codemirror/next/fold'
+import { toggleBlockComment, toggleLineComment } from '@codemirror/next/comment'
+import { foldCode, foldGutter, unfoldCode } from '@codemirror/next/fold'
 import { lineNumbers } from '@codemirror/next/gutter'
 import { defaultHighlighter } from '@codemirror/next/highlight'
 import {
@@ -154,12 +155,15 @@ export class Editor {
         [isMac ? 'Mod-Shift-u' : 'Alt-u']: redoSelection,
         'Ctrl-y': isMac ? undefined : redo,
         'Shift-Enter': this.execute,
-        'Mod-Enter': this.execute,
         'Mod-ArrowLeft': moveLineStart,
         'Mod-ArrowRight': moveLineEnd,
-        'Alt-Space': startCompletion,
+        'Ctrl-Space': startCompletion,
         'Alt-Backspace': deleteWord,
         'Mod-Backspace': deleteLine,
+        'Mod-/': toggleLineComment,
+        'Mod-*': toggleBlockComment,
+        'Mod-Alt-[': foldCode,
+        'Mod-Alt-]': unfoldCode,
         // FIXME: Add indentation commands
         ...this.keymap,
       }),
