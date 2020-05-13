@@ -16,7 +16,7 @@ import {
   undoSelection,
 } from '@codemirror/next/history'
 import { keymap, Keymap as KeymapI } from '@codemirror/next/keymap'
-import { javascript } from '@codemirror/next/lang-javascript'
+import { python } from '@codemirror/next/lang-python'
 import { bracketMatching } from '@codemirror/next/matchbrackets'
 import { multipleSelections } from '@codemirror/next/multiple-selections'
 import { specialChars } from '@codemirror/next/special-chars'
@@ -144,7 +144,7 @@ export class Editor {
       bracketMatching(),
       closeBrackets,
       defaultHighlighter,
-      javascript(),
+      python(),
       multipleSelections(),
       specialChars(),
       keymap({
