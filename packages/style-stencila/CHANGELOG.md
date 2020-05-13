@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.11.2...@stencila/style-stencila@0.12.0) (2020-05-13)
+
+
+### Features
+
+* **Styles:** Add fallback values to CSS variables. Close [#33](https://github.com/stencila/style/issues/33) ([d196459](https://github.com/stencila/style/commit/d196459d94628515cc90c86511095e69cb4db6e0))
+
+
+
+
+
 ## [0.11.2](https://github.com/stencila/style/compare/@stencila/style-stencila@0.11.1...@stencila/style-stencila@0.11.2) (2020-05-13)
 
 **Note:** Version bump only for package @stencila/style-stencila

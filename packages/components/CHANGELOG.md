@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/stencila/designa/compare/@stencila/components@0.12.2...@stencila/components@0.13.0) (2020-05-13)
+
+
+### Features
+
+* **Editor:** Add more keyboard shortcuts (Toggle comments, fold code) ([667abb3](https://github.com/stencila/designa/commit/667abb3f5594ca1207addd4bc76a04f1e1cc490f))
+* **Editor:** Use Python as the default language instead of JS ([a0c721a](https://github.com/stencila/designa/commit/a0c721afdd84c191eb9c6ca8b0d9e11d3ff878f5))
+
+
+
+
+
 ## [0.12.2](https://github.com/stencila/designa/compare/@stencila/components@0.12.1...@stencila/components@0.12.2) (2020-05-13)
 
 **Note:** Version bump only for package @stencila/components
