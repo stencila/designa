@@ -206,7 +206,15 @@ export class Editor {
   @Method()
   public setContents(contents: string): Promise<string> {
     const docState = this.editorRef.state
-    const transaction = docState.t().replace(0, docState.doc.length, contents)
+    const transaction = docState.update({
+      changes: {
+        from: 0,
+        to: docState.doc.length,
+        insert: contents,
+      },
+      scrollIntoView: true,
+    })
+
     this.editorRef.dispatch(transaction)
     return Promise.resolve(contents)
   }
