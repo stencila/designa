@@ -25,6 +25,7 @@ const colors = {
 }
 
 module.exports = {
+  purge: false, // Any style purging should be done in apps consuming these themes
   theme: {
     fontFamily: {
       display: 'var(--font-family-display, sans)',
