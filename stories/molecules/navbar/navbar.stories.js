@@ -76,3 +76,30 @@ export const navbar = () => {
     </div>
   `
 }
+
+export const articleControls = () => {
+  const { color, position } = props({ color: '--color-neutral-300' })
+
+  return html`
+    <div>
+      <stencila-nav-bar color=${color} position=${position}>
+        <span slot="start">
+          <stencila-button color="stock" icon="play" size="small">
+            Run Document
+          </stencila-button>
+        </span>
+
+        <span slot="middle" style="color: black;">
+          <stencila-icon icon="loader"></stencila-icon>
+          Starting session… You are 17th in line. Estimated wait time 38s
+        </span>
+
+        <span slot="end">
+          <stencila-button color="stock" icon="git-branch" size="small"
+            >Clone</stencila-button
+          >
+        </span>
+      </stencila-nav-bar>
+    </div>
+  `
+}
