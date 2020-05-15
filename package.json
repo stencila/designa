@@ -7,6 +7,11 @@
   "repository": "https://github.com/stencila/style",
   "author": "https://github.com/stencila/style/graphs/contributors",
   "license": "Apache-2.0",
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "not IE_Mob 11"
+  ],
   "scripts": {
     "dev": "concurrently \"npm run storybook\" \"npm run build:watch\"",
     "build": "npx lerna run build",

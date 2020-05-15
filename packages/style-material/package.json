@@ -31,8 +31,13 @@
     "build:watch": "parcel watch 'src/*.css' 'src/**/*.css'  --public-url ./"
   },
   "bugs": {
-    "url": "https://github.com/stencila/style/issues"
+    "url": "https://github.com/stencila/designa/issues"
   },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "not IE_Mob 11"
+  ],
   "dependencies": {
     "@stencila/brand": "file:../brand",
     "tailwindcss": "^1.4.6"
