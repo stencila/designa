@@ -50,4 +50,10 @@ module.exports = {
       },
     },
   },
+  corePlugins: {
+    backgroundOpacity: false,
+    borderOpacity: false,
+    placeholderOpacity: false,
+    textOpacity: false,
+  },
 }
