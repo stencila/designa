@@ -28,8 +28,8 @@ module.exports = {
   purge: false, // Any style purging should be done in apps consuming these themes
   theme: {
     fontFamily: {
-      display: 'var(--font-family-display, sans)',
-      body: 'var(--font-family-body, sans)',
+      display: 'var(--font-family-display, sans-serif)',
+      body: 'var(--font-family-body, sans-serif)',
       mono: 'var(--font-family-mono, monospace)',
     },
     colors,
