@@ -236,16 +236,6 @@ export namespace Components {
     interface StencilaMenuItem {
         "icon": IconNames | undefined;
     }
-    interface StencilaNavBar {
-        /**
-          * The background fill color of the Navbar
-         */
-        "color": Colors;
-        /**
-          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
-         */
-        "position": "static" | "fixed";
-    }
     interface StencilaNodeList {
         /**
           * Array of nodes to render.
@@ -281,6 +271,16 @@ export namespace Components {
           * Which headings to grab inside of the contentSelector element.
          */
         "headingSelector": string;
+    }
+    interface StencilaToolbar {
+        /**
+          * The background fill color of the Navbar
+         */
+        "color": Colors;
+        /**
+          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
+         */
+        "position": "static" | "fixed";
     }
     interface StencilaTooltip {
         /**
@@ -376,12 +376,6 @@ declare global {
         prototype: HTMLStencilaMenuItemElement;
         new (): HTMLStencilaMenuItemElement;
     };
-    interface HTMLStencilaNavBarElement extends Components.StencilaNavBar, HTMLStencilElement {
-    }
-    var HTMLStencilaNavBarElement: {
-        prototype: HTMLStencilaNavBarElement;
-        new (): HTMLStencilaNavBarElement;
-    };
     interface HTMLStencilaNodeListElement extends Components.StencilaNodeList, HTMLStencilElement {
     }
     var HTMLStencilaNodeListElement: {
@@ -405,6 +399,12 @@ declare global {
     var HTMLStencilaTocElement: {
         prototype: HTMLStencilaTocElement;
         new (): HTMLStencilaTocElement;
+    };
+    interface HTMLStencilaToolbarElement extends Components.StencilaToolbar, HTMLStencilElement {
+    }
+    var HTMLStencilaToolbarElement: {
+        prototype: HTMLStencilaToolbarElement;
+        new (): HTMLStencilaToolbarElement;
     };
     interface HTMLStencilaTooltipElement extends Components.StencilaTooltip, HTMLStencilElement {
     }
@@ -438,11 +438,11 @@ declare global {
         "stencila-input": HTMLStencilaInputElement;
         "stencila-menu": HTMLStencilaMenuElement;
         "stencila-menu-item": HTMLStencilaMenuItemElement;
-        "stencila-nav-bar": HTMLStencilaNavBarElement;
         "stencila-node-list": HTMLStencilaNodeListElement;
         "stencila-tab": HTMLStencilaTabElement;
         "stencila-tab-list": HTMLStencilaTabListElement;
         "stencila-toc": HTMLStencilaTocElement;
+        "stencila-toolbar": HTMLStencilaToolbarElement;
         "stencila-tooltip": HTMLStencilaTooltipElement;
         "stencila-tooltip-element": HTMLStencilaTooltipElementElement;
         "stencila-vertical-nav": HTMLStencilaVerticalNavElement;
@@ -664,16 +664,6 @@ declare namespace LocalJSX {
     interface StencilaMenuItem {
         "icon"?: IconNames | undefined;
     }
-    interface StencilaNavBar {
-        /**
-          * The background fill color of the Navbar
-         */
-        "color"?: Colors;
-        /**
-          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
-         */
-        "position"?: "static" | "fixed";
-    }
     interface StencilaNodeList {
         /**
           * Array of nodes to render.
@@ -710,6 +700,16 @@ declare namespace LocalJSX {
          */
         "headingSelector"?: string;
     }
+    interface StencilaToolbar {
+        /**
+          * The background fill color of the Navbar
+         */
+        "color"?: Colors;
+        /**
+          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
+         */
+        "position"?: "static" | "fixed";
+    }
     interface StencilaTooltip {
         /**
           * The text content of the Tooltip.
@@ -738,11 +738,11 @@ declare namespace LocalJSX {
         "stencila-input": StencilaInput;
         "stencila-menu": StencilaMenu;
         "stencila-menu-item": StencilaMenuItem;
-        "stencila-nav-bar": StencilaNavBar;
         "stencila-node-list": StencilaNodeList;
         "stencila-tab": StencilaTab;
         "stencila-tab-list": StencilaTabList;
         "stencila-toc": StencilaToc;
+        "stencila-toolbar": StencilaToolbar;
         "stencila-tooltip": StencilaTooltip;
         "stencila-tooltip-element": StencilaTooltipElement;
         "stencila-vertical-nav": StencilaVerticalNav;
@@ -765,11 +765,11 @@ declare module "@stencil/core" {
             "stencila-input": LocalJSX.StencilaInput & JSXBase.HTMLAttributes<HTMLStencilaInputElement>;
             "stencila-menu": LocalJSX.StencilaMenu & JSXBase.HTMLAttributes<HTMLStencilaMenuElement>;
             "stencila-menu-item": LocalJSX.StencilaMenuItem & JSXBase.HTMLAttributes<HTMLStencilaMenuItemElement>;
-            "stencila-nav-bar": LocalJSX.StencilaNavBar & JSXBase.HTMLAttributes<HTMLStencilaNavBarElement>;
             "stencila-node-list": LocalJSX.StencilaNodeList & JSXBase.HTMLAttributes<HTMLStencilaNodeListElement>;
             "stencila-tab": LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
             "stencila-tab-list": LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;
             "stencila-toc": LocalJSX.StencilaToc & JSXBase.HTMLAttributes<HTMLStencilaTocElement>;
+            "stencila-toolbar": LocalJSX.StencilaToolbar & JSXBase.HTMLAttributes<HTMLStencilaToolbarElement>;
             "stencila-tooltip": LocalJSX.StencilaTooltip & JSXBase.HTMLAttributes<HTMLStencilaTooltipElement>;
             "stencila-tooltip-element": LocalJSX.StencilaTooltipElement & JSXBase.HTMLAttributes<HTMLStencilaTooltipElementElement>;
             "stencila-vertical-nav": LocalJSX.StencilaVerticalNav & JSXBase.HTMLAttributes<HTMLStencilaVerticalNavElement>;

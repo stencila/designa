@@ -2,8 +2,8 @@ import { select } from '@storybook/addon-knobs'
 import { html } from 'lit-html'
 
 export default {
-  title: 'Molecules/Navbar',
-  component: 'stencila-nav-bar',
+  title: 'Molecules/Toolbar',
+  component: 'stencila-toolbar',
   excludeStories: ['props'],
 }
 
@@ -29,12 +29,12 @@ export const props = (overrides = {}) => ({
   ),
 })
 
-export const navbar = () => {
+export const toolbar = () => {
   const { color, position } = props()
 
   return html`
     <div>
-      <stencila-nav-bar color=${color} position=${position}>
+      <stencila-toolbar color=${color} position=${position}>
         <stencila-menu slot="start">
           <stencila-button
             ?icon-only=${true}
@@ -72,7 +72,7 @@ export const navbar = () => {
             tooltip="Save"
           ></stencila-button>
         </span>
-      </stencila-nav-bar>
+      </stencila-toolbar>
     </div>
   `
 }
@@ -82,7 +82,7 @@ export const articleControls = () => {
 
   return html`
     <div>
-      <stencila-nav-bar color=${color} position=${position}>
+      <stencila-toolbar color=${color} position=${position}>
         <span slot="start">
           <stencila-button color="stock" icon="play" size="small">
             Run Document
@@ -99,7 +99,40 @@ export const articleControls = () => {
             >Clone</stencila-button
           >
         </span>
-      </stencila-nav-bar>
+      </stencila-toolbar>
+    </div>
+  `
+}
+
+export const articleControlsActive = () => {
+  const { color, position } = props({ color: '--color-neutral-300' })
+
+  return html`
+    <div>
+      <stencila-toolbar color=${color} position=${position}>
+        <span slot="start">
+          <stencila-button color="stock" icon="play" size="small">
+            Run Document
+          </stencila-button>
+        </span>
+
+        <span slot="middle" style="color: var(--color-neutral-700);">
+          <stencila-icon
+            icon="check-circle"
+            style="color: var(--color-success-600);"
+          ></stencila-icon>
+          Ran in 2.37s
+        </span>
+
+        <span slot="end">
+          <stencila-button color="key" icon="stop-circle" size="small" minimal
+            >End Session</stencila-button
+          >
+          <stencila-button color="stock" icon="git-branch" size="small"
+            >Clone</stencila-button
+          >
+        </span>
+      </stencila-toolbar>
     </div>
   `
 }

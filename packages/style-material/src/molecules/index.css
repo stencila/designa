@@ -1,5 +1,5 @@
 @import './editor';
-@import './navbar';
 @import './tabList';
 @import './tableOfContents';
+@import './toolbar';
 @import './verticalNav';
