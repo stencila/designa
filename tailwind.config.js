@@ -13,7 +13,8 @@ const generateColors = (name, defaultName) => ({
 })
 
 const colors = {
-  transparent: 'transparent',
+  transparent: defaultColors.transparent,
+  current: defaultColors.current,
   stock: `var(--color-stock, ${defaultColors.white})`,
   key: `var(--color-key, ${defaultColors.black})`,
   brand: `var(--color-brand, #1d63f3)`,
