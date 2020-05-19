@@ -105,9 +105,9 @@ export class Button {
   @Prop({
     attribute: 'clickHandler',
   })
-  public clickHandlerProp: (e?: MouseEvent) => unknown
+  public clickHandlerProp: (e: MouseEvent) => unknown
 
-  private onClick = async (e?: MouseEvent): Promise<unknown> => {
+  private onClick = async (e: MouseEvent): Promise<unknown> => {
     if (this.clickHandlerProp !== undefined) {
       this.ioPending = true
       const result = await Promise.resolve(this.clickHandlerProp(e))

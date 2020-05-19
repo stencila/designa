@@ -35,7 +35,7 @@ export namespace Components {
         /**
           * Function to be called when clicking the button. Passed function will be wrapped in a Promise, and the result returned.
          */
-        "clickHandlerProp": (e?: MouseEvent) => unknown;
+        "clickHandlerProp": (e: MouseEvent) => unknown;
         /**
           * The color of the button
          */
@@ -471,7 +471,7 @@ declare namespace LocalJSX {
         /**
           * Function to be called when clicking the button. Passed function will be wrapped in a Promise, and the result returned.
          */
-        "clickHandlerProp"?: (e?: MouseEvent) => unknown;
+        "clickHandlerProp"?: (e: MouseEvent) => unknown;
         /**
           * The color of the button
          */
