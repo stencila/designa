@@ -41,7 +41,6 @@ export async function generateJsonDocs(
           name: prop.attr,
           description: prop.docs,
         })),
-      methods: cmp.methods,
       events: cmp.events.map((e) => ({
         ...e,
         name: e.event,
@@ -49,7 +48,25 @@ export async function generateJsonDocs(
         type: e.detail,
       })),
       styles: cmp.styles,
-      slots: cmp.slots,
+      methods: cmp.methods.map((method) => ({
+        name: method.name,
+        description: method.docs,
+        signature: method.signature,
+      })),
+      slots: cmp.slots.map((slot) => ({
+        name: slot.name,
+        description: slot.docs,
+      })),
+      cssProperties: cmp.styles
+        .filter((style) => style.annotation === 'prop')
+        .map((style) => ({
+          name: style.name,
+          description: style.docs,
+        })),
+      cssParts: cmp.parts.map((part) => ({
+        name: part.name,
+        description: part.docs,
+      })),
       dependents: cmp.dependents,
       dependencies: cmp.dependencies,
       dependencyGraph: cmp.dependencyGraph,
