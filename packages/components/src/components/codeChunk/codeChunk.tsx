@@ -144,10 +144,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     ))
   }
 
-  private toggleCode = (): void => {
-    this.isCodeVisible = !this.isCodeVisible
-  }
-
   private setAllCodeVisibilityHandler(isVisible: boolean) {
     this.setAllCodeVisibility.emit({ isVisible })
   }
@@ -162,32 +158,23 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
         <stencila-action-menu expandable={true}>
           <stencila-button
             isSecondary={true}
-            onClick={this.toggleCode}
+            clickHandlerProp={this.hideAllCode}
             icon={this.isCodeVisible ? 'eye' : 'eye-off'}
+            iconOnly={true}
             size="xsmall"
-          >
-            {this.isCodeVisible ? 'Show' : 'Hide'} Code
-          </stencila-button>
-          <stencila-button
-            isSecondary={true}
-            icon={this.isCodeVisible ? 'eye' : 'eye-off'}
-            size="xsmall"
-            onClick={this.hideAllCode}
-          >
-            {this.isCodeVisible ? 'Show' : 'Hide'} All Code
-          </stencila-button>
+            tooltip={`${this.isCodeVisible ? 'Show' : 'Hide'} Code`}
+          ></stencila-button>
           {this.executeHandler !== undefined && (
             <stencila-button
               icon="play"
               isSecondary={true}
               size="xsmall"
-              ariaLabel="Run Code"
+              tooltip="Run Code"
+              iconOnly={true}
               slot="persistentActions"
               clickHandlerProp={this.execute}
               isLoading={this.executeCodeState === 'PENDING'}
-            >
-              Run
-            </stencila-button>
+            ></stencila-button>
           )}
         </stencila-action-menu>
 
