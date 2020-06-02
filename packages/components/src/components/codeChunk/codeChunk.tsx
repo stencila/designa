@@ -1,3 +1,4 @@
+import { Keymap } from '@codemirror/next/keymap'
 import {
   Component,
   Element,
@@ -11,13 +12,7 @@ import {
   State,
 } from '@stencil/core'
 import { codeChunk, CodeChunk } from '@stencila/schema'
-import { Keymap } from '@codemirror/next/keymap'
-
-interface CollapseEvent extends CustomEvent {
-  detail: {
-    isCollapsed: boolean
-  }
-}
+import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
 
 @Component({
   tag: 'stencila-code-chunk',
@@ -27,9 +22,7 @@ interface CollapseEvent extends CustomEvent {
   },
   scoped: true,
 })
-export class CodeChunkComponent {
-  /* private static readonly elementName = 'stencila-code-chunk' */
-
+export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   private static readonly slots = {
     text: 'text',
     outputs: 'outputs',
@@ -58,38 +51,12 @@ export class CodeChunkComponent {
   @Prop({
     attribute: 'data-collapsed',
   })
-  public isCodeCollapsedProp = false
-
-  @State() private isCodeCollapsed: boolean = this.isCodeCollapsedProp
-
-  private toggleCodeVisibility = (): void => {
-    this.isCodeCollapsed = !this.isCodeCollapsed
-  }
-
-  private collapseAllCodeHandler(isCollapsed: boolean) {
-    this.collapseAllCode.emit({ isCollapsed })
-  }
+  public isCodeVisibleProp = true
 
   /**
-   * Trigger a global DOM event to collapse all `CodeChunk` and `CodeFragment` component code expressions,
-   * leaving only the results visible.
+   * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
    */
-  @Event({
-    eventName: 'collapseAllCode',
-  })
-  public collapseAllCode: EventEmitter
-
-  private collapseAllListenHandler = (e: CollapseEvent) => {
-    this.isCodeCollapsed = e.detail.isCollapsed
-  }
-
-  @Listen('collapseAllCode', { target: 'window' })
-  collapseAllListenHandlerTwo(event: CollapseEvent) {
-    this.collapseAllListenHandler(event)
-  }
-
-  private collapseAllCodeTrigger = () =>
-    this.collapseAllCodeHandler(!this.isCodeCollapsed)
+  @Prop() public executeHandler?: (codeChunk: CodeChunk) => Promise<CodeChunk>
 
   /**
    * Custom keyboard shortcuts to pass along to CodeMirror
@@ -97,12 +64,32 @@ export class CodeChunkComponent {
    */
   @Prop() public keymap: Keymap = {}
 
-  /**
-   * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
-   */
-  @Prop() public executeHandler?: (codeChunk: CodeChunk) => Promise<CodeChunk>
+  @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED'
 
-  private onExecuteHandler_ = async () => {
+  @State() outputs: CodeChunk['outputs']
+
+  @State() codeErrors: CodeChunk['errors']
+
+  @State() private isCodeVisible: boolean = this.isCodeVisibleProp
+
+  /**
+   * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code,
+   * leaving only the results visible.
+   */
+  @Event({
+    eventName: 'collapseAllCode',
+  })
+  public setAllCodeVisibility: EventEmitter
+
+  @Listen('collapseAllCode', { target: 'window' })
+  onSetAllCodeVisibility(event: CodeVisibilityEvent): void {
+    this.hideCode(event)
+  }
+
+  private hideAllCode = (): void =>
+    this.setAllCodeVisibilityHandler(!this.isCodeVisible)
+
+  private onExecuteHandler = async (): Promise<CodeChunk> => {
     const node = await this.getContents()
 
     if (this.executeHandler !== undefined) {
@@ -115,39 +102,8 @@ export class CodeChunkComponent {
     return node
   }
 
-  @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED'
-
-  private executeCode = () => {
-    this.executeCodeState = 'PENDING'
-    this.onExecuteHandler_()
-      .then((res) => {
-        this.executeCodeState = 'RESOLVED'
-        return res
-      })
-      .catch((err) => {
-        console.error(err)
-        return err
-      })
-  }
-
-  protected componentDidLoad() {
+  componentDidLoad(): void {
     this.editorRef = this.el.querySelector('stencila-editor')
-  }
-
-  @State() outputs: CodeChunk['outputs']
-
-  @State() codeErrors: CodeChunk['errors']
-
-  private updateErrors = (errors: CodeChunk['errors'] = []) => {
-    this.codeErrors = errors.map((error) => (
-      <stencila-code-error
-        kind={(error.errorType as unknown) as 'error' | 'warning' | 'incapable'}
-        hasStacktrace={error.stackTrace !== undefined}
-      >
-        {error.errorMessage}
-        <pre slot="stacktrace">{error.stackTrace}</pre>
-      </stencila-code-error>
-    ))
   }
 
   /**
@@ -163,25 +119,62 @@ export class CodeChunkComponent {
     return codeChunk({ text: '' })
   }
 
-  public render() {
+  // eslint-disable-next-line @stencil/own-props-must-be-private
+  execute = async (): Promise<CodeChunk> => {
+    this.executeCodeState = 'PENDING'
+    try {
+      const res = await this.onExecuteHandler()
+      this.executeCodeState = 'RESOLVED'
+      return res
+    } catch (err) {
+      console.error(err)
+      return err
+    }
+  }
+
+  private updateErrors = (errors: CodeChunk['errors'] = []): void => {
+    this.codeErrors = errors.map((error) => (
+      <stencila-code-error
+        kind={(error.errorType as unknown) as 'error' | 'warning' | 'incapable'}
+        hasStacktrace={error.stackTrace !== undefined}
+      >
+        {error.errorMessage}
+        <pre slot="stacktrace">{error.stackTrace}</pre>
+      </stencila-code-error>
+    ))
+  }
+
+  private toggleCode = (): void => {
+    this.isCodeVisible = !this.isCodeVisible
+  }
+
+  private setAllCodeVisibilityHandler(isVisible: boolean) {
+    this.setAllCodeVisibility.emit({ isVisible })
+  }
+
+  private hideCode = (e: CodeVisibilityEvent): void => {
+    this.isCodeVisible = e.detail.isVisible
+  }
+
+  public render(): HTMLElement {
     return (
       <Host>
         <stencila-action-menu expandable={true}>
           <stencila-button
             isSecondary={true}
-            onClick={this.toggleCodeVisibility}
-            icon={this.isCodeCollapsed ? 'eye' : 'eye-off'}
+            onClick={this.toggleCode}
+            icon={this.isCodeVisible ? 'eye' : 'eye-off'}
             size="xsmall"
           >
-            {this.isCodeCollapsed ? 'Show' : 'Hide'} Source
+            {this.isCodeVisible ? 'Show' : 'Hide'} Code
           </stencila-button>
           <stencila-button
             isSecondary={true}
-            icon={this.isCodeCollapsed ? 'eye' : 'eye-off'}
+            icon={this.isCodeVisible ? 'eye' : 'eye-off'}
             size="xsmall"
-            onClick={this.collapseAllCodeTrigger}
+            onClick={this.hideAllCode}
           >
-            {this.isCodeCollapsed ? 'Show' : 'Hide'} All Sources
+            {this.isCodeVisible ? 'Show' : 'Hide'} All Code
           </stencila-button>
           {this.executeHandler !== undefined && (
             <stencila-button
@@ -190,7 +183,7 @@ export class CodeChunkComponent {
               size="xsmall"
               ariaLabel="Run Code"
               slot="persistentActions"
-              clickHandlerProp={this.executeCode}
+              clickHandlerProp={this.execute}
               isLoading={this.executeCodeState === 'PENDING'}
             >
               Run
@@ -201,7 +194,7 @@ export class CodeChunkComponent {
         <div
           class={{
             editorContainer: true,
-            hidden: this.isCodeCollapsed,
+            hidden: this.isCodeVisible,
           }}
         >
           <stencila-editor

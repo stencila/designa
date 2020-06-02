@@ -1,64 +1,118 @@
-import { Component, Element, h, Host, State } from '@stencil/core'
+import {
+  Component,
+  Element,
+  h,
+  Host,
+  Listen,
+  Method,
+  Prop,
+  State,
+} from '@stencil/core'
+import { codeExpression, CodeExpression } from '@stencila/schema'
+import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
 
 const slots = {
   text: 'text',
-  output: 'output'
+  output: 'output',
 }
 
 @Component({
   tag: 'stencila-code-expression',
   styleUrls: {
     default: 'codeExpression.css',
-    material: 'codeExpression.css'
+    material: 'codeExpression.css',
   },
-  scoped: true
+  scoped: true,
 })
-export class CodeExpression {
+export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
+  private emptyOutputMessage = 'No output to show'
+  private hoverTimeOut: number | undefined = undefined
+  private hoverStartedAt = Date.now()
+
   @Element() private el: HTMLStencilaCodeExpressionElement
 
-  @State() sourceWidth = 'auto'
+  /**
+   * A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`.
+   */
+  @Prop() public executeHandler?: (
+    codeExpression: CodeExpression
+  ) => Promise<CodeExpression>
 
-  @State() isSourceVisible = true
+  @State() output: CodeExpression['output']
 
-  private toggleSourceVisibility = () =>
-    (this.isSourceVisible = !this.isSourceVisible)
+  @State() codeErrors: CodeExpression['errors']
 
-  private calculateSourceWidth = () => {
-    const source: HTMLElement | null = this.el.querySelector(
-      `[slot=${slots.text}]`
+  @State() hover = false
+
+  @State() isCodeVisible = true
+
+  @State() isOutputEmpty = false
+
+  componentDidLoad(): void {
+    this.isOutputEmpty = this.outputExists()
+  }
+
+  @Listen('collapseAllCode', { target: 'window' })
+  onSetAllCodeVisibility(event: CodeVisibilityEvent): void {
+    this.collapseAllListenHandler(event)
+  }
+
+  /**
+   * Returns the `CodeExpression` node with the updated `text` contents from the editor.
+   */
+  @Method()
+  public async getContents(): Promise<CodeExpression> {
+    return Promise.resolve(
+      codeExpression({
+        text: this.getTextSlotContents(),
+        output: this.getOutputSlotContents(),
+      })
     )
-    if (source !== null) {
-      source.style.width = 'auto'
-      this.sourceWidth = source !== null ? `${source.offsetWidth}px` : 'auto'
-      source.style.width = ''
+  }
+
+  private collapseAllListenHandler = (e: CodeVisibilityEvent): void => {
+    this.isCodeVisible = !e.detail.isVisible
+  }
+
+  private toggleCodeVisibility = (): boolean =>
+    (this.isCodeVisible = !this.isCodeVisible)
+
+  // Use `innerHTML` for checking output presence to account for non-text nodes such as images.
+  private outputExists = (): boolean =>
+    this.selectOutputSlot()?.innerHTML.trim() === ''
+
+  private selectTextSlot = (): HTMLElement | null =>
+    this.el.querySelector(`[slot=${slots.text}]`)
+
+  private getTextSlotContents = (): string => {
+    const slot = this.selectTextSlot()
+    return slot?.textContent ?? ''
+  }
+
+  private selectOutputSlot = (): HTMLElement | null =>
+    this.el.querySelector(`[slot=${slots.output}]`)
+
+  private getOutputSlotContents = (): string => {
+    const slot = this.selectOutputSlot()
+    return slot?.textContent ?? ''
+  }
+
+  // eslint-disable-next-line @stencil/own-props-must-be-private
+  execute = async (): Promise<CodeExpression> => {
+    try {
+      const codeExpression = await this.getContents()
+      if (this.executeHandler) {
+        return this.executeHandler(codeExpression)
+      }
+
+      throw new Error('handler not found')
+    } catch (err) {
+      console.error(err)
+      throw new Error(err)
     }
   }
 
-  @State() isOutputEmpty = true
-
-  private outputExists = () => {
-    const output: HTMLElement | null = this.el.querySelector(
-      `[slot=${slots.output}]`
-    )
-
-    this.isOutputEmpty = output === null ? true : output.innerHTML.trim() === ''
-
-    if (this.isOutputEmpty && output !== null) {
-      output.innerHTML = `…`
-    }
-  }
-
-  protected componentWillLoad() {
-    this.outputExists()
-  }
-
-  protected componentDidLoad() {
-    this.calculateSourceWidth()
-  }
-
-  private emptyOutputMessage = 'No output to show'
-
-  private dividerArrow = (
+  private dividerArrow = (): SVGElement => (
     <svg
       class="divider"
       xmlns="http://www.w3.org/2000/svg"
@@ -69,41 +123,83 @@ export class CodeExpression {
     </svg>
   )
 
-  public render() {
-    const content = [
-      <span class="source" style={{ '--source-width': this.sourceWidth }}>
-        <stencila-tooltip
-          text={`${this.isSourceVisible ? 'Hide' : 'Show'} Source`}
-        >
-          <stencila-icon
-            tabindex="0"
-            aria-label={`${this.isSourceVisible ? 'Hide' : 'Show'} Source`}
-            icon={this.isSourceVisible ? 'eye' : 'eye-off'}
-            onClick={this.toggleSourceVisibility}
-          ></stencila-icon>
-        </stencila-tooltip>
-        <slot name={slots.text} />
-      </span>,
-      this.dividerArrow,
-      <span>
-        <slot name={slots.output} />
-      </span>
-    ]
+  private addHoverState = (): void => {
+    window.clearTimeout(this.hoverTimeOut)
 
+    if (!this.hover) {
+      this.hover = true
+      this.hoverStartedAt = Date.now()
+    }
+  }
+
+  private removeHoverState = (): void => {
+    const diff = Date.now() - this.hoverStartedAt
+    const hasFocus = this.el.contains(document.activeElement)
+    if (!hasFocus && this.hover && diff < 60) {
+      this.hoverTimeOut = window.setTimeout(() => {
+        this.hover = false
+      }, 3000)
+    } else if (!hasFocus && this.hover) {
+      this.hover = false
+    }
+  }
+
+  private generateContent = (): HTMLElement[] => {
+    return [
+      <span class="actions">
+        <stencila-icon
+          aria-label="Code Express"
+          icon="terminal"
+        ></stencila-icon>
+        <span class="extraActions">
+          <stencila-tooltip
+            text={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
+          >
+            <stencila-icon
+              tabindex="0"
+              aria-label={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
+              icon={this.isCodeVisible ? 'eye' : 'eye-off'}
+              onClick={this.toggleCodeVisibility}
+            ></stencila-icon>
+          </stencila-tooltip>
+          <stencila-tooltip text="Run">
+            <stencila-icon
+              tabindex="0"
+              aria-label="Run Code"
+              icon="play"
+              onClick={this.execute}
+            ></stencila-icon>
+          </stencila-tooltip>
+        </span>
+        <span
+          class="text"
+          contentEditable={true}
+          onBlur={this.removeHoverState}
+        >
+          <slot name={slots.text} />
+        </span>
+      </span>,
+      this.dividerArrow(),
+      this.isOutputEmpty ? (
+        <stencila-tooltip text={this.emptyOutputMessage}>…</stencila-tooltip>
+      ) : (
+        <slot name={slots.output} />
+      ),
+    ]
+  }
+
+  public render(): HTMLElement {
     return (
       <Host
         class={{
-          sourceHidden: !this.isSourceVisible,
-          isOutputEmpty: this.isOutputEmpty
+          hover: this.hover,
+          codeHidden: !this.isCodeVisible,
+          isOutputEmpty: this.isOutputEmpty,
         }}
+        onMouseEnter={this.addHoverState}
+        onMouseLeave={this.removeHoverState}
       >
-        {this.isOutputEmpty ? (
-          <stencila-tooltip text={this.emptyOutputMessage}>
-            {content}
-          </stencila-tooltip>
-        ) : (
-          content
-        )}
+        {this.generateContent()}
       </Host>
     )
   }

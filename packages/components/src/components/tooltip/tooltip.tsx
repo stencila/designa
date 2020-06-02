@@ -1,5 +1,13 @@
 import { createPopper, Instance } from '@popperjs/core'
-import { Component, Element, h, Host, Prop, Watch } from '@stencil/core'
+import {
+  Component,
+  ComponentInterface,
+  Element,
+  h,
+  Host,
+  Prop,
+  Watch,
+} from '@stencil/core'
 
 @Component({
   tag: 'stencila-tooltip',
@@ -9,23 +17,23 @@ import { Component, Element, h, Host, Prop, Watch } from '@stencil/core'
   },
   scoped: true,
 })
-export class Tooltip {
-  public static readonly elementName = 'stencila-tooltip'
+export class Tooltip implements ComponentInterface {
+  protected static readonly elementName = 'stencila-tooltip'
 
-  @Element() el: HTMLElement
+  @Element() el: HTMLStencilaTooltipElement
 
   /**
    * The text content of the Tooltip.
    */
   @Prop() text!: string
 
-  private tooltipRef: HTMLSpanElement
+  private tooltipRef?: HTMLSpanElement
   private popperRef: Instance | null = null
 
-  private showTooltip = () => {
+  private showTooltip = (): void => {
     // TODO: Use Schema helpers once package is updated: https://github.com/stencila/schema/issues/178
     const target =
-      document.querySelector('[data-itemscope="root"]') || document.body
+      document.querySelector('[data-itemscope="root"]') ?? document.body
 
     if (this.tooltipRef === undefined) {
       this.tooltipRef =
@@ -52,7 +60,7 @@ export class Tooltip {
     })
   }
 
-  private destroyTooltip = () => {
+  private destroyTooltip = (): void => {
     if (this.tooltipRef) {
       this.tooltipRef.remove()
     }
@@ -63,7 +71,7 @@ export class Tooltip {
     }
   }
 
-  private loadComponent = () => {
+  private loadComponent = (): void => {
     this.el.addEventListener('focus', this.showTooltip)
     this.el.addEventListener('blur', this.destroyTooltip)
 
@@ -71,7 +79,7 @@ export class Tooltip {
     this.el.addEventListener('mouseleave', this.destroyTooltip)
   }
 
-  private unloadComponent = () => {
+  private unloadComponent = (): void => {
     this.el.removeEventListener('focus', this.showTooltip)
     this.el.removeEventListener('blur', this.destroyTooltip)
 
@@ -79,23 +87,23 @@ export class Tooltip {
     this.el.removeEventListener('mouseleave', this.destroyTooltip)
   }
 
-  componentDidLoad() {
+  public componentDidLoad(): void {
     this.loadComponent()
   }
 
-  componentDidUnload() {
+  protected componentDidUnload(): void {
     this.unloadComponent()
     this.destroyTooltip()
   }
 
   @Watch('text')
-  watchHandler(newText: string) {
+  watchHandler(newText: string): void {
     if (this.tooltipRef !== undefined) {
       this.tooltipRef.innerText = newText
     }
   }
 
-  public render() {
+  public render(): HTMLElement {
     return (
       <Host tabindex="0">
         <slot />

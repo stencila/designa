@@ -7,8 +7,8 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Colors, } from "./types";
 import { IconNames, } from "./components/icon/icon";
+import { CodeChunk, CodeExpression, Collection, Datatable, ImageObject, Node, } from "@stencila/schema";
 import { Keymap, } from "@codemirror/next/keymap";
-import { CodeChunk, Collection, Datatable, ImageObject, Node, } from "@stencila/schema";
 import { EditorContents, Keymap as Keymap1, } from "./components/editor/editor";
 import { IconNames as IconNames1, } from "./components/icon/icon";
 import { ChildTab, } from "./components/tabList/tabList";
@@ -102,7 +102,7 @@ export namespace Components {
         /**
           * Whether the code section is visible or not
          */
-        "isCodeCollapsedProp": boolean;
+        "isCodeVisibleProp": boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
@@ -128,6 +128,14 @@ export namespace Components {
         "open": boolean;
     }
     interface StencilaCodeExpression {
+        /**
+          * A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`.
+         */
+        "executeHandler"?: (codeExpression: CodeExpression) => Promise<CodeExpression>;
+        /**
+          * Returns the `CodeExpression` node with the updated `text` contents from the editor.
+         */
+        "getContents": () => Promise<CodeExpression>;
     }
     interface StencilaDataTable {
         /**
@@ -534,14 +542,14 @@ declare namespace LocalJSX {
         /**
           * Whether the code section is visible or not
          */
-        "isCodeCollapsedProp"?: boolean;
+        "isCodeVisibleProp"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
          */
         "keymap"?: Keymap;
         /**
-          * Trigger a global DOM event to collapse all `CodeChunk` and `CodeFragment` component code expressions, leaving only the results visible.
+          * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.
          */
         "onCollapseAllCode"?: (event: CustomEvent<any>) => void;
         /**
@@ -564,6 +572,10 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface StencilaCodeExpression {
+        /**
+          * A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`.
+         */
+        "executeHandler"?: (codeExpression: CodeExpression) => Promise<CodeExpression>;
     }
     interface StencilaDataTable {
         /**

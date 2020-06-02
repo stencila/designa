@@ -13,14 +13,14 @@ enum BOUNDARY {
 
 /** CodeMirror command to delete content until a given boundary */
 export const deleteTill = (granularity: BOUNDARY) => (view: EditorView) => {
-  let changes = view.state.changeByRange((range) => {
+  const changes = view.state.changeByRange((range) => {
     let { from, to } = range
-    if (from == to) {
-      let target = view.movePos(range.head, 'backward', granularity, 'move')
+    if (from === to) {
+      const target = view.movePos(range.head, 'backward', granularity, 'move')
       from = Math.min(from, target)
       to = Math.max(to, target)
     }
-    if (from == to) return { range }
+    if (from === to) return { range }
     return { changes: { from, to }, range: new SelectionRange(from) }
   })
 
