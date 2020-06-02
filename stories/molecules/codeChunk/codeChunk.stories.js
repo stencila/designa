@@ -109,17 +109,12 @@ export const alongsideACodeExpression = () => html`
   <div>
     <p>
       This is a paragraph with a code expresssion inside it
-      <stencila-code-expression
-        data-collapsed="false"
-        itemtype="stencila:CodeChunk"
+      <stencila-code-expression itemtype="stencila:CodeExpression"
         ><code slot="text">x * y</code
         ><output slot="output">42</output></stencila-code-expression
       >
       followed by some more text and another
-      <stencila-code-expression
-        data-collapsed="false"
-        itemtype="stencila:CodeChunk"
-      >
+      <stencila-code-expression itemtype="stencila:CodeExpression">
         <code slot="text"
           >x * y - 128 * (212 - 2) x * y - 128 * (212 - 2)
           round(length(which((silent_1hr_l1-silent_0hr_l1)>0))/length(silent_0hr_l1)*100)</code
@@ -129,7 +124,7 @@ export const alongsideACodeExpression = () => html`
         > </stencila-code-expression
       >.
     </p>
-    <stencila-code-chunk data-collapsed="false" itemtype="stencila:CodeChunk">
+    <stencila-code-chunk itemtype="stencila:CodeChunk">
       <pre slot="text" itemprop="code"><code>print(second)</code></pre>
 
       <figure slot="outputs">
@@ -137,7 +132,7 @@ export const alongsideACodeExpression = () => html`
 
         <img
           alt="This is a sample output image"
-          src="https://via.placeholder.com/350x500"
+          src="https://codechvia.placeholder.com/350x500"
         />
 
         <pre><output>10</output></pre>

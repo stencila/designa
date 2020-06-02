@@ -44,7 +44,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
 
   @State() hover = false
 
-  @State() isCodeVisible = true
+  @State() isCodeVisible = false
 
   @State() isOutputEmpty = false
 
@@ -158,7 +158,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
             <stencila-icon
               tabindex="0"
               aria-label={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
-              icon={this.isCodeVisible ? 'eye' : 'eye-off'}
+              icon={this.isCodeVisible ? 'eye-off' : 'eye'}
               onClick={this.toggleCodeVisibility}
             ></stencila-icon>
           </stencila-tooltip>

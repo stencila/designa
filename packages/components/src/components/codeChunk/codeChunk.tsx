@@ -51,7 +51,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   @Prop({
     attribute: 'data-collapsed',
   })
-  public isCodeVisibleProp = true
+  public isCodeVisibleProp = false
 
   /**
    * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
@@ -159,10 +159,10 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
           <stencila-button
             isSecondary={true}
             clickHandlerProp={this.hideAllCode}
-            icon={this.isCodeVisible ? 'eye' : 'eye-off'}
+            icon={this.isCodeVisible ? 'eye-off' : 'eye'}
             iconOnly={true}
             size="xsmall"
-            tooltip={`${this.isCodeVisible ? 'Show' : 'Hide'} Code`}
+            tooltip={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
           ></stencila-button>
           {this.executeHandler !== undefined && (
             <stencila-button
@@ -181,7 +181,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
         <div
           class={{
             editorContainer: true,
-            hidden: this.isCodeVisible,
+            hidden: !this.isCodeVisible,
           }}
         >
           <stencila-editor
