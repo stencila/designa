@@ -3,14 +3,25 @@
 
 :host,
 stencila-code-expression {
-  @apply inline-flex items-stretch p-0 text-sm leading-none align-text-bottom border border-solid rounded border-neutral-300;
+  /** @prop --background: Background color of the Code Output section */
+  --background: var(--color-stock);
+
+  /** @prop --background-editor: Background color of the Code Editor section */
+  --background-editor: var(--color-neutral-200);
+
+  /** @prop --border: Border color around the component as well as internal section dividers */
+  --border: var(--color-neutral-300);
+
+  @apply inline-flex items-stretch p-0 text-sm leading-none align-text-bottom border border-solid rounded;
+  border-color: var(--border);
 
   stencila-tooltip {
     @apply inline-flex items-stretch p-0 overflow-hidden leading-none align-bottom;
   }
 
   .actions {
-    @apply relative inline-flex flex-initial whitespace-no-wrap rounded-l bg-neutral-200;
+    @apply relative inline-flex flex-initial whitespace-no-wrap rounded-l;
+    background-color: var(--background-editor);
   }
 
   .text {
@@ -39,7 +50,7 @@ stencila-code-expression {
 
   .divider {
     @apply self-center inline-block w-2 max-h-em;
-    fill: var(--color-neutral-200);
+    fill: var(--background-editor);
   }
 
   .actions stencila-icon {
@@ -89,7 +100,8 @@ stencila-code-expression {
     }
 
     .extraActions stencila-icon {
-      @apply max-w-full px-1 border-r border-neutral-300;
+      @apply max-w-full px-1 border-r;
+      border-color: var(--border);
       width: 1.75rem;
     }
   }

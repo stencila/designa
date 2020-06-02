@@ -8,7 +8,17 @@
 
 :host,
 stencila-code-chunk {
-  @apply relative block w-full my-4 border border-solid rounded border-neutral-300;
+  /** @prop --background: Background color of the Code Output section */
+  --background: var(--color-stock);
+
+  /** @prop --background-editor: Background color of the Code Editor section */
+  --background-editor: var(--color-neutral-200);
+
+  /** @prop --border: Border color around the component as well as internal section dividers */
+  --border: var(--color-neutral-300);
+
+  @apply relative block w-full my-4 border border-solid rounded;
+  border-color: var(--border);
 
   stencila-editor {
     --border-width: 0;
@@ -17,11 +27,14 @@ stencila-code-chunk {
 
   stencila-node-list {
     @apply p-2 m-0;
+    background-color: var(--background);
   }
 }
 
 .editorContainer {
-  @apply relative flex flex-col flex-auto m-0 border-t-0 border-b border-l-0 border-r-0 rounded-none bg-neutral-200 border-neutral-300;
+  @apply relative flex flex-col flex-auto m-0 border-t-0 border-b border-l-0 border-r-0 rounded-none;
+  background: var(--background-editor);
+  border-color: var(--border);
   height: intrinsic;
 
   pre,
