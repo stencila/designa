@@ -1,8 +1,8 @@
 import { html } from 'lit-html'
 
 export default {
-  title: 'Objects/Error',
-  component: 'stencila-code-error'
+  title: 'Schema Nodes/Error',
+  component: 'stencila-code-error',
 }
 
 export const warning = () =>

@@ -1,8 +1,8 @@
 import { html } from 'lit-html'
 
 export default {
-  title: 'Molecules/Code Expression',
-  component: 'stencila-code-expression'
+  title: 'Schema Nodes/Code Expression',
+  component: 'stencila-code-expression',
 }
 
 export const codeExpression = () => html`

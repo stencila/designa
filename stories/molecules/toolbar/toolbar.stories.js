@@ -77,7 +77,8 @@ export const toolbar = () => {
   `
 }
 
-export const articleControls = () => {
+// Article controls are WIP
+const articleControls = () => {
   const { color, position } = props({ color: '--color-neutral-300' })
 
   return html`
@@ -104,7 +105,7 @@ export const articleControls = () => {
   `
 }
 
-export const articleControlsActive = () => {
+const articleControlsActive = () => {
   const { color, position } = props({ color: '--color-neutral-300' })
 
   return html`

@@ -1,7 +1,7 @@
 import { html } from 'lit-html'
 
 export default {
-  title: 'Molecules/Code Chunk',
+  title: 'Schema Nodes/Code Chunk',
   component: 'stencila-code-chunk',
 }
 
