@@ -95,6 +95,15 @@
     "extends": [
       "@stencila",
       ":pinOnlyDevDependencies"
+    ],
+    "packageRules": [
+      {
+        "packagePatterns": [
+          "^@stencil/core"
+        ],
+        "groupName": "StencilJS",
+        "allowedVersions": "<=1.10.0"
+      }
     ]
   },
   "dependencies": {}
