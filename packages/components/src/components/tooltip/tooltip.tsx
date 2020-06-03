@@ -1,5 +1,13 @@
 import { createPopper, Instance } from '@popperjs/core'
-import { Component, Element, h, Host, Prop, Watch } from '@stencil/core'
+import {
+  Component,
+  ComponentInterface,
+  Element,
+  h,
+  Host,
+  Prop,
+  Watch,
+} from '@stencil/core'
 
 @Component({
   tag: 'stencila-tooltip',
@@ -9,23 +17,23 @@ import { Component, Element, h, Host, Prop, Watch } from '@stencil/core'
   },
   scoped: true,
 })
-export class Tooltip {
-  public static readonly elementName = 'stencila-tooltip'
+export class Tooltip implements ComponentInterface {
+  protected static readonly elementName = 'stencila-tooltip'
 
-  @Element() el: HTMLElement
+  @Element() el: HTMLStencilaTooltipElement
 
   /**
    * The text content of the Tooltip.
    */
   @Prop() text!: string
 
-  private tooltipRef: HTMLSpanElement
+  private tooltipRef?: HTMLSpanElement
   private popperRef: Instance | null = null
 
-  private showTooltip = () => {
+  private showTooltip = (): void => {
     // TODO: Use Schema helpers once package is updated: https://github.com/stencila/schema/issues/178
     const target =
-      document.querySelector('[data-itemscope="root"]') || document.body
+      document.querySelector('[data-itemscope="root"]') ?? document.body
 
     if (this.tooltipRef === undefined) {
       this.tooltipRef =
@@ -50,9 +58,23 @@ export class Tooltip {
         },
       ],
     })
+
+    window.addEventListener('mousemove', this.onMouseMoveHandler)
   }
 
-  private destroyTooltip = () => {
+  private onMouseMoveHandler = (e: MouseEvent): void => {
+    if (!this.el.contains(e.target as Node)) {
+      this.destroyTooltip()
+    }
+  }
+
+  private onMouseOutHandler = (e: MouseEvent): void => {
+    if (e.relatedTarget && !this.el.contains(e.relatedTarget as Node)) {
+      this.destroyTooltip()
+    }
+  }
+
+  private destroyTooltip = (): void => {
     if (this.tooltipRef) {
       this.tooltipRef.remove()
     }
@@ -61,43 +83,53 @@ export class Tooltip {
       this.popperRef.destroy()
       this.popperRef = null
     }
+
+    window.removeEventListener('mousemove', this.onMouseMoveHandler)
   }
 
-  private loadComponent = () => {
-    this.el.addEventListener('focus', this.showTooltip)
-    this.el.addEventListener('blur', this.destroyTooltip)
+  private loadComponent = (): void => {
+    this.el.addEventListener('focusin', this.showTooltip)
+    this.el.addEventListener('focusout', this.destroyTooltip)
 
     this.el.addEventListener('mouseenter', this.showTooltip)
-    this.el.addEventListener('mouseleave', this.destroyTooltip)
+    this.el.addEventListener('mouseout', this.onMouseOutHandler)
   }
 
-  private unloadComponent = () => {
-    this.el.removeEventListener('focus', this.showTooltip)
-    this.el.removeEventListener('blur', this.destroyTooltip)
+  private unloadComponent = (): void => {
+    this.el.removeEventListener('focusin', this.showTooltip)
+    this.el.removeEventListener('focusout', this.destroyTooltip)
 
     this.el.removeEventListener('mouseenter', this.showTooltip)
-    this.el.removeEventListener('mouseleave', this.destroyTooltip)
+    this.el.removeEventListener('mouseout', this.onMouseOutHandler)
+    window.removeEventListener('mousemove', this.onMouseMoveHandler)
   }
 
-  componentDidLoad() {
+  public componentDidLoad(): void {
     this.loadComponent()
   }
 
-  componentDidUnload() {
+  protected componentDidUnload(): void {
     this.unloadComponent()
     this.destroyTooltip()
   }
 
   @Watch('text')
-  watchHandler(newText: string) {
+  watchHandler(newText: string): void {
     if (this.tooltipRef !== undefined) {
       this.tooltipRef.innerText = newText
+      if (this.popperRef) {
+        this.popperRef
+          .update()
+          .catch((err) =>
+            console.log('could not update Tooltip position\n', err)
+          )
+      }
     }
   }
 
-  public render() {
+  public render(): HTMLElement {
     return (
-      <Host tabindex="0">
+      <Host>
         <slot />
       </Host>
     )

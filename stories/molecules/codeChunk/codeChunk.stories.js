@@ -1,19 +1,19 @@
 import { html } from 'lit-html'
 
 export default {
-  title: 'Molecules/Code Chunk',
-  component: 'stencila-code-chunk'
+  title: 'Schema Nodes/Code Chunk',
+  component: 'stencila-code-chunk',
 }
 
-const delay = cb => {
-  return new Promise(res => {
+const delay = (cb) => {
+  return new Promise((res) => {
     window.setTimeout(() => {
       res(cb())
     }, 1500)
   })
 }
 
-const executeHandler = t =>
+const executeHandler = (t) =>
   delay(() => console.log(t) || { outputs: [t, t, t] })
 
 export const withExecuteHandler = () => html`
@@ -109,24 +109,22 @@ export const alongsideACodeExpression = () => html`
   <div>
     <p>
       This is a paragraph with a code expresssion inside it
-      <stencila-code-expression
-        data-collapsed="false"
-        itemtype="stencila:CodeChunk"
+      <stencila-code-expression itemtype="stencila:CodeExpression"
         ><code slot="text">x * y</code
         ><output slot="output">42</output></stencila-code-expression
       >
       followed by some more text and another
-      <stencila-code-expression
-        data-collapsed="false"
-        itemtype="stencila:CodeChunk"
-      >
-        <code slot="text">x * y - 128 * (212 - 2)</code>
+      <stencila-code-expression itemtype="stencila:CodeExpression">
+        <code slot="text"
+          >x * y - 128 * (212 - 2) x * y - 128 * (212 - 2)
+          round(length(which((silent_1hr_l1-silent_0hr_l1)>0))/length(silent_0hr_l1)*100)</code
+        >
         <output slot="output"
           >Reaaaaalllyyyyyyyy loooongggggggggggggggggggg output</output
         > </stencila-code-expression
       >.
     </p>
-    <stencila-code-chunk data-collapsed="false" itemtype="stencila:CodeChunk">
+    <stencila-code-chunk itemtype="stencila:CodeChunk">
       <pre slot="text" itemprop="code"><code>print(second)</code></pre>
 
       <figure slot="outputs">
@@ -134,7 +132,7 @@ export const alongsideACodeExpression = () => html`
 
         <img
           alt="This is a sample output image"
-          src="https://via.placeholder.com/350x500"
+          src="https://codechvia.placeholder.com/350x500"
         />
 
         <pre><output>10</output></pre>

@@ -10,7 +10,7 @@ button {
 
   &.small,
   &[size='small'] {
-    @apply p-2 text-sm;
+    @apply px-3 py-2 text-sm;
   }
 
   &.large,

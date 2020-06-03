@@ -289,9 +289,9 @@ export type IconNames =
   tag: 'stencila-icon',
   styleUrls: {
     default: 'icon.css',
-    material: 'icon.material.css'
+    material: 'icon.material.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class Icon {
   public static readonly elementName = 'stencila-icon'
@@ -304,7 +304,7 @@ export class Icon {
 
   public render() {
     return (
-      <Host>
+      <Host icon={this.icon}>
         <span innerHTML={feather.icons[this.icon].toSvg()}></span>
       </Host>
     )

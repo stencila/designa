@@ -7,8 +7,8 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Colors, } from "./types";
 import { IconNames, } from "./components/icon/icon";
+import { CodeChunk, CodeExpression, Collection, Datatable, ImageObject, Node, } from "@stencila/schema";
 import { Keymap, } from "@codemirror/next/keymap";
-import { CodeChunk, Collection, Datatable, ImageObject, Node, } from "@stencila/schema";
 import { EditorContents, Keymap as Keymap1, } from "./components/editor/editor";
 import { IconNames as IconNames1, } from "./components/icon/icon";
 import { ChildTab, } from "./components/tabList/tabList";
@@ -35,7 +35,7 @@ export namespace Components {
         /**
           * Function to be called when clicking the button. Passed function will be wrapped in a Promise, and the result returned.
          */
-        "clickHandlerProp": (e?: MouseEvent) => unknown;
+        "clickHandlerProp": (e: MouseEvent) => unknown;
         /**
           * The color of the button
          */
@@ -102,7 +102,7 @@ export namespace Components {
         /**
           * Whether the code section is visible or not
          */
-        "isCodeCollapsedProp": boolean;
+        "isCodeVisibleProp": boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
@@ -128,6 +128,14 @@ export namespace Components {
         "open": boolean;
     }
     interface StencilaCodeExpression {
+        /**
+          * A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`.
+         */
+        "executeHandler"?: (codeExpression: CodeExpression) => Promise<CodeExpression>;
+        /**
+          * Returns the `CodeExpression` node with the updated `text` contents from the editor.
+         */
+        "getContents": () => Promise<CodeExpression>;
     }
     interface StencilaDataTable {
         /**
@@ -236,16 +244,6 @@ export namespace Components {
     interface StencilaMenuItem {
         "icon": IconNames | undefined;
     }
-    interface StencilaNavBar {
-        /**
-          * The background fill color of the Navbar
-         */
-        "color": Colors;
-        /**
-          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
-         */
-        "position": "static" | "fixed";
-    }
     interface StencilaNodeList {
         /**
           * Array of nodes to render.
@@ -281,6 +279,16 @@ export namespace Components {
           * Which headings to grab inside of the contentSelector element.
          */
         "headingSelector": string;
+    }
+    interface StencilaToolbar {
+        /**
+          * The background fill color of the Navbar
+         */
+        "color": Colors;
+        /**
+          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
+         */
+        "position": "static" | "fixed";
     }
     interface StencilaTooltip {
         /**
@@ -376,12 +384,6 @@ declare global {
         prototype: HTMLStencilaMenuItemElement;
         new (): HTMLStencilaMenuItemElement;
     };
-    interface HTMLStencilaNavBarElement extends Components.StencilaNavBar, HTMLStencilElement {
-    }
-    var HTMLStencilaNavBarElement: {
-        prototype: HTMLStencilaNavBarElement;
-        new (): HTMLStencilaNavBarElement;
-    };
     interface HTMLStencilaNodeListElement extends Components.StencilaNodeList, HTMLStencilElement {
     }
     var HTMLStencilaNodeListElement: {
@@ -405,6 +407,12 @@ declare global {
     var HTMLStencilaTocElement: {
         prototype: HTMLStencilaTocElement;
         new (): HTMLStencilaTocElement;
+    };
+    interface HTMLStencilaToolbarElement extends Components.StencilaToolbar, HTMLStencilElement {
+    }
+    var HTMLStencilaToolbarElement: {
+        prototype: HTMLStencilaToolbarElement;
+        new (): HTMLStencilaToolbarElement;
     };
     interface HTMLStencilaTooltipElement extends Components.StencilaTooltip, HTMLStencilElement {
     }
@@ -438,11 +446,11 @@ declare global {
         "stencila-input": HTMLStencilaInputElement;
         "stencila-menu": HTMLStencilaMenuElement;
         "stencila-menu-item": HTMLStencilaMenuItemElement;
-        "stencila-nav-bar": HTMLStencilaNavBarElement;
         "stencila-node-list": HTMLStencilaNodeListElement;
         "stencila-tab": HTMLStencilaTabElement;
         "stencila-tab-list": HTMLStencilaTabListElement;
         "stencila-toc": HTMLStencilaTocElement;
+        "stencila-toolbar": HTMLStencilaToolbarElement;
         "stencila-tooltip": HTMLStencilaTooltipElement;
         "stencila-tooltip-element": HTMLStencilaTooltipElementElement;
         "stencila-vertical-nav": HTMLStencilaVerticalNavElement;
@@ -471,7 +479,7 @@ declare namespace LocalJSX {
         /**
           * Function to be called when clicking the button. Passed function will be wrapped in a Promise, and the result returned.
          */
-        "clickHandlerProp"?: (e?: MouseEvent) => unknown;
+        "clickHandlerProp"?: (e: MouseEvent) => unknown;
         /**
           * The color of the button
          */
@@ -534,14 +542,14 @@ declare namespace LocalJSX {
         /**
           * Whether the code section is visible or not
          */
-        "isCodeCollapsedProp"?: boolean;
+        "isCodeVisibleProp"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
          */
         "keymap"?: Keymap;
         /**
-          * Trigger a global DOM event to collapse all `CodeChunk` and `CodeFragment` component code expressions, leaving only the results visible.
+          * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.
          */
         "onCollapseAllCode"?: (event: CustomEvent<any>) => void;
         /**
@@ -564,6 +572,10 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface StencilaCodeExpression {
+        /**
+          * A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`.
+         */
+        "executeHandler"?: (codeExpression: CodeExpression) => Promise<CodeExpression>;
     }
     interface StencilaDataTable {
         /**
@@ -664,16 +676,6 @@ declare namespace LocalJSX {
     interface StencilaMenuItem {
         "icon"?: IconNames | undefined;
     }
-    interface StencilaNavBar {
-        /**
-          * The background fill color of the Navbar
-         */
-        "color"?: Colors;
-        /**
-          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
-         */
-        "position"?: "static" | "fixed";
-    }
     interface StencilaNodeList {
         /**
           * Array of nodes to render.
@@ -710,6 +712,16 @@ declare namespace LocalJSX {
          */
         "headingSelector"?: string;
     }
+    interface StencilaToolbar {
+        /**
+          * The background fill color of the Navbar
+         */
+        "color"?: Colors;
+        /**
+          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
+         */
+        "position"?: "static" | "fixed";
+    }
     interface StencilaTooltip {
         /**
           * The text content of the Tooltip.
@@ -738,11 +750,11 @@ declare namespace LocalJSX {
         "stencila-input": StencilaInput;
         "stencila-menu": StencilaMenu;
         "stencila-menu-item": StencilaMenuItem;
-        "stencila-nav-bar": StencilaNavBar;
         "stencila-node-list": StencilaNodeList;
         "stencila-tab": StencilaTab;
         "stencila-tab-list": StencilaTabList;
         "stencila-toc": StencilaToc;
+        "stencila-toolbar": StencilaToolbar;
         "stencila-tooltip": StencilaTooltip;
         "stencila-tooltip-element": StencilaTooltipElement;
         "stencila-vertical-nav": StencilaVerticalNav;
@@ -765,11 +777,11 @@ declare module "@stencil/core" {
             "stencila-input": LocalJSX.StencilaInput & JSXBase.HTMLAttributes<HTMLStencilaInputElement>;
             "stencila-menu": LocalJSX.StencilaMenu & JSXBase.HTMLAttributes<HTMLStencilaMenuElement>;
             "stencila-menu-item": LocalJSX.StencilaMenuItem & JSXBase.HTMLAttributes<HTMLStencilaMenuItemElement>;
-            "stencila-nav-bar": LocalJSX.StencilaNavBar & JSXBase.HTMLAttributes<HTMLStencilaNavBarElement>;
             "stencila-node-list": LocalJSX.StencilaNodeList & JSXBase.HTMLAttributes<HTMLStencilaNodeListElement>;
             "stencila-tab": LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
             "stencila-tab-list": LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;
             "stencila-toc": LocalJSX.StencilaToc & JSXBase.HTMLAttributes<HTMLStencilaTocElement>;
+            "stencila-toolbar": LocalJSX.StencilaToolbar & JSXBase.HTMLAttributes<HTMLStencilaToolbarElement>;
             "stencila-tooltip": LocalJSX.StencilaTooltip & JSXBase.HTMLAttributes<HTMLStencilaTooltipElement>;
             "stencila-tooltip-element": LocalJSX.StencilaTooltipElement & JSXBase.HTMLAttributes<HTMLStencilaTooltipElementElement>;
             "stencila-vertical-nav": LocalJSX.StencilaVerticalNav & JSXBase.HTMLAttributes<HTMLStencilaVerticalNavElement>;

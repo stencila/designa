@@ -3,7 +3,7 @@
 @import './codeExpression';
 @import './dataTable';
 @import './details';
-@import './navbar';
 @import './tabList';
 @import './tableOfContents';
+@import './toolbar';
 @import './verticalNav';

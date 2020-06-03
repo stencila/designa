@@ -1,4 +1,10 @@
 :host {
+  /** @prop --background: Sets the background color of the component.
+  * Can be a CSS variable name from the palette (`danger`, `success-300`), a fully formed CSS variable name
+  * (`--my-custom-variable`), or any other valid CSS color value.
+  */
+  --background: var(--color-primary);
+
   @apply block h-12;
 
   &[position='fixed'] {
@@ -9,7 +15,7 @@
     }
   }
 
-  nav {
+  div {
     @apply flex flex-row items-center justify-between px-1 py-2 m-0 leading-none align-middle bg-primary-500 text-stock font-body;
 
     & > * {
@@ -17,50 +23,15 @@
     }
   }
 
-  &[color='neutral'] {
-    nav {
-      @apply bg-neutral-500;
-    }
-  }
-
-  &[color='primary'] {
-    nav {
-      @apply bg-primary-500;
-    }
-  }
-
-  &[color='danger'] {
-    nav {
-      @apply bg-danger-500;
-    }
-  }
-
-  &[color='warn'] {
-    nav {
-      @apply bg-warn-500;
-    }
-  }
-
-  &[color='success'] {
-    nav {
-      @apply bg-success-500;
-    }
-  }
-
-  &[color='stock'] {
-    nav {
-      @apply bg-stock;
-    }
-  }
-
-  &[color='key'] {
-    nav {
-      @apply bg-key;
+  /* Create color background variants based on background color */
+  &[color] {
+    div {
+      background-color: var(--background);
     }
   }
 
   ::slotted([slot='middle']) {
-    @apply flex-grow pl-4;
+    @apply flex-grow px-4;
   }
 
   /* Use lighter backdrop on dark backgrounds */

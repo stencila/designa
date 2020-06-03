@@ -13,7 +13,8 @@ const generateColors = (name, defaultName) => ({
 })
 
 const colors = {
-  transparent: 'transparent',
+  transparent: defaultColors.transparent,
+  current: defaultColors.current,
   stock: `var(--color-stock, ${defaultColors.white})`,
   key: `var(--color-key, ${defaultColors.black})`,
   brand: `var(--color-brand, #1d63f3)`,
@@ -25,10 +26,11 @@ const colors = {
 }
 
 module.exports = {
+  purge: false, // Any style purging should be done in apps consuming these themes
   theme: {
     fontFamily: {
-      display: 'var(--font-family-display, sans)',
-      body: 'var(--font-family-body, sans)',
+      display: 'var(--font-family-display, sans-serif)',
+      body: 'var(--font-family-body, sans-serif)',
       mono: 'var(--font-family-mono, monospace)',
     },
     colors,
@@ -48,5 +50,11 @@ module.exports = {
         em: '1em',
       },
     },
+  },
+  corePlugins: {
+    backgroundOpacity: false,
+    borderOpacity: false,
+    placeholderOpacity: false,
+    textOpacity: false,
   },
 }
