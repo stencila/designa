@@ -169,14 +169,16 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
               onClick={this.toggleCodeVisibility}
             ></stencila-icon>
           </stencila-tooltip>
-          <stencila-tooltip text="Run">
-            <stencila-icon
-              tabindex="0"
-              aria-label="Run Code"
-              icon="play"
-              onClick={this.execute}
-            ></stencila-icon>
-          </stencila-tooltip>
+          {this.executeHandler && (
+            <stencila-tooltip text="Run">
+              <stencila-icon
+                tabindex="0"
+                aria-label="Run Code"
+                icon="play"
+                onClick={this.execute}
+              ></stencila-icon>
+            </stencila-tooltip>
+          )}
         </span>
         <span
           class="text"
