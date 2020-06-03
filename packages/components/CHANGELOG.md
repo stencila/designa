@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/stencila/designa/compare/@stencila/components@0.13.0...@stencila/components@0.14.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* **Button:** Make MouseEvent argument required ([d41b85d](https://github.com/stencila/designa/commit/d41b85dc72dfb3db6d272d88f0bc503f5bb1c53c))
+* **CodeExpression:** Fix hover state issues when reflowing with text ([c2a88bb](https://github.com/stencila/designa/commit/c2a88bb111733278a0a14bcc8fc5802fad59b813))
+* **Tooltip:** Fix tooltip rendering & removal logic ([6d22847](https://github.com/stencila/designa/commit/6d22847df846f92fe137eef675769ccb5e6ba4bd))
+
+
+### Features
+
+* **Code Expression:** Hide Run button if no execution handler attached ([8d694d2](https://github.com/stencila/designa/commit/8d694d2eb392a83fcdb5e3df026f1ad10374fabc))
+* **CodeChunk,CodeExpression:** Hide source sections code by default ([302ca2a](https://github.com/stencila/designa/commit/302ca2a4c3e39de814c63079e6bd794c4ae31d4d))
+* **NavBar:** Add ability to use wider range of colors for background ([5e04a7a](https://github.com/stencila/designa/commit/5e04a7a725c41deb64181559da80e723ec538243))
+
+
+
+
+
 # [0.13.0](https://github.com/stencila/designa/compare/@stencila/components@0.12.2...@stencila/components@0.13.0) (2020-05-13)
 
 

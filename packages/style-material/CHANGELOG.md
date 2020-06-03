@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/stencila/style/compare/@stencila/style-material@0.10.0...@stencila/style-material@0.11.0) (2020-06-03)
+
+
+### Features
+
+* **NavBar:** Add ability to use wider range of colors for background ([5e04a7a](https://github.com/stencila/style/commit/5e04a7a725c41deb64181559da80e723ec538243))
+
+
+
+
+
 # [0.10.0](https://github.com/stencila/style/compare/@stencila/style-material@0.9.2...@stencila/style-material@0.10.0) (2020-05-13)
 
 

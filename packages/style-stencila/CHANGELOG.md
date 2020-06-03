@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.12.0...@stencila/style-stencila@0.13.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* **Button:** Refine horizontal padding styles on small buttons ([5f2fe2f](https://github.com/stencila/style/commit/5f2fe2f0d2a17d8d40bcc207b8b784e34a4801ec))
+* **CodeChunk, CodeExpression:** Add fallback values to CSS props ([b0ad67d](https://github.com/stencila/style/commit/b0ad67d6f1d41262acc5911f7bf28290da9203b5))
+* **CodeExpression:** Fix hover state issues when reflowing with text ([c2a88bb](https://github.com/stencila/style/commit/c2a88bb111733278a0a14bcc8fc5802fad59b813))
+
+
+### Features
+
+* **NavBar:** Add ability to use wider range of colors for background ([5e04a7a](https://github.com/stencila/style/commit/5e04a7a725c41deb64181559da80e723ec538243))
+
+
+
+
+
 # [0.12.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.11.2...@stencila/style-stencila@0.12.0) (2020-05-13)
 
 
