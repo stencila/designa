@@ -13,6 +13,7 @@ stencila-code-expression {
   --border: var(--color-neutral-300, #e2e8f0);
 
   @apply inline-flex items-stretch p-0 text-sm leading-none align-text-bottom border border-solid rounded;
+  background-color: var(--background);
   border-color: var(--border);
 
   stencila-tooltip {
@@ -36,6 +37,7 @@ stencila-code-expression {
   ::slotted([slot='output']),
   [slot='output'] {
     @apply inline-block py-1 pl-1 pr-2 font-mono border-none bg-stock text-key;
+    background-color: var(--background);
     transition: padding 120ms ease-out;
 
     stencila-icon {
