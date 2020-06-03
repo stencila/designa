@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.1](https://github.com/stencila/style/compare/@stencila/style-stencila@0.13.0...@stencila/style-stencila@0.13.1) (2020-06-03)
+
+
+### Bug Fixes
+
+* **CodeExpression:** Apply background CSS variable to output section ([c193e5a](https://github.com/stencila/style/commit/c193e5aa64b4224f11ed9cb8726591b5c3471d37))
+
+
+
+
+
 # [0.13.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.12.0...@stencila/style-stencila@0.13.0) (2020-06-03)
 
 
