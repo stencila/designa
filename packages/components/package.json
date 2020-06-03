@@ -1,6 +1,6 @@
 {
   "name": "@stencila/components",
-  "version": "0.14.1",
+  "version": "0.14.2",
   "description": "Stencila Web Components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
