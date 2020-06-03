@@ -123,6 +123,14 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     </svg>
   )
 
+  private onMouseOutHandler = (e: MouseEvent): void => {
+    const target = e.target as Node | null
+    const relatedTarget = e.relatedTarget as Node | null
+    if (!target?.contains(relatedTarget)) {
+      this.removeHoverState()
+    }
+  }
+
   private addHoverState = (): void => {
     window.clearTimeout(this.hoverTimeOut)
 
@@ -134,12 +142,11 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
 
   private removeHoverState = (): void => {
     const diff = Date.now() - this.hoverStartedAt
-    const hasFocus = this.el.contains(document.activeElement)
-    if (!hasFocus && this.hover && diff < 60) {
+    if (this.hover && diff < 60) {
       this.hoverTimeOut = window.setTimeout(() => {
         this.hover = false
       }, 3000)
-    } else if (!hasFocus && this.hover) {
+    } else if (this.hover) {
       this.hover = false
     }
   }
@@ -197,7 +204,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
           isOutputEmpty: this.isOutputEmpty,
         }}
         onMouseEnter={this.addHoverState}
-        onMouseLeave={this.removeHoverState}
+        onMouseOut={this.onMouseOutHandler}
       >
         {this.generateContent()}
       </Host>

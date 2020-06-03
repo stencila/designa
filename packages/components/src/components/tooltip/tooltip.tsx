@@ -58,6 +58,20 @@ export class Tooltip implements ComponentInterface {
         },
       ],
     })
+
+    window.addEventListener('mousemove', this.onMouseMoveHandler)
+  }
+
+  private onMouseMoveHandler = (e: MouseEvent): void => {
+    if (!this.el.contains(e.target as Node)) {
+      this.destroyTooltip()
+    }
+  }
+
+  private onMouseOutHandler = (e: MouseEvent): void => {
+    if (e.relatedTarget && !this.el.contains(e.relatedTarget as Node)) {
+      this.destroyTooltip()
+    }
   }
 
   private destroyTooltip = (): void => {
@@ -69,22 +83,25 @@ export class Tooltip implements ComponentInterface {
       this.popperRef.destroy()
       this.popperRef = null
     }
+
+    window.removeEventListener('mousemove', this.onMouseMoveHandler)
   }
 
   private loadComponent = (): void => {
-    this.el.addEventListener('focus', this.showTooltip)
-    this.el.addEventListener('blur', this.destroyTooltip)
+    this.el.addEventListener('focusin', this.showTooltip)
+    this.el.addEventListener('focusout', this.destroyTooltip)
 
     this.el.addEventListener('mouseenter', this.showTooltip)
-    this.el.addEventListener('mouseleave', this.destroyTooltip)
+    this.el.addEventListener('mouseout', this.onMouseOutHandler)
   }
 
   private unloadComponent = (): void => {
-    this.el.removeEventListener('focus', this.showTooltip)
-    this.el.removeEventListener('blur', this.destroyTooltip)
+    this.el.removeEventListener('focusin', this.showTooltip)
+    this.el.removeEventListener('focusout', this.destroyTooltip)
 
     this.el.removeEventListener('mouseenter', this.showTooltip)
-    this.el.removeEventListener('mouseleave', this.destroyTooltip)
+    this.el.removeEventListener('mouseout', this.onMouseOutHandler)
+    window.removeEventListener('mousemove', this.onMouseMoveHandler)
   }
 
   public componentDidLoad(): void {
@@ -100,12 +117,19 @@ export class Tooltip implements ComponentInterface {
   watchHandler(newText: string): void {
     if (this.tooltipRef !== undefined) {
       this.tooltipRef.innerText = newText
+      if (this.popperRef) {
+        this.popperRef
+          .update()
+          .catch((err) =>
+            console.log('could not update Tooltip position\n', err)
+          )
+      }
     }
   }
 
   public render(): HTMLElement {
     return (
-      <Host tabindex="0">
+      <Host>
         <slot />
       </Host>
     )
