@@ -4,13 +4,13 @@
 :host,
 stencila-code-expression {
   /** @prop --background: Background color of the Code Output section */
-  --background: var(--color-stock);
+  --background: var(--color-stock, #fff);
 
   /** @prop --background-editor: Background color of the Code Editor section */
-  --background-editor: var(--color-neutral-200);
+  --background-editor: var(--color-neutral-200, #edf2f7);
 
   /** @prop --border: Border color around the component as well as internal section dividers */
-  --border: var(--color-neutral-300);
+  --border: var(--color-neutral-300, #e2e8f0);
 
   @apply inline-flex items-stretch p-0 text-sm leading-none align-text-bottom border border-solid rounded;
   border-color: var(--border);
