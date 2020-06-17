@@ -47,7 +47,7 @@
     "tailwindcss": "1.4.6"
   },
   "dependencies": {
-    "@codemirror/next": "^0.6.0",
+    "@codemirror/next": "^0.7.0",
     "@popperjs/core": "^2.4.0",
     "@stencila/style-material": "file:../style-material",
     "@stencila/style-stencila": "file:../style-stencila",
