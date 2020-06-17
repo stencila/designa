@@ -29,7 +29,7 @@
     "lint": "eslint 'src/**/*.{ts,js}'"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "2.2.0",
+    "@fullhuman/postcss-purgecss": "2.3.0",
     "@stencil/core": "1.10.0",
     "@stencil/postcss": "1.0.1",
     "@stencila/schema": "0.43.1",
@@ -38,7 +38,7 @@
     "@types/puppeteer": "3.0.0",
     "@types/webfontloader": "1.6.32",
     "chokidar-cli": "2.1.0",
-    "fp-ts": "2.6.2",
+    "fp-ts": "2.6.6",
     "jest": "26.0.1",
     "jest-cli": "26.0.1",
     "postcss-custom-properties": "9.1.1",
