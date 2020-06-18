@@ -1,4 +1,3 @@
-import { Keymap } from '@codemirror/next/keymap'
 import {
   Component,
   Element,
@@ -13,6 +12,7 @@ import {
 } from '@stencil/core'
 import { codeChunk, CodeChunk } from '@stencila/schema'
 import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
+import { Keymap } from '../editor/editor'
 
 @Component({
   tag: 'stencila-code-chunk',
@@ -46,6 +46,11 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   public programmingLanguageProp: string
 
   /**
+   * Callback function to call when a language of the editor is changed
+   */
+  @Prop() public onSetLanguage?: (language: string) => void
+
+  /**
    * Whether the code section is visible or not
    */
   @Prop({
@@ -62,7 +67,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    * Custom keyboard shortcuts to pass along to CodeMirror
    * @see https://codemirror.net/6/docs/ref/#keymap
    */
-  @Prop() public keymap: Keymap = {}
+  @Prop() public keymap: Keymap[] = []
 
   @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED'
 
@@ -187,6 +192,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
           <stencila-editor
             activeLanguage={this.programmingLanguageProp}
             autofocus={this.autofocus}
+            executeHandler={this.onExecuteHandler}
             keymap={this.keymap}
             readOnly={this.executeHandler === undefined}
           >

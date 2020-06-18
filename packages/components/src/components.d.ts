@@ -8,7 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Colors, } from "./types";
 import { IconNames, } from "./components/icon/icon";
 import { CodeChunk, CodeExpression, Collection, Datatable, ImageObject, Node, } from "@stencila/schema";
-import { Keymap, } from "@codemirror/next/keymap";
+import { Keymap, } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1, } from "./components/editor/editor";
 import { IconNames as IconNames1, } from "./components/icon/icon";
 import { ChildTab, } from "./components/tabList/tabList";
@@ -107,7 +107,11 @@ export namespace Components {
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
          */
-        "keymap": Keymap;
+        "keymap": Keymap[];
+        /**
+          * Callback function to call when a language of the editor is changed
+         */
+        "onSetLanguage"?: (language: string) => void;
         /**
           * Programming language of the CodeChunk
          */
@@ -158,7 +162,7 @@ export namespace Components {
         /**
           * Function to be evaluated over the contents of the editor.
          */
-        "executeHandler": (contents: EditorContents) => Promise<unknown>;
+        "executeHandler"?: (contents: EditorContents) => Promise<unknown>;
         /**
           * Enables abiility to fold sections of code
          */
@@ -171,7 +175,7 @@ export namespace Components {
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
          */
-        "keymap": Keymap;
+        "keymap": Keymap[];
         /**
           * List of all supported programming languages
          */
@@ -180,6 +184,10 @@ export namespace Components {
           * Determines the visibility of line numbers
          */
         "lineNumbers": boolean;
+        /**
+          * Callback function to call when a language of the editor is changed
+         */
+        "onSetLanguage"?: (language: string) => void;
         /**
           * Disallow editing of the editor contents when set to `true`
          */
@@ -547,11 +555,15 @@ declare namespace LocalJSX {
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
          */
-        "keymap"?: Keymap;
+        "keymap"?: Keymap[];
         /**
           * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.
          */
         "onCollapseAllCode"?: (event: CustomEvent<any>) => void;
+        /**
+          * Callback function to call when a language of the editor is changed
+         */
+        "onSetLanguage"?: (language: string) => void;
         /**
           * Programming language of the CodeChunk
          */
@@ -607,7 +619,7 @@ declare namespace LocalJSX {
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
          */
-        "keymap"?: Keymap;
+        "keymap"?: Keymap[];
         /**
           * List of all supported programming languages
          */
@@ -616,6 +628,10 @@ declare namespace LocalJSX {
           * Determines the visibility of line numbers
          */
         "lineNumbers"?: boolean;
+        /**
+          * Callback function to call when a language of the editor is changed
+         */
+        "onSetLanguage"?: (language: string) => void;
         /**
           * Disallow editing of the editor contents when set to `true`
          */
