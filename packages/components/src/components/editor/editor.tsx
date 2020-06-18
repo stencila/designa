@@ -1,22 +1,12 @@
 import { autocomplete, startCompletion } from '@codemirror/next/autocomplete'
 import { closeBrackets } from '@codemirror/next/closebrackets'
-import {
-  baseKeymap,
-  moveLineEnd,
-  moveLineStart,
-} from '@codemirror/next/commands'
-import { toggleBlockComment, toggleLineComment } from '@codemirror/next/comment'
-import { foldCode, foldGutter, unfoldCode } from '@codemirror/next/fold'
+import { defaultKeymap, deleteGroupBackward } from '@codemirror/next/commands'
+import { commentKeymap } from '@codemirror/next/comment'
+import { foldGutter, foldKeymap } from '@codemirror/next/fold'
 import { lineNumbers } from '@codemirror/next/gutter'
 import { defaultHighlighter } from '@codemirror/next/highlight'
-import {
-  history,
-  redo,
-  redoSelection,
-  undo,
-  undoSelection,
-} from '@codemirror/next/history'
-import { keymap, Keymap as KeymapI } from '@codemirror/next/keymap'
+import { history, historyKeymap } from '@codemirror/next/history'
+import { KeyBinding as KeymapI, keymap } from '@codemirror/next/keymap'
 import { python } from '@codemirror/next/lang-python'
 import { bracketMatching } from '@codemirror/next/matchbrackets'
 import { multipleSelections } from '@codemirror/next/multiple-selections'
@@ -24,7 +14,7 @@ import { specialChars } from '@codemirror/next/special-chars'
 import { EditorState } from '@codemirror/next/state'
 import { Command, EditorView } from '@codemirror/next/view'
 import { Component, Element, h, Host, Method, Prop } from '@stencil/core'
-import { deleteLine, deleteWord } from './commands'
+import { deleteToLineStart } from './commands'
 
 export interface EditorContents {
   text: string
@@ -75,31 +65,42 @@ export class Editor {
   @Prop() public readOnly = false
 
   /**
+   * Callback function to call when a language of the editor is changed
+   */
+  @Prop() public onSetLanguage?: (language: string) => void
+
+  /**
    * Changes the active programming language of the editor.
    * Does not affect syntax highlighting.
    */
-  private setLanguage = (e: Event) => {
+  private setLanguage = (e: Event): void => {
     const target = e.currentTarget as HTMLSelectElement
     this.activeLanguage = target.value.toLowerCase()
+    if (this.onSetLanguage) {
+      this.onSetLanguage(target.value)
+    }
   }
 
   /**
    * Programming language of the Editor
    */
+  // eslint-disable-next-line @stencil/strict-mutable
   @Prop({ mutable: true, reflect: true }) public activeLanguage: string =
     this.languageCapabilities[0]?.toLowerCase() ?? ''
 
   /**
    * Function to be evaluated over the contents of the editor.
    */
-  @Prop() public executeHandler: (contents: EditorContents) => Promise<unknown>
+  @Prop() public executeHandler?: (contents: EditorContents) => Promise<unknown>
 
   /**
    * Wrapper around the `executeHandler` function, needed to run using CodeMirror keyboard shortcuts.
    */
   private execute: Command = () => {
     this.getContents()
-      .then((contents) => this.executeHandler(contents))
+      .then((contents) => {
+        return this.executeHandler ? this.executeHandler(contents) : contents
+      })
       .catch((err) => {
         console.error(err)
         return false
@@ -127,17 +128,17 @@ export class Editor {
    * Custom keyboard shortcuts to pass along to CodeMirror
    * @see https://codemirror.net/6/docs/ref/#keymap
    */
-  @Prop() public keymap: Keymap = {}
+  @Prop() public keymap: Keymap[] = []
 
-  private initCodeMirror = () => {
-    const isMac = navigator.platform.includes('Mac')
-
+  private initCodeMirror = (): void => {
     const root = this.el
     const slot = root.querySelector('[slot]')
     const textContent =
       slot?.textContent ??
       root?.querySelector(`#${cssIds.editorTarget}`)?.textContent ??
       ''
+
+    console.log(root, slot, textContent)
 
     const extensions = [
       history(),
@@ -148,26 +149,29 @@ export class Editor {
       python(),
       multipleSelections(),
       specialChars(),
-      keymap({
-        'Mod-z': undo,
-        'Mod-Shift-z': redo,
-        'Mod-u': (view) => undoSelection(view) || true,
-        [isMac ? 'Mod-Shift-u' : 'Alt-u']: redoSelection,
-        'Ctrl-y': isMac ? undefined : redo,
-        'Shift-Enter': this.execute,
-        'Mod-ArrowLeft': moveLineStart,
-        'Mod-ArrowRight': moveLineEnd,
-        'Ctrl-Space': startCompletion,
-        'Alt-Backspace': deleteWord,
-        'Mod-Backspace': deleteLine,
-        'Mod-/': toggleLineComment,
-        'Mod-*': toggleBlockComment,
-        'Mod-Alt-[': foldCode,
-        'Mod-Alt-]': unfoldCode,
-        // FIXME: Add indentation commands
+      keymap([
+        ...defaultKeymap,
+        ...commentKeymap,
+        ...historyKeymap,
+        ...foldKeymap,
+        {
+          key: 'Ctrl-Space',
+          run: startCompletion,
+        },
+        {
+          mac: 'Alt-Backspace',
+          run: deleteGroupBackward,
+        },
+        {
+          key: 'Mod-Backspace',
+          run: deleteToLineStart,
+        },
+        {
+          key: 'Shift-Enter',
+          run: this.execute,
+        },
         ...this.keymap,
-      }),
-      keymap(baseKeymap),
+      ]),
       EditorView.editable.of(!this.readOnly),
     ]
 
@@ -191,7 +195,7 @@ export class Editor {
       ?.replaceWith(this.editorRef.dom)
   }
 
-  private getContent = () => this.editorRef.state.toJSON().doc
+  private getContent = (): string => this.editorRef.state.doc.toString()
 
   /**
    * Public method, returning the Editor contents and active language.
@@ -227,7 +231,7 @@ export class Editor {
    * Prevents keyboard event listeners attached to parent DOM elements from firing.
    * This is to avoid conflicts when user has focused on the editor.
    */
-  private stopEventPropagation = (e: KeyboardEvent) => {
+  private stopEventPropagation = (e: KeyboardEvent): void => {
     e.stopPropagation()
   }
 

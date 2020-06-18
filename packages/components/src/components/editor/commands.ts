@@ -1,35 +1,38 @@
-import { SelectionRange } from '@codemirror/next/state'
-import { EditorView } from '@codemirror/next/view/src'
+import { EditorSelection, Transaction } from '@codemirror/next/state'
+import { Command, EditorView } from '@codemirror/next/view/src'
 
 // Collection of CodeMirror Commands
 // @see https://codemirror.net/6/docs/ref/#commands
 
-enum BOUNDARY {
-  CHARACTER = 'character',
-  WORD = 'word',
-  LINE = 'line',
-  LINE_BOUNDARY = 'lineboundary',
-}
-
-/** CodeMirror command to delete content until a given boundary */
-export const deleteTill = (granularity: BOUNDARY) => (view: EditorView) => {
-  const changes = view.state.changeByRange((range) => {
+// Copied from https://github.com/codemirror/codemirror.next/blob/2d0e33f422a8b30f4f5476c604f6e09f289a1a7f/commands/src/commands.ts#L293
+// as this function is not exported by the library
+function deleteBy(view: EditorView, by: (start: number) => number) {
+  const { state } = view
+  const changes = state.changeByRange((range) => {
     let { from, to } = range
     if (from === to) {
-      const target = view.movePos(range.head, 'backward', granularity, 'move')
-      from = Math.min(from, target)
-      to = Math.max(to, target)
+      const towards = by(from)
+      from = Math.min(from, towards)
+      to = Math.max(to, towards)
     }
-    if (from === to) return { range }
-    return { changes: { from, to }, range: new SelectionRange(from) }
+    return from === to
+      ? { range }
+      : { changes: { from, to }, range: EditorSelection.cursor(from) }
   })
-
   if (changes.changes.empty) return false
-
-  view.dispatch(view.state.update(changes, { scrollIntoView: true }))
+  view.dispatch(
+    view.state.update(changes, {
+      scrollIntoView: true,
+      annotations: Transaction.userEvent.of('delete'),
+    })
+  )
   return true
 }
 
-export const deleteWord = deleteTill(BOUNDARY.WORD)
-
-export const deleteLine = deleteTill(BOUNDARY.LINE_BOUNDARY)
+// Delete till start of current line, or if already at start of line, delete till end of the previous line
+export const deleteToLineStart: Command = (view) =>
+  deleteBy(view, (pos) => {
+    const lineStart = view.lineAt(pos).from
+    if (pos > lineStart) return lineStart
+    return Math.max(0, view.lineAt(pos - 1).to)
+  })
