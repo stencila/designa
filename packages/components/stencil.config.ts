@@ -2,7 +2,6 @@ import purgecss from '@fullhuman/postcss-purgecss'
 import { Config } from '@stencil/core'
 import { postcss } from '@stencil/postcss'
 import path from 'path'
-import cssImport from 'postcss-import'
 import tailwind from 'tailwindcss'
 import { generateJsonDocs } from './jsonDocTransformer'
 
@@ -48,14 +47,7 @@ export const config: Config = {
   ],
   plugins: [
     postcss({
-      // TODO: This is needed to include CSS variables with component styles
-      // However it does not currently work with Scoped components
-      // injectGlobalPaths: ['src/globals/variables.css'],
-      plugins: [
-        require('postcss-import'),
-        require('tailwindcss')(tailwindConfigPath),
-        ...prodPlugins,
-      ],
+      plugins: [tailwind(tailwindConfigPath), ...prodPlugins],
     }),
   ],
 }
