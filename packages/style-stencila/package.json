@@ -38,7 +38,7 @@
     "not IE_Mob 11"
   ],
   "dependencies": {
-    "@stencila/brand": "file:../brand",
+    "@stencila/brand": "^0.4.4",
     "tailwindcss": "^1.4.6"
   },
   "devDependencies": {

@@ -18,9 +18,9 @@
   },
   "scripts": {
     "dev": "concurrently \"npm run storybook\" \"npm run build:watch\"",
-    "build": "npx lerna run build",
-    "build:watch": "npx lerna run build:watch --stream --parallel",
-    "bootstrap": "npx lerna exec npm install",
+    "build": "lerna run build",
+    "build:watch": "lerna run build:watch --stream --parallel",
+    "bootstrap": "lerna bootstrap --force-local",
     "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist",
     "storybook:build": "build-storybook -o docs -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist",
     "chromatic": "chromatic --storybook-build-dir docs"
