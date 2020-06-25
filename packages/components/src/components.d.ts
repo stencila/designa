@@ -5,13 +5,13 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Colors, } from "./types";
-import { IconNames, } from "./components/icon/icon";
-import { CodeChunk, CodeExpression, Collection, Datatable, ImageObject, Node, } from "@stencila/schema";
-import { Keymap, } from "./components/editor/editor";
-import { EditorContents, Keymap as Keymap1, } from "./components/editor/editor";
-import { IconNames as IconNames1, } from "./components/icon/icon";
-import { ChildTab, } from "./components/tabList/tabList";
+import { Colors } from "./types";
+import { IconNames } from "./components/icon/icon";
+import { CodeChunk, CodeExpression, Collection, Datatable, ImageObject, Node } from "@stencila/schema";
+import { Keymap } from "./components/editor/editor";
+import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
+import { IconNames as IconNames1 } from "./components/icon/icon";
+import { ChildTab } from "./components/tabList/tabList";
 export namespace Components {
     interface StencilaActionMenu {
         /**
@@ -31,7 +31,7 @@ export namespace Components {
         /**
           * The type of button to render, options correspond to HTML Button `type` attribute. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button Only applies if the button is not an anchor link.
          */
-        "buttonType": "button" | "submit" | "reset";
+        "buttonType": 'button' | 'submit' | 'reset';
         /**
           * Function to be called when clicking the button. Passed function will be wrapped in a Promise, and the result returned.
          */
@@ -76,11 +76,11 @@ export namespace Components {
         /**
           * The overall size of the Button.
          */
-        "size": "xsmall" | "small" | "default" | "large";
+        "size": 'xsmall' | 'small' | 'default' | 'large';
         /**
           * Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute. Only applies if the button is an anchor link. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target
          */
-        "target"?: HTMLAnchorElement["target"];
+        "target"?: HTMLAnchorElement['target'];
         /**
           * An optional help text to display for button focus and hover states.
          */
@@ -125,7 +125,7 @@ export namespace Components {
         /**
           * The severity of the error message
          */
-        "kind": "incapable" | "warning" | "error";
+        "kind": 'incapable' | 'warning' | 'error';
         /**
           * Determines whether the stacktrace is visible or not
          */
@@ -135,7 +135,9 @@ export namespace Components {
         /**
           * A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`.
          */
-        "executeHandler"?: (codeExpression: CodeExpression) => Promise<CodeExpression>;
+        "executeHandler"?: (
+    codeExpression: CodeExpression
+  ) => Promise<CodeExpression>;
         /**
           * Returns the `CodeExpression` node with the updated `text` contents from the editor.
          */
@@ -223,7 +225,13 @@ export namespace Components {
         /**
           * A hint to the browser for which keyboard to display.
          */
-        "inputmode"?: "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search";
+        "inputmode"?: | 'text'
+    | 'tel'
+    | 'url'
+    | 'email'
+    | 'numeric'
+    | 'decimal'
+    | 'search';
         /**
           * Accessible text label for the input field. Defaults to the input's `name` prop.
          */
@@ -237,7 +245,7 @@ export namespace Components {
           * When `true` value must be provided before submitting.
          */
         "required": boolean;
-        "type": "text" | "password" | "number" | "search";
+        "type": 'text' | 'password' | 'number' | 'search';
         /**
           * Text value of the input.
          */
@@ -296,7 +304,7 @@ export namespace Components {
         /**
           * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
          */
-        "position": "static" | "fixed";
+        "position": 'static' | 'fixed';
     }
     interface StencilaTooltip {
         /**
@@ -483,7 +491,7 @@ declare namespace LocalJSX {
         /**
           * The type of button to render, options correspond to HTML Button `type` attribute. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button Only applies if the button is not an anchor link.
          */
-        "buttonType"?: "button" | "submit" | "reset";
+        "buttonType"?: 'button' | 'submit' | 'reset';
         /**
           * Function to be called when clicking the button. Passed function will be wrapped in a Promise, and the result returned.
          */
@@ -528,11 +536,11 @@ declare namespace LocalJSX {
         /**
           * The overall size of the Button.
          */
-        "size"?: "xsmall" | "small" | "default" | "large";
+        "size"?: 'xsmall' | 'small' | 'default' | 'large';
         /**
           * Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute. Only applies if the button is an anchor link. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target
          */
-        "target"?: HTMLAnchorElement["target"];
+        "target"?: HTMLAnchorElement['target'];
         /**
           * An optional help text to display for button focus and hover states.
          */
@@ -577,7 +585,7 @@ declare namespace LocalJSX {
         /**
           * The severity of the error message
          */
-        "kind"?: "incapable" | "warning" | "error";
+        "kind"?: 'incapable' | 'warning' | 'error';
         /**
           * Determines whether the stacktrace is visible or not
          */
@@ -587,7 +595,9 @@ declare namespace LocalJSX {
         /**
           * A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`.
          */
-        "executeHandler"?: (codeExpression: CodeExpression) => Promise<CodeExpression>;
+        "executeHandler"?: (
+    codeExpression: CodeExpression
+  ) => Promise<CodeExpression>;
     }
     interface StencilaDataTable {
         /**
@@ -663,7 +673,13 @@ declare namespace LocalJSX {
         /**
           * A hint to the browser for which keyboard to display.
          */
-        "inputmode"?: "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search";
+        "inputmode"?: | 'text'
+    | 'tel'
+    | 'url'
+    | 'email'
+    | 'numeric'
+    | 'decimal'
+    | 'search';
         /**
           * Accessible text label for the input field. Defaults to the input's `name` prop.
          */
@@ -677,7 +693,7 @@ declare namespace LocalJSX {
           * When `true` value must be provided before submitting.
          */
         "required"?: boolean;
-        "type"?: "text" | "password" | "number" | "search";
+        "type"?: 'text' | 'password' | 'number' | 'search';
         /**
           * Text value of the input.
          */
@@ -736,7 +752,7 @@ declare namespace LocalJSX {
         /**
           * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
          */
-        "position"?: "static" | "fixed";
+        "position"?: 'static' | 'fixed';
     }
     interface StencilaTooltip {
         /**

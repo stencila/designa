@@ -5,9 +5,9 @@
 
 ## Properties
 
-| Property | Attribute | Description               | Type     | Default     |
-| -------- | --------- | ------------------------- | -------- | ----------- |
-| `nodes`  | --        | Array of nodes to render. | `Node[]` | `undefined` |
+| Property | Attribute | Description               | Type                  | Default     |
+| -------- | --------- | ------------------------- | --------------------- | ----------- |
+| `nodes`  | --        | Array of nodes to render. | `Node[] \| undefined` | `undefined` |
 
 
 ## Dependencies
