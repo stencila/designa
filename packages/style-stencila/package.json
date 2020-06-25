@@ -1,6 +1,6 @@
 {
   "name": "@stencila/style-stencila",
-  "version": "0.13.4",
+  "version": "0.13.5",
   "description": "Custom designed theme for Stencila components",
   "keywords": [
     "Stencila",
@@ -38,7 +38,7 @@
     "not IE_Mob 11"
   ],
   "dependencies": {
-    "@stencila/brand": "^0.4.4",
+    "@stencila/brand": "0.4.5",
     "tailwindcss": "^1.4.6"
   },
   "devDependencies": {
