@@ -1,6 +1,6 @@
 {
   "name": "@stencila/components",
-  "version": "0.14.8",
+  "version": "0.14.9",
   "description": "Stencila Web Components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -49,8 +49,8 @@
   "dependencies": {
     "@codemirror/next": "^0.7.0",
     "@popperjs/core": "^2.4.2",
-    "@stencila/style-material": "0.11.4",
-    "@stencila/style-stencila": "0.13.5",
+    "@stencila/style-material": "0.11.5",
+    "@stencila/style-stencila": "0.13.6",
     "feather-icons": "^4.28.0",
     "tocbot": "^4.11.2",
     "webfontloader": "^1.6.28"
