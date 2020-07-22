@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "2.3.0",
-    "@stencil/core": "1.16.4",
+    "@stencil/core": "1.16.5",
     "@stencil/postcss": "1.0.1",
     "@stencila/schema": "0.43.3",
     "@types/feather-icons": "4.7.0",
