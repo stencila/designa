@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.13](https://github.com/stencila/designa/compare/@stencila/components@0.14.12...@stencila/components@0.14.13) (2020-07-23)
+
+
+### Bug Fixes
+
+* **dependencies:** update dependency @codemirror/next to ^0.8.0 ([72f3663](https://github.com/stencila/designa/commit/72f36639841f50fb2b0419f365855ca0f41f66b0))
+
+
+
+
+
 ## [0.14.12](https://github.com/stencila/designa/compare/@stencila/components@0.14.11...@stencila/components@0.14.12) (2020-07-22)
 
 **Note:** Version bump only for package @stencila/components
