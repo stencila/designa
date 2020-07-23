@@ -32,7 +32,7 @@ function deleteBy(view: EditorView, by: (start: number) => number) {
 // Delete till start of current line, or if already at start of line, delete till end of the previous line
 export const deleteToLineStart: Command = (view) =>
   deleteBy(view, (pos) => {
-    const lineStart = view.lineAt(pos).from
+    const lineStart = view.visualLineAt(pos).from
     if (pos > lineStart) return lineStart
-    return Math.max(0, view.lineAt(pos - 1).to)
+    return Math.max(0, view.visualLineAt(pos - 1).to)
   })

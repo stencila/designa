@@ -6,13 +6,17 @@ import { foldGutter, foldKeymap } from '@codemirror/next/fold'
 import { lineNumbers } from '@codemirror/next/gutter'
 import { defaultHighlighter } from '@codemirror/next/highlight'
 import { history, historyKeymap } from '@codemirror/next/history'
-import { KeyBinding as KeymapI, keymap } from '@codemirror/next/keymap'
 import { python } from '@codemirror/next/lang-python'
 import { bracketMatching } from '@codemirror/next/matchbrackets'
-import { multipleSelections } from '@codemirror/next/multiple-selections'
-import { specialChars } from '@codemirror/next/special-chars'
-import { EditorState } from '@codemirror/next/state'
-import { Command, EditorView } from '@codemirror/next/view'
+import { EditorState, Extension } from '@codemirror/next/state'
+import {
+  KeyBinding as KeymapI,
+  keymap,
+  Command,
+  EditorView,
+  highlightSpecialChars,
+  multipleSelections,
+} from '@codemirror/next/view'
 import { Component, Element, h, Host, Method, Prop } from '@stencil/core'
 import { deleteToLineStart } from './commands'
 
@@ -45,29 +49,28 @@ const cssIds = {
   scoped: true,
 })
 export class Editor {
-  @Element() private el: HTMLStencilaEditorElement
+  @Element()
+  private el: HTMLStencilaEditorElement
 
   private editorRef: EditorView
 
   /**
    * List of all supported programming languages
    */
-  @Prop() public languageCapabilities: string[] = [
-    'Bash',
-    'JavaScript',
-    'R',
-    'Python',
-  ]
+  @Prop()
+  public languageCapabilities: string[] = ['Bash', 'JavaScript', 'R', 'Python']
 
   /**
    * Disallow editing of the editor contents when set to `true`
    */
-  @Prop() public readOnly = false
+  @Prop()
+  public readOnly = false
 
   /**
    * Callback function to call when a language of the editor is changed
    */
-  @Prop() public onSetLanguage?: (language: string) => void
+  @Prop()
+  public onSetLanguage?: (language: string) => void
 
   /**
    * Changes the active programming language of the editor.
@@ -85,13 +88,15 @@ export class Editor {
    * Programming language of the Editor
    */
   // eslint-disable-next-line @stencil/strict-mutable
-  @Prop({ mutable: true, reflect: true }) public activeLanguage: string =
+  @Prop({ mutable: true, reflect: true })
+  public activeLanguage: string =
     this.languageCapabilities[0]?.toLowerCase() ?? ''
 
   /**
    * Function to be evaluated over the contents of the editor.
    */
-  @Prop() public executeHandler?: (contents: EditorContents) => Promise<unknown>
+  @Prop()
+  public executeHandler?: (contents: EditorContents) => Promise<unknown>
 
   /**
    * Wrapper around the `executeHandler` function, needed to run using CodeMirror keyboard shortcuts.
@@ -112,23 +117,27 @@ export class Editor {
   /**
    * Autofocus the editor on page load
    */
-  @Prop() public autofocus = false
+  @Prop()
+  public autofocus = false
 
   /**
    * Determines the visibility of line numbers
    */
-  @Prop() public lineNumbers = true
+  @Prop()
+  public lineNumbers = true
 
   /**
    * Enables abiility to fold sections of code
    */
-  @Prop() public foldGutter = true
+  @Prop()
+  public foldGutter = true
 
   /**
    * Custom keyboard shortcuts to pass along to CodeMirror
    * @see https://codemirror.net/6/docs/ref/#keymap
    */
-  @Prop() public keymap: Keymap[] = []
+  @Prop()
+  public keymap: Keymap[] = []
 
   private initCodeMirror = (): void => {
     const root = this.el
@@ -140,15 +149,15 @@ export class Editor {
 
     console.log(root, slot, textContent)
 
-    const extensions = [
+    const extensions: Extension[] = [
       history(),
       autocomplete(),
       bracketMatching(),
-      closeBrackets,
+      closeBrackets(),
       defaultHighlighter,
       python(),
       multipleSelections(),
-      specialChars(),
+      highlightSpecialChars(),
       keymap([
         ...defaultKeymap,
         ...commentKeymap,
