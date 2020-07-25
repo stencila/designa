@@ -1,6 +1,6 @@
 a.button,
 button {
-  @apply inline-block px-4 py-2 m-0 text-base leading-none no-underline border-none font-body;
+  @apply inline-block px-4 py-2 m-0 text-base leading-none no-underline whitespace-no-wrap border-none font-body;
   transition: color 120ms ease-out, background-color 120ms ease-out;
 
   &.xsmall,
