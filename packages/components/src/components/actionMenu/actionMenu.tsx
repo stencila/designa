@@ -4,9 +4,9 @@ import { Component, Element, h, Prop, State } from '@stencil/core'
   tag: 'stencila-action-menu',
   styleUrls: {
     default: 'actionMenu.css',
-    material: 'actionMenu.css'
+    material: 'actionMenu.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class ActionMenu {
   @Element() private el: HTMLStencilaActionMenuElement
@@ -58,7 +58,7 @@ export class ActionMenu {
         )
         this.observer.observe(this.el, {
           characterData: true,
-          subtree: true
+          subtree: true,
         })
         this.calculateWidth()
         this.isCollapsed = true
@@ -78,7 +78,7 @@ export class ActionMenu {
             class={{
               actionContainer: true,
               isAnimating: this.isAnimating,
-              isCollapsed: this.isCollapsed
+              isCollapsed: this.isCollapsed,
             }}
             style={{ '--max-width': this.width }}
           >

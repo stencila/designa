@@ -47,12 +47,12 @@ export class Button {
   /**
    * Renders the button without initial background color or border.
    */
-  @Prop() public minimal: boolean = false
+  @Prop() public minimal = false
 
   /**
    * Renders the button using a secondory, and usually less visually prominent, Button CSS stylesheet.
    */
-  @Prop() public isSecondary: boolean = false
+  @Prop() public isSecondary = false
 
   /**
    * The type of button to render, options correspond to HTML Button `type` attribute.
@@ -64,7 +64,7 @@ export class Button {
   /**
    * If true, prevents the user from interacting with the button.
    */
-  @Prop() public disabled: boolean = false
+  @Prop() public disabled = false
 
   /**
    * Name of the icon to render inside the button
@@ -76,17 +76,17 @@ export class Button {
    * If true, removes extra padding from Icon inside the button
    * TODO: See if we can automatically infer removal of padding through CSS
    */
-  @Prop() public iconOnly: boolean = false
+  @Prop() public iconOnly = false
 
   /**
    * If true, disables the button, shows a loading icon, and prevents the click handler from firing
    */
-  @Prop() public isLoading: boolean = false
+  @Prop() public isLoading = false
 
   /**
    * If true, the button will take up the full width of the parent container
    */
-  @Prop() public fill: boolean = false
+  @Prop() public fill = false
 
   /**
    * An optional help text to display for button focus and hover states.
@@ -96,7 +96,7 @@ export class Button {
   /**
    * State keeping track of when asynchronous action is in flight
    */
-  @State() private ioPending: boolean = false
+  @State() private ioPending = false
 
   /**
    * Function to be called when clicking the button.
