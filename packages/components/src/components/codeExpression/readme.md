@@ -22,6 +22,16 @@ Type: `Promise<CodeExpression>`
 
 
 
+### `getContents() => Promise<CodeExpression>`
+
+Returns the `CodeExpression` node with the updated `text` contents from the editor.
+
+#### Returns
+
+Type: `Promise<CodeExpression>`
+
+
+
 
 ## CSS Custom Properties
 
