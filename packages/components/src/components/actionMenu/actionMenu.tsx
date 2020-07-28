@@ -88,7 +88,8 @@ export class ActionMenu {
           <stencila-button
             onClick={this.toggleActionMenu}
             icon="more-horizontal"
-            isSecondary={true}
+            color="key"
+            minimal={true}
             size="xsmall"
             iconOnly={true}
             ariaLabel="Toggle Action Menu"

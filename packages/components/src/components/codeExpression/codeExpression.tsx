@@ -97,8 +97,11 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     return slot?.textContent ?? ''
   }
 
-  // eslint-disable-next-line @stencil/own-props-must-be-private
-  execute = async (): Promise<CodeExpression> => {
+  /**
+   * Run the `CodeChunk`
+   */
+  @Method()
+  public async execute(): Promise<CodeExpression> {
     try {
       const codeExpression = await this.getContents()
       if (this.executeHandler) {
@@ -111,6 +114,10 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
       throw new Error(err)
     }
   }
+
+  // Create an execute handler bound to this instance
+  // @see https://github.com/typescript-eslint/typescript-eslint/blob/v3.7.0/packages/eslint-plugin/docs/rules/unbound-method.md
+  private executeRef = () => this.execute()
 
   private dividerArrow = (): SVGElement => (
     <svg
@@ -154,31 +161,28 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   private generateContent = (): HTMLElement[] => {
     return [
       <span class="actions">
-        <stencila-icon
-          aria-label="Code Express"
-          icon="terminal"
-        ></stencila-icon>
+        <stencila-button
+          aria-label="Run Code"
+          clickHandlerProp={this.executeRef}
+          color="key"
+          disabled={!this.executeHandler}
+          icon="play"
+          iconOnly={true}
+          minimal={true}
+          size="xsmall"
+          tooltip="Run"
+        ></stencila-button>
         <span class="extraActions">
-          <stencila-tooltip
-            text={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
-          >
-            <stencila-icon
-              tabindex="0"
-              aria-label={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
-              icon={this.isCodeVisible ? 'eye-off' : 'eye'}
-              onClick={this.toggleCodeVisibility}
-            ></stencila-icon>
-          </stencila-tooltip>
-          {this.executeHandler && (
-            <stencila-tooltip text="Run">
-              <stencila-icon
-                tabindex="0"
-                aria-label="Run Code"
-                icon="play"
-                onClick={this.execute}
-              ></stencila-icon>
-            </stencila-tooltip>
-          )}
+          <stencila-button
+            aria-label="Run Code"
+            clickHandlerProp={this.toggleCodeVisibility}
+            color="key"
+            icon={this.isCodeVisible ? 'eye-off' : 'eye'}
+            iconOnly={true}
+            minimal={true}
+            size="xsmall"
+            tooltip={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
+          ></stencila-button>
         </span>
         <span
           class="text"

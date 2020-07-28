@@ -30,6 +30,8 @@
 
  - [stencila-action-menu](../actionMenu)
  - [stencila-code-chunk](../codeChunk)
+ - [stencila-code-expression](../codeExpression)
+ - [stencila-executable-document-toolbar](../executableDocumentToolbar)
 
 ### Depends on
 
@@ -44,6 +46,8 @@ graph TD;
   stencila-tooltip --> stencila-tooltip-element
   stencila-action-menu --> stencila-button
   stencila-code-chunk --> stencila-button
+  stencila-code-expression --> stencila-button
+  stencila-executable-document-toolbar --> stencila-button
   style stencila-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

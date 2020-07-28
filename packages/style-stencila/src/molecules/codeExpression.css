@@ -26,17 +26,13 @@ stencila-code-expression {
   }
 
   .text {
-    @apply inline-block py-0 pl-1 pr-2 overflow-hidden font-mono whitespace-pre-line min-w-em duration-150 ease-out;
+    @apply inline-block py-1 pl-1 pr-2 overflow-hidden font-mono whitespace-pre-line min-w-em duration-150 ease-out;
     transition-property: width;
-  }
-
-  [icon='terminal'] {
-    @apply text-primary-500 min-w-em;
   }
 
   ::slotted([slot='output']),
   [slot='output'] {
-    @apply inline-block py-1 pl-1 pr-2 font-mono border-none bg-stock text-key;
+    @apply inline-block py-1 pt-2 pl-1 pr-2 font-mono border-none bg-stock text-key;
     background-color: var(--background);
     transition: padding 120ms ease-out;
 
@@ -55,28 +51,18 @@ stencila-code-expression {
     fill: var(--background-editor);
   }
 
-  .actions stencila-icon {
-    @apply inline-flex items-stretch self-stretch pt-px overflow-hidden cursor-default transition ease-out duration-150;
-    transition-property: padding, width;
-
-    &:not([icon='terminal']):focus,
-    &:not([icon='terminal']):hover {
-      @apply cursor-pointer bg-neutral-300;
-    }
+  .actions stencila-button {
+    @apply inline-flex items-stretch self-start overflow-hidden cursor-default transition ease-out duration-150;
+    transition-property: padding, width, max-width;
   }
 
-  .extraActions stencila-icon {
-    @apply w-0 max-w-0;
+  .extraActions stencila-button {
+    @apply inline-block w-0 max-w-0;
   }
 
   &.codeHidden {
     .text {
       @apply w-0 min-w-0 pl-0 pr-0 overflow-hidden whitespace-no-wrap;
-    }
-
-    ::slotted([slot='output']),
-    [slot='output'] {
-      @apply pr-1;
     }
   }
 
@@ -96,15 +82,12 @@ stencila-code-expression {
       @apply px-2 min-w-em;
     }
 
-    ::slotted([slot='output']),
-    [slot='output'] {
-      @apply pr-2;
+    .extraActions {
+      @apply pr-1;
     }
 
-    .extraActions stencila-icon {
-      @apply max-w-full px-1 border-r;
-      border-color: var(--border);
-      width: 1.75rem;
+    .extraActions stencila-button {
+      @apply w-8 max-w-full;
     }
   }
 }

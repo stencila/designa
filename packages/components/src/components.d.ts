@@ -134,6 +134,10 @@ export namespace Components {
     }
     interface StencilaCodeExpression {
         /**
+          * Run the `CodeChunk`
+         */
+        "execute": () => Promise<CodeExpression>;
+        /**
           * A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`.
          */
         "executeHandler"?: (

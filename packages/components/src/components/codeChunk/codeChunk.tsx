@@ -162,7 +162,8 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
       <Host>
         <stencila-action-menu expandable={true}>
           <stencila-button
-            isSecondary={true}
+            minimal={true}
+            color="key"
             clickHandlerProp={this.hideAllCode}
             icon={this.isCodeVisible ? 'eye-off' : 'eye'}
             iconOnly={true}
@@ -172,7 +173,8 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
           {this.executeHandler !== undefined && (
             <stencila-button
               icon="play"
-              isSecondary={true}
+              minimal={true}
+              color="key"
               size="xsmall"
               tooltip="Run Code"
               iconOnly={true}

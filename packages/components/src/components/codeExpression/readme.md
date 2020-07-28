@@ -12,9 +12,9 @@
 
 ## Methods
 
-### `getContents() => Promise<CodeExpression>`
+### `execute() => Promise<CodeExpression>`
 
-Returns the `CodeExpression` node with the updated `text` contents from the editor.
+Run the `CodeChunk`
 
 #### Returns
 
@@ -36,14 +36,16 @@ Type: `Promise<CodeExpression>`
 
 ### Depends on
 
-- [stencila-icon](../icon)
+- [stencila-button](../button)
 - [stencila-tooltip](../tooltip)
 
 ### Graph
 ```mermaid
 graph TD;
-  stencila-code-expression --> stencila-icon
+  stencila-code-expression --> stencila-button
   stencila-code-expression --> stencila-tooltip
+  stencila-button --> stencila-icon
+  stencila-button --> stencila-tooltip
   stencila-tooltip --> stencila-tooltip-element
   style stencila-code-expression fill:#f9f,stroke:#333,stroke-width:4px
 ```
