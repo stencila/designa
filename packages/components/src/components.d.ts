@@ -12,6 +12,7 @@ import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
 import { IconNames as IconNames1 } from "./components/icon/icon";
 import { ChildTab } from "./components/tabList/tabList";
+import { ToastPosition, ToastType } from "./components/toast/toastController";
 export namespace Components {
     interface StencilaActionMenu {
         /**
@@ -286,6 +287,20 @@ export namespace Components {
          */
         "tabs": ChildTab[];
     }
+    interface StencilaToast {
+        /**
+          * Duration in milliseconds for how long the toast should be display
+         */
+        "duration": number;
+        /**
+          * Where on the screen to show the Toast. Overrides the base position set in the `ToastController` instance.
+         */
+        "position": ToastPosition | undefined;
+        /**
+          * Type of the toast to show. Affects the component color scheme.
+         */
+        "type": ToastType;
+    }
     interface StencilaToc {
         /**
           * Where to grab the headings to build the table of contents.
@@ -418,6 +433,12 @@ declare global {
         prototype: HTMLStencilaTabListElement;
         new (): HTMLStencilaTabListElement;
     };
+    interface HTMLStencilaToastElement extends Components.StencilaToast, HTMLStencilElement {
+    }
+    var HTMLStencilaToastElement: {
+        prototype: HTMLStencilaToastElement;
+        new (): HTMLStencilaToastElement;
+    };
     interface HTMLStencilaTocElement extends Components.StencilaToc, HTMLStencilElement {
     }
     var HTMLStencilaTocElement: {
@@ -465,6 +486,7 @@ declare global {
         "stencila-node-list": HTMLStencilaNodeListElement;
         "stencila-tab": HTMLStencilaTabElement;
         "stencila-tab-list": HTMLStencilaTabListElement;
+        "stencila-toast": HTMLStencilaToastElement;
         "stencila-toc": HTMLStencilaTocElement;
         "stencila-toolbar": HTMLStencilaToolbarElement;
         "stencila-tooltip": HTMLStencilaTooltipElement;
@@ -734,6 +756,20 @@ declare namespace LocalJSX {
          */
         "tabs": ChildTab[];
     }
+    interface StencilaToast {
+        /**
+          * Duration in milliseconds for how long the toast should be display
+         */
+        "duration"?: number;
+        /**
+          * Where on the screen to show the Toast. Overrides the base position set in the `ToastController` instance.
+         */
+        "position"?: ToastPosition | undefined;
+        /**
+          * Type of the toast to show. Affects the component color scheme.
+         */
+        "type"?: ToastType;
+    }
     interface StencilaToc {
         /**
           * Where to grab the headings to build the table of contents.
@@ -785,6 +821,7 @@ declare namespace LocalJSX {
         "stencila-node-list": StencilaNodeList;
         "stencila-tab": StencilaTab;
         "stencila-tab-list": StencilaTabList;
+        "stencila-toast": StencilaToast;
         "stencila-toc": StencilaToc;
         "stencila-toolbar": StencilaToolbar;
         "stencila-tooltip": StencilaTooltip;
@@ -812,6 +849,7 @@ declare module "@stencil/core" {
             "stencila-node-list": LocalJSX.StencilaNodeList & JSXBase.HTMLAttributes<HTMLStencilaNodeListElement>;
             "stencila-tab": LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
             "stencila-tab-list": LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;
+            "stencila-toast": LocalJSX.StencilaToast & JSXBase.HTMLAttributes<HTMLStencilaToastElement>;
             "stencila-toc": LocalJSX.StencilaToc & JSXBase.HTMLAttributes<HTMLStencilaTocElement>;
             "stencila-toolbar": LocalJSX.StencilaToolbar & JSXBase.HTMLAttributes<HTMLStencilaToolbarElement>;
             "stencila-tooltip": LocalJSX.StencilaTooltip & JSXBase.HTMLAttributes<HTMLStencilaTooltipElement>;
