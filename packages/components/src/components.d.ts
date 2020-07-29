@@ -75,6 +75,11 @@ export namespace Components {
          */
         "minimal": boolean;
         /**
+          * Relationship of the link
+          * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
+         */
+        "rel"?: string;
+        /**
           * The overall size of the Button.
          */
         "size": 'xsmall' | 'small' | 'default' | 'large';
@@ -567,6 +572,11 @@ declare namespace LocalJSX {
           * Renders the button without initial background color or border.
          */
         "minimal"?: boolean;
+        /**
+          * Relationship of the link
+          * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
+         */
+        "rel"?: string;
         /**
           * The overall size of the Button.
          */

@@ -23,6 +23,13 @@ export class Button {
   @Prop() public href?: string
 
   /**
+   * Relationship of the link
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel
+   * Only applied if `href` prop is also set.
+   */
+  @Prop() public rel?: string
+
+  /**
    * Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute.
    * Only applies if the button is an anchor link.
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target
@@ -118,8 +125,12 @@ export class Button {
     return Promise.resolve()
   }
 
-  generateButton = (): HTMLButtonElement | HTMLAnchorElement => {
-    const TagType = this.href != null ? 'a' : 'button'
+  private generateButton = (): HTMLButtonElement | HTMLAnchorElement => {
+    const TagType = this.href === undefined ? 'button' : 'a'
+    const elAttrs =
+      TagType === 'button'
+        ? { type: this.buttonType }
+        : { href: this.href, rel: this.rel, target: this.target }
 
     return (
       <TagType
@@ -132,9 +143,7 @@ export class Button {
           [this.size]: this.size !== undefined,
           [`color-${this.color}`]: true,
         }}
-        href={this.href}
-        target={this.target}
-        type={this.buttonType}
+        {...elAttrs}
         disabled={this.ioPending || this.isLoading || this.disabled || false}
         aria-label={this.ariaLabel ?? this.tooltip}
         onClick={this.onClick}
