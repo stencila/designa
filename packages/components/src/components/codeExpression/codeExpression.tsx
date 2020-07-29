@@ -72,7 +72,8 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   }
 
   private collapseAllListenHandler = (e: CodeVisibilityEvent): void => {
-    this.isCodeVisible = e.detail.isVisible
+    // TODO: Remove usage of `isCodeCollapsed` once prop is fully deprecated.
+    this.isCodeVisible = e.detail.isVisible ?? e.detail.isCodeCollapsed
   }
 
   private toggleCodeVisibility = (): boolean =>
