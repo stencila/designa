@@ -32,10 +32,9 @@ stencila-code-chunk {
 }
 
 .editorContainer {
-  @apply relative flex flex-col flex-auto m-0 border-t-0 border-b border-l-0 border-r-0 rounded-none;
+  @apply relative flex flex-col flex-auto h-auto m-0 border-t-0 border-b border-l-0 border-r-0 rounded-none;
   background: var(--background-editor);
   border-color: var(--border);
-  height: intrinsic;
 
   pre,
   pre[class*='language-'] {
