@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.1](https://github.com/stencila/designa/compare/@stencila/components@0.15.0...@stencila/components@0.15.1) (2020-07-29)
+
+
+### Bug Fixes
+
+* **CodeExpression:** Add support for deprecated listener until removed ([a684599](https://github.com/stencila/designa/commit/a684599a8d2d7cb20e86a94f68e791aca8cf4556))
+
+
+
+
+
 # [0.15.0](https://github.com/stencila/designa/compare/@stencila/components@0.14.13...@stencila/components@0.15.0) (2020-07-29)
 
 

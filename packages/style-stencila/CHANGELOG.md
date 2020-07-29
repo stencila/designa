@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.1](https://github.com/stencila/style/compare/@stencila/style-stencila@0.14.0...@stencila/style-stencila@0.14.1) (2020-07-29)
+
+
+### Reverts
+
+* Revert "fix(CodeChunk): Revert patch for fixing CodeChunk height in Safari" ([41479af](https://github.com/stencila/style/commit/41479af575ff09e6eaa9283e7a0cd2096795fce0))
+
+
+
+
+
 # [0.14.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.13.7...@stencila/style-stencila@0.14.0) (2020-07-29)
 
 
