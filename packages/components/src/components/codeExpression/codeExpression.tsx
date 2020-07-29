@@ -189,6 +189,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
           class="text"
           contentEditable={true}
           onBlur={this.removeHoverState}
+          tabIndex={this.isCodeVisible ? 0 : -1}
         >
           <slot name={slots.text} />
         </span>
