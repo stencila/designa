@@ -12,6 +12,7 @@ import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
 import { IconNames as IconNames1 } from "./components/icon/icon";
 import { ChildTab } from "./components/tabList/tabList";
+import { ToastPosition, ToastType } from "./components/toast/toastController";
 export namespace Components {
     interface StencilaActionMenu {
         /**
@@ -74,6 +75,11 @@ export namespace Components {
          */
         "minimal": boolean;
         /**
+          * Relationship of the link
+          * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
+         */
+        "rel"?: string;
+        /**
           * The overall size of the Button.
          */
         "size": 'xsmall' | 'small' | 'default' | 'large';
@@ -92,6 +98,10 @@ export namespace Components {
          */
         "autofocus": boolean;
         /**
+          * Run the `CodeChunk`
+         */
+        "execute": () => Promise<CodeChunk>;
+        /**
           * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
@@ -100,9 +110,13 @@ export namespace Components {
          */
         "getContents": () => Promise<CodeChunk>;
         /**
+          * @deprecated Use `isCodeVisible` prop (`is-code-visible` attribute) instead Whether the code section is visible or not
+         */
+        "isCodeCollapsed": boolean;
+        /**
           * Whether the code section is visible or not
          */
-        "isCodeVisibleProp": boolean;
+        "isCodeVisible": boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
@@ -132,6 +146,10 @@ export namespace Components {
         "open": boolean;
     }
     interface StencilaCodeExpression {
+        /**
+          * Run the `CodeChunk`
+         */
+        "execute": () => Promise<CodeExpression>;
         /**
           * A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`.
          */
@@ -286,6 +304,20 @@ export namespace Components {
          */
         "tabs": ChildTab[];
     }
+    interface StencilaToast {
+        /**
+          * Duration in milliseconds for how long the toast should be display
+         */
+        "duration": number;
+        /**
+          * Where on the screen to show the Toast. Overrides the base position set in the `ToastController` instance.
+         */
+        "position": ToastPosition | undefined;
+        /**
+          * Type of the toast to show. Affects the component color scheme.
+         */
+        "type": ToastType;
+    }
     interface StencilaToc {
         /**
           * Where to grab the headings to build the table of contents.
@@ -418,6 +450,12 @@ declare global {
         prototype: HTMLStencilaTabListElement;
         new (): HTMLStencilaTabListElement;
     };
+    interface HTMLStencilaToastElement extends Components.StencilaToast, HTMLStencilElement {
+    }
+    var HTMLStencilaToastElement: {
+        prototype: HTMLStencilaToastElement;
+        new (): HTMLStencilaToastElement;
+    };
     interface HTMLStencilaTocElement extends Components.StencilaToc, HTMLStencilElement {
     }
     var HTMLStencilaTocElement: {
@@ -465,6 +503,7 @@ declare global {
         "stencila-node-list": HTMLStencilaNodeListElement;
         "stencila-tab": HTMLStencilaTabElement;
         "stencila-tab-list": HTMLStencilaTabListElement;
+        "stencila-toast": HTMLStencilaToastElement;
         "stencila-toc": HTMLStencilaTocElement;
         "stencila-toolbar": HTMLStencilaToolbarElement;
         "stencila-tooltip": HTMLStencilaTooltipElement;
@@ -534,6 +573,11 @@ declare namespace LocalJSX {
          */
         "minimal"?: boolean;
         /**
+          * Relationship of the link
+          * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
+         */
+        "rel"?: string;
+        /**
           * The overall size of the Button.
          */
         "size"?: 'xsmall' | 'small' | 'default' | 'large';
@@ -556,9 +600,13 @@ declare namespace LocalJSX {
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
         /**
+          * @deprecated Use `isCodeVisible` prop (`is-code-visible` attribute) instead Whether the code section is visible or not
+         */
+        "isCodeCollapsed"?: boolean;
+        /**
           * Whether the code section is visible or not
          */
-        "isCodeVisibleProp"?: boolean;
+        "isCodeVisible"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
@@ -567,7 +615,7 @@ declare namespace LocalJSX {
         /**
           * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.
          */
-        "onCollapseAllCode"?: (event: CustomEvent<any>) => void;
+        "onSetAllCodeVisibility"?: (event: CustomEvent<any>) => void;
         /**
           * Callback function to call when a language of the editor is changed
          */
@@ -734,6 +782,20 @@ declare namespace LocalJSX {
          */
         "tabs": ChildTab[];
     }
+    interface StencilaToast {
+        /**
+          * Duration in milliseconds for how long the toast should be display
+         */
+        "duration"?: number;
+        /**
+          * Where on the screen to show the Toast. Overrides the base position set in the `ToastController` instance.
+         */
+        "position"?: ToastPosition | undefined;
+        /**
+          * Type of the toast to show. Affects the component color scheme.
+         */
+        "type"?: ToastType;
+    }
     interface StencilaToc {
         /**
           * Where to grab the headings to build the table of contents.
@@ -785,6 +847,7 @@ declare namespace LocalJSX {
         "stencila-node-list": StencilaNodeList;
         "stencila-tab": StencilaTab;
         "stencila-tab-list": StencilaTabList;
+        "stencila-toast": StencilaToast;
         "stencila-toc": StencilaToc;
         "stencila-toolbar": StencilaToolbar;
         "stencila-tooltip": StencilaTooltip;
@@ -812,6 +875,7 @@ declare module "@stencil/core" {
             "stencila-node-list": LocalJSX.StencilaNodeList & JSXBase.HTMLAttributes<HTMLStencilaNodeListElement>;
             "stencila-tab": LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
             "stencila-tab-list": LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;
+            "stencila-toast": LocalJSX.StencilaToast & JSXBase.HTMLAttributes<HTMLStencilaToastElement>;
             "stencila-toc": LocalJSX.StencilaToc & JSXBase.HTMLAttributes<HTMLStencilaTocElement>;
             "stencila-toolbar": LocalJSX.StencilaToolbar & JSXBase.HTMLAttributes<HTMLStencilaToolbarElement>;
             "stencila-tooltip": LocalJSX.StencilaTooltip & JSXBase.HTMLAttributes<HTMLStencilaTooltipElement>;

@@ -16,7 +16,6 @@
 
  - [stencila-button](../button)
  - [stencila-code-error](../error)
- - [stencila-code-expression](../codeExpression)
  - [stencila-details](../details)
  - [stencila-editor](../editor)
  - [stencila-input](../input)
@@ -27,7 +26,6 @@
 graph TD;
   stencila-button --> stencila-icon
   stencila-code-error --> stencila-icon
-  stencila-code-expression --> stencila-icon
   stencila-details --> stencila-icon
   stencila-editor --> stencila-icon
   stencila-input --> stencila-icon

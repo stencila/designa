@@ -8,7 +8,7 @@ import { defaultHighlighter } from '@codemirror/next/highlight'
 import { history, historyKeymap } from '@codemirror/next/history'
 import { python } from '@codemirror/next/lang-python'
 import { bracketMatching } from '@codemirror/next/matchbrackets'
-import { EditorState, Extension } from '@codemirror/next/state'
+import { EditorState, Extension, tagExtension } from '@codemirror/next/state'
 import {
   KeyBinding as KeymapI,
   keymap,
@@ -17,7 +17,7 @@ import {
   highlightSpecialChars,
   multipleSelections,
 } from '@codemirror/next/view'
-import { Component, Element, h, Host, Method, Prop } from '@stencil/core'
+import { Component, Element, h, Host, Method, Prop, Watch } from '@stencil/core'
 import { deleteToLineStart } from './commands'
 
 export interface EditorContents {
@@ -65,6 +65,23 @@ export class Editor {
    */
   @Prop()
   public readOnly = false
+
+  /**
+   * Update the CodeMirror internal state when the `readOnly` prop changes
+   */
+  @Watch('readOnly')
+  readOnlyChanged(nextReadOnly: boolean, prevReadOnly: boolean): void {
+    if (nextReadOnly !== prevReadOnly) {
+      this.editorRef.dispatch({
+        reconfigure: {
+          [this.readOnlyTag]: EditorView.editable.of(!this.readOnly),
+        },
+      })
+    }
+  }
+
+  // Mutable CodeMirror states need to be "tagged". @see https://codemirror.net/6/docs/ref/#state.tagExtension
+  private readOnlyTag = Symbol('readOnly')
 
   /**
    * Callback function to call when a language of the editor is changed
@@ -147,8 +164,6 @@ export class Editor {
       root?.querySelector(`#${cssIds.editorTarget}`)?.textContent ??
       ''
 
-    console.log(root, slot, textContent)
-
     const extensions: Extension[] = [
       history(),
       autocomplete(),
@@ -181,7 +196,7 @@ export class Editor {
         },
         ...this.keymap,
       ]),
-      EditorView.editable.of(!this.readOnly),
+      tagExtension(this.readOnlyTag, EditorView.editable.of(!this.readOnly)),
     ]
 
     if (this.lineNumbers) {

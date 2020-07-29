@@ -12,4 +12,5 @@
 @import './pre';
 @import './summary';
 @import './tab';
+@import './toast';
 @import './tooltip';

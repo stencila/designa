@@ -5,24 +5,35 @@
 
 ## Properties
 
-| Property                  | Attribute                  | Description                                                                                            | Type                                                          | Default     |
-| ------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- | ----------- |
-| `autofocus`               | `autofocus`                | Autofocus the editor on page load                                                                      | `boolean`                                                     | `false`     |
-| `executeHandler`          | --                         | A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`. | `((codeChunk: CodeChunk) => Promise<CodeChunk>) \| undefined` | `undefined` |
-| `isCodeVisibleProp`       | `data-collapsed`           | Whether the code section is visible or not                                                             | `boolean`                                                     | `false`     |
-| `keymap`                  | --                         | Custom keyboard shortcuts to pass along to CodeMirror                                                  | `KeyBinding[]`                                                | `[]`        |
-| `onSetLanguage`           | --                         | Callback function to call when a language of the editor is changed                                     | `((language: string) => void) \| undefined`                   | `undefined` |
-| `programmingLanguageProp` | `data-programminglanguage` | Programming language of the CodeChunk                                                                  | `string`                                                      | `undefined` |
+| Property                  | Attribute                  | Description                                                                                                                                                         | Type                                                          | Default     |
+| ------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ----------- |
+| `autofocus`               | `autofocus`                | Autofocus the editor on page load                                                                                                                                   | `boolean`                                                     | `false`     |
+| `executeHandler`          | --                         | A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.                                                              | `((codeChunk: CodeChunk) => Promise<CodeChunk>) \| undefined` | `undefined` |
+| `isCodeCollapsed`         | `data-collapsed`           | <span style="color:red">**[DEPRECATED]**</span> Use `isCodeVisible` prop (`is-code-visible` attribute) instead Whether the code section is visible or not<br/><br/> | `boolean`                                                     | `false`     |
+| `isCodeVisible`           | `is-code-visible`          | Whether the code section is visible or not                                                                                                                          | `boolean`                                                     | `false`     |
+| `keymap`                  | --                         | Custom keyboard shortcuts to pass along to CodeMirror                                                                                                               | `KeyBinding[]`                                                | `[]`        |
+| `onSetLanguage`           | --                         | Callback function to call when a language of the editor is changed                                                                                                  | `((language: string) => void) \| undefined`                   | `undefined` |
+| `programmingLanguageProp` | `data-programminglanguage` | Programming language of the CodeChunk                                                                                                                               | `string`                                                      | `undefined` |
 
 
 ## Events
 
-| Event             | Description                                                                                                                           | Type               |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `collapseAllCode` | Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible. | `CustomEvent<any>` |
+| Event                  | Description                                                                                                                           | Type               |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `setAllCodeVisibility` | Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible. | `CustomEvent<any>` |
 
 
 ## Methods
+
+### `execute() => Promise<CodeChunk>`
+
+Run the `CodeChunk`
+
+#### Returns
+
+Type: `Promise<CodeChunk>`
+
+
 
 ### `getContents() => Promise<CodeChunk>`
 

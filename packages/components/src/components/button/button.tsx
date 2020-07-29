@@ -23,6 +23,13 @@ export class Button {
   @Prop() public href?: string
 
   /**
+   * Relationship of the link
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel
+   * Only applied if `href` prop is also set.
+   */
+  @Prop() public rel?: string
+
+  /**
    * Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute.
    * Only applies if the button is an anchor link.
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target
@@ -47,12 +54,12 @@ export class Button {
   /**
    * Renders the button without initial background color or border.
    */
-  @Prop() public minimal: boolean = false
+  @Prop() public minimal = false
 
   /**
    * Renders the button using a secondory, and usually less visually prominent, Button CSS stylesheet.
    */
-  @Prop() public isSecondary: boolean = false
+  @Prop() public isSecondary = false
 
   /**
    * The type of button to render, options correspond to HTML Button `type` attribute.
@@ -64,7 +71,7 @@ export class Button {
   /**
    * If true, prevents the user from interacting with the button.
    */
-  @Prop() public disabled: boolean = false
+  @Prop() public disabled = false
 
   /**
    * Name of the icon to render inside the button
@@ -76,17 +83,17 @@ export class Button {
    * If true, removes extra padding from Icon inside the button
    * TODO: See if we can automatically infer removal of padding through CSS
    */
-  @Prop() public iconOnly: boolean = false
+  @Prop() public iconOnly = false
 
   /**
    * If true, disables the button, shows a loading icon, and prevents the click handler from firing
    */
-  @Prop() public isLoading: boolean = false
+  @Prop() public isLoading = false
 
   /**
    * If true, the button will take up the full width of the parent container
    */
-  @Prop() public fill: boolean = false
+  @Prop() public fill = false
 
   /**
    * An optional help text to display for button focus and hover states.
@@ -96,7 +103,7 @@ export class Button {
   /**
    * State keeping track of when asynchronous action is in flight
    */
-  @State() private ioPending: boolean = false
+  @State() private ioPending = false
 
   /**
    * Function to be called when clicking the button.
@@ -118,8 +125,12 @@ export class Button {
     return Promise.resolve()
   }
 
-  generateButton = (): HTMLButtonElement | HTMLAnchorElement => {
-    const TagType = this.href != null ? 'a' : 'button'
+  private generateButton = (): HTMLButtonElement | HTMLAnchorElement => {
+    const TagType = this.href === undefined ? 'button' : 'a'
+    const elAttrs =
+      TagType === 'button'
+        ? { type: this.buttonType }
+        : { href: this.href, rel: this.rel, target: this.target }
 
     return (
       <TagType
@@ -132,9 +143,7 @@ export class Button {
           [this.size]: this.size !== undefined,
           [`color-${this.color}`]: true,
         }}
-        href={this.href}
-        target={this.target}
-        type={this.buttonType}
+        {...elAttrs}
         disabled={this.ioPending || this.isLoading || this.disabled || false}
         aria-label={this.ariaLabel ?? this.tooltip}
         onClick={this.onClick}
