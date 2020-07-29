@@ -72,7 +72,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   }
 
   private collapseAllListenHandler = (e: CodeVisibilityEvent): void => {
-    this.isCodeVisible = !e.detail.isVisible
+    this.isCodeVisible = e.detail.isVisible
   }
 
   private toggleCodeVisibility = (): boolean =>
