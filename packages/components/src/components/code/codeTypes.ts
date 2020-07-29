@@ -3,6 +3,8 @@ import { CodeChunk, CodeExpression } from '@stencila/schema'
 export interface CodeVisibilityEvent extends CustomEvent {
   detail: {
     isVisible: boolean
+    /** @deprecated Use `isVisible` instead */
+    isCodeCollapsed: boolean
   }
 }
 

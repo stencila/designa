@@ -51,12 +51,19 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   @Prop() public onSetLanguage?: (language: string) => void
 
   /**
+   * @deprecated Use `isCodeVisible` prop (`is-code-visible` attribute) instead
    * Whether the code section is visible or not
    */
   @Prop({
     attribute: 'data-collapsed',
   })
-  public isCodeVisibleProp = false
+  public isCodeCollapsed = false
+
+  /**
+   * Whether the code section is visible or not
+   */
+  @Prop()
+  public isCodeVisible = false
 
   /**
    * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
@@ -75,24 +82,25 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
 
   @State() codeErrors: CodeChunk['errors']
 
-  @State() private isCodeVisible: boolean = this.isCodeVisibleProp
+  @State() private isCodeVisibleState: boolean = this.isCodeVisible
 
   /**
    * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code,
    * leaving only the results visible.
    */
   @Event({
-    eventName: 'collapseAllCode',
+    eventName: 'setAllCodeVisibility',
   })
   public setAllCodeVisibility: EventEmitter
 
   @Listen('collapseAllCode', { target: 'window' })
+  @Listen('setAllCodeVisibility', { target: 'window' })
   onSetAllCodeVisibility(event: CodeVisibilityEvent): void {
-    this.hideCode(event)
+    this.setCodeVisibility(event)
   }
 
-  private hideAllCode = (): void =>
-    this.setAllCodeVisibilityHandler(!this.isCodeVisible)
+  private toggleAllCodeVisibility = (): void =>
+    this.setAllCodeVisibilityHandler(!this.isCodeVisibleState)
 
   private onExecuteHandler = async (): Promise<CodeChunk> => {
     const node = await this.getContents()
@@ -124,8 +132,11 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     return codeChunk({ text: '' })
   }
 
-  // eslint-disable-next-line @stencil/own-props-must-be-private
-  execute = async (): Promise<CodeChunk> => {
+  /**
+   * Run the `CodeChunk`
+   */
+  @Method()
+  public async execute(): Promise<CodeChunk> {
     this.executeCodeState = 'PENDING'
     try {
       const res = await this.onExecuteHandler()
@@ -136,6 +147,10 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
       return err
     }
   }
+
+  // Create an execute handler bound to this instance
+  // @see https://github.com/typescript-eslint/typescript-eslint/blob/v3.7.0/packages/eslint-plugin/docs/rules/unbound-method.md
+  private executeRef = () => this.execute()
 
   private updateErrors = (errors: CodeChunk['errors'] = []): void => {
     this.codeErrors = errors.map((error) => (
@@ -153,8 +168,9 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     this.setAllCodeVisibility.emit({ isVisible })
   }
 
-  private hideCode = (e: CodeVisibilityEvent): void => {
-    this.isCodeVisible = e.detail.isVisible
+  private setCodeVisibility = (e: CodeVisibilityEvent): void => {
+    // TODO: Remove usage of `isCodeCollapsed` once prop is fully deprecated.
+    this.isCodeVisibleState = e.detail.isVisible ?? e.detail.isCodeCollapsed
   }
 
   public render(): HTMLElement {
@@ -164,11 +180,11 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
           <stencila-button
             minimal={true}
             color="key"
-            clickHandlerProp={this.hideAllCode}
-            icon={this.isCodeVisible ? 'eye-off' : 'eye'}
+            clickHandlerProp={this.toggleAllCodeVisibility}
+            icon={this.isCodeVisibleState ? 'eye-off' : 'eye'}
             iconOnly={true}
             size="xsmall"
-            tooltip={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
+            tooltip={`${this.isCodeVisibleState ? 'Hide' : 'Show'} Code`}
           ></stencila-button>
           {this.executeHandler !== undefined && (
             <stencila-button
@@ -179,7 +195,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
               tooltip="Run Code"
               iconOnly={true}
               slot="persistentActions"
-              clickHandlerProp={this.execute}
+              clickHandlerProp={this.executeRef}
               isLoading={this.executeCodeState === 'PENDING'}
             ></stencila-button>
           )}
@@ -188,7 +204,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
         <div
           class={{
             editorContainer: true,
-            hidden: !this.isCodeVisible,
+            hidden: !this.isCodeVisibleState,
           }}
         >
           <stencila-editor

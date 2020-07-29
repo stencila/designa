@@ -93,6 +93,10 @@ export namespace Components {
          */
         "autofocus": boolean;
         /**
+          * Run the `CodeChunk`
+         */
+        "execute": () => Promise<CodeChunk>;
+        /**
           * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
@@ -101,9 +105,13 @@ export namespace Components {
          */
         "getContents": () => Promise<CodeChunk>;
         /**
+          * @deprecated Use `isCodeVisible` prop (`is-code-visible` attribute) instead Whether the code section is visible or not
+         */
+        "isCodeCollapsed": boolean;
+        /**
           * Whether the code section is visible or not
          */
-        "isCodeVisibleProp": boolean;
+        "isCodeVisible": boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
@@ -582,9 +590,13 @@ declare namespace LocalJSX {
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
         /**
+          * @deprecated Use `isCodeVisible` prop (`is-code-visible` attribute) instead Whether the code section is visible or not
+         */
+        "isCodeCollapsed"?: boolean;
+        /**
           * Whether the code section is visible or not
          */
-        "isCodeVisibleProp"?: boolean;
+        "isCodeVisible"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
@@ -593,7 +605,7 @@ declare namespace LocalJSX {
         /**
           * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.
          */
-        "onCollapseAllCode"?: (event: CustomEvent<any>) => void;
+        "onSetAllCodeVisibility"?: (event: CustomEvent<any>) => void;
         /**
           * Callback function to call when a language of the editor is changed
          */

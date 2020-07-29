@@ -53,6 +53,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   }
 
   @Listen('collapseAllCode', { target: 'window' })
+  @Listen('setAllCodeVisibility', { target: 'window' })
   onSetAllCodeVisibility(event: CodeVisibilityEvent): void {
     this.collapseAllListenHandler(event)
   }
