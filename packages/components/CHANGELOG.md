@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/stencila/designa/compare/@stencila/components@0.14.13...@stencila/components@0.15.0) (2020-07-29)
+
+
+### Bug Fixes
+
+* **Code:** Standardize CodeChunk and CodeExpression component buttons ([dd04e83](https://github.com/stencila/designa/commit/dd04e839ed248eb9df9e98be14793b950ab661e1))
+* **CodeExpression:** Don't bring keyboard focus to editor if it's hidden ([a623f1d](https://github.com/stencila/designa/commit/a623f1d937ade67ebe53d62a7be32fc96fe9bc63))
+* **CodeExpression:** Fix toggling of code visibility to match CodeChunk ([0ccd4a0](https://github.com/stencila/designa/commit/0ccd4a0aa35b49766c483450d53b197cb27f1a21))
+* **Editor:** Correctly reflect readonly state when changing prop ([fc9524b](https://github.com/stencila/designa/commit/fc9524b8c1a0193b98b60ef8609eb5bd77736a90))
+
+
+### Features
+
+* **Button:** Add ability to set rel & target attributes for links ([5044fec](https://github.com/stencila/designa/commit/5044fec1d6a067aeff043012c1dabb8db562827a))
+* **Toast:** Add Toast notification component ([abf8025](https://github.com/stencila/designa/commit/abf8025bbda0c86e0d327321e27383762075c7b9))
+
+
+
+
+
 ## [0.14.13](https://github.com/stencila/designa/compare/@stencila/components@0.14.12...@stencila/components@0.14.13) (2020-07-23)
 
 

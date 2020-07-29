@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.13.7...@stencila/style-stencila@0.14.0) (2020-07-29)
+
+
+### Bug Fixes
+
+* **Button:** Keep text and icons on single line ([d6bceaf](https://github.com/stencila/style/commit/d6bceafc24b8a68dc8fd7d36267f4094bd2dd8b1))
+* **Button:** Refine icons in Stencila theme for xs size buttons ([a8f4510](https://github.com/stencila/style/commit/a8f4510f796547164acfeb0a62f4d4e0b70aaa4b))
+* **Code:** Standardize CodeChunk and CodeExpression component buttons ([dd04e83](https://github.com/stencila/style/commit/dd04e839ed248eb9df9e98be14793b950ab661e1))
+* **CodeChunk:** Revert patch for fixing CodeChunk height in Safari ([a5e0d5f](https://github.com/stencila/style/commit/a5e0d5fd30650107d593158e15a9b44e9a43c446))
+
+
+### Features
+
+* **Button, Tooltip:** Reduce corner radiuses to match Hub v3 styles ([3f0eda5](https://github.com/stencila/style/commit/3f0eda58a6339815ddd704dec14fda92ec24435a))
+* **Toast:** Add Toast notification component ([abf8025](https://github.com/stencila/style/commit/abf8025bbda0c86e0d327321e27383762075c7b9))
+
+
+
+
+
 ## [0.13.7](https://github.com/stencila/style/compare/@stencila/style-stencila@0.13.6...@stencila/style-stencila@0.13.7) (2020-07-21)
 
 **Note:** Version bump only for package @stencila/style-stencila

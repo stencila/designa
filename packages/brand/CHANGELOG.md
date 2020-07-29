@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/stencila/style/compare/@stencila/brand@0.4.6...@stencila/brand@0.5.0) (2020-07-29)
+
+
+### Features
+
+* **Brand:** Add light logo variant for use on dark backgrounds ([c9b2f0e](https://github.com/stencila/style/commit/c9b2f0e21f060f28f529f54bdb849d441b0877be))
+
+
+
+
+
 ## [0.4.6](https://github.com/stencila/style/compare/@stencila/brand@0.4.5...@stencila/brand@0.4.6) (2020-07-21)
 
 **Note:** Version bump only for package @stencila/brand

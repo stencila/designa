@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.7](https://github.com/stencila/style/compare/@stencila/style-material@0.11.6...@stencila/style-material@0.11.7) (2020-07-29)
+
+
+### Bug Fixes
+
+* **Button:** Keep text and icons on single line ([d6bceaf](https://github.com/stencila/style/commit/d6bceafc24b8a68dc8fd7d36267f4094bd2dd8b1))
+
+
+
+
+
 ## [0.11.6](https://github.com/stencila/style/compare/@stencila/style-material@0.11.5...@stencila/style-material@0.11.6) (2020-07-21)
 
 **Note:** Version bump only for package @stencila/style-material
