@@ -18,6 +18,7 @@
  - [stencila-code-error](../error)
  - [stencila-details](../details)
  - [stencila-editor](../editor)
+ - [stencila-executable-document-toolbar](../executableDocumentToolbar)
  - [stencila-input](../input)
  - [stencila-menu-item](../menuItem)
 
@@ -28,6 +29,7 @@ graph TD;
   stencila-code-error --> stencila-icon
   stencila-details --> stencila-icon
   stencila-editor --> stencila-icon
+  stencila-executable-document-toolbar --> stencila-icon
   stencila-input --> stencila-icon
   stencila-menu-item --> stencila-icon
   style stencila-icon fill:#f9f,stroke:#333,stroke-width:4px

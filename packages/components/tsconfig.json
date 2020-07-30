@@ -12,7 +12,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strictPropertyInitialization": false,
-    "target": "es2017"
+    "target": "es2017",
+    "skipLibCheck": true
   },
   "include": ["src", "types/jsx.d.ts"],
   "exclude": ["node_modules"]

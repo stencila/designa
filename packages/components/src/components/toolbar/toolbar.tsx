@@ -21,7 +21,7 @@ export class Toolbar {
   /**
    * The background fill color of the Navbar
    */
-  @Prop() public color: Colors = 'primary'
+  @Prop() public color: Colors | string = 'primary'
 
   public render() {
     return (

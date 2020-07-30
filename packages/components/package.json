@@ -49,12 +49,14 @@
   "dependencies": {
     "@codemirror/next": "^0.8.0",
     "@popperjs/core": "^2.4.4",
+    "@stencila/executa": "^1.11.8",
     "@stencila/style-material": "0.11.8",
     "@stencila/style-stencila": "0.14.1",
     "animate-presence": "^0.2.1",
     "feather-icons": "^4.28.0",
     "tocbot": "^4.11.2",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "wretch": "^1.7.2"
   },
   "peerDependencies": {
     "@stencila/schema": "^0.43.0"

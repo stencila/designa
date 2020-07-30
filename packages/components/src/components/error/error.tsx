@@ -4,9 +4,9 @@ import { Component, h, Host, Prop } from '@stencil/core'
   tag: 'stencila-code-error',
   styleUrls: {
     default: 'error.css',
-    material: 'error.css'
+    material: 'error.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class Error {
   /* public static readonly elementName = 'stencila-code-error' */
@@ -28,7 +28,7 @@ export class Error {
 
   public render() {
     return (
-      <Host>
+      <Host kind={this.kind}>
         <div class="overview">
           <stencila-icon icon="alert-triangle"></stencila-icon>
           <slot />
