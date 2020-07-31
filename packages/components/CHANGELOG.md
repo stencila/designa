@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/stencila/designa/compare/@stencila/components@0.15.1...@stencila/components@0.16.0) (2020-07-31)
+
+
+### Bug Fixes
+
+* **Button:** Resolve clickHandler Promise even if it fails ([0c1ae87](https://github.com/stencila/designa/commit/0c1ae876d4b81d2771beb52e65a0556eec400365))
+
+
+### Features
+
+* **Code Expression:** Add keyboard shortcut for running code ([5fc094e](https://github.com/stencila/designa/commit/5fc094e6831024df26bbd3a5fee7790643fa7892))
+* **Components:** Add ExecutableDocument toolbar component ([d975905](https://github.com/stencila/designa/commit/d9759056fc16f2827940a54688734954bf3b62b8)), closes [#44](https://github.com/stencila/designa/issues/44)
+* **Components:** Inject CSS variables depending on `mode` attribute ([8f3bb9b](https://github.com/stencila/designa/commit/8f3bb9b03e43fe7e931f045dd3086afa436f61e9))
+
+
+
+
+
 ## [0.15.1](https://github.com/stencila/designa/compare/@stencila/components@0.15.0...@stencila/components@0.15.1) (2020-07-29)
 
 

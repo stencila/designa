@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.14.1...@stencila/style-stencila@0.15.0) (2020-07-31)
+
+
+### Bug Fixes
+
+* **Toast:** Fix background color for info Toasts ([51d92e0](https://github.com/stencila/style/commit/51d92e08c43a5afd00041899aac94cc9de9b0750))
+
+
+### Features
+
+* **Components:** Add ExecutableDocument toolbar component ([d975905](https://github.com/stencila/style/commit/d9759056fc16f2827940a54688734954bf3b62b8)), closes [#44](https://github.com/stencila/style/issues/44)
+
+
+
+
+
 ## [0.14.1](https://github.com/stencila/style/compare/@stencila/style-stencila@0.14.0...@stencila/style-stencila@0.14.1) (2020-07-29)
 
 
