@@ -26,6 +26,7 @@
 
 ### Used by
 
+ - [stencila-executable-document-toolbar](../executableDocumentToolbar)
  - [stencila-toast](.)
 
 ### Depends on
@@ -37,6 +38,7 @@
 ```mermaid
 graph TD;
   stencila-toast --> stencila-toast
+  stencila-executable-document-toolbar --> stencila-toast
   style stencila-toast fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

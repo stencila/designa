@@ -3,11 +3,25 @@
 a.button,
 button {
   &:not(.secondary) {
-    @apply font-medium rounded-sm text-stock;
+    @apply rounded-sm text-stock;
 
     &.xsmall,
     &[size='xsmall'] {
       @apply rounded-sm;
+    }
+
+    &.color-stock {
+      @apply bg-stock text-key;
+
+      &:hover {
+        @apply bg-neutral-300;
+      }
+
+      &[disabled],
+      &[disabled]:active,
+      &[disabled]:hover {
+        @apply bg-neutral-200 text-neutral-700;
+      }
     }
 
     @mixin buttonColorVariant danger;

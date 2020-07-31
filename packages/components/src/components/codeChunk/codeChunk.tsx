@@ -220,9 +220,8 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
 
         <stencila-node-list nodes={this.outputs}>
           <slot name={CodeChunkComponent.slots.outputs} />
+          {this.codeErrors}
         </stencila-node-list>
-
-        {this.codeErrors}
       </Host>
     )
   }

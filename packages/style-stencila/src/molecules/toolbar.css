@@ -1,11 +1,9 @@
 :host {
-  /** @prop --background: Sets the background color of the component.
-  * Can be a CSS variable name from the palette (`danger`, `success-300`), a fully formed CSS variable name
-  * (`--my-custom-variable`), or any other valid CSS color value.
-  */
+  /** @prop --background: Sets the background color of the component. */
   --background: var(--color-primary);
 
   @apply block h-12;
+  background-color: var(--background, var(--color-primary-500));
 
   &[position='fixed'] {
     @apply fixed top-0 left-0 z-30 w-full;

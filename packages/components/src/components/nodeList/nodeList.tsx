@@ -5,16 +5,17 @@ import { isEmpty } from 'fp-ts/lib/Array'
 /* const elementName = 'stencila-node-list' */
 
 const slots = {
-  nodes: 'outputs'
+  nodes: 'outputs',
+  errors: 'errors',
 }
 
 @Component({
   tag: 'stencila-node-list',
   styleUrls: {
     default: 'nodeList.css',
-    material: 'nodeList.css'
+    material: 'nodeList.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class OutputsList {
   @Element() private el: HTMLStencilaNodeListElement
@@ -63,7 +64,7 @@ export class OutputsList {
   }
 
   private renderNodes = (nodes?: Node[]) => {
-    return nodes?.map(node => this.renderNode(node))
+    return nodes?.map((node) => this.renderNode(node))
   }
 
   private renderNode = (node: Node): string => {
@@ -105,6 +106,8 @@ export class OutputsList {
         )}
 
         {!this.isEmpty && <figure>{this.renderNodes(this.nodes)}</figure>}
+
+        <slot />
       </Host>
     )
   }

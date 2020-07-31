@@ -217,6 +217,20 @@ export namespace Components {
          */
         "setContents": (contents: string) => Promise<string>;
     }
+    interface StencilaExecutableDocumentToolbar {
+        /**
+          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
+         */
+        "position": 'static' | 'fixed';
+        /**
+          * The URL for requesting a SoftwareSession as defined in Stencila Schema. Passed to Stencila Executa for instantiating the session. TODO: If undefined user should be able to set one themselves (e.g. running a local machine)
+         */
+        "sessionProviderUrl": string;
+        /**
+          * The URL of the document being decorated. Could be a Snapshot from Stencila Hub, a Project URL, or something else.
+         */
+        "sourceUrl": string;
+    }
     interface StencilaIcon {
         "icon": IconNames;
     }
@@ -332,7 +346,7 @@ export namespace Components {
         /**
           * The background fill color of the Navbar
          */
-        "color": Colors;
+        "color": Colors | string;
         /**
           * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
          */
@@ -401,6 +415,12 @@ declare global {
     var HTMLStencilaEditorElement: {
         prototype: HTMLStencilaEditorElement;
         new (): HTMLStencilaEditorElement;
+    };
+    interface HTMLStencilaExecutableDocumentToolbarElement extends Components.StencilaExecutableDocumentToolbar, HTMLStencilElement {
+    }
+    var HTMLStencilaExecutableDocumentToolbarElement: {
+        prototype: HTMLStencilaExecutableDocumentToolbarElement;
+        new (): HTMLStencilaExecutableDocumentToolbarElement;
     };
     interface HTMLStencilaIconElement extends Components.StencilaIcon, HTMLStencilElement {
     }
@@ -495,6 +515,7 @@ declare global {
         "stencila-data-table": HTMLStencilaDataTableElement;
         "stencila-details": HTMLStencilaDetailsElement;
         "stencila-editor": HTMLStencilaEditorElement;
+        "stencila-executable-document-toolbar": HTMLStencilaExecutableDocumentToolbarElement;
         "stencila-icon": HTMLStencilaIconElement;
         "stencila-image-object": HTMLStencilaImageObjectElement;
         "stencila-input": HTMLStencilaInputElement;
@@ -695,6 +716,20 @@ declare namespace LocalJSX {
          */
         "readOnly"?: boolean;
     }
+    interface StencilaExecutableDocumentToolbar {
+        /**
+          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
+         */
+        "position"?: 'static' | 'fixed';
+        /**
+          * The URL for requesting a SoftwareSession as defined in Stencila Schema. Passed to Stencila Executa for instantiating the session. TODO: If undefined user should be able to set one themselves (e.g. running a local machine)
+         */
+        "sessionProviderUrl"?: string;
+        /**
+          * The URL of the document being decorated. Could be a Snapshot from Stencila Hub, a Project URL, or something else.
+         */
+        "sourceUrl"?: string;
+    }
     interface StencilaIcon {
         "icon"?: IconNames;
     }
@@ -810,7 +845,7 @@ declare namespace LocalJSX {
         /**
           * The background fill color of the Navbar
          */
-        "color"?: Colors;
+        "color"?: Colors | string;
         /**
           * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
          */
@@ -839,6 +874,7 @@ declare namespace LocalJSX {
         "stencila-data-table": StencilaDataTable;
         "stencila-details": StencilaDetails;
         "stencila-editor": StencilaEditor;
+        "stencila-executable-document-toolbar": StencilaExecutableDocumentToolbar;
         "stencila-icon": StencilaIcon;
         "stencila-image-object": StencilaImageObject;
         "stencila-input": StencilaInput;
@@ -867,6 +903,7 @@ declare module "@stencil/core" {
             "stencila-data-table": LocalJSX.StencilaDataTable & JSXBase.HTMLAttributes<HTMLStencilaDataTableElement>;
             "stencila-details": LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
             "stencila-editor": LocalJSX.StencilaEditor & JSXBase.HTMLAttributes<HTMLStencilaEditorElement>;
+            "stencila-executable-document-toolbar": LocalJSX.StencilaExecutableDocumentToolbar & JSXBase.HTMLAttributes<HTMLStencilaExecutableDocumentToolbarElement>;
             "stencila-icon": LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
             "stencila-image-object": LocalJSX.StencilaImageObject & JSXBase.HTMLAttributes<HTMLStencilaImageObjectElement>;
             "stencila-input": LocalJSX.StencilaInput & JSXBase.HTMLAttributes<HTMLStencilaInputElement>;

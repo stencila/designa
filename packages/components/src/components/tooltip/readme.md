@@ -18,6 +18,7 @@
 
  - [stencila-button](../button)
  - [stencila-code-expression](../codeExpression)
+ - [stencila-executable-document-toolbar](../executableDocumentToolbar)
 
 ### Depends on
 
@@ -29,6 +30,7 @@ graph TD;
   stencila-tooltip --> stencila-tooltip-element
   stencila-button --> stencila-tooltip
   stencila-code-expression --> stencila-tooltip
+  stencila-executable-document-toolbar --> stencila-tooltip
   style stencila-tooltip fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
