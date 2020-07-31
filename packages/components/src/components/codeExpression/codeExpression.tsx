@@ -84,7 +84,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     this.selectOutputSlot()?.innerHTML.trim() === ''
 
   private selectTextSlot = (): HTMLElement | null =>
-    this.el.querySelector(`[slot=${slots.text}]`)
+    this.el.querySelector(`.${slots.text}`)
 
   private getTextSlotContents = (): string => {
     const slot = this.selectTextSlot()
@@ -97,6 +97,15 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   private getOutputSlotContents = (): string => {
     const slot = this.selectOutputSlot()
     return slot?.textContent ?? ''
+  }
+
+  private handleKeyDown = (event: KeyboardEvent): void => {
+    if (event.key === 'Enter' && event.shiftKey) {
+      event.preventDefault()
+      this.execute().catch((err) => {
+        console.error(err)
+      })
+    }
   }
 
   /**
@@ -214,6 +223,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
         }}
         onMouseEnter={this.addHoverState}
         onMouseOut={this.onMouseOutHandler}
+        onKeyDown={this.handleKeyDown}
       >
         {this.generateContent()}
       </Host>
