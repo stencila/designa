@@ -219,6 +219,10 @@ export namespace Components {
     }
     interface StencilaExecutableDocumentToolbar {
         /**
+          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
+         */
+        "position": 'static' | 'fixed';
+        /**
           * The URL for requesting a SoftwareSession as defined in Stencila Schema. Passed to Stencila Executa for instantiating the session. TODO: If undefined user should be able to set one themselves (e.g. running a local machine)
          */
         "sessionProviderUrl": string;
@@ -713,6 +717,10 @@ declare namespace LocalJSX {
         "readOnly"?: boolean;
     }
     interface StencilaExecutableDocumentToolbar {
+        /**
+          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
+         */
+        "position"?: 'static' | 'fixed';
         /**
           * The URL for requesting a SoftwareSession as defined in Stencila Schema. Passed to Stencila Executa for instantiating the session. TODO: If undefined user should be able to set one themselves (e.g. running a local machine)
          */

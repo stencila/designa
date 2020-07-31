@@ -1,3 +1,1 @@
-:host {
-  @apply block pb-16;
-}
+@import '~@stencila/style-stencila/dist/objects/executableToolbar.css';

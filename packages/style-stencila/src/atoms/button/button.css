@@ -3,7 +3,7 @@
 a.button,
 button {
   &:not(.secondary) {
-    @apply font-medium rounded-sm text-stock;
+    @apply rounded-sm text-stock;
 
     &.xsmall,
     &[size='xsmall'] {

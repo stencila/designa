@@ -1,3 +1,4 @@
+import { datumEither as DE } from '@nll/datum'
 import {
   Component,
   ComponentInterface,
@@ -11,64 +12,37 @@ import {
   CodeChunk,
   codeError,
   CodeExpression,
-  SoftwareSession,
   softwareSession,
 } from '@stencila/schema'
+import { pipe } from 'fp-ts/lib/function'
 import wretch from 'wretch'
 import {
   toastController,
   ToastPositions,
   ToastTypes,
 } from '../toast/toastController'
-
-interface Job {
-  id: number
-  statusMessage: string
-  summaryString: string
-  runtimeFormatted: string
-  url: null | string
-  position: number
-  children: unknown[]
-  key: string
-  description: string
-  created: Date
-  updated: Date
-  began: null
-  ended: null
-  status: string
-  isActive: boolean
-  method: string
-  params: Params
-  result: null
-  error: null | { message: string; type: string }
-  log: null
-  runtime: null
-  worker: null
-  retries: null
-  callbackId: null
-  callbackMethod: null
-  project: number
-  creator: number
-  queue: number
-  parent: null
-  callbackType: null
-  users: number[]
-}
-
-export interface Params {
-  project: number
-  snapshotPath: string
-}
-
-const jobLogic = {
-  keepChecking: ['WAITING', 'DISPATCHED', 'PENDING', 'RECEIVED', 'STARTED'],
-  stopChecking: ['SUCCESS', 'FAILURE', 'CANCELLED', 'REVOKED', 'TERMINATED'],
-  readyToExecute: ['RUNNING'],
-}
+import {
+  executableJobGuard,
+  fetchJobDatum,
+  JobDatum,
+  JobError,
+  SessionDatum,
+} from './executa'
+import { SessionStatus } from './sessionStatus'
 
 const notify = toastController({
   position: ToastPositions.topCenter,
 })
+
+const errorNotification = () =>
+  notify.present('Couldn’t start a compute session', {
+    type: ToastTypes.danger,
+  })
+
+type OnConnect = (a: Promise<SessionDatum>) => void
+type OnReject = (a: JobError) => void
+
+// =============================================================================
 
 @Component({
   tag: 'stencila-executable-document-toolbar',
@@ -79,163 +53,164 @@ const notify = toastController({
   scoped: true,
 })
 export class StencilaExecutableDocumentToolbar implements ComponentInterface {
+  private jobPoller: number | undefined = undefined
+  private jobPollFrequency = 3000
+
+  private jobUrl: string | undefined
+
   /**
    * The URL of the document being decorated. Could be a Snapshot from Stencila Hub, a Project URL, or something else.
    */
-  @Prop() sourceUrl: string
+  @Prop()
+  sourceUrl: string
 
   /**
    * The URL for requesting a SoftwareSession as defined in Stencila Schema.
    * Passed to Stencila Executa for instantiating the session.
    * TODO: If undefined user should be able to set one themselves (e.g. running a local machine)
    */
-  @Prop() sessionProviderUrl: string
+  @Prop()
+  sessionProviderUrl: string
 
-  @State() sessionStatus: 'initial' | 'pending' | 'replete' = 'initial'
-  @State() session: null | SoftwareSession = null
-  @State() executor: null | Executor = null
+  /**
+   * When `fixed` the Navbar will remain pinned to the top of the screen.
+   * Note that if the Navbar component is not followed by a sibling element,
+   * you will have to set `margin-top: 3rem` on the following element yourself.
+   */
+  @Prop() public position: 'static' | 'fixed' = 'static'
 
-  @State() job: null | Job = null
-  @State() jobUrl: string | undefined
-  @State() jobStatus: 'initial' | 'pending' | 'replete' = 'initial'
-  private jobPoller: number | undefined = undefined
+  @State()
+  session: SessionDatum = DE.initial
 
-  private sessionProvider = wretch()
-  // Set the base url
-  /* .options({ redirect: 'manual' }) */
-  // Cors fetch options
-  /* .options({ credentials: 'include', mode: 'cors' }) */
-  // Handle 403 errors
-  /* .resolve((_) => _.forbidden(handle403)) */
+  @State()
+  job: JobDatum = DE.initial
 
-  private checkJobStatus = async (): Promise<Job | undefined> => {
-    if (this.jobUrl !== undefined) {
-      try {
-        this.jobStatus = 'pending'
-        return this.sessionProvider
-          .url(this.jobUrl)
-          .get()
-          .json((job) => {
-            const _job = job as Job
-            this.job = _job
-            this.jobStatus = 'replete'
-            return _job
-          })
-      } catch (err) {
-        this.jobStatus = 'replete'
-        throw new Error(err)
-      }
-    }
+  @State()
+  executor: null | Executor = null
 
-    return Promise.resolve(undefined)
-  }
+  private checkJobStatus = async (): Promise<JobDatum> =>
+    // If we're already checking for the status, don't send second request
+    DE.isRefresh(this.job)
+      ? this.job
+      : pipe(
+          () => {
+            this.job = DE.toRefresh(this.job)
+          },
+          () => fetchJobDatum(this.jobUrl)
+        )
 
   private handleJobStatus = (
-    job: Job | undefined
-  ): Promise<SoftwareSession | undefined> => {
-    // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-    if (job !== undefined) {
-      if (jobLogic.stopChecking.includes(job.status)) {
-        // Stop polling
-        window.clearInterval(this.jobPoller)
-        throw new Error(
-          job.error?.message ?? 'Could not start a compute session'
-        )
-      } else if (
-        jobLogic.readyToExecute.includes(job.status) &&
-        job.url !== null
-      ) {
-        // Ready to execute
-        window.clearInterval(this.jobPoller)
-        return this.startExecutor(job.url)
-      } else {
-        window.clearInterval(this.jobPoller)
-        throw new Error('Something went seriously wrong with polling for a Job')
-      }
-    }
-
-    return Promise.resolve(undefined)
-  }
-
-  private pollJob = () =>
-    new Promise<SoftwareSession>((resolve, reject) => {
-      this.checkJobStatus()
-        .then((job) => this.handleJobStatus(job))
-        .then((s) => {
-          if (s !== undefined) {
-            resolve(s)
-          } else {
-            this.jobPoller = window.setInterval(() => {
-              this.checkJobStatus()
-                .then(this.handleJobStatus)
-                .catch((err) => reject(err))
-            }, 5000)
+    job: JobDatum,
+    onJobReady: OnConnect,
+    onJobError: OnReject
+  ): JobDatum =>
+    pipe(
+      job,
+      DE.fold(
+        () => {
+          this.jobPoller = window.setInterval(() => {
+            this.pollJob(onJobReady, onJobError).catch((err) => {
+              throw new Error(err)
+            })
+          }, this.jobPollFrequency)
+          return DE.pending
+        },
+        () => job,
+        () => job,
+        () => job,
+        (jobValue) => {
+          window.clearInterval(this.jobPoller)
+          onJobError(jobValue)
+          return job
+        },
+        (jobValue) => {
+          if (executableJobGuard(jobValue)) {
+            window.clearInterval(this.jobPoller)
+            onJobReady(this.startExecutor(jobValue.url))
           }
-        })
-        .catch((err) => {
-          reject(new Error(err))
-        })
-    })
 
-  private findSession = async (): Promise<SoftwareSession | void> => {
-    // POST to sessionProviderURL
-    // Poll response until status: running
-    // poll every 5 seconds
-    // Smart polling: aggressive, ease up, accelerate again once wait time low?
-    // meanwhile present user with info: position, message TBD, wait time
-    // Pass `url` from `success` state payload to WebSocketClient
+          return job
+        }
+      ),
+      (jobDatum) => {
+        this.job = jobDatum
+        return jobDatum
+      }
+    )
 
-    if (
-      this.sessionStatus === 'initial' &&
-      this.sessionProviderUrl !== undefined
-    ) {
-      this.sessionStatus = 'pending'
+  private pollJob = (onConnectCb: OnConnect, onRejectCb: OnReject) =>
+    this.checkJobStatus().then((job) =>
+      this.handleJobStatus(job, onConnectCb, onRejectCb)
+    )
 
-      return this.sessionProvider
-        .url(this.sessionProviderUrl)
-        .post()
-        .res(async (res) => {
-          const location = res.url
-          this.job = await res.json()
-          this.jobUrl = location
-          return res
-        })
-        .then(() => this.pollJob())
-        .catch((err) => {
-          this.sessionStatus = 'replete'
-          console.error(err)
-          return err
-        })
-    } else if (this.session) {
-      return Promise.resolve(this.session)
+  private findSession = async (): Promise<SessionDatum | void> => {
+    // TODO: Smart polling: aggressive, ease up, accelerate again once wait time low?
+
+    if (this.sessionProviderUrl === undefined) {
+      return DE.failure(new Error('Please set a SessionProviderUrl'))
     }
+
+    if (DE.isInitial(this.session) || DE.isFailure(this.session)) {
+      this.session = DE.pending
+
+      return wretch(this.sessionProviderUrl)
+        .post()
+        .res((res) => {
+          this.jobUrl = res.url
+        })
+        .then(
+          () =>
+            new Promise<SessionDatum>((resolve, reject) =>
+              this.handleJobStatus(DE.initial, resolve, reject)
+            )
+        )
+        .catch((err) => {
+          errorNotification()
+          this.session = DE.failure(err)
+          throw err
+        })
+    }
+
+    return Promise.resolve(this.session)
   }
 
   private startExecutor = async (executorUrl: string) => {
     const sessionClient = new WebSocketClient(executorUrl)
     this.executor = sessionClient
-    this.session = await sessionClient.begin(softwareSession())
-    /* this.session = await this.executor.begin() */
-    notify.present('Connected', {
-      type: ToastTypes.success,
-    })
+    this.session = await sessionClient
+      .begin(softwareSession())
+      .then((session) => {
+        notify.present('Ready to execute document', {
+          type: ToastTypes.success,
+        })
+        return DE.success(session)
+      })
+      .catch((err) => {
+        errorNotification()
+        return DE.failure(new Error(err))
+      })
+
     return this.session
   }
 
   private codeNodeSelector = (): (
     | HTMLStencilaCodeChunkElement
     | HTMLStencilaCodeExpressionElement
-  )[] => {
-    return [
-      ...Array.from(document.getElementsByTagName('stencila-code-chunk')),
-      ...Array.from(document.getElementsByTagName('stencila-code-expression')),
-    ]
-  }
+  )[] => [
+    ...Array.from(document.getElementsByTagName('stencila-code-chunk')),
+    ...Array.from(document.getElementsByTagName('stencila-code-expression')),
+  ]
 
   private executeHandler = async (
     code: CodeChunk | CodeExpression
   ): Promise<CodeChunk | CodeExpression> => {
-    /* ): Promise<C extends CodeChunk ? CodeChunk : CodeExpression | undefined | void> => { */
+    if (DE.isPending(this.session)) {
+      notify.present('Please wait until a compute session is found', {
+        type: ToastTypes.warn,
+      })
+
+      return code
+    }
 
     const failureCase = (stackTrace: string): CodeChunk | CodeExpression => ({
       ...code,
@@ -251,24 +226,18 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
 
     return this.findSession()
       .then(() => {
-        if (this.executor && this.session) {
-          return this.executor.execute(code, this.session).catch((err) => {
-            console.error(err)
-            return failureCase(err)
-          })
+        if (this.executor && DE.isSuccess(this.session)) {
+          return this.executor
+            .execute(code, this.session.value.right)
+            .catch((err) => {
+              console.error(err)
+              return failureCase(err)
+            })
         }
 
-        return failureCase(
-          `Couldn’t start a compute session\n${this.job?.error?.message ?? ''}`
-        )
+        return failureCase('Couldn’t start a compute session')
       })
-      .catch((err) => {
-        return failureCase(err)
-      })
-      .finally(() => {
-        this.sessionStatus = 'replete'
-        this.jobStatus = 'replete'
-      })
+      .catch((err) => failureCase(err))
   }
 
   private runAll = async (
@@ -276,13 +245,11 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
   ): Promise<(CodeExpression | CodeChunk | undefined | void)[]> => {
     e.preventDefault()
 
-    return this.findSession().then(() =>
-      Promise.all(
-        this.codeNodeSelector().map(async (item) => {
-          return item.execute()
-        })
+    return this.findSession().then(() => {
+      return Promise.all(
+        this.codeNodeSelector().map(async (item) => item.execute())
       )
-    )
+    })
   }
 
   componentDidLoad(): void {
@@ -292,86 +259,32 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
     })
   }
 
-  componentWillUnload(): void {
-    if (this.session) {
-      // PATCH to cancel job
-    }
-  }
+  // TODO: Close session when removing component
+  // componentWillUnload(): void {}
 
   render(): HTMLElement {
-    console.log('JOB UPDATE: -------------------')
-    console.log(JSON.stringify(this.job, null, 2))
-    console.log('-------------------------------')
     return (
-      <Host>
-        <stencila-toolbar color="neutral-300">
+      <Host position={this.position}>
+        <stencila-toolbar>
           <span slot="start">
             <stencila-button
               color="stock"
-              icon={this.session ? 'play' : 'cloud-off'}
+              icon={DE.isSuccess(this.session) ? 'play' : 'cloud-off'}
               size="small"
               clickHandlerProp={this.runAll}
+              isLoading={
+                DE.isPending(this.session) || DE.isRefresh(this.session)
+              }
             >
               Run Document
             </stencila-button>
-
-            {/*
-            {this.sessionStatus === 'replete' && this.session && (
-              <span slot="middle">
-                <stencila-button
-                  color="warn"
-                  isSecondary={true}
-                  icon="refresh-cw"
-                  size="small"
-                  iconOnly={true}
-                  tooltip="Restart Session"
-                ></stencila-button>
-              </span>
-            )}
-            */}
           </span>
 
-          <span
-            slot="middle"
-            style={{ color: 'black', verticalAlign: 'middle' }}
-          >
-            {this.sessionStatus === 'pending' && (
-              <stencila-icon icon="loader"></stencila-icon>
-            )}
-            <span style={{ verticalAlign: 'middle', lineHeight: '1' }}>
-              {this.sessionStatus === 'pending' &&
-                !this.job &&
-                'Starting compute session'}
-              {this.jobStatus !== 'replete' &&
-                this.job?.statusMessage !== 'Job is running' &&
-                this.job?.statusMessage}
-              {this.job?.statusMessage === 'Job is running' && (
-                <stencila-tooltip text="Compute session is active">
-                  <stencila-icon
-                    icon="activity"
-                    style={{
-                      color: 'var(--color-success-700)',
-                      cursor: 'help',
-                    }}
-                  ></stencila-icon>
-                </stencila-tooltip>
-              )}
-              {this.job?.statusMessage === 'Job is failure' && (
-                <stencila-tooltip
-                  text={`Could not start a compute session\n${
-                    this.job.error?.message ?? ''
-                  }`}
-                >
-                  <stencila-icon
-                    icon="x-octagon"
-                    style={{
-                      color: 'var(--color-danger-700)',
-                      cursor: 'help',
-                    }}
-                  ></stencila-icon>
-                </stencila-tooltip>
-              )}
-            </span>
+          <span slot="middle">
+            <SessionStatus
+              job={this.job}
+              session={this.session}
+            ></SessionStatus>
           </span>
 
           {this.sourceUrl !== undefined && (

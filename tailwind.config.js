@@ -1,4 +1,4 @@
-const { inset, colors: defaultColors } = require('tailwindcss/defaultTheme')
+const { colors: defaultColors } = require('tailwindcss/defaultTheme')
 
 const generateColors = (name, defaultName) => ({
   '100': `var(--color-${name}-100, ${defaultColors[defaultName][100]})`,

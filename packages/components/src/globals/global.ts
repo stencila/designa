@@ -18,7 +18,7 @@ const mode = getMode(document.documentElement)
 const families =
   mode === 'material'
     ? ['Roboto', 'IBM Plex Mono']
-    : ['Montserrat', 'IBM Plex Mono']
+    : ['Montserrat:400,600', 'Lato:400,400i,700,700i', 'IBM Plex Mono']
 
 const stencilaThemeVersion = dependencies['@stencila/style-stencila']
 const materialThemeVersion = dependencies['@stencila/style-material']

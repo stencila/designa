@@ -40,7 +40,7 @@ export const articleControls = () => {
 export const articleControlsActive = () => {
   return html`
     <article>
-      <stencila-executable-document-toolbar>
+      <stencila-executable-document-toolbar source-url="#">
       </stencila-executable-document-toolbar>
 
       <p>
@@ -52,9 +52,7 @@ export const articleControlsActive = () => {
           ><output slot="output">42</output></stencila-code-expression
         >
         followed by some more text and another
-        <stencila-code-expression
-          itemtype="stencila:CodeChunk"
-        >
+        <stencila-code-expression itemtype="stencila:CodeChunk">
           <code slot="text"
             >x * y - 128 * (212 - 2) x * y - 128 * (212 - 2) asd fas fhalsd
             faslhdf asdf asdljf ajsdhf jash l x * y - 128 * (212 - 2) asd fas

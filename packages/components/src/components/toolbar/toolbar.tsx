@@ -1,6 +1,5 @@
-import { Component, h, Prop, Host } from '@stencil/core'
+import { Component, h, Host, Prop } from '@stencil/core'
 import { Colors } from '../../types'
-import { getColor } from '../../utils/theme'
 
 @Component({
   tag: 'stencila-toolbar',
@@ -25,13 +24,7 @@ export class Toolbar {
 
   public render() {
     return (
-      <Host
-        color={this.color}
-        position={this.position}
-        style={{
-          '--background': getColor(this.color),
-        }}
-      >
+      <Host color={this.color} position={this.position}>
         <div>
           <slot name="start" />
           <slot name="middle" />

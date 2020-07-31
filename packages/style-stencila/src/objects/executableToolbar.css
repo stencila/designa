@@ -1,0 +1,35 @@
+:host {
+  /** @prop --background: Sets the background color of the component. */
+  --background: var(--color-neutral-300);
+
+  @apply block;
+
+  &[position='fixed'] {
+    @apply fixed top-0 left-0 z-30 w-full;
+
+    & + * {
+      @apply mt-12;
+    }
+  }
+}
+
+.executableDocumentStatus {
+  @apply text-key leading-none text-sm;
+
+  &.success {
+    @apply text-success-700;
+  }
+
+  &.danger {
+    @apply text-danger-500;
+  }
+
+  [icon='loader'] {
+    @apply mr-1;
+  }
+
+  [icon='activity'],
+  [icon='x-octagon'] {
+    pointer: help;
+  }
+}
