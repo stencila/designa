@@ -180,7 +180,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
     this.session = await sessionClient
       .begin(softwareSession())
       .then((session) => {
-        notify.present('Ready to execute document', {
+        notify.present('Ready to run document', {
           type: ToastTypes.success,
         })
         return DE.success(session)
@@ -218,7 +218,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
         ...(code.errors ?? []),
         codeError({
           errorType: 'error',
-          errorMessage: `Could not execute ${code.type}`,
+          errorMessage: `Could not run ${code.type}`,
           stackTrace: stackTrace,
         }),
       ],
