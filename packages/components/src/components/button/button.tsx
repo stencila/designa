@@ -1,6 +1,6 @@
 import { Component, h, Host, Prop, State } from '@stencil/core'
-import { IconNames } from '../icon/icon'
 import { Colors } from '../../types'
+import { IconNames } from '../icon/icon'
 
 @Component({
   tag: 'stencila-button',
@@ -117,8 +117,13 @@ export class Button {
   private onClick = async (e: MouseEvent): Promise<unknown> => {
     if (this.clickHandlerProp !== undefined) {
       this.ioPending = true
-      const result = await Promise.resolve(this.clickHandlerProp(e))
+      let result
+      try {
+        result = await Promise.resolve(this.clickHandlerProp(e))
+      } catch {}
+
       this.ioPending = false
+
       return result
     }
 
