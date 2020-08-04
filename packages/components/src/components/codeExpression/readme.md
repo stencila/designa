@@ -35,11 +35,12 @@ Type: `Promise<CodeExpression>`
 
 ## CSS Custom Properties
 
-| Name                  | Description                                                            |
-| --------------------- | ---------------------------------------------------------------------- |
-| `--background`        | Background color of the Code Output section                            |
-| `--background-editor` | Background color of the Code Editor section                            |
-| `--border`            | Border color around the component as well as internal section dividers |
+| Name                   | Description                                                            |
+| ---------------------- | ---------------------------------------------------------------------- |
+| `--background`         | Background color of the Code Output section                            |
+| `--background-buttons` | Background color of the Code Editor section                            |
+| `--background-editor`  | Background color of the Code Editor section                            |
+| `--border`             | Border color around the component as well as internal section dividers |
 
 
 ## Dependencies

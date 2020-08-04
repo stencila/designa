@@ -13,6 +13,14 @@
 | `expandable` | `expandable` | Defines whether the Action Menu can be collapsed and expanded | `boolean`             | `false`     |
 
 
+## CSS Custom Properties
+
+| Name           | Description                                   |
+| -------------- | --------------------------------------------- |
+| `--background` | Background color of the Action Menu component |
+| `--border`     | Border color of the Action Menu component     |
+
+
 ## Dependencies
 
 ### Used by

@@ -162,7 +162,9 @@ export class Button {
           this.icon
         )}
 
-        <slot />
+        <span class="label">
+          <slot />
+        </span>
       </TagType>
     )
   }
