@@ -19,14 +19,10 @@
     width: var(--width);
   }
 
-  ::slotted(span > svg),
-  &::slotted(span > svg) {
-    @apply block;
-    box-sizing: border-box;
+  ::slotted(svg),
+  &::slotted(svg) {
+    @apply block fill-current box-border;
     height: var(--height);
-    padding: 2px;
-    stroke-linecap: round;
-    stroke-width: 2px;
     width: var(--width);
   }
 

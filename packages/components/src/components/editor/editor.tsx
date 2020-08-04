@@ -294,7 +294,7 @@ export class Editor {
 
           <menu>
             <label aria-label="Programming Language">
-              <stencila-icon icon="code"></stencila-icon>
+              <stencila-icon icon="terminal"></stencila-icon>
               <select onChange={this.setLanguage}>
                 {this.languageCapabilities.map((language) => (
                   <option

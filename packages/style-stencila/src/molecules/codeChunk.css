@@ -17,8 +17,12 @@ stencila-code-chunk {
   /** @prop --border: Border color around the component as well as internal section dividers */
   --border: var(--color-neutral-300, #e2e8f0);
 
-  @apply relative block w-full my-4 border border-solid rounded;
+  @apply relative block w-full my-4 overflow-hidden border border-solid rounded;
   border-color: var(--border);
+
+  stencila-action-menu {
+    @apply relative block w-full p-0 border-l-0 border-r-0 rounded-none;
+  }
 
   stencila-editor {
     --border-width: 0;
@@ -48,16 +52,16 @@ stencila-code-chunk {
 }
 
 @screen lg {
-  :host,
-  stencila-code-chunk {
+  :host > div,
+  stencila-code-chunk > div {
     @apply flex flex-row items-stretch w-full;
   }
 
   .editorContainer {
-    @apply w-1/2 border-b-0 border-l;
+    @apply w-1/2 border-b-0 border-r;
   }
 
   stencila-node-list {
-    @apply flex-grow order-first w-1/2;
+    @apply flex-grow w-1/2;
   }
 }

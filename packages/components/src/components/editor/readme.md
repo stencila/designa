@@ -41,6 +41,13 @@ Type: `Promise<string>`
 
 
 
+## CSS Custom Properties
+
+| Name                       | Description                                        |
+| -------------------------- | -------------------------------------------------- |
+| `--line-number-background` | Background color of the Editor Line Numbers gutter |
+
+
 ## Dependencies
 
 ### Used by

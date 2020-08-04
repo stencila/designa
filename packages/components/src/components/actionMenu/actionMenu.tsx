@@ -1,5 +1,10 @@
 import { Component, Element, h, Prop, State } from '@stencil/core'
 
+const slots = {
+  default: '',
+  persistentActions: 'persistentActions',
+}
+
 @Component({
   tag: 'stencila-action-menu',
   styleUrls: {
@@ -23,6 +28,8 @@ export class ActionMenu {
   @Prop()
   public expandable = false
 
+  @State() private hasSecondaryActions: boolean
+
   @State() private isCollapsed = false
 
   private toggleActionMenu = () => (this.isCollapsed = !this.isCollapsed)
@@ -43,8 +50,19 @@ export class ActionMenu {
 
   private observer = new window.MutationObserver(this.calculateWidth)
 
-  protected componentDidLoad() {
-    if (this.expandable && this.el) {
+  private checkForSecondaryActions = (): boolean => {
+    const hasSecondaryActions =
+      this.el
+        .querySelector('.secondaryActions .actionContainer')
+        ?.innerHTML.trim() === ''
+    this.hasSecondaryActions = hasSecondaryActions
+    return hasSecondaryActions
+  }
+
+  protected componentDidLoad(): void {
+    this.checkForSecondaryActions()
+
+    if (this.expandable) {
       this.actionContainerRef = this.el.querySelector('.actionContainer')
 
       if (this.actionContainerRef !== null) {
@@ -66,14 +84,19 @@ export class ActionMenu {
     }
   }
 
-  protected componentDidUnload() {
+  protected componentDidUnload(): void {
     this.observer.disconnect()
   }
 
   public render() {
     return (
       <nav>
-        <span class="secondaryActions">
+        <span
+          class={{
+            secondaryActions: true,
+            hidden: this.hasSecondaryActions,
+          }}
+        >
           <span
             class={{
               actionContainer: true,
@@ -87,7 +110,7 @@ export class ActionMenu {
 
           <stencila-button
             onClick={this.toggleActionMenu}
-            icon="more-horizontal"
+            icon="more"
             color="key"
             minimal={true}
             size="xsmall"
@@ -96,7 +119,9 @@ export class ActionMenu {
           ></stencila-button>
         </span>
 
-        <slot name="persistentActions" />
+        <span class="persistentActions">
+          <slot name={slots.persistentActions} />
+        </span>
       </nav>
     )
   }

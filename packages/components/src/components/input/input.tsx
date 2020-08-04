@@ -1,19 +1,19 @@
 import { Component, Host, h, Prop } from '@stencil/core'
-import { IconNames } from '../icon/icon'
+import { IconNames } from '../icon/iconNames'
 
 @Component({
   tag: 'stencila-input',
   styleUrls: {
     default: 'input.css',
-    material: 'input.material.css'
+    material: 'input.material.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class Input {
   /**
    * Automatically bring cursor focus to the input field on render.
    */
-  @Prop() autoFocus: boolean = false
+  @Prop() autoFocus = false
 
   /**
    * A hint to the browser for which keyboard to display.
@@ -79,14 +79,14 @@ export class Input {
         ? {
             type: 'text',
             inputmode: 'numeric',
-            pattern: '[0-9]*'
+            pattern: '[0-9]*',
           }
         : { type: this.type }
 
     const _label =
       this.label === undefined || this.hideLabel
         ? {
-            'aria-label': this.label ?? this.name
+            'aria-label': this.label ?? this.name,
           }
         : { 'aria-labelledby': `${this.name}-label` }
 

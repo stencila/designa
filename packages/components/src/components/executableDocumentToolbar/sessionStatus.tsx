@@ -59,13 +59,13 @@ export const SessionStatus: FunctionalComponent<HelloProps> = ({
         ),
         (err) => (
           <span>
-            <stencila-icon icon="x-octagon"></stencila-icon>
+            <stencila-icon icon="error-warning"></stencila-icon>
             {jobErrorMessage(err)}
           </span>
         ),
         () => (
           <stencila-tooltip text="Compute session is active">
-            <stencila-icon icon="activity"></stencila-icon>
+            <stencila-icon icon="pulse"></stencila-icon>
           </stencila-tooltip>
         )
       )

@@ -174,6 +174,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
       <span class="actions">
         <stencila-button
           aria-label="Run Code"
+          class="run"
           clickHandlerProp={this.executeRef}
           color="key"
           disabled={!this.executeHandler}
@@ -183,18 +184,17 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
           size="xsmall"
           tooltip="Run"
         ></stencila-button>
-        <span class="extraActions">
-          <stencila-button
-            aria-label="Run Code"
-            clickHandlerProp={this.toggleCodeVisibility}
-            color="key"
-            icon={this.isCodeVisible ? 'eye-off' : 'eye'}
-            iconOnly={true}
-            minimal={true}
-            size="xsmall"
-            tooltip={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
-          ></stencila-button>
-        </span>
+        <stencila-button
+          aria-label="Run Code"
+          class="sourceToggle"
+          clickHandlerProp={this.toggleCodeVisibility}
+          color="key"
+          icon={this.isCodeVisible ? 'eye-off' : 'eye'}
+          iconOnly={true}
+          minimal={true}
+          size="xsmall"
+          tooltip={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
+        ></stencila-button>
         <span
           class="text"
           contentEditable={true}
@@ -218,7 +218,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
       <Host
         class={{
           hover: this.hover,
-          codeHidden: !this.isCodeVisible,
+          isCodeVisible: this.isCodeVisible,
           isOutputEmpty: this.isOutputEmpty,
         }}
         onMouseEnter={this.addHoverState}

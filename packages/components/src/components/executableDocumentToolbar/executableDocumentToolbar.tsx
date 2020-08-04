@@ -77,7 +77,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
    * Note that if the Navbar component is not followed by a sibling element,
    * you will have to set `margin-top: 3rem` on the following element yourself.
    */
-  @Prop() public position: 'static' | 'fixed' = 'static'
+  @Prop() public position: 'fixed' | 'static' = 'fixed'
 
   @State()
   session: SessionDatum = DE.initial
@@ -269,7 +269,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
           <span slot="start">
             <stencila-button
               color="stock"
-              icon={DE.isSuccess(this.session) ? 'play' : 'cloud-off'}
+              icon="play"
               size="small"
               clickHandlerProp={this.runAll}
               isLoading={

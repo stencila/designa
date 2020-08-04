@@ -1,5 +1,5 @@
 import { Component, h, Host, Prop } from '@stencil/core'
-import { IconNames } from '../icon/icon'
+import { IconNames } from '../icon/iconNames'
 
 @Component({
   tag: 'stencila-menu-item',

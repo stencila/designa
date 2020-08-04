@@ -13,9 +13,9 @@
 
 ## CSS Custom Properties
 
-| Name           | Description                                                                                                                                                                                                       |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--background` | Sets the background color of the component. Can be a CSS variable name from the palette (`danger`, `success-300`), a fully formed CSS variable name (`--my-custom-variable`), or any other valid CSS color value. |
+| Name           | Description                                 |
+| -------------- | ------------------------------------------- |
+| `--background` | Sets the background color of the component. |
 
 
 ## Dependencies

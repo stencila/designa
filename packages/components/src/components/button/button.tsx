@@ -1,6 +1,6 @@
 import { Component, h, Host, Prop, State } from '@stencil/core'
 import { Colors } from '../../types'
-import { IconNames } from '../icon/icon'
+import { IconNames } from '../icon/iconNames'
 
 @Component({
   tag: 'stencila-button',
@@ -162,14 +162,16 @@ export class Button {
           this.icon
         )}
 
-        <slot />
+        <span class="label">
+          <slot />
+        </span>
       </TagType>
     )
   }
 
   public render() {
     return (
-      <Host size={this.size} tabindex="-1">
+      <Host size={this.size} tabindex="-1" icon={this.icon}>
         {this.tooltip === undefined ? (
           this.generateButton()
         ) : (
