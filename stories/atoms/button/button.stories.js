@@ -8,7 +8,7 @@ export default {
 }
 
 const defaultText = 'Sign In'
-const defaultIcon = 'command'
+const defaultIcon = 'magic'
 const icons = [
   'activity',
   'airplay',

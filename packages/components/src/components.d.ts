@@ -6,11 +6,10 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Colors } from "./types";
-import { IconNames } from "./components/icon/icon";
+import { IconNames } from "./components/icon/iconNames";
 import { CodeChunk, CodeExpression, Collection, Datatable, ImageObject, Node } from "@stencila/schema";
 import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
-import { IconNames as IconNames1 } from "./components/icon/icon";
 import { ChildTab } from "./components/tabList/tabList";
 import { ToastPosition, ToastType } from "./components/toast/toastController";
 export namespace Components {
@@ -232,7 +231,18 @@ export namespace Components {
         "sourceUrl": string;
     }
     interface StencilaIcon {
+        /**
+          * Name of the icon to be rendered. Corresponds to icon names from the [Remix Icon set](http://remixicon.com)
+         */
         "icon": IconNames;
+        /**
+          * Fully formed path to an SVG symbol file, including the ID selector of the symbol
+         */
+        "iconSrc": string | undefined;
+        /**
+          * Style with which to render the icon
+         */
+        "iconStyle": 'fill' | 'line';
     }
     interface StencilaImageObject {
         /**
@@ -731,7 +741,18 @@ declare namespace LocalJSX {
         "sourceUrl"?: string;
     }
     interface StencilaIcon {
+        /**
+          * Name of the icon to be rendered. Corresponds to icon names from the [Remix Icon set](http://remixicon.com)
+         */
         "icon"?: IconNames;
+        /**
+          * Fully formed path to an SVG symbol file, including the ID selector of the symbol
+         */
+        "iconSrc"?: string | undefined;
+        /**
+          * Style with which to render the icon
+         */
+        "iconStyle"?: 'fill' | 'line';
     }
     interface StencilaImageObject {
         /**

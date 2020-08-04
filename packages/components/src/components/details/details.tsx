@@ -4,9 +4,9 @@ import { Component, h, Prop, State, Host } from '@stencil/core'
   tag: 'stencila-details',
   styleUrls: {
     default: 'details.css',
-    material: 'details.css'
+    material: 'details.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class Details {
   public static readonly elementName = 'stencila-details'
@@ -14,7 +14,7 @@ export class Details {
   /*
    * Determines whether the contents are visible or not
    */
-  @Prop() open: boolean = false
+  @Prop() open = false
 
   @State() isOpen: boolean = this.open ? this.open : false
 
@@ -33,7 +33,7 @@ export class Details {
         </div>
 
         <stencila-icon
-          icon="chevron-down"
+          icon="arrow-down-s"
           class="disclosure-toggle"
         ></stencila-icon>
       </Host>

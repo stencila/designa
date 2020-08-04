@@ -30,7 +30,7 @@ export class Error {
     return (
       <Host kind={this.kind}>
         <div class="overview">
-          <stencila-icon icon="alert-triangle"></stencila-icon>
+          <stencila-icon icon="alert"></stencila-icon>
           <slot />
         </div>
 
