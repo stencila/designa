@@ -26,7 +26,6 @@ const prodPlugins =
 export const config: Config = {
   namespace: 'stencila-components',
   globalScript: './src/globals/global.ts',
-  globalStyle: './src/globals/variables.css',
   outputTargets: [
     {
       type: 'dist',
