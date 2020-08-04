@@ -236,10 +236,6 @@ export namespace Components {
          */
         "icon": IconNames;
         /**
-          * Fully formed path to an SVG symbol file, including the ID selector of the symbol
-         */
-        "iconSrc": string | undefined;
-        /**
           * Style with which to render the icon
          */
         "iconStyle": 'fill' | 'line';
@@ -745,10 +741,6 @@ declare namespace LocalJSX {
           * Name of the icon to be rendered. Corresponds to icon names from the [Remix Icon set](http://remixicon.com)
          */
         "icon"?: IconNames;
-        /**
-          * Fully formed path to an SVG symbol file, including the ID selector of the symbol
-         */
-        "iconSrc"?: string | undefined;
         /**
           * Style with which to render the icon
          */
