@@ -269,7 +269,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
           <span slot="start">
             <stencila-button
               color="stock"
-              icon={DE.isSuccess(this.session) ? 'play' : 'cloud-off'}
+              icon="play"
               size="small"
               clickHandlerProp={this.runAll}
               isLoading={
