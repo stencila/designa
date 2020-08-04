@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://github.com/stencila/designa/compare/@stencila/components@0.16.0...@stencila/components@0.17.0) (2020-08-04)
+
+
+### Features
+
+* **Editor:** Expose CSS variable for styling Line Numbers background ([6e04143](https://github.com/stencila/designa/commit/6e0414353f9e984a21801d82fc2bab5fe84e2e63))
+* **Executable Toolbar:** Default to Sticky positioning ([eafc92d](https://github.com/stencila/designa/commit/eafc92d306bb9eb2b3021834ab50b4d255241bf5))
+
+
+
+
+
 # [0.16.0](https://github.com/stencila/designa/compare/@stencila/components@0.15.1...@stencila/components@0.16.0) (2020-07-31)
 
 

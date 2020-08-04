@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.15.0...@stencila/style-stencila@0.16.0) (2020-08-04)
+
+
+### Bug Fixes
+
+* **CodeChunk:** Fix ProgrammingLanguage selector icon size & alignment ([6d723ea](https://github.com/stencila/style/commit/6d723eaa8e8230ab08a1d38e3d978cd64dbd388f))
+* **Executable Toolbar:** Ensure sticky version is full-width ([07a34d1](https://github.com/stencila/style/commit/07a34d15adfa78109e8b34d7dc25562f3f8f4c3a))
+
+
+### Features
+
+* **Editor:** Expose CSS variable for styling Line Numbers background ([6e04143](https://github.com/stencila/style/commit/6e0414353f9e984a21801d82fc2bab5fe84e2e63))
+
+
+
+
+
 # [0.15.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.14.1...@stencila/style-stencila@0.15.0) (2020-07-31)
 
 
