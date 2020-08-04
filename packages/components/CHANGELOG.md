@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.17.1](https://github.com/stencila/designa/compare/@stencila/components@0.17.0...@stencila/components@0.17.1) (2020-08-04)
+
+
+### Bug Fixes
+
+* **Icon:** Fix loading of icons across domains ([1538729](https://github.com/stencila/designa/commit/1538729e8489673049d104632d887140fafad612))
+
+
+
+
+
 # [0.17.0](https://github.com/stencila/designa/compare/@stencila/components@0.16.0...@stencila/components@0.17.0) (2020-08-04)
 
 
