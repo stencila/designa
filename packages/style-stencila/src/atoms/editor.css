@@ -2,6 +2,12 @@
 
 :host,
 stencila-editor {
+  /** @prop --line-number-background: Background color of the Editor Line Numbers gutter */
+  --line-number-background: var(
+    --color-background,
+    var(--color-neutral-200, #edf2f7)
+  );
+
   all: initial;
 
   @apply flex max-w-full;
@@ -34,6 +40,10 @@ stencila-editor {
 
     .codemirror-scroller {
       @apply overflow-auto;
+    }
+
+    .cm-gutters {
+      background-color: var(--line-number-background);
     }
   }
 
