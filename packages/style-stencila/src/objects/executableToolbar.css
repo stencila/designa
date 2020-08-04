@@ -7,6 +7,7 @@ stencila-executable-document-toolbar {
 
   &[position='fixed'] {
     @apply fixed top-0 left-0 z-30 w-full;
+    max-width: none !important;
 
     & + * {
       @apply mt-12;
