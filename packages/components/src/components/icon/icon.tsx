@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop, getAssetPath } from '@stencil/core'
+import { Component, h, Host, Prop } from '@stencil/core'
 import { IconNames } from './iconNames'
 
 const getGlobalIconStyle = () =>
@@ -13,7 +13,6 @@ const getGlobalIconStyle = () =>
     default: 'icon.css',
     material: 'icon.material.css',
   },
-  assetsDirs: ['assets'],
   scoped: true,
 })
 export class Icon {
@@ -32,25 +31,10 @@ export class Icon {
   @Prop()
   public readonly iconStyle: 'fill' | 'line' = getGlobalIconStyle()
 
-  /**
-   * Fully formed path to an SVG symbol file, including the ID selector of the symbol
-   */
-  @Prop()
-  public readonly iconSrc: string | undefined
-
-  private getIconName = (): string =>
-    this.iconSrc !== undefined
-      ? `${this.iconSrc}`
-      : `${getAssetPath('./assets/remixicon.symbol.svg')}#ri-${this.icon}-${
-          this.iconStyle
-        }`
-
   public render() {
     return (
-      <Host icon={this.icon}>
-        <svg>
-          <use href={this.getIconName()}></use>
-        </svg>
+      <Host icon={this.icon} aria-hidden="true">
+        <i class={`ri-${this.icon}-${this.iconStyle}`}></i>
       </Host>
     )
   }
