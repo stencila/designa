@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.1](https://github.com/stencila/style/compare/@stencila/style-stencila@0.16.0...@stencila/style-stencila@0.16.1) (2020-08-05)
+
+
+### Bug Fixes
+
+* **Button:** Reset background-image to avoid issues with Tufte theme ([8bad509](https://github.com/stencila/style/commit/8bad5094ae418ec493b8188a90c48b1451a7a99e))
+* **CodeExpression:** Don't show empty space for hidden source toggle ([7fba111](https://github.com/stencila/style/commit/7fba111cf612a7be64df61ef6f117161610a0797))
+* **Tooltip:** Keep width auto for tooltips when used with 3rd party CSS ([076231d](https://github.com/stencila/style/commit/076231d561a4ac69b2f5e4e23f454cd02e1420f6))
+
+
+
+
+
 # [0.16.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.15.0...@stencila/style-stencila@0.16.0) (2020-08-04)
 
 

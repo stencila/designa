@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.10](https://github.com/stencila/style/compare/@stencila/style-material@0.11.9...@stencila/style-material@0.11.10) (2020-08-05)
+
+
+### Bug Fixes
+
+* **Button:** Reset background-image to avoid issues with Tufte theme ([8bad509](https://github.com/stencila/style/commit/8bad5094ae418ec493b8188a90c48b1451a7a99e))
+* **Tooltip:** Keep width auto for tooltips when used with 3rd party CSS ([076231d](https://github.com/stencila/style/commit/076231d561a4ac69b2f5e4e23f454cd02e1420f6))
+
+
+
+
+
 ## [0.11.9](https://github.com/stencila/style/compare/@stencila/style-material@0.11.8...@stencila/style-material@0.11.9) (2020-08-04)
 
 **Note:** Version bump only for package @stencila/style-material
