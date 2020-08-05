@@ -66,17 +66,9 @@ stencila-code-expression {
     @apply inline-flex items-stretch self-start overflow-hidden cursor-default transition ease-out duration-150;
     transition-property: padding, width, max-width;
 
-    &[icon='eye'] {
-      @apply w-0;
+    &.sourceToggle {
+      @apply inline-block w-0;
     }
-  }
-
-  .extraActions {
-    @apply inline-flex;
-  }
-
-  .extraActions stencila-button {
-    @apply inline-block w-0 max-w-0;
   }
 
   &.isOutputEmpty {
@@ -90,9 +82,8 @@ stencila-code-expression {
   &:focus,
   &:focus-within,
   &:hover {
-    .actions stencila-button[icon='eye'],
-    .extraActions stencila-button {
-      @apply w-8 max-w-full;
+    .actions stencila-button.sourceToggle {
+      @apply inline-flex w-8 max-w-full;
     }
   }
 }
