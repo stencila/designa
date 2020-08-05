@@ -26,7 +26,7 @@
     "chromatic": "chromatic --storybook-build-dir docs"
   },
   "devDependencies": {
-    "@babel/core": "7.10.5",
+    "@babel/core": "7.11.1",
     "@stencila/dev-config": "1.4.60",
     "@stencila/renovate-config": "0.3.0",
     "@storybook/addon-a11y": "5.3.19",
@@ -38,11 +38,11 @@
     "@storybook/addon-storysource": "5.3.19",
     "@storybook/addon-viewport": "5.3.19",
     "@storybook/web-components": "5.3.19",
-    "autoprefixer": "9.8.5",
+    "autoprefixer": "9.8.6",
     "babel-loader": "8.1.0",
-    "chromatic": "5.0.0",
+    "chromatic": "5.1.0",
     "concurrently": "5.2.0",
-    "eslint": "7.5.0",
+    "eslint": "7.6.0",
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "7.20.5",
     "filewatcher-webpack-plugin": "1.2.0",
@@ -61,7 +61,7 @@
     "postcss-parcel-import": "0.0.2",
     "postcss-url": "8.0.0",
     "storybook-addon-root-attribute": "1.0.0",
-    "tailwindcss": "1.6.0",
+    "tailwindcss": "1.6.2",
     "typescript": "3.9.7",
     "write-file-webpack-plugin": "4.5.1"
   },
