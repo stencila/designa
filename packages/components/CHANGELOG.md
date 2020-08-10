@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/stencila/designa/compare/@stencila/components@0.17.3...@stencila/components@0.18.0) (2020-08-10)
+
+
+### Features
+
+* **Exec Toolbar:** Pass credentials with same-origin network requests ([2f4df64](https://github.com/stencila/designa/commit/2f4df64ba3eb6c17947b809c50381cbd943fbc21))
+
+
+
+
+
 ## [0.17.3](https://github.com/stencila/designa/compare/@stencila/components@0.17.2...@stencila/components@0.17.3) (2020-08-05)
 
 **Note:** Version bump only for package @stencila/components
