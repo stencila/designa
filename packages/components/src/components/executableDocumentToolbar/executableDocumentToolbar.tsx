@@ -15,7 +15,6 @@ import {
   softwareSession,
 } from '@stencila/schema'
 import { pipe } from 'fp-ts/lib/function'
-import wretch from 'wretch'
 import {
   toastController,
   ToastPositions,
@@ -26,6 +25,7 @@ import {
   fetchJobDatum,
   JobDatum,
   JobError,
+  jobFetch,
   SessionDatum,
 } from './executa'
 import { SessionStatus } from './sessionStatus'
@@ -54,7 +54,9 @@ type OnReject = (a: JobError) => void
 })
 export class StencilaExecutableDocumentToolbar implements ComponentInterface {
   private jobPoller: number | undefined = undefined
-  private jobPollFrequency = 3000
+
+  /** Frequency in milliseconds with which to check the status of a Job on Stencila Hub */
+  private jobPollFrequency = 3_000
 
   private jobUrl: string | undefined
 
@@ -153,7 +155,8 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
     if (DE.isInitial(this.session) || DE.isFailure(this.session)) {
       this.session = DE.pending
 
-      return wretch(this.sessionProviderUrl)
+      return jobFetch
+        .url(this.sessionProviderUrl)
         .post()
         .res((res) => {
           this.jobUrl = res.url

@@ -117,8 +117,10 @@ export const jobToDatum = (job: Job): JobDatum => {
   return DE.toReplete(failedJobGuard(job) ? DE.failure(job) : DE.success(job))
 }
 
+export const jobFetch = wretch().options({ credentials: 'include' })
+
 export const fetchJob = (jobUrl: string): Promise<Job> =>
-  wretch()
+  jobFetch
     .url(jobUrl)
     .get()
     .json((job) => job as Job)
