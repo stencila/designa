@@ -38,13 +38,13 @@
     "not IE_Mob 11"
   ],
   "dependencies": {
-    "@stencila/brand": "0.5.0",
-    "tailwindcss": "^1.4.6"
+    "@stencila/brand": "0.5.0"
   },
   "devDependencies": {
     "@abide-community/parcel-plugin-clean-out-dir": "1.0.0",
     "concurrently": "5.2.0",
     "parcel-plugin-css-pretransform": "1.0.0",
+    "tailwindcss": "^1.6.2",
     "tocbot": "4.12.0"
   }
 }

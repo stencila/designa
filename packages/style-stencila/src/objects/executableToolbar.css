@@ -26,12 +26,11 @@ stencila-executable-document-toolbar {
     @apply text-danger-500;
   }
 
-  [icon='loader'] {
+  stencila-icon {
     @apply mr-1;
   }
 
-  [icon='activity'],
-  [icon='x-octagon'] {
-    pointer: help;
+  stencila-tooltip {
+    cursor: help;
   }
 }

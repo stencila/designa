@@ -19,19 +19,13 @@
     width: var(--width);
   }
 
-  ::slotted(span > svg),
-  &::slotted(span > svg) {
-    @apply block;
-    box-sizing: border-box;
-    height: var(--height);
-    padding: 2px;
-    stroke-linecap: round;
-    stroke-width: 3px;
-    width: var(--width);
+  ::slotted(i),
+  &::slotted(i) {
+    @apply relative block fill-current;
+    stroke-linecap: butt;
   }
 
-  ::slotted(span > .feather-loader),
-  &::slotted(span > .feather-loader) {
+  &[icon^='loader']::slotted(i) {
     animation: spin 3000ms linear infinite;
   }
 }
