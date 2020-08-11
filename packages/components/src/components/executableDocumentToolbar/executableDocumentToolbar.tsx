@@ -79,7 +79,8 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
    * Note that if the Navbar component is not followed by a sibling element,
    * you will have to set `margin-top: 3rem` on the following element yourself.
    */
-  @Prop() public position: 'fixed' | 'static' = 'fixed'
+  @Prop()
+  public position: 'fixed' | 'static' = 'fixed'
 
   @State()
   session: SessionDatum = DE.initial
@@ -90,45 +91,50 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
   @State()
   executor: null | Executor = null
 
-  private checkJobStatus = async (): Promise<JobDatum> =>
+  private checkJobStatus = async (): Promise<JobDatum> => {
     // If we're already checking for the status, don't send second request
-    DE.isRefresh(this.job)
-      ? this.job
-      : pipe(
-          () => {
-            this.job = DE.toRefresh(this.job)
-          },
-          () => fetchJobDatum(this.jobUrl)
-        )
+    if (DE.isRefresh(this.job)) {
+      return this.job
+    } else {
+      this.job = DE.toRefresh(this.job)
+      return fetchJobDatum(this.jobUrl)
+    }
+  }
 
   private handleJobStatus = (
     job: JobDatum,
-    onJobReady: OnConnect,
-    onJobError: OnReject
+    onJobReady?: OnConnect,
+    onJobError?: OnReject
   ): JobDatum =>
     pipe(
       job,
       DE.fold(
         () => {
-          this.jobPoller = window.setInterval(() => {
-            this.pollJob(onJobReady, onJobError).catch((err) => {
-              throw new Error(err)
-            })
-          }, this.jobPollFrequency)
+          this.jobPoller = this.pollJobFn(
+            this.jobPollFrequency,
+            onJobReady,
+            onJobError
+          )
           return DE.pending
         },
         () => job,
         () => job,
         () => job,
-        (jobValue) => {
+        (jobError) => {
           window.clearInterval(this.jobPoller)
-          onJobError(jobValue)
+          this.executor?.stop().catch((err) => {
+            console.warn('Failed to stop Executa', err)
+          })
+          this.session = DE.failure(jobError)
           return job
         },
         (jobValue) => {
           if (executableJobGuard(jobValue)) {
             window.clearInterval(this.jobPoller)
-            onJobReady(this.startExecutor(jobValue.url))
+            this.jobPoller = this.pollJobFn(10_000)
+            if (onJobReady) {
+              onJobReady(this.startExecutor(jobValue.url))
+            }
           }
 
           return job
@@ -140,10 +146,19 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
       }
     )
 
-  private pollJob = (onConnectCb: OnConnect, onRejectCb: OnReject) =>
-    this.checkJobStatus().then((job) =>
-      this.handleJobStatus(job, onConnectCb, onRejectCb)
-    )
+  private pollJob = (onConnectCb?: OnConnect, onRejectCb?: OnReject) =>
+    this.checkJobStatus()
+      .then((job) => this.handleJobStatus(job, onConnectCb, onRejectCb))
+      .catch((err) => this.handleJobStatus(DE.failure(err)))
+
+  private pollJobFn = (
+    interval = this.jobPollFrequency,
+    onJobReady?: OnConnect,
+    onJobError?: OnReject
+  ) =>
+    window.setInterval(() => {
+      this.pollJob(onJobReady, onJobError).catch((err) => DE.failure(err))
+    }, interval)
 
   private findSession = async (): Promise<SessionDatum | void> => {
     // TODO: Smart polling: aggressive, ease up, accelerate again once wait time low?
@@ -261,9 +276,6 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
       code.executeHandler = this.executeHandler
     })
   }
-
-  // TODO: Close session when removing component
-  // componentWillUnload(): void {}
 
   render(): HTMLElement {
     return (
