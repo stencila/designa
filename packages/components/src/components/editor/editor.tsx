@@ -1,6 +1,9 @@
 import { autocomplete, startCompletion } from '@codemirror/next/autocomplete'
-import { closeBrackets } from '@codemirror/next/closebrackets'
-import { defaultKeymap, deleteGroupBackward } from '@codemirror/next/commands'
+import {
+  closeBrackets,
+  closeBracketsKeymap,
+} from '@codemirror/next/closebrackets'
+import { defaultKeymap } from '@codemirror/next/commands'
 import { commentKeymap } from '@codemirror/next/comment'
 import { foldGutter, foldKeymap } from '@codemirror/next/fold'
 import { lineNumbers } from '@codemirror/next/gutter'
@@ -10,11 +13,11 @@ import { python } from '@codemirror/next/lang-python'
 import { bracketMatching } from '@codemirror/next/matchbrackets'
 import { EditorState, Extension, tagExtension } from '@codemirror/next/state'
 import {
-  KeyBinding as KeymapI,
-  keymap,
   Command,
   EditorView,
   highlightSpecialChars,
+  KeyBinding as KeymapI,
+  keymap,
   multipleSelections,
 } from '@codemirror/next/view'
 import { Component, Element, h, Host, Method, Prop, Watch } from '@stencil/core'
@@ -176,15 +179,12 @@ export class Editor {
       keymap([
         ...defaultKeymap,
         ...commentKeymap,
+        ...closeBracketsKeymap,
         ...historyKeymap,
         ...foldKeymap,
         {
           key: 'Ctrl-Space',
           run: startCompletion,
-        },
-        {
-          mac: 'Alt-Backspace',
-          run: deleteGroupBackward,
         },
         {
           key: 'Mod-Backspace',
