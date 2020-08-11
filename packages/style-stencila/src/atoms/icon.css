@@ -19,15 +19,12 @@
     width: var(--width);
   }
 
-  ::slotted(svg),
-  &::slotted(svg) {
-    @apply block fill-current box-border;
-    height: var(--height);
-    width: var(--width);
+  ::slotted(i),
+  &::slotted(i) {
+    @apply relative block fill-current;
   }
 
-  ::slotted(span > .feather-loader),
-  &::slotted(span > .feather-loader) {
+  &[icon^='loader']::slotted(i) {
     animation: spin 3000ms linear infinite;
   }
 }

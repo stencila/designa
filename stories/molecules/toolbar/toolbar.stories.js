@@ -91,7 +91,7 @@ const articleControls = () => {
         </span>
 
         <span slot="middle" style="color: black;">
-          <stencila-icon icon="loader"></stencila-icon>
+          <stencila-icon icon="loader-2"></stencila-icon>
           Starting session… You are 17th in line. Estimated wait time 38s
         </span>
 

@@ -9,14 +9,16 @@ interface HelloProps {
 }
 
 const jobErrorMessage = (jobError: JobError): string =>
-  isErrorGuard(jobError) ? jobError.statusMessage : 'failed'
+  isErrorGuard(jobError)
+    ? jobError.statusMessage
+    : 'An unexpected error occurred'
 
 const jobStatusString = (jobObject: JobDatum): string =>
   pipe(
     jobObject,
     DE.fold(
-      () => 'Requesting compute session',
-      () => 'Requesting compute session',
+      () => 'Requesting session',
+      () => 'Requesting session',
       jobErrorMessage,
       (job) => job.statusMessage,
       jobErrorMessage,
@@ -41,19 +43,19 @@ export const SessionStatus: FunctionalComponent<HelloProps> = ({
         () => '',
         () => (
           <span>
-            <stencila-icon icon="loader"></stencila-icon>
+            <stencila-icon icon="loader-2"></stencila-icon>
             {jobStatusString(job)}
           </span>
         ),
         (refreshingErroredJob) => (
           <span>
-            <stencila-icon icon="loader"></stencila-icon>
+            <stencila-icon icon="loader-2"></stencila-icon>
             {jobErrorMessage(refreshingErroredJob)}
           </span>
         ),
         (refreshingSession) => (
           <span>
-            <stencila-icon icon="loader"></stencila-icon>
+            <stencila-icon icon="loader-2"></stencila-icon>
             {refreshingSession.status}
           </span>
         ),

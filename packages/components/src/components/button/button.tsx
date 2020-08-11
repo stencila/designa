@@ -155,7 +155,7 @@ export class Button {
       >
         {this.icon === undefined ? null : typeof this.icon === 'string' ? (
           <stencila-icon
-            icon={this.ioPending || this.isLoading ? 'loader' : this.icon}
+            icon={this.ioPending || this.isLoading ? 'loader-2' : this.icon}
             class={{ spin: this.isLoading }}
           ></stencila-icon>
         ) : (

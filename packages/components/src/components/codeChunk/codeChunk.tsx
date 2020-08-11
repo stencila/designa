@@ -76,7 +76,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    */
   @Prop() public keymap: Keymap[] = []
 
-  @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED'
+  @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED' = 'INITIAL'
 
   @State() outputs: CodeChunk['outputs']
 
@@ -111,10 +111,12 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     this.setAllCodeVisibilityHandler(!this.isCodeVisibleState)
 
   private onExecuteHandler = async (): Promise<CodeChunk> => {
+    this.executeCodeState = 'PENDING'
     const node = await this.getContents()
 
     if (this.executeHandler !== undefined) {
       const computed = await this.executeHandler(node)
+      this.executeCodeState = 'RESOLVED'
       this.updateErrors(computed.errors)
       this.outputs = computed.outputs
       return computed
@@ -148,7 +150,8 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     this.executeCodeState = 'PENDING'
     try {
       const res = await this.onExecuteHandler()
-      this.executeCodeState = 'RESOLVED'
+      // Add artificial delay to allow user to register the spinner
+      window.setTimeout(() => (this.executeCodeState = 'RESOLVED'), 250)
       return res
     } catch (err) {
       console.error(err)
