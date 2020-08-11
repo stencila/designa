@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/stencila/designa/compare/@stencila/components@0.18.0...@stencila/components@0.19.0) (2020-08-11)
+
+
+### Bug Fixes
+
+* **Icon:** Fix spinner icons not spinning ([15dcc28](https://github.com/stencila/designa/commit/15dcc28ec849c85b1b7864a6ed4d8824d8f06bb0))
+
+
+### Features
+
+* **Exec Toolbar:** Continue polling Job status even after connecting ([d361147](https://github.com/stencila/designa/commit/d361147da6564a8dcf1a906fea49c49831615895))
+
+
+
+
+
 # [0.18.0](https://github.com/stencila/designa/compare/@stencila/components@0.17.3...@stencila/components@0.18.0) (2020-08-10)
 
 

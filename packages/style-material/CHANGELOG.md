@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.11](https://github.com/stencila/style/compare/@stencila/style-material@0.11.10...@stencila/style-material@0.11.11) (2020-08-11)
+
+
+### Bug Fixes
+
+* **Icon:** Fix spinner icons not spinning ([15dcc28](https://github.com/stencila/style/commit/15dcc28ec849c85b1b7864a6ed4d8824d8f06bb0))
+
+
+
+
+
 ## [0.11.10](https://github.com/stencila/style/compare/@stencila/style-material@0.11.9...@stencila/style-material@0.11.10) (2020-08-05)
 
 
