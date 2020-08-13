@@ -61,7 +61,7 @@ export class Editor {
    * List of all supported programming languages
    */
   @Prop()
-  public languageCapabilities: string[] = ['Bash', 'JavaScript', 'R', 'Python']
+  public languageCapabilities: string[] = ['Bash', 'R', 'Python']
 
   /**
    * Disallow editing of the editor contents when set to `true`
