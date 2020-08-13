@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@abide-community/parcel-plugin-clean-out-dir": "1.0.0",
-    "concurrently": "5.2.0",
+    "concurrently": "5.3.0",
     "parcel-plugin-css-pretransform": "1.0.0",
     "tailwindcss": "^1.6.2",
     "tocbot": "4.12.0"
