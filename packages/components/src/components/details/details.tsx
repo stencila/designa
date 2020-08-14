@@ -11,7 +11,7 @@ import { Component, h, Prop, State, Host } from '@stencil/core'
 export class Details {
   public static readonly elementName = 'stencila-details'
 
-  /*
+  /**
    * Determines whether the contents are visible or not
    */
   @Prop() open = false

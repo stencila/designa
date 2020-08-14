@@ -5,9 +5,9 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type      | Default |
-| -------- | --------- | ----------- | --------- | ------- |
-| `open`   | `open`    |             | `boolean` | `false` |
+| Property | Attribute | Description                                        | Type      | Default |
+| -------- | --------- | -------------------------------------------------- | --------- | ------- |
+| `open`   | `open`    | Determines whether the contents are visible or not | `boolean` | `false` |
 
 
 ## Dependencies

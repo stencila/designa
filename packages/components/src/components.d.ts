@@ -167,6 +167,9 @@ export namespace Components {
         "table": Datatable;
     }
     interface StencilaDetails {
+        /**
+          * Determines whether the contents are visible or not
+         */
         "open": boolean;
     }
     interface StencilaEditor {
@@ -681,6 +684,9 @@ declare namespace LocalJSX {
         "table"?: Datatable;
     }
     interface StencilaDetails {
+        /**
+          * Determines whether the contents are visible or not
+         */
         "open"?: boolean;
     }
     interface StencilaEditor {
