@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.3](https://github.com/stencila/designa/compare/@stencila/components@0.19.2...@stencila/components@0.19.3) (2020-08-14)
+
+
+### Bug Fixes
+
+* **dependencies:** update dependency @codemirror/next to ^0.10.0 ([9c2a29e](https://github.com/stencila/designa/commit/9c2a29e9d936df57e179390476dc6db0bb7a6e7c))
+* **Editor:** Remove JavaScript from default list of languages ([925e22d](https://github.com/stencila/designa/commit/925e22d0bd458e587a76c4ee90529d94acd9884c))
+
+
+
+
+
 ## [0.19.2](https://github.com/stencila/designa/compare/@stencila/components@0.19.1...@stencila/components@0.19.2) (2020-08-13)
 
 **Note:** Version bump only for package @stencila/components
