@@ -47,7 +47,7 @@
     "tailwindcss": "1.6.2"
   },
   "dependencies": {
-    "@codemirror/next": "^0.8.0",
+    "@codemirror/next": "^0.10.0",
     "@nll/datum": "^3.1.0",
     "@popperjs/core": "^2.4.4",
     "@stencila/executa": "^1.11.8",
