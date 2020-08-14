@@ -50,7 +50,6 @@ type OnReject = (a: JobError) => void
     default: 'executableDocumentToolbar.css',
     material: 'executableDocumentToolbar.css',
   },
-  scoped: true,
 })
 export class StencilaExecutableDocumentToolbar implements ComponentInterface {
   private jobPoller: number | undefined = undefined
@@ -236,7 +235,9 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
         ...(code.errors ?? []),
         codeError({
           errorType: 'error',
-          errorMessage: `Could not run ${code.type}`,
+          errorMessage: `Could not run ${
+            code.type === 'CodeChunk' ? 'code chunk' : 'code expression'
+          }`,
           stackTrace: stackTrace,
         }),
       ],
