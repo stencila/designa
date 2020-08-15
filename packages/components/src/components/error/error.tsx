@@ -36,7 +36,7 @@ export class Error {
 
         {this.hasStacktrace && (
           <stencila-details>
-            <span slot="summary">Vew the stacktrace</span>
+            <span slot="summary">View the stacktrace</span>
             <slot name="stacktrace" />
           </stencila-details>
         )}

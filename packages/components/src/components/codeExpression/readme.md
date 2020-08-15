@@ -5,9 +5,10 @@
 
 ## Properties
 
-| Property         | Attribute | Description                                                                                                      | Type                                                                         | Default     |
-| ---------------- | --------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ----------- |
-| `executeHandler` | --        | A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`. | `((codeExpression: CodeExpression) => Promise<CodeExpression>) \| undefined` | `undefined` |
+| Property              | Attribute              | Description                                                                                                      | Type                                                                         | Default     |
+| --------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ----------- |
+| `executeHandler`      | --                     | A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`. | `((codeExpression: CodeExpression) => Promise<CodeExpression>) \| undefined` | `undefined` |
+| `programmingLanguage` | `programming-language` | Programming language of the CodeExpression                                                                       | `string`                                                                     | `undefined` |
 
 
 ## Methods

@@ -13,24 +13,32 @@ stencila-executable-document-toolbar {
       @apply mt-12;
     }
   }
-}
 
-.executableDocumentStatus {
-  @apply text-sm leading-none text-key;
+  .hidden-sm {
+    @apply hidden;
 
-  &.success {
-    @apply text-success-700;
+    @screen sm {
+      @apply inline;
+    }
   }
 
-  &.danger {
-    @apply text-danger-500;
-  }
+  .executableDocumentStatus {
+    @apply text-sm leading-none text-key;
 
-  stencila-icon {
-    @apply mr-1;
-  }
+    &.success {
+      @apply text-success-700;
+    }
 
-  stencila-tooltip {
-    cursor: help;
+    &.danger {
+      @apply text-danger-500;
+    }
+
+    stencila-icon {
+      @apply mr-1;
+    }
+
+    stencila-tooltip {
+      cursor: help;
+    }
   }
 }

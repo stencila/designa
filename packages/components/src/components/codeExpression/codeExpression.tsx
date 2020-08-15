@@ -38,6 +38,12 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     codeExpression: CodeExpression
   ) => Promise<CodeExpression>
 
+  /**
+   * Programming language of the CodeExpression
+   */
+  @Prop()
+  public programmingLanguage: string
+
   @State() output: CodeExpression['output']
 
   @State() codeErrors: CodeExpression['errors']
@@ -67,6 +73,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
       codeExpression({
         text: this.getTextSlotContents(),
         output: this.getOutputSlotContents(),
+        programmingLanguage: this.programmingLanguage,
       })
     )
   }
