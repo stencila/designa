@@ -159,6 +159,10 @@ export namespace Components {
           * Returns the `CodeExpression` node with the updated `text` contents from the editor.
          */
         "getContents": () => Promise<CodeExpression>;
+        /**
+          * Programming language of the CodeExpression
+         */
+        "programmingLanguage": string;
     }
     interface StencilaDataTable {
         /**
@@ -676,6 +680,10 @@ declare namespace LocalJSX {
         "executeHandler"?: (
     codeExpression: CodeExpression
   ) => Promise<CodeExpression>;
+        /**
+          * Programming language of the CodeExpression
+         */
+        "programmingLanguage"?: string;
     }
     interface StencilaDataTable {
         /**

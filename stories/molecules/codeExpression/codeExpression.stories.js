@@ -5,16 +5,22 @@ export default {
   component: 'stencila-code-expression',
 }
 
+const handler = console.log
+
 export const codeExpression = () => html`
   <div>
     <stencila-code-expression
-      data-collapsed="false"
-      itemtype="stencila:CodeChunk"
+      programming-language="r"
+      itemscope=""
+      itemtype="http://schema.stenci.la/CodeExpression"
+      .executeHandler=${handler}
     >
-      <code slot="text">x * y</code>
-      <output slot="output">
-        Reaaaaalllyyyyyyyy loooongggggggggggggggggggg output
-      </output>
+      <code class="r" slot="text"
+        >length(subset(data2, Lot==1 &amp; Time==0)$value)</code
+      >
+      <output slot="output"
+        ><span data-itemtype="http://schema.org/Number">3</span></output
+      >
     </stencila-code-expression>
   </div>
 `
