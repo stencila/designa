@@ -14,6 +14,14 @@ stencila-executable-document-toolbar {
     }
   }
 
+  .hidden-sm {
+    @apply hidden;
+
+    @screen sm {
+      @apply inline;
+    }
+  }
+
   .executableDocumentStatus {
     @apply text-sm leading-none text-key;
 

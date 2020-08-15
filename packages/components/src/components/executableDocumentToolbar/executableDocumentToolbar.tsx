@@ -292,7 +292,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
                 DE.isPending(this.session) || DE.isRefresh(this.session)
               }
             >
-              Run Document
+              Run<span class="hidden-sm"> Document</span>
             </stencila-button>
           </span>
 
