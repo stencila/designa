@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.5](https://github.com/stencila/style/compare/@stencila/style-stencila@0.16.4...@stencila/style-stencila@0.16.5) (2020-08-15)
+
+
+### Bug Fixes
+
+* **Exec Toolbar:** Give status text more room on small screens ([17cfc14](https://github.com/stencila/style/commit/17cfc14ce27e21c471833ddb49310651164edd1d))
+
+
+
+
+
 ## [0.16.4](https://github.com/stencila/style/compare/@stencila/style-stencila@0.16.3...@stencila/style-stencila@0.16.4) (2020-08-13)
 
 **Note:** Version bump only for package @stencila/style-stencila

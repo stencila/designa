@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.5](https://github.com/stencila/designa/compare/@stencila/components@0.19.4...@stencila/components@0.19.5) (2020-08-15)
+
+
+### Bug Fixes
+
+* **CodeExpression:** Pass language prop to execution handler (close [#38](https://github.com/stencila/designa/issues/38)) ([633de27](https://github.com/stencila/designa/commit/633de2715ed5778b5cede5f5e2d509e66268e738))
+* **Error:** Fix typo in default message ([e026ff7](https://github.com/stencila/designa/commit/e026ff7a051319d73afa2516357a93450be0a9f4))
+* **Exec Toolbar:** Give status text more room on small screens ([17cfc14](https://github.com/stencila/designa/commit/17cfc14ce27e21c471833ddb49310651164edd1d))
+
+
+
+
+
 ## [0.19.4](https://github.com/stencila/designa/compare/@stencila/components@0.19.3...@stencila/components@0.19.4) (2020-08-14)
 
 **Note:** Version bump only for package @stencila/components
