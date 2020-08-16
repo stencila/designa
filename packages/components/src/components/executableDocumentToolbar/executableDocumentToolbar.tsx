@@ -214,8 +214,11 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
     | HTMLStencilaCodeChunkElement
     | HTMLStencilaCodeExpressionElement
   )[] => [
-    ...Array.from(document.getElementsByTagName('stencila-code-chunk')),
-    ...Array.from(document.getElementsByTagName('stencila-code-expression')),
+    ...Array.from(
+      document.querySelectorAll<
+        HTMLStencilaCodeChunkElement | HTMLStencilaCodeExpressionElement
+      >('stencila-code-chunk, stencila-code-expression')
+    ),
   ]
 
   private executeHandler = async (
@@ -264,10 +267,14 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
   ): Promise<(CodeExpression | CodeChunk | undefined | void)[]> => {
     e.preventDefault()
 
-    return this.findSession().then(() => {
-      return Promise.all(
-        this.codeNodeSelector().map(async (item) => item.execute())
-      )
+    return this.findSession().then(async () => {
+      const results = []
+      for (const node of this.codeNodeSelector()) {
+        const res = await node.execute()
+        results.push(res)
+      }
+
+      return results
     })
   }
 
