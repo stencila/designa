@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.16.5...@stencila/style-stencila@0.17.0) (2020-08-16)
+
+
+### Features
+
+* **CodeExpression:** Update CodeExpression outputs when executing code ([554ad58](https://github.com/stencila/style/commit/554ad589b122189a569bd6cabbed5cfcddd14249))
+
+
+
+
+
 ## [0.16.5](https://github.com/stencila/style/compare/@stencila/style-stencila@0.16.4...@stencila/style-stencila@0.16.5) (2020-08-15)
 
 

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/stencila/designa/compare/@stencila/components@0.19.5...@stencila/components@0.20.0) (2020-08-16)
+
+
+### Bug Fixes
+
+* **CodeCunk:** Ensure execution state is always resolved ([d371877](https://github.com/stencila/designa/commit/d37187727233b659fab9205bb46b8d5e0d24169b))
+* **Exec Toolbar:** Ensure sequential execution of code components ([c9a40f1](https://github.com/stencila/designa/commit/c9a40f12a4a8c092fc614625017504ba71cec65f)), closes [#90](https://github.com/stencila/designa/issues/90)
+
+
+### Features
+
+* **CodeExpression:** Update CodeExpression outputs when executing code ([554ad58](https://github.com/stencila/designa/commit/554ad589b122189a569bd6cabbed5cfcddd14249))
+
+
+
+
+
 ## [0.19.5](https://github.com/stencila/designa/compare/@stencila/components@0.19.4...@stencila/components@0.19.5) (2020-08-15)
 
 
