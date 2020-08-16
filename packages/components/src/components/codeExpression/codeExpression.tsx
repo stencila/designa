@@ -10,6 +10,7 @@ import {
 } from '@stencil/core'
 import { codeExpression, CodeExpression } from '@stencila/schema'
 import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
+import { NodeRenderer } from '../nodeList/nodeRenderer'
 
 const slots = {
   text: 'text',
@@ -54,6 +55,8 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
 
   @State() isOutputEmpty = false
 
+  @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED' = 'INITIAL'
+
   componentDidLoad(): void {
     this.isOutputEmpty = this.outputExists()
   }
@@ -72,7 +75,6 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     return Promise.resolve(
       codeExpression({
         text: this.getTextSlotContents(),
-        output: this.getOutputSlotContents(),
         programmingLanguage: this.programmingLanguage,
       })
     )
@@ -87,8 +89,11 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     (this.isCodeVisible = !this.isCodeVisible)
 
   // Use `innerHTML` for checking output presence to account for non-text nodes such as images.
-  private outputExists = (): boolean =>
-    this.selectOutputSlot()?.innerHTML.trim() === ''
+  private outputExists = (): boolean => {
+    const contents = this.selectOutputSlot()?.innerHTML.trim()
+    this.output = contents
+    return contents === ''
+  }
 
   private selectTextSlot = (): HTMLElement | null =>
     this.el.querySelector(`.${slots.text}`)
@@ -101,11 +106,6 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   private selectOutputSlot = (): HTMLElement | null =>
     this.el.querySelector(`[slot=${slots.output}]`)
 
-  private getOutputSlotContents = (): string => {
-    const slot = this.selectOutputSlot()
-    return slot?.textContent ?? ''
-  }
-
   private handleKeyDown = (event: KeyboardEvent): void => {
     if (event.key === 'Enter' && event.shiftKey) {
       event.preventDefault()
@@ -115,21 +115,39 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     }
   }
 
+  private onExecuteHandler = async (): Promise<CodeExpression> => {
+    this.executeCodeState = 'PENDING'
+    const node = await this.getContents()
+
+    if (this.executeHandler !== undefined) {
+      const computed = await this.executeHandler(node)
+      this.executeCodeState = 'RESOLVED'
+      /* this.updateErrors(computed.errors) */
+      this.isOutputEmpty =
+        computed.output === undefined || computed.output === null
+      this.output = computed.output
+      return computed
+    }
+
+    this.executeCodeState = 'RESOLVED'
+    return node
+  }
+
   /**
-   * Run the `CodeChunk`
+   * Run the `CodeExpression`
    */
   @Method()
   public async execute(): Promise<CodeExpression> {
+    this.executeCodeState = 'PENDING'
     try {
-      const codeExpression = await this.getContents()
-      if (this.executeHandler) {
-        return this.executeHandler(codeExpression)
-      }
-
-      throw new Error('handler not found')
+      const res = await this.onExecuteHandler()
+      // Add artificial delay to allow user to register the spinner
+      window.setTimeout(() => (this.executeCodeState = 'RESOLVED'), 250)
+      return res
     } catch (err) {
       console.error(err)
-      throw new Error(err)
+      this.executeCodeState = 'RESOLVED'
+      return err
     }
   }
 
@@ -185,6 +203,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
           clickHandlerProp={this.executeRef}
           color="key"
           disabled={!this.executeHandler}
+          isLoading={this.executeCodeState === 'PENDING'}
           icon="play"
           iconOnly={true}
           minimal={true}
@@ -212,10 +231,15 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
         </span>
       </span>,
       this.dividerArrow(),
+      <span class={{ hidden: true, slot: true }}>
+        <slot name="output" />
+      </span>,
       this.isOutputEmpty ? (
-        <stencila-tooltip text={this.emptyOutputMessage}>…</stencila-tooltip>
-      ) : (
-        <slot name={slots.output} />
+        <stencila-tooltip text={this.emptyOutputMessage} class="output">
+          …
+        </stencila-tooltip>
+      ) : this.output == null ? null : (
+        <NodeRenderer node={this.output}></NodeRenderer>
       ),
     ]
   }

@@ -122,6 +122,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
       return computed
     }
 
+    this.executeCodeState = 'RESOLVED'
     return node
   }
 
@@ -155,6 +156,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
       return res
     } catch (err) {
       console.error(err)
+      this.executeCodeState = 'RESOLVED'
       return err
     }
   }
