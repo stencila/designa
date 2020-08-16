@@ -54,7 +54,7 @@ stencila-code-expression {
 
   .output {
     & > * {
-      @apply my-0;
+      @apply inline-block p-0 m-0 font-mono text-xs border-none bg-stock text-key;
     }
   }
 
