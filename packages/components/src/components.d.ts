@@ -146,7 +146,7 @@ export namespace Components {
     }
     interface StencilaCodeExpression {
         /**
-          * Run the `CodeChunk`
+          * Run the `CodeExpression`
          */
         "execute": () => Promise<CodeExpression>;
         /**

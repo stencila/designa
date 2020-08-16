@@ -32,7 +32,8 @@ stencila-code-expression {
   }
 
   ::slotted([slot='output']),
-  [slot='output'] {
+  [slot='output'],
+  .output {
     @apply inline-block py-1 pl-1 pr-2 font-mono text-xs border-none bg-stock text-key;
     background-color: var(--background);
     transition: padding 120ms ease-out;
@@ -44,6 +45,16 @@ stencila-code-expression {
       svg {
         @apply h-4 stroke-warn-600;
       }
+    }
+  }
+
+  .slot.hidden {
+    @apply hidden;
+  }
+
+  .output {
+    & > * {
+      @apply my-0;
     }
   }
 
@@ -63,7 +74,7 @@ stencila-code-expression {
   }
 
   .actions stencila-button {
-    @apply inline-flex items-stretch self-start overflow-hidden cursor-default transition ease-out duration-150;
+    @apply inline-flex items-stretch self-start flex-shrink-0 overflow-hidden cursor-default transition ease-out duration-150;
     transition-property: padding, width, max-width;
 
     &.sourceToggle {
@@ -73,7 +84,9 @@ stencila-code-expression {
 
   &.isOutputEmpty {
     ::slotted([slot='output']),
-    [slot='output'] {
+    [slot='output'],
+    .output,
+    stencila-tooltip {
       @apply text-neutral-600;
     }
   }

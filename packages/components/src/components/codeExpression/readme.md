@@ -15,7 +15,7 @@
 
 ### `execute() => Promise<CodeExpression>`
 
-Run the `CodeChunk`
+Run the `CodeExpression`
 
 #### Returns
 
@@ -50,12 +50,16 @@ Type: `Promise<CodeExpression>`
 
 - [stencila-button](../button)
 - [stencila-tooltip](../tooltip)
+- [stencila-image-object](../imageObject)
+- [stencila-data-table](../dataTable)
 
 ### Graph
 ```mermaid
 graph TD;
   stencila-code-expression --> stencila-button
   stencila-code-expression --> stencila-tooltip
+  stencila-code-expression --> stencila-image-object
+  stencila-code-expression --> stencila-data-table
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip
   stencila-tooltip --> stencila-tooltip-element
