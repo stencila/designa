@@ -40,5 +40,9 @@ stencila-executable-document-toolbar {
     stencila-tooltip {
       cursor: help;
     }
+
+    span {
+      @apply align-middle;
+    }
   }
 }
