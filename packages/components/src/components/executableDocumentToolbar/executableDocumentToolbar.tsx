@@ -63,6 +63,14 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
 
   private activeNodeIndex?: number
 
+  private requestController = new AbortController()
+  private requestSignal = this.requestController.signal
+
+  private initAbortControllers = () => {
+    this.requestController = new AbortController()
+    this.requestSignal = this.requestController.signal
+  }
+
   /**
    * The URL of the document being decorated. Could be a Snapshot from Stencila Hub, a Project URL, or something else.
    */
@@ -131,6 +139,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
         () => job,
         (jobError) => {
           window.clearInterval(this.jobPoller)
+          this.requestController.abort()
           this.executor?.stop().catch((err) => {
             console.warn('Failed to stop Executa', err)
           })
@@ -276,30 +285,40 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
     e: MouseEvent
   ): Promise<(CodeExpression | CodeChunk | undefined | void)[]> => {
     e.preventDefault()
+    this.initAbortControllers()
 
-    return this.findSession().then(async () => {
-      const results = []
-      let idx = 0
+    return new Promise((resolve, reject) => {
+      this.requestSignal.addEventListener('abort', reject)
 
-      this.session = DE.toRefresh(this.session)
+      this.findSession()
+        .then(async () => {
+          const results: (CodeChunk | CodeExpression)[] = []
+          let idx = 0
 
-      for (const node of this.codeNodeSelector()) {
-        this.activeNodeIndex = idx
-        this.statusMessage = `${++idx} of ${this.codeCount} code ${pluralize(
-          'node',
-          this.codeCount
-        )}`
+          this.session = DE.toRefresh(this.session)
 
-        const res = await node.execute()
-        results.push(res)
+          for (const node of this.codeNodeSelector()) {
+            this.activeNodeIndex = idx
+            this.statusMessage = `${++idx} of ${
+              this.codeCount
+            } code ${pluralize('node', this.codeCount)}`
 
-        if (idx >= this.codeCount) {
-          this.statusMessage = ''
-        }
-      }
+            const res = await node.execute()
+            results.push(res)
 
-      this.session = DE.toReplete(this.session)
-      return results
+            if (idx >= this.codeCount) {
+              this.statusMessage = ''
+            }
+          }
+
+          this.session = DE.toReplete(this.session)
+          this.requestSignal.removeEventListener('abort', reject)
+          return resolve(results)
+        })
+        .catch((err) => {
+          this.requestSignal.removeEventListener('abort', reject)
+          reject(err)
+        })
     })
   }
 
