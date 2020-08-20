@@ -16,6 +16,7 @@ import {
 } from '@stencila/schema'
 import { array as A, option as O } from 'fp-ts'
 import { pipe } from 'fp-ts/lib/function'
+import pluralize from 'pluralize'
 import {
   toastController,
   ToastPositions,
@@ -60,7 +61,6 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
 
   private jobUrl: string | undefined
 
-  private codeCount: number
   private activeNodeIndex?: number
 
   /**
@@ -93,6 +93,9 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
 
   @State()
   executor: null | Executor = null
+
+  @State()
+  private codeCount = 0
 
   @State()
   statusMessage = ''
@@ -282,7 +285,10 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
 
       for (const node of this.codeNodeSelector()) {
         this.activeNodeIndex = idx
-        this.statusMessage = `${++idx} of ${this.codeCount}`
+        this.statusMessage = `${++idx} of ${this.codeCount} code ${pluralize(
+          'node',
+          this.codeCount
+        )}`
 
         const res = await node.execute()
         results.push(res)
@@ -297,7 +303,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
     })
   }
 
-  componentDidLoad(): void {
+  componentWillLoad(): void {
     const codeNodes = this.codeNodeSelector()
     this.codeCount = codeNodes.length
     codeNodes.map((code) => {
@@ -343,6 +349,12 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
               icon="play"
               size="small"
               clickHandlerProp={this.runAll}
+              disabled={this.codeCount <= 0}
+              tooltip={
+                this.codeCount <= 0
+                  ? 'No code nodes in the document to execute'
+                  : undefined
+              }
               isLoading={
                 DE.isPending(this.session) || DE.isRefresh(this.session)
               }
