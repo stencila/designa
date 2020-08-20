@@ -25,25 +25,25 @@
 
 ### Depends on
 
+- [stencila-tooltip](../tooltip)
+- [stencila-icon](../icon)
 - [stencila-toolbar](../toolbar)
 - [stencila-button](../button)
 - animate-presence
 - [stencila-toast](../toast)
-- [stencila-icon](../icon)
-- [stencila-tooltip](../tooltip)
 
 ### Graph
 ```mermaid
 graph TD;
+  stencila-executable-document-toolbar --> stencila-tooltip
+  stencila-executable-document-toolbar --> stencila-icon
   stencila-executable-document-toolbar --> stencila-toolbar
   stencila-executable-document-toolbar --> stencila-button
   stencila-executable-document-toolbar --> animate-presence
   stencila-executable-document-toolbar --> stencila-toast
-  stencila-executable-document-toolbar --> stencila-icon
-  stencila-executable-document-toolbar --> stencila-tooltip
+  stencila-tooltip --> stencila-tooltip-element
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip
-  stencila-tooltip --> stencila-tooltip-element
   stencila-toast --> animate-presence
   stencila-toast --> stencila-toast
   style stencila-executable-document-toolbar fill:#f9f,stroke:#333,stroke-width:4px

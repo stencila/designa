@@ -14,7 +14,9 @@ import {
   CodeExpression,
   softwareSession,
 } from '@stencila/schema'
+import { array as A, option as O } from 'fp-ts'
 import { pipe } from 'fp-ts/lib/function'
+import pluralize from 'pluralize'
 import {
   toastController,
   ToastPositions,
@@ -59,6 +61,8 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
 
   private jobUrl: string | undefined
 
+  private activeNodeIndex?: number
+
   /**
    * The URL of the document being decorated. Could be a Snapshot from Stencila Hub, a Project URL, or something else.
    */
@@ -89,6 +93,12 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
 
   @State()
   executor: null | Executor = null
+
+  @State()
+  private codeCount = 0
+
+  @State()
+  statusMessage = ''
 
   private checkJobStatus = async (): Promise<JobDatum> => {
     // If we're already checking for the status, don't send second request
@@ -269,21 +279,65 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
 
     return this.findSession().then(async () => {
       const results = []
+      let idx = 0
+
+      this.session = DE.toRefresh(this.session)
+
       for (const node of this.codeNodeSelector()) {
+        this.activeNodeIndex = idx
+        this.statusMessage = `${++idx} of ${this.codeCount} code ${pluralize(
+          'node',
+          this.codeCount
+        )}`
+
         const res = await node.execute()
         results.push(res)
+
+        if (idx >= this.codeCount) {
+          this.statusMessage = ''
+        }
       }
 
+      this.session = DE.toReplete(this.session)
       return results
     })
   }
 
-  componentDidLoad(): void {
-    this.codeNodeSelector().map((code) => {
+  componentWillLoad(): void {
+    const codeNodes = this.codeNodeSelector()
+    this.codeCount = codeNodes.length
+    codeNodes.map((code) => {
       // @ts-ignore
       code.executeHandler = this.executeHandler
     })
   }
+
+  private goToActiveNode = (): void => {
+    pipe(
+      this.codeNodeSelector(),
+      A.lookup(this.activeNodeIndex ?? -1),
+      O.map((el) => {
+        const toolbar = document.querySelector(
+          'stencila-executable-document-toolbar'
+        )
+        const offset = toolbar?.getBoundingClientRect().height ?? 0
+        const target =
+          el.getBoundingClientRect().top - offset + window.pageYOffset
+
+        window.scrollTo({
+          top: target,
+          behavior: 'smooth',
+        })
+      })
+    )
+  }
+
+  private executionProgress = () => (
+    <stencila-tooltip text="Jump to location" onClick={this.goToActiveNode}>
+      <stencila-icon icon="focus-3"></stencila-icon>
+      <span>{this.statusMessage}</span>
+    </stencila-tooltip>
+  )
 
   render(): HTMLElement {
     return (
@@ -295,19 +349,26 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
               icon="play"
               size="small"
               clickHandlerProp={this.runAll}
+              disabled={this.codeCount <= 0}
+              tooltip={
+                this.codeCount <= 0
+                  ? 'No code nodes in the document to execute'
+                  : undefined
+              }
               isLoading={
                 DE.isPending(this.session) || DE.isRefresh(this.session)
               }
             >
-              Run<span class="hidden-sm"> Document</span>
+              {DE.isPending(this.session) || DE.isRefresh(this.session)
+                ? 'Running'
+                : ['Run', <span class="hidden-sm"> Document</span>]}
             </stencila-button>
           </span>
 
           <span slot="middle">
-            <SessionStatus
-              job={this.job}
-              session={this.session}
-            ></SessionStatus>
+            <SessionStatus job={this.job} session={this.session}>
+              {DE.isRefresh(this.session) && this.executionProgress()}
+            </SessionStatus>
           </span>
 
           {this.sourceUrl !== undefined && (

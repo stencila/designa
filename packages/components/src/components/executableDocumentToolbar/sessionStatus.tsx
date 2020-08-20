@@ -1,11 +1,13 @@
 import { datumEither as DE } from '@nll/datum'
-import { FunctionalComponent, h } from '@stencil/core'
+import { FunctionalComponent, h, VNode } from '@stencil/core'
+import { array as A } from 'fp-ts'
 import { pipe } from 'fp-ts/lib/function'
 import { isErrorGuard, JobDatum, JobError, SessionDatum } from './executa'
 
 interface HelloProps {
   session: SessionDatum
   job: JobDatum
+  children?: VNode | VNode[]
 }
 
 const jobErrorMessage = (jobError: JobError): string =>
@@ -26,10 +28,10 @@ const jobStatusString = (jobObject: JobDatum): string =>
     )
   )
 
-export const SessionStatus: FunctionalComponent<HelloProps> = ({
-  session,
-  job,
-}) => (
+export const SessionStatus: FunctionalComponent<HelloProps> = (
+  { session, job },
+  children
+) => (
   <span
     class={{
       executableDocumentStatus: true,
@@ -44,30 +46,37 @@ export const SessionStatus: FunctionalComponent<HelloProps> = ({
         () => (
           <span>
             <stencila-icon icon="loader-2"></stencila-icon>
-            {jobStatusString(job)}
+            <span>{jobStatusString(job)}</span>
           </span>
         ),
         (refreshingErroredJob) => (
           <span>
             <stencila-icon icon="loader-2"></stencila-icon>
-            {jobErrorMessage(refreshingErroredJob)}
+            <span>{jobErrorMessage(refreshingErroredJob)}</span>
           </span>
         ),
         (refreshingSession) => (
           <span>
-            <stencila-icon icon="loader-2"></stencila-icon>
-            {refreshingSession.status}
+            {A.isEmpty(children) ? (
+              [
+                <stencila-icon icon="loader-2"></stencila-icon>,
+                refreshingSession.status,
+              ]
+            ) : (
+              <span>{children}</span>
+            )}
           </span>
         ),
         (err) => (
           <span>
             <stencila-icon icon="error-warning"></stencila-icon>
-            {jobErrorMessage(err)}
+            <span>{jobErrorMessage(err)}</span>
           </span>
         ),
         () => (
           <stencila-tooltip text="Compute session is active">
             <stencila-icon icon="pulse"></stencila-icon>
+            {A.isEmpty(children) ? null : <span>{children}</span>}
           </stencila-tooltip>
         )
       )
