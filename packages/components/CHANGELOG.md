@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.com/stencila/designa/compare/@stencila/components@0.20.0...@stencila/components@0.21.0) (2020-08-20)
+
+
+### Features
+
+* **Exec Toolbar:** Add execution progress indicator ([f3345ee](https://github.com/stencila/designa/commit/f3345eeccce6ee33d87ff60a4381e591bd960ac5))
+
+
+
+
+
 # [0.20.0](https://github.com/stencila/designa/compare/@stencila/components@0.19.5...@stencila/components@0.20.0) (2020-08-16)
 
 

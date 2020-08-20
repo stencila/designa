@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.17.0...@stencila/style-stencila@0.18.0) (2020-08-20)
+
+
+### Features
+
+* **Exec Toolbar:** Add execution progress indicator ([f3345ee](https://github.com/stencila/style/commit/f3345eeccce6ee33d87ff60a4381e591bd960ac5))
+
+
+
+
+
 # [0.17.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.16.5...@stencila/style-stencila@0.17.0) (2020-08-16)
 
 
