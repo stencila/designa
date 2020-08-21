@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.1](https://github.com/stencila/designa/compare/@stencila/components@0.21.0...@stencila/components@0.21.1) (2020-08-21)
+
+
+### Bug Fixes
+
+* **Exec Toolbar:** Stop button spinner if Job/Session fails ([dcff6c6](https://github.com/stencila/designa/commit/dcff6c684f6291b67e012e551f675afc6970cd41))
+
+
+
+
+
 # [0.21.0](https://github.com/stencila/designa/compare/@stencila/components@0.20.0...@stencila/components@0.21.0) (2020-08-20)
 
 
