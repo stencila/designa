@@ -1,15 +1,15 @@
 const { colors: defaultColors } = require('tailwindcss/defaultTheme')
 
 const generateColors = (name, defaultName) => ({
-  '100': `var(--color-${name}-100, ${defaultColors[defaultName][100]})`,
-  '200': `var(--color-${name}-200, ${defaultColors[defaultName][200]})`,
-  '300': `var(--color-${name}-300, ${defaultColors[defaultName][300]})`,
-  '400': `var(--color-${name}-400, ${defaultColors[defaultName][400]})`,
-  '500': `var(--color-${name}-500, ${defaultColors[defaultName][500]})`,
-  '600': `var(--color-${name}-600, ${defaultColors[defaultName][600]})`,
-  '700': `var(--color-${name}-700, ${defaultColors[defaultName][700]})`,
-  '800': `var(--color-${name}-800, ${defaultColors[defaultName][800]})`,
-  '900': `var(--color-${name}-900, ${defaultColors[defaultName][900]})`,
+  100: `var(--color-${name}-100, ${defaultColors[defaultName][100]})`,
+  200: `var(--color-${name}-200, ${defaultColors[defaultName][200]})`,
+  300: `var(--color-${name}-300, ${defaultColors[defaultName][300]})`,
+  400: `var(--color-${name}-400, ${defaultColors[defaultName][400]})`,
+  500: `var(--color-${name}-500, ${defaultColors[defaultName][500]})`,
+  600: `var(--color-${name}-600, ${defaultColors[defaultName][600]})`,
+  700: `var(--color-${name}-700, ${defaultColors[defaultName][700]})`,
+  800: `var(--color-${name}-800, ${defaultColors[defaultName][800]})`,
+  900: `var(--color-${name}-900, ${defaultColors[defaultName][900]})`,
 })
 
 const colors = {
@@ -56,5 +56,9 @@ module.exports = {
     borderOpacity: false,
     placeholderOpacity: false,
     textOpacity: false,
+  },
+  future: {
+    purgeLayersByDefault: false,
+    removeDeprecatedGapUtilities: true,
   },
 }
