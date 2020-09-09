@@ -1,4 +1,4 @@
-import { autocomplete, startCompletion } from '@codemirror/next/autocomplete'
+import { autocompletion, startCompletion } from '@codemirror/next/autocomplete'
 import {
   closeBrackets,
   closeBracketsKeymap,
@@ -169,7 +169,7 @@ export class Editor {
 
     const extensions: Extension[] = [
       history(),
-      autocomplete(),
+      autocompletion(),
       bracketMatching(),
       closeBrackets(),
       defaultHighlighter,
