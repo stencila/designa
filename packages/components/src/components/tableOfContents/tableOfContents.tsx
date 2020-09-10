@@ -5,8 +5,8 @@ import tocbot from 'tocbot'
   tag: 'stencila-toc',
   styleUrls: {
     default: 'tableOfContents.css',
-    material: 'tableOfContents.material.css'
-  }
+    material: 'tableOfContents.material.css',
+  },
 })
 export class TableOfContents {
   public static readonly elementName = 'stencila-toc'
@@ -14,19 +14,19 @@ export class TableOfContents {
   /**
    * Where to grab the headings to build the table of contents.
    */
-  @Prop() public contentSelector: string = 'article'
+  @Prop() public contentSelector = 'article'
 
   /**
    * Which headings to grab inside of the contentSelector element.
    */
-  @Prop() public headingSelector: string = 'h1, h2, h3, h4'
+  @Prop() public headingSelector = 'h1, h2, h3, h4'
 
   private initTOC = (): void => {
     tocbot.init({
       tocSelector: '.toc',
       positionFixedSelector: '.toc',
       contentSelector: this.contentSelector,
-      headingSelector: this.headingSelector
+      headingSelector: this.headingSelector,
     })
   }
 
@@ -42,7 +42,7 @@ export class TableOfContents {
     }
   }
 
-  public componentDidUnload(): void {
+  public disconnectedCallback(): void {
     document.removeEventListener('DOMContentLoaded', this.initTOC)
   }
 

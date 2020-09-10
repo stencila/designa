@@ -273,7 +273,7 @@ export class Editor {
     }
   }
 
-  protected componentDidUnload() {
+  protected disconnectedCallback() {
     this.editorRef.destroy()
   }
 

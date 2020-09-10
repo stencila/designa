@@ -25,6 +25,11 @@ const prodPlugins =
 
 export const config: Config = {
   namespace: 'stencila-components',
+  buildEs5: 'prod',
+  extras: {
+    appendChildSlotFix: true,
+    safari10: true,
+  },
   globalScript: './src/globals/global.ts',
   outputTargets: [
     {

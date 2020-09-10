@@ -84,7 +84,7 @@ export class ActionMenu {
     }
   }
 
-  protected componentDidUnload(): void {
+  protected disconnectedCallback(): void {
     this.observer.disconnect()
   }
 
