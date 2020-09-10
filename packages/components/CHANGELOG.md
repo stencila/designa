@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://github.com/stencila/designa/compare/@stencila/components@0.21.5...@stencila/components@0.22.0) (2020-09-10)
+
+
+### Features
+
+* **Toolbar:** Add unique identifiers to Exec Toolbar buttons ([5f3b598](https://github.com/stencila/designa/commit/5f3b598882cb8c88348d2422dbc8dd9e0dcae4d3))
+
+
+
+
+
 ## [0.21.5](https://github.com/stencila/designa/compare/@stencila/components@0.21.4...@stencila/components@0.21.5) (2020-09-09)
 
 **Note:** Version bump only for package @stencila/components
