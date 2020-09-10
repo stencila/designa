@@ -23,9 +23,8 @@ export class OutputsList {
   /**
    * Array of nodes to render.
    */
-  @Prop() nodes: Node[] | undefined
+  @Prop() nodes: Node[] | undefined = undefined
 
-  /* @State() isEmpty = !(this.nodes !== undefined && !isEmpty(this.nodes)) */
   @State() isEmpty =
     this.nodes === undefined ||
     (this.nodes !== undefined && isEmpty(this.nodes))

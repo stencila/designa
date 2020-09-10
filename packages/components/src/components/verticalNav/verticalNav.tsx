@@ -29,15 +29,15 @@ const parseCreativeWorks = (
   tag: 'stencila-vertical-nav',
   styleUrls: {
     default: './verticalNav.css',
-    material: './verticalNav.material.css'
+    material: './verticalNav.material.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class VerticalNav {
   /**
    * Collection schema from which to generate a table of contents
    */
-  @Prop() public collection?: Collection
+  @Prop() public collection?: Collection = undefined
 
   private _collection?: Collection = this.collection
 
@@ -50,7 +50,7 @@ export class VerticalNav {
     const _col: Collection[] = Array.from(
       document.querySelectorAll('script[type="application/ld+json"]')
     ).reduce((scripts: Collection[], el) => {
-      let contents: {}
+      let contents = {}
       try {
         contents = JSON.parse(el.innerHTML)
       } catch (e) {

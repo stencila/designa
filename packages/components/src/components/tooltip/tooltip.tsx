@@ -108,7 +108,7 @@ export class Tooltip implements ComponentInterface {
     this.loadComponent()
   }
 
-  protected componentDidUnload(): void {
+  public disconnectedCallback(): void {
     this.unloadComponent()
     this.destroyTooltip()
   }
