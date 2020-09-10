@@ -1,12 +1,10 @@
-import { withA11y } from '@storybook/addon-a11y'
 import { withCssResources } from '@storybook/addon-cssresources'
-import { withKnobs } from '@storybook/addon-knobs'
 import { create } from '@storybook/theming'
 import {
   addDecorator,
   addParameters,
   configure,
-  setCustomElements
+  setCustomElements,
 } from '@storybook/web-components'
 import { withRootAttribute } from 'storybook-addon-root-attribute'
 import customElements from '../packages/components/dist/custom-elements.json'
@@ -15,18 +13,18 @@ const cssresources = [
   {
     id: `CSS Variables`,
     code: `<link rel="stylesheet" type="text/css" href="./stencila-components/stencila-components.css"></link>`,
-    picked: false
+    picked: false,
   },
   {
     id: `Stencila`,
     code: `<link rel="stylesheet" type="text/css" href="./index-stencila.css"></link>`,
-    picked: false
+    picked: false,
   },
   {
     id: `Material`,
     code: `<link rel="stylesheet" type="text/css" href="./index-material.css"></link>`,
-    picked: false
-  }
+    picked: false,
+  },
 ]
 
 // https://storybook.js.org/docs/configurations/theming/
@@ -36,7 +34,7 @@ const theme = create({
   fontBase: 'Montserrat, Nunito, "Open Sans", sans-serif',
   fontCode: 'IBM Plex, monospace',
   brandTitle: 'Stencila',
-  brandUrl: 'https://stenci.la'
+  brandUrl: 'https://stenci.la',
 })
 
 /**
@@ -68,9 +66,7 @@ const atomicSort = ([a], [b]) => {
 
 setCustomElements(customElements)
 
-addDecorator(withA11y)
 addDecorator(withCssResources)
-addDecorator(withKnobs)
 addDecorator(withRootAttribute)
 
 addParameters({
@@ -78,31 +74,30 @@ addParameters({
     config: {},
     options: {
       checks: { 'color-contrast': { options: { noScroll: true } } },
-      restoreScroll: true
-    }
+      restoreScroll: true,
+    },
   },
   cssresources,
-  // docs: { disable: true },
+  docs: { theme: theme },
   options: {
-    theme,
-    storySort: atomicSort
+    storySort: atomicSort,
   },
   rootAttribute: {
     attribute: 'mode',
     defaultState: {
       name: 'Stencila',
-      value: null
+      value: null,
     },
     states: [
       {
         name: 'Material',
-        value: 'material'
-      }
-    ]
-  }
+        value: 'material',
+      },
+    ],
+  },
 })
 
-const req = require.context('../stories', true, /\.stories\.(js|mdx)$/)
+const req = require.context('../stories', true, /\.stories\.(ts|js|mdx)$/)
 configure(req, module)
 if (module.hot) {
   module.hot.accept(req.id, () => {
