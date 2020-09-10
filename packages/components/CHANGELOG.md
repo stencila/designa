@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://github.com/stencila/designa/compare/@stencila/components@0.22.0...@stencila/components@0.23.0) (2020-09-10)
+
+
+### Features
+
+* **Components:** Upgrade to Stencil v2 ([4fe7532](https://github.com/stencila/designa/commit/4fe7532adecf7ccaf6c074e2720070edcf5bd211))
+
+
+
+
+
 # [0.22.0](https://github.com/stencila/designa/compare/@stencila/components@0.21.5...@stencila/components@0.22.0) (2020-09-10)
 
 
