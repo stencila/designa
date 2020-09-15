@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.3](https://github.com/stencila/designa/compare/@stencila/components@0.23.2...@stencila/components@0.23.3) (2020-09-15)
+
+
+### Bug Fixes
+
+* **Button:** Set data-el attribute on the button instead of WebComponent ([5c16117](https://github.com/stencila/designa/commit/5c16117a531b48832d84ff62de21617dff6fe062))
+
+
+
+
+
 ## [0.23.2](https://github.com/stencila/designa/compare/@stencila/components@0.23.1...@stencila/components@0.23.2) (2020-09-15)
 
 
