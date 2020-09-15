@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.2](https://github.com/stencila/designa/compare/@stencila/components@0.23.1...@stencila/components@0.23.2) (2020-09-15)
+
+
+### Bug Fixes
+
+* **Build:** Add prepare script to update style dependency versions ([9103cef](https://github.com/stencila/designa/commit/9103cef2cad50f74adbec64ab038d4b227f8f023))
+* **Build:** Fix component usage when imported from other projects ([92a3c06](https://github.com/stencila/designa/commit/92a3c063085d7f0f57b4c8e6bf657888e178cdd7)), closes [/github.com/ionic-team/stencil/issues/2600#issuecomment-670312323](https://github.com//github.com/ionic-team/stencil/issues/2600/issues/issuecomment-670312323)
+
+
+
+
+
 ## [0.23.1](https://github.com/stencila/designa/compare/@stencila/components@0.23.0...@stencila/components@0.23.1) (2020-09-11)
 
 
