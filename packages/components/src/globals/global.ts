@@ -1,6 +1,5 @@
 import { setMode } from '@stencil/core'
 import WebFont from 'webfontloader'
-import { dependencies } from '../../package.json'
 
 // Global mode (theme) configuration based on https://stackoverflow.com/a/56530775
 const getMode = (el: HTMLElement): string => {
@@ -20,8 +19,10 @@ const families =
     ? ['Roboto', 'IBM Plex Mono']
     : ['Montserrat:400,600', 'Lato:400,400i,700,700i', 'IBM Plex Mono']
 
-const stencilaThemeVersion = dependencies['@stencila/style-stencila']
-const materialThemeVersion = dependencies['@stencila/style-material']
+// These version numbers are automatically updated when releasing new versions.
+// see `../../scripts/prepare.mjs`
+const stencilaThemeVersion = '0.18.3'
+const materialThemeVersion = '0.11.16'
 
 const themeName = mode === 'material' ? 'material' : 'stencila'
 
