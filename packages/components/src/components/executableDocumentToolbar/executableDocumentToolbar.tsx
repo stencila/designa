@@ -377,7 +377,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
               isLoading={
                 DE.isPending(this.session) || DE.isRefresh(this.session)
               }
-              data-el="Toolbar/Run Document"
+              dataEl="Toolbar/Run Document"
             >
               {DE.isPending(this.session) || DE.isRefresh(this.session)
                 ? 'Running'
@@ -400,7 +400,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
                 rel="nofollow noopener"
                 icon="external-link"
                 size="small"
-                data-el="Toolbar/Project Source"
+                dataEl="Toolbar/Project Source"
               >
                 Source
               </stencila-button>

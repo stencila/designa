@@ -101,6 +101,11 @@ export class Button {
   @Prop() public tooltip?: string
 
   /**
+   * An optional data attribute set on the button element for easier targetting using JavaScript.
+   */
+  @Prop() public dataEl?: string
+
+  /**
    * State keeping track of when asynchronous action is in flight
    */
   @State() private ioPending = false
@@ -137,6 +142,11 @@ export class Button {
         ? { type: this.buttonType }
         : { href: this.href, rel: this.rel, target: this.target }
 
+    const extraAttrs: Record<string, string> = {}
+    if (this.dataEl !== undefined) {
+      extraAttrs['data-el'] = this.dataEl
+    }
+
     return (
       <TagType
         class={{
@@ -149,6 +159,7 @@ export class Button {
           [`color-${this.color}`]: true,
         }}
         {...elAttrs}
+        {...extraAttrs}
         disabled={this.ioPending || this.isLoading || this.disabled || false}
         aria-label={this.ariaLabel ?? this.tooltip}
         onClick={this.onClick}
