@@ -41,6 +41,10 @@ export namespace Components {
          */
         "color": Colors;
         /**
+          * An optional data attribute set on the button element for easier targetting using JavaScript.
+         */
+        "dataEl"?: string;
+        /**
           * If true, prevents the user from interacting with the button.
          */
         "disabled": boolean;
@@ -573,6 +577,10 @@ declare namespace LocalJSX {
           * The color of the button
          */
         "color"?: Colors;
+        /**
+          * An optional data attribute set on the button element for easier targetting using JavaScript.
+         */
+        "dataEl"?: string;
         /**
           * If true, prevents the user from interacting with the button.
          */
