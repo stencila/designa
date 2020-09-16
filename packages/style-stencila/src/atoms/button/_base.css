@@ -37,6 +37,10 @@ button {
     @apply align-text-bottom;
   }
 
+  & * {
+    @apply pointer-events-none;
+  }
+
   stencila-icon {
     @apply pr-1;
     --width: 1.125em;
