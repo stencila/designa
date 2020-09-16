@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.17](https://github.com/stencila/style/compare/@stencila/style-material@0.11.16...@stencila/style-material@0.11.17) (2020-09-16)
+
+
+### Bug Fixes
+
+* **Button:** Don't treat Button child elements as event targets ([81eaa68](https://github.com/stencila/style/commit/81eaa6838647d3bf80155700dabfde5c3c106135))
+* **Toolbar:** Allow setting Toolbar background color based on props ([1f4b572](https://github.com/stencila/style/commit/1f4b5721b1c0c1f62ef0a45270d5fdbcfdc2c0d8))
+
+
+
+
+
 ## [0.11.16](https://github.com/stencila/style/compare/@stencila/style-material@0.11.15...@stencila/style-material@0.11.16) (2020-09-09)
 
 **Note:** Version bump only for package @stencila/style-material

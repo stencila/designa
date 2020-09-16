@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/stencila/style/compare/@stencila/brand@0.5.1...@stencila/brand@0.6.0) (2020-09-16)
+
+
+### Features
+
+* **Brand:** Add JPG & PNG versions of Stencila icon ([916b344](https://github.com/stencila/style/commit/916b344b1d5bb6452d72deb193cee8c2fb8cce8b))
+
+
+
+
+
 ## [0.5.1](https://github.com/stencila/style/compare/@stencila/brand@0.5.0...@stencila/brand@0.5.1) (2020-08-13)
 
 **Note:** Version bump only for package @stencila/brand

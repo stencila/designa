@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.5](https://github.com/stencila/designa/compare/@stencila/components@0.23.4...@stencila/components@0.23.5) (2020-09-16)
+
+
+### Bug Fixes
+
+* **Toolbar:** Allow setting Toolbar background color based on props ([1f4b572](https://github.com/stencila/designa/commit/1f4b5721b1c0c1f62ef0a45270d5fdbcfdc2c0d8))
+
+
+
+
+
 ## [0.23.4](https://github.com/stencila/designa/compare/@stencila/components@0.23.3...@stencila/components@0.23.4) (2020-09-16)
 
 **Note:** Version bump only for package @stencila/components
