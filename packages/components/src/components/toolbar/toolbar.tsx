@@ -20,7 +20,7 @@ export class Toolbar {
   /**
    * The background fill color of the Navbar
    */
-  @Prop() public color: Colors | string = 'primary'
+  @Prop() public color: Colors | string
 
   public render() {
     return (

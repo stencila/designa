@@ -1,37 +1,37 @@
-import { select } from '@storybook/addon-knobs'
 import { html } from 'lit-html'
 
 export default {
   title: 'Molecules/Toolbar',
   component: 'stencila-toolbar',
   excludeStories: ['props'],
+  argTypes: {
+    color: {
+      type: 'select',
+      options: [
+        'primary',
+        'success',
+        'warn',
+        'danger',
+        'neutral',
+        'stock',
+        'key',
+        'brand',
+      ],
+    },
+    position: {
+      control: {
+        type: 'inline-radio',
+        options: ['static', 'fixed'],
+      },
+    },
+  },
+  args: {
+    color: 'primary',
+    position: 'static',
+  },
 }
 
-export const props = (overrides = {}) => ({
-  color: select(
-    'color',
-    [
-      'primary',
-      'success',
-      'warn',
-      'danger',
-      'neutral',
-      'stock',
-      'key',
-      'brand',
-    ],
-    overrides.color || 'primary'
-  ),
-  position: select(
-    'position',
-    ['static', 'fixed'],
-    overrides.position || 'static'
-  ),
-})
-
-export const toolbar = () => {
-  const { color, position } = props()
-
+export const toolbar = ({ color, position }) => {
   return html`
     <div>
       <stencila-toolbar color=${color} position=${position}>
@@ -78,9 +78,7 @@ export const toolbar = () => {
 }
 
 // Article controls are WIP
-const articleControls = () => {
-  const { color, position } = props({ color: '--color-neutral-300' })
-
+const articleControls = ({ color, position }) => {
   return html`
     <div>
       <stencila-toolbar color=${color} position=${position}>
@@ -105,9 +103,7 @@ const articleControls = () => {
   `
 }
 
-const articleControlsActive = () => {
-  const { color, position } = props({ color: '--color-neutral-300' })
-
+const articleControlsActive = ({ color, position }) => {
   return html`
     <div>
       <stencila-toolbar color=${color} position=${position}>
@@ -137,3 +133,4 @@ const articleControlsActive = () => {
     </div>
   `
 }
+articleControlsActive.args = { color: '--color-neutral-300' }

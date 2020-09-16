@@ -12,18 +12,40 @@
     }
   }
 
+  &[color='stock'] div {
+    @apply bg-stock;
+  }
+
+  &[color='key'] div {
+    @apply bg-key;
+  }
+
+  &[color='primary'] div {
+    @apply bg-primary-500;
+  }
+
+  &[color='neutral'] div {
+    @apply bg-neutral-500;
+  }
+
+  &[color='success'] div {
+    @apply bg-success-500;
+  }
+
+  &[color='warn'] div {
+    @apply bg-warn-500;
+  }
+
+  &[color='danger'] div {
+    @apply bg-danger-500;
+  }
+
   div {
-    @apply flex flex-row items-center justify-between px-1 py-2 m-0 leading-none align-middle bg-primary-500 text-stock font-body;
+    @apply flex flex-row items-center justify-between px-1 py-2 m-0 leading-none align-middle text-stock font-body;
+    background-color: var(--background);
 
     & > * {
       @apply align-middle;
-    }
-  }
-
-  /* Create color background variants based on background color */
-  &[color] {
-    div {
-      background-color: var(--background);
     }
   }
 
