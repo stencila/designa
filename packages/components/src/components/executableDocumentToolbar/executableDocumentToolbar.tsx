@@ -290,7 +290,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
     return new Promise((resolve, reject) => {
       this.requestSignal.addEventListener('abort', reject)
 
-      this.findSession()
+      return this.findSession()
         .then(async () => {
           const results: (CodeChunk | CodeExpression)[] = []
           let idx = 0

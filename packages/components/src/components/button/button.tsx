@@ -119,20 +119,72 @@ export class Button {
   })
   public clickHandlerProp: (e: MouseEvent) => unknown
 
+  /**
+   * Function to be called to interrupt the initial `clickHandler` callback.
+   */
+  @Prop() public abortHandler?: (e: MouseEvent) => unknown
+
+  /**
+   * An alternate tooltip text for abortable buttons.
+   */
+  @Prop() public abortLabel?: string
+
+  private controller: AbortController
+  private signal: AbortSignal
+  private abortCallback: (event: Event) => unknown
+
+  private initAbortControllers = () => {
+    this.controller = new AbortController()
+    this.signal = this.controller.signal
+  }
+
   private onClick = async (e: MouseEvent): Promise<unknown> => {
+    // Evaluate the `abortHandler` method prop if present
+    if (this.ioPending === true && this.abortHandler !== undefined) {
+      return this.controller.abort()
+    }
+
     if (this.clickHandlerProp !== undefined) {
       this.ioPending = true
+
       let result
-      try {
-        result = await Promise.resolve(this.clickHandlerProp(e))
-      } catch {}
+      result = await new Promise(async (resolve, reject) => {
+        if (this.abortHandler !== undefined) {
+          try {
+            this.initAbortControllers()
+            this.abortCallback = (abortEvent) => {
+              this.ioPending = false
+              this.abortHandler!(e)
+              return reject(abortEvent)
+            }
+
+            this.signal.addEventListener('abort', this.abortCallback)
+          } catch (err) {
+            console.error('Could not initialize abort handler')
+          }
+        }
+
+        const res = await Promise.resolve(this.clickHandlerProp(e))
+          .then(resolve)
+          .finally(() => {
+            // Change state of `ioPending` in case `clickHandlerProps` throws an error
+            this.ioPending = false
+          })
+
+        return resolve(res)
+      })
 
       this.ioPending = false
-
       return result
     }
 
     return Promise.resolve()
+  }
+
+  protected disconnectedCallback() {
+    if (this.controller && this.abortCallback) {
+      this.signal.removeEventListener('abort', this.abortCallback)
+    }
   }
 
   private generateButton = (): HTMLButtonElement | HTMLAnchorElement => {
@@ -160,14 +212,19 @@ export class Button {
         }}
         {...elAttrs}
         {...extraAttrs}
-        disabled={this.ioPending || this.isLoading || this.disabled || false}
+        disabled={this.isDisabled()}
         aria-label={this.ariaLabel ?? this.tooltip}
         onClick={this.onClick}
       >
         {this.icon === undefined ? null : typeof this.icon === 'string' ? (
           <stencila-icon
-            icon={this.ioPending || this.isLoading ? 'loader-2' : this.icon}
-            class={{ spin: this.isLoading }}
+            icon={
+              this.ioPending && this.abortHandler
+                ? 'close'
+                : this.ioPending || this.isLoading
+                ? 'loader-2'
+                : this.icon
+            }
           ></stencila-icon>
         ) : (
           this.icon
@@ -180,13 +237,25 @@ export class Button {
     )
   }
 
+  private isDisabled = (): boolean =>
+    (this.abortHandler === undefined && (this.ioPending || this.isLoading)) ||
+    this.disabled ||
+    false
+
+  private getTooltipText = (): string =>
+    this.abortHandler !== undefined &&
+    this.abortLabel !== undefined &&
+    (this.ioPending || this.isLoading)
+      ? this.abortLabel
+      : this.tooltip ?? ''
+
   public render() {
     return (
       <Host size={this.size} tabindex="-1" icon={this.icon}>
         {this.tooltip === undefined ? (
           this.generateButton()
         ) : (
-          <stencila-tooltip text={this.tooltip}>
+          <stencila-tooltip text={this.getTooltipText()}>
             {this.generateButton()}
           </stencila-tooltip>
         )}

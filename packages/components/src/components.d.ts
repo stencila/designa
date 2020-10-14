@@ -25,6 +25,14 @@ export namespace Components {
     }
     interface StencilaButton {
         /**
+          * Function to be called to interrupt the initial `clickHandler` callback.
+         */
+        "abortHandler"?: (e: MouseEvent) => unknown;
+        /**
+          * An alternate tooltip text for abortable buttons.
+         */
+        "abortLabel"?: string;
+        /**
           * Screen-reader accessible label to read out.
          */
         "ariaLabel": string;
@@ -561,6 +569,14 @@ declare namespace LocalJSX {
         "expandable"?: boolean;
     }
     interface StencilaButton {
+        /**
+          * Function to be called to interrupt the initial `clickHandler` callback.
+         */
+        "abortHandler"?: (e: MouseEvent) => unknown;
+        /**
+          * An alternate tooltip text for abortable buttons.
+         */
+        "abortLabel"?: string;
         /**
           * Screen-reader accessible label to read out.
          */
