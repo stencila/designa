@@ -18,7 +18,7 @@ import {
   highlightSpecialChars,
   KeyBinding as KeymapI,
   keymap,
-  multipleSelections,
+  drawSelection,
 } from '@codemirror/next/view'
 import { Component, Element, h, Host, Method, Prop, Watch } from '@stencil/core'
 import { deleteToLineStart } from './commands'
@@ -174,7 +174,8 @@ export class Editor {
       closeBrackets(),
       defaultHighlighter,
       python(),
-      multipleSelections(),
+      drawSelection(),
+      EditorState.allowMultipleSelections.of(true),
       highlightSpecialChars(),
       keymap([
         ...defaultKeymap,
