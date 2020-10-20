@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/stencila/designa/compare/@stencila/components@0.23.5...@stencila/components@0.24.0) (2020-10-20)
+
+
+### Bug Fixes
+
+* **Toast:** Allow instantiating Toast component from outside Designa pkg ([727e0d2](https://github.com/stencila/designa/commit/727e0d2894142ca507078ed3b06125af2ee09876))
+
+
+### Features
+
+* **Icon:** Export Icon Names type interface ([311bfaf](https://github.com/stencila/designa/commit/311bfaf30557b7b1a14b4c11fe22a8672ae592cb))
+
+
+
+
+
 ## [0.23.5](https://github.com/stencila/designa/compare/@stencila/components@0.23.4...@stencila/components@0.23.5) (2020-09-16)
 
 
