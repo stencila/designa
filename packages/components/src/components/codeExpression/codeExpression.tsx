@@ -200,7 +200,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
         <stencila-button
           aria-label="Run Code"
           class="run"
-          clickHandlerProp={this.executeRef}
+          onClick={this.executeRef}
           color="key"
           disabled={!this.executeHandler}
           isLoading={this.executeCodeState === 'PENDING'}
@@ -213,7 +213,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
         <stencila-button
           aria-label="Run Code"
           class="sourceToggle"
-          clickHandlerProp={this.toggleCodeVisibility}
+          onClick={this.toggleCodeVisibility}
           color="key"
           icon={this.isCodeVisible ? 'eye-off' : 'eye'}
           iconOnly={true}

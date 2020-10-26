@@ -204,7 +204,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
               tooltip="Run"
               iconOnly={true}
               slot="persistentActions"
-              clickHandlerProp={this.executeRef}
+              onClick={this.executeRef}
               isLoading={this.executeCodeState === 'PENDING'}
             ></stencila-button>
           )}
@@ -213,7 +213,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
             minimal={true}
             color="key"
             class="sourceToggle"
-            clickHandlerProp={this.toggleCodeVisibility}
+            onClick={this.toggleCodeVisibility}
             icon={this.isCodeVisibleState ? 'eye-off' : 'eye'}
             iconOnly={true}
             size="xsmall"
