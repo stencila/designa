@@ -7,7 +7,10 @@ node_js:
 # Build Packages and Storybook
 script:
   - npm run bootstrap
-  - npm run build
+  - npm run build:styles
+  - npm run test
+  # Rebuild components as the `test` command builds in `dev` mode
+  - npm run build:components
   - npm run storybook:build -- --quiet
   # Publish storybook to Chromatic https://www.chromatic.com/
   - if [[ $TRAVIS_EVENT_TYPE != 'pull_request' ||  $TRAVIS_PULL_REQUEST_SLUG != $TRAVIS_REPO_SLUG ]]; then npm run chromatic -- --exit-zero-on-changes --exit-once-uploaded; fi
