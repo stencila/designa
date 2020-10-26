@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.25.0](https://github.com/stencila/designa/compare/@stencila/components@0.24.2...@stencila/components@0.25.0) (2020-10-26)
+
+
+### Features
+
+* **Components:** Export Color type interfaces ([e7eced6](https://github.com/stencila/designa/commit/e7eced662f742956bf2a3f02891a303b5c724f4c))
+
+
+
+
+
 ## [0.24.2](https://github.com/stencila/designa/compare/@stencila/components@0.24.1...@stencila/components@0.24.2) (2020-10-26)
 
 
