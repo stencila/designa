@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop, State } from '@stencil/core'
+import { Component, h, Host, Prop } from '@stencil/core'
 import { Colors } from '../../types'
 import { IconNames } from '../icon/iconNames'
 
@@ -70,6 +70,7 @@ export class Button {
 
   /**
    * If true, prevents the user from interacting with the button.
+   * Note: Not all browser prevent the click handler from firing on disabled buttons.
    */
   @Prop() public disabled = false
 
@@ -86,7 +87,8 @@ export class Button {
   @Prop() public iconOnly = false
 
   /**
-   * If true, disables the button, shows a loading icon, and prevents the click handler from firing
+   * If true, shows a loading spinner icon and sets a `disabled` attribute on the button.
+   * Note: Not all browser prevent the click handler from firing on disabled buttons.
    */
   @Prop() public isLoading = false
 
@@ -101,39 +103,9 @@ export class Button {
   @Prop() public tooltip?: string
 
   /**
-   * An optional data attribute set on the button element for easier targetting using JavaScript.
+   * An optional data attribute set on the button element for easier targeting using JavaScript.
    */
   @Prop() public dataEl?: string
-
-  /**
-   * State keeping track of when asynchronous action is in flight
-   */
-  @State() private ioPending = false
-
-  /**
-   * Function to be called when clicking the button.
-   * Passed function will be wrapped in a Promise, and the result returned.
-   */
-  @Prop({
-    attribute: 'clickHandler',
-  })
-  public clickHandlerProp: (e: MouseEvent) => unknown
-
-  private onClick = async (e: MouseEvent): Promise<unknown> => {
-    if (this.clickHandlerProp !== undefined) {
-      this.ioPending = true
-      let result
-      try {
-        result = await Promise.resolve(this.clickHandlerProp(e))
-      } catch {}
-
-      this.ioPending = false
-
-      return result
-    }
-
-    return Promise.resolve()
-  }
 
   private generateButton = (): HTMLButtonElement | HTMLAnchorElement => {
     const TagType = this.href === undefined ? 'button' : 'a'
@@ -160,13 +132,12 @@ export class Button {
         }}
         {...elAttrs}
         {...extraAttrs}
-        disabled={this.ioPending || this.isLoading || this.disabled || false}
+        disabled={this.isLoading || this.disabled || false}
         aria-label={this.ariaLabel ?? this.tooltip}
-        onClick={this.onClick}
       >
         {this.icon === undefined ? null : typeof this.icon === 'string' ? (
           <stencila-icon
-            icon={this.ioPending || this.isLoading ? 'loader-2' : this.icon}
+            icon={this.isLoading ? 'loader-2' : this.icon}
             class={{ spin: this.isLoading }}
           ></stencila-icon>
         ) : (

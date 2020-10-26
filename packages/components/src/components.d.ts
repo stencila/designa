@@ -33,19 +33,15 @@ export namespace Components {
          */
         "buttonType": 'button' | 'submit' | 'reset';
         /**
-          * Function to be called when clicking the button. Passed function will be wrapped in a Promise, and the result returned.
-         */
-        "clickHandlerProp": (e: MouseEvent) => unknown;
-        /**
           * The color of the button
          */
         "color": Colors;
         /**
-          * An optional data attribute set on the button element for easier targetting using JavaScript.
+          * An optional data attribute set on the button element for easier targeting using JavaScript.
          */
         "dataEl"?: string;
         /**
-          * If true, prevents the user from interacting with the button.
+          * If true, prevents the user from interacting with the button. Note: Not all browser prevent the click handler from firing on disabled buttons.
          */
         "disabled": boolean;
         /**
@@ -66,7 +62,7 @@ export namespace Components {
          */
         "iconOnly": boolean;
         /**
-          * If true, disables the button, shows a loading icon, and prevents the click handler from firing
+          * If true, shows a loading spinner icon and sets a `disabled` attribute on the button. Note: Not all browser prevent the click handler from firing on disabled buttons.
          */
         "isLoading": boolean;
         /**
@@ -570,19 +566,15 @@ declare namespace LocalJSX {
          */
         "buttonType"?: 'button' | 'submit' | 'reset';
         /**
-          * Function to be called when clicking the button. Passed function will be wrapped in a Promise, and the result returned.
-         */
-        "clickHandlerProp"?: (e: MouseEvent) => unknown;
-        /**
           * The color of the button
          */
         "color"?: Colors;
         /**
-          * An optional data attribute set on the button element for easier targetting using JavaScript.
+          * An optional data attribute set on the button element for easier targeting using JavaScript.
          */
         "dataEl"?: string;
         /**
-          * If true, prevents the user from interacting with the button.
+          * If true, prevents the user from interacting with the button. Note: Not all browser prevent the click handler from firing on disabled buttons.
          */
         "disabled"?: boolean;
         /**
@@ -603,7 +595,7 @@ declare namespace LocalJSX {
          */
         "iconOnly"?: boolean;
         /**
-          * If true, disables the button, shows a loading icon, and prevents the click handler from firing
+          * If true, shows a loading spinner icon and sets a `disabled` attribute on the button. Note: Not all browser prevent the click handler from firing on disabled buttons.
          */
         "isLoading"?: boolean;
         /**

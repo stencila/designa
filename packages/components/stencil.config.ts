@@ -54,4 +54,12 @@ export const config: Config = {
       plugins: [tailwind(tailwindConfigPath), ...prodPlugins],
     }),
   ],
+  testing: {
+    allowableMismatchedRatio: 0.15,
+    transform: {
+      '^.+\\.(ts|tsx|jsx|js|css)$':
+        '<rootDir>/node_modules/@stencil/core/testing/jest-preprocessor.js',
+    },
+    transformIgnorePatterns: ['node_modules/(?!(@nll|fp-ts)/)'],
+  },
 }

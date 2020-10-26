@@ -367,7 +367,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
               color="stock"
               icon="play"
               size="small"
-              clickHandlerProp={this.runAll}
+              onClick={this.runAll}
               disabled={this.codeCount <= 0}
               tooltip={
                 this.codeCount <= 0

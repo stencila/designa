@@ -14,7 +14,9 @@ describe('get colors', () => {
   })
 
   it('does not change custom CSS variable strings', () => {
-    expect(getColor('--some-custom-variable')).toEqual('--some-custom-variable')
+    expect(getColor('--some-custom-variable')).toEqual(
+      'var(--some-custom-variable)'
+    )
   })
 
   it('does not change CSS HEX color values', () => {
