@@ -83,6 +83,7 @@ graph TD;
   stencila-editor --> stencila-icon
   stencila-node-list --> stencila-image-object
   stencila-node-list --> stencila-data-table
+  stencila-image-object --> stencila-image-plotly
   style stencila-code-chunk fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

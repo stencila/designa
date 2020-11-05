@@ -2,8 +2,6 @@ import { Component, Element, h, Host, Prop, State } from '@stencil/core'
 import { isA, isCode, isPrimitive, Node } from '@stencila/schema'
 import { isEmpty } from 'fp-ts/lib/Array'
 
-/* const elementName = 'stencila-node-list' */
-
 const slots = {
   nodes: 'outputs',
   errors: 'errors',
@@ -54,11 +52,11 @@ export class OutputsList {
 
   private emptyOutputMessage = 'No output to show'
 
-  componentDidLoad() {
+  componentDidLoad(): void {
     this.checkIfEmpty()
   }
 
-  componentWillUpdate() {
+  componentWillUpdate(): void {
     this.checkIfEmpty()
   }
 

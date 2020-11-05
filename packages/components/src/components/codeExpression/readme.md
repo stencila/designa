@@ -63,6 +63,7 @@ graph TD;
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip
   stencila-tooltip --> stencila-tooltip-element
+  stencila-image-object --> stencila-image-plotly
   style stencila-code-expression fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
