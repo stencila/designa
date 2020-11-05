@@ -12,6 +12,7 @@ module.exports = {
     '@typescript-eslint/no-unsafe-return': 'off',
     '@stencil/ban-prefix': 'off',
     '@stencil/decorators-style': 'off',
+    'no-use-before-define': 'off',
   },
   overrides: [
     {
