@@ -13,6 +13,8 @@ module.exports = {
     '@stencil/ban-prefix': 'off',
     '@stencil/decorators-style': 'off',
     'no-use-before-define': 'off',
+    '@typescript-eslint/no-unused-vars': 0,
+    '@typescript-eslint/no-unused-vars-experimental': 'error',
   },
   overrides: [
     {

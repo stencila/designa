@@ -27,7 +27,7 @@
     "clean": "rimraf .stencil",
     "test": "stencil test --spec --e2e",
     "test:watch": "stencil test --spec --e2e --watchAll",
-    "lint": "eslint 'src/**/*.{ts,js}'",
+    "lint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
     "prepublishOnly": "node ./scripts/prepare.mjs && npm run build"
   },
   "devDependencies": {
