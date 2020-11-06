@@ -258,11 +258,7 @@ export namespace Components {
         /**
           * The Plotly data to render as an interactive visualization.
          */
-        "data": Data[];
-        /**
-          * The `ImageObject` node to render as a fallback.
-         */
-        "image": ImageObject;
+        "data"?: Data[];
     }
     interface StencilaInput {
         /**
@@ -788,11 +784,11 @@ declare namespace LocalJSX {
         /**
           * The Plotly data to render as an interactive visualization.
          */
-        "data": Data[];
+        "data"?: Data[];
         /**
-          * The `ImageObject` node to render as a fallback.
+          * Custom event emitter to indicate that the loading of the Plotly.js script has finished
          */
-        "image": ImageObject;
+        "onPlotlyLoaded"?: (event: CustomEvent<any>) => void;
     }
     interface StencilaInput {
         /**

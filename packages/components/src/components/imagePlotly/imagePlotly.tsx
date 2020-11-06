@@ -1,61 +1,122 @@
-import { Component, Element, h, Host, Prop, State } from '@stencil/core';
-import { ImageObject } from '@stencila/schema';
-import { Data } from 'plotly.js';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  h,
+  Host,
+  Listen,
+  Prop,
+  State,
+} from '@stencil/core'
+import { Data } from 'plotly.js'
+import { plotlyMediaType } from './imagePlotlyUtils'
+
+const plotlySrc = 'https://cdn.plot.ly/plotly-latest.min.js'
+
+let plotlyIsPresent: boolean
+let plotlyIsLoaded: boolean
 
 @Component({
   tag: 'stencila-image-plotly',
-  styleUrl: 'imagePlotly.css',
+  styleUrls: {
+    default: 'imagePlotly.css',
+    material: 'imagePlotly.css',
+  },
   scoped: true,
 })
 export class ImagePlotlyComponent {
+  @Element() private el: HTMLStencilaImagePlotlyElement
+
   /**
    * The Plotly data to render as an interactive visualization.
    */
-  @Prop() data!: Data[]
+  @Prop() data?: Data[]
 
-  /**
-   * The `ImageObject` node to render as a fallback.
-   */
-  @Prop() image!: ImageObject
+  @State() private plotIsRendered = false
 
-  @Element() private el: HTMLStencilaImagePlotlyElement
+  /** Custom event emitter to indicate that the loading of the Plotly.js script has finished */
+  @Event() public plotlyLoaded: EventEmitter
 
-  @State() private plotlyIsLoaded: boolean = false
+  /** Render the Plotly data, if it hasn’t been rendered already */
+  @Listen('plotlyLoaded', { target: 'window' })
+  public onPlotlyLoaded(): void {
+    if (!this.plotIsRendered) {
+      this.renderPlot()
+    }
+  }
+
+  private renderPlot = () => {
+    const data = this.getPlotData()
+
+    if (!data) return
+
+    const root = document.createElement('div')
+    const pic = this.el.querySelector<HTMLPictureElement>('picture')
+
+    pic?.appendChild(root)
+
+    window.Plotly?.plot(root, data)
+      .then(() => {
+        this.plotIsRendered = true
+      })
+      .catch((err) => {
+        console.error('Failed to render plot', err)
+      })
+  }
+
+  private loadPlotly = () => {
+    if (this.isPlotlyPresent()) return
+
+    const script = document.createElement('script')
+    script.setAttribute('src', plotlySrc)
+    plotlyIsPresent = true
+
+    script.addEventListener('load', () => {
+      plotlyIsLoaded = true
+      this.plotlyLoaded.emit()
+    })
+
+    document.querySelector<HTMLHeadElement>('head')?.appendChild(script)
+  }
+
+  private isPlotlyPresent = (): boolean => {
+    plotlyIsPresent =
+      plotlyIsPresent === undefined
+        ? document.querySelector(`head script[src="${plotlySrc}"]`) !== null
+        : plotlyIsPresent
+
+    return plotlyIsPresent
+  }
+
+  private getPlotData = (): Data[] | undefined => {
+    if (this.data) return this.data
+
+    const plotEl = this.el.querySelector<HTMLScriptElement>(
+      `[type="${plotlyMediaType}"]`
+    )
+
+    if (plotEl) {
+      try {
+        const data = plotEl.textContent
+        return JSON.parse(data ?? '')
+      } catch (err) {
+        console.error('Could not parse plot data')
+      }
+    }
+
+    return undefined
+  }
 
   componentWillLoad(): Promise<unknown> | void {
-    // TODO: Remove this when hydrating from HTML properly
-    this.data = this.data || [{x:[1,2], y:[3,4]}]
-    this.image = this.image || {contentUrl: '', text: 'Plotly placeholder'}
-
-    const src = 'https://cdn.plot.ly/plotly-latest.min.js'
-    if (document.querySelector(`head script[src="${src}"]`) === null) {
-      const script = document.createElement('script')
-      script.setAttribute('src', src)
-      script.onload = () => this.plotlyIsLoaded = true
-      document.getElementsByTagName('head')[0].appendChild(script)
+    if (!this.plotIsRendered && plotlyIsLoaded) {
+      this.renderPlot()
+    } else {
+      this.loadPlotly()
     }
   }
 
-  render() {
-    return (
-      <Host>
-        <img
-          alt={this.image.text}
-          class={this.plotlyIsLoaded ? 'hide' : 'show'}
-          itemscope={true}
-          itemtype="http://schema.org/ImageObject"
-          src={this.image.contentUrl}
-        />
-      </Host>
-    )
-  }
-
-  componentDidRender(): void {
-    if (this.plotlyIsLoaded) {
-      const root = document.createElement('div')
-      this.el.appendChild(root)
-      // @ts-ignore
-      Plotly.plot(root, this.data)
-    }
+  render(): HTMLStencilaImagePlotlyElement {
+    return <Host class={{ imgHidden: this.plotIsRendered }}></Host>
   }
 }

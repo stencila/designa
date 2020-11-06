@@ -7,10 +7,16 @@
 
 ## Properties
 
-| Property             | Attribute | Description                                                | Type          | Default     |
-| -------------------- | --------- | ---------------------------------------------------------- | ------------- | ----------- |
-| `data` _(required)_  | --        | The Plotly data to render as an interactive visualization. | `Data[]`      | `undefined` |
-| `image` _(required)_ | --        | The `ImageObject` node to render as a fallback.            | `ImageObject` | `undefined` |
+| Property | Attribute | Description                                                | Type                  | Default     |
+| -------- | --------- | ---------------------------------------------------------- | --------------------- | ----------- |
+| `data`   | --        | The Plotly data to render as an interactive visualization. | `Data[] \| undefined` | `undefined` |
+
+
+## Events
+
+| Event          | Description                                                                            | Type               |
+| -------------- | -------------------------------------------------------------------------------------- | ------------------ |
+| `plotlyLoaded` | Custom event emitter to indicate that the loading of the Plotly.js script has finished | `CustomEvent<any>` |
 
 
 ## Dependencies

@@ -1,7 +1,7 @@
 import { Component, Element, h, Host, Prop, State } from '@stencil/core'
 import { isA, isCode, isPrimitive, Node } from '@stencila/schema'
 import { isEmpty } from 'fp-ts/lib/Array'
-import { preferredImageObjectComponent } from '../imageObject/imageObjectUtils';
+import { preferredImageObjectComponent } from '../imageObject/imageObjectUtils'
 
 const slots = {
   nodes: 'outputs',
@@ -65,7 +65,7 @@ export class OutputsList {
     return nodes?.map((node) => this.renderNode(node))
   }
 
-  private renderNode = (node: Node): string => {
+  private renderNode = (node: Node): string | HTMLElement => {
     if (isPrimitive(node)) {
       const text =
         typeof node === 'string' || typeof node === 'number'
