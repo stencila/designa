@@ -10,7 +10,7 @@ import { IconNames } from "./components/icon/iconNames";
 import { CodeChunk, CodeExpression, Collection, Datatable, ImageObject, Node } from "@stencila/schema";
 import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
-import { Data } from "plotly.js";
+import { Config, Data, Layout } from "plotly.js";
 import { ChildTab } from "./components/tabList/tabList";
 import { ToastPosition, ToastType } from "./components/toast/toastController";
 export namespace Components {
@@ -256,9 +256,17 @@ export namespace Components {
     }
     interface StencilaImagePlotly {
         /**
+          * The Plotly configuration object
+         */
+        "config"?: Partial<Config>;
+        /**
           * The Plotly data to render as an interactive visualization.
          */
         "data"?: Data[];
+        /**
+          * The Plotly layout settings object
+         */
+        "layout"?: Partial<Layout>;
     }
     interface StencilaInput {
         /**
@@ -782,9 +790,17 @@ declare namespace LocalJSX {
     }
     interface StencilaImagePlotly {
         /**
+          * The Plotly configuration object
+         */
+        "config"?: Partial<Config>;
+        /**
           * The Plotly data to render as an interactive visualization.
          */
         "data"?: Data[];
+        /**
+          * The Plotly layout settings object
+         */
+        "layout"?: Partial<Layout>;
         /**
           * Custom event emitter to indicate that the loading of the Plotly.js script has finished
          */

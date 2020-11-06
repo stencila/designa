@@ -6,8 +6,8 @@ export const plotlyMediaType = 'application/vnd.plotly.v1+json'
 export interface PlotlyObject {
   mediaType: string
   data: Data[]
-  config?: Config
-  layout?: Layout
+  config?: Partial<Config>
+  layout?: Partial<Layout>
 }
 
 export const isPlotlyObject = (node: Node): node is PlotlyObject => {

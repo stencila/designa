@@ -20,7 +20,11 @@ export const preferredImageObjectComponent = (
     for (const node of content) {
       if (isPlotlyObject(node))
         return (
-          <stencila-image-plotly data={node.data}>
+          <stencila-image-plotly
+            config={node.config}
+            data={node.data}
+            layout={node.layout}
+          >
             <picture>
               <stencila-image-object image={image}></stencila-image-object>
             </picture>

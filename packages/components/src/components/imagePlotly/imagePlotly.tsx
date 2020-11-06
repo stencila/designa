@@ -9,7 +9,7 @@ import {
   Prop,
   State,
 } from '@stencil/core'
-import { Data } from 'plotly.js'
+import { Config, Data, Layout } from 'plotly.js'
 import { plotlyMediaType } from './imagePlotlyUtils'
 
 const plotlySrc = 'https://cdn.plot.ly/plotly-latest.min.js'
@@ -32,6 +32,16 @@ export class ImagePlotlyComponent {
    * The Plotly data to render as an interactive visualization.
    */
   @Prop() data?: Data[]
+
+  /**
+   * The Plotly layout settings object
+   */
+  @Prop() layout?: Partial<Layout>
+
+  /**
+   * The Plotly configuration object
+   */
+  @Prop() config?: Partial<Config>
 
   @State() private plotIsRendered = false
 
@@ -56,7 +66,7 @@ export class ImagePlotlyComponent {
 
     pic?.appendChild(root)
 
-    window.Plotly?.plot(root, data)
+    window.Plotly?.plot(root, data, this.layout, this.config)
       .then(() => {
         this.plotIsRendered = true
       })
