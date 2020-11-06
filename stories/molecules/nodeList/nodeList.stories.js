@@ -32,7 +32,7 @@ const nodes = [
     contentUrl: 'https://via.placeholder.com/150',
     content: [
       {
-        type: 'plotly',
+        mediaType: 'application/vnd.plotly.v1+json',
         data: [
           {
             x: [1, 2, 3, 4],
@@ -50,20 +50,20 @@ const nodes = [
 
 export const emptyState = () => html`
   <stencila-node-list .nodes=${[]}>
-  </stencila-code-chunk>
+  </stencila-node-list>
 `
 
 export const singleNode = () => html`
   <stencila-node-list .nodes=${[nodes[0]]}>
-  </stencila-code-chunk>
+  </stencila-node-list>
 
 `
 export const multipleNodes = () => html`
   <stencila-node-list .nodes=${nodes}>
-  </stencila-code-chunk>
+  </stencila-node-list>
 `
 
 export const dataTable = () => html`
   <stencila-node-list .nodes=${[nodes[2]]}>
-  </stencila-code-chunk>
+  </stencila-node-list>
 `

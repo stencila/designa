@@ -1,17 +1,20 @@
-import { Node, isEntity } from '@stencila/schema'
-import { PlotData, Layout, Config } from 'plotly.js'
+import { Node } from '@stencila/schema'
+import { Data, Layout, Config } from 'plotly.js'
+
+export const plotlyMediaType = 'application/vnd.plotly.v1+json'
 
 export interface PlotlyObject {
-  data: PlotData[]
+  mediaType: string
+  data: Data[]
   config?: Config
   layout?: Layout
 }
 
-export const isPlotly = (node: Node): node is PlotlyObject => {
-  // For html hydration check `type` attr
-  // For JSON schema check `mediaType`
-  // mimetype === 'application/vnd.plotly.v1+json'
-  // HTML hydration base64 decode string to JSON
-  // @ts-ignore
-  return isEntity(node) && node.type === 'plotly'
+export const isPlotlyObject = (node: Node): node is PlotlyObject => {
+  return (
+    typeof node === 'object' &&
+    node !== null &&
+    'mediaType' in node &&
+    node.mediaType === plotlyMediaType
+  )
 }

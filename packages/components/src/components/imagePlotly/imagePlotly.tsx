@@ -1,40 +1,61 @@
-import { Component, Host, h, Prop, Element } from '@stencil/core'
-import { PlotData } from 'plotly.js'
+import { Component, Element, h, Host, Prop, State } from '@stencil/core';
+import { ImageObject } from '@stencila/schema';
+import { Data } from 'plotly.js';
 
 @Component({
   tag: 'stencila-image-plotly',
   styleUrl: 'imagePlotly.css',
   scoped: true,
 })
-export class StencilaImagePlotly {
-  @Element() el: HTMLStencilaImagePlotlyElement
+export class ImagePlotlyComponent {
+  /**
+   * The Plotly data to render as an interactive visualization.
+   */
+  @Prop() data!: Data[]
 
-  /** Plotly data to render */
-  @Prop() data!: PlotData[]
+  /**
+   * The `ImageObject` node to render as a fallback.
+   */
+  @Prop() image!: ImageObject
 
-  private generateViz = () => {
-    console.log('generating plot', this.el, this.data)
-    {
-      /* Plotly.plot(this.el, this.data).catch((err) =>
-      console.log('could not render plot', err)
-    ) */
-    }
-  }
+  @Element() private el: HTMLStencilaImagePlotlyElement
+
+  @State() private plotlyIsLoaded: boolean = false
 
   componentWillLoad(): Promise<unknown> | void {
-    // TODO: Check for presence of Plotly.js
-    // Ensure script is only requested only once even if multiple instances of plotly images are in place
-  }
+    // TODO: Remove this when hydrating from HTML properly
+    this.data = this.data || [{x:[1,2], y:[3,4]}]
+    this.image = this.image || {contentUrl: '', text: 'Plotly placeholder'}
 
-  componentDidRender(): void {
-    this.generateViz()
+    const src = 'https://cdn.plot.ly/plotly-latest.min.js'
+    if (document.querySelector(`head script[src="${src}"]`) === null) {
+      const script = document.createElement('script')
+      script.setAttribute('src', src)
+      script.onload = () => this.plotlyIsLoaded = true
+      document.getElementsByTagName('head')[0].appendChild(script)
+    }
   }
 
   render() {
     return (
       <Host>
-        <div>Hello</div>
+        <img
+          alt={this.image.text}
+          class={this.plotlyIsLoaded ? 'hide' : 'show'}
+          itemscope={true}
+          itemtype="http://schema.org/ImageObject"
+          src={this.image.contentUrl}
+        />
       </Host>
     )
+  }
+
+  componentDidRender(): void {
+    if (this.plotlyIsLoaded) {
+      const root = document.createElement('div')
+      this.el.appendChild(root)
+      // @ts-ignore
+      Plotly.plot(root, this.data)
+    }
   }
 }

@@ -1,10 +1,10 @@
 import { newSpecPage } from '@stencil/core/testing'
-import { StencilaImagePlotly } from '../imagePlotly'
+import { ImagePlotlyComponent } from '../imagePlotly'
 
 describe('stencila-image-plotly', () => {
   it('renders', async () => {
     const page = await newSpecPage({
-      components: [StencilaImagePlotly],
+      components: [ImagePlotlyComponent],
       html: `<stencila-image-plotly></stencila-image-plotly>`,
     })
     expect(page.root).toEqualHtml(`

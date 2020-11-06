@@ -18,15 +18,16 @@
 
 ### Depends on
 
-- [stencila-image-object](../imageObject)
 - [stencila-data-table](../dataTable)
+- [stencila-image-plotly](../imagePlotly)
+- [stencila-image-object](../imageObject)
 
 ### Graph
 ```mermaid
 graph TD;
-  stencila-node-list --> stencila-image-object
   stencila-node-list --> stencila-data-table
-  stencila-image-object --> stencila-image-plotly
+  stencila-node-list --> stencila-image-plotly
+  stencila-node-list --> stencila-image-object
   stencila-code-chunk --> stencila-node-list
   style stencila-node-list fill:#f9f,stroke:#333,stroke-width:4px
 ```

@@ -1,6 +1,5 @@
 import { Component, h, Prop } from '@stencil/core'
 import { ImageObject } from '@stencila/schema'
-import { isPlotly } from '../imagePlotly/imagePlotlyUtils'
 
 @Component({
   tag: 'stencila-image-object',
@@ -17,19 +16,6 @@ export class ImageObjectComponent {
   @Prop() image: ImageObject
 
   public render(): HTMLImageElement {
-    if (
-      this.image.content &&
-      this.image.content.length === 1 &&
-      this.image.content.some(isPlotly)
-    ) {
-      return (
-        <stencila-image-plotly
-          // @ts-ignore
-          data={this.image.content[0].data}
-        ></stencila-image-plotly>
-      )
-    }
-
     return (
       <img
         alt={this.image.text}
