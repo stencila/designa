@@ -10,7 +10,7 @@ import {
   State,
 } from '@stencil/core'
 import { Config, Data, Layout } from 'plotly.js'
-import { plotlyMediaType } from './imagePlotlyUtils'
+import { plotlyMediaType, PlotlyObject } from './imagePlotlyUtils'
 
 const plotlySrc = 'https://cdn.plot.ly/plotly-latest.min.js'
 
@@ -57,7 +57,8 @@ export class ImagePlotlyComponent {
   }
 
   private renderPlot = () => {
-    const data = this.getPlotData()
+    const { data, layout = this.layout, config = this.config } =
+      this.getPlotContent() ?? {}
 
     if (!data) return
 
@@ -66,7 +67,7 @@ export class ImagePlotlyComponent {
 
     pic?.appendChild(root)
 
-    window.Plotly?.plot(root, data, this.layout, this.config)
+    window.Plotly?.plot(root, data, layout, config)
       .then(() => {
         this.plotIsRendered = true
       })
@@ -75,6 +76,7 @@ export class ImagePlotlyComponent {
       })
   }
 
+  /** Inject the Plotly.js script tag if it hasn't been requested yet */
   private loadPlotly = () => {
     if (this.isPlotlyPresent()) return
 
@@ -90,6 +92,7 @@ export class ImagePlotlyComponent {
     document.querySelector<HTMLHeadElement>('head')?.appendChild(script)
   }
 
+  /** Check if the Plotly.js script tag is present in the document */
   private isPlotlyPresent = (): boolean => {
     plotlyIsPresent =
       plotlyIsPresent === undefined
@@ -99,8 +102,10 @@ export class ImagePlotlyComponent {
     return plotlyIsPresent
   }
 
-  private getPlotData = (): Data[] | undefined => {
-    if (this.data) return this.data
+  private getPlotContent = (): PlotlyObject | undefined => {
+    if (this.data) {
+      return { data: this.data, layout: this.layout, config: this.config }
+    }
 
     const plotEl = this.el.querySelector<HTMLScriptElement>(
       `[type="${plotlyMediaType}"]`
@@ -108,8 +113,11 @@ export class ImagePlotlyComponent {
 
     if (plotEl) {
       try {
-        const data = plotEl.textContent
-        return JSON.parse(data ?? '')
+        const content = plotEl.textContent
+        const contentParsed: Data[] | PlotlyObject = JSON.parse(content ?? '')
+        return Array.isArray(contentParsed)
+          ? { data: contentParsed }
+          : contentParsed
       } catch (err) {
         console.error('Could not parse plot data')
       }
