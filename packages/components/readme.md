@@ -13,7 +13,7 @@ Stencil components are just Web Components, so they work in any major framework 
 ## Naming Components
 
 Web Component tags may not be CamelCased and they must include a hyphen (`-`) in the name.
-Pleasee follow the pattern of `<stencila-(component-type)>`, for example `<stencila-tab-list>`.
+Please follow the pattern of `<stencila-(component-type)>`, for example `<stencila-tab-list>`.
 
 ## Using these components
 
