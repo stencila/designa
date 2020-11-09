@@ -27,6 +27,7 @@ let plotlyIsLoaded: boolean
 })
 export class ImagePlotlyComponent {
   @Element() private el: HTMLStencilaImagePlotlyElement
+  private plotContainer: HTMLDivElement | null
 
   /**
    * The Plotly data to render as an interactive visualization.
@@ -56,20 +57,26 @@ export class ImagePlotlyComponent {
     }
   }
 
+  private createPlotContainer = () => {
+    this.plotContainer = document.createElement('div')
+    const pic = this.el.querySelector<HTMLPictureElement>('picture')
+    pic?.appendChild(this.plotContainer)
+    return this.plotContainer
+  }
+
   private renderPlot = () => {
     const { data, layout = this.layout, config = this.config } =
       this.getPlotContent() ?? {}
 
     if (!data) return
 
-    const root = document.createElement('div')
-    const pic = this.el.querySelector<HTMLPictureElement>('picture')
+    const root = this.plotContainer ?? this.createPlotContainer()
 
-    pic?.appendChild(root)
-
-    window.Plotly?.plot(root, data, layout, config)
+    window.Plotly?.react(root, data, layout, config)
       .then(() => {
-        this.plotIsRendered = true
+        if (!this.plotIsRendered) {
+          this.plotIsRendered = true
+        }
       })
       .catch((err) => {
         console.error('Failed to render plot', err)
@@ -132,6 +139,10 @@ export class ImagePlotlyComponent {
     } else {
       this.loadPlotly()
     }
+  }
+
+  componentWillUpdate(): void {
+    this.renderPlot()
   }
 
   render(): HTMLStencilaImagePlotlyElement {
