@@ -1,0 +1,78 @@
+name: Build and Publish packages
+
+on:
+  pull_request:
+    branches: '*'
+  push:
+    branches:
+      - master
+
+env:
+  CI: true
+
+jobs:
+  build:
+    # ignore commits with `[skip ci]`
+    if: contains(github.event.head_commit.message, '[skip ci]')
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - name: restore Lerna
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - run: npm ci
+      - run: npm run bootstrap
+
+      - name: Build Styles
+        run: npm run build:styles
+
+      - name: Test
+        run: npm run test
+
+      # Rebuild components as the `test` command builds Components in `dev` mode
+      - run: npm run build:components
+
+      - name: Build storybook
+        run: npm run storybook:build -- --quiet
+
+      # Publish storybook to Chromatic https://www.chromatic.com/
+      - name: Publish Storybook to Chromatic
+        run: then npm run chromatic -- --exit-zero-on-changes --exit-once-uploaded
+        # Don’t send package update PRs to Chromatic
+        if: success() && startsWith(github.head_ref, 'renovate/dev') != true
+
+      # Publish packages if running on main branch
+      - run: git config --global user.email ${{ secrets.GIT_AUTHOR_EMAIL }}
+      - run: git config --global user.name ${{ secrets.GIT_AUTHOR_NAME }}
+      - run: echo "//registry.npmjs.org/:_authToken=\${secrets.NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+
+      - name: Publish package
+        run: npx lerna publish --yes
+        if: success() && github.ref == "refs/heads/master"
+
+        # Deploy Storybook to Github Pages
+      - name: Deploy to GitHub Pages
+        if: success() && github.ref == "refs/heads/master"
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          build_dir: docs
+          committer: ${{ secrets.GIT_AUTHOR_NAME }} <${{ secrets.GIT_AUTHOR_EMAIL }}>
+          author: ${{ secrets.GIT_AUTHOR_NAME }} <${{ secrets.GIT_AUTHOR_EMAIL }}>
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
