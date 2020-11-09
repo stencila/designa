@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/stencila/designa/compare/@stencila/components@0.25.0...@stencila/components@0.26.0) (2020-11-09)
+
+
+### Bug Fixes
+
+* **Plotly image:** Load Plotly.js on demand; refactor naming and instantiation ([6832a85](https://github.com/stencila/designa/commit/6832a85de0ae247e9098957286def2e11f57ff15))
+
+
+### Features
+
+* **Plotly:** Add Plotly renderer component ([387df92](https://github.com/stencila/designa/commit/387df92179d71ea747bb8e0c12a448b20c72efe3))
+* **Plotly:** Allow setting layout & config options ([a500678](https://github.com/stencila/designa/commit/a500678296d3a71913fe172ef1a2e1c0760d1c4b))
+* **Plotly:** Support rendering just data or full configuration object ([cbcb267](https://github.com/stencila/designa/commit/cbcb267256d6c04343d4d326bf8f6fde46e005c1))
+
+
+### Performance Improvements
+
+* **Plotly:** Use more performant Plotly method, and react to new data ([3a9c8d3](https://github.com/stencila/designa/commit/3a9c8d3e8540f64c529c2147f70086b24aa2b1fa))
+
+
+
+
+
 # [0.25.0](https://github.com/stencila/designa/compare/@stencila/components@0.24.2...@stencila/components@0.25.0) (2020-10-26)
 
 
