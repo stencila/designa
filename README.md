@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/stencila/designa.svg?branch=master)](https://travis-ci.org/stencila/designa)
+[![Build Status](https://github.com/stencila/designa/workflows/Build%20and%20Publish%20packages/badge.svg?branch=master)](https://github.com/stencila/designa/actions?query=workflow%3A%22Build+and+Publish+packages%22)
 
 # Designa
 
