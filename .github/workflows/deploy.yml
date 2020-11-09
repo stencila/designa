@@ -65,8 +65,8 @@ jobs:
         run: |
           git config --global user.email "$GIT_AUTHOR_EMAIL"
           git config --global user.name "$GIT_AUTHOR_NAME"
-          git remote set-url origin "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" > /dev/null 2>&1
-          echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+          git remote set-url origin "https://$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git" > /dev/null 2>&1
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc 2> /dev/null
         env:
           GIT_AUTHOR_EMAIL: ${{ secrets.GIT_AUTHOR_EMAIL }}
           GIT_AUTHOR_NAME: ${{ secrets.GIT_AUTHOR_NAME }}
@@ -76,6 +76,9 @@ jobs:
       - name: Publish package
         run: npx lerna publish --yes
         if: success() && (github.ref == 'refs/heads/master')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
         # Deploy Storybook to Github Pages
       - name: Deploy to GitHub Pages
