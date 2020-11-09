@@ -10,6 +10,7 @@ import { IconNames } from "./components/icon/iconNames";
 import { CodeChunk, CodeExpression, Collection, Datatable, ImageObject, Node } from "@stencila/schema";
 import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
+import { Config, Data, Layout } from "plotly.js";
 import { ChildTab } from "./components/tabList/tabList";
 import { ToastPosition, ToastType } from "./components/toast/toastController";
 export namespace Components {
@@ -253,6 +254,20 @@ export namespace Components {
          */
         "image": ImageObject;
     }
+    interface StencilaImagePlotly {
+        /**
+          * The Plotly configuration object
+         */
+        "config"?: Partial<Config>;
+        /**
+          * The Plotly data to render as an interactive visualization.
+         */
+        "data"?: Data[];
+        /**
+          * The Plotly layout settings object
+         */
+        "layout"?: Partial<Layout>;
+    }
     interface StencilaInput {
         /**
           * Automatically bring cursor focus to the input field on render.
@@ -447,6 +462,12 @@ declare global {
         prototype: HTMLStencilaImageObjectElement;
         new (): HTMLStencilaImageObjectElement;
     };
+    interface HTMLStencilaImagePlotlyElement extends Components.StencilaImagePlotly, HTMLStencilElement {
+    }
+    var HTMLStencilaImagePlotlyElement: {
+        prototype: HTMLStencilaImagePlotlyElement;
+        new (): HTMLStencilaImagePlotlyElement;
+    };
     interface HTMLStencilaInputElement extends Components.StencilaInput, HTMLStencilElement {
     }
     var HTMLStencilaInputElement: {
@@ -531,6 +552,7 @@ declare global {
         "stencila-executable-document-toolbar": HTMLStencilaExecutableDocumentToolbarElement;
         "stencila-icon": HTMLStencilaIconElement;
         "stencila-image-object": HTMLStencilaImageObjectElement;
+        "stencila-image-plotly": HTMLStencilaImagePlotlyElement;
         "stencila-input": HTMLStencilaInputElement;
         "stencila-menu": HTMLStencilaMenuElement;
         "stencila-menu-item": HTMLStencilaMenuItemElement;
@@ -766,6 +788,24 @@ declare namespace LocalJSX {
          */
         "image"?: ImageObject;
     }
+    interface StencilaImagePlotly {
+        /**
+          * The Plotly configuration object
+         */
+        "config"?: Partial<Config>;
+        /**
+          * The Plotly data to render as an interactive visualization.
+         */
+        "data"?: Data[];
+        /**
+          * The Plotly layout settings object
+         */
+        "layout"?: Partial<Layout>;
+        /**
+          * Custom event emitter to indicate that the loading of the Plotly.js script has finished
+         */
+        "onPlotlyLoaded"?: (event: CustomEvent<any>) => void;
+    }
     interface StencilaInput {
         /**
           * Automatically bring cursor focus to the input field on render.
@@ -904,6 +944,7 @@ declare namespace LocalJSX {
         "stencila-executable-document-toolbar": StencilaExecutableDocumentToolbar;
         "stencila-icon": StencilaIcon;
         "stencila-image-object": StencilaImageObject;
+        "stencila-image-plotly": StencilaImagePlotly;
         "stencila-input": StencilaInput;
         "stencila-menu": StencilaMenu;
         "stencila-menu-item": StencilaMenuItem;
@@ -933,6 +974,7 @@ declare module "@stencil/core" {
             "stencila-executable-document-toolbar": LocalJSX.StencilaExecutableDocumentToolbar & JSXBase.HTMLAttributes<HTMLStencilaExecutableDocumentToolbarElement>;
             "stencila-icon": LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
             "stencila-image-object": LocalJSX.StencilaImageObject & JSXBase.HTMLAttributes<HTMLStencilaImageObjectElement>;
+            "stencila-image-plotly": LocalJSX.StencilaImagePlotly & JSXBase.HTMLAttributes<HTMLStencilaImagePlotlyElement>;
             "stencila-input": LocalJSX.StencilaInput & JSXBase.HTMLAttributes<HTMLStencilaInputElement>;
             "stencila-menu": LocalJSX.StencilaMenu & JSXBase.HTMLAttributes<HTMLStencilaMenuElement>;
             "stencila-menu-item": LocalJSX.StencilaMenuItem & JSXBase.HTMLAttributes<HTMLStencilaMenuItemElement>;

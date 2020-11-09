@@ -1,8 +1,7 @@
 import { Component, Element, h, Host, Prop, State } from '@stencil/core'
 import { isA, isCode, isPrimitive, Node } from '@stencila/schema'
 import { isEmpty } from 'fp-ts/lib/Array'
-
-/* const elementName = 'stencila-node-list' */
+import { preferredImageObjectComponent } from '../imageObject/imageObjectUtils'
 
 const slots = {
   nodes: 'outputs',
@@ -54,11 +53,11 @@ export class OutputsList {
 
   private emptyOutputMessage = 'No output to show'
 
-  componentDidLoad() {
+  componentDidLoad(): void {
     this.checkIfEmpty()
   }
 
-  componentWillUpdate() {
+  componentWillUpdate(): void {
     this.checkIfEmpty()
   }
 
@@ -66,7 +65,7 @@ export class OutputsList {
     return nodes?.map((node) => this.renderNode(node))
   }
 
-  private renderNode = (node: Node): string => {
+  private renderNode = (node: Node): string | HTMLElement => {
     if (isPrimitive(node)) {
       const text =
         typeof node === 'string' || typeof node === 'number'
@@ -85,7 +84,7 @@ export class OutputsList {
         </pre>
       )
     } else if (isA('ImageObject', node)) {
-      return <stencila-image-object image={node}></stencila-image-object>
+      return preferredImageObjectComponent(node)
     } else if (isA('Datatable', node)) {
       return <stencila-data-table table={node}></stencila-data-table>
     }

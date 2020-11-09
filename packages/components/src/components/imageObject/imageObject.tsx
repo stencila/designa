@@ -5,9 +5,9 @@ import { ImageObject } from '@stencila/schema'
   tag: 'stencila-image-object',
   styleUrls: {
     default: 'imageObject.css',
-    material: 'imageObject.css'
+    material: 'imageObject.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class ImageObjectComponent {
   /**
@@ -15,7 +15,7 @@ export class ImageObjectComponent {
    */
   @Prop() image: ImageObject
 
-  public render() {
+  public render(): HTMLImageElement {
     return (
       <img
         alt={this.image.text}
