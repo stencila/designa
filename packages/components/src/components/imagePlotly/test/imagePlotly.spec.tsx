@@ -2,7 +2,7 @@ import { newSpecPage } from '@stencil/core/testing'
 import { ImagePlotlyComponent } from '../imagePlotly'
 
 describe('stencila-image-plotly', () => {
-  it('renders', async () => {
+  it.skip('renders', async () => {
     const page = await newSpecPage({
       components: [ImagePlotlyComponent],
       html: `<stencila-image-plotly></stencila-image-plotly>`,

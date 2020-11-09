@@ -25,6 +25,7 @@
     "bootstrap": "lerna bootstrap --force-local",
     "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist",
     "storybook:build": "build-storybook -o docs -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist",
+    "test": "lerna run test",
     "chromatic": "chromatic --storybook-build-dir docs"
   },
   "devDependencies": {
