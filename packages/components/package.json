@@ -37,7 +37,7 @@
     "@stencila/schema": "0.46.5",
     "@types/feather-icons": "4.7.0",
     "@types/jest": "26.0.15",
-    "@types/plotly.js": "^1.54.2",
+    "@types/plotly.js": "1.54.2",
     "@types/pluralize": "0.0.29",
     "@types/puppeteer": "3.0.2",
     "@types/webfontloader": "1.6.32",
