@@ -65,7 +65,7 @@
     "wretch": "^1.7.2"
   },
   "peerDependencies": {
-    "@stencila/schema": "^0.43.0 || ^0.45.0 || ^0.46.0"
+    "@stencila/schema": "^0.43.0 || ^0.45.0 || ^0.46.0 || ^0.47.0"
   },
   "browserslist": [
     "defaults",
