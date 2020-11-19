@@ -54,7 +54,7 @@
     "@codemirror/next": "^0.14.0",
     "@nll/datum": "^3.1.0",
     "@popperjs/core": "^2.4.4",
-    "@stencila/executa": "^1.14.0",
+    "@stencila/executa": "^1.15.2",
     "@stencila/style-material": "0.11.18",
     "@stencila/style-stencila": "0.18.5",
     "animate-presence": "^0.2.1",
@@ -65,7 +65,7 @@
     "wretch": "^1.7.2"
   },
   "peerDependencies": {
-    "@stencila/schema": "^0.43.0 || ^0.45.0 || ^0.46.0"
+    "@stencila/schema": "^0.47.2"
   },
   "browserslist": [
     "defaults",
