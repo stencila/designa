@@ -32,29 +32,29 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "2.3.0",
-    "@stencil/core": "2.1.0",
+    "@stencil/core": "2.3.0",
     "@stencil/postcss": "1.0.1",
-    "@stencila/schema": "0.46.5",
+    "@stencila/schema": "0.47.2",
     "@types/feather-icons": "4.7.0",
     "@types/jest": "26.0.15",
     "@types/plotly.js": "1.54.2",
     "@types/pluralize": "0.0.29",
-    "@types/puppeteer": "3.0.2",
+    "@types/puppeteer": "3.0.5",
     "@types/webfontloader": "1.6.32",
     "chokidar-cli": "2.1.0",
-    "fp-ts": "2.8.4",
-    "jest": "26.6.0",
-    "jest-cli": "26.6.0",
+    "fp-ts": "2.8.6",
+    "jest": "26.6.3",
+    "jest-cli": "26.6.3",
     "postcss-custom-properties": "9.2.0",
     "postcss-import": "12.0.1",
-    "puppeteer": "5.3.1",
-    "tailwindcss": "1.9.5"
+    "puppeteer": "5.5.0",
+    "tailwindcss": "1.9.6"
   },
   "dependencies": {
     "@codemirror/next": "^0.14.0",
     "@nll/datum": "^3.1.0",
     "@popperjs/core": "^2.4.4",
-    "@stencila/executa": "^1.14.0",
+    "@stencila/executa": "^1.15.2",
     "@stencila/style-material": "0.11.18",
     "@stencila/style-stencila": "0.18.5",
     "animate-presence": "^0.2.1",
@@ -65,7 +65,7 @@
     "wretch": "^1.7.2"
   },
   "peerDependencies": {
-    "@stencila/schema": "^0.43.0 || ^0.45.0 || ^0.46.0"
+    "@stencila/schema": "^0.47.2"
   },
   "browserslist": [
     "defaults",
