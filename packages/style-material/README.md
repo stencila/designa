@@ -1,11 +1,1 @@
-# `@stencila/style-material`
-
-> TODO: description
-
-## Usage
-
-```
-const styleMaterial = require('@stencila/style-material');
-
-// TODO: DEMONSTRATE API
-```
+This is the `@stencila/style-material` package. Please see the main project [README](../../).
