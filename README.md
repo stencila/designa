@@ -1,58 +1,34 @@
+# 📐 Designa
+
+#### Visual design components for executable documents
+
 [![Build Status](https://github.com/stencila/designa/workflows/Build%20and%20Publish%20packages/badge.svg?branch=master)](https://github.com/stencila/designa/actions?query=workflow%3A%22Build+and+Publish+packages%22)
+[![Community](https://img.shields.io/badge/join-community-green.svg)](https://discord.gg/uFtQtk9)
 
-# Designa
-
-> 🎨 Stencila's visual design resources and style guide
+## 👋 Introduction
 
 This is the place for Stencila's visual design resources (e.g. CSS, icons,
-logos) and style guide. The resources here will be reused across a number of
+logos), styles and Web Components. The resources here are reused across a number of
 other repositories including our main [`website`](https://github.com/stencila/website), the
 [`hub`](https://github.com/stencila/hub), and [`thema`](https://github.com/stencila/thema).
 
-## Packages
+We aim to maintain browser support parity with React, namely popular browsers
+according to CanIUse, including IE9 and above.
+
+## 📦 Packages
 
 This repository is a [monorepo](https://en.wikipedia.org/wiki/Monorepo), and contains the following packages:
 
-- [brand](./packages/brand): Stencila branding elements such as fonts, logos, and illustrations.
-- [style-stencila](./packages/style-stencila): CSS for styling semantic HTML markup in Stencila's proprietary visual language.
+- [components](./packages/components): Web Components built using [StencilJS](https://stenciljs.com), styled using the `style-*` packages listed below.
+- [style-stencila](./packages/style-stencila): CSS for styling semantic HTML markup in Stencila's own visual language.
 - [style-material](./packages/style-material): CSS for styling semantic HTML markup in Google's Material Design visual language.
-- [components](./packages/components): Web Components built using [StencilJS](https://stenciljs.com), styled using the `style-*` packages listed above.
+- [brand](./packages/brand): Stencila branding elements such as fonts, logos, and illustrations.
 
----
+## 📜 Documentation
 
-## Table of Contents
+See the [guide](./packages/components) for getting started with integrating our Web Components into your site. Then, more detailed, interactive documentation for each component is available at https://stencila.github.io/designa/. For example, see the docs on the [code editor](https://stencila.github.io/designa/?path=/docs/atoms-editor-) and executable [code chunk](https://stencila.github.io/designa/?path=/docs/schema-nodes-code-chunk) components.
 
-- [Packages](#packages)
-- [Table of Contents](#table-of-contents)
-- [Design Philosophy](#design-philosophy)
-- [Quick Start](#quick-start)
-- [Development](#development)
-  - [Adding Components](#adding-components)
-  - [Commit Messages](#commit-messages)
-- [Browser Support](#browser-support)
-- [External Resources](#external-resources)
-- [Acknowledgments](#acknowledgments)
-
----
-
-## Design Philosophy
-
-A goal that we strive to achieve is to have semantic and accessible
-presentational markup, i.e. HTML, remain unchanged as we apply different
-themes to it.
-
-For in depth outline, please see [this
-issue](https://github.com/stencila/designa/issues/9).
-
-## Quick Start
-
-1. `git clone git@github.com:stencila/designa.git && cd designa`
-2. `npm install`
-3. `npm run bootstrap`
-4. `npm run build`
-5. `npm run storybook`
-
-## Development
+## 🛠 Development
 
 To get started with development, clone this repo:
 
@@ -78,8 +54,8 @@ below for useful references.
 Once the story is written, you will need to add appropriate styles for each design system.
 Currently we support:
 
-- Stencila's own design system
-- Material Design system
+- [Stencila's own design system](./packages/style-stencila)
+- [Material Design system](./packages/style-stencila)
 
 ### Commit Messages
 
@@ -97,22 +73,14 @@ Package builds and Storybook generation are done on [Travis
 CI](https://travis-ci.org/stencila/designa). Releases are made to the sub-packages
 found inside the packages directory.
 
-## Browser Support
 
-We aim to maintain browser support parity with React, namely popular browsers
-according to CanIUse, including IE9 and above.
-
-> React supports all popular browsers, including Internet Explorer 9 and
-> above, although some polyfills are required for older browsers such as IE 9
-> and IE 10. > _https://reactjs.org/docs/react-dom.html#browser-support_
-
-## External Resources
+### External Resources
 
 - [WAI-ARIA](https://www.w3.org/TR/wai-aria-practices-1.1)
 - [Inclusive Components](https://inclusive-components.design)
 - [TailwindCSS](https://tailwindcss.com)
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 We rely on many tools and services for which we are grateful ❤ to their developers and contributors for all their time and energy.
 
