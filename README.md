@@ -3,6 +3,7 @@
 #### Visual design components for executable documents
 
 [![Build Status](https://github.com/stencila/designa/workflows/Build%20and%20Publish%20packages/badge.svg?branch=master)](https://github.com/stencila/designa/actions?query=workflow%3A%22Build+and+Publish+packages%22)
+[![Storybook](https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg)](https://stencila.github.io/designa/)
 [![Community](https://img.shields.io/badge/join-community-green.svg)](https://discord.gg/uFtQtk9)
 
 ## 👋 Introduction
