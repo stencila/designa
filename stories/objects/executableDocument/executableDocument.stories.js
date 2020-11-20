@@ -2,7 +2,6 @@ import { html } from 'lit-html'
 
 export default {
   title: 'Objects/ExecutableDocument',
-  excludeStories: ['props'],
   component: 'stencila-executable-document-toolbar',
   argTypes: {
     position: {

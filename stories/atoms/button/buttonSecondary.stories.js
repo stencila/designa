@@ -1,14 +1,11 @@
 import { html } from 'lit-html'
-import { props } from './button.stories'
 
 export default {
   title: 'Atoms/Button/Secondary',
-  component: 'stencila-button'
+  component: 'stencila-button',
 }
 
-export const withText = () => {
-  const { disabled } = props()
-
+export const withText = ({ disabled }) => {
   return html`
     <button class="secondary color-stock" ?disabled=${disabled}>
       Hello World
@@ -16,8 +13,8 @@ export const withText = () => {
   `
 }
 
-export const withEmoji = () => {
+export const withEmoji = ({ disabled }) => {
   return html`
-    <button class="secondary">😀 😎 👍 💯</button>
+    <button class="secondary" ?disabled=${disabled}>😀 😎 👍 💯</button>
   `
 }

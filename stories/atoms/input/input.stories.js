@@ -4,7 +4,6 @@ import { iconNames } from '../icons/iconNames'
 export default {
   title: 'Atoms/Input',
   component: 'stencila-input',
-  excludeStories: ['props'],
   argTypes: {
     value: {
       control: {
@@ -51,12 +50,6 @@ export default {
     },
   },
 }
-
-// export const props = (overrides = {}) => ({
-//   placeholder: text('placeholder'),
-//   name: text('name', 'My Input'),
-//   iconStart: select('iconStart', [null, 'archive', 'key'], 'key')
-// })
 
 export const inputField = ({
   hideLabel,

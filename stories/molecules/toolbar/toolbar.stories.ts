@@ -3,7 +3,6 @@ import { html } from 'lit-html'
 export default {
   title: 'Molecules/Toolbar',
   component: 'stencila-toolbar',
-  excludeStories: ['props'],
   argTypes: {
     color: {
       type: 'select',

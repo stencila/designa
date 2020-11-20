@@ -1,62 +1,67 @@
-import { boolean, select, text } from '@storybook/addon-knobs'
 import { html } from 'lit-html'
 import { iconNames } from '../icons/iconNames'
 
 export default {
   title: 'Atoms/Button/Primary',
   component: 'stencila-button',
-  excludeStories: ['props'],
+  argTypes: {
+    label: {
+      defaultValue: 'Sign In',
+      control: {
+        type: 'text',
+      },
+    },
+    icon: {
+      defaultValue: 'magic',
+      control: {
+        type: 'select',
+        options: iconNames,
+      },
+    },
+    color: {
+      defaultValue: 'primary',
+      control: {
+        type: 'select',
+        options: [
+          'primary',
+          'success',
+          'warn',
+          'danger',
+          'neutral',
+          'stock',
+          'key',
+          'brand',
+        ],
+      },
+    },
+    size: {
+      defaultValue: 'default',
+      control: {
+        type: 'select',
+        options: ['xsmall', 'small', 'default', 'large'],
+      },
+    },
+  },
 }
 
-const defaultText = 'Sign In'
-const defaultIcon = 'magic'
-
 export const props = (overrides = {}) => ({
-  color: select(
-    'color',
-    [
-      'primary',
-      'success',
-      'warn',
-      'danger',
-      'neutral',
-      'stock',
-      'key',
-      'brand',
-    ],
-    overrides.color || 'primary'
-  ),
-  disabled: boolean('disabled', overrides.disabled || false),
-  fill: boolean('fill', overrides.fill || false),
   href: text('href', overrides.href || ''),
-  icon: select('icon', iconNames, overrides.icon || defaultIcon),
-  isLoading: boolean('isLoading', overrides.isLoading || false),
-  label: text('Button Text', overrides.label || defaultText),
-  minimal: boolean('minimal', overrides.minimal || false),
-  secondary: boolean('isSecondary', overrides.isSecondary || false),
-  size: select(
-    'size',
-    ['xsmall', 'small', 'default', 'large'],
-    overrides.size || 'default'
-  ),
   tooltip: text('tooltip', overrides.tooltip || undefined),
 })
 
-export const withText = () => {
-  const {
-    color,
-    disabled,
-    fill,
-    href,
-    icon,
-    isLoading,
-    label,
-    minimal,
-    secondary,
-    size,
-    tooltip,
-  } = props()
-
+export const withText = ({
+  color,
+  disabled,
+  fill,
+  href,
+  icon,
+  isLoading,
+  label,
+  minimal,
+  secondary,
+  size,
+  tooltip,
+}) => {
   return html`
     <button
       class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
@@ -74,23 +79,19 @@ export const withText = () => {
   `
 }
 
-export const withEmoji = () => {
-  const {
-    color,
-    disabled,
-    fill,
-    href,
-    icon,
-    isLoading,
-    label,
-    minimal,
-    secondary,
-    size,
-    tooltip,
-  } = props({
-    label: '😀 😎 👍 💯',
-  })
-
+export const withEmoji = ({
+  color,
+  disabled,
+  fill,
+  href,
+  icon,
+  isLoading,
+  label,
+  minimal,
+  secondary,
+  size,
+  tooltip,
+}) => {
   return html`
     <button
       class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
@@ -107,25 +108,23 @@ export const withEmoji = () => {
     </button>
   `
 }
+withEmoji.args = {
+  label: '😀 😎 👍 💯',
+}
 
-export const small = () => {
-  const {
-    color,
-    disabled,
-    fill,
-    href,
-    icon,
-    isLoading,
-    label,
-    minimal,
-    secondary,
-    size,
-    tooltip,
-  } = props({
-    label: 'A small step',
-    size: 'small',
-  })
-
+export const small = ({
+  color,
+  disabled,
+  fill,
+  href,
+  icon,
+  isLoading,
+  label,
+  minimal,
+  secondary,
+  size,
+  tooltip,
+}) => {
   return html`
     <button
       class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
@@ -142,25 +141,24 @@ export const small = () => {
     </button>
   `
 }
+small.args = {
+  label: 'A small step',
+  size: 'small',
+}
 
-export const extraSmall = () => {
-  const {
-    color,
-    disabled,
-    fill,
-    href,
-    icon,
-    isLoading,
-    label,
-    minimal,
-    secondary,
-    size,
-    tooltip,
-  } = props({
-    label: 'a very small step',
-    size: 'xsmall',
-  })
-
+export const extraSmall = ({
+  color,
+  disabled,
+  fill,
+  href,
+  icon,
+  isLoading,
+  label,
+  minimal,
+  secondary,
+  size,
+  tooltip,
+}) => {
   return html`
     <button
       class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
@@ -177,25 +175,24 @@ export const extraSmall = () => {
     </button>
   `
 }
+extraSmall.args = {
+  label: 'a very small step',
+  size: 'xsmall',
+}
 
-export const anchorButton = () => {
-  const {
-    color,
-    disabled,
-    fill,
-    href,
-    icon,
-    isLoading,
-    label,
-    minimal,
-    secondary,
-    size,
-    tooltip,
-  } = props({
-    label: 'a very small step',
-    size: 'xsmall',
-  })
-
+export const anchorButton = ({
+  color,
+  disabled,
+  fill,
+  href,
+  icon,
+  isLoading,
+  label,
+  minimal,
+  secondary,
+  size,
+  tooltip,
+}) => {
   return html`
     <button
       class="color-${color} ${minimal === true ? 'minimal' : ''} ${fill === true
@@ -212,28 +209,30 @@ export const anchorButton = () => {
     </button>
   `
 }
+anchorButton.args = {
+  label: 'a very small step',
+  size: 'xsmall',
+}
 
-export const webComponent = () => {
-  const {
-    color,
-    disabled,
-    fill,
-    href,
-    icon,
-    isLoading,
-    label,
-    minimal,
-    secondary,
-    size,
-    tooltip,
-  } = props()
-
+export const webComponent = ({
+  color,
+  disabled,
+  fill,
+  href,
+  icon,
+  isLoading,
+  label,
+  minimal,
+  secondary,
+  size,
+  tooltip,
+}) => {
   return html`
     <stencila-button
       ?minimal=${minimal}
       color=${color}
       ?disabled=${disabled}
-      fill=${fill}
+      ?fill=${fill}
       icon=${icon}
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
@@ -245,27 +244,25 @@ export const webComponent = () => {
   `
 }
 
-export const webComponent_withAnIcon = () => {
-  const {
-    color,
-    disabled,
-    fill,
-    href,
-    icon,
-    isLoading,
-    label,
-    minimal,
-    secondary,
-    size,
-    tooltip,
-  } = props({ icon: undefined, color: 'stock', fill: true })
-
+export const webComponent_withSVGIcon = ({
+  color,
+  disabled,
+  fill,
+  href,
+  icon,
+  isLoading,
+  label,
+  minimal,
+  secondary,
+  size,
+  tooltip,
+}) => {
   return html`
     <stencila-button
       ?minimal=${minimal}
       color=${color}
       ?disabled=${disabled}
-      fill=${fill}
+      ?fill=${fill}
       .icon=${undefined}
       .fill=${fill}
       ?is-secondary=${secondary}
@@ -297,28 +294,31 @@ export const webComponent_withAnIcon = () => {
     </stencila-button>
   `
 }
+webComponent_withSVGIcon.args = {
+  icon: undefined,
+  color: 'stock',
+  fill: true,
+}
 
-export const webComponent_withAFeatherIcon = () => {
-  const {
-    color,
-    disabled,
-    fill,
-    href,
-    icon,
-    isLoading,
-    label,
-    minimal,
-    secondary,
-    size,
-    tooltip,
-  } = props()
-
+export const webComponent_withIcon = ({
+  color,
+  disabled,
+  fill,
+  href,
+  icon,
+  isLoading,
+  label,
+  minimal,
+  secondary,
+  size,
+  tooltip,
+}) => {
   return html`
     <stencila-button
       ?minimal=${minimal}
       color=${color}
       ?disabled=${disabled}
-      fill=${fill}
+      ?fill=${fill}
       icon=${icon}
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
@@ -331,30 +331,25 @@ export const webComponent_withAFeatherIcon = () => {
   `
 }
 
-export const webComponent_Link = () => {
-  const {
-    color,
-    disabled,
-    fill,
-    href,
-    icon,
-    isLoading,
-    label,
-    minimal,
-    secondary,
-    size,
-    tooltip,
-  } = props({
-    icon: null,
-    href: '#',
-  })
-
+export const webComponent_Link = ({
+  color,
+  disabled,
+  fill,
+  href,
+  icon,
+  isLoading,
+  label,
+  minimal,
+  secondary,
+  size,
+  tooltip,
+}) => {
   return html`
     <stencila-button
       ?minimal=${minimal}
       color=${color}
       ?disabled=${disabled}
-      fill=${fill}
+      ?fill=${fill}
       icon=${icon}
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
@@ -365,4 +360,8 @@ export const webComponent_Link = () => {
       ${label}
     </stencila-button>
   `
+}
+webComponent_Link.args = {
+  icon: null,
+  href: '#',
 }
