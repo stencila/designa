@@ -83,6 +83,7 @@ export const withLabel = ({
   placeholder,
   required,
   type,
+  value,
 }) => {
   return html`
   <label>
