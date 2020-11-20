@@ -19,7 +19,7 @@ Please follow the pattern of `<stencila-(component-type)>`, for example `<stenci
 
 ### Add to your project
 
-There are two ways to load these components into your project, a `script` tag in an HTML file, or as an `npm` pacakge.
+There are two ways to load these components into your project, a `script` tag in an HTML file, or as a Node module.
 
 #### Script tag
 
@@ -30,19 +30,19 @@ There are two ways to load these components into your project, a `script` tag in
 <script type="text/javascript" nomodule="true" src="https://unpkg.com/@stencila/components@latest/dist/stencila-components/stencila-components.js"></script>
 ```
 
-- Then you can use the element anywhere in your template, JSX, html, etc.
+- Then you can use the element anywhere in your HTML, HTML template, JSX, etc.
 
-For modern browser support the `module` attribute, only the components used on the page will be requested and lazy-loaded, keeping the page size low.
+In modern browsers supporting the `module` attribute, only the components used on the page will be requested and lazy-loaded, keeping the page size low.
 
-#### Node Modules
+#### Node module
 
 - Run `npm install @stencila/components --save`
 - Import the package in your main/top-level file: `import '@stencila/components'`
-- Stencil will automatically setup the lazy-loading capabilities for the Stencil library. Then you can use the element anywhere in your template, JSX, html etc.
+- Stencil will automatically setup the lazy-loading capabilities for the Stencil library. Then you can use the element anywhere in your template, JSX, HTML etc.
 
 ### Using and customizing components
 
-The best reference for how to use and combine these components is our [component library](https://stencila.github.io/designa/?path=/story/schema-nodes-code-chunk--with-execute-handler).
+The best reference for how to use and combine these components is our [component library](https://stencila.github.io/designa/).
 The source code for the stories is written using simple [`lit-html`](https://lit-html.polymer-project.org) syntax and [can be found here](../../stories).
 
 For general overview of working with WebComponents using plain JavaScript, the [StencilJS website](https://stenciljs.com/docs/javascript) provides a good introduction.
