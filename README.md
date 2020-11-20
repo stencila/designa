@@ -13,8 +13,7 @@ logos), styles and Web Components. The resources here are reused across a number
 other repositories including our main [`website`](https://github.com/stencila/website), the
 [`hub`](https://github.com/stencila/hub), and [`thema`](https://github.com/stencila/thema).
 
-We aim to maintain browser support parity with React, namely popular browsers
-according to CanIUse, including IE9 and above.
+We aim to maintain browser support for popular browsers according to [Browserslist](https://github.com/browserslist/browserslist#best-practices), [excluding IE11 and below](https://github.com/stencila/designa/blob/d3b70de5206d7e0380455cbc7f81ff64612b80c6/package.json#L10-L14).
 
 ## 📦 Packages
 
@@ -39,11 +38,16 @@ Then install the necessary Node packages:
 
 `npm install && npm run bootstrap`
 
-Start Storybook and watch for changes inside `/packages/*`
+Build packages and watch for changes:
 
-`npm run dev`
+`npm run build:watch`
 
-> 😩 Note that you will currently have to manually reload, or disable/enable the desired "CSS Resource" in Storybook after making changes to see the results. A fix for this is high on the priority list.
+In a _separate terminal window_ start Storybook:
+
+`npm run storybook`
+
+> 😩 Note that you will currently have to manually reload the Storybook after making changes to components see the results.
+> An issue to improve the DX [can be seen here](https://github.com/stencila/designa/issues/113)
 
 ### Adding Components
 
@@ -73,7 +77,6 @@ full details.
 Package builds and Storybook generation are done on [Travis
 CI](https://travis-ci.org/stencila/designa). Releases are made to the sub-packages
 found inside the packages directory.
-
 
 ### External Resources
 
