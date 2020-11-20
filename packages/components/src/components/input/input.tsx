@@ -27,7 +27,7 @@ export class Input {
     | 'decimal'
     | 'search'
 
-  /*
+  /**
    * Type of input field.
    */
   @Prop() public type: 'text' | 'password' | 'number' | 'search' = 'text'
@@ -53,12 +53,12 @@ export class Input {
    */
   @Prop() inline = false
 
-  /*
+  /**
    * Short hint demonstrating expected input value. Shown when the input is empty.
    */
   @Prop() public placeholder?: string
 
-  /*
+  /**
    * Icon to show at the start of the input field.
    */
   @Prop() public iconStart?: IconNames

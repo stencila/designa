@@ -1,71 +1,101 @@
-import { select, text, boolean } from '@storybook/addon-knobs'
 import { html } from 'lit-html'
+import { iconNames } from '../icons/iconNames'
 
 export default {
   title: 'Atoms/Input',
-  excludeStories: ['props']
+  component: 'stencila-input',
+  argTypes: {
+    value: {
+      control: {
+        type: 'text',
+      },
+    },
+    label: {
+      control: {
+        type: 'text',
+      },
+    },
+    placeholder: {
+      control: {
+        type: 'text',
+      },
+    },
+    iconStart: {
+      defaultValue: 'key',
+      control: {
+        type: 'select',
+        options: iconNames,
+      },
+    },
+    inputmode: {
+      control: {
+        type: 'select',
+        options: [
+          'text',
+          'tel',
+          'url',
+          'email',
+          'numeric',
+          'decimal',
+          'search',
+        ],
+      },
+    },
+    type: {
+      defaultValue: 'text',
+      control: {
+        type: 'select',
+        options: ['text', 'number', 'password'],
+      },
+    },
+  },
 }
 
-export const props = (overrides = {}) => ({
-  type: select(
-    'type',
-    ['text', 'number', 'password'],
-    overrides.type || 'text'
-  ),
-  placeholder: text('placeholder'),
-  name: text('name', 'My Input'),
-  required: boolean('required', false),
-  inline: boolean('inline', false),
-  hideLabel: boolean('hideLabel', false),
-  iconStart: select('iconStart', [null, 'archive', 'key'], 'key')
-})
-
-export const inputField = () => {
-  const {
-    hideLabel,
-    iconStart,
-    inline,
-    name,
-    placeholder,
-    required,
-    type
-  } = props()
-
+export const inputField = ({
+  hideLabel,
+  iconStart,
+  inline,
+  name,
+  placeholder,
+  required,
+  type,
+  value,
+}) => {
   return html`
     <stencila-input
-      .placeholder=${placeholder}
+      .iconStart=${iconStart}
+      .name=${name}
       .type=${type}
-      hide-label=${hideLabel}
-      icon-start=${iconStart}
-      inline=${inline}
-      name=${name}
-      required=${required}
+      ?hideLabel=${hideLabel}
+      ?inline=${inline}
+      ?required=${required}
+      .placeholder=${placeholder}
+      .value=${value}
     /></stencila-input>
   `
 }
 
-export const withLabel = () => {
-  const {
-    hideLabel,
-    iconStart,
-    inline,
-    name,
-    placeholder,
-    required,
-    type
-  } = props()
-
+export const withLabel = ({
+  hideLabel,
+  iconStart,
+  inline,
+  name,
+  placeholder,
+  required,
+  type,
+}) => {
   return html`
   <label>
     My Input
     <stencila-input
-      .placeholder=${placeholder}
+      .iconStart=${iconStart}
+      .name=${name}
       .type=${type}
-      hide-label=${hideLabel}
-      icon-start=${iconStart}
-      inline=${inline}
-      name=${name}
-      required=${required}
+      ?hideLabel=${hideLabel}
+      ?inline=${inline}
+      ?required=${required}
+      .placeholder=${placeholder}
+      .value=${value}
     /></stencila-input>
   </label>
   `

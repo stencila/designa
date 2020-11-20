@@ -1,4 +1,3 @@
-import { boolean } from '@storybook/addon-knobs'
 import { html } from 'lit-html'
 
 export default {
@@ -6,18 +5,18 @@ export default {
   component: 'stencila-menu',
 }
 
-export const menu = () =>
+export const menu = ({ isOpen }) =>
   html`
-    <stencila-menu ?is-open=${boolean('isOpen', true)}>
+    <stencila-menu .isOpen=${isOpen}>
       <stencila-menu-item icon="home">Home</stencila-menu-item>
       <stencila-menu-item icon="user">Profile</stencila-menu-item>
       <stencila-menu-item icon="settings">Settings</stencila-menu-item>
     </stencila-menu>
   `
 
-export const withToggleButton = () =>
+export const withToggleButton = ({ isOpen }) =>
   html`
-    <stencila-menu ?isOpen=${boolean('isOpen', true)}>
+    <stencila-menu .isOpen=${isOpen}>
       <stencila-button
         ?icon-only=${true}
         icon="menu"
@@ -32,17 +31,17 @@ export const withToggleButton = () =>
     </stencila-menu>
   `
 
-export const emptyMenu = () =>
-  html`<stencila-menu ?is-open=${boolean('isOpen', true)}></stencila-menu>`
+export const emptyMenu = ({ isOpen }) =>
+  html`<stencila-menu .isOpen=${isOpen}></stencila-menu>`
 
-export const menuWithOneItem = () => html`
-  <stencila-menu ?is-open=${boolean('isOpen', true)}>
+export const menuWithOneItem = ({ isOpen }) => html`
+  <stencila-menu .isOpen=${isOpen}>
     <stencila-menu-item>Lonely menu item</stencila-menu-item>
   </stencila-menu>
 `
 
-export const menuWithIcons = () => html`
-  <stencila-menu ?is-open=${boolean('isOpen', true)}>
+export const menuWithIcons = ({ isOpen }) => html`
+  <stencila-menu .isOpen=${isOpen}>
     <stencila-menu-item icon="grid">Projects</stencila-menu-item>
     <stencila-menu-item icon="user" }}>Profile</stencila-menu-item>
     <stencila-menu-item icon="log-out">Sign Out</stencila-menu-item>

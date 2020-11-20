@@ -1,46 +1,35 @@
-import { select } from '@storybook/addon-knobs'
 import { html } from 'lit-html'
 
 export default {
   title: 'Objects/ExecutableDocument',
-  excludeStories: ['props'],
+  component: 'stencila-executable-document-toolbar',
+  argTypes: {
+    position: {
+      defaultValue: 'fixed',
+      control: {
+        type: 'select',
+        options: ['fixed', 'static'],
+      },
+    },
+  },
 }
 
-export const props = (overrides = {}) => ({
-  color: select(
-    'color',
-    [
-      'primary',
-      'success',
-      'warn',
-      'danger',
-      'neutral',
-      'stock',
-      'key',
-      'brand',
-    ],
-    overrides.color || 'primary'
-  ),
-  position: select(
-    'position',
-    ['static', 'fixed'],
-    overrides.position || 'static'
-  ),
-})
-
-export const articleControls = () => {
+export const articleControls = ({ position }) => {
   return html`
     <div>
-      <stencila-executable-document-toolbar>
+      <stencila-executable-document-toolbar .position=${position}>
       </stencila-executable-document-toolbar>
     </div>
   `
 }
 
-export const articleControlsActive = () => {
+export const articleControlsActive = ({ position, sourceUrl }) => {
   return html`
     <article>
-      <stencila-executable-document-toolbar source-url="#">
+      <stencila-executable-document-toolbar
+        .position=${position}
+        .sourceUrl=${sourceUrl}
+      >
       </stencila-executable-document-toolbar>
 
       <p>

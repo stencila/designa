@@ -1,4 +1,3 @@
-import { boolean } from '@storybook/addon-knobs'
 import { html } from 'lit-html'
 
 export default {
@@ -6,16 +5,14 @@ export default {
   component: 'stencila-action-menu',
 }
 
-export const actionMenu = () => {
-  const expandable = boolean('expandable', false)
-
+export const actionMenu = ({ expandable }) => {
   return html`
     <stencila-action-menu .expandable=${expandable}>
       <stencila-button
         size="xsmall"
         icon="command"
         color="key"
-        .minimal="${true}}"
+        ?minimal=${true}
       >
         Action 1
       </stencila-button>
@@ -24,7 +21,7 @@ export const actionMenu = () => {
         size="xsmall"
         icon="command"
         color="key"
-        .minimal="${true}}"
+        ?minimal=${true}
       >
         Action 2
       </stencila-button>
@@ -33,7 +30,7 @@ export const actionMenu = () => {
         size="xsmall"
         icon="command"
         color="key"
-        .minimal="${true}}"
+        ?minimal=${true}
       >
         Action 3
       </stencila-button>

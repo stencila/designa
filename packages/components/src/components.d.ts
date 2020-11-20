@@ -277,6 +277,9 @@ export namespace Components {
           * Visually conceal the input label. Use sparingly for simple forms only with a descriptive action button.
          */
         "hideLabel": boolean;
+        /**
+          * Icon to show at the start of the input field.
+         */
         "iconStart"?: IconNames;
         /**
           * Render the label and input field as inline elements.
@@ -300,11 +303,17 @@ export namespace Components {
           * The name of the input, submitted as the value's label inside the form data.
          */
         "name": string;
+        /**
+          * Short hint demonstrating expected input value. Shown when the input is empty.
+         */
         "placeholder"?: string;
         /**
           * When `true` value must be provided before submitting.
          */
         "required": boolean;
+        /**
+          * Type of input field.
+         */
         "type": 'text' | 'password' | 'number' | 'search';
         /**
           * Text value of the input.
@@ -815,6 +824,9 @@ declare namespace LocalJSX {
           * Visually conceal the input label. Use sparingly for simple forms only with a descriptive action button.
          */
         "hideLabel"?: boolean;
+        /**
+          * Icon to show at the start of the input field.
+         */
         "iconStart"?: IconNames;
         /**
           * Render the label and input field as inline elements.
@@ -838,11 +850,17 @@ declare namespace LocalJSX {
           * The name of the input, submitted as the value's label inside the form data.
          */
         "name": string;
+        /**
+          * Short hint demonstrating expected input value. Shown when the input is empty.
+         */
         "placeholder"?: string;
         /**
           * When `true` value must be provided before submitting.
          */
         "required"?: boolean;
+        /**
+          * Type of input field.
+         */
         "type"?: 'text' | 'password' | 'number' | 'search';
         /**
           * Text value of the input.
