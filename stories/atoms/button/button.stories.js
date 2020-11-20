@@ -44,11 +44,6 @@ export default {
   },
 }
 
-export const props = (overrides = {}) => ({
-  href: text('href', overrides.href || ''),
-  tooltip: text('tooltip', overrides.tooltip || undefined),
-})
-
 export const withText = ({
   color,
   disabled,
