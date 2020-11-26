@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.2](https://github.com/stencila/style/compare/@stencila/brand@0.6.1...@stencila/brand@0.6.2) (2020-11-26)
+
+
+### Bug Fixes
+
+* **Brand:** Remove old and now unused fonts ([752516e](https://github.com/stencila/style/commit/752516eddaf5375a95b38f1697f1e16503e9ea83))
+
+
+
+
+
 ## [0.6.1](https://github.com/stencila/style/compare/@stencila/brand@0.6.0...@stencila/brand@0.6.1) (2020-11-20)
 
 **Note:** Version bump only for package @stencila/brand
