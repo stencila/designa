@@ -39,6 +39,9 @@ jobs:
       - run: npm ci
       - run: npm run bootstrap
 
+      - name: Build Brand Assets
+        run: npm run build:brand
+
       - name: Build Styles
         run: npm run build:styles
 

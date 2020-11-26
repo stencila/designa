@@ -19,8 +19,9 @@
   "scripts": {
     "dev": "concurrently \"npm run storybook\" \"npm run build:watch\"",
     "build": "lerna run build",
-    "build:styles": "lerna run build --scope '@stencila/style*'",
+    "build:brand": "lerna run build --scope '@stencila/brand'",
     "build:components": "lerna run build --scope '@stencila/components'",
+    "build:styles": "lerna run build --scope '@stencila/style*'",
     "build:watch": "lerna run build:watch --stream --parallel",
     "bootstrap": "lerna bootstrap --force-local",
     "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist",
