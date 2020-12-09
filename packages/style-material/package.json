@@ -1,6 +1,6 @@
 {
   "name": "@stencila/style-material",
-  "version": "0.11.21",
+  "version": "0.11.22",
   "description": "Material Design theme for Stencila components",
   "keywords": [
     "Stencila",
@@ -39,7 +39,7 @@
     "not IE_Mob 11"
   ],
   "dependencies": {
-    "@stencila/brand": "0.6.2"
+    "@stencila/brand": "0.6.3"
   },
   "devDependencies": {
     "@abide-community/parcel-plugin-clean-out-dir": "1.0.0",
