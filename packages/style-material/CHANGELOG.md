@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.23](https://github.com/stencila/style/compare/@stencila/style-material@0.11.22...@stencila/style-material@0.11.23) (2021-01-05)
+
+**Note:** Version bump only for package @stencila/style-material
+
+
+
+
+
 ## [0.11.22](https://github.com/stencila/style/compare/@stencila/style-material@0.11.21...@stencila/style-material@0.11.22) (2020-12-09)
 
 **Note:** Version bump only for package @stencila/style-material

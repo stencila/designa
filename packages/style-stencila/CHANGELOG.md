@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.10](https://github.com/stencila/style/compare/@stencila/style-stencila@0.18.9...@stencila/style-stencila@0.18.10) (2021-01-05)
+
+**Note:** Version bump only for package @stencila/style-stencila
+
+
+
+
+
 ## [0.18.9](https://github.com/stencila/style/compare/@stencila/style-stencila@0.18.8...@stencila/style-stencila@0.18.9) (2020-12-09)
 
 **Note:** Version bump only for package @stencila/style-stencila
