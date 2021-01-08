@@ -46,11 +46,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   public programmingLanguageProp: string
 
   /**
-   * Callback function to call when a language of the editor is changed
-   */
-  @Prop() public onSetLanguage?: (language: string) => void
-
-  /**
    * @deprecated Use `isCodeVisible` prop (`is-code-visible` attribute) instead
    * Whether the code section is visible or not
    */

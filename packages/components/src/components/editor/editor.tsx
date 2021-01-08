@@ -14,13 +14,23 @@ import { bracketMatching } from '@codemirror/next/matchbrackets'
 import { EditorState, Extension, tagExtension } from '@codemirror/next/state'
 import {
   Command,
+  drawSelection,
   EditorView,
   highlightSpecialChars,
   KeyBinding as KeymapI,
   keymap,
-  drawSelection,
 } from '@codemirror/next/view'
-import { Component, Element, h, Host, Method, Prop, Watch } from '@stencil/core'
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  h,
+  Host,
+  Method,
+  Prop,
+  Watch,
+} from '@stencil/core'
 import { deleteToLineStart } from './commands'
 
 export interface EditorContents {
@@ -87,21 +97,18 @@ export class Editor {
   private readOnlyTag = Symbol('readOnly')
 
   /**
-   * Callback function to call when a language of the editor is changed
+   * Event emitted when the language of the editor is changed.
    */
-  @Prop()
-  public onSetLanguage?: (language: string) => void
+  @Event() setLanguage: EventEmitter<string | undefined>
 
   /**
    * Changes the active programming language of the editor.
    * Does not affect syntax highlighting.
    */
-  private setLanguage = (e: Event): void => {
+  private onSetLanguage = (e: Event): void => {
     const target = e.currentTarget as HTMLSelectElement
     this.activeLanguage = target.value.toLowerCase()
-    if (this.onSetLanguage) {
-      this.onSetLanguage(target.value)
-    }
+    this.setLanguage.emit(target.value)
   }
 
   /**
@@ -296,7 +303,7 @@ export class Editor {
           <menu>
             <label aria-label="Programming Language">
               <stencila-icon icon="terminal"></stencila-icon>
-              <select onChange={this.setLanguage}>
+              <select onChange={this.onSetLanguage}>
                 {this.languageCapabilities.map((language) => (
                   <option
                     value={language.toLowerCase()}
