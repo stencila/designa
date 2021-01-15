@@ -1,4 +1,8 @@
-import { autocompletion, startCompletion } from '@codemirror/autocomplete'
+import {
+  autocompletion,
+  completeAnyWord,
+  startCompletion,
+} from '@codemirror/autocomplete'
 import { closeBrackets, closeBracketsKeymap } from '@codemirror/closebrackets'
 import { defaultKeymap } from '@codemirror/commands'
 import { commentKeymap } from '@codemirror/comment'
@@ -173,7 +177,7 @@ export class Editor {
 
     const extensions: Extension[] = [
       history(),
-      autocompletion(),
+      autocompletion({ override: [completeAnyWord] }),
       bracketMatching(),
       closeBrackets(),
       Prec.fallback(defaultHighlightStyle),
