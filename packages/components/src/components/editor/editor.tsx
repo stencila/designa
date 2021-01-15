@@ -1,17 +1,14 @@
-import { autocompletion, startCompletion } from '@codemirror/next/autocomplete'
-import {
-  closeBrackets,
-  closeBracketsKeymap,
-} from '@codemirror/next/closebrackets'
-import { defaultKeymap } from '@codemirror/next/commands'
-import { commentKeymap } from '@codemirror/next/comment'
-import { foldGutter, foldKeymap } from '@codemirror/next/fold'
-import { lineNumbers } from '@codemirror/next/gutter'
-import { defaultHighlighter } from '@codemirror/next/highlight'
-import { history, historyKeymap } from '@codemirror/next/history'
-import { python } from '@codemirror/next/lang-python'
-import { bracketMatching } from '@codemirror/next/matchbrackets'
-import { EditorState, Extension, tagExtension } from '@codemirror/next/state'
+import { autocompletion, startCompletion } from '@codemirror/autocomplete'
+import { closeBrackets, closeBracketsKeymap } from '@codemirror/closebrackets'
+import { defaultKeymap } from '@codemirror/commands'
+import { commentKeymap } from '@codemirror/comment'
+import { foldGutter, foldKeymap } from '@codemirror/fold'
+import { lineNumbers } from '@codemirror/gutter'
+import { defaultHighlightStyle } from '@codemirror/highlight'
+import { history, historyKeymap } from '@codemirror/history'
+import { python } from '@codemirror/lang-python'
+import { bracketMatching } from '@codemirror/matchbrackets'
+import { EditorState, Extension, Prec, tagExtension } from '@codemirror/state'
 import {
   Command,
   drawSelection,
@@ -19,7 +16,7 @@ import {
   highlightSpecialChars,
   KeyBinding as KeymapI,
   keymap,
-} from '@codemirror/next/view'
+} from '@codemirror/view'
 import {
   Component,
   Element,
@@ -179,12 +176,12 @@ export class Editor {
       autocompletion(),
       bracketMatching(),
       closeBrackets(),
-      defaultHighlighter,
+      Prec.fallback(defaultHighlightStyle),
       python(),
       drawSelection(),
       EditorState.allowMultipleSelections.of(true),
       highlightSpecialChars(),
-      keymap([
+      keymap.of([
         ...defaultKeymap,
         ...commentKeymap,
         ...closeBracketsKeymap,

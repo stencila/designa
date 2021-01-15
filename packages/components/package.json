@@ -51,7 +51,17 @@
     "tailwindcss": "1.9.6"
   },
   "dependencies": {
-    "@codemirror/next": "^0.14.0",
+    "@codemirror/autocomplete": "^0.17.2",
+    "@codemirror/closebrackets": "^0.17.2",
+    "@codemirror/commands": "^0.17.1",
+    "@codemirror/comment": "^0.17.1",
+    "@codemirror/fold": "^0.17.1",
+    "@codemirror/gutter": "^0.17.1",
+    "@codemirror/highlight": "^0.17.1",
+    "@codemirror/history": "^0.17.1",
+    "@codemirror/lang-python": "^0.17.2",
+    "@codemirror/state": "^0.17.1",
+    "@codemirror/view": "^0.17.5",
     "@nll/datum": "^3.3.0",
     "@popperjs/core": "^2.5.4",
     "@stencila/executa": "^1.15.2",

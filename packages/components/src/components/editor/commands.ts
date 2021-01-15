@@ -1,5 +1,5 @@
-import { EditorSelection, Transaction } from '@codemirror/next/state'
-import { Command, EditorView } from '@codemirror/next/view/src'
+import { EditorSelection, Transaction } from '@codemirror/state'
+import { Command, EditorView } from '@codemirror/view'
 
 // Collection of CodeMirror Commands
 // @see https://codemirror.net/6/docs/ref/#commands
