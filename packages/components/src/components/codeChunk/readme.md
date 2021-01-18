@@ -12,7 +12,6 @@
 | `isCodeCollapsed`         | `data-collapsed`           | <span style="color:red">**[DEPRECATED]**</span> Use `isCodeVisible` prop (`is-code-visible` attribute) instead Whether the code section is visible or not<br/><br/> | `boolean`                                                     | `false`     |
 | `isCodeVisible`           | `is-code-visible`          | Whether the code section is visible or not                                                                                                                          | `boolean`                                                     | `false`     |
 | `keymap`                  | --                         | Custom keyboard shortcuts to pass along to CodeMirror                                                                                                               | `KeyBinding[]`                                                | `[]`        |
-| `onSetLanguage`           | --                         | Callback function to call when a language of the editor is changed                                                                                                  | `((language: string) => void) \| undefined`                   | `undefined` |
 | `programmingLanguageProp` | `data-programminglanguage` | Programming language of the CodeChunk                                                                                                                               | `string`                                                      | `undefined` |
 
 

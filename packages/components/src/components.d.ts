@@ -123,10 +123,6 @@ export namespace Components {
          */
         "keymap": Keymap[];
         /**
-          * Callback function to call when a language of the editor is changed
-         */
-        "onSetLanguage"?: (language: string) => void;
-        /**
           * Programming language of the CodeChunk
          */
         "programmingLanguageProp": string;
@@ -211,10 +207,6 @@ export namespace Components {
           * Determines the visibility of line numbers
          */
         "lineNumbers": boolean;
-        /**
-          * Callback function to call when a language of the editor is changed
-         */
-        "onSetLanguage"?: (language: string) => void;
         /**
           * Disallow editing of the editor contents when set to `true`
          */
@@ -682,10 +674,6 @@ declare namespace LocalJSX {
          */
         "onSetAllCodeVisibility"?: (event: CustomEvent<any>) => void;
         /**
-          * Callback function to call when a language of the editor is changed
-         */
-        "onSetLanguage"?: (language: string) => void;
-        /**
           * Programming language of the CodeChunk
          */
         "programmingLanguageProp"?: string;
@@ -759,9 +747,9 @@ declare namespace LocalJSX {
          */
         "lineNumbers"?: boolean;
         /**
-          * Callback function to call when a language of the editor is changed
+          * Event emitted when the language of the editor is changed.
          */
-        "onSetLanguage"?: (language: string) => void;
+        "onSetLanguage"?: (event: CustomEvent<string | undefined>) => void;
         /**
           * Disallow editing of the editor contents when set to `true`
          */

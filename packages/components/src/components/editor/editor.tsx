@@ -1,26 +1,40 @@
-import { autocompletion, startCompletion } from '@codemirror/next/autocomplete'
 import {
-  closeBrackets,
-  closeBracketsKeymap,
-} from '@codemirror/next/closebrackets'
-import { defaultKeymap } from '@codemirror/next/commands'
-import { commentKeymap } from '@codemirror/next/comment'
-import { foldGutter, foldKeymap } from '@codemirror/next/fold'
-import { lineNumbers } from '@codemirror/next/gutter'
-import { defaultHighlighter } from '@codemirror/next/highlight'
-import { history, historyKeymap } from '@codemirror/next/history'
-import { python } from '@codemirror/next/lang-python'
-import { bracketMatching } from '@codemirror/next/matchbrackets'
-import { EditorState, Extension, tagExtension } from '@codemirror/next/state'
+  autocompletion,
+  completeAnyWord,
+  startCompletion,
+} from '@codemirror/autocomplete'
+import { closeBrackets, closeBracketsKeymap } from '@codemirror/closebrackets'
+import { defaultKeymap } from '@codemirror/commands'
+import { commentKeymap } from '@codemirror/comment'
+import { foldGutter, foldKeymap } from '@codemirror/fold'
+import { lineNumbers } from '@codemirror/gutter'
+import { defaultHighlightStyle } from '@codemirror/highlight'
+import { history, historyKeymap } from '@codemirror/history'
+import { python } from '@codemirror/lang-python'
+import { r } from '@codemirror/legacy-modes/mode/r'
+import { shell } from '@codemirror/legacy-modes/mode/shell'
+import { bracketMatching } from '@codemirror/matchbrackets'
+import { EditorState, Extension, Prec, tagExtension } from '@codemirror/state'
+import { StreamLanguage } from '@codemirror/stream-parser'
 import {
   Command,
+  drawSelection,
   EditorView,
   highlightSpecialChars,
   KeyBinding as KeymapI,
   keymap,
-  drawSelection,
-} from '@codemirror/next/view'
-import { Component, Element, h, Host, Method, Prop, Watch } from '@stencil/core'
+} from '@codemirror/view'
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  h,
+  Host,
+  Method,
+  Prop,
+  Watch,
+} from '@stencil/core'
 import { deleteToLineStart } from './commands'
 
 export interface EditorContents {
@@ -87,30 +101,58 @@ export class Editor {
   private readOnlyTag = Symbol('readOnly')
 
   /**
-   * Callback function to call when a language of the editor is changed
-   */
-  @Prop()
-  public onSetLanguage?: (language: string) => void
-
-  /**
-   * Changes the active programming language of the editor.
-   * Does not affect syntax highlighting.
-   */
-  private setLanguage = (e: Event): void => {
-    const target = e.currentTarget as HTMLSelectElement
-    this.activeLanguage = target.value.toLowerCase()
-    if (this.onSetLanguage) {
-      this.onSetLanguage(target.value)
-    }
-  }
-
-  /**
    * Programming language of the Editor
    */
   // eslint-disable-next-line @stencil/strict-mutable
   @Prop({ mutable: true, reflect: true })
   public activeLanguage: string =
     this.languageCapabilities[0]?.toLowerCase() ?? ''
+
+  /**
+   * Event emitted when the language of the editor is changed.
+   */
+  @Event() setLanguage: EventEmitter<string | undefined>
+
+  private getLang = (language: string) => {
+    switch (language) {
+      case 'r': {
+        return StreamLanguage.define(r)
+      }
+      case 'bash':
+      case 'shell':
+      case 'sh': {
+        return StreamLanguage.define(shell)
+      }
+      case 'python':
+      default: {
+        return python()
+      }
+    }
+  }
+
+  // Mutable CodeMirror states need to be "tagged". @see https://codemirror.net/6/docs/ref/#state.tagExtension
+  private languageTag = Symbol('language')
+  private languageSyntax = this.getLang(this.activeLanguage)
+
+  /**
+   * Changes the active programming language of the editor.
+   * Does not affect syntax highlighting.
+   */
+  private onSetLanguage = (e: Event): void => {
+    const target = e.currentTarget as HTMLSelectElement
+    const language = target.value.toLowerCase()
+    this.activeLanguage = language
+    this.setLanguage.emit(target.value)
+
+    const docState = this.editorRef.state
+    const transaction = docState.update({
+      reconfigure: {
+        [this.languageTag]: [this.getLang(language)],
+      },
+    })
+
+    this.editorRef.dispatch(transaction)
+  }
 
   /**
    * Function to be evaluated over the contents of the editor.
@@ -169,15 +211,15 @@ export class Editor {
 
     const extensions: Extension[] = [
       history(),
-      autocompletion(),
+      autocompletion({ override: [completeAnyWord] }),
       bracketMatching(),
       closeBrackets(),
-      defaultHighlighter,
-      python(),
+      Prec.fallback(defaultHighlightStyle),
+      tagExtension(this.languageTag, this.languageSyntax),
       drawSelection(),
       EditorState.allowMultipleSelections.of(true),
       highlightSpecialChars(),
-      keymap([
+      keymap.of([
         ...defaultKeymap,
         ...commentKeymap,
         ...closeBracketsKeymap,
@@ -296,7 +338,7 @@ export class Editor {
           <menu>
             <label aria-label="Programming Language">
               <stencila-icon icon="terminal"></stencila-icon>
-              <select onChange={this.setLanguage}>
+              <select onChange={this.onSetLanguage}>
                 {this.languageCapabilities.map((language) => (
                   <option
                     value={language.toLowerCase()}
