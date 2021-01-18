@@ -31,6 +31,8 @@
     "prepublishOnly": "node ./scripts/prepare.mjs && npm run build"
   },
   "devDependencies": {
+    "@codemirror/legacy-modes": "^0.17.1",
+    "@codemirror/stream-parser": "^0.17.1",
     "@fullhuman/postcss-purgecss": "2.3.0",
     "@stencil/core": "2.3.0",
     "@stencil/postcss": "1.0.1",

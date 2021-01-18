@@ -11,8 +11,11 @@ import { lineNumbers } from '@codemirror/gutter'
 import { defaultHighlightStyle } from '@codemirror/highlight'
 import { history, historyKeymap } from '@codemirror/history'
 import { python } from '@codemirror/lang-python'
+import { r } from '@codemirror/legacy-modes/mode/r'
+import { shell } from '@codemirror/legacy-modes/mode/shell'
 import { bracketMatching } from '@codemirror/matchbrackets'
 import { EditorState, Extension, Prec, tagExtension } from '@codemirror/state'
+import { StreamLanguage } from '@codemirror/stream-parser'
 import {
   Command,
   drawSelection,
@@ -98,9 +101,38 @@ export class Editor {
   private readOnlyTag = Symbol('readOnly')
 
   /**
+   * Programming language of the Editor
+   */
+  // eslint-disable-next-line @stencil/strict-mutable
+  @Prop({ mutable: true, reflect: true })
+  public activeLanguage: string =
+    this.languageCapabilities[0]?.toLowerCase() ?? ''
+
+  /**
    * Event emitted when the language of the editor is changed.
    */
   @Event() setLanguage: EventEmitter<string | undefined>
+
+  private getLang = (language: string) => {
+    switch (language) {
+      case 'r': {
+        return StreamLanguage.define(r)
+      }
+      case 'bash':
+      case 'shell':
+      case 'sh': {
+        return StreamLanguage.define(shell)
+      }
+      case 'python':
+      default: {
+        return python()
+      }
+    }
+  }
+
+  // Mutable CodeMirror states need to be "tagged". @see https://codemirror.net/6/docs/ref/#state.tagExtension
+  private languageTag = Symbol('language')
+  private languageSyntax = this.getLang(this.activeLanguage)
 
   /**
    * Changes the active programming language of the editor.
@@ -108,17 +140,19 @@ export class Editor {
    */
   private onSetLanguage = (e: Event): void => {
     const target = e.currentTarget as HTMLSelectElement
-    this.activeLanguage = target.value.toLowerCase()
+    const language = target.value.toLowerCase()
+    this.activeLanguage = language
     this.setLanguage.emit(target.value)
-  }
 
-  /**
-   * Programming language of the Editor
-   */
-  // eslint-disable-next-line @stencil/strict-mutable
-  @Prop({ mutable: true, reflect: true })
-  public activeLanguage: string =
-    this.languageCapabilities[0]?.toLowerCase() ?? ''
+    const docState = this.editorRef.state
+    const transaction = docState.update({
+      reconfigure: {
+        [this.languageTag]: [this.getLang(language)],
+      },
+    })
+
+    this.editorRef.dispatch(transaction)
+  }
 
   /**
    * Function to be evaluated over the contents of the editor.
@@ -181,7 +215,7 @@ export class Editor {
       bracketMatching(),
       closeBrackets(),
       Prec.fallback(defaultHighlightStyle),
-      python(),
+      tagExtension(this.languageTag, this.languageSyntax),
       drawSelection(),
       EditorState.allowMultipleSelections.of(true),
       highlightSpecialChars(),
