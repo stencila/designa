@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://github.com/stencila/designa/compare/@stencila/components@0.26.8...@stencila/components@0.27.0) (2021-01-18)
+
+
+### Bug Fixes
+
+* **Editor:** Change highlighter/syntax when changing language ([84f511f](https://github.com/stencila/designa/commit/84f511f150786bbfdd6524c4dfecbec2ecbc2f00))
+* **Editor:** Change prop to event to fix StencilJS warning ([3094658](https://github.com/stencila/designa/commit/30946584d4596c401181218ebd24250dc362ff90))
+* **Editor:** Update CodeMirror dependencies ([8e95e42](https://github.com/stencila/designa/commit/8e95e42d6aface946fdf7db790ba17eb2b0f3d88))
+
+
+### Features
+
+* **Editor:** Populate autocompletion with document contents ([ec63677](https://github.com/stencila/designa/commit/ec63677898c5e0e4789ad35e48d226a817b05987))
+
+
+
+
+
 ## [0.26.8](https://github.com/stencila/designa/compare/@stencila/components@0.26.7...@stencila/components@0.26.8) (2021-01-06)
 
 **Note:** Version bump only for package @stencila/components
