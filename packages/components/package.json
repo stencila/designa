@@ -31,14 +31,14 @@
     "prepublishOnly": "node ./scripts/prepare.mjs && npm run build"
   },
   "devDependencies": {
-    "@codemirror/legacy-modes": "^0.17.1",
-    "@codemirror/stream-parser": "^0.17.1",
+    "@codemirror/legacy-modes": "0.17.1",
+    "@codemirror/stream-parser": "0.17.1",
     "@fullhuman/postcss-purgecss": "2.3.0",
     "@stencil/core": "2.3.0",
     "@stencil/postcss": "1.0.1",
     "@stencila/schema": "0.47.2",
     "@types/feather-icons": "4.7.0",
-    "@types/jest": "26.0.19",
+    "@types/jest": "26.0.20",
     "@types/plotly.js": "1.54.7",
     "@types/pluralize": "0.0.29",
     "@types/puppeteer": "3.0.5",
