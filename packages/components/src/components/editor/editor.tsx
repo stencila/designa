@@ -211,7 +211,8 @@ export class Editor {
 
     const extensions: Extension[] = [
       history(),
-      autocompletion({ override: [completeAnyWord] }),
+      autocompletion(),
+      EditorState.languageData.of(() => [{ autocomplete: completeAnyWord }]),
       bracketMatching(),
       closeBrackets(),
       Prec.fallback(defaultHighlightStyle),
