@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.2](https://github.com/stencila/designa/compare/@stencila/components@0.27.1...@stencila/components@0.27.2) (2021-01-19)
+
+
+### Bug Fixes
+
+* **Editor:** Augment default language completion w/ words from document ([3ac73ef](https://github.com/stencila/designa/commit/3ac73efd7d8a17439c216bde3f0b48c9e6a07461))
+
+
+
+
+
 ## [0.27.1](https://github.com/stencila/designa/compare/@stencila/components@0.27.0...@stencila/components@0.27.1) (2021-01-18)
 
 **Note:** Version bump only for package @stencila/components
