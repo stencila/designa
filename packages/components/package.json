@@ -39,7 +39,7 @@
     "@types/jest": "26.0.20",
     "@types/plotly.js": "1.54.7",
     "@types/pluralize": "0.0.29",
-    "@types/puppeteer": "3.0.5",
+    "@types/puppeteer": "5.4.2",
     "@types/webfontloader": "1.6.32",
     "chokidar-cli": "2.1.0",
     "fp-ts": "2.9.3",
