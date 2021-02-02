@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.6](https://github.com/stencila/designa/compare/@stencila/components@0.27.5...@stencila/components@0.27.6) (2021-02-02)
+
+
+### Bug Fixes
+
+* **CodeExpression:** Avoid raw rendering of escaped HTML characters ([41d9190](https://github.com/stencila/designa/commit/41d9190546e180c68f53a492ba832bb448c1a59c))
+
+
+
+
+
 ## [0.27.5](https://github.com/stencila/designa/compare/@stencila/components@0.27.4...@stencila/components@0.27.5) (2021-02-02)
 
 **Note:** Version bump only for package @stencila/components
