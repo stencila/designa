@@ -76,7 +76,7 @@ export namespace Components {
         "minimal": boolean;
         /**
           * Relationship of the link
-          * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
+          * @see https ://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
          */
         "rel"?: string;
         /**
@@ -119,7 +119,7 @@ export namespace Components {
         "isCodeVisible": boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
-          * @see https://codemirror.net/6/docs/ref/#keymap
+          * @see https ://codemirror.net/6/docs/ref/#keymap
          */
         "keymap": Keymap[];
         /**
@@ -196,7 +196,7 @@ export namespace Components {
         "getContents": () => Promise<EditorContents>;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
-          * @see https://codemirror.net/6/docs/ref/#keymap
+          * @see https ://codemirror.net/6/docs/ref/#keymap
          */
         "keymap": Keymap[];
         /**
@@ -631,7 +631,7 @@ declare namespace LocalJSX {
         "minimal"?: boolean;
         /**
           * Relationship of the link
-          * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
+          * @see https ://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
          */
         "rel"?: string;
         /**
@@ -666,7 +666,7 @@ declare namespace LocalJSX {
         "isCodeVisible"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
-          * @see https://codemirror.net/6/docs/ref/#keymap
+          * @see https ://codemirror.net/6/docs/ref/#keymap
          */
         "keymap"?: Keymap[];
         /**
@@ -735,7 +735,7 @@ declare namespace LocalJSX {
         "foldGutter"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
-          * @see https://codemirror.net/6/docs/ref/#keymap
+          * @see https ://codemirror.net/6/docs/ref/#keymap
          */
         "keymap"?: Keymap[];
         /**

@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "2.3.0",
-    "@stencil/core": "2.3.0",
+    "@stencil/core": "2.4.0",
     "@stencil/postcss": "1.0.1",
     "@stencila/schema": "0.47.2",
     "@types/feather-icons": "4.7.0",
@@ -42,7 +42,7 @@
     "@types/puppeteer": "5.4.2",
     "@types/webfontloader": "1.6.32",
     "chokidar-cli": "2.1.0",
-    "fp-ts": "2.9.3",
+    "fp-ts": "2.9.4",
     "jest": "26.6.3",
     "jest-cli": "26.6.3",
     "postcss-custom-properties": "9.2.0",
