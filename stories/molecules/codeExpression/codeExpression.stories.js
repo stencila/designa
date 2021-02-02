@@ -95,3 +95,16 @@ export const codeExpressionWithNoOutput = () => html`
     followed by some more text.
   </p>
 `
+
+export const codeExpressionWithSymbolsInOutput = () => html`
+  <p>
+    This is a paragraph with a code expresssion inside it
+    <stencila-code-expression
+      data-collapsed="false"
+      itemtype="stencila:CodeChunk"
+      ><code slot="text">x * y</code
+      ><output slot="output">&lt;0.001</output></stencila-code-expression
+    >
+    followed by some more text.
+  </p>
+`

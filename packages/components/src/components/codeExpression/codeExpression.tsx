@@ -90,9 +90,8 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
 
   // Use `innerHTML` for checking output presence to account for non-text nodes such as images.
   private outputExists = (): boolean => {
-    const contents = this.selectOutputSlot()?.innerHTML.trim()
-    this.output = contents
-    return contents === ''
+    this.output = this.selectOutputSlot()?.textContent ?? ''
+    return this.selectOutputSlot()?.innerHTML.trim() === ''
   }
 
   private selectTextSlot = (): HTMLElement | null =>
