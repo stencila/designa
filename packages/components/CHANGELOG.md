@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.7](https://github.com/stencila/designa/compare/@stencila/components@0.27.6...@stencila/components@0.27.7) (2021-02-03)
+
+**Note:** Version bump only for package @stencila/components
+
+
+
+
+
 ## [0.27.6](https://github.com/stencila/designa/compare/@stencila/components@0.27.5...@stencila/components@0.27.6) (2021-02-02)
 
 
