@@ -20,7 +20,7 @@ stencila-node-list {
   }
 
   .emptyContentMessage {
-    @apply text-neutral-600;
+    @apply font-mono text-neutral-600 text-base;
   }
 
   stencila-code-error {
@@ -40,23 +40,15 @@ stencila-node-list {
       @apply mt-0;
     }
 
-    &:last-child {
-      @apply mb-0;
-    }
-
     pre {
       @apply p-0 m-0 border-0;
     }
 
-    img {
-      @apply border-b-0 border-l-0 border-r-0;
-    }
-
     & > *:not(figcaption) {
-      @apply pt-3 my-3 border-0 border-t border-dashed border-neutral-300;
+      @apply pt-3 my-3;
 
       &:first-child {
-        @apply pt-0 mt-0 border-t-0;
+        @apply pt-0 mt-0;
       }
 
       &:last-child {

@@ -25,13 +25,17 @@ stencila-editor {
   }
 
   .editor {
-    @apply flex-grow max-w-full overflow-auto font-mono cursor-text;
+    @apply flex-grow max-w-full overflow-auto font-mono cursor-text font-mono text-sm;
   }
 
   &::slotted(.editorContainer) {
-    .codemirror-content *,
-    .gutterElement * {
-      @apply font-mono text-sm;
+    .cm-wrap,
+    .cm-wrap * {
+      @apply font-mono;
+    }
+
+    .cm-wrap {
+      @apply leading-normal;
     }
 
     .codemirror-focused {
@@ -44,6 +48,17 @@ stencila-editor {
 
     .cm-gutters {
       background-color: var(--line-number-background);
+    }
+
+    .cm-tooltip.cm-tooltip-autocomplete > ul > li {
+      font-size: 90%;
+      padding-bottom: 2px;
+      padding-top: 2px;
+    }
+
+    .cm-completionIcon {
+      min-width: 1.375em;
+      min-width: 2ch;
     }
   }
 
