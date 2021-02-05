@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.18.12...@stencila/style-stencila@0.19.0) (2021-02-05)
+
+
+### Bug Fixes
+
+* **Editor:** Improve editor text readability and default font families ([91ad396](https://github.com/stencila/style/commit/91ad39635ecfa9e3ca93a1d5f7eab6360748a967))
+
+
+### Features
+
+* **Node List:** Remove divider lines between node list items ([47ffcd8](https://github.com/stencila/style/commit/47ffcd8e13d0137750f32766c0007408fb8bf6d3))
+
+
+
+
+
 ## [0.18.12](https://github.com/stencila/style/compare/@stencila/style-stencila@0.18.11...@stencila/style-stencila@0.18.12) (2021-01-18)
 
 **Note:** Version bump only for package @stencila/style-stencila
