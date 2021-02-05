@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.28.0](https://github.com/stencila/designa/compare/@stencila/components@0.27.8...@stencila/components@0.28.0) (2021-02-05)
+
+
+### Bug Fixes
+
+* **Deps:** Update dependencies ([c62f459](https://github.com/stencila/designa/commit/c62f45968e24115fe0aa470cc494a487c2983f79))
+
+
+### Features
+
+* **ToC:** Remove Table of Contents component ([c15d6c0](https://github.com/stencila/designa/commit/c15d6c06789c3729cdcd1f9a3d72a6c1bc996531))
+
+
+
+
+
 ## [0.27.8](https://github.com/stencila/designa/compare/@stencila/components@0.27.7...@stencila/components@0.27.8) (2021-02-05)
 
 **Note:** Version bump only for package @stencila/components

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.19.0...@stencila/style-stencila@0.20.0) (2021-02-05)
+
+
+### Features
+
+* **ToC:** Remove Table of Contents component ([c15d6c0](https://github.com/stencila/style/commit/c15d6c06789c3729cdcd1f9a3d72a6c1bc996531))
+
+
+
+
+
 # [0.19.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.18.12...@stencila/style-stencila@0.19.0) (2021-02-05)
 
 

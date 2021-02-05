@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/stencila/style/compare/@stencila/style-material@0.11.25...@stencila/style-material@0.12.0) (2021-02-05)
+
+
+### Features
+
+* **ToC:** Remove Table of Contents component ([c15d6c0](https://github.com/stencila/style/commit/c15d6c06789c3729cdcd1f9a3d72a6c1bc996531))
+
+
+
+
+
 ## [0.11.25](https://github.com/stencila/style/compare/@stencila/style-material@0.11.24...@stencila/style-material@0.11.25) (2021-01-18)
 
 **Note:** Version bump only for package @stencila/style-material
