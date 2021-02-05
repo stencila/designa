@@ -7,7 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Colors } from "./types";
 import { IconNames } from "./components/icon/iconNames";
-import { CodeChunk, CodeExpression, Collection, Datatable, ImageObject, Node } from "@stencila/schema";
+import { CodeChunk, CodeExpression, Datatable, ImageObject, Node } from "@stencila/schema";
 import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
 import { Config, Data, Layout } from "plotly.js";
@@ -361,16 +361,6 @@ export namespace Components {
          */
         "type": ToastType;
     }
-    interface StencilaToc {
-        /**
-          * Where to grab the headings to build the table of contents.
-         */
-        "contentSelector": string;
-        /**
-          * Which headings to grab inside of the contentSelector element.
-         */
-        "headingSelector": string;
-    }
     interface StencilaToolbar {
         /**
           * The background fill color of the Navbar
@@ -388,12 +378,6 @@ export namespace Components {
         "text": string;
     }
     interface StencilaTooltipElement {
-    }
-    interface StencilaVerticalNav {
-        /**
-          * Collection schema from which to generate a table of contents
-         */
-        "collection"?: Collection;
     }
 }
 declare global {
@@ -511,12 +495,6 @@ declare global {
         prototype: HTMLStencilaToastElement;
         new (): HTMLStencilaToastElement;
     };
-    interface HTMLStencilaTocElement extends Components.StencilaToc, HTMLStencilElement {
-    }
-    var HTMLStencilaTocElement: {
-        prototype: HTMLStencilaTocElement;
-        new (): HTMLStencilaTocElement;
-    };
     interface HTMLStencilaToolbarElement extends Components.StencilaToolbar, HTMLStencilElement {
     }
     var HTMLStencilaToolbarElement: {
@@ -534,12 +512,6 @@ declare global {
     var HTMLStencilaTooltipElementElement: {
         prototype: HTMLStencilaTooltipElementElement;
         new (): HTMLStencilaTooltipElementElement;
-    };
-    interface HTMLStencilaVerticalNavElement extends Components.StencilaVerticalNav, HTMLStencilElement {
-    }
-    var HTMLStencilaVerticalNavElement: {
-        prototype: HTMLStencilaVerticalNavElement;
-        new (): HTMLStencilaVerticalNavElement;
     };
     interface HTMLElementTagNameMap {
         "stencila-action-menu": HTMLStencilaActionMenuElement;
@@ -561,11 +533,9 @@ declare global {
         "stencila-tab": HTMLStencilaTabElement;
         "stencila-tab-list": HTMLStencilaTabListElement;
         "stencila-toast": HTMLStencilaToastElement;
-        "stencila-toc": HTMLStencilaTocElement;
         "stencila-toolbar": HTMLStencilaToolbarElement;
         "stencila-tooltip": HTMLStencilaTooltipElement;
         "stencila-tooltip-element": HTMLStencilaTooltipElementElement;
-        "stencila-vertical-nav": HTMLStencilaVerticalNavElement;
     }
 }
 declare namespace LocalJSX {
@@ -904,16 +874,6 @@ declare namespace LocalJSX {
          */
         "type"?: ToastType;
     }
-    interface StencilaToc {
-        /**
-          * Where to grab the headings to build the table of contents.
-         */
-        "contentSelector"?: string;
-        /**
-          * Which headings to grab inside of the contentSelector element.
-         */
-        "headingSelector"?: string;
-    }
     interface StencilaToolbar {
         /**
           * The background fill color of the Navbar
@@ -931,12 +891,6 @@ declare namespace LocalJSX {
         "text": string;
     }
     interface StencilaTooltipElement {
-    }
-    interface StencilaVerticalNav {
-        /**
-          * Collection schema from which to generate a table of contents
-         */
-        "collection"?: Collection;
     }
     interface IntrinsicElements {
         "stencila-action-menu": StencilaActionMenu;
@@ -958,11 +912,9 @@ declare namespace LocalJSX {
         "stencila-tab": StencilaTab;
         "stencila-tab-list": StencilaTabList;
         "stencila-toast": StencilaToast;
-        "stencila-toc": StencilaToc;
         "stencila-toolbar": StencilaToolbar;
         "stencila-tooltip": StencilaTooltip;
         "stencila-tooltip-element": StencilaTooltipElement;
-        "stencila-vertical-nav": StencilaVerticalNav;
     }
 }
 export { LocalJSX as JSX };
@@ -988,11 +940,9 @@ declare module "@stencil/core" {
             "stencila-tab": LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
             "stencila-tab-list": LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;
             "stencila-toast": LocalJSX.StencilaToast & JSXBase.HTMLAttributes<HTMLStencilaToastElement>;
-            "stencila-toc": LocalJSX.StencilaToc & JSXBase.HTMLAttributes<HTMLStencilaTocElement>;
             "stencila-toolbar": LocalJSX.StencilaToolbar & JSXBase.HTMLAttributes<HTMLStencilaToolbarElement>;
             "stencila-tooltip": LocalJSX.StencilaTooltip & JSXBase.HTMLAttributes<HTMLStencilaTooltipElement>;
             "stencila-tooltip-element": LocalJSX.StencilaTooltipElement & JSXBase.HTMLAttributes<HTMLStencilaTooltipElementElement>;
-            "stencila-vertical-nav": LocalJSX.StencilaVerticalNav & JSXBase.HTMLAttributes<HTMLStencilaVerticalNavElement>;
         }
     }
 }
