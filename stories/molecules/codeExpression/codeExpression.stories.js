@@ -78,8 +78,8 @@ export const codeExpressionWithAnImageOutput = () => html`
     >
       <code slot="text">x * y - 128 * (212 - 2)</code>
       <output slot="output"
-        ><img src="https://via.placeholder.com/150x200"</output
-      > </stencila-code-expression
+        ><img src="https://via.placeholder.com/150x200"
+      /></output> </stencila-code-expression
     >.
   </p>
 `

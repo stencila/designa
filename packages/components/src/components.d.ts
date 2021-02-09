@@ -147,7 +147,7 @@ export namespace Components {
          */
         "execute": () => Promise<CodeExpression>;
         /**
-          * A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`.
+          * A callback function to be called with the value of the `CodeExpression` node when executing the `CodeExpression`.
          */
         "executeHandler"?: (
     codeExpression: CodeExpression
@@ -664,7 +664,7 @@ declare namespace LocalJSX {
     }
     interface StencilaCodeExpression {
         /**
-          * A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`.
+          * A callback function to be called with the value of the `CodeExpression` node when executing the `CodeExpression`.
          */
         "executeHandler"?: (
     codeExpression: CodeExpression

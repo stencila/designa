@@ -33,7 +33,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   @Element() private el: HTMLStencilaCodeExpressionElement
 
   /**
-   * A callback function to be called with the value of the `CodeExpression` node when execting the `CodeExpression`.
+   * A callback function to be called with the value of the `CodeExpression` node when executing the `CodeExpression`.
    */
   @Prop() public executeHandler?: (
     codeExpression: CodeExpression
@@ -45,7 +45,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   @Prop()
   public programmingLanguage: string
 
-  @State() output: CodeExpression['output']
+  @State() output: CodeExpression['output'] | HTMLElement
 
   @State() codeErrors: CodeExpression['errors']
 
@@ -58,7 +58,18 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED' = 'INITIAL'
 
   componentDidLoad(): void {
-    this.isOutputEmpty = this.outputExists()
+    // Checking output list to account for non-text nodes such as images.
+    const outputSlot = this.el.querySelector(`[slot=${slots.output}]`)
+    const output = (outputSlot?.childNodes ?? [])[0]
+
+    this.output =
+      output === undefined
+        ? ''
+        : output instanceof Text
+        ? output.textContent
+        : output
+
+    this.isOutputEmpty = output === undefined
   }
 
   @Listen('collapseAllCode', { target: 'window' })
@@ -88,12 +99,6 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   private toggleCodeVisibility = (): boolean =>
     (this.isCodeVisible = !this.isCodeVisible)
 
-  // Use `innerHTML` for checking output presence to account for non-text nodes such as images.
-  private outputExists = (): boolean => {
-    this.output = this.selectOutputSlot()?.textContent ?? ''
-    return this.selectOutputSlot()?.innerHTML.trim() === ''
-  }
-
   private selectTextSlot = (): HTMLElement | null =>
     this.el.querySelector(`.${slots.text}`)
 
@@ -101,9 +106,6 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     const slot = this.selectTextSlot()
     return slot?.textContent ?? ''
   }
-
-  private selectOutputSlot = (): HTMLElement | null =>
-    this.el.querySelector(`[slot=${slots.output}]`)
 
   private handleKeyDown = (event: KeyboardEvent): void => {
     if (event.key === 'Enter' && event.shiftKey) {
