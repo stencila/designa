@@ -1,11 +1,15 @@
 import { FunctionalComponent, h, VNode } from '@stencil/core'
 import { isA, isCode, isPrimitive, Node } from '@stencila/schema'
 
-const schemNodeHTMLRegExp = /itemtype=".+?"/
+const schemaNodeHTMLRegExp = /itemtype=".+?"/
 
 const renderNode = (node: Node): VNode => {
-  if (typeof node === 'string' && schemNodeHTMLRegExp.test(node)) {
+  if (typeof node === 'string' && schemaNodeHTMLRegExp.test(node)) {
     return <span innerHTML={node}></span>
+  }
+
+  if (node instanceof HTMLElement) {
+    return <span innerHTML={node.outerHTML}></span>
   }
 
   if (isPrimitive(node)) {
