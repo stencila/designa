@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.1](https://github.com/stencila/style/compare/@stencila/style-stencila@0.20.0...@stencila/style-stencila@0.20.1) (2021-02-09)
+
+
+### Bug Fixes
+
+* **Code Expression:** Improve whitespace handling when rendering outputs ([436db80](https://github.com/stencila/style/commit/436db80f989a65fb22399807801c1cf33d663865))
+
+
+
+
+
 # [0.20.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.19.0...@stencila/style-stencila@0.20.0) (2021-02-05)
 
 

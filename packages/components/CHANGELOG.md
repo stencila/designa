@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.1](https://github.com/stencila/designa/compare/@stencila/components@0.28.0...@stencila/components@0.28.1) (2021-02-09)
+
+
+### Bug Fixes
+
+* **Code Expression:** Fix rendering of HTML elements in outputs ([bb32be8](https://github.com/stencila/designa/commit/bb32be87a67a0ca473a9fec50b1f2143979fccb4))
+
+
+
+
+
 # [0.28.0](https://github.com/stencila/designa/compare/@stencila/components@0.27.8...@stencila/components@0.28.0) (2021-02-05)
 
 
