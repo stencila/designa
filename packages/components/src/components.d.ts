@@ -102,17 +102,13 @@ export namespace Components {
          */
         "execute": () => Promise<CodeChunk>;
         /**
-          * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
+          * A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
         /**
           * Returns the `CodeChunk` node with the updated `text` content from the editor.
          */
         "getContents": () => Promise<CodeChunk>;
-        /**
-          * @deprecated Use `isCodeVisible` prop (`is-code-visible` attribute) instead Whether the code section is visible or not
-         */
-        "isCodeCollapsed": boolean;
         /**
           * Whether the code section is visible or not
          */
@@ -623,13 +619,9 @@ declare namespace LocalJSX {
          */
         "autofocus"?: boolean;
         /**
-          * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
+          * A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
-        /**
-          * @deprecated Use `isCodeVisible` prop (`is-code-visible` attribute) instead Whether the code section is visible or not
-         */
-        "isCodeCollapsed"?: boolean;
         /**
           * Whether the code section is visible or not
          */
@@ -643,6 +635,10 @@ declare namespace LocalJSX {
           * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.
          */
         "onSetAllCodeVisibility"?: (event: CustomEvent<any>) => void;
+        /**
+          * Trigger a global DOM event to set the layout of all `CodeChunk` component. Can be set to either show the editor and outputs side by side or stacked vertically.
+         */
+        "onSetEditorLayout"?: (event: CustomEvent<any>) => void;
         /**
           * Programming language of the CodeChunk
          */

@@ -43,7 +43,9 @@ export class ActionMenu {
   private calculateWidth = () => {
     if (this.actionContainerRef !== null && this.isTransitioning === false) {
       this.width = 'auto'
+
       const width = this.actionContainerRef.getBoundingClientRect().width
+
       this.width = `${width}px`
     }
   }
@@ -91,12 +93,26 @@ export class ActionMenu {
   public render() {
     return (
       <nav>
+        <span class="persistentActions">
+          <slot name={slots.persistentActions} />
+        </span>
+
         <span
           class={{
             secondaryActions: true,
             hidden: this.hasSecondaryActions,
           }}
         >
+          <stencila-button
+            onClick={this.toggleActionMenu}
+            icon="more"
+            color="key"
+            minimal={true}
+            size="xsmall"
+            iconOnly={true}
+            ariaLabel="Toggle Action Menu"
+          ></stencila-button>
+
           <span
             class={{
               actionContainer: true,
@@ -107,20 +123,6 @@ export class ActionMenu {
           >
             <slot />
           </span>
-
-          <stencila-button
-            onClick={this.toggleActionMenu}
-            icon="more"
-            color="key"
-            minimal={true}
-            size="xsmall"
-            iconOnly={true}
-            ariaLabel="Toggle Action Menu"
-          ></stencila-button>
-        </span>
-
-        <span class="persistentActions">
-          <slot name={slots.persistentActions} />
         </span>
       </nav>
     )
