@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/stencila/designa/compare/@stencila/components@0.28.2...@stencila/components@0.29.0) (2021-02-15)
+
+
+### Features
+
+* **Code Chunk:** Ability to change between side by side or stacked view ([8f9be74](https://github.com/stencila/designa/commit/8f9be746f4cf3f475ee3dca87f7c2591b2d0f6e4))
+
+
+
+
+
 ## [0.28.2](https://github.com/stencila/designa/compare/@stencila/components@0.28.1...@stencila/components@0.28.2) (2021-02-11)
 
 **Note:** Version bump only for package @stencila/components

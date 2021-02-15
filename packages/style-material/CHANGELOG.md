@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.2](https://github.com/stencila/style/compare/@stencila/style-material@0.12.1...@stencila/style-material@0.12.2) (2021-02-15)
+
+
+### Bug Fixes
+
+* **Tooltip:** Ensure the tooltip width doesn't become too long ([2cab3a4](https://github.com/stencila/style/commit/2cab3a4fabe5c7102e0c4ed7317b4b47a95fd4fb))
+
+
+
+
+
 ## [0.12.1](https://github.com/stencila/style/compare/@stencila/style-material@0.12.0...@stencila/style-material@0.12.1) (2021-02-11)
 
 **Note:** Version bump only for package @stencila/style-material

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.20.2...@stencila/style-stencila@0.21.0) (2021-02-15)
+
+
+### Bug Fixes
+
+* **Tooltip:** Ensure the tooltip width doesn't become too long ([2cab3a4](https://github.com/stencila/style/commit/2cab3a4fabe5c7102e0c4ed7317b4b47a95fd4fb))
+
+
+### Features
+
+* **Code Chunk:** Ability to change between side by side or stacked view ([8f9be74](https://github.com/stencila/style/commit/8f9be746f4cf3f475ee3dca87f7c2591b2d0f6e4))
+
+
+
+
+
 ## [0.20.2](https://github.com/stencila/style/compare/@stencila/style-stencila@0.20.1...@stencila/style-stencila@0.20.2) (2021-02-11)
 
 **Note:** Version bump only for package @stencila/style-stencila
