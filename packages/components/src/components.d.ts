@@ -102,17 +102,13 @@ export namespace Components {
          */
         "execute": () => Promise<CodeChunk>;
         /**
-          * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
+          * A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
         /**
           * Returns the `CodeChunk` node with the updated `text` content from the editor.
          */
         "getContents": () => Promise<CodeChunk>;
-        /**
-          * @deprecated Use `isCodeVisible` prop (`is-code-visible` attribute) instead Whether the code section is visible or not
-         */
-        "isCodeCollapsed": boolean;
         /**
           * Whether the code section is visible or not
          */
@@ -623,13 +619,9 @@ declare namespace LocalJSX {
          */
         "autofocus"?: boolean;
         /**
-          * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
+          * A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
-        /**
-          * @deprecated Use `isCodeVisible` prop (`is-code-visible` attribute) instead Whether the code section is visible or not
-         */
-        "isCodeCollapsed"?: boolean;
         /**
           * Whether the code section is visible or not
          */

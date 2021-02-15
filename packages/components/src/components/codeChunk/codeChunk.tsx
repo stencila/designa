@@ -46,22 +46,13 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   public programmingLanguageProp: string
 
   /**
-   * @deprecated Use `isCodeVisible` prop (`is-code-visible` attribute) instead
-   * Whether the code section is visible or not
-   */
-  @Prop({
-    attribute: 'data-collapsed',
-  })
-  public isCodeCollapsed = false
-
-  /**
    * Whether the code section is visible or not
    */
   @Prop()
   public isCodeVisible = false
 
   /**
-   * A callback function to be called with the value of the `CodeChunk` node when execting the `CodeChunk`.
+   * A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`.
    */
   @Prop() public executeHandler?: (codeChunk: CodeChunk) => Promise<CodeChunk>
 
@@ -216,8 +207,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   }
 
   private setCodeVisibility = (e: CodeVisibilityEvent): void => {
-    // TODO: Remove usage of `isCodeCollapsed` once prop is fully deprecated.
-    this.isCodeVisibleState = e.detail.isVisible ?? e.detail.isCodeCollapsed
+    this.isCodeVisibleState = e.detail.isVisible
   }
 
   public render(): HTMLElement {
