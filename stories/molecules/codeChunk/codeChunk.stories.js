@@ -17,12 +17,17 @@ const executeHandler = (t) =>
   delay(() => console.log(t) || { outputs: [t, t, t] })
 
 export const withExecuteHandler = () => html`
-  <stencila-code-chunk .executeHandler=${executeHandler}>
-    <pre slot="text">print(a)</pre>
-    <figure slot="outputs">
-      <pre><output>10</output></pre>
-    </figure>
-  </stencila-code-chunk>
+  <div style="max-width: 900px">
+    <stencila-code-chunk
+      .executeHandler=${executeHandler}
+      .isCodeVisible=${true}
+    >
+      <pre slot="text">print(a)</pre>
+      <figure slot="outputs">
+        <pre><output>10</output></pre>
+      </figure>
+    </stencila-code-chunk>
+  </div>
 `
 
 export const singleCodeChunk = () => html`

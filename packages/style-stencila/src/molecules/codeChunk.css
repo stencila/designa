@@ -33,6 +33,14 @@ stencila-code-chunk {
     @apply p-2 m-0;
     background-color: var(--background);
   }
+
+  .layoutToggle {
+    @apply hidden;
+
+    @screen lg {
+      @apply inline-block;
+    }
+  }
 }
 
 .editorContainer {
@@ -52,16 +60,16 @@ stencila-code-chunk {
 }
 
 @screen lg {
-  :host > div,
-  stencila-code-chunk > div {
+  :host:not(.isStacked) > div,
+  stencila-code-chunk:not(.isStacked) > div {
     @apply flex flex-row items-stretch w-full;
-  }
 
-  .editorContainer {
-    @apply w-1/2 border-b-0 border-r;
-  }
+    .editorContainer {
+      @apply w-1/2 border-b-0 border-r;
+    }
 
-  stencila-node-list {
-    @apply flex-grow w-1/2;
+    stencila-node-list {
+      @apply flex-grow w-1/2;
+    }
   }
 }

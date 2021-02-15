@@ -17,9 +17,10 @@
 
 ## Events
 
-| Event                  | Description                                                                                                                           | Type               |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `setAllCodeVisibility` | Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible. | `CustomEvent<any>` |
+| Event                  | Description                                                                                                                                                     | Type               |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `setAllCodeVisibility` | Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.                           | `CustomEvent<any>` |
+| `setEditorLayout`      | Trigger a global DOM event to set the layout of all `CodeChunk` component. Can be set to either show the editor and outputs side by side or stacked vertically. | `CustomEvent<any>` |
 
 
 ## Methods

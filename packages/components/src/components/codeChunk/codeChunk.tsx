@@ -73,6 +73,8 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
 
   @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED' = 'INITIAL'
 
+  @State() isStacked = true
+
   @State() outputs: CodeChunk['outputs']
 
   @State() codeErrors: CodeChunk['errors']
@@ -95,6 +97,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   }
 
   private toggleCodeVisibility = (e: MouseEvent): void => {
+    e.preventDefault()
     if (e.shiftKey) {
       this.toggleAllCodeVisibility()
     } else {
@@ -119,6 +122,42 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
 
     this.executeCodeState = 'RESOLVED'
     return node
+  }
+
+  private setEditorLayoutHandler = (isStacked: boolean) => {
+    this.isStacked = isStacked
+  }
+
+  /**
+   * Trigger a global DOM event to set the layout of all `CodeChunk` component.
+   * Can be set to either show the editor and outputs side by side or stacked vertically.
+   */
+  @Event({
+    eventName: 'setEditorLayout',
+  })
+  public setEditorLayout: EventEmitter
+
+  @Listen('setEditorLayout', { target: 'window' })
+  onSetEditorLayout(event: { detail: { isStacked: boolean } }): void {
+    this.setEditorLayoutHandler(event.detail.isStacked)
+  }
+
+  private toggleEditorLayout = (e: MouseEvent) => {
+    e.preventDefault()
+    if (e.shiftKey) {
+      this.setEditorLayout.emit({ isStacked: !this.isStacked })
+    } else {
+      this.setEditorLayoutHandler(!this.isStacked)
+    }
+  }
+
+  componentWillLoad(): void {
+    /** Get rendered width of component to decide whether to stack the editor and outputs or not.
+     * We can’t use media queries as the component is not always full width of the viewport, and depends on the parent element width.
+     */
+    const minWidth = 1200 // A non-scientific value below which the side-by-side layout looks too narrow.
+    console.log(this.el.getBoundingClientRect().width)
+    this.isStacked = this.el.getBoundingClientRect().width < minWidth
   }
 
   componentDidLoad(): void {
@@ -186,9 +225,10 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
       <Host
         class={{
           isCodeVisible: this.isCodeVisibleState,
+          isStacked: this.isStacked,
         }}
       >
-        <stencila-action-menu expandable={true}>
+        <stencila-action-menu>
           {this.executeHandler !== undefined && (
             <stencila-button
               icon="play"
@@ -213,8 +253,26 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
             iconOnly={true}
             size="xsmall"
             slot="persistentActions"
-            tooltip={`${this.isCodeVisibleState ? 'Hide' : 'Show'} Code`}
+            tooltip={`${
+              this.isCodeVisibleState ? 'Hide' : 'Show'
+            } Code\nShift click to set for all code blocks`}
           ></stencila-button>
+
+          {this.isCodeVisibleState && (
+            <stencila-button
+              minimal={true}
+              color="key"
+              class="layoutToggle"
+              onClick={this.toggleEditorLayout}
+              icon={this.isStacked ? 'layout-column' : 'layout-row'}
+              iconOnly={true}
+              size="xsmall"
+              slot="persistentActions"
+              tooltip={`${
+                this.isStacked ? 'Side by side' : 'Stacked'
+              } view\nShift click to set for all code blocks`}
+            ></stencila-button>
+          )}
         </stencila-action-menu>
 
         <div>

@@ -29,7 +29,8 @@
     }
   }
 
-  stencila-button {
+  stencila-button,
+  ::slotted(stencila-button) {
     @apply inline-block;
   }
 

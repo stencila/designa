@@ -644,6 +644,10 @@ declare namespace LocalJSX {
          */
         "onSetAllCodeVisibility"?: (event: CustomEvent<any>) => void;
         /**
+          * Trigger a global DOM event to set the layout of all `CodeChunk` component. Can be set to either show the editor and outputs side by side or stacked vertically.
+         */
+        "onSetEditorLayout"?: (event: CustomEvent<any>) => void;
+        /**
           * Programming language of the CodeChunk
          */
         "programmingLanguageProp"?: string;
