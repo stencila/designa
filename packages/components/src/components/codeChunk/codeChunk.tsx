@@ -147,7 +147,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
      * We can’t use media queries as the component is not always full width of the viewport, and depends on the parent element width.
      */
     const minWidth = 1200 // A non-scientific value below which the side-by-side layout looks too narrow.
-    console.log(this.el.getBoundingClientRect().width)
     this.isStacked = this.el.getBoundingClientRect().width < minWidth
   }
 
