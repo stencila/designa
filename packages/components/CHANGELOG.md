@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.1](https://github.com/stencila/designa/compare/@stencila/components@0.29.0...@stencila/components@0.29.1) (2021-02-17)
+
+
+### Bug Fixes
+
+* **Toast:** Avoid triggering duplicate notifications in quick succession ([1971e18](https://github.com/stencila/designa/commit/1971e188bee6289d72317478f1cbb4c8ec3a9543))
+
+
+
+
+
 # [0.29.0](https://github.com/stencila/designa/compare/@stencila/components@0.28.2...@stencila/components@0.29.0) (2021-02-15)
 
 
