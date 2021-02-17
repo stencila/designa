@@ -71,6 +71,7 @@
     "@stencila/style-stencila": "0.21.0",
     "animate-presence": "^0.2.1",
     "feather-icons": "^4.28.0",
+    "mem": "^8.0.0",
     "pluralize": "^8.0.0",
     "webfontloader": "^1.6.28",
     "wretch": "^1.7.4"

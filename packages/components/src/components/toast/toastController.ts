@@ -1,3 +1,5 @@
+import mem from 'mem'
+
 export enum ToastTypes {
   info = 'info',
   success = 'success',
@@ -54,13 +56,28 @@ interface ToastController {
 // Base Toast controller function for managing the presentation of `stencila-toast` components
 export const toastController = (
   baseOptions: ToastOptions = {}
-): ToastController => ({
-  present: (message, options = {}): void => {
+): ToastController => {
+  const present = (
+    message: string,
+    options: ToastOptions | undefined = {}
+  ): void => {
     const el = document.createElement('stencila-toast')
     el.type = options.type ?? baseOptions.type ?? ToastTypes.info
     el.position =
       options.position ?? baseOptions.position ?? ToastPositions.topCenter
     el.innerText = message
     init(baseOptions).append(el)
-  },
-})
+  }
+
+  /** Memoize the notification function based on the message string and options to avoid showing
+   * duplicate notifications in quick succession.
+   */
+  const memoizedPresent = mem(present, {
+    cacheKey: JSON.stringify,
+    maxAge: 150,
+  })
+
+  return {
+    present: memoizedPresent,
+  }
+}
