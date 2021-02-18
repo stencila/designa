@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.2](https://github.com/stencila/designa/compare/@stencila/components@0.29.1...@stencila/components@0.29.2) (2021-02-18)
+
+
+### Bug Fixes
+
+* **Deps:** Update dependencies ([ffe049c](https://github.com/stencila/designa/commit/ffe049c0d50dec5939f9555c72afde0e9ee1159d))
+
+
+
+
+
 ## [0.29.1](https://github.com/stencila/designa/compare/@stencila/components@0.29.0...@stencila/components@0.29.1) (2021-02-17)
 
 
