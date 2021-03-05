@@ -104,6 +104,14 @@
     "extends": [
       "@stencila",
       ":pinOnlyDevDependencies"
+    ],
+    "packageRules": [
+      {
+        "matchSourceUrlPrefixes": [
+          "https://github.com/codemirror/"
+        ],
+        "groupName": "CodeMirror editor packages"
+      }
     ]
   },
   "dependencies": {}
