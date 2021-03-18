@@ -14,7 +14,7 @@ import { python } from '@codemirror/lang-python'
 import { r } from '@codemirror/legacy-modes/mode/r'
 import { shell } from '@codemirror/legacy-modes/mode/shell'
 import { bracketMatching } from '@codemirror/matchbrackets'
-import { EditorState, Extension, Prec, tagExtension } from '@codemirror/state'
+import { Compartment, EditorState, Extension, Prec } from '@codemirror/state'
 import { StreamLanguage } from '@codemirror/stream-parser'
 import {
   Command,
@@ -90,15 +90,15 @@ export class Editor {
   readOnlyChanged(nextReadOnly: boolean, prevReadOnly: boolean): void {
     if (nextReadOnly !== prevReadOnly) {
       this.editorRef.dispatch({
-        reconfigure: {
-          [this.readOnlyTag]: EditorView.editable.of(!this.readOnly),
-        },
+        effects: [
+          this.readOnlyConf.reconfigure(EditorView.editable.of(!this.readOnly)),
+        ],
       })
     }
   }
 
-  // Mutable CodeMirror states need to be "tagged". @see https://codemirror.net/6/docs/ref/#state.tagExtension
-  private readOnlyTag = Symbol('readOnly')
+  // Dynamic CodeMirror states need to be "compartmentalized". @see https://codemirror.net/6/docs/ref/#state.Compartment
+  private readOnlyConf = new Compartment()
 
   /**
    * Programming language of the Editor
@@ -130,8 +130,8 @@ export class Editor {
     }
   }
 
-  // Mutable CodeMirror states need to be "tagged". @see https://codemirror.net/6/docs/ref/#state.tagExtension
-  private languageTag = Symbol('language')
+  // Dynamic CodeMirror states need to be "compartmentalized". @see https://codemirror.net/6/docs/ref/#state.Compartment
+  private languageConf = new Compartment()
   private languageSyntax = this.getLang(this.activeLanguage)
 
   /**
@@ -146,9 +146,7 @@ export class Editor {
 
     const docState = this.editorRef.state
     const transaction = docState.update({
-      reconfigure: {
-        [this.languageTag]: [this.getLang(language)],
-      },
+      effects: [this.languageConf.reconfigure(this.getLang(language))],
     })
 
     this.editorRef.dispatch(transaction)
@@ -201,6 +199,13 @@ export class Editor {
   @Prop()
   public keymap: Keymap[] = []
 
+  /**
+   * Custom CodeMirror extensions to combine with the default settings
+   * @see https://codemirror.net/6/docs/ref/#state.Extension
+   */
+  @Prop()
+  public extensions: () => Extension[] = () => []
+
   private initCodeMirror = (): void => {
     const root = this.el
     const slot = root.querySelector('[slot]')
@@ -216,7 +221,7 @@ export class Editor {
       bracketMatching(),
       closeBrackets(),
       Prec.fallback(defaultHighlightStyle),
-      tagExtension(this.languageTag, this.languageSyntax),
+      this.languageConf.of(this.languageSyntax),
       drawSelection(),
       EditorState.allowMultipleSelections.of(true),
       highlightSpecialChars(),
@@ -240,7 +245,7 @@ export class Editor {
         },
         ...this.keymap,
       ]),
-      tagExtension(this.readOnlyTag, EditorView.editable.of(!this.readOnly)),
+      this.readOnlyConf.of(EditorView.editable.of(!this.readOnly)),
     ]
 
     if (this.lineNumbers) {
