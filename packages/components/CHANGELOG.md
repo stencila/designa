@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.4](https://github.com/stencila/designa/compare/@stencila/components@0.29.3...@stencila/components@0.29.4) (2021-03-18)
+
+
+### Bug Fixes
+
+* **dependencies:** update codemirror editor packages ([b277b08](https://github.com/stencila/designa/commit/b277b0812e74d0cbc64d0219acf5694e5445b02a))
+* **Editor:** Remove stray prop ([2048f44](https://github.com/stencila/designa/commit/2048f44da3f970c849a4107607976f0d6acd91bb))
+
+
+
+
+
 ## [0.29.3](https://github.com/stencila/designa/compare/@stencila/components@0.29.2...@stencila/components@0.29.3) (2021-03-03)
 
 **Note:** Version bump only for package @stencila/components
