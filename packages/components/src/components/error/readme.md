@@ -14,10 +14,6 @@
 
 ## Dependencies
 
-### Used by
-
- - [stencila-code-chunk](../codeChunk)
-
 ### Depends on
 
 - [stencila-icon](../icon)
@@ -29,7 +25,6 @@ graph TD;
   stencila-code-error --> stencila-icon
   stencila-code-error --> stencila-details
   stencila-details --> stencila-icon
-  stencila-code-chunk --> stencila-code-error
   style stencila-code-error fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

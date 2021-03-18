@@ -68,7 +68,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
 
   @State() outputs: CodeChunk['outputs']
 
-  @State() codeErrors: CodeChunk['errors']
+  @State() codeErrors: CodeChunk['errors'] = []
 
   @State() private isCodeVisibleState: boolean = this.isCodeVisible
 
@@ -106,7 +106,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     if (this.executeHandler !== undefined) {
       const computed = await this.executeHandler(node)
       this.executeCodeState = 'RESOLVED'
-      this.updateErrors(computed.errors)
+      this.codeErrors = computed.errors
       this.outputs = computed.outputs
       return computed
     }
@@ -189,18 +189,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   // @see https://github.com/typescript-eslint/typescript-eslint/blob/v3.7.0/packages/eslint-plugin/docs/rules/unbound-method.md
   private executeRef = () => this.execute()
 
-  private updateErrors = (errors: CodeChunk['errors'] = []): void => {
-    this.codeErrors = errors.map((error) => (
-      <stencila-code-error
-        kind={(error.errorType as unknown) as 'error' | 'warning' | 'incapable'}
-        hasStacktrace={error.stackTrace !== undefined}
-      >
-        {error.errorMessage}
-        <pre slot="stacktrace">{error.stackTrace}</pre>
-      </stencila-code-error>
-    ))
-  }
-
   private setAllCodeVisibilityHandler(isVisible: boolean) {
     this.setAllCodeVisibility.emit({ isVisible })
   }
@@ -277,6 +265,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
               executeHandler={this.onExecuteHandler}
               keymap={this.keymap}
               readOnly={this.executeHandler === undefined}
+              errors={this.codeErrors}
             >
               <slot name={CodeChunkComponent.slots.text} />
             </stencila-editor>
@@ -284,7 +273,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
 
           <stencila-node-list nodes={this.outputs}>
             <slot name={CodeChunkComponent.slots.outputs} />
-            {this.codeErrors}
           </stencila-node-list>
         </div>
       </Host>

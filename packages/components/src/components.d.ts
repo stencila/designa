@@ -7,7 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Colors } from "./types";
 import { IconNames } from "./components/icon/iconNames";
-import { CodeChunk, CodeExpression, Datatable, ImageObject, Node } from "@stencila/schema";
+import { CodeChunk, CodeError, CodeExpression, Datatable, ImageObject, Node } from "@stencila/schema";
 import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
 import { Config, Data, Layout } from "plotly.js";
@@ -178,6 +178,10 @@ export namespace Components {
           * Autofocus the editor on page load
          */
         "autofocus": boolean;
+        /**
+          * List of errors to display at the bottom of the code editor section. If the error is a `string`, then it will be rendered as a warning.
+         */
+        "errors"?: CodeError[] | string[];
         /**
           * Function to be evaluated over the contents of the editor.
          */
@@ -691,6 +695,10 @@ declare namespace LocalJSX {
           * Autofocus the editor on page load
          */
         "autofocus"?: boolean;
+        /**
+          * List of errors to display at the bottom of the code editor section. If the error is a `string`, then it will be rendered as a warning.
+         */
+        "errors"?: CodeError[] | string[];
         /**
           * Function to be evaluated over the contents of the editor.
          */
