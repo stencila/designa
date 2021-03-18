@@ -199,13 +199,6 @@ export class Editor {
   @Prop()
   public keymap: Keymap[] = []
 
-  /**
-   * Custom CodeMirror extensions to combine with the default settings
-   * @see https://codemirror.net/6/docs/ref/#state.Extension
-   */
-  @Prop()
-  public extensions: () => Extension[] = () => []
-
   private initCodeMirror = (): void => {
     const root = this.el
     const slot = root.querySelector('[slot]')
