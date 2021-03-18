@@ -1,6 +1,6 @@
 :host,
 stencila-code-error {
-  @apply relative block w-full p-2 rounded font-body border-warn-500 bg-warn-100 text-warn-900;
+  @apply box-border relative block w-full max-w-full p-2 rounded font-body border-warn-500 bg-warn-100 text-warn-900;
 
   .overview {
     * {
