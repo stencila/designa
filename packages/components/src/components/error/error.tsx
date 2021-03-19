@@ -1,4 +1,8 @@
-import { Component, h, Host, Prop } from '@stencil/core'
+import { Component, Element, h, Host, Prop, State } from '@stencil/core'
+import { CodeError } from '@stencila/schema'
+import { IconNames } from '../icon/iconNames'
+
+type Level = 'info' | 'warning' | 'error'
 
 @Component({
   tag: 'stencila-code-error',
@@ -8,35 +12,69 @@ import { Component, h, Host, Prop } from '@stencil/core'
   },
   scoped: true,
 })
-export class Error {
-  /* public static readonly elementName = 'stencila-code-error' */
+export class ErrorComponent {
+  @Element()
+  private el: HTMLStencilaCodeErrorElement | null
 
   /**
-   * Determines whether the stacktrace is visible or not
+   * The `CodeError` object
    */
-  @Prop() open = false
-
-  /**
-   * The severity of the error message
-   */
-  @Prop() kind: 'incapable' | 'warning' | 'error' = 'warning'
+  @Prop() error?: CodeError
 
   /**
    * The severity of the error message
    */
-  @Prop() hasStacktrace: boolean
+  @Prop() kind: string | Level = 'info'
+
+  @State() stackIsOpen = false
+
+  private hasStack = false
+
+  private toggleStackVisibility = (e: MouseEvent) => {
+    e.preventDefault()
+    this.stackIsOpen = !this.stackIsOpen
+  }
+
+  private getIcon(severity: Level): IconNames {
+    switch (severity) {
+      case 'error':
+        return 'close-circle'
+      case 'warning':
+        return 'alert'
+      default:
+        return 'information'
+    }
+  }
+
+  private getLevel(kind: string): Level {
+    switch (kind) {
+      case 'error':
+      case 'incapable':
+        return 'error'
+      case 'warning':
+      case 'warn':
+        return 'warning'
+      default:
+        return 'info'
+    }
+  }
+
+  componentWillLoad() {
+    this.hasStack = !!this.el?.querySelector('[slot="stacktrace"]')
+  }
 
   public render() {
+    const severity = this.getLevel(this.error?.errorType ?? this.kind)
+
     return (
-      <Host kind={this.kind}>
-        <div class="overview">
-          <stencila-icon icon="alert"></stencila-icon>
+      <Host kind={severity}>
+        <div class="overview" onClick={this.toggleStackVisibility}>
+          <stencila-icon icon={this.getIcon(severity)}></stencila-icon>
           <slot />
         </div>
 
-        {this.hasStacktrace && (
-          <stencila-details>
-            <span slot="summary">View the stacktrace</span>
+        {this.hasStack && (
+          <stencila-details open={this.stackIsOpen}>
             <slot name="stacktrace" />
           </stencila-details>
         )}

@@ -125,17 +125,13 @@ export namespace Components {
     }
     interface StencilaCodeError {
         /**
-          * The severity of the error message
+          * The `CodeError` object
          */
-        "hasStacktrace": boolean;
+        "error"?: CodeError;
         /**
           * The severity of the error message
          */
-        "kind": 'incapable' | 'warning' | 'error';
-        /**
-          * Determines whether the stacktrace is visible or not
-         */
-        "open": boolean;
+        "kind": string | Level;
     }
     interface StencilaCodeExpression {
         /**
@@ -650,17 +646,13 @@ declare namespace LocalJSX {
     }
     interface StencilaCodeError {
         /**
-          * The severity of the error message
+          * The `CodeError` object
          */
-        "hasStacktrace"?: boolean;
+        "error"?: CodeError;
         /**
           * The severity of the error message
          */
-        "kind"?: 'incapable' | 'warning' | 'error';
-        /**
-          * Determines whether the stacktrace is visible or not
-         */
-        "open"?: boolean;
+        "kind"?: string | Level;
     }
     interface StencilaCodeExpression {
         /**

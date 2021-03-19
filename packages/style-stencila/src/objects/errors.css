@@ -1,8 +1,10 @@
 :host,
 stencila-code-error {
-  @apply box-border relative block w-full max-w-full p-2 rounded font-body border-warn-500 bg-warn-100 text-warn-900;
+  @apply box-border relative block w-full max-w-full p-2 rounded font-body border-neutral-500 bg-neutral-100 text-neutral-900 relative;
 
   .overview {
+    @apply pr-4;
+
     * {
       @apply align-middle;
     }
@@ -12,20 +14,26 @@ stencila-code-error {
     }
   }
 
-  [slot='summary'] {
-    @apply text-xs tracking-wider uppercase;
-  }
-
   stencila-details {
-    @apply block;
+    @apply block static;
+
+    --disclosure-icon-right: 0.5rem;
+    --disclosure-icon-top: 0.5rem;
   }
 
   [slot='stacktrace'] {
     @apply m-0 bg-stock border-warn-500 text-key;
   }
 
-  &[kind='error'],
-  &[kind='incapable'] {
+  &[kind='warning'] {
+    @apply border-warn-500 bg-warn-100 text-warn-900;
+
+    [slot='stacktrace'] {
+      @apply border-warn-500;
+    }
+  }
+
+  &[kind='error'] {
     @apply border-danger-500 bg-danger-100 text-danger-900;
 
     [slot='stacktrace'] {
