@@ -1,14 +1,12 @@
 import { CodeChunk, CodeExpression } from '@stencila/schema'
 
-export interface CodeVisibilityEvent extends CustomEvent {
-  detail: {
-    isVisible: boolean
-    /** @deprecated Use `isVisible` instead */
-    isCodeCollapsed: boolean
-  }
-}
+export type CodeVisibilityEvent = CustomEvent<{
+  isVisible: boolean
+  /** @deprecated Use `isVisible` instead */
+  isCodeCollapsed: boolean
+}>
 
-// Defines a set of methods and properties that all `Code` node based comopnents
+// Defines a set of methods and properties that all `Code` node based components
 // must implement to ensure a unified public API and interactions
 export abstract class CodeComponent<C extends CodeChunk | CodeExpression> {
   abstract onSetAllCodeVisibility(event: CodeVisibilityEvent): void

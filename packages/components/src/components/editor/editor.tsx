@@ -35,7 +35,9 @@ import {
   Prop,
   Watch,
 } from '@stencil/core'
+import { CodeError } from '@stencila/schema'
 import { deleteToLineStart } from './commands'
+import { codeErrors, updateErrors } from './customizations/errorPanel'
 
 export interface EditorContents {
   text: string
@@ -199,6 +201,20 @@ export class Editor {
   @Prop()
   public keymap: Keymap[] = []
 
+  /**
+   * List of errors to display at the bottom of the code editor section.
+   * If the error is a `string`, then it will be rendered as a warning.
+   */
+  @Prop()
+  public errors?: CodeError[] | string[]
+
+  @Watch('errors')
+  errorsChanged(nextErrors: (CodeError | string)[]): void {
+    this.editorRef.dispatch({
+      effects: updateErrors.of(nextErrors),
+    })
+  }
+
   private initCodeMirror = (): void => {
     const root = this.el
     const slot = root.querySelector('[slot]')
@@ -239,6 +255,7 @@ export class Editor {
         ...this.keymap,
       ]),
       this.readOnlyConf.of(EditorView.editable.of(!this.readOnly)),
+      codeErrors(),
     ]
 
     if (this.lineNumbers) {

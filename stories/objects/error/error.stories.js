@@ -3,27 +3,31 @@ import { html } from 'lit-html'
 export default {
   title: 'Schema Nodes/Error',
   component: 'stencila-code-error',
+  argTypes: {
+    kind: {
+      defaultValue: 'warning',
+      control: {
+        type: 'select',
+        options: ['info', 'warning', 'error'],
+      },
+    },
+  },
 }
 
-export const warning = () =>
+export const withStacktrace = ({ kind }) =>
   html`
-    <stencila-code-error kind="warning" has-stacktrace="true">
+    <stencila-code-error kind=${kind}>
       We’re sorry, something has gone wrong...
       <pre slot="stacktrace"><code>Some stack trace goes here...</code></pre>
     </stencila-code-error>
   `
+withStacktrace.args = {
+  kind: 'error',
+}
 
-export const error = () =>
+export const withoutStacktrace = ({ kind }) =>
   html`
-    <stencila-code-error kind="error" has-stacktrace="true">
-      We’re sorry, something has gone wrong...
-      <pre slot="stacktrace"><code>Some stack trace goes here...</code></pre>
-    </stencila-code-error>
-  `
-
-export const withoutStacktrace = () =>
-  html`
-    <stencila-code-error kind="warning">
+    <stencila-code-error kind=${kind}>
       We’re sorry, something has gone wrong...
     </stencila-code-error>
   `

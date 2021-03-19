@@ -58,7 +58,6 @@ Type: `Promise<CodeChunk>`
 
 ### Depends on
 
-- [stencila-code-error](../error)
 - [stencila-action-menu](../actionMenu)
 - [stencila-button](../button)
 - [stencila-editor](../editor)
@@ -67,14 +66,10 @@ Type: `Promise<CodeChunk>`
 ### Graph
 ```mermaid
 graph TD;
-  stencila-code-chunk --> stencila-code-error
   stencila-code-chunk --> stencila-action-menu
   stencila-code-chunk --> stencila-button
   stencila-code-chunk --> stencila-editor
   stencila-code-chunk --> stencila-node-list
-  stencila-code-error --> stencila-icon
-  stencila-code-error --> stencila-details
-  stencila-details --> stencila-icon
   stencila-action-menu --> stencila-button
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip

@@ -59,9 +59,10 @@ jobs:
       - name: Publish Storybook to Chromatic
         # Don’t send package update PRs to Chromatic
         if: success() && startsWith(github.head_ref, 'renovate/dev') != true
-        run: npm run chromatic -- --exit-zero-on-changes --exit-once-uploaded
-        env:
-          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 
       # Publish packages if running on main branch
       - name: Configure services

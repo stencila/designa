@@ -5,18 +5,13 @@
 
 ## Properties
 
-| Property        | Attribute        | Description                                         | Type                                  | Default     |
-| --------------- | ---------------- | --------------------------------------------------- | ------------------------------------- | ----------- |
-| `hasStacktrace` | `has-stacktrace` | The severity of the error message                   | `boolean`                             | `undefined` |
-| `kind`          | `kind`           | The severity of the error message                   | `"error" \| "incapable" \| "warning"` | `'warning'` |
-| `open`          | `open`           | Determines whether the stacktrace is visible or not | `boolean`                             | `false`     |
+| Property | Attribute | Description                       | Type                     | Default     |
+| -------- | --------- | --------------------------------- | ------------------------ | ----------- |
+| `error`  | --        | The `CodeError` object            | `CodeError \| undefined` | `undefined` |
+| `kind`   | `kind`    | The severity of the error message | `string`                 | `'info'`    |
 
 
 ## Dependencies
-
-### Used by
-
- - [stencila-code-chunk](../codeChunk)
 
 ### Depends on
 
@@ -29,7 +24,6 @@ graph TD;
   stencila-code-error --> stencila-icon
   stencila-code-error --> stencila-details
   stencila-details --> stencila-icon
-  stencila-code-chunk --> stencila-code-error
   style stencila-code-error fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

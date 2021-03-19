@@ -13,8 +13,30 @@ const delay = (cb) => {
   })
 }
 
+const generateErrors = () => {
+  const count = Math.round(Math.random() * 10)
+  const errs = []
+
+  for (let i = 0; i <= count; i++) {
+    errs.push({
+      type: 'CodeError',
+      errorMessage: `Something went wrong (${i})`,
+      errorType: i % 2 === 0 ? 'warning' : 'error',
+      stackTrace: 'Some stack trace',
+    })
+  }
+
+  return errs
+}
+
 const executeHandler = (t) =>
-  delay(() => console.log(t) || { outputs: [t, t, t] })
+  delay(
+    () =>
+      console.log(t) || {
+        outputs: [t, t, t],
+        errors: generateErrors(),
+      }
+  )
 
 export const withExecuteHandler = () => html`
   <div style="max-width: 900px">
