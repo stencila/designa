@@ -16,7 +16,7 @@ stencila-details {
   }
 
   .disclosure-toggle {
-    @apply absolute top-0 right-0 cursor-pointer;
+    @apply absolute cursor-pointer pointer-events-none;
     transition: transform 120ms ease-in-out;
     transform: rotateZ(0deg);
 
@@ -25,7 +25,7 @@ stencila-details {
     }
   }
 
-  &[isopen='true'] .disclosure-toggle {
+  &[isopen] .disclosure-toggle {
     transform: rotateZ(180deg);
   }
 

@@ -165,9 +165,9 @@ export namespace Components {
     }
     interface StencilaDetails {
         /**
-          * Determines whether the contents are visible or not
+          * Determines whether the contents are visible or not.
          */
-        "open": boolean;
+        "open"?: boolean;
     }
     interface StencilaEditor {
         /**
@@ -682,7 +682,7 @@ declare namespace LocalJSX {
     }
     interface StencilaDetails {
         /**
-          * Determines whether the contents are visible or not
+          * Determines whether the contents are visible or not.
          */
         "open"?: boolean;
     }
