@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.21.1...@stencila/style-stencila@0.22.0) (2021-03-19)
+
+
+### Bug Fixes
+
+* **Error:** Prevent Error component from being wider than parent element ([7d7af62](https://github.com/stencila/style/commit/7d7af62cd7ae3c7cc15506ca6a35cdc37d2b3ecf))
+
+
+### Features
+
+* **Details:** Allow parent to control content visibility state ([569ab83](https://github.com/stencila/style/commit/569ab839d11cbc4b105446f7fd8d94ec79897e9a))
+* **Details:** Allow positioning of the disclosure arrow icon ([d027b32](https://github.com/stencila/style/commit/d027b328c54f07804fba58a1ba9aded2cbcfef68))
+* **Error:** Simplify props and refine design ([b0bb479](https://github.com/stencila/style/commit/b0bb47906f7c38fc9f01ac709bece310d180ea86)), closes [/github.com/stencila/designa/pull/180#issuecomment-802355039](https://github.com//github.com/stencila/designa/pull/180/issues/issuecomment-802355039)
+
+
+
+
+
 ## [0.21.1](https://github.com/stencila/style/compare/@stencila/style-stencila@0.21.0...@stencila/style-stencila@0.21.1) (2021-03-03)
 
 **Note:** Version bump only for package @stencila/style-stencila

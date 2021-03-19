@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.30.0](https://github.com/stencila/designa/compare/@stencila/components@0.29.4...@stencila/components@0.30.0) (2021-03-19)
+
+
+### Features
+
+* **Details:** Allow parent to control content visibility state ([569ab83](https://github.com/stencila/designa/commit/569ab839d11cbc4b105446f7fd8d94ec79897e9a))
+* **Details:** Allow positioning of the disclosure arrow icon ([d027b32](https://github.com/stencila/designa/commit/d027b328c54f07804fba58a1ba9aded2cbcfef68))
+* **Editor:** Add panel for displaying errors ([95416d7](https://github.com/stencila/designa/commit/95416d7554a0d641559f2dff6f641f81089573ce)), closes [#157](https://github.com/stencila/designa/issues/157)
+* **Error:** Simplify props and refine design ([b0bb479](https://github.com/stencila/designa/commit/b0bb47906f7c38fc9f01ac709bece310d180ea86)), closes [/github.com/stencila/designa/pull/180#issuecomment-802355039](https://github.com//github.com/stencila/designa/pull/180/issues/issuecomment-802355039)
+
+
+
+
+
 ## [0.29.4](https://github.com/stencila/designa/compare/@stencila/components@0.29.3...@stencila/components@0.29.4) (2021-03-18)
 
 
