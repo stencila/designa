@@ -1,5 +1,15 @@
 :host,
 stencila-details {
+  /** @prop --disclosure-icon-right: Position of the disclosure toggle icon relative to
+  * the right boundary of the closest relatively positioned parent element.
+  */
+  --disclosure-icon-right: var(--disclosure-icon-right, 0);
+
+  /** @prop --disclosure-icon-top: Position of the disclosure toggle icon relative to
+  * the top boundary of the closest relatively positioned parent element.
+  */
+  --disclosure-icon-top: var(--disclosure-icon-top, 0);
+
   @apply relative block font-body;
 
   .contents {
@@ -17,6 +27,8 @@ stencila-details {
 
   .disclosure-toggle {
     @apply absolute cursor-pointer pointer-events-none;
+    top: var(--disclosure-icon-top, 0);
+    right: var(--disclosure-icon-right, 0);
     transition: transform 120ms ease-in-out;
     transform: rotateZ(0deg);
 
