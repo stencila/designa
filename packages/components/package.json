@@ -74,6 +74,9 @@
     "feather-icons": "^4.28.0",
     "mem": "^8.0.0",
     "pluralize": "^8.0.0",
+    "vega": "^5.20.0",
+    "vega-embed": "^6.16.0",
+    "vega-lite": "^5.0.0",
     "webfontloader": "^1.6.28",
     "wretch": "^1.7.4"
   },
