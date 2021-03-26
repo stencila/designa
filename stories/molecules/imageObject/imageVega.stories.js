@@ -2,7 +2,7 @@ import { html } from 'lit-html'
 
 const testSpec = {
   description: 'A simple bar chart with embedded spec.',
-  spec: {
+  data: {
     values: [
       { a: 'A', b: 28 },
       { a: 'B', b: 55 },
@@ -33,7 +33,7 @@ export default {
 export const complete = ({ spec }) => html`
   <stencila-image-vega .spec=${spec}>
     <picture>
-      <script type="application/vega-lite">
+      <script type="application/vnd.vega+json">
         ${JSON.stringify(testSpec)}
       </script>
       <img src="https://via.placeholder.com/150" />
@@ -51,3 +51,18 @@ export const withInlineSource = ({ spec }) => html`
     </picture>
   </stencila-image-vega>
 `
+
+export const withCustomVegaVersion = ({ spec }) => html`
+  <stencila-image-vega .spec=${spec}>
+    <picture>
+      <img src="https://via.placeholder.com/150" />
+    </picture>
+  </stencila-image-vega>
+`
+
+withCustomVegaVersion.args = {
+  spec: {
+    ...testSpec,
+    $schema: 'https://vega.github.io/schema/vega-lite/v2.1.json',
+  },
+}

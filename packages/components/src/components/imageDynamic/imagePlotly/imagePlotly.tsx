@@ -64,9 +64,9 @@ export class ImagePlotlyComponent {
 
     if (!data) return
 
-    const root = this.plotContainer ?? createPlotContainer(this.el)
+    this.plotContainer = this.plotContainer ?? createPlotContainer(this.el)
 
-    window.Plotly?.react(root, data, layout, config)
+    window.Plotly?.react(this.plotContainer, data, layout, config)
       .then(() => {
         if (!this.plotIsRendered) {
           this.plotIsRendered = true
@@ -113,6 +113,17 @@ export class ImagePlotlyComponent {
         },
       })
     }
+  }
+
+  componentShouldUpdate(
+    nexValue: unknown,
+    oldValue: unknown,
+    varName: string
+  ): boolean {
+    if (varName === 'plotIsRendered' && oldValue === nexValue) {
+      return false
+    }
+    return true
   }
 
   componentWillUpdate(): void {

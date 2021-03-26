@@ -12,6 +12,7 @@ import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
 import { Config, Data, Layout } from "plotly.js";
 import { EmbedOptions, VisualizationSpec } from "vega-embed";
+import { VegaLoadEvent } from "./components/imageDynamic/imageDynamic/imageVegaUtils";
 import { ChildTab } from "./components/tabList/tabList";
 import { ToastPosition, ToastType } from "./components/toast/toastController";
 export namespace Components {
@@ -790,6 +791,10 @@ declare namespace LocalJSX {
         "onPlotlyLoaded"?: (event: CustomEvent<any>) => void;
     }
     interface StencilaImageVega {
+        /**
+          * Custom event emitter to indicate that the loading of the Vega JS script has finished
+         */
+        "onVegaLoaded"?: (event: CustomEvent<VegaLoadEvent>) => void;
         /**
           * A JavaScript object containing options for embedding
           * @see https ://github.com/vega/vega-embed#options
