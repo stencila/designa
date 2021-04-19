@@ -57,7 +57,7 @@
     "parcel-bundler": "1.12.4",
     "postcss-cli": "8.3.1",
     "postcss-custom-properties": "11.0.0",
-    "postcss-host": "git+https://git@github.com/vitkarpov/postcss-host.git#fd454f76af0ad8f477154ae84ecb3223c647f0f9",
+    "postcss-host": "2.0.1",
     "postcss-import": "14.0.1",
     "postcss-import-url": "7.0.0",
     "postcss-mixins": "7.0.3",
