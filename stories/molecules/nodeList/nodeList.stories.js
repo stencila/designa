@@ -7,7 +7,7 @@ export default {
 
 const nodes = [
   'Text result',
-  { type: 'ImageObject', contentUrl: 'https://via.placeholder.com/150' },
+  { type: 'ImageObject', contentUrl: 'https://place-hold.it/150' },
   {
     type: 'Datatable',
     columns: [
@@ -29,7 +29,7 @@ const nodes = [
   null,
   {
     type: 'ImageObject',
-    contentUrl: 'https://via.placeholder.com/150',
+    contentUrl: 'https://place-hold.it/150',
     content: [
       {
         mediaType: 'application/vnd.plotly.v1+json',
@@ -49,21 +49,16 @@ const nodes = [
 ]
 
 export const emptyState = () => html`
-  <stencila-node-list .nodes=${[]}>
-  </stencila-node-list>
+  <stencila-node-list .nodes=${[]}> </stencila-node-list>
 `
 
 export const singleNode = () => html`
-  <stencila-node-list .nodes=${[nodes[0]]}>
-  </stencila-node-list>
-
+  <stencila-node-list .nodes=${[nodes[0]]}> </stencila-node-list>
 `
 export const multipleNodes = () => html`
-  <stencila-node-list .nodes=${nodes}>
-  </stencila-node-list>
+  <stencila-node-list .nodes=${nodes}> </stencila-node-list>
 `
 
 export const dataTable = () => html`
-  <stencila-node-list .nodes=${[nodes[2]]}>
-  </stencila-node-list>
+  <stencila-node-list .nodes=${[nodes[2]]}> </stencila-node-list>
 `

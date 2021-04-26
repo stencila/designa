@@ -14,7 +14,7 @@ export const complete = ({ data }) => html`
       <script type="application/vnd.plotly.v1+json">
         ${JSON.stringify(data)}
       </script>
-      <img src="https://via.placeholder.com/150" />
+      <img src="https://place-hold.it/150" />
     </picture>
   </stencila-image-plotly>
 `
@@ -22,7 +22,7 @@ export const complete = ({ data }) => html`
 export const withNoSource = () => html`
   <stencila-image-plotly>
     <picture>
-      <img src="https://via.placeholder.com/150" />
+      <img src="https://place-hold.it/150" />
     </picture>
   </stencila-image-plotly>
 `
@@ -30,7 +30,7 @@ export const withNoSource = () => html`
 export const withInlineSource = ({ data }) => html`
   <stencila-image-plotly .data=${data}>
     <picture>
-      <img src="https://via.placeholder.com/150" />
+      <img src="https://place-hold.it/150" />
     </picture>
   </stencila-image-plotly>
 `
@@ -41,19 +41,19 @@ export const withMultipleInstances = ({ data }) => html`
       <script type="application/vnd.plotly.v1+json">
         ${JSON.stringify(data)}
       </script>
-      <img src="https://via.placeholder.com/150" />
+      <img src="https://place-hold.it/150" />
     </picture>
   </stencila-image-plotly>
 
   <stencila-image-plotly>
     <picture>
-      <img src="https://via.placeholder.com/150" />
+      <img src="https://place-hold.it/150" />
     </picture>
   </stencila-image-plotly>
 
   <stencila-image-plotly .data=${data}>
     <picture>
-      <img src="https://via.placeholder.com/150" />
+      <img src="https://place-hold.it/150" />
     </picture>
   </stencila-image-plotly>
 `

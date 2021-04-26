@@ -61,7 +61,7 @@ export const articleControlsActive = ({ position, sourceUrl }) => {
 
           <img
             alt="This is a sample output image"
-            src="https://via.placeholder.com/350x500"
+            src="https://place-hold.it/350x500"
           />
 
           <pre><output>10</output></pre>
@@ -104,7 +104,7 @@ export const articleControlsActive = ({ position, sourceUrl }) => {
 
           <img
             alt="This is a sample output image"
-            src="https://via.placeholder.com/350x500"
+            src="https://place-hold.it/350x500"
           />
 
           <pre><output>10</output></pre>

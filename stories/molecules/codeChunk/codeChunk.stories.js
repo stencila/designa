@@ -85,7 +85,7 @@ export const multipleCodeChunks = () => html`
       <figure slot="outputs">
         <img
           alt="This is a sample output image"
-          src="https://via.placeholder.com/350x500"
+          src="https://place-hold.it/350x500"
         />
       </figure>
     </stencila-code-chunk>
@@ -102,7 +102,7 @@ export const withMultipleOutputs = () => html`
 
         <img
           alt="This is a sample output image"
-          src="https://via.placeholder.com/350x500"
+          src="https://place-hold.it/350x500"
         />
 
         <pre><output>10</output></pre>
@@ -159,7 +159,7 @@ export const alongsideACodeExpression = () => html`
 
         <img
           alt="This is a sample output image"
-          src="https://codechvia.placeholder.com/350x500"
+          src="https://codechplace-hold.it/350x500"
         />
 
         <pre><output>10</output></pre>
@@ -186,7 +186,7 @@ area = np.pi * (15 * np.random.rand(N))**2  # 0 to 15 point radii
 
 plt.scatter(x, y, s=area, c=colors, alpha=0.5)</code></pre>
     <figure slot="outputs">
-      <img src="https://via.placeholder.com/350x500" itemprop="image" />
+      <img src="https://place-hold.it/350x500" itemprop="image" />
     </figure>
   </stencila-code-chunk>
 `

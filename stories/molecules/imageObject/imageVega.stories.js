@@ -36,7 +36,7 @@ export const complete = ({ spec }) => html`
       <script type="application/vnd.vega+json">
         ${JSON.stringify(testSpec)}
       </script>
-      <img src="https://via.placeholder.com/150" />
+      <img src="https://place-hold.it/150" />
     </picture>
   </stencila-image-vega>
 `
@@ -47,7 +47,7 @@ complete.args = {
 export const withInlineSource = ({ spec }) => html`
   <stencila-image-vega .spec=${spec}>
     <picture>
-      <img src="https://via.placeholder.com/150" />
+      <img src="https://place-hold.it/150" />
     </picture>
   </stencila-image-vega>
 `
@@ -55,7 +55,7 @@ export const withInlineSource = ({ spec }) => html`
 export const withCustomVegaVersion = ({ spec }) => html`
   <stencila-image-vega .spec=${spec}>
     <picture>
-      <img src="https://via.placeholder.com/150" />
+      <img src="https://place-hold.it/150" />
     </picture>
   </stencila-image-vega>
 `
