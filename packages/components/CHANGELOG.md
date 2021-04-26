@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/stencila/designa/compare/@stencila/components@0.30.1...@stencila/components@0.31.0) (2021-04-26)
+
+
+### Bug Fixes
+
+* **Components:** Add shim for dynamic component importing ([3baf46b](https://github.com/stencila/designa/commit/3baf46bb9405a50c55eb620fb573e3c1cfb4d1c7))
+* **Vega:** Support multiple versions of Vega/Vega-Lite figures ([f53b357](https://github.com/stencila/designa/commit/f53b35707b068d0dafca72eb120fc5eeeab19d93))
+
+
+### Features
+
+* **Image Vega:** Support rendering Vega figures ([155bcb2](https://github.com/stencila/designa/commit/155bcb28f311cd52d4dbfa8b6324265d6f6379f0)), closes [#179](https://github.com/stencila/designa/issues/179)
+
+
+
+
+
 ## [0.30.1](https://github.com/stencila/designa/compare/@stencila/components@0.30.0...@stencila/components@0.30.1) (2021-03-29)
 
 **Note:** Version bump only for package @stencila/components
