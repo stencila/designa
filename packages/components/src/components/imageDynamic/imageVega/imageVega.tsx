@@ -9,7 +9,7 @@ import {
   Prop,
   State,
 } from '@stencil/core'
-import embed, { EmbedOptions, Result, VisualizationSpec } from 'vega-embed'
+import embed, { Result, VisualizationSpec } from 'vega-embed'
 import { injectScriptSrc } from '../../utls/jsDeps'
 import { createPlotContainer } from '../imageDynamicUtils'
 import {
@@ -53,7 +53,7 @@ export class ImageVegaComponent {
   }
 
   /**
-   * The Vega or Vega-Lite spec @see
+   * The Vega or Vega-Lite spec
    * @see https://vega.github.io/vega/docs/specification/
    */
   @Prop() spec?: VisualizationSpec | string
@@ -62,7 +62,10 @@ export class ImageVegaComponent {
    * A JavaScript object containing options for embedding
    * @see https://github.com/vega/vega-embed#options
    */
-  @Prop() options?: Partial<EmbedOptions>
+  @Prop() options?: Record<string, unknown> = {}
+  // TODO: Fix type definition. Currently StencilJS writes user computer specific
+  // file path in the auto-generated component README.md, which causes
+  // package release failures on CI.
 
   @State() private plotIsRendered = false
 
@@ -115,6 +118,7 @@ export class ImageVegaComponent {
           compiled: false,
           editor: false,
         },
+        ...this.options,
       }).then((res) => {
         this.plotIsRendered = true
         return res

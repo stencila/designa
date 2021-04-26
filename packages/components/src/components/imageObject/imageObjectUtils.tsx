@@ -1,6 +1,6 @@
 import { h } from '@stencil/core'
 import { ImageObject } from '@stencila/schema'
-import { isVegaObject } from '../imageDynamic/imageDynamic/imageVegaUtils'
+import { isVegaObject } from '../imageDynamic/imageVega/imageVegaUtils'
 import { isPlotlyObject } from '../imageDynamic/imagePlotly/imagePlotlyUtils'
 
 /**

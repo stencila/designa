@@ -11,8 +11,8 @@ import { CodeChunk, CodeError, CodeExpression, Datatable, ImageObject, Node } fr
 import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
 import { Config, Data, Layout } from "plotly.js";
-import { EmbedOptions, VisualizationSpec } from "vega-embed";
-import { VegaLoadEvent } from "./components/imageDynamic/imageDynamic/imageVegaUtils";
+import { VisualizationSpec } from "vega-embed";
+import { VegaLoadEvent } from "./components/imageDynamic/imageVega/imageVegaUtils";
 import { ChildTab } from "./components/tabList/tabList";
 import { ToastPosition, ToastType } from "./components/toast/toastController";
 export namespace Components {
@@ -263,9 +263,9 @@ export namespace Components {
           * A JavaScript object containing options for embedding
           * @see https ://github.com/vega/vega-embed#options
          */
-        "options"?: Partial<EmbedOptions>;
+        "options"?: Record<string, unknown>;
         /**
-          * The Vega or Vega-Lite spec @see
+          * The Vega or Vega-Lite spec
           * @see https ://vega.github.io/vega/docs/specification/
          */
         "spec"?: VisualizationSpec | string;
@@ -799,9 +799,9 @@ declare namespace LocalJSX {
           * A JavaScript object containing options for embedding
           * @see https ://github.com/vega/vega-embed#options
          */
-        "options"?: Partial<EmbedOptions>;
+        "options"?: Record<string, unknown>;
         /**
-          * The Vega or Vega-Lite spec @see
+          * The Vega or Vega-Lite spec
           * @see https ://vega.github.io/vega/docs/specification/
          */
         "spec"?: VisualizationSpec | string;

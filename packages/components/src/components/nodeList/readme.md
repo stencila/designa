@@ -21,7 +21,7 @@
 - [stencila-data-table](../dataTable)
 - [stencila-image-plotly](../imageDynamic/imagePlotly)
 - [stencila-image-object](../imageObject)
-- [stencila-image-vega](../imageDynamic/imageDynamic)
+- [stencila-image-vega](../imageDynamic/imageVega)
 
 ### Graph
 ```mermaid
