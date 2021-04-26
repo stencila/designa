@@ -28,6 +28,7 @@ export const config: Config = {
   buildEs5: 'prod',
   extras: {
     appendChildSlotFix: true,
+    dynamicImportShim: true,
     safari10: true,
   },
   globalScript: './src/globals/global.ts',

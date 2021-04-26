@@ -1,6 +1,7 @@
 import { h } from '@stencil/core'
 import { ImageObject } from '@stencila/schema'
-import { isPlotlyObject } from '../imagePlotly/imagePlotlyUtils'
+import { isVegaObject } from '../imageDynamic/imageDynamic/imageVegaUtils'
+import { isPlotlyObject } from '../imageDynamic/imagePlotly/imagePlotlyUtils'
 
 /**
  * Return the preferred component for an `ImageObject`.
@@ -30,6 +31,15 @@ export const preferredImageObjectComponent = (
             </picture>
           </stencila-image-plotly>
         )
+      if (isVegaObject(node)) {
+        return (
+          <stencila-image-vega spec={node.spec} options={node.options}>
+            <picture>
+              <stencila-image-object image={image}></stencila-image-object>
+            </picture>
+          </stencila-image-vega>
+        )
+      }
     }
   }
 

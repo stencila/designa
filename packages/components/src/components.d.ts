@@ -11,6 +11,8 @@ import { CodeChunk, CodeError, CodeExpression, Datatable, ImageObject, Node } fr
 import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
 import { Config, Data, Layout } from "plotly.js";
+import { EmbedOptions, VisualizationSpec } from "vega-embed";
+import { VegaLoadEvent } from "./components/imageDynamic/imageDynamic/imageVegaUtils";
 import { ChildTab } from "./components/tabList/tabList";
 import { ToastPosition, ToastType } from "./components/toast/toastController";
 export namespace Components {
@@ -256,6 +258,18 @@ export namespace Components {
          */
         "layout"?: Partial<Layout>;
     }
+    interface StencilaImageVega {
+        /**
+          * A JavaScript object containing options for embedding
+          * @see https ://github.com/vega/vega-embed#options
+         */
+        "options"?: Partial<EmbedOptions>;
+        /**
+          * The Vega or Vega-Lite spec @see
+          * @see https ://vega.github.io/vega/docs/specification/
+         */
+        "spec"?: VisualizationSpec | string;
+    }
     interface StencilaInput {
         /**
           * Automatically bring cursor focus to the input field on render.
@@ -449,6 +463,12 @@ declare global {
         prototype: HTMLStencilaImagePlotlyElement;
         new (): HTMLStencilaImagePlotlyElement;
     };
+    interface HTMLStencilaImageVegaElement extends Components.StencilaImageVega, HTMLStencilElement {
+    }
+    var HTMLStencilaImageVegaElement: {
+        prototype: HTMLStencilaImageVegaElement;
+        new (): HTMLStencilaImageVegaElement;
+    };
     interface HTMLStencilaInputElement extends Components.StencilaInput, HTMLStencilElement {
     }
     var HTMLStencilaInputElement: {
@@ -522,6 +542,7 @@ declare global {
         "stencila-icon": HTMLStencilaIconElement;
         "stencila-image-object": HTMLStencilaImageObjectElement;
         "stencila-image-plotly": HTMLStencilaImagePlotlyElement;
+        "stencila-image-vega": HTMLStencilaImageVegaElement;
         "stencila-input": HTMLStencilaInputElement;
         "stencila-menu": HTMLStencilaMenuElement;
         "stencila-menu-item": HTMLStencilaMenuItemElement;
@@ -769,6 +790,22 @@ declare namespace LocalJSX {
          */
         "onPlotlyLoaded"?: (event: CustomEvent<any>) => void;
     }
+    interface StencilaImageVega {
+        /**
+          * Custom event emitter to indicate that the loading of the Vega JS script has finished
+         */
+        "onVegaLoaded"?: (event: CustomEvent<VegaLoadEvent>) => void;
+        /**
+          * A JavaScript object containing options for embedding
+          * @see https ://github.com/vega/vega-embed#options
+         */
+        "options"?: Partial<EmbedOptions>;
+        /**
+          * The Vega or Vega-Lite spec @see
+          * @see https ://vega.github.io/vega/docs/specification/
+         */
+        "spec"?: VisualizationSpec | string;
+    }
     interface StencilaInput {
         /**
           * Automatically bring cursor focus to the input field on render.
@@ -901,6 +938,7 @@ declare namespace LocalJSX {
         "stencila-icon": StencilaIcon;
         "stencila-image-object": StencilaImageObject;
         "stencila-image-plotly": StencilaImagePlotly;
+        "stencila-image-vega": StencilaImageVega;
         "stencila-input": StencilaInput;
         "stencila-menu": StencilaMenu;
         "stencila-menu-item": StencilaMenuItem;
@@ -929,6 +967,7 @@ declare module "@stencil/core" {
             "stencila-icon": LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
             "stencila-image-object": LocalJSX.StencilaImageObject & JSXBase.HTMLAttributes<HTMLStencilaImageObjectElement>;
             "stencila-image-plotly": LocalJSX.StencilaImagePlotly & JSXBase.HTMLAttributes<HTMLStencilaImagePlotlyElement>;
+            "stencila-image-vega": LocalJSX.StencilaImageVega & JSXBase.HTMLAttributes<HTMLStencilaImageVegaElement>;
             "stencila-input": LocalJSX.StencilaInput & JSXBase.HTMLAttributes<HTMLStencilaInputElement>;
             "stencila-menu": LocalJSX.StencilaMenu & JSXBase.HTMLAttributes<HTMLStencilaMenuElement>;
             "stencila-menu-item": LocalJSX.StencilaMenuItem & JSXBase.HTMLAttributes<HTMLStencilaMenuItemElement>;
