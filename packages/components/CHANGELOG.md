@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.31.2](https://github.com/stencila/designa/compare/@stencila/components@0.31.1...@stencila/components@0.31.2) (2021-04-27)
+
+
+### Bug Fixes
+
+* **Deps:** Update dependencies ([53bb6ba](https://github.com/stencila/designa/commit/53bb6baaa9bc184a731f216c95983a340eb25a8c))
+
+
+
+
+
 ## [0.31.1](https://github.com/stencila/designa/compare/@stencila/components@0.31.0...@stencila/components@0.31.1) (2021-04-27)
 
 **Note:** Version bump only for package @stencila/components
