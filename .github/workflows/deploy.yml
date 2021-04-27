@@ -80,12 +80,14 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # Verify that NPM authentication succeeded, try to prevent failed releases
+      # @see https://github.com/lerna/lerna/issues/2788#issuecomment-774265338
       - name: Check NPM authentication
         if: success() && (github.ref == 'refs/heads/master')
         run: npm whoami
 
       - name: Publish package
-        run: npx lerna publish --yes
+        # @see https://github.com/lerna/lerna/issues/2788#issuecomment-7742653388
+        run: npx lerna publish --yes --no-verify-access
         if: success() && (github.ref == 'refs/heads/master')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
