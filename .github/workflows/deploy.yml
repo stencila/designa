@@ -37,7 +37,8 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: npm ci
-      - run: npm run bootstrap
+      # Retry bootstrap command in case it fails. Lerna can be flaky sometimes.
+      - run: npm run bootstrap || npm run bootstrap
 
       - name: Build Brand Assets
         run: npm run build:brand
