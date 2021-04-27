@@ -78,6 +78,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      # Verify that NPM authentication succeeded, try to prevent failed releases
+      - name: Check NPM authentication
+        if: success() && (github.ref == 'refs/heads/master')
+        run: npm whoami
+
       - name: Publish package
         run: npx lerna publish --yes
         if: success() && (github.ref == 'refs/heads/master')
