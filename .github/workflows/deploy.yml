@@ -65,6 +65,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           storybookBuildDir: docs
+          exitOnceUploaded: true
 
       # Publish packages if running on main branch
       - name: Configure services
