@@ -1,6 +1,6 @@
 {
   "name": "@stencila/components",
-  "version": "0.31.3",
+  "version": "0.31.4",
   "description": "Stencila Web Components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -68,8 +68,8 @@
     "@nll/datum": "^3.5.0",
     "@popperjs/core": "^2.9.2",
     "@stencila/executa": "^1.15.7",
-    "@stencila/style-material": "0.12.5",
-    "@stencila/style-stencila": "0.22.2",
+    "@stencila/style-material": "0.12.6",
+    "@stencila/style-stencila": "0.22.3",
     "animate-presence": "^0.2.1",
     "feather-icons": "^4.28.0",
     "mem": "^8.1.1",
