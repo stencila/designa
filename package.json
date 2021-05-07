@@ -17,13 +17,13 @@
     "npm": ">=6.10.0"
   },
   "scripts": {
+    "prepare": "lerna bootstrap",
     "dev": "concurrently \"npm run storybook\" \"npm run build:watch\"",
     "build": "lerna run build",
     "build:brand": "lerna run build --scope '@stencila/brand'",
     "build:components": "lerna run build --scope '@stencila/components'",
     "build:styles": "lerna run build --scope '@stencila/style*'",
     "build:watch": "lerna run build:watch --stream --parallel",
-    "bootstrap": "lerna bootstrap --force-local",
     "storybook": "start-storybook -p 9006 -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist",
     "storybook:build": "build-storybook -o docs -s ./packages/brand/dist,./packages/style-material/dist,./packages/style-stencila/dist,./packages/components/dist",
     "test": "lerna run test",
@@ -113,6 +113,5 @@
         "groupName": "CodeMirror editor packages"
       }
     ]
-  },
-  "dependencies": {}
+  }
 }

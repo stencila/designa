@@ -19,12 +19,12 @@ We aim to maintain browser support for popular browsers according to [Browsersli
 
 This repository is a [monorepo](https://en.wikipedia.org/wiki/Monorepo), and contains the following packages.
 
-|Name                                        | Description                                                                                                      | NPM
-|--------------------------------------------|------------------------------------------------------------------------------------------------------------------|-----
-[components](./packages/components)          | Web Components built using [StencilJS](https://stenciljs.com), styled using the `style-*` packages listed below. | [![NPM](https://img.shields.io/npm/v/@stencila/components.svg?style=flat)](https://www.npmjs.com/package/@stencila/components)
-[style-stencila](./packages/style-stencila)  | CSS for styling semantic HTML markup in Stencila's own visual language.                                          | [![NPM](https://img.shields.io/npm/v/@stencila/style-stencila.svg?style=flat)](https://www.npmjs.com/package/@stencila/style-stencila)
-[style-material](./packages/style-material)  | CSS for styling semantic HTML markup in Google's Material Design visual language.                                | [![NPM](https://img.shields.io/npm/v/@stencila/style-material.svg?style=flat)](https://www.npmjs.com/package/@stencila/style-material)
-[brand](./packages/brand)                    | Stencila branding elements such as fonts, logos, and illustrations.                                              | [![NPM](https://img.shields.io/npm/v/@stencila/brand.svg?style=flat)](https://www.npmjs.com/package/@stencila/brand)
+| Name                                        | Description                                                                                                      | NPM                                                                                                                                    |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| [components](./packages/components)         | Web Components built using [StencilJS](https://stenciljs.com), styled using the `style-*` packages listed below. | [![NPM](https://img.shields.io/npm/v/@stencila/components.svg?style=flat)](https://www.npmjs.com/package/@stencila/components)         |
+| [style-stencila](./packages/style-stencila) | CSS for styling semantic HTML markup in Stencila's own visual language.                                          | [![NPM](https://img.shields.io/npm/v/@stencila/style-stencila.svg?style=flat)](https://www.npmjs.com/package/@stencila/style-stencila) |
+| [style-material](./packages/style-material) | CSS for styling semantic HTML markup in Google's Material Design visual language.                                | [![NPM](https://img.shields.io/npm/v/@stencila/style-material.svg?style=flat)](https://www.npmjs.com/package/@stencila/style-material) |
+| [brand](./packages/brand)                   | Stencila branding elements such as fonts, logos, and illustrations.                                              | [![NPM](https://img.shields.io/npm/v/@stencila/brand.svg?style=flat)](https://www.npmjs.com/package/@stencila/brand)                   |
 
 ## 📜 Documentation
 
@@ -38,7 +38,7 @@ To get started with development, clone this repo:
 
 Then install the necessary Node packages:
 
-`npm install && npm run bootstrap`
+`npm install`
 
 Build packages and watch for changes:
 
