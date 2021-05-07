@@ -27,18 +27,16 @@ jobs:
         with:
           node-version: 14
 
-      - name: restore Lerna
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      # - name: restore Lerna
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       ~/.npm
+      #     key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-node-
 
       - run: npm ci
-      # Retry bootstrap command in case it fails. Lerna can be flaky sometimes.
-      - run: npm run bootstrap || npm run bootstrap
 
       - name: Build Brand Assets
         run: npm run build:brand
