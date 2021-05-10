@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.31.5](https://github.com/stencila/designa/compare/@stencila/components@0.31.4...@stencila/components@0.31.5) (2021-05-10)
+
+
+### Bug Fixes
+
+* **Deps:** Update CodeMirror dependencies ([43d4999](https://github.com/stencila/designa/commit/43d4999b4c7e31f4238cc7389f2f65d4b03117a6))
+
+
+
+
+
 ## [0.31.4](https://github.com/stencila/designa/compare/@stencila/components@0.31.3...@stencila/components@0.31.4) (2021-05-07)
 
 **Note:** Version bump only for package @stencila/components
