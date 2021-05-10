@@ -36,7 +36,6 @@ import {
   Watch,
 } from '@stencil/core'
 import { CodeError } from '@stencila/schema'
-import { deleteToLineStart } from './commands'
 import { codeErrors, updateErrors } from './customizations/errorPanel'
 
 export interface EditorContents {
@@ -243,10 +242,6 @@ export class Editor {
         {
           key: 'Ctrl-Space',
           run: startCompletion,
-        },
-        {
-          key: 'Mod-Backspace',
-          run: deleteToLineStart,
         },
         {
           key: 'Shift-Enter',
