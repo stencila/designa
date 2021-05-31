@@ -21,7 +21,7 @@ const colors = {
   primary: generateColors('primary', 'blue'),
   neutral: generateColors('neutral', 'gray'),
   success: generateColors('success', 'green'),
-  warn: generateColors('warn', 'orange'),
+  warn: generateColors('warn', 'yellow'),
   danger: generateColors('danger', 'red'),
 }
 
@@ -56,9 +56,5 @@ module.exports = {
     borderOpacity: false,
     placeholderOpacity: false,
     textOpacity: false,
-  },
-  future: {
-    purgeLayersByDefault: false,
-    removeDeprecatedGapUtilities: true,
   },
 }

@@ -21,12 +21,12 @@ stencila-code-expression {
   }
 
   .actions {
-    @apply relative inline-flex flex-initial whitespace-no-wrap rounded-l;
+    @apply relative inline-flex flex-initial whitespace-nowrap rounded-l;
     background-color: var(--background-buttons);
   }
 
   .text {
-    @apply inline-block w-0 min-w-0 px-0 py-1 overflow-hidden font-mono text-xs whitespace-no-wrap duration-150 ease-out text-key;
+    @apply inline-block w-0 min-w-0 px-0 py-1 overflow-hidden font-mono text-xs whitespace-nowrap duration-150 ease-out text-key;
     background-color: var(--background-editor);
     transition-property: width;
   }
@@ -49,7 +49,8 @@ stencila-code-expression {
   }
 
   .slot.hidden {
-    @apply hidden;
+    /* @apply hidden; */
+    display: none;
   }
 
   .output {

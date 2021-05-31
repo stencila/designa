@@ -1,10 +1,11 @@
 const path = require('path')
 
-module.exports = {
+module.exports = (ctx) => ({
   modules: false,
+  map: ctx.options.map,
   plugins: [
     require('postcss-mixins')({
-      mixinsDir: path.join(__dirname, 'utils', 'css', 'mixins')
+      mixinsDir: path.join(__dirname, 'utils', 'css', 'mixins'),
     }),
     require('postcss-import'),
     require('postcss-import-url')({ modernBrowser: true }),
@@ -13,6 +14,8 @@ module.exports = {
     require('postcss-nested'),
     require('postcss-custom-properties')(),
     require('postcss-host'),
-    require('autoprefixer')
-  ]
-}
+    require('cssnano')({
+      preset: ['advanced', { discardComments: false }],
+    }),
+  ],
+})

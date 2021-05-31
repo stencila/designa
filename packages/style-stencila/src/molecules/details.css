@@ -16,7 +16,8 @@ stencila-details {
     @apply overflow-hidden;
 
     &.hidden {
-      @apply hidden;
+      /* @apply hidden; */
+      display: none;
     }
   }
 

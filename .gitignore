@@ -1,5 +1,6 @@
 .git
 **/.cache
+**/.parcel-cache
 **/dist
 /docs
 **/node_modules
