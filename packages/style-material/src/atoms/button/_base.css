@@ -10,17 +10,17 @@ button {
 
   &.xsmall,
   &[size='xsmall'] {
-    @apply px-2 py-1 text-xs rounded-sm;
+    @apply px-2 py-1 text-xs leading-none rounded-sm;
   }
 
   &.small,
   &[size='small'] {
-    @apply p-2 text-sm;
+    @apply p-2 text-sm leading-none;
   }
 
   &.large,
   &[size='large'] {
-    @apply px-6 py-3 text-2xl;
+    @apply px-6 py-3 text-2xl leading-none;
   }
 
   &:hover {

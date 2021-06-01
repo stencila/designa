@@ -28,7 +28,7 @@
   },
   "scripts": {
     "build": "parcel build './src/**/*.{ts,css,jpg,jpeg,png,gif,svg}' --no-scope-hoist --no-optimize",
-    "build:watch": "parcel watch './src/**/*.{ts,css,jpg,jpeg,png,gif,svg}' --no-scope-hoist --no-optimize"
+    "build:watch": "parcel watch './src/**/*.{ts,css,jpg,jpeg,png,gif,svg}'"
   },
   "bugs": {
     "url": "https://github.com/stencila/style/issues"

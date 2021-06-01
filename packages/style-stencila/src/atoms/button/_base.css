@@ -1,22 +1,22 @@
 a.button,
 button {
-  @apply inline-block px-4 py-2 m-0 text-base font-semibold leading-none no-underline whitespace-nowrap border-none font-display;
+  @apply inline-block px-4 py-2 m-0 text-base leading-none font-semibold leading-none no-underline whitespace-nowrap border-none font-display;
   background-image: none;
   transition: color 120ms ease-out, background-color 120ms ease-out;
 
   &.xsmall,
   &[size='xsmall'] {
-    @apply px-2 py-1 text-xs rounded-sm;
+    @apply px-2 py-1 text-xs leading-none rounded-sm;
   }
 
   &.small,
   &[size='small'] {
-    @apply px-3 py-2 text-sm;
+    @apply px-3 py-2 text-sm leading-none;
   }
 
   &.large,
   &[size='large'] {
-    @apply px-6 py-3 text-2xl;
+    @apply px-6 py-3 text-2xl leading-none;
   }
 
   &:hover {
