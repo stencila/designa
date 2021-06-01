@@ -1,10 +1,6 @@
 @define-mixin buttonColorVariant $color, $hoverColor: $(color) {
   &.color-$(color) {
-    @apply bg-$(color)-500 text-stock;
-
-    &:hover {
-      @apply bg-$(hoverColor)-700 text-stock;
-    }
+    @apply bg-$(color)-500 hover:bg-$(hoverColor)-700 text-stock;
 
     &[disabled],
     &[disabled]:active,

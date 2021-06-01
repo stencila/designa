@@ -80,7 +80,7 @@ button {
 }
 
 :host {
-  &::slotted(bytton > *) {
+  &::slotted(button > *) {
     @apply align-text-bottom;
   }
 

@@ -1,6 +1,5 @@
-@import './variables';
 @import './tailwind';
-@import './tailwindUtils';
+@import './variables';
 @import './typography';
 @import './atoms';
 @import './molecules';
