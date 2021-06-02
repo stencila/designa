@@ -92,7 +92,7 @@ export class Input {
 
     return (
       <Host class={{ inline: this.inline }}>
-        {this.iconStart && (
+        {this.iconStart !== undefined && (
           <stencila-icon icon={this.iconStart}></stencila-icon>
         )}
         <input

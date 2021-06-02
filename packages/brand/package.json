@@ -11,7 +11,10 @@
   "author": "Stencila <hello@stenci.la>",
   "homepage": "https://stenci.la",
   "license": "Apache-2.0",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "targets": {
+    "main": false
+  },
   "files": [
     "dist",
     "src"
@@ -24,16 +27,15 @@
     "url": "git+https://github.com/stencila/style.git"
   },
   "scripts": {
-    "build": "parcel build ./src/* ./src/**/* ./src/**/**/* -d ./dist --public-url ./",
-    "build:watch:brand": "parcel watch ./src/* ./src/**/* ./src/**/**/* -d ./dist --public-url ./",
-    "moveFonts": "mv ./dist/*.woff* ./dist/fonts"
+    "build": "parcel build './src/**/*.{ts,css,jpg,jpeg,png,gif,svg}' --no-scope-hoist --no-optimize",
+    "build:watch": "parcel watch './src/**/*.{ts,css,jpg,jpeg,png,gif,svg}'"
   },
   "bugs": {
     "url": "https://github.com/stencila/style/issues"
   },
   "devDependencies": {
     "@abide-community/parcel-plugin-clean-out-dir": "1.0.0",
-    "concurrently": "6.0.2",
-    "parcel-plugin-css-pretransform": "1.0.0"
+    "concurrently": "6.2.0",
+    "parcel": "2.0.0-beta.3.1"
   }
 }

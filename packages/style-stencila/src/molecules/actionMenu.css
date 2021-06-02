@@ -35,7 +35,7 @@
   }
 
   .actionContainer {
-    @apply inline-block overflow-hidden whitespace-no-wrap align-middle;
+    @apply inline-block overflow-hidden whitespace-nowrap align-middle;
     width: var(--max-width);
     transition: width 120ms ease-in-out;
 

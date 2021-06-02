@@ -1,5 +1,5 @@
 :host,
 stencila-tooltip-element {
-  @apply z-50 inline-block w-auto px-2 py-1 text-xs whitespace-no-wrap rounded shadow bg-neutral-700 text-stock font-body;
+  @apply z-50 inline-block w-auto px-2 py-1 text-xs whitespace-nowrap rounded shadow bg-neutral-700 text-stock font-body;
   width: auto !important;
 }

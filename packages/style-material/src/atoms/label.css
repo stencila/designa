@@ -1,5 +1,5 @@
 label {
-  @apply block mb-1 text-xs text-left text-neutral-700;
+  @apply block mb-1 text-xs leading-none text-left text-neutral-700;
 
   & + & {
     @apply mt-2;

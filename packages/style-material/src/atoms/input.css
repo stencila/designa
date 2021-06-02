@@ -1,6 +1,6 @@
 :host,
 stencila-input {
-  @apply relative block text-base;
+  @apply relative block text-base leading-none;
 
   &.inline {
     @apply inline-block;
@@ -17,7 +17,7 @@ stencila-input {
   }
 
   input {
-    @apply w-full p-2 text-base border border-solid rounded border-neutral-300;
+    @apply w-full p-2 text-base leading-none border border-solid rounded border-neutral-300;
 
     &:active,
     &:focus {
