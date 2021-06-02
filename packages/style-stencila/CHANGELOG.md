@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.22.3...@stencila/style-stencila@0.23.0) (2021-06-02)
+
+
+### Bug Fixes
+
+* **Styles:** Fix PostCSS configuration ([b4c63e4](https://github.com/stencila/style/commit/b4c63e4dd15ebaedda0a2fd34740cd1e50270efe))
+
+
+### Features
+
+* **Deps:** Dependency major version updates ([0e9ed2c](https://github.com/stencila/style/commit/0e9ed2cc5805966b8eab6a7dd8c612747b243ee6))
+
+
+
+
+
 ## [0.22.3](https://github.com/stencila/style/compare/@stencila/style-stencila@0.22.2...@stencila/style-stencila@0.22.3) (2021-05-07)
 
 **Note:** Version bump only for package @stencila/style-stencila
