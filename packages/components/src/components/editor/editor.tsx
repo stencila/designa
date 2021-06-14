@@ -80,10 +80,18 @@ export class Editor {
   @Prop()
   public languageCapabilities: string[] = [
     'Bash',
+    'Dockerfile',
+    'JavaScript',
+    'JSON',
+    'LaTeX',
+    'Markdown',
+    'Python',
     'R',
     'RMD',
-    'Python',
-    'LaTeX',
+    'Plain Text',
+    'TOML',
+    'XML',
+    'YAML',
   ]
 
   /**
@@ -131,7 +139,7 @@ export class Editor {
   @Event() setLanguage: EventEmitter<string | undefined>
 
   private getLang = async (language: string) => {
-    switch (language) {
+    switch (language.toLowerCase()) {
       case 'r': {
         const { StreamLanguage } = await import('@codemirror/stream-parser')
         const { r } = await import('@codemirror/legacy-modes/mode/r')
@@ -145,15 +153,56 @@ export class Editor {
         return StreamLanguage.define(shell)
       }
       case 'latex':
+      case 'stex':
       case 'tex': {
         const { StreamLanguage } = await import('@codemirror/stream-parser')
         const { stexMath } = await import('@codemirror/legacy-modes/mode/stex')
         return StreamLanguage.define(stexMath)
       }
-      case 'python':
-      default: {
+      case 'toml': {
+        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { toml } = await import('@codemirror/legacy-modes/mode/toml')
+        return StreamLanguage.define(toml)
+      }
+      case 'yaml': {
+        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { yaml } = await import('@codemirror/legacy-modes/mode/yaml')
+        return StreamLanguage.define(yaml)
+      }
+      case 'dockerfile': {
+        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { dockerFile } = await import(
+          '@codemirror/legacy-modes/mode/dockerfile'
+        )
+        return StreamLanguage.define(dockerFile)
+      }
+      case 'javascript': {
+        const { javascript } = await import('@codemirror/lang-javascript')
+        return javascript()
+      }
+      case 'json': {
+        const { json } = await import('@codemirror/lang-json')
+        return json()
+      }
+      case 'xml': {
+        const { xml } = await import('@codemirror/lang-xml')
+        return xml()
+      }
+      case 'python': {
         const { python } = await import('@codemirror/lang-python')
         return python()
+      }
+      case 'rmd': {
+        const { markdown } = await import('@codemirror/lang-markdown')
+        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { r } = await import('@codemirror/legacy-modes/mode/r')
+        return markdown({ defaultCodeLanguage: StreamLanguage.define(r) })
+      }
+      case 'md':
+      case 'markdown':
+      default: {
+        const { markdown } = await import('@codemirror/lang-markdown')
+        return markdown()
       }
     }
   }
