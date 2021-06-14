@@ -66,6 +66,7 @@
     "@codemirror/lang-xml": "^0.18.0",
     "@codemirror/legacy-modes": "^0.18.0",
     "@codemirror/panel": "^0.18.2",
+    "@codemirror/search": "^0.18.4",
     "@codemirror/state": "^0.18.7",
     "@codemirror/stream-parser": "^0.18.2",
     "@codemirror/view": "^0.18.17",
