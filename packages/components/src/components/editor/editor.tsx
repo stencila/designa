@@ -10,12 +10,14 @@ import { foldGutter, foldKeymap } from '@codemirror/fold'
 import { lineNumbers } from '@codemirror/gutter'
 import { defaultHighlightStyle } from '@codemirror/highlight'
 import { history, historyKeymap } from '@codemirror/history'
-import { python } from '@codemirror/lang-python'
-import { r } from '@codemirror/legacy-modes/mode/r'
-import { shell } from '@codemirror/legacy-modes/mode/shell'
 import { bracketMatching } from '@codemirror/matchbrackets'
-import { Compartment, EditorState, Extension, Prec } from '@codemirror/state'
-import { StreamLanguage } from '@codemirror/stream-parser'
+import {
+  Compartment,
+  EditorState,
+  Extension,
+  Prec,
+  StateEffect,
+} from '@codemirror/state'
 import {
   Command,
   drawSelection,
@@ -76,7 +78,13 @@ export class Editor {
    * List of all supported programming languages
    */
   @Prop()
-  public languageCapabilities: string[] = ['Bash', 'R', 'Python']
+  public languageCapabilities: string[] = [
+    'Bash',
+    'R',
+    'RMD',
+    'Python',
+    'LaTeX',
+  ]
 
   /**
    * Disallow editing of the editor contents when set to `true`
@@ -90,11 +98,9 @@ export class Editor {
   @Watch('readOnly')
   readOnlyChanged(nextReadOnly: boolean, prevReadOnly: boolean): void {
     if (nextReadOnly !== prevReadOnly) {
-      this.editorRef.dispatch({
-        effects: [
-          this.readOnlyConf.reconfigure(EditorView.editable.of(!this.readOnly)),
-        ],
-      })
+      this.dispatchEffect(
+        this.readOnlyConf.reconfigure(EditorView.editable.of(!this.readOnly))
+      )
     }
   }
 
@@ -109,23 +115,44 @@ export class Editor {
   public activeLanguage: string =
     this.languageCapabilities[0]?.toLowerCase() ?? ''
 
+  private dispatchEffect = (effect: StateEffect<unknown>) => {
+    const docState = this.editorRef.state
+
+    const transaction = docState.update({
+      effects: [effect],
+    })
+
+    this.editorRef.dispatch(transaction)
+  }
+
   /**
    * Event emitted when the language of the editor is changed.
    */
   @Event() setLanguage: EventEmitter<string | undefined>
 
-  private getLang = (language: string) => {
+  private getLang = async (language: string) => {
     switch (language) {
       case 'r': {
+        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { r } = await import('@codemirror/legacy-modes/mode/r')
         return StreamLanguage.define(r)
       }
       case 'bash':
       case 'shell':
       case 'sh': {
+        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { shell } = await import('@codemirror/legacy-modes/mode/shell')
         return StreamLanguage.define(shell)
+      }
+      case 'latex':
+      case 'tex': {
+        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { stexMath } = await import('@codemirror/legacy-modes/mode/stex')
+        return StreamLanguage.define(stexMath)
       }
       case 'python':
       default: {
+        const { python } = await import('@codemirror/lang-python')
         return python()
       }
     }
@@ -133,24 +160,20 @@ export class Editor {
 
   // Dynamic CodeMirror states need to be "compartmentalized". @see https://codemirror.net/6/docs/ref/#state.Compartment
   private languageConf = new Compartment()
-  private languageSyntax = this.getLang(this.activeLanguage)
 
   /**
    * Changes the active programming language of the editor.
    * Does not affect syntax highlighting.
    */
-  private onSetLanguage = (e: Event): void => {
+  private onSetLanguage = async (e: Event): Promise<void> => {
     const target = e.currentTarget as HTMLSelectElement
     const language = target.value.toLowerCase()
     this.activeLanguage = language
     this.setLanguage.emit(target.value)
 
-    const docState = this.editorRef.state
-    const transaction = docState.update({
-      effects: [this.languageConf.reconfigure(this.getLang(language))],
-    })
+    const lang = await this.getLang(language)
 
-    this.editorRef.dispatch(transaction)
+    this.dispatchEffect(this.languageConf.reconfigure(lang))
   }
 
   /**
@@ -181,17 +204,61 @@ export class Editor {
   @Prop()
   public autofocus = false
 
+  // Dynamic CodeMirror states need to be "compartmentalized". @see https://codemirror.net/6/docs/ref/#state.Compartment
+  private lineNumbersConf = new Compartment()
+
   /**
    * Determines the visibility of line numbers
    */
   @Prop()
   public lineNumbers = true
 
+  @Watch('lineNumbers')
+  onSetLineNumbers(nextValue: boolean, prevValue: boolean): void {
+    if (nextValue !== prevValue) {
+      this.dispatchEffect(
+        this.lineNumbersConf.reconfigure(nextValue ? lineNumbers() : [])
+      )
+    }
+  }
+
+  // Dynamic CodeMirror states need to be "compartmentalized". @see https://codemirror.net/6/docs/ref/#state.Compartment
+  private lineWrappingConf = new Compartment()
+
+  /**
+   * Control line wrapping of text inside the editor
+   */
+  @Prop()
+  public lineWrapping = false
+
+  @Watch('lineWrapping')
+  onSetLineWrapping(nextValue: boolean, prevValue: boolean): void {
+    if (nextValue !== prevValue) {
+      this.dispatchEffect(
+        this.lineWrappingConf.reconfigure(
+          nextValue ? EditorView.lineWrapping : []
+        )
+      )
+    }
+  }
+
+  // Dynamic CodeMirror states need to be "compartmentalized". @see https://codemirror.net/6/docs/ref/#state.Compartment
+  private foldGutterConf = new Compartment()
+
   /**
    * Enables abiility to fold sections of code
    */
   @Prop()
   public foldGutter = true
+
+  @Watch('foldGutter')
+  onSetfoldGutter(nextValue: boolean, prevValue: boolean): void {
+    if (nextValue !== prevValue) {
+      this.dispatchEffect(
+        this.foldGutterConf.reconfigure(nextValue ? foldGutter() : [])
+      )
+    }
+  }
 
   /**
    * Custom keyboard shortcuts to pass along to CodeMirror
@@ -214,13 +281,15 @@ export class Editor {
     })
   }
 
-  private initCodeMirror = (): void => {
+  private initCodeMirror = async (): Promise<void> => {
     const root = this.el
     const slot = root.querySelector('[slot]')
     const textContent =
       slot?.textContent ??
       root?.querySelector(`#${cssIds.editorTarget}`)?.textContent ??
       ''
+
+    const lang = await this.getLang(this.activeLanguage)
 
     const extensions: Extension[] = [
       history(),
@@ -229,7 +298,12 @@ export class Editor {
       bracketMatching(),
       closeBrackets(),
       Prec.fallback(defaultHighlightStyle),
-      this.languageConf.of(this.languageSyntax),
+      this.languageConf.of(lang),
+      this.lineWrappingConf.of(
+        this.lineWrapping ? EditorView.lineWrapping : []
+      ),
+      this.lineNumbersConf.of(this.lineNumbers ? lineNumbers() : []),
+      this.foldGutterConf.of(this.foldGutter ? foldGutter() : []),
       drawSelection(),
       EditorState.allowMultipleSelections.of(true),
       highlightSpecialChars(),
@@ -252,14 +326,6 @@ export class Editor {
       this.readOnlyConf.of(EditorView.editable.of(!this.readOnly)),
       codeErrors(),
     ]
-
-    if (this.lineNumbers) {
-      extensions.push(lineNumbers())
-    }
-
-    if (this.foldGutter) {
-      extensions.push(foldGutter())
-    }
 
     this.editorRef = new EditorView({
       state: EditorState.create({
@@ -322,9 +388,14 @@ export class Editor {
 
   protected componentDidLoad() {
     this.initCodeMirror()
-    if (this.autofocus) {
-      this.focusEditor()
-    }
+      .then(() => {
+        if (this.autofocus) {
+          this.focusEditor()
+        }
+      })
+      .catch((err) => {
+        console.log('Encountered error while initializing code editor\n', err)
+      })
   }
 
   protected disconnectedCallback() {
