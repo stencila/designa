@@ -34,7 +34,7 @@
     "@fullhuman/postcss-purgecss": "4.0.3",
     "@stencil/core": "2.6.0",
     "@stencil/postcss": "2.0.0",
-    "@stencila/schema": "1.7.3",
+    "@stencila/schema": "1.8.1",
     "@types/feather-icons": "4.7.0",
     "@types/jest": "26.0.23",
     "@types/plotly.js": "1.54.10",
