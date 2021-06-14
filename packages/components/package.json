@@ -32,9 +32,9 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "4.0.3",
-    "@stencil/core": "2.5.2",
+    "@stencil/core": "2.6.0",
     "@stencil/postcss": "2.0.0",
-    "@stencila/schema": "1.5.3",
+    "@stencila/schema": "1.7.3",
     "@types/feather-icons": "4.7.0",
     "@types/jest": "26.0.23",
     "@types/plotly.js": "1.54.10",
@@ -79,7 +79,7 @@
     "mem": "^8.1.1",
     "pluralize": "^8.0.0",
     "vega": "^5.20.2",
-    "vega-embed": "^6.17.0",
+    "vega-embed": "^6.18.2",
     "vega-lite": "^5.1.0",
     "webfontloader": "^1.6.28",
     "wretch": "^1.7.4"
