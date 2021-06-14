@@ -206,6 +206,10 @@ export namespace Components {
          */
         "lineNumbers": boolean;
         /**
+          * Control line wrapping of text inside the editor
+         */
+        "lineWrapping": boolean;
+        /**
           * Disallow editing of the editor contents when set to `true`
          */
         "readOnly": boolean;
@@ -733,6 +737,10 @@ declare namespace LocalJSX {
           * Determines the visibility of line numbers
          */
         "lineNumbers"?: boolean;
+        /**
+          * Control line wrapping of text inside the editor
+         */
+        "lineWrapping"?: boolean;
         /**
           * Event emitted when the language of the editor is changed.
          */
