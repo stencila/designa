@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.33.0](https://github.com/stencila/designa/compare/@stencila/components@0.32.0...@stencila/components@0.33.0) (2021-06-15)
+
+
+### Features
+
+* **Editor:** Add ability to pass down contents as a prop ([201654a](https://github.com/stencila/designa/commit/201654a43c65e1687e8706ef4eb9c607a4bd886d))
+* **Editor:** Add search functionality to code editor ([15892f2](https://github.com/stencila/designa/commit/15892f2940083e1a2b759e805f29d5c36b743e8a))
+* **Editor:** Add support for more language syntaxes ([d7747fc](https://github.com/stencila/designa/commit/d7747fcb84c1ac6fa1b966fed747b409ed673757))
+
+
+
+
+
 # [0.32.0](https://github.com/stencila/designa/compare/@stencila/components@0.31.5...@stencila/components@0.32.0) (2021-06-02)
 
 
