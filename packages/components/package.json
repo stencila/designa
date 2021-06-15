@@ -48,7 +48,7 @@
     "postcss-custom-properties": "11.0.0",
     "postcss-import": "14.0.2",
     "puppeteer": "10.0.0",
-    "tailwindcss": "1.9.6"
+    "tailwindcss": "2.1.4"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^0.18.7",
