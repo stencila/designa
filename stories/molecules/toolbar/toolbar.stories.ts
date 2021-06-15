@@ -20,8 +20,8 @@ export default {
     position: {
       control: {
         type: 'inline-radio',
-        options: ['static', 'fixed'],
       },
+      options: ['static', 'fixed'],
     },
   },
   args: {

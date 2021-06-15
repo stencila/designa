@@ -1,14 +1,14 @@
 module.exports = {
-  // stories: ['../stories/**/*.stories.@(ts|js|mdx)'],
-  presets: ['@storybook/addon-docs/preset'],
   addons: [
+    '@storybook/addon-docs',
     '@storybook/addon-controls',
-    '@storybook/addon-a11y/register',
-    '@storybook/addon-backgrounds/register',
-    '@storybook/addon-options/register',
-    '@storybook/addon-storysource/register',
-    '@storybook/addon-viewport/register',
-    '@storybook/addon-cssresources/register',
-    'storybook-addon-root-attribute/register',
+    '@storybook/addon-a11y',
+    '@storybook/addon-backgrounds',
+    '@storybook/addon-storysource',
+    '@storybook/addon-viewport',
+    '@storybook/addon-cssresources',
   ],
+  features: {
+    postcss: false,
+  },
 }

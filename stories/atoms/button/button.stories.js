@@ -15,31 +15,31 @@ export default {
       defaultValue: 'magic',
       control: {
         type: 'select',
-        options: iconNames,
       },
+      options: iconNames,
     },
     color: {
       defaultValue: 'primary',
       control: {
         type: 'select',
-        options: [
-          'primary',
-          'success',
-          'warn',
-          'danger',
-          'neutral',
-          'stock',
-          'key',
-          'brand',
-        ],
       },
+      options: [
+        'primary',
+        'success',
+        'warn',
+        'danger',
+        'neutral',
+        'stock',
+        'key',
+        'brand',
+      ],
     },
     size: {
       defaultValue: 'default',
       control: {
         type: 'select',
-        options: ['xsmall', 'small', 'default', 'large'],
       },
+      options: ['xsmall', 'small', 'default', 'large'],
     },
   },
 }
