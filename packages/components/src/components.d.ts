@@ -177,6 +177,10 @@ export namespace Components {
          */
         "autofocus": boolean;
         /**
+          * Text contents of the editor
+         */
+        "contents"?: string;
+        /**
           * List of errors to display at the bottom of the code editor section. If the error is a `string`, then it will be rendered as a warning.
          */
         "errors"?: CodeError[] | string[];
@@ -712,6 +716,10 @@ declare namespace LocalJSX {
           * Autofocus the editor on page load
          */
         "autofocus"?: boolean;
+        /**
+          * Text contents of the editor
+         */
+        "contents"?: string;
         /**
           * List of errors to display at the bottom of the code editor section. If the error is a `string`, then it will be rendered as a warning.
          */
