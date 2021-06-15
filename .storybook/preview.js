@@ -1,31 +1,6 @@
-import { withCssResources } from '@storybook/addon-cssresources'
 import { create } from '@storybook/theming'
-import {
-  addDecorator,
-  addParameters,
-  configure,
-  setCustomElements,
-} from '@storybook/web-components'
-import { withRootAttribute } from 'storybook-addon-root-attribute'
+import { addParameters, setCustomElements } from '@storybook/web-components'
 import customElements from '../packages/components/dist/custom-elements.json'
-
-const cssresources = [
-  {
-    id: `CSS Variables`,
-    code: `<link rel="stylesheet" type="text/css" href="./stencila-components/stencila-components.css"></link>`,
-    picked: false,
-  },
-  {
-    id: `Stencila`,
-    code: `<link rel="stylesheet" type="text/css" href="./index-stencila.css"></link>`,
-    picked: false,
-  },
-  {
-    id: `Material`,
-    code: `<link rel="stylesheet" type="text/css" href="./index-material.css"></link>`,
-    picked: false,
-  },
-]
 
 // https://storybook.js.org/docs/configurations/theming/
 const theme = create({
@@ -66,9 +41,6 @@ const atomicSort = ([a], [b]) => {
 
 setCustomElements(customElements)
 
-addDecorator(withCssResources)
-addDecorator(withRootAttribute)
-
 addParameters({
   a11y: {
     config: {},
@@ -77,32 +49,8 @@ addParameters({
       restoreScroll: true,
     },
   },
-  cssresources,
   docs: { theme: theme },
   options: {
     storySort: atomicSort,
   },
-  rootAttribute: {
-    attribute: 'mode',
-    defaultState: {
-      name: 'Stencila',
-      value: null,
-    },
-    states: [
-      {
-        name: 'Material',
-        value: 'material',
-      },
-    ],
-  },
 })
-
-const req = require.context('../stories', true, /\.stories\.(ts|js|mdx)$/)
-configure(req, module)
-if (module.hot) {
-  module.hot.accept(req.id, () => {
-    const currentLocationHref = window.location.href
-    window.history.pushState(null, null, currentLocationHref)
-    window.location.reload()
-  })
-}

@@ -1,4 +1,5 @@
 module.exports = {
+  stories: ['../stories/**/*.stories.@(ts|js|mdx)'],
   addons: [
     '@storybook/addon-docs',
     '@storybook/addon-controls',
@@ -6,7 +7,6 @@ module.exports = {
     '@storybook/addon-backgrounds',
     '@storybook/addon-storysource',
     '@storybook/addon-viewport',
-    '@storybook/addon-cssresources',
   ],
   features: {
     postcss: false,
