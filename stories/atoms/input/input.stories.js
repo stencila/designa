@@ -24,29 +24,21 @@ export default {
       defaultValue: 'key',
       control: {
         type: 'select',
-        options: iconNames,
       },
+      options: iconNames,
     },
     inputmode: {
       control: {
         type: 'select',
-        options: [
-          'text',
-          'tel',
-          'url',
-          'email',
-          'numeric',
-          'decimal',
-          'search',
-        ],
       },
+      options: ['text', 'tel', 'url', 'email', 'numeric', 'decimal', 'search'],
     },
     type: {
       defaultValue: 'text',
       control: {
         type: 'select',
-        options: ['text', 'number', 'password'],
       },
+      options: ['text', 'number', 'password'],
     },
   },
 }

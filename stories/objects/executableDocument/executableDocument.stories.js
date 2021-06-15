@@ -8,8 +8,8 @@ export default {
       defaultValue: 'fixed',
       control: {
         type: 'select',
-        options: ['fixed', 'static'],
       },
+      options: ['fixed', 'static'],
     },
   },
 }

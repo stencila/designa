@@ -11,7 +11,7 @@ import { lineNumbers } from '@codemirror/gutter'
 import { defaultHighlightStyle } from '@codemirror/highlight'
 import { history, historyKeymap } from '@codemirror/history'
 import { bracketMatching } from '@codemirror/matchbrackets'
-import { searchKeymap, searchConfig } from '@codemirror/search'
+import { searchConfig, searchKeymap } from '@codemirror/search'
 import {
   Compartment,
   EditorState,
@@ -74,6 +74,19 @@ export class Editor {
   private el: HTMLStencilaEditorElement
 
   private editorRef: EditorView
+
+  /**
+   * Text contents of the editor
+   */
+  @Prop()
+  public contents?: string
+
+  @Watch('contents')
+  contentsChanged(nextValue: string, prevValue: string): void {
+    if (nextValue !== prevValue) {
+      this.setContentsHandler(nextValue)
+    }
+  }
 
   /**
    * List of all supported programming languages
@@ -335,6 +348,7 @@ export class Editor {
     const root = this.el
     const slot = root.querySelector('[slot]')
     const textContent =
+      this.contents ??
       slot?.textContent ??
       root?.querySelector(`#${cssIds.editorTarget}`)?.textContent ??
       ''
@@ -404,11 +418,7 @@ export class Editor {
     })
   }
 
-  /**
-   * Public method, to replace the contents of the Editor with a supplied string.
-   */
-  @Method()
-  public setContents(contents: string): Promise<string> {
+  private setContentsHandler = (contents: string) => {
     const docState = this.editorRef.state
     const transaction = docState.update({
       changes: {
@@ -420,6 +430,14 @@ export class Editor {
     })
 
     this.editorRef.dispatch(transaction)
+  }
+
+  /**
+   * Public method, to replace the contents of the Editor with a supplied string.
+   */
+  @Method()
+  public setContents(contents: string): Promise<string> {
+    this.setContentsHandler(contents)
     return Promise.resolve(contents)
   }
 

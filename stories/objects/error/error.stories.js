@@ -8,8 +8,8 @@ export default {
       defaultValue: 'warning',
       control: {
         type: 'select',
-        options: ['info', 'warning', 'error'],
       },
+      options: ['info', 'warning', 'error'],
     },
   },
 }
