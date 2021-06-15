@@ -47,7 +47,7 @@
     "jest-cli": "26.6.3",
     "postcss-custom-properties": "11.0.0",
     "postcss-import": "14.0.2",
-    "puppeteer": "9.1.1",
+    "puppeteer": "10.0.0",
     "tailwindcss": "1.9.6"
   },
   "dependencies": {
