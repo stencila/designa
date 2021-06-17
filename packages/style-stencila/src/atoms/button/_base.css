@@ -34,7 +34,7 @@ button {
   }
 
   & > * {
-    @apply align-text-bottom;
+    @apply align-middle;
   }
 
   & * {
@@ -43,31 +43,15 @@ button {
 
   stencila-icon {
     @apply pr-1;
-    --width: 1.125em;
-    --height: 1.125em;
+    --width: 1.25em;
+    --height: 1.25em;
   }
 
   & > svg,
   & > img {
     @apply inline-block pr-1;
-    width: 1.125em;
-    height: 1.125em;
-  }
-
-  &.xsmall,
-  &[size='xsmall'],
-  &.small,
-  &[size='small'] {
-    stencila-icon {
-      --height: 1.25em;
-      --width: 1.25em;
-    }
-
-    & > img,
-    & > svg {
-      --height: 1.25em;
-      --width: 1.25em;
-    }
+    width: 1.25em;
+    height: 1.25em;
   }
 
   &.iconOnly {
@@ -76,12 +60,16 @@ button {
     & > img {
       @apply pr-0;
     }
+
+    .label {
+      @apply sr-only;
+    }
   }
 }
 
 :host {
   &::slotted(button > *) {
-    @apply align-text-bottom;
+    @apply align-middle;
   }
 
   &::slotted(button > svg),
@@ -91,12 +79,16 @@ button {
     height: 1.25em;
   }
 
-  &[size='xsmall'],
-  &[size='small'] {
+  &[size='xsmall'] {
+    stencila-icon {
+      --width: 1.125em;
+      --height: 1.125em;
+    }
+
     &::slotted(button > svg),
     &::slotted(button > img) {
-      height: 1.25em;
-      width: 1.25em;
+      height: 1.125em;
+      width: 1.125em;
     }
   }
 

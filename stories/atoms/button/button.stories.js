@@ -50,6 +50,7 @@ export const withText = ({
   fill,
   href,
   icon,
+  iconOnly,
   isLoading,
   label,
   minimal,
@@ -63,7 +64,8 @@ export const withText = ({
         ? 'fill'
         : ''}"
       ?disabled=${disabled}
-      icon=${icon}
+      .icon=${icon}
+      .iconOnly=${iconOnly}
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
@@ -80,6 +82,7 @@ export const withEmoji = ({
   fill,
   href,
   icon,
+  iconOnly,
   isLoading,
   label,
   minimal,
@@ -93,7 +96,8 @@ export const withEmoji = ({
         ? 'fill'
         : ''}"
       ?disabled=${disabled}
-      icon=${icon}
+      .icon=${icon}
+      .iconOnly=${iconOnly}
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
@@ -113,6 +117,7 @@ export const small = ({
   fill,
   href,
   icon,
+  iconOnly,
   isLoading,
   label,
   minimal,
@@ -126,7 +131,8 @@ export const small = ({
         ? 'fill'
         : ''}"
       ?disabled=${disabled}
-      icon=${icon}
+      .icon=${icon}
+      .iconOnly=${iconOnly}
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
@@ -147,6 +153,7 @@ export const extraSmall = ({
   fill,
   href,
   icon,
+  iconOnly,
   isLoading,
   label,
   minimal,
@@ -160,7 +167,8 @@ export const extraSmall = ({
         ? 'fill'
         : ''}"
       ?disabled=${disabled}
-      icon=${icon}
+      .icon=${icon}
+      .iconOnly=${iconOnly}
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
@@ -181,6 +189,7 @@ export const anchorButton = ({
   fill,
   href,
   icon,
+  iconOnly,
   isLoading,
   label,
   minimal,
@@ -194,7 +203,8 @@ export const anchorButton = ({
         ? 'fill'
         : ''}"
       ?disabled=${disabled}
-      icon=${icon}
+      .icon=${icon}
+      .iconOnly=${iconOnly}
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
@@ -215,6 +225,7 @@ export const webComponent = ({
   fill,
   href,
   icon,
+  iconOnly,
   isLoading,
   label,
   minimal,
@@ -228,7 +239,8 @@ export const webComponent = ({
       color=${color}
       ?disabled=${disabled}
       ?fill=${fill}
-      icon=${icon}
+      .icon=${icon}
+      .iconOnly=${iconOnly}
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
@@ -245,6 +257,7 @@ export const webComponent_withSVGIcon = ({
   fill,
   href,
   icon,
+  iconOnly,
   isLoading,
   label,
   minimal,
@@ -265,7 +278,7 @@ export const webComponent_withSVGIcon = ({
       .href=${href === '' ? undefined : href}
       size=${size}
     >
-      <svg width="24" height="24" viewBox="0 0 24 24">
+      <svg slot="icon" width="24" height="24" viewBox="0 0 24 24">
         <g fill="none" fill-rule="evenodd">
           <path
             d="M12 11v3h4.5c-.19 1.02-.711 1.742-1.575 2.32v2.048h2.637c1.543-1.42 2.434-3.513 2.434-5.998 0-.31-.033-.76-.097-1.352L12 11z"
@@ -301,6 +314,7 @@ export const webComponent_withIcon = ({
   fill,
   href,
   icon,
+  iconOnly,
   isLoading,
   label,
   minimal,
@@ -314,7 +328,8 @@ export const webComponent_withIcon = ({
       color=${color}
       ?disabled=${disabled}
       ?fill=${fill}
-      icon=${icon}
+      .icon=${icon}
+      .iconOnly=${iconOnly}
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
@@ -332,6 +347,7 @@ export const webComponent_Link = ({
   fill,
   href,
   icon,
+  iconOnly,
   isLoading,
   label,
   minimal,
@@ -345,7 +361,8 @@ export const webComponent_Link = ({
       color=${color}
       ?disabled=${disabled}
       ?fill=${fill}
-      icon=${icon}
+      .icon=${icon}
+      .iconOnly=${iconOnly}
       ?is-secondary=${secondary}
       ?is-loading=${isLoading}
       .href=${href === '' ? undefined : href}
