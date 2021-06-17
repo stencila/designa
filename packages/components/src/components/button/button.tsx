@@ -135,7 +135,7 @@ export class Button {
         disabled={this.isLoading || this.disabled || false}
         aria-label={this.ariaLabel ?? this.tooltip}
       >
-        {this.icon === undefined ? null : typeof this.icon === 'string' ? (
+        {typeof this.icon === 'string' ? (
           <stencila-icon
             icon={this.isLoading ? 'loader-2' : this.icon}
             class={{ spin: this.isLoading }}
@@ -143,6 +143,7 @@ export class Button {
         ) : (
           this.icon
         )}
+        <slot name="icon" />
 
         <span class="label">
           <slot />
