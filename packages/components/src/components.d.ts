@@ -21,10 +21,6 @@ export namespace Components {
           * List of buttons to include in Action Menu.
          */
         "actions": HTMLButtonElement[];
-        /**
-          * Defines whether the Action Menu can be collapsed and expanded
-         */
-        "expandable": boolean;
     }
     interface StencilaButton {
         /**
@@ -569,10 +565,6 @@ declare namespace LocalJSX {
           * List of buttons to include in Action Menu.
          */
         "actions"?: HTMLButtonElement[];
-        /**
-          * Defines whether the Action Menu can be collapsed and expanded
-         */
-        "expandable"?: boolean;
     }
     interface StencilaButton {
         /**
