@@ -57,9 +57,12 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
 
   @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED' = 'INITIAL'
 
-  componentDidLoad(): void {
+  private checkIfEmpty = (): void => {
     // Checking output list to account for non-text nodes such as images.
-    const outputSlot = this.el.querySelector(`[slot=${slots.output}]`)
+    const outputSlot = Array.from(this.el.children).filter(
+      (el) => el.slot === slots.output
+    )[0]
+
     const output = (outputSlot?.childNodes ?? [])[0]
 
     this.output =
@@ -70,6 +73,10 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
         : output
 
     this.isOutputEmpty = output === undefined
+  }
+
+  componentWillLoad(): void {
+    this.checkIfEmpty()
   }
 
   @Listen('collapseAllCode', { target: 'window' })
