@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.34.0](https://github.com/stencila/designa/compare/@stencila/components@0.33.0...@stencila/components@0.34.0) (2021-06-22)
+
+
+### Bug Fixes
+
+* **Editor:** Fix matching and activating language syntaxes ([7621d47](https://github.com/stencila/designa/commit/7621d47e13c313fa01384ed3fd470b70a1cf05ed))
+
+
+### Features
+
+* **Button:** Add dedicated slot for custom icons ([5fa0be1](https://github.com/stencila/designa/commit/5fa0be1f77f4faec4f403d299060d125e49347f8))
+
+
+
+
+
 # [0.33.0](https://github.com/stencila/designa/compare/@stencila/components@0.32.0...@stencila/components@0.33.0) (2021-06-15)
 
 
