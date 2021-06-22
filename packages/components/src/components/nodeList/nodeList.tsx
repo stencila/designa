@@ -44,8 +44,12 @@ export class OutputsList {
     /**
      * If the `outputs` slot doesn't exist, or contains no content, the output is empty.
      */
-    const output = this.el.querySelector(`[slot=${slots.nodes}]`)
-    empty = output === null ? true : output.innerHTML.trim() === ''
+    empty =
+      this.el.children.length === 0 ||
+      Array.from(this.el.children ?? []).reduce(
+        (text: string, el) => text + el.innerHTML.trim(),
+        ''
+      ) === ''
 
     this.isEmpty = empty
     return empty
@@ -53,7 +57,7 @@ export class OutputsList {
 
   private emptyOutputMessage = 'No output to show'
 
-  componentDidLoad(): void {
+  componentWillLoad(): void {
     this.checkIfEmpty()
   }
 

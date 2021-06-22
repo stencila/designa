@@ -40,6 +40,7 @@ import {
 } from '@stencil/core'
 import { CodeError } from '@stencila/schema'
 import { codeErrors, updateErrors } from './customizations/errorPanel'
+import { defaultLanguageCapabilities, languageByAlias } from './languageUtils'
 
 export interface EditorContents {
   text: string
@@ -92,21 +93,7 @@ export class Editor {
    * List of all supported programming languages
    */
   @Prop()
-  public languageCapabilities: string[] = [
-    'Bash',
-    'Dockerfile',
-    'JavaScript',
-    'JSON',
-    'LaTeX',
-    'Markdown',
-    'Python',
-    'R',
-    'RMD',
-    'Plain Text',
-    'TOML',
-    'XML',
-    'YAML',
-  ]
+  public languageCapabilities: string[] = defaultLanguageCapabilities
 
   /**
    * Disallow editing of the editor contents when set to `true`
@@ -225,18 +212,38 @@ export class Editor {
   private languageConf = new Compartment()
 
   /**
+   * Handle logic for updated internal and external representation/state of the
+   * active language prop.
+   */
+  private setLanguageHandler = async (language: string) => {
+    this.setLanguage.emit(language)
+
+    const lang = await this.getLang(language)
+    this.activeLanguage = language
+
+    this.dispatchEffect(this.languageConf.reconfigure(lang))
+  }
+
+  /**
    * Changes the active programming language of the editor.
-   * Does not affect syntax highlighting.
    */
   private onSetLanguage = async (e: Event): Promise<void> => {
     const target = e.currentTarget as HTMLSelectElement
-    const language = target.value.toLowerCase()
-    this.activeLanguage = language
-    this.setLanguage.emit(target.value)
+    const language = languageByAlias(target.value)
+    return this.setLanguageHandler(language)
+  }
 
-    const lang = await this.getLang(language)
-
-    this.dispatchEffect(this.languageConf.reconfigure(lang))
+  /**
+   * Update the internal state, for both the component and CodeMirror, when the
+   * `activeLanguage` prop changes
+   */
+  @Watch('activeLanguage')
+  activeLanguageOnlyChanged(nextLanguage: string, prevLanguage: string): void {
+    if (nextLanguage !== prevLanguage) {
+      this.setLanguageHandler(nextLanguage).catch((err) => {
+        console.log(err)
+      })
+    }
   }
 
   /**
@@ -473,6 +480,8 @@ export class Editor {
   }
 
   public render() {
+    const activeLanguageByAlias = languageByAlias(this.activeLanguage)
+
     return (
       <Host>
         <div class={cssClasses.container}>
@@ -494,7 +503,9 @@ export class Editor {
                 {this.languageCapabilities.map((language) => (
                   <option
                     value={language.toLowerCase()}
-                    selected={language.toLowerCase() === this.activeLanguage}
+                    selected={
+                      languageByAlias(language) === activeLanguageByAlias
+                    }
                   >
                     {language}
                   </option>

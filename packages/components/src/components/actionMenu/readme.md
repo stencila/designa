@@ -7,10 +7,9 @@
 
 ## Properties
 
-| Property     | Attribute    | Description                                                   | Type                  | Default     |
-| ------------ | ------------ | ------------------------------------------------------------- | --------------------- | ----------- |
-| `actions`    | --           | List of buttons to include in Action Menu.                    | `HTMLButtonElement[]` | `undefined` |
-| `expandable` | `expandable` | Defines whether the Action Menu can be collapsed and expanded | `boolean`             | `false`     |
+| Property  | Attribute | Description                                | Type                  | Default     |
+| --------- | --------- | ------------------------------------------ | --------------------- | ----------- |
+| `actions` | --        | List of buttons to include in Action Menu. | `HTMLButtonElement[]` | `undefined` |
 
 
 ## CSS Custom Properties

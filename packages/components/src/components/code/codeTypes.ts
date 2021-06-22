@@ -2,8 +2,6 @@ import { CodeChunk, CodeExpression } from '@stencila/schema'
 
 export type CodeVisibilityEvent = CustomEvent<{
   isVisible: boolean
-  /** @deprecated Use `isVisible` instead */
-  isCodeCollapsed: boolean
 }>
 
 // Defines a set of methods and properties that all `Code` node based components

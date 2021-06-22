@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop } from '@stencil/core'
+import { Component, h, Host, Prop, getAssetPath } from '@stencil/core'
 import { IconNames } from './iconNames'
 
 const getGlobalIconStyle = () =>
@@ -14,10 +14,9 @@ const getGlobalIconStyle = () =>
     material: 'icon.material.css',
   },
   scoped: true,
+  assetsDirs: ['assets'],
 })
 export class Icon {
-  public static readonly elementName = 'stencila-icon'
-
   /**
    * Name of the icon to be rendered.
    * Corresponds to icon names from the [Remix Icon set](http://remixicon.com)
@@ -34,7 +33,13 @@ export class Icon {
   public render() {
     return (
       <Host icon={this.icon} aria-hidden="true">
-        <i class={`ri-${this.icon}-${this.iconStyle}`}></i>
+        <svg>
+          <use
+            xlinkHref={`${getAssetPath(`./assets/remixicon.symbol.svg`)}#ri-${
+              this.icon
+            }-${this.iconStyle}`}
+          ></use>
+        </svg>
       </Host>
     )
   }

@@ -22,12 +22,6 @@ export class ActionMenu {
   @Prop()
   public actions: HTMLButtonElement[]
 
-  /**
-   * Defines whether the Action Menu can be collapsed and expanded
-   */
-  @Prop()
-  public expandable = false
-
   @State() private hasSecondaryActions: boolean
 
   @State() private isCollapsed = false
@@ -37,11 +31,11 @@ export class ActionMenu {
   @State() private width = 'auto'
   @State() private isAnimating = false
 
-  private actionContainerRef: HTMLSpanElement | null
+  private actionContainerRef: HTMLSpanElement | undefined
   private isTransitioning = false
 
   private calculateWidth = () => {
-    if (this.actionContainerRef !== null && this.isTransitioning === false) {
+    if (this.actionContainerRef && this.isTransitioning === false) {
       this.width = 'auto'
 
       const width = this.actionContainerRef.getBoundingClientRect().width
@@ -53,36 +47,39 @@ export class ActionMenu {
   private observer = new window.MutationObserver(this.calculateWidth)
 
   private checkForSecondaryActions = (): boolean => {
-    const hasSecondaryActions =
-      this.el
-        .querySelector('.secondaryActions .actionContainer')
-        ?.innerHTML.trim() === ''
-    this.hasSecondaryActions = hasSecondaryActions
-    return hasSecondaryActions
+    this.hasSecondaryActions = Array.from(this.el.children).some((child) => {
+      return child.slot === ''
+    })
+    return this.hasSecondaryActions
+  }
+
+  protected componentWillLoad(): void {
+    this.checkForSecondaryActions()
   }
 
   protected componentDidLoad(): void {
-    this.checkForSecondaryActions()
+    if (this.actionContainerRef) {
+      window.requestAnimationFrame(() => {
+        if (this.actionContainerRef && this.hasSecondaryActions) {
+          this.actionContainerRef.addEventListener(
+            'transitionstart',
+            () => (this.isTransitioning = true)
+          )
 
-    if (this.expandable) {
-      this.actionContainerRef = this.el.querySelector('.actionContainer')
+          this.actionContainerRef.addEventListener(
+            'transitionend',
+            () => (this.isTransitioning = false)
+          )
 
-      if (this.actionContainerRef !== null) {
-        this.actionContainerRef.addEventListener(
-          'transitionstart',
-          () => (this.isTransitioning = true)
-        )
-        this.actionContainerRef.addEventListener(
-          'transitionend',
-          () => (this.isTransitioning = false)
-        )
-        this.observer.observe(this.el, {
-          characterData: true,
-          subtree: true,
-        })
-        this.calculateWidth()
-        this.isCollapsed = true
-      }
+          this.observer.observe(this.el, {
+            characterData: true,
+            subtree: true,
+          })
+
+          this.calculateWidth()
+          this.isCollapsed = true
+        }
+      })
     }
   }
 
@@ -91,6 +88,8 @@ export class ActionMenu {
   }
 
   public render() {
+    if (this.el.children.length <= 0) return null
+
     return (
       <nav>
         <span class="persistentActions">
@@ -100,7 +99,7 @@ export class ActionMenu {
         <span
           class={{
             secondaryActions: true,
-            hidden: this.hasSecondaryActions,
+            hidden: !this.hasSecondaryActions,
           }}
         >
           <stencila-button
@@ -119,6 +118,7 @@ export class ActionMenu {
               isAnimating: this.isAnimating,
               isCollapsed: this.isCollapsed,
             }}
+            ref={(el) => (this.actionContainerRef = el)}
             style={{ '--max-width': this.width }}
           >
             <slot />

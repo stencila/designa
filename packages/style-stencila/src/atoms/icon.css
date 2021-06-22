@@ -13,18 +13,13 @@
 
   @apply inline-block leading-none align-middle text-current;
 
-  span {
-    @apply block w-full h-auto max-h-full;
+  svg {
+    @apply relative block w-full h-auto max-h-full fill-current;
     height: var(--height);
     width: var(--width);
   }
 
-  ::slotted(i),
-  &::slotted(i) {
-    @apply relative block fill-current;
-  }
-
-  &[icon^='loader']::slotted(i) {
+  &[icon^='loader'] svg {
     animation: spin 3000ms linear infinite;
   }
 }
