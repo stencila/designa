@@ -10,6 +10,7 @@ import { IconNames } from "./components/icon/iconNames";
 import { CodeChunk, CodeError, CodeExpression, Datatable, ImageObject, Node } from "@stencila/schema";
 import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
+import { EditorView } from "@codemirror/view";
 import { Config, Data, Layout } from "plotly.js";
 import { VisualizationSpec } from "vega-embed";
 import { VegaLoadEvent } from "./components/imageDynamic/imageVega/imageVegaUtils";
@@ -192,6 +193,10 @@ export namespace Components {
           * Public method, returning the Editor contents and active language.
          */
         "getContents": () => Promise<EditorContents>;
+        /**
+          * Public method, returning a reference to the internal CodeMirror editor. Allows for maintaining state from applications making use of this component.
+         */
+        "getEditorRef": () => Promise<EditorView>;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https ://codemirror.net/6/docs/ref/#keymap

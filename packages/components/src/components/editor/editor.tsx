@@ -449,6 +449,15 @@ export class Editor {
   }
 
   /**
+   * Public method, returning a reference to the internal CodeMirror editor.
+   * Allows for maintaining state from applications making use of this component.
+   */
+  @Method()
+  public async getEditorRef(): Promise<EditorView> {
+    return Promise.resolve(this.editorRef)
+  }
+
+  /**
    * Prevents keyboard event listeners attached to parent DOM elements from firing.
    * This is to avoid conflicts when user has focused on the editor.
    */

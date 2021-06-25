@@ -39,6 +39,17 @@ Type: `Promise<EditorContents>`
 
 
 
+### `getEditorRef() => Promise<EditorView>`
+
+Public method, returning a reference to the internal CodeMirror editor.
+Allows for maintaining state from applications making use of this component.
+
+#### Returns
+
+Type: `Promise<EditorView>`
+
+
+
 ### `setContents(contents: string) => Promise<string>`
 
 Public method, to replace the contents of the Editor with a supplied string.
