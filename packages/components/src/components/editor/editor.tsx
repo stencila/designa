@@ -39,6 +39,7 @@ import {
   Watch,
 } from '@stencil/core'
 import { CodeError } from '@stencila/schema'
+import { LanguagePicker } from './components/languageSelect'
 import { codeErrors, updateErrors } from './customizations/errorPanel'
 import { defaultLanguageCapabilities, languageByAlias } from './languageUtils'
 
@@ -489,8 +490,6 @@ export class Editor {
   }
 
   public render() {
-    const activeLanguageByAlias = languageByAlias(this.activeLanguage)
-
     return (
       <Host>
         <div class={cssClasses.container}>
@@ -506,21 +505,11 @@ export class Editor {
           </div>
 
           <menu>
-            <label aria-label="Programming Language">
-              <stencila-icon icon="terminal"></stencila-icon>
-              <select onChange={this.onSetLanguage}>
-                {this.languageCapabilities.map((language) => (
-                  <option
-                    value={language.toLowerCase()}
-                    selected={
-                      languageByAlias(language) === activeLanguageByAlias
-                    }
-                  >
-                    {language}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <LanguagePicker
+              activeLanguage={this.activeLanguage}
+              onSetLanguage={this.onSetLanguage}
+              languageCapabilities={this.languageCapabilities}
+            ></LanguagePicker>
           </menu>
         </div>
       </Host>
