@@ -35,7 +35,7 @@ export class Icon {
       <Host icon={this.icon} aria-hidden="true">
         <svg>
           <use
-            xlinkHref={`${getAssetPath(`./assets/remixicon.symbol.svg`)}#ri-${
+            href={`${getAssetPath(`./assets/remixicon.symbol.svg`)}#ri-${
               this.icon
             }-${this.iconStyle}`}
           ></use>
