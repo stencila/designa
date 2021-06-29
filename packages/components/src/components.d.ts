@@ -10,6 +10,8 @@ import { IconNames } from "./components/icon/iconNames";
 import { CodeChunk, CodeError, CodeExpression, Datatable, ImageObject, Node } from "@stencila/schema";
 import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
+import { EditorSelection, Extension } from "@codemirror/state";
+import { EditorView } from "@codemirror/view";
 import { Config, Data, Layout } from "plotly.js";
 import { VisualizationSpec } from "vega-embed";
 import { VegaLoadEvent } from "./components/imageDynamic/imageVega/imageVegaUtils";
@@ -185,13 +187,21 @@ export namespace Components {
          */
         "executeHandler"?: (contents: EditorContents) => Promise<unknown>;
         /**
-          * Enables abiility to fold sections of code
+          * Enables ability to fold sections of code if the syntax package supports it
          */
         "foldGutter": boolean;
         /**
           * Public method, returning the Editor contents and active language.
          */
         "getContents": () => Promise<EditorContents>;
+        /**
+          * Public method, returning a reference to the internal CodeMirror editor. Allows for maintaining state from applications making use of this component.
+         */
+        "getRef": () => Promise<EditorView>;
+        /**
+          * Disable language and other editor configuration management, deferring control to consuming applications
+         */
+        "isControlled": boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https ://codemirror.net/6/docs/ref/#keymap
@@ -217,6 +227,10 @@ export namespace Components {
           * Public method, to replace the contents of the Editor with a supplied string.
          */
         "setContents": (contents: string) => Promise<string>;
+        /**
+          * Public method, to completely replace the editor state with the given state. This replaces the editor configuration, edit history, language, etc.
+         */
+        "setState": (contents: string, config?: EditorConfig | undefined, extensions?: Extension[] | undefined, selection?: EditorSelection | undefined) => Promise<string>;
     }
     interface StencilaExecutableDocumentToolbar {
         /**
@@ -721,9 +735,13 @@ declare namespace LocalJSX {
          */
         "executeHandler"?: (contents: EditorContents) => Promise<unknown>;
         /**
-          * Enables abiility to fold sections of code
+          * Enables ability to fold sections of code if the syntax package supports it
          */
         "foldGutter"?: boolean;
+        /**
+          * Disable language and other editor configuration management, deferring control to consuming applications
+         */
+        "isControlled"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https ://codemirror.net/6/docs/ref/#keymap
