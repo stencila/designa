@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.35.0](https://github.com/stencila/designa/compare/@stencila/components@0.34.0...@stencila/components@0.35.0) (2021-06-29)
+
+
+### Features
+
+* **Editor:** Allow managing Editor state externally ([36eb906](https://github.com/stencila/designa/commit/36eb9067797869af42ffff7a41c9bc3fff04cd1a))
+* **Editor:** Expose method for getting ref. to internal editor state ([7415234](https://github.com/stencila/designa/commit/7415234eb8cb201a4f2ee7a8df031c6e1790dd2b))
+
+
+
+
+
 # [0.34.0](https://github.com/stencila/designa/compare/@stencila/components@0.33.0...@stencila/components@0.34.0) (2021-06-22)
 
 
