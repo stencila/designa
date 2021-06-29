@@ -10,7 +10,7 @@ import {
   State,
 } from '@stencil/core'
 import { Config, Data, Layout } from 'plotly.js'
-import { injectScriptSrc } from '../../utls/jsDeps'
+import { injectScriptSrc } from '../../utils/jsDeps'
 import { createPlotContainer } from '../imageDynamicUtils'
 import { plotlyMediaType, PlotlyObject } from './imagePlotlyUtils'
 
@@ -59,8 +59,11 @@ export class ImagePlotlyComponent {
   }
 
   private renderPlot = () => {
-    const { data, layout = this.layout, config = this.config } =
-      this.getPlotContent() ?? {}
+    const {
+      data,
+      layout = this.layout,
+      config = this.config,
+    } = this.getPlotContent() ?? {}
 
     if (!data) return
 

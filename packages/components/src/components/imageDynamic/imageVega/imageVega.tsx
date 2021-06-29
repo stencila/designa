@@ -10,7 +10,7 @@ import {
   State,
 } from '@stencil/core'
 import embed, { Result, VisualizationSpec } from 'vega-embed'
-import { injectScriptSrc } from '../../utls/jsDeps'
+import { injectScriptSrc } from '../../utils/jsDeps'
 import { createPlotContainer } from '../imageDynamicUtils'
 import {
   getVegaLibSrc,

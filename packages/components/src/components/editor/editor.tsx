@@ -40,7 +40,7 @@ import {
   Watch,
 } from '@stencil/core'
 import { CodeError } from '@stencila/schema'
-import { findSlotByName } from '../utls/slotSelectors'
+import { findSlotByName } from '../utils/slotSelectors'
 import { LanguagePicker } from './components/languageSelect'
 import { codeErrors, updateErrors } from './customizations/errorPanel'
 import { defaultLanguageCapabilities, languageByAlias } from './languageUtils'
