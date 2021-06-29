@@ -14,6 +14,7 @@ import { bracketMatching } from '@codemirror/matchbrackets'
 import { searchConfig, searchKeymap } from '@codemirror/search'
 import {
   Compartment,
+  EditorSelection,
   EditorState,
   Extension,
   Prec,
@@ -39,6 +40,7 @@ import {
   Watch,
 } from '@stencil/core'
 import { CodeError } from '@stencila/schema'
+import { findSlotByName } from '../utls/slotSelectors'
 import { LanguagePicker } from './components/languageSelect'
 import { codeErrors, updateErrors } from './customizations/errorPanel'
 import { defaultLanguageCapabilities, languageByAlias } from './languageUtils'
@@ -63,6 +65,13 @@ const cssIds = {
   editorTarget: 'editorTarget',
 }
 
+type EditorConfig = {
+  language?: string
+  foldGutterEnabled?: boolean
+  lineNumbersEnabled?: boolean
+  lineWrappingEnabled?: boolean
+}
+
 @Component({
   tag: 'stencila-editor',
   styleUrls: {
@@ -75,7 +84,9 @@ export class Editor {
   @Element()
   private el: HTMLStencilaEditorElement
 
-  private editorRef: EditorView
+  private editorRef: EditorView | undefined
+
+  private isReady = false
 
   /**
    * Text contents of the editor
@@ -83,9 +94,15 @@ export class Editor {
   @Prop()
   public contents?: string
 
+  /**
+   * Disable language and other editor configuration management, deferring control to consuming applications
+   */
+  @Prop()
+  public isControlled = false
+
   @Watch('contents')
   contentsChanged(nextValue: string, prevValue: string): void {
-    if (nextValue !== prevValue) {
+    if (!this.isControlled && nextValue !== prevValue) {
       this.setContentsHandler(nextValue)
     }
   }
@@ -126,13 +143,14 @@ export class Editor {
     this.languageCapabilities[0]?.toLowerCase() ?? ''
 
   private dispatchEffect = (effect: StateEffect<unknown>) => {
-    const docState = this.editorRef.state
+    const docState = this.editorRef?.state
 
-    const transaction = docState.update({
-      effects: [effect],
-    })
+    const transaction =
+      docState?.update({
+        effects: [effect],
+      }) ?? {}
 
-    this.editorRef.dispatch(transaction)
+    this.editorRef?.dispatch(transaction)
   }
 
   /**
@@ -240,7 +258,7 @@ export class Editor {
    */
   @Watch('activeLanguage')
   activeLanguageOnlyChanged(nextLanguage: string, prevLanguage: string): void {
-    if (nextLanguage !== prevLanguage) {
+    if (!this.isControlled && nextLanguage !== prevLanguage) {
       this.setLanguageHandler(nextLanguage).catch((err) => {
         console.log(err)
       })
@@ -286,7 +304,7 @@ export class Editor {
 
   @Watch('lineNumbers')
   onSetLineNumbers(nextValue: boolean, prevValue: boolean): void {
-    if (nextValue !== prevValue) {
+    if (!this.isControlled && nextValue !== prevValue) {
       this.dispatchEffect(
         this.lineNumbersConf.reconfigure(nextValue ? lineNumbers() : [])
       )
@@ -304,7 +322,7 @@ export class Editor {
 
   @Watch('lineWrapping')
   onSetLineWrapping(nextValue: boolean, prevValue: boolean): void {
-    if (nextValue !== prevValue) {
+    if (!this.isControlled && nextValue !== prevValue) {
       this.dispatchEffect(
         this.lineWrappingConf.reconfigure(
           nextValue ? EditorView.lineWrapping : []
@@ -317,14 +335,14 @@ export class Editor {
   private foldGutterConf = new Compartment()
 
   /**
-   * Enables abiility to fold sections of code
+   * Enables ability to fold sections of code if the syntax package supports it
    */
   @Prop()
   public foldGutter = true
 
   @Watch('foldGutter')
   onSetfoldGutter(nextValue: boolean, prevValue: boolean): void {
-    if (nextValue !== prevValue) {
+    if (!this.isControlled && nextValue !== prevValue) {
       this.dispatchEffect(
         this.foldGutterConf.reconfigure(nextValue ? foldGutter() : [])
       )
@@ -347,21 +365,26 @@ export class Editor {
 
   @Watch('errors')
   errorsChanged(nextErrors: (CodeError | string)[]): void {
-    this.editorRef.dispatch({
+    this.editorRef?.dispatch({
       effects: updateErrors.of(nextErrors),
     })
   }
 
-  private initCodeMirror = async (): Promise<void> => {
-    const root = this.el
-    const slot = root.querySelector('[slot]')
-    const textContent =
-      this.contents ??
-      slot?.textContent ??
-      root?.querySelector(`#${cssIds.editorTarget}`)?.textContent ??
-      ''
+  private getCodeMirrorConfig = async (config: EditorConfig = {}) => {
+    const {
+      language,
+      foldGutterEnabled,
+      lineNumbersEnabled,
+      lineWrappingEnabled,
+    } = {
+      language: this.activeLanguage,
+      foldGutterEnabled: this.foldGutter,
+      lineNumbersEnabled: this.lineNumbers,
+      lineWrappingEnabled: this.lineWrapping,
+      ...config,
+    }
 
-    const lang = await this.getLang(this.activeLanguage)
+    const languageSyntax = await this.getLang(language)
 
     const extensions: Extension[] = [
       history(),
@@ -370,12 +393,12 @@ export class Editor {
       bracketMatching(),
       closeBrackets(),
       Prec.fallback(defaultHighlightStyle),
-      this.languageConf.of(lang),
+      this.languageConf.of(languageSyntax),
       this.lineWrappingConf.of(
-        this.lineWrapping ? EditorView.lineWrapping : []
+        lineWrappingEnabled ? EditorView.lineWrapping : []
       ),
-      this.lineNumbersConf.of(this.lineNumbers ? lineNumbers() : []),
-      this.foldGutterConf.of(this.foldGutter ? foldGutter() : []),
+      this.lineNumbersConf.of(lineNumbersEnabled ? lineNumbers() : []),
+      this.foldGutterConf.of(foldGutterEnabled ? foldGutter() : []),
       drawSelection(),
       EditorState.allowMultipleSelections.of(true),
       searchConfig({ top: true }),
@@ -401,43 +424,56 @@ export class Editor {
       codeErrors(),
     ]
 
+    return extensions
+  }
+
+  private initCodeMirror = async (): Promise<void> => {
+    const root = this.el
+    const slotEl: Element | undefined = findSlotByName(root)(slots.text)
+
+    const textContent = this.contents ?? slotEl?.textContent ?? ''
+
     this.editorRef = new EditorView({
       state: EditorState.create({
         doc: textContent,
-        extensions,
+        extensions: await this.getCodeMirrorConfig(),
       }),
     })
 
-    return root
-      ?.querySelector(`#${cssIds.editorTarget}`)
-      ?.replaceWith(this.editorRef.dom)
+    this.isReady = true
   }
 
-  private getContent = (): string => this.editorRef.state.doc.toString()
+  private attachEditorToDom = () => {
+    const editorDom = this.editorRef?.dom
+    if (editorDom) {
+      this.el?.querySelector(`#${cssIds.editorTarget}`)?.replaceWith(editorDom)
+    }
+  }
 
   /**
    * Public method, returning the Editor contents and active language.
    */
   @Method()
   public async getContents(): Promise<EditorContents> {
-    return Promise.resolve({
-      text: this.getContent(),
+    return {
+      text: this.editorRef?.state.doc.toString() ?? '',
       language: this.activeLanguage,
-    })
+    }
   }
 
   private setContentsHandler = (contents: string) => {
-    const docState = this.editorRef.state
-    const transaction = docState.update({
-      changes: {
-        from: 0,
-        to: docState.doc.length,
-        insert: contents,
-      },
-      scrollIntoView: true,
-    })
+    const docState = this.editorRef?.state
+    const transaction =
+      docState?.update({
+        changes: {
+          from: 0,
+          to: docState.doc.length,
+          insert: contents,
+        },
+        scrollIntoView: true,
+      }) ?? {}
 
-    this.editorRef.dispatch(transaction)
+    this.editorRef?.dispatch(transaction)
   }
 
   /**
@@ -450,12 +486,63 @@ export class Editor {
   }
 
   /**
+   * Public method, to completely replace the editor state with the given state.
+   * This replaces the editor configuration, edit history, language, etc.
+   */
+  @Method()
+  public async setState(
+    contents: string,
+    config?: EditorConfig,
+    extensions?: Extension[],
+    selection?: EditorSelection
+  ): Promise<string> {
+    this.editorRef?.setState(
+      EditorState.create({
+        doc: contents,
+        extensions: extensions ?? (await this.getCodeMirrorConfig(config)),
+        selection,
+      })
+    )
+    return Promise.resolve(contents)
+  }
+
+  /**
    * Public method, returning a reference to the internal CodeMirror editor.
    * Allows for maintaining state from applications making use of this component.
    */
   @Method()
-  public async getEditorRef(): Promise<EditorView> {
-    return Promise.resolve(this.editorRef)
+  public async getRef(): Promise<EditorView> {
+    if (this.editorRef) {
+      return this.editorRef
+    }
+
+    return new Promise((resolve, reject) => {
+      let isChecking = true
+      const timeout = 3_000
+
+      const wait = setTimeout(() => {
+        isChecking = false
+      }, timeout)
+
+      const check = () => {
+        setInterval(() => {
+          if (this.editorRef && this.isReady) {
+            clearTimeout(wait)
+            resolve(this.editorRef)
+          } else if (!isChecking) {
+            reject(
+              new Error(
+                `Editor wasn’t instantiated in time (${timeout}ms), please try again.`
+              )
+            )
+          } else {
+            check()
+          }
+        }, 100)
+      }
+
+      check()
+    })
   }
 
   /**
@@ -469,24 +556,27 @@ export class Editor {
   /**
    * Brings DOM focus to the editor
    */
-  private focusEditor = (): void => {
-    this.editorRef.focus()
+  private focus = (): void => {
+    this.editorRef?.focus()
+  }
+
+  protected async componentWillLoad(): Promise<void> {
+    try {
+      return this.initCodeMirror()
+    } catch (err) {
+      console.log('Encountered error while initializing code editor\n', err)
+    }
   }
 
   protected componentDidLoad() {
-    this.initCodeMirror()
-      .then(() => {
-        if (this.autofocus) {
-          this.focusEditor()
-        }
-      })
-      .catch((err) => {
-        console.log('Encountered error while initializing code editor\n', err)
-      })
+    this.attachEditorToDom()
+    if (this.autofocus) {
+      this.focus()
+    }
   }
 
   protected disconnectedCallback() {
-    this.editorRef.destroy()
+    this.editorRef?.destroy()
   }
 
   public render() {
@@ -496,7 +586,7 @@ export class Editor {
           <div
             class={cssClasses.editor}
             onKeyDown={this.stopEventPropagation}
-            onClick={this.focusEditor}
+            onClick={this.focus}
           >
             <div class="hidden">
               <slot name={slots.text} />

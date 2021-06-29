@@ -12,7 +12,8 @@
 | `contents`             | `contents`        | Text contents of the editor                                                                                                            | `string \| undefined`                                           | `undefined`                                         |
 | `errors`               | --                | List of errors to display at the bottom of the code editor section. If the error is a `string`, then it will be rendered as a warning. | `CodeError[] \| string[] \| undefined`                          | `undefined`                                         |
 | `executeHandler`       | --                | Function to be evaluated over the contents of the editor.                                                                              | `((contents: EditorContents) => Promise<unknown>) \| undefined` | `undefined`                                         |
-| `foldGutter`           | `fold-gutter`     | Enables abiility to fold sections of code                                                                                              | `boolean`                                                       | `true`                                              |
+| `foldGutter`           | `fold-gutter`     | Enables ability to fold sections of code if the syntax package supports it                                                             | `boolean`                                                       | `true`                                              |
+| `isControlled`         | `is-controlled`   | Disable language and other editor configuration management, deferring control to consuming applications                                | `boolean`                                                       | `false`                                             |
 | `keymap`               | --                | Custom keyboard shortcuts to pass along to CodeMirror                                                                                  | `KeyBinding[]`                                                  | `[]`                                                |
 | `languageCapabilities` | --                | List of all supported programming languages                                                                                            | `string[]`                                                      | `defaultLanguageCapabilities`                       |
 | `lineNumbers`          | `line-numbers`    | Determines the visibility of line numbers                                                                                              | `boolean`                                                       | `true`                                              |
@@ -39,7 +40,7 @@ Type: `Promise<EditorContents>`
 
 
 
-### `getEditorRef() => Promise<EditorView>`
+### `getRef() => Promise<EditorView>`
 
 Public method, returning a reference to the internal CodeMirror editor.
 Allows for maintaining state from applications making use of this component.
@@ -53,6 +54,17 @@ Type: `Promise<EditorView>`
 ### `setContents(contents: string) => Promise<string>`
 
 Public method, to replace the contents of the Editor with a supplied string.
+
+#### Returns
+
+Type: `Promise<string>`
+
+
+
+### `setState(contents: string, config?: EditorConfig | undefined, extensions?: Extension[] | undefined, selection?: EditorSelection | undefined) => Promise<string>`
+
+Public method, to completely replace the editor state with the given state.
+This replaces the editor configuration, edit history, language, etc.
 
 #### Returns
 
