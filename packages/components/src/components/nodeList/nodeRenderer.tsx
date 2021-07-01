@@ -1,5 +1,5 @@
 import { FunctionalComponent, h, VNode } from '@stencil/core'
-import { isA, isCode, isPrimitive, Node } from '@stencila/schema'
+import { isA, isIn, isPrimitive, Node } from '@stencila/schema'
 
 const schemaNodeHTMLRegExp = /itemtype=".+?"/
 
@@ -23,7 +23,7 @@ const renderNode = (node: Node): VNode => {
         <output>{text}</output>
       </pre>
     )
-  } else if (isCode(node)) {
+  } else if (isIn('CodeTypes', node)) {
     return (
       <pre>
         <output>{node.text}</output>

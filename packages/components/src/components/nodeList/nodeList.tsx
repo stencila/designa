@@ -1,5 +1,5 @@
 import { Component, Element, h, Host, Prop, State } from '@stencil/core'
-import { isA, isCode, isPrimitive, Node } from '@stencila/schema'
+import { isA, isIn, isPrimitive, Node } from '@stencila/schema'
 import { isEmpty } from 'fp-ts/lib/Array'
 import { preferredImageObjectComponent } from '../imageObject/imageObjectUtils'
 
@@ -81,7 +81,7 @@ export class OutputsList {
           <output>{text}</output>
         </pre>
       )
-    } else if (isCode(node)) {
+    } else if (isIn('CodeTypes', node)) {
       return (
         <pre>
           <output>{node.text}</output>
