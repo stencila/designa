@@ -34,7 +34,7 @@
     "@fullhuman/postcss-purgecss": "4.0.3",
     "@stencil/core": "2.6.0",
     "@stencil/postcss": "2.0.0",
-    "@stencila/schema": "1.7.3",
+    "@stencila/schema": "1.9.0",
     "@types/feather-icons": "4.7.0",
     "@types/jest": "26.0.23",
     "@types/plotly.js": "1.54.10",
@@ -47,8 +47,8 @@
     "jest-cli": "26.6.3",
     "postcss-custom-properties": "11.0.0",
     "postcss-import": "14.0.2",
-    "puppeteer": "10.0.0",
-    "tailwindcss": "2.1.4"
+    "puppeteer": "10.1.0",
+    "tailwindcss": "2.2.4"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^0.18.7",
