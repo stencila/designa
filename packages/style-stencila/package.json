@@ -1,6 +1,6 @@
 {
   "name": "@stencila/style-stencila",
-  "version": "0.23.2",
+  "version": "0.23.3",
   "description": "Custom designed theme for Stencila components",
   "keywords": [
     "Stencila",
@@ -38,7 +38,7 @@
     "not IE_Mob 11"
   ],
   "dependencies": {
-    "@stencila/brand": "0.7.1"
+    "@stencila/brand": "0.7.2"
   },
   "devDependencies": {
     "@abide-community/parcel-plugin-clean-out-dir": "1.0.0",
