@@ -45,6 +45,6 @@
     "@abide-community/parcel-plugin-clean-out-dir": "1.0.0",
     "concurrently": "6.2.0",
     "parcel-plugin-css-pretransform": "1.0.0",
-    "tailwindcss": "2.1.4"
+    "tailwindcss": "2.2.4"
   }
 }

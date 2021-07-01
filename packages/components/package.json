@@ -34,7 +34,7 @@
     "@fullhuman/postcss-purgecss": "4.0.3",
     "@stencil/core": "2.6.0",
     "@stencil/postcss": "2.0.0",
-    "@stencila/schema": "1.7.3",
+    "@stencila/schema": "1.9.0",
     "@types/feather-icons": "4.7.0",
     "@types/jest": "26.0.23",
     "@types/plotly.js": "1.54.10",
@@ -47,11 +47,11 @@
     "jest-cli": "26.6.3",
     "postcss-custom-properties": "11.0.0",
     "postcss-import": "14.0.2",
-    "puppeteer": "10.0.0",
-    "tailwindcss": "2.1.4"
+    "puppeteer": "10.1.0",
+    "tailwindcss": "2.2.4"
   },
   "dependencies": {
-    "@codemirror/autocomplete": "^0.18.7",
+    "@codemirror/autocomplete": "^0.18.8",
     "@codemirror/closebrackets": "^0.18.0",
     "@codemirror/commands": "^0.18.3",
     "@codemirror/comment": "^0.18.1",
@@ -64,7 +64,7 @@
     "@codemirror/lang-markdown": "^0.18.4",
     "@codemirror/lang-python": "^0.18.0",
     "@codemirror/lang-xml": "^0.18.0",
-    "@codemirror/legacy-modes": "^0.18.0",
+    "@codemirror/legacy-modes": "^0.18.1",
     "@codemirror/panel": "^0.18.2",
     "@codemirror/search": "^0.18.4",
     "@codemirror/state": "^0.18.7",
@@ -83,7 +83,7 @@
     "vega-embed": "^6.18.2",
     "vega-lite": "^5.1.0",
     "webfontloader": "^1.6.28",
-    "wretch": "^1.7.4"
+    "wretch": "^1.7.5"
   },
   "peerDependencies": {
     "@stencila/schema": "^1.0.0"

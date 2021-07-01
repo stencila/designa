@@ -75,6 +75,7 @@ export const isVegaObject = (node: Node): node is VegaNode => {
     node !== null &&
     'mediaType' in node &&
     isVegaMediaType(node.mediaType) &&
-    node.spec !== null
+    Object.prototype.hasOwnProperty.call(node, 'spec') &&
+    (node as Record<string, unknown>).spec !== null
   )
 }
