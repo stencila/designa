@@ -4,9 +4,11 @@
  * are attached to the DOM.
  * This is especially useful in the `componentWillMount` lifecycle events for performance reasons
  */
-export const findSlotByName =
-  (root: Element) =>
+export const getSlotByName =
+  (root?: Element | null) =>
   (slotName: string): Element | undefined => {
+    if (!root) return
+
     const children = Array.from(root.children)
     const el = children.find((child) => {
       return child.slot === slotName
@@ -16,5 +18,5 @@ export const findSlotByName =
       return el
     }
 
-    return children.find((child) => findSlotByName(child)(slotName))
+    return children.find((child) => getSlotByName(child)(slotName))
   }
