@@ -17,17 +17,79 @@ button {
         @apply bg-neutral-300;
       }
 
-      &[disabled],
-      &[disabled]:active,
-      &[disabled]:hover {
-        @apply bg-neutral-200 text-neutral-700;
+      &[disabled] {
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+          @apply bg-neutral-200 text-neutral-700;
+        }
       }
     }
 
-    @mixin buttonColorVariant danger;
-    @mixin buttonColorVariant neutral;
-    @mixin buttonColorVariant primary;
-    @mixin buttonColorVariant success;
-    @mixin buttonColorVariant warn;
+    &.color-danger {
+      @apply bg-danger-500 hover:bg-danger-700 text-stock;
+
+      &[disabled] {
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+          @apply bg-danger-200 text-danger-400;
+        }
+      }
+    }
+
+    &.color-neutral {
+      @apply bg-neutral-500 hover:bg-neutral-700 text-stock;
+
+      &[disabled] {
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+          @apply bg-neutral-200 text-neutral-400;
+        }
+      }
+    }
+
+    &.color-primary {
+      @apply bg-primary-500 hover:bg-primary-700 text-stock;
+
+      &[disabled] {
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+          @apply bg-primary-200 text-primary-400;
+        }
+      }
+    }
+
+    &.color-success {
+      @apply bg-success-500 hover:bg-success-700 text-stock;
+
+      &[disabled] {
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+          @apply bg-success-200 text-success-400;
+        }
+      }
+    }
+
+    &.color-warn {
+      @apply bg-warn-500 hover:bg-warn-700 text-stock;
+
+      &[disabled] {
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+          @apply bg-warn-200 text-warn-400;
+        }
+      }
+    }
   }
 }

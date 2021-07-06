@@ -1,0 +1,15 @@
+{
+  "modules": false,
+  "plugins": {
+    "postcss-import": {},
+    "postcss-import-url": { "modernBrowser": true },
+    "postcss-url": { "url": "rebase" },
+    "tailwindcss/nesting": {},
+    "tailwindcss": {
+      "config": "tailwind.config.js"
+    },
+    "postcss-custom-properties": {},
+    "postcss-host": {},
+    "cssnano": {}
+  }
+}

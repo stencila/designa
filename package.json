@@ -19,14 +19,14 @@
   "scripts": {
     "prepare": "lerna bootstrap",
     "dev": "concurrently \"npm run storybook\" \"npm run build:watch\"",
-    "build": "lerna run build",
-    "build:brand": "lerna run build --scope '@stencila/brand'",
-    "build:components": "lerna run build --scope '@stencila/components'",
-    "build:styles": "lerna run build --scope '@stencila/style*'",
-    "build:watch": "lerna run build:watch --stream --parallel",
+    "build": "lerna run build --stream",
+    "build:brand": "lerna run build --stream --scope '@stencila/brand'",
+    "build:components": "lerna run build --stream --scope '@stencila/components'",
+    "build:components:watch": "lerna run build:watch --stream --scope '@stencila/components'",
+    "build:styles": "lerna run build --stream --scope '@stencila/style*'",
     "storybook": "start-storybook -p 9006 -s packages/components/dist",
     "storybook:build": "build-storybook -o docs -s packages/components/dist",
-    "test": "lerna run test",
+    "test": "lerna run test --stream",
     "chromatic": "chromatic --storybook-build-dir docs"
   },
   "devDependencies": {
