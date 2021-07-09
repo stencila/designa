@@ -27,8 +27,8 @@
     "build:styles:stencila:watch": "lerna run build:watch --stream --scope '@stencila/style-stencila'",
     "build:styles:material": "lerna run build --stream --scope '@stencila/style-material'",
     "build:styles:material:watch": "lerna run build:watch --stream --scope '@stencila/style-material'",
-    "storybook": "start-storybook -p 9006 -s packages/components/dist",
-    "storybook:build": "build-storybook -o docs -s packages/components/dist",
+    "storybook": "start-storybook -p 9006 -s packages/components/dist,packages/style-stencila/dist --modern",
+    "storybook:build": "build-storybook -o docs -s packages/components/dist,packages/style-stencila/dist --modern",
     "test": "lerna run test --stream",
     "chromatic": "chromatic --storybook-build-dir docs"
   },
