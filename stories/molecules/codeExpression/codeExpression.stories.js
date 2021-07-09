@@ -5,7 +5,13 @@ export default {
   component: 'stencila-code-expression',
 }
 
-const handler = console.log
+const handler = (e) => {
+  console.log(e)
+  return {
+    type: 'CodeExpression',
+    output: `Results of ${e.text}`,
+  }
+}
 
 export const codeExpression = () => html`
   <div>
