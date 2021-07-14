@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.36.0](https://github.com/stencila/designa/compare/@stencila/components@0.35.1...@stencila/components@0.36.0) (2021-07-14)
+
+
+### Features
+
+* **Colours:** Change default colours for improved accessibility ([e101c60](https://github.com/stencila/designa/commit/e101c60f406e9c0e7b8e7bdc1645513cc861a628))
+* **Editor:** Add HTML syntax support ([eed54df](https://github.com/stencila/designa/commit/eed54df65087984bccc7be76a7efaa4bc0ede235))
+* **Toast:** Add ability show actionable Toast/Notifications ([263777a](https://github.com/stencila/designa/commit/263777ad1a1b2f4086d162010eabeeeefed0ba64))
+
+
+
+
+
 ## [0.35.1](https://github.com/stencila/designa/compare/@stencila/components@0.35.0...@stencila/components@0.35.1) (2021-07-01)
 
 **Note:** Version bump only for package @stencila/components

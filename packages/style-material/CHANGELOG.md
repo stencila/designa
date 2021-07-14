@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/stencila/style/compare/@stencila/style-material@0.13.3...@stencila/style-material@0.14.0) (2021-07-14)
+
+
+### Bug Fixes
+
+* **Button:** Ensure IconOnly buttons have even padding/are square ([5e2b646](https://github.com/stencila/style/commit/5e2b6463ce62826450e4ffb31ee973b71a27a974))
+
+
+### Features
+
+* **Colours:** Change default colours for improved accessibility ([e101c60](https://github.com/stencila/style/commit/e101c60f406e9c0e7b8e7bdc1645513cc861a628))
+
+
+
+
+
 ## [0.13.3](https://github.com/stencila/style/compare/@stencila/style-material@0.13.2...@stencila/style-material@0.13.3) (2021-07-01)
 
 **Note:** Version bump only for package @stencila/style-material
