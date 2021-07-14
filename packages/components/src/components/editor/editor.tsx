@@ -40,7 +40,7 @@ import {
   Watch,
 } from '@stencil/core'
 import { CodeError } from '@stencila/schema'
-import { findSlotByName } from '../utils/slotSelectors'
+import { getSlotByName } from '../utils/slotSelectors'
 import { LanguagePicker } from './components/languageSelect'
 import { codeErrors, updateErrors } from './customizations/errorPanel'
 import { defaultLanguageCapabilities, languageByAlias } from './languageUtils'
@@ -195,6 +195,10 @@ export class Editor {
           '@codemirror/legacy-modes/mode/dockerfile'
         )
         return StreamLanguage.define(dockerFile)
+      }
+      case 'html': {
+        const { html } = await import('@codemirror/lang-html')
+        return html()
       }
       case 'javascript': {
         const { javascript } = await import('@codemirror/lang-javascript')
@@ -429,7 +433,7 @@ export class Editor {
 
   private initCodeMirror = async (): Promise<void> => {
     const root = this.el
-    const slotEl: Element | undefined = findSlotByName(root)(slots.text)
+    const slotEl: Element | undefined = getSlotByName(root)(slots.text)
 
     const textContent = this.contents ?? slotEl?.textContent ?? ''
 

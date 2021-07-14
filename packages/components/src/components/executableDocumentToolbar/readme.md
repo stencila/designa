@@ -44,6 +44,8 @@ graph TD;
   stencila-tooltip --> stencila-tooltip-element
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip
+  stencila-toast --> stencila-icon
+  stencila-toast --> stencila-button
   stencila-toast --> animate-presence
   stencila-toast --> stencila-toast
   style stencila-executable-document-toolbar fill:#f9f,stroke:#333,stroke-width:4px

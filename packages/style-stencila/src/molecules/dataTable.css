@@ -1,16 +1,17 @@
-[itemtype="https://schema.stenci.la/Datatable"] {
+[itemtype="https://schema.stenci.la/Datatable"]
+{
   @apply block overflow-auto text-sm border-collapse font-body;
 
   td,
   th {
-    @apply px-2 py-1 border border-neutral-300;
+    @apply px-2 py-1;
   }
 
   th {
-    @apply font-bold bg-neutral-100;
+    @apply font-bold bg-neutral-50;
   }
 
   tbody tr:nth-child(even) {
-    @apply bg-neutral-100;
+    @apply bg-neutral-50;
   }
 }

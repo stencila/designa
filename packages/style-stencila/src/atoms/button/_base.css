@@ -1,8 +1,12 @@
 a.button,
 button {
-  @apply inline-block px-4 py-2 m-0 text-base leading-none font-semibold leading-none no-underline whitespace-nowrap border-none font-display;
+  @apply inline-block px-3 py-2 m-0 text-sm leading-none font-semibold leading-none no-underline whitespace-nowrap border-none font-display;
   background-image: none;
   transition: color 120ms ease-out, background-color 120ms ease-out;
+
+  @screen md {
+    @apply px-4 py-2 text-base leading-none;
+  }
 
   &.xsmall,
   &[size='xsmall'] {
@@ -55,6 +59,8 @@ button {
   }
 
   &.iconOnly {
+    @apply p-1;
+
     stencila-icon,
     & > svg,
     & > img {

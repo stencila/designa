@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property   | Attribute  | Description                                                                                               | Type                                                                                                   | Default           |
-| ---------- | ---------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------- |
-| `duration` | `duration` | Duration in milliseconds for how long the toast should be display                                         | `number`                                                                                               | `4000`            |
-| `position` | `position` | Where on the screen to show the Toast. Overrides the base position set in the `ToastController` instance. | `"bottomCenter" \| "bottomEnd" \| "bottomStart" \| "topCenter" \| "topEnd" \| "topStart" \| undefined` | `undefined`       |
-| `type`     | `type`     | Type of the toast to show. Affects the component color scheme.                                            | `"danger" \| "info" \| "success" \| "warn"`                                                            | `ToastTypes.info` |
+| Property      | Attribute     | Description                                                                                                                           | Type                                                                                                   | Default              |
+| ------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------- |
+| `dismissable` | `dismissable` | If true, shows a "close" button to immediately dismiss the toast                                                                      | `boolean \| undefined`                                                                                 | `false`              |
+| `duration`    | `duration`    | Duration in milliseconds for how long the toast should be display Setting `duration` to `0` will disable auto-dismissal of the toast. | `number \| undefined`                                                                                  | `4_000`              |
+| `position`    | `position`    | Where on the screen to show the Toast. Overrides the base position set in the `ToastController` instance.                             | `"bottomCenter" \| "bottomEnd" \| "bottomStart" \| "topCenter" \| "topEnd" \| "topStart" \| undefined` | `undefined`          |
+| `type`        | `type`        | Type of the toast to show. Affects the component colour scheme.                                                                       | `"danger" \| "neutral" \| "success" \| "warn"`                                                         | `ToastTypes.neutral` |
 
 
 ## CSS Custom Properties
@@ -31,6 +32,8 @@
 
 ### Depends on
 
+- [stencila-icon](../icon)
+- [stencila-button](../button)
 - animate-presence
 - [stencila-toast](.)
 
@@ -38,6 +41,9 @@
 ```mermaid
 graph TD;
   stencila-toast --> stencila-toast
+  stencila-button --> stencila-icon
+  stencila-button --> stencila-tooltip
+  stencila-tooltip --> stencila-tooltip-element
   stencila-executable-document-toolbar --> stencila-toast
   style stencila-toast fill:#f9f,stroke:#333,stroke-width:4px
 ```

@@ -1,16 +1,8 @@
 import purgecss from '@fullhuman/postcss-purgecss'
 import { Config } from '@stencil/core'
 import { postcss } from '@stencil/postcss'
-import path from 'path'
 import tailwind from 'tailwindcss'
 import { generateJsonDocs } from './jsonDocTransformer'
-
-const tailwindConfigPath = path.join(
-  __dirname,
-  '..',
-  '..',
-  'tailwind.config.js'
-)
 
 const prodPlugins =
   process.env.NODE_ENV === 'production'
@@ -52,7 +44,7 @@ export const config: Config = {
   ],
   plugins: [
     postcss({
-      plugins: [tailwind(tailwindConfigPath), ...prodPlugins],
+      plugins: [tailwind('../../tailwind.config.js'), ...prodPlugins],
     }),
   ],
   testing: {

@@ -1,8 +1,8 @@
 :host {
-  @apply block h-12;
-
   /** @prop --background: Sets the background color of the component. */
-  background-color: var(--background, var(--color-neutral-300));
+
+  @apply block;
+  background-color: var(--background, var(--color-neutral-200));
 
   &[position='fixed'] {
     @apply fixed top-0 left-0 z-30 w-full;
@@ -12,37 +12,45 @@
     }
   }
 
+  &[color='stock'],
   &[color='stock'] div {
-    @apply bg-stock;
+    --background: var(--color-stock);
   }
 
+  &[color='key'],
   &[color='key'] div {
-    @apply bg-key;
+    --background: var(--color-key);
   }
 
+  &[color='primary'],
   &[color='primary'] div {
-    @apply bg-primary-500;
+    --background: var(--color-primary-500);
   }
 
+  &[color='neutral'],
   &[color='neutral'] div {
-    @apply bg-neutral-500;
+    @apply text-neutral-700;
+    --background: var(--color-neutral-200);
   }
 
+  &[color='success'],
   &[color='success'] div {
-    @apply bg-success-500;
+    --background: var(--color-success-500);
   }
 
+  &[color='warn'],
   &[color='warn'] div {
-    @apply bg-warn-500;
+    --background: var(--color-warn-500);
   }
 
+  &[color='danger'],
   &[color='danger'] div {
-    @apply bg-danger-500;
+    --background: var(--color-danger-500);
   }
 
   div {
-    @apply flex flex-row items-center justify-between px-1 py-2 m-0 leading-none align-middle text-stock font-body;
-    background-color: var(--background);
+    @apply flex flex-row items-center justify-between p-2 m-0 leading-none align-middle text-stock font-body;
+    background-color: var(--background, var(--color-neutral-200));
 
     & > * {
       @apply align-middle;
@@ -55,9 +63,9 @@
 
   /* Use lighter backdrop on dark backgrounds */
   /* TODO: Make this work when `key` color is light */
-  &[color='key']::slotted(*)
+  /* &[color='key']::slotted(*)
     stencila-button:not([disabled]):hover
     button.iconOnly {
     background-color: rgba(255, 255, 255, 0.2);
-  }
+  } */
 }

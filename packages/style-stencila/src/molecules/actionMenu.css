@@ -1,9 +1,9 @@
 :host {
   /** @prop --background: Background color of the Action Menu component */
-  --background: var(--color-neutral-200, #edf2f7);
+  --background: var(--color-neutral-50, #edf2f7);
 
   /** @prop --border: Border color of the Action Menu component */
-  --border: var(--color-neutral-300, #e2e8f0);
+  --border: var(--color-neutral-100, #e2e8f0);
 
   @apply absolute top-0 right-0 z-10 py-px pl-1 pr-1 font-mono text-xs leading-none border-t-0 border-b border-l border-r-0 border-solid rounded-bl;
   background-color: var(--background);

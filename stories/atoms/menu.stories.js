@@ -3,6 +3,9 @@ import { html } from 'lit-html'
 export default {
   title: 'Atoms/Menu',
   component: 'stencila-menu',
+  args: {
+    isOpen: true,
+  },
 }
 
 export const menu = ({ isOpen }) =>
@@ -44,6 +47,6 @@ export const menuWithIcons = ({ isOpen }) => html`
   <stencila-menu .isOpen=${isOpen}>
     <stencila-menu-item icon="grid">Projects</stencila-menu-item>
     <stencila-menu-item icon="user" }}>Profile</stencila-menu-item>
-    <stencila-menu-item icon="log-out">Sign Out</stencila-menu-item>
+    <stencila-menu-item icon="logout-box-r">Sign Out</stencila-menu-item>
   </stencila-menu>
 `

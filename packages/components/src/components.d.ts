@@ -377,15 +377,19 @@ export namespace Components {
     }
     interface StencilaToast {
         /**
-          * Duration in milliseconds for how long the toast should be display
+          * If true, shows a "close" button to immediately dismiss the toast
          */
-        "duration": number;
+        "dismissable"?: boolean | undefined;
+        /**
+          * Duration in milliseconds for how long the toast should be display Setting `duration` to `0` will disable auto-dismissal of the toast.
+         */
+        "duration"?: number | undefined;
         /**
           * Where on the screen to show the Toast. Overrides the base position set in the `ToastController` instance.
          */
         "position": ToastPosition | undefined;
         /**
-          * Type of the toast to show. Affects the component color scheme.
+          * Type of the toast to show. Affects the component colour scheme.
          */
         "type": ToastType;
     }
@@ -921,15 +925,19 @@ declare namespace LocalJSX {
     }
     interface StencilaToast {
         /**
-          * Duration in milliseconds for how long the toast should be display
+          * If true, shows a "close" button to immediately dismiss the toast
          */
-        "duration"?: number;
+        "dismissable"?: boolean | undefined;
+        /**
+          * Duration in milliseconds for how long the toast should be display Setting `duration` to `0` will disable auto-dismissal of the toast.
+         */
+        "duration"?: number | undefined;
         /**
           * Where on the screen to show the Toast. Overrides the base position set in the `ToastController` instance.
          */
         "position"?: ToastPosition | undefined;
         /**
-          * Type of the toast to show. Affects the component color scheme.
+          * Type of the toast to show. Affects the component colour scheme.
          */
         "type"?: ToastType;
     }

@@ -2,11 +2,14 @@
 
 :host,
 stencila-editor {
-  /** @prop --line-number-background: Background color of the Editor Line Numbers gutter */
-  --line-number-background: var(
+  /** @prop --gutter-background: Background color of the Editor gutter (Line numbers, fold, etc) */
+  --gutter-background: var(
     --color-background,
-    var(--color-neutral-200, #edf2f7)
+    var(--color-neutral-50, #e9eaf1)
   );
+
+  /** @prop --gutter-color: (Text) Color of the Editor Line Numbers gutter (Line numbers, fold, etc) */
+  --gutter-color: var(--color-neutral-500, #6e7591);
 
   all: initial;
 
@@ -15,12 +18,12 @@ stencila-editor {
   --background-color: transparent;
 
   .editorContainer {
-    @apply flex flex-col flex-grow max-w-full border rounded border-neutral-300;
+    @apply flex flex-col flex-grow max-w-full border rounded border-neutral-100;
     background-color: var(--background-color);
     border-width: var(--border-width);
 
     &:focus-within {
-      box-shadow: inset 0px 0px 0px 2px var(--color-neutral-400);
+      box-shadow: inset 0px 0px 0px 2px var(--color-neutral-200);
     }
   }
 
@@ -47,7 +50,8 @@ stencila-editor {
     }
 
     .cm-gutters {
-      background-color: var(--line-number-background);
+      color: var(--gutter-color);
+      background-color: var(--gutter-background);
     }
 
     .cm-tooltip.cm-tooltip-autocomplete > ul > li {
@@ -60,10 +64,19 @@ stencila-editor {
       min-width: 1.375em;
       min-width: 2ch;
     }
+
+    stencila-code-error {
+      @apply rounded-none border-t-0 border-l-0 border-r-0 border-b;
+      border-bottom-style: solid;
+
+      &:last-of-type {
+        @apply border-b-0;
+      }
+    }
   }
 
   menu {
-    @apply flex justify-end p-0 py-px m-0 border-t border-neutral-300;
+    @apply flex justify-end p-0 py-px m-0 border-t border-neutral-100;
 
     stencila-icon {
       --height: 1em;

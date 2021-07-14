@@ -16,6 +16,9 @@
     "src": "src"
   },
   "style": "./dist/index-material.css",
+  "targets": {
+    "main": false
+  },
   "files": [
     "dist"
   ],
@@ -27,8 +30,8 @@
     "url": "git+https://github.com/stencila/style.git"
   },
   "scripts": {
-    "build": "postcss 'src/**/*.css' -m --base src --dir dist",
-    "build:watch": "npm run build -- --watch"
+    "build": "parcel build 'src/**/*.css' --no-optimize",
+    "build:watch": "parcel watch 'src/**/*.css'"
   },
   "bugs": {
     "url": "https://github.com/stencila/designa/issues"
@@ -42,9 +45,8 @@
     "@stencila/brand": "0.7.2"
   },
   "devDependencies": {
-    "@abide-community/parcel-plugin-clean-out-dir": "1.0.0",
-    "concurrently": "6.2.0",
-    "parcel-plugin-css-pretransform": "1.0.0",
+    "cssnano": "^5.0.6",
+    "parcel": "^2.0.0-beta.3.1",
     "tailwindcss": "2.2.4"
   }
 }

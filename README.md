@@ -42,14 +42,17 @@ Then install the necessary Node packages:
 
 Build packages and watch for changes:
 
-`npm run build:watch`
+- `components`: `npm run build:components:watch`
+- Styles:
+  - `style-stencila`: `npm run build:styles:stencila:watch`
+  - `style-material` `npm run build:styles:stencila:watch`
+  - 🏎 Note: To significantly reduce development build times you can disable the `cssnano` PostCSS plugins from the respective project’s `.postcssrs.json` file
 
 In a _separate terminal window_ start Storybook:
 
 `npm run storybook`
 
-> 😩 Note that you will currently have to manually reload the Storybook after making changes to components see the results.
-> An issue to improve the DX [can be seen here](https://github.com/stencila/designa/issues/113)
+> An issue to improve the development experience when using Storybook [can be seen here](https://github.com/stencila/designa/issues/113)
 
 ### Adding Components
 

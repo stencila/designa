@@ -17,7 +17,7 @@ stencila-input {
   }
 
   input {
-    @apply w-full p-2 text-base leading-none border border-solid rounded border-neutral-300;
+    @apply w-full p-2 text-base leading-none border border-solid rounded border-neutral-100;
 
     &:active,
     &:focus {

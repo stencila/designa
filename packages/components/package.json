@@ -20,11 +20,9 @@
     "access": "public"
   },
   "scripts": {
-    "build:watch": "concurrently \"npm run dev\" \"chokidar '../style-*/dist/*.css' -c 'npm run kill; npm run clean && npm run dev'\"",
     "build": "stencil build --docs",
-    "dev": "stencil build --dev --watch --docs",
+    "build:watch": "stencil build --dev --watch --docs",
     "kill": "pkill -f \"Stencil: stencila-components\"",
-    "clean": "rimraf .stencil",
     "test": "stencil test --spec --e2e",
     "test:watch": "stencil test --spec --e2e --watchAll",
     "lint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",

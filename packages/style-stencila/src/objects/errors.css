@@ -1,6 +1,6 @@
 :host,
 stencila-code-error {
-  @apply box-border relative block w-full max-w-full p-2 rounded font-body border-neutral-500 bg-neutral-100 text-neutral-900 relative;
+  @apply box-border relative block w-full max-w-full p-2 rounded font-body border border-solid border-neutral-500 bg-neutral-50 text-neutral-700 relative;
 
   .overview {
     @apply pr-4;
@@ -26,7 +26,7 @@ stencila-code-error {
   }
 
   &[kind='warning'] {
-    @apply border-warn-500 bg-warn-100 text-warn-900;
+    @apply border-warn-500 bg-warn-50 text-warn-800;
 
     [slot='stacktrace'] {
       @apply border-warn-500;
@@ -34,7 +34,7 @@ stencila-code-error {
   }
 
   &[kind='error'] {
-    @apply border-danger-500 bg-danger-100 text-danger-900;
+    @apply border-danger-500 bg-danger-50 text-danger-600;
 
     [slot='stacktrace'] {
       @apply border-danger-500;

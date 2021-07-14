@@ -21,8 +21,8 @@ const families =
 
 // These version numbers are automatically updated when releasing new versions.
 // see `../../scripts/prepare.mjs`
-const stencilaThemeVersion = '0.18.3'
-const materialThemeVersion = '0.11.16'
+const stencilaThemeVersion = 'latest'
+const materialThemeVersion = 'latest'
 
 const themeName = mode === 'material' ? 'material' : 'stencila'
 

@@ -1,7 +1,7 @@
 :host,
 stencila-executable-document-toolbar {
   /** @prop --background: Sets the background color of the component. */
-  --background: var(--color-neutral-300);
+  --background: var(--color-neutral-100);
 
   @apply block;
 
@@ -15,7 +15,6 @@ stencila-executable-document-toolbar {
   }
 
   .hidden-sm {
-    /* @apply hidden; */
     display: none;
 
     @screen sm {

@@ -4,13 +4,13 @@ stencila-code-expression {
   --background: var(--color-stock, #fff);
 
   /** @prop --background-buttons: Background color of the Code Editor section */
-  --background-buttons: var(--color-neutral-200, #edf2f7);
+  --background-buttons: var(--color-neutral-50, #edf2f7);
 
   /** @prop --background-editor: Background color of the Code Editor section */
-  --background-editor: var(--color-neutral-200, #edf2f7);
+  --background-editor: var(--color-neutral-50, #edf2f7);
 
   /** @prop --border: Border color around the component as well as internal section dividers */
-  --border: var(--color-neutral-300, #e2e8f0);
+  --border: var(--color-neutral-100, #e2e8f0);
 
   @apply inline-flex items-stretch p-0 text-sm leading-none align-text-bottom border border-solid rounded;
   background-color: var(--background);
@@ -88,7 +88,7 @@ stencila-code-expression {
     [slot='output'],
     .output,
     stencila-tooltip {
-      @apply text-neutral-600;
+      @apply text-neutral-500;
     }
   }
 

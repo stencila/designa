@@ -5,5 +5,5 @@ stencila-tab-list {
 :host ul,
 stencila-tab-list ul,
 ul[role='tablist'] {
-  @apply flex flex-row p-0 m-0 bg-neutral-100;
+  @apply flex flex-row p-0 m-0 bg-neutral-50;
 }

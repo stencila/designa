@@ -38,9 +38,9 @@ export class ErrorComponent {
   private getIcon(severity: Level): IconNames {
     switch (severity) {
       case 'error':
-        return 'close-circle'
+        return 'forbid'
       case 'warning':
-        return 'alert'
+        return 'error-warning'
       default:
         return 'information'
     }

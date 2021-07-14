@@ -1,5 +1,5 @@
 pre {
-  @apply border rounded p-1 overflow-x-auto border-neutral-300;
+  @apply border rounded p-1 overflow-x-auto border-neutral-100;
 
   code:focus {
     outline: none;
