@@ -9,6 +9,7 @@
       "config": "../../tailwind.config.js"
     },
     "postcss-custom-properties": {},
-    "postcss-host": {}
+    "postcss-host": {},
+    "cssnano": {}
   }
 }

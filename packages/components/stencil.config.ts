@@ -1,7 +1,6 @@
 import purgecss from '@fullhuman/postcss-purgecss'
 import { Config } from '@stencil/core'
 import { postcss } from '@stencil/postcss'
-import path from 'path'
 import tailwind from 'tailwindcss'
 import { generateJsonDocs } from './jsonDocTransformer'
 
