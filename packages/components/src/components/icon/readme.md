@@ -22,6 +22,7 @@
  - [stencila-executable-document-toolbar](../executableDocumentToolbar)
  - [stencila-input](../input)
  - [stencila-menu-item](../menuItem)
+ - [stencila-toast](../toast)
 
 ### Graph
 ```mermaid
@@ -33,6 +34,7 @@ graph TD;
   stencila-executable-document-toolbar --> stencila-icon
   stencila-input --> stencila-icon
   stencila-menu-item --> stencila-icon
+  stencila-toast --> stencila-icon
   style stencila-icon fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

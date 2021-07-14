@@ -1,4 +1,5 @@
 import mem from 'mem'
+import { Components } from '../../components'
 
 export enum ToastTypes {
   info = 'info',
@@ -20,10 +21,7 @@ export enum ToastPositions {
 
 export type ToastPosition = keyof typeof ToastPositions
 
-interface ToastOptions {
-  type?: ToastTypes
-  position?: ToastPositions
-}
+type ToastOptions = Partial<Components.StencilaToast>
 
 const init = (options: ToastOptions): Element | HTMLElement => {
   const toastContainer = document.querySelector('.stencila-toast-container')
@@ -62,9 +60,13 @@ export const toastController = (
     options: ToastOptions | undefined = {}
   ): void => {
     const el = document.createElement('stencila-toast')
+
     el.type = options.type ?? baseOptions.type ?? ToastTypes.info
     el.position =
       options.position ?? baseOptions.position ?? ToastPositions.topCenter
+    el.dismissable = options.dismissable ?? baseOptions.dismissable
+    el.duration = options.duration ?? baseOptions.duration
+
     el.innerText = message
     init(baseOptions).append(el)
   }

@@ -1,5 +1,5 @@
 .stencila-toast-container {
-  @apply fixed top-0 left-0 z-50 flex flex-col items-center w-screen h-screen p-2 pointer-events-none;
+  @apply fixed top-0 left-0 z-50 flex flex-col items-center w-screen h-screen p-2 pointer-events-none box-border;
   display: flex !important;
 
   &[position^='top'] {
@@ -27,9 +27,11 @@ stencila-toast {
   /** @prop --background: Background color of the Toast component */
   --background: var(--color-stock, white);
 
-  @apply flex-shrink-0 block px-4 py-2 my-1 overflow-hidden font-bold leading-none shadow-lg pointer-events-auto left-1/2 rounded-md text-stock;
+  @apply flex flex-row flex-shrink-0 block my-1 overflow-hidden font-body leading-none shadow-lg pointer-events-auto rounded-md text-stock text-base relative max-w-prose;
   background-color: var(--background);
+  border: 1px solid var(--color-neutral-200);
   color: var(--color);
+  min-width: 32ch;
 
   &[data-enter] {
     animation: fade-in 150ms ease-in;
@@ -43,16 +45,73 @@ stencila-toast {
 
   /* Toast color variants */
   /* TODO: Allow variables set above to override these colors */
+  .toastAccent {
+    @apply text-stock leading-none px-2 py-4;
+
+    stencila-icon {
+      @apply block rounded-full p-1 -mt-0.5;
+      --height: 1.25rem;
+      --width: 1.25rem;
+    }
+  }
+
+  &,
+  &[type='info'] {
+    .toastAccent {
+      @apply bg-neutral-300 text-neutral-600;
+
+      stencila-icon {
+        @apply bg-neutral-100;
+      }
+    }
+  }
+
+  &[type='primary'] {
+    @apply border-primary-200;
+
+    .toastAccent {
+      @apply bg-primary-200 text-primary-500;
+
+      stencila-icon {
+        @apply bg-primary-100;
+      }
+    }
+  }
+
   &[type='success'] {
-    @apply text-stock bg-success-500;
+    @apply border-success-200;
+
+    .toastAccent {
+      @apply bg-success-200 text-success-500;
+
+      stencila-icon {
+        @apply bg-success-100;
+      }
+    }
   }
 
   &[type='warn'] {
-    @apply text-warn-900 bg-warn-500;
+    @apply border-warn-300;
+
+    .toastAccent {
+      @apply bg-warn-300 text-warn-600;
+
+      stencila-icon {
+        @apply bg-warn-100;
+      }
+    }
   }
 
   &[type='danger'] {
-    @apply text-danger-900 bg-danger-500;
+    @apply border-danger-200;
+
+    .toastAccent {
+      @apply bg-danger-200 text-danger-500;
+
+      stencila-icon {
+        @apply bg-danger-100;
+      }
+    }
   }
 
   &[position='topStart'] {
@@ -61,6 +120,33 @@ stencila-toast {
 
   &[position='topEnd'] {
     @apply self-end;
+  }
+
+  .content {
+    @apply p-4 flex flex-col justify-center items-start text-sm;
+  }
+
+  [slot='title'] {
+    @apply font-bold;
+  }
+
+  [slot='actions']:not(:empty) {
+    @apply mt-2 flex justify-start w-full;
+
+    & > *:not(:first-child) {
+      @apply pl-2;
+    }
+  }
+
+  /* Close button */
+  &[dismissable] {
+    @apply pr-8;
+  }
+
+  .closeButton {
+    @apply absolute;
+    right: 0.325rem;
+    top: 0.325rem;
   }
 }
 
