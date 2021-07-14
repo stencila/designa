@@ -79,10 +79,6 @@ a.button:not(.secondary) {
     }
   }
 
-  /* TODO: Enhance colorVariant mixin to work with colors which only have one shade/tint */
-  /* @mixin buttonColorVariant brand; */
-  /* @mixin buttonColorVariant stock; */
-  /* @mixin buttonColorVariant key; */
   &.color-stock {
     @apply bg-stock text-key;
 

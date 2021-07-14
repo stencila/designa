@@ -59,6 +59,8 @@ button {
   }
 
   &.iconOnly {
+    @apply p-1;
+
     stencila-icon,
     & > svg,
     & > img {
