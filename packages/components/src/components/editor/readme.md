@@ -75,9 +75,10 @@ Type: `Promise<string>`
 
 ## CSS Custom Properties
 
-| Name                       | Description                                        |
-| -------------------------- | -------------------------------------------------- |
-| `--line-number-background` | Background color of the Editor Line Numbers gutter |
+| Name                  | Description                                                              |
+| --------------------- | ------------------------------------------------------------------------ |
+| `--gutter-background` | Background color of the Editor gutter (Line numbers, fold, etc)          |
+| `--gutter-color`      | (Text) Color of the Editor Line Numbers gutter (Line numbers, fold, etc) |
 
 
 ## Dependencies

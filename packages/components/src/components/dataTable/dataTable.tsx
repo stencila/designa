@@ -5,9 +5,9 @@ import { Datatable } from '@stencila/schema'
   tag: 'stencila-data-table',
   styleUrls: {
     default: 'dataTable.css',
-    material: 'dataTable.css'
+    material: 'dataTable.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class DataTable {
   /**
@@ -23,7 +23,7 @@ export class DataTable {
       <table itemtype="https://schema.stenci.la/Datatable">
         <thead>
           <tr>
-            {cols.map(col => (
+            {cols.map((col) => (
               <th>{col.name}</th>
             ))}
           </tr>
@@ -31,7 +31,7 @@ export class DataTable {
         <tbody>
           {rows.map((_, row) => (
             <tr>
-              {cols.map(col => (
+              {cols.map((col) => (
                 <td>{col.values[row]}</td>
               ))}
             </tr>

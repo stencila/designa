@@ -4,7 +4,7 @@
 
   td,
   th {
-    @apply px-2 py-1 border border-neutral-200;
+    @apply px-2 py-1;
   }
 
   th {

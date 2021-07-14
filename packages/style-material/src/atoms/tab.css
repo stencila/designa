@@ -10,7 +10,7 @@ ul[role='tablist'] li {
   @apply flex flex-row m-0 text-sm leading-none font-medium tracking-wider text-center uppercase list-none;
 
   a {
-    @apply block w-full px-4 py-4 leading-none border-0 border-b-2 border-solid border-neutral-200;
+    @apply block w-full px-4 py-4 leading-none border-0 border-b-2 border-solid border-neutral-100;
 
     &[aria-selected='true'] {
       @apply border-b-2 border-primary-500 text-primary-500;

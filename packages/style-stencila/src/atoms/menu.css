@@ -1,6 +1,6 @@
 :host {
   ul {
-    @apply absolute z-10 inline-block p-0 m-0 border border-solid rounded shadow-md bg-stock border-neutral-200;
+    @apply absolute z-10 inline-block p-0 m-0 border border-solid rounded shadow-md bg-stock border-neutral-100;
     min-width: 112px;
 
     &[aria-hidden] {
@@ -8,7 +8,7 @@
     }
 
     &::slotted(:not(:last-child)) {
-      @apply border-0 border-b border-solid border-neutral-200;
+      @apply border-0 border-b border-solid border-neutral-100;
     }
   }
 }

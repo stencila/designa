@@ -67,6 +67,16 @@ a.button {
         @apply bg-stock;
         mix-blend-mode: soft-light;
       }
+
+      &.color-key {
+        mix-blend-mode: normal;
+        opacity: 0.55;
+
+        &::before {
+          @apply bg-stock;
+          mix-blend-mode: normal;
+        }
+      }
     }
   }
 }
