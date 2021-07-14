@@ -14,7 +14,7 @@ button {
       @apply bg-stock text-key;
 
       &:hover {
-        @apply bg-neutral-300;
+        @apply bg-neutral-100;
       }
 
       &[disabled] {
@@ -28,7 +28,7 @@ button {
     }
 
     &.color-danger {
-      @apply bg-danger-500 hover:bg-danger-700 text-stock;
+      @apply bg-danger-500 hover:bg-danger-600 text-stock;
 
       &[disabled] {
         &,
@@ -41,7 +41,7 @@ button {
     }
 
     &.color-neutral {
-      @apply bg-neutral-500 hover:bg-neutral-700 text-stock;
+      @apply bg-neutral-500 hover:bg-neutral-600 text-stock;
 
       &[disabled] {
         &,
@@ -54,7 +54,7 @@ button {
     }
 
     &.color-primary {
-      @apply bg-primary-500 hover:bg-primary-700 text-stock;
+      @apply bg-primary-500 hover:bg-primary-600 text-stock;
 
       &[disabled] {
         &,
@@ -67,7 +67,7 @@ button {
     }
 
     &.color-success {
-      @apply bg-success-500 hover:bg-success-700 text-stock;
+      @apply bg-success-500 hover:bg-success-600 text-stock;
 
       &[disabled] {
         &,
@@ -80,7 +80,7 @@ button {
     }
 
     &.color-warn {
-      @apply bg-warn-500 hover:bg-warn-700 text-stock;
+      @apply bg-warn-400 hover:bg-warn-500 text-warn-800;
 
       &[disabled] {
         &,

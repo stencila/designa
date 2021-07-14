@@ -45,7 +45,7 @@ export const config: Config = {
   ],
   plugins: [
     postcss({
-      plugins: [tailwind('./tailwind.config.js'), ...prodPlugins],
+      plugins: [tailwind('../../tailwind.config.js'), ...prodPlugins],
     }),
   ],
   testing: {

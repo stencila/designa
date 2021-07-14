@@ -3,6 +3,9 @@ import { html } from 'lit-html'
 export default {
   title: 'Atoms/Menu',
   component: 'stencila-menu',
+  args: {
+    isOpen: true,
+  },
 }
 
 export const menu = ({ isOpen }) =>

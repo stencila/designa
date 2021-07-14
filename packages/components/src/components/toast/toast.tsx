@@ -34,7 +34,7 @@ export class StencilaToast {
   /**
    * Type of the toast to show. Affects the component colour scheme.
    */
-  @Prop() type: ToastType = ToastTypes.info
+  @Prop() type: ToastType = ToastTypes.neutral
 
   /**
    * Where on the screen to show the Toast. Overrides the base position set in the `ToastController` instance.
@@ -52,7 +52,7 @@ export class StencilaToast {
       case 'warn': {
         return 'error-warning'
       }
-      case 'info':
+      case 'neutral':
       default: {
         return 'question'
       }

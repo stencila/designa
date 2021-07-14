@@ -20,7 +20,7 @@ stencila-node-list {
   }
 
   .emptyContentMessage {
-    @apply font-mono text-neutral-600 text-base;
+    @apply font-mono text-neutral-500 text-base;
   }
 
   stencila-code-error {

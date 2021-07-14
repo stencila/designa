@@ -5,11 +5,21 @@ button,
 a.button {
   &.minimal:not(.secondary),
   &.minimal {
-    @apply bg-transparent border-0 shadow-none text-primary-500;
+    @apply bg-transparent border-0 shadow-none text-primary-500 rounded-sm relative overflow-hidden;
+
+    &::before {
+      content: '';
+      @apply absolute top-0 left-0 w-full h-full block;
+    }
 
     &:focus,
     &:hover {
-      background-color: rgba(0, 0, 0, 0.15);
+      @apply bg-transparent;
+
+      &::before {
+        background-color: rgba(0, 0, 0, 0.25);
+        mix-blend-mode: darken;
+      }
     }
 
     &.color-stock {
@@ -38,13 +48,25 @@ a.button {
 
     &.color-neutral {
       @apply text-neutral-500;
+
+      &:focus,
+      &:hover {
+        @apply text-neutral-900;
+      }
     }
 
     &[disabled],
     &[disabled]:focus,
     &[disabled]:active,
     &[disabled]:hover {
-      @apply opacity-25 bg-neutral-100 text-key;
+      @apply text-key;
+      mix-blend-mode: soft-light;
+      opacity: 0.65;
+
+      &::before {
+        @apply bg-stock;
+        mix-blend-mode: soft-light;
+      }
     }
   }
 }

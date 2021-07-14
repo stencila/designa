@@ -58,10 +58,10 @@ stencila-toast {
   &,
   &[type='info'] {
     .toastAccent {
-      @apply bg-neutral-300 text-neutral-600;
+      @apply bg-neutral-100 text-neutral-600;
 
       stencila-icon {
-        @apply bg-neutral-100;
+        @apply bg-neutral-50;
       }
     }
   }
@@ -70,10 +70,10 @@ stencila-toast {
     @apply border-primary-200;
 
     .toastAccent {
-      @apply bg-primary-200 text-primary-500;
+      @apply bg-primary-100 text-primary-500;
 
       stencila-icon {
-        @apply bg-primary-100;
+        @apply bg-primary-50;
       }
     }
   }
@@ -85,19 +85,19 @@ stencila-toast {
       @apply bg-success-200 text-success-500;
 
       stencila-icon {
-        @apply bg-success-100;
+        @apply bg-success-50;
       }
     }
   }
 
   &[type='warn'] {
-    @apply border-warn-300;
+    @apply border-warn-200;
 
     .toastAccent {
-      @apply bg-warn-300 text-warn-600;
+      @apply bg-warn-200 text-warn-600;
 
       stencila-icon {
-        @apply bg-warn-100;
+        @apply bg-warn-50;
       }
     }
   }
@@ -109,7 +109,7 @@ stencila-toast {
       @apply bg-danger-200 text-danger-500;
 
       stencila-icon {
-        @apply bg-danger-100;
+        @apply bg-danger-50;
       }
     }
   }

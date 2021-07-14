@@ -67,7 +67,7 @@ a.button:not(.secondary) {
   }
 
   &.color-warn {
-    @apply bg-warn-500 hover:bg-warn-700 text-stock;
+    @apply bg-warn-500 hover:bg-warn-700 text-warn-700;
 
     &[disabled] {
       &,

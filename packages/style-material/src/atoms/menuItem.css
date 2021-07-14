@@ -2,7 +2,7 @@
   @apply flex items-center h-12 px-4 no-underline cursor-pointer text-key font-body;
 
   &:hover {
-    @apply bg-neutral-200;
+    @apply bg-neutral-50;
   }
 
   stencila-icon {

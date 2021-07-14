@@ -2,7 +2,7 @@ import mem from 'mem'
 import { Components } from '../../components'
 
 export enum ToastTypes {
-  info = 'info',
+  neutral = 'neutral',
   success = 'success',
   warn = 'warn',
   danger = 'danger',
@@ -61,7 +61,7 @@ export const toastController = (
   ): void => {
     const el = document.createElement('stencila-toast')
 
-    el.type = options.type ?? baseOptions.type ?? ToastTypes.info
+    el.type = options.type ?? baseOptions.type ?? ToastTypes.neutral
     el.position =
       options.position ?? baseOptions.position ?? ToastPositions.topCenter
     el.dismissable = options.dismissable ?? baseOptions.dismissable

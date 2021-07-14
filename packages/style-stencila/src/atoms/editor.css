@@ -5,7 +5,7 @@ stencila-editor {
   /** @prop --line-number-background: Background color of the Editor Line Numbers gutter */
   --line-number-background: var(
     --color-background,
-    var(--color-neutral-200, #edf2f7)
+    var(--color-neutral-50, #edf2f7)
   );
 
   all: initial;
@@ -15,12 +15,12 @@ stencila-editor {
   --background-color: transparent;
 
   .editorContainer {
-    @apply flex flex-col flex-grow max-w-full border rounded border-neutral-300;
+    @apply flex flex-col flex-grow max-w-full border rounded border-neutral-200;
     background-color: var(--background-color);
     border-width: var(--border-width);
 
     &:focus-within {
-      box-shadow: inset 0px 0px 0px 2px var(--color-neutral-400);
+      box-shadow: inset 0px 0px 0px 2px var(--color-neutral-200);
     }
   }
 
@@ -63,7 +63,7 @@ stencila-editor {
   }
 
   menu {
-    @apply flex justify-end p-0 py-px m-0 border-t border-neutral-300;
+    @apply flex justify-end p-0 py-px m-0 border-t border-neutral-200;
 
     stencila-icon {
       --height: 1em;
