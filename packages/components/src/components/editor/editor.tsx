@@ -196,6 +196,10 @@ export class Editor {
         )
         return StreamLanguage.define(dockerFile)
       }
+      case 'html': {
+        const { html } = await import('@codemirror/lang-html')
+        return html()
+      }
       case 'javascript': {
         const { javascript } = await import('@codemirror/lang-javascript')
         return javascript()
