@@ -50,7 +50,8 @@ stencila-editor {
     }
 
     .cm-gutters {
-      background-color: var(--line-number-background);
+      color: var(--gutter-color);
+      background-color: var(--gutter-background);
     }
 
     .cm-tooltip.cm-tooltip-autocomplete > ul > li {
@@ -62,6 +63,15 @@ stencila-editor {
     .cm-completionIcon {
       min-width: 1.375em;
       min-width: 2ch;
+    }
+
+    stencila-code-error {
+      @apply rounded-none border-t-0 border-l-0 border-r-0 border-b;
+      border-bottom-style: solid;
+
+      &:last-of-type {
+        @apply border-b-0;
+      }
     }
   }
 
