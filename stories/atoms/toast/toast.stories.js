@@ -26,6 +26,11 @@ export default {
         'bottomEnd',
       ],
     },
+    dismissable: {
+      control: {
+        type: 'boolean',
+      },
+    },
   },
 }
 
@@ -43,7 +48,7 @@ export const toast = ({ type, duration, position, dismissable }) =>
 
 export const dismissable = ({ type, duration, position, dismissable }) =>
   html`
-    <animate-presence class="stencila-toast-container" .position=${position}>
+    <stencila-toast-container .position=${position}>
       <stencila-toast
         .type=${type}
         .duration=${duration}
@@ -84,7 +89,7 @@ export const dismissable = ({ type, duration, position, dismissable }) =>
       >
         This is a simple toast
       </stencila-toast>
-    </animate-presence>
+    </stencila-toast-container>
   `
 dismissable.args = {
   dismissable: true,
@@ -92,7 +97,7 @@ dismissable.args = {
 
 export const withAction = ({ type, duration, position, dismissable }) =>
   html`
-    <animate-presence class="stencila-toast-container" .position=${position}>
+    <stencila-toast-container .position=${position}>
       <stencila-toast
         .type=${type}
         .duration=${duration}
@@ -157,7 +162,7 @@ export const withAction = ({ type, duration, position, dismissable }) =>
           <stencila-button>Action</stencila-button>
         </div>
       </stencila-toast>
-    </animate-presence>
+    </stencila-toast-container>
   `
 withAction.args = {
   dismissable: true,

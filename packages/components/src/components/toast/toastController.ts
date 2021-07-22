@@ -24,21 +24,16 @@ export type ToastPosition = keyof typeof ToastPositions
 type ToastOptions = Partial<Components.StencilaToast>
 
 const init = (options: ToastOptions): Element | HTMLElement => {
-  const toastContainer = document.querySelector('.stencila-toast-container')
+  const toastContainer = document.querySelector('stencila-toast-container')
 
   if (toastContainer) {
     return toastContainer
   }
 
-  const container = document.createElement('animate-presence')
-  container.classList.add('stencila-toast-container')
-  container.setAttribute('aria-live', 'polite')
-  container.setAttribute('role', 'status')
-  // TODO: Look into `aria-relevant="additions"` not silencing node removals in VoiceOver
-  container.setAttribute('aria-relevant', 'additions')
+  const container = document.createElement('stencila-toast-container')
 
   if (options.position !== undefined) {
-    container.setAttribute('position', options.position)
+    container.position = options.position
   }
 
   document.body.append(container)

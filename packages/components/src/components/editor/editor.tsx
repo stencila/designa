@@ -9,12 +9,11 @@ import { commentKeymap } from '@codemirror/comment'
 import { foldGutter, foldKeymap } from '@codemirror/fold'
 import { lineNumbers } from '@codemirror/gutter'
 import { defaultHighlightStyle } from '@codemirror/highlight'
-import { history, historyKeymap } from '@codemirror/history'
+import { history, historyField, historyKeymap } from '@codemirror/history'
 import { bracketMatching } from '@codemirror/matchbrackets'
 import { searchConfig, searchKeymap } from '@codemirror/search'
 import {
   Compartment,
-  EditorSelection,
   EditorState,
   Extension,
   Prec,
@@ -51,6 +50,8 @@ export interface EditorContents {
 }
 
 export type Keymap = KeymapI
+
+type EditorStateJSON = Record<string, unknown>
 
 const slots = {
   text: 'text',
@@ -94,15 +95,9 @@ export class Editor {
   @Prop()
   public contents?: string
 
-  /**
-   * Disable language and other editor configuration management, deferring control to consuming applications
-   */
-  @Prop()
-  public isControlled = false
-
   @Watch('contents')
   contentsChanged(nextValue: string, prevValue: string): void {
-    if (!this.isControlled && nextValue !== prevValue) {
+    if (nextValue !== prevValue) {
       this.setContentsHandler(nextValue)
     }
   }
@@ -262,7 +257,7 @@ export class Editor {
    */
   @Watch('activeLanguage')
   activeLanguageOnlyChanged(nextLanguage: string, prevLanguage: string): void {
-    if (!this.isControlled && nextLanguage !== prevLanguage) {
+    if (nextLanguage !== prevLanguage) {
       this.setLanguageHandler(nextLanguage).catch((err) => {
         console.log(err)
       })
@@ -308,7 +303,7 @@ export class Editor {
 
   @Watch('lineNumbers')
   onSetLineNumbers(nextValue: boolean, prevValue: boolean): void {
-    if (!this.isControlled && nextValue !== prevValue) {
+    if (nextValue !== prevValue) {
       this.dispatchEffect(
         this.lineNumbersConf.reconfigure(nextValue ? lineNumbers() : [])
       )
@@ -326,7 +321,7 @@ export class Editor {
 
   @Watch('lineWrapping')
   onSetLineWrapping(nextValue: boolean, prevValue: boolean): void {
-    if (!this.isControlled && nextValue !== prevValue) {
+    if (nextValue !== prevValue) {
       this.dispatchEffect(
         this.lineWrappingConf.reconfigure(
           nextValue ? EditorView.lineWrapping : []
@@ -346,7 +341,7 @@ export class Editor {
 
   @Watch('foldGutter')
   onSetfoldGutter(nextValue: boolean, prevValue: boolean): void {
-    if (!this.isControlled && nextValue !== prevValue) {
+    if (nextValue !== prevValue) {
       this.dispatchEffect(
         this.foldGutterConf.reconfigure(nextValue ? foldGutter() : [])
       )
@@ -455,14 +450,14 @@ export class Editor {
   }
 
   /**
-   * Public method, returning the Editor contents and active language.
+   * Retrieve the Editor contents and active language.
    */
   @Method()
-  public async getContents(): Promise<EditorContents> {
-    return {
+  public getContents(): Promise<EditorContents> {
+    return Promise.resolve({
       text: this.editorRef?.state.doc.toString() ?? '',
       language: this.activeLanguage,
-    }
+    })
   }
 
   private setContentsHandler = (contents: string) => {
@@ -481,7 +476,7 @@ export class Editor {
   }
 
   /**
-   * Public method, to replace the contents of the Editor with a supplied string.
+   * Replace the contents of the Editor with a supplied string.
    */
   @Method()
   public setContents(contents: string): Promise<string> {
@@ -490,28 +485,49 @@ export class Editor {
   }
 
   /**
-   * Public method, to completely replace the editor state with the given state.
-   * This replaces the editor configuration, edit history, language, etc.
+   * Retrieve a JSON representation of the the internal editor state.
    */
   @Method()
-  public async setState(
-    contents: string,
-    config?: EditorConfig,
-    extensions?: Extension[],
-    selection?: EditorSelection
-  ): Promise<string> {
-    this.editorRef?.setState(
-      EditorState.create({
-        doc: contents,
-        extensions: extensions ?? (await this.getCodeMirrorConfig(config)),
-        selection,
+  public getState(): Promise<EditorStateJSON> {
+    return Promise.resolve(
+      this.editorRef?.state.toJSON({
+        history: historyField,
       })
     )
-    return Promise.resolve(contents)
   }
 
   /**
-   * Public method, returning a reference to the internal CodeMirror editor.
+   * Update the internal editor state with the given JSON object.
+   */
+  @Method()
+  public async setState(state: EditorStateJSON): Promise<void> {
+    this.editorRef?.setState(
+      EditorState.fromJSON(
+        state,
+        { extensions: await this.getCodeMirrorConfig() },
+        {
+          history: historyField,
+        }
+      )
+    )
+  }
+
+  /**
+   * Create a new editor state from a given string.
+   * The string will be used as the initial contents of the editor.
+   */
+  @Method()
+  public async setStateFromString(content: string): Promise<void> {
+    this.editorRef?.setState(
+      EditorState.create({
+        doc: content,
+        extensions: await this.getCodeMirrorConfig(),
+      })
+    )
+  }
+
+  /**
+   * Retrieve a reference to the internal CodeMirror editor.
    * Allows for maintaining state from applications making use of this component.
    */
   @Method()

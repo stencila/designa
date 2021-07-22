@@ -10,7 +10,6 @@ import { IconNames } from "./components/icon/iconNames";
 import { CodeChunk, CodeError, CodeExpression, Datatable, ImageObject, Node } from "@stencila/schema";
 import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
-import { EditorSelection, Extension } from "@codemirror/state";
 import { EditorView } from "@codemirror/view";
 import { Config, Data, Layout } from "plotly.js";
 import { VisualizationSpec } from "vega-embed";
@@ -191,17 +190,17 @@ export namespace Components {
          */
         "foldGutter": boolean;
         /**
-          * Public method, returning the Editor contents and active language.
+          * Retrieve the Editor contents and active language.
          */
         "getContents": () => Promise<EditorContents>;
         /**
-          * Public method, returning a reference to the internal CodeMirror editor. Allows for maintaining state from applications making use of this component.
+          * Retrieve a reference to the internal CodeMirror editor. Allows for maintaining state from applications making use of this component.
          */
         "getRef": () => Promise<EditorView>;
         /**
-          * Disable language and other editor configuration management, deferring control to consuming applications
+          * Retrieve a JSON representation of the the internal editor state.
          */
-        "isControlled": boolean;
+        "getState": () => Promise<EditorStateJSON>;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https ://codemirror.net/6/docs/ref/#keymap
@@ -224,13 +223,17 @@ export namespace Components {
          */
         "readOnly": boolean;
         /**
-          * Public method, to replace the contents of the Editor with a supplied string.
+          * Replace the contents of the Editor with a supplied string.
          */
         "setContents": (contents: string) => Promise<string>;
         /**
-          * Public method, to completely replace the editor state with the given state. This replaces the editor configuration, edit history, language, etc.
+          * Update the internal editor state with the given JSON object.
          */
-        "setState": (contents: string, config?: EditorConfig | undefined, extensions?: Extension[] | undefined, selection?: EditorSelection | undefined) => Promise<string>;
+        "setState": (state: EditorStateJSON) => Promise<void>;
+        /**
+          * Create a new editor state from a given string. The string will be used as the initial contents of the editor.
+         */
+        "setStateFromString": (content: string) => Promise<void>;
     }
     interface StencilaExecutableDocumentToolbar {
         /**
@@ -393,6 +396,12 @@ export namespace Components {
          */
         "type": ToastType;
     }
+    interface StencilaToastContainer {
+        /**
+          * Default position of Toasts on the screen. Can be overridden by individual Toast instances.
+         */
+        "position": ToastPosition;
+    }
     interface StencilaToolbar {
         /**
           * The background fill color of the Navbar
@@ -533,6 +542,12 @@ declare global {
         prototype: HTMLStencilaToastElement;
         new (): HTMLStencilaToastElement;
     };
+    interface HTMLStencilaToastContainerElement extends Components.StencilaToastContainer, HTMLStencilElement {
+    }
+    var HTMLStencilaToastContainerElement: {
+        prototype: HTMLStencilaToastContainerElement;
+        new (): HTMLStencilaToastContainerElement;
+    };
     interface HTMLStencilaToolbarElement extends Components.StencilaToolbar, HTMLStencilElement {
     }
     var HTMLStencilaToolbarElement: {
@@ -572,6 +587,7 @@ declare global {
         "stencila-tab": HTMLStencilaTabElement;
         "stencila-tab-list": HTMLStencilaTabListElement;
         "stencila-toast": HTMLStencilaToastElement;
+        "stencila-toast-container": HTMLStencilaToastContainerElement;
         "stencila-toolbar": HTMLStencilaToolbarElement;
         "stencila-tooltip": HTMLStencilaTooltipElement;
         "stencila-tooltip-element": HTMLStencilaTooltipElementElement;
@@ -742,10 +758,6 @@ declare namespace LocalJSX {
           * Enables ability to fold sections of code if the syntax package supports it
          */
         "foldGutter"?: boolean;
-        /**
-          * Disable language and other editor configuration management, deferring control to consuming applications
-         */
-        "isControlled"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https ://codemirror.net/6/docs/ref/#keymap
@@ -941,6 +953,12 @@ declare namespace LocalJSX {
          */
         "type"?: ToastType;
     }
+    interface StencilaToastContainer {
+        /**
+          * Default position of Toasts on the screen. Can be overridden by individual Toast instances.
+         */
+        "position"?: ToastPosition;
+    }
     interface StencilaToolbar {
         /**
           * The background fill color of the Navbar
@@ -980,6 +998,7 @@ declare namespace LocalJSX {
         "stencila-tab": StencilaTab;
         "stencila-tab-list": StencilaTabList;
         "stencila-toast": StencilaToast;
+        "stencila-toast-container": StencilaToastContainer;
         "stencila-toolbar": StencilaToolbar;
         "stencila-tooltip": StencilaTooltip;
         "stencila-tooltip-element": StencilaTooltipElement;
@@ -1009,6 +1028,7 @@ declare module "@stencil/core" {
             "stencila-tab": LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
             "stencila-tab-list": LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;
             "stencila-toast": LocalJSX.StencilaToast & JSXBase.HTMLAttributes<HTMLStencilaToastElement>;
+            "stencila-toast-container": LocalJSX.StencilaToastContainer & JSXBase.HTMLAttributes<HTMLStencilaToastContainerElement>;
             "stencila-toolbar": LocalJSX.StencilaToolbar & JSXBase.HTMLAttributes<HTMLStencilaToolbarElement>;
             "stencila-tooltip": LocalJSX.StencilaTooltip & JSXBase.HTMLAttributes<HTMLStencilaTooltipElement>;
             "stencila-tooltip-element": LocalJSX.StencilaTooltipElement & JSXBase.HTMLAttributes<HTMLStencilaTooltipElementElement>;

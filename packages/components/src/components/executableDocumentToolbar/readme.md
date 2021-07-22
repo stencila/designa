@@ -29,7 +29,7 @@
 - [stencila-icon](../icon)
 - [stencila-toolbar](../toolbar)
 - [stencila-button](../button)
-- animate-presence
+- [stencila-toast-container](../toastContainer)
 - [stencila-toast](../toast)
 
 ### Graph
@@ -39,14 +39,17 @@ graph TD;
   stencila-executable-document-toolbar --> stencila-icon
   stencila-executable-document-toolbar --> stencila-toolbar
   stencila-executable-document-toolbar --> stencila-button
-  stencila-executable-document-toolbar --> animate-presence
+  stencila-executable-document-toolbar --> stencila-toast-container
   stencila-executable-document-toolbar --> stencila-toast
   stencila-tooltip --> stencila-tooltip-element
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip
+  stencila-toast-container --> animate-presence
+  stencila-toast-container --> stencila-toast-container
+  stencila-toast-container --> stencila-toast
   stencila-toast --> stencila-icon
   stencila-toast --> stencila-button
-  stencila-toast --> animate-presence
+  stencila-toast --> stencila-toast-container
   stencila-toast --> stencila-toast
   style stencila-executable-document-toolbar fill:#f9f,stroke:#333,stroke-width:4px
 ```
