@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.37.0](https://github.com/stencila/designa/compare/@stencila/components@0.36.0...@stencila/components@0.37.0) (2021-07-22)
+
+
+### Bug Fixes
+
+* **Deps:** Bump minimum version requirement for @stencila/schema ([e760ca6](https://github.com/stencila/designa/commit/e760ca60fa1f632b363c151d11c85ba9fbd83a50))
+
+
+### Features
+
+* **Editor:** Add API for getting and setting editor state using JSON ([4e4621a](https://github.com/stencila/designa/commit/4e4621a920e7a2def1fbbe4b64375745d7b32333))
+
+
+
+
+
 # [0.36.0](https://github.com/stencila/designa/compare/@stencila/components@0.35.1...@stencila/components@0.36.0) (2021-07-14)
 
 
