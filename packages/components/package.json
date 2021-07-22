@@ -75,7 +75,7 @@
     "@stencila/style-stencila": "0.24.0",
     "animate-presence": "^0.2.1",
     "feather-icons": "^4.28.0",
-    "mem": "^8.1.1",
+    "mem": "^9.0.0",
     "pluralize": "^8.0.0",
     "vega": "^5.20.2",
     "vega-embed": "^6.18.2",
