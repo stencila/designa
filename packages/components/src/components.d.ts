@@ -396,6 +396,12 @@ export namespace Components {
          */
         "type": ToastType;
     }
+    interface StencilaToastContainer {
+        /**
+          * Default position of Toasts on the screen. Can be overridden by individual Toast instances.
+         */
+        "position": ToastPosition;
+    }
     interface StencilaToolbar {
         /**
           * The background fill color of the Navbar
@@ -536,6 +542,12 @@ declare global {
         prototype: HTMLStencilaToastElement;
         new (): HTMLStencilaToastElement;
     };
+    interface HTMLStencilaToastContainerElement extends Components.StencilaToastContainer, HTMLStencilElement {
+    }
+    var HTMLStencilaToastContainerElement: {
+        prototype: HTMLStencilaToastContainerElement;
+        new (): HTMLStencilaToastContainerElement;
+    };
     interface HTMLStencilaToolbarElement extends Components.StencilaToolbar, HTMLStencilElement {
     }
     var HTMLStencilaToolbarElement: {
@@ -575,6 +587,7 @@ declare global {
         "stencila-tab": HTMLStencilaTabElement;
         "stencila-tab-list": HTMLStencilaTabListElement;
         "stencila-toast": HTMLStencilaToastElement;
+        "stencila-toast-container": HTMLStencilaToastContainerElement;
         "stencila-toolbar": HTMLStencilaToolbarElement;
         "stencila-tooltip": HTMLStencilaTooltipElement;
         "stencila-tooltip-element": HTMLStencilaTooltipElementElement;
@@ -940,6 +953,12 @@ declare namespace LocalJSX {
          */
         "type"?: ToastType;
     }
+    interface StencilaToastContainer {
+        /**
+          * Default position of Toasts on the screen. Can be overridden by individual Toast instances.
+         */
+        "position"?: ToastPosition;
+    }
     interface StencilaToolbar {
         /**
           * The background fill color of the Navbar
@@ -979,6 +998,7 @@ declare namespace LocalJSX {
         "stencila-tab": StencilaTab;
         "stencila-tab-list": StencilaTabList;
         "stencila-toast": StencilaToast;
+        "stencila-toast-container": StencilaToastContainer;
         "stencila-toolbar": StencilaToolbar;
         "stencila-tooltip": StencilaTooltip;
         "stencila-tooltip-element": StencilaTooltipElement;
@@ -1008,6 +1028,7 @@ declare module "@stencil/core" {
             "stencila-tab": LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
             "stencila-tab-list": LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;
             "stencila-toast": LocalJSX.StencilaToast & JSXBase.HTMLAttributes<HTMLStencilaToastElement>;
+            "stencila-toast-container": LocalJSX.StencilaToastContainer & JSXBase.HTMLAttributes<HTMLStencilaToastContainerElement>;
             "stencila-toolbar": LocalJSX.StencilaToolbar & JSXBase.HTMLAttributes<HTMLStencilaToolbarElement>;
             "stencila-tooltip": LocalJSX.StencilaTooltip & JSXBase.HTMLAttributes<HTMLStencilaTooltipElement>;
             "stencila-tooltip-element": LocalJSX.StencilaTooltipElement & JSXBase.HTMLAttributes<HTMLStencilaTooltipElementElement>;

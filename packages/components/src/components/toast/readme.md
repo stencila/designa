@@ -29,12 +29,13 @@
 
  - [stencila-executable-document-toolbar](../executableDocumentToolbar)
  - [stencila-toast](.)
+ - [stencila-toast-container](../toastContainer)
 
 ### Depends on
 
 - [stencila-icon](../icon)
 - [stencila-button](../button)
-- animate-presence
+- [stencila-toast-container](../toastContainer)
 - [stencila-toast](.)
 
 ### Graph
@@ -44,6 +45,7 @@ graph TD;
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip
   stencila-tooltip --> stencila-tooltip-element
+  stencila-toast-container --> stencila-toast
   stencila-executable-document-toolbar --> stencila-toast
   style stencila-toast fill:#f9f,stroke:#333,stroke-width:4px
 ```

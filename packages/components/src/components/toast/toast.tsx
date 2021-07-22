@@ -116,7 +116,7 @@ export class StencilaToast {
       <Host
         type={this.type}
         position={this.position}
-        dismissable={this.dismissable}
+        dismissable={this.dismissable || this.duration === 0}
         onMouseEnter={this.pauseAutoDismiss}
         onMouseLeave={this.autoDismiss}
       >
