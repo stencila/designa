@@ -84,7 +84,7 @@
     "wretch": "^1.7.5"
   },
   "peerDependencies": {
-    "@stencila/schema": "^1.0.0"
+    "@stencila/schema": "^1.9.0"
   },
   "browserslist": [
     "defaults",
