@@ -65,11 +65,11 @@
     "postcss-import": "14.0.2",
     "postcss-import-url": "7.0.0",
     "postcss-mixins": "8.1.0",
-    "postcss-modules": "4.2.0",
+    "postcss-modules": "4.2.2",
     "postcss-nested": "5.0.5",
     "postcss-url": "10.1.3",
     "storybook-addon-outline": "1.4.1",
-    "tailwindcss": "2.2.6",
+    "tailwindcss": "2.2.7",
     "typescript": "4.3.5",
     "write-file-webpack-plugin": "4.5.1"
   },
