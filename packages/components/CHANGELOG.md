@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.38.0](https://github.com/stencila/designa/compare/@stencila/components@0.37.1...@stencila/components@0.38.0) (2021-07-27)
+
+
+### Features
+
+* **Editor:** New Editor prop to attach callback to editor update events ([be2b3a4](https://github.com/stencila/designa/commit/be2b3a40fcace72a1a27c6f7fbc155ba962a2402))
+
+
+
+
+
 ## [0.37.1](https://github.com/stencila/designa/compare/@stencila/components@0.37.0...@stencila/components@0.37.1) (2021-07-23)
 
 **Note:** Version bump only for package @stencila/components
