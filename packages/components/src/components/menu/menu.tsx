@@ -1,5 +1,7 @@
 import { Component, h, Host, Prop } from '@stencil/core'
 
+let menuIds = 0
+
 @Component({
   tag: 'stencila-menu',
   styleUrls: {
@@ -16,7 +18,7 @@ export class Menu {
     mutable: true,
     reflect: true,
   })
-  public isOpen: boolean = false
+  public isOpen = false
 
   private toggleMenu = (e: MouseEvent) => {
     e.preventDefault()
@@ -46,5 +48,3 @@ export class Menu {
     )
   }
 }
-
-let menuIds = 0
