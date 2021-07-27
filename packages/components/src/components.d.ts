@@ -10,6 +10,7 @@ import { IconNames } from "./components/icon/iconNames";
 import { CodeChunk, CodeError, CodeExpression, Datatable, ImageObject, Node } from "@stencila/schema";
 import { Keymap } from "./components/editor/editor";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
+import { EditorUpdateHandlerCb } from "./components/editor/customizations/onUpdateHandlerExtension";
 import { EditorView } from "@codemirror/view";
 import { Config, Data, Layout } from "plotly.js";
 import { VisualizationSpec } from "vega-embed";
@@ -173,6 +174,10 @@ export namespace Components {
           * Autofocus the editor on page load
          */
         "autofocus": boolean;
+        /**
+          * Callback function to invoke whenever the editor contents are updated.
+         */
+        "contentChangeHandler"?: EditorUpdateHandlerCb;
         /**
           * Text contents of the editor
          */
@@ -742,6 +747,10 @@ declare namespace LocalJSX {
           * Autofocus the editor on page load
          */
         "autofocus"?: boolean;
+        /**
+          * Callback function to invoke whenever the editor contents are updated.
+         */
+        "contentChangeHandler"?: EditorUpdateHandlerCb;
         /**
           * Text contents of the editor
          */

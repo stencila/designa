@@ -42,6 +42,10 @@ import { CodeError } from '@stencila/schema'
 import { getSlotByName } from '../utils/slotSelectors'
 import { LanguagePicker } from './components/languageSelect'
 import { codeErrors, updateErrors } from './customizations/errorPanel'
+import {
+  EditorUpdateHandlerCb,
+  updateListenerExtension,
+} from './customizations/onUpdateHandlerExtension'
 import { defaultLanguageCapabilities, languageByAlias } from './languageUtils'
 
 export interface EditorContents {
@@ -287,6 +291,12 @@ export class Editor {
   }
 
   /**
+   * Callback function to invoke whenever the editor contents are updated.
+   */
+  @Prop()
+  public contentChangeHandler?: EditorUpdateHandlerCb
+
+  /**
    * Autofocus the editor on page load
    */
   @Prop()
@@ -421,6 +431,9 @@ export class Editor {
       ]),
       this.readOnlyConf.of(EditorView.editable.of(!this.readOnly)),
       codeErrors(),
+      this.contentChangeHandler
+        ? updateListenerExtension(this.contentChangeHandler)
+        : [],
     ]
 
     return extensions
