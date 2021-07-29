@@ -122,7 +122,7 @@ export namespace Components {
         /**
           * Programming language of the CodeChunk
          */
-        "programmingLanguageProp": string;
+        "programmingLanguage": string;
     }
     interface StencilaCodeError {
         /**
@@ -703,7 +703,7 @@ declare namespace LocalJSX {
         /**
           * Programming language of the CodeChunk
          */
-        "programmingLanguageProp"?: string;
+        "programmingLanguage"?: string;
     }
     interface StencilaCodeError {
         /**

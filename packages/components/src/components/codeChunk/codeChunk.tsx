@@ -43,7 +43,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   @Prop({
     attribute: 'data-programmingLanguage',
   })
-  public programmingLanguageProp: string
+  public programmingLanguage: string
 
   /**
    * Whether the code section is visible or not
@@ -260,7 +260,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
             }}
           >
             <stencila-editor
-              activeLanguage={this.programmingLanguageProp}
+              activeLanguage={this.programmingLanguage}
               autofocus={this.autofocus}
               executeHandler={this.onExecuteHandler}
               keymap={this.keymap}
