@@ -46,7 +46,12 @@ import {
   EditorUpdateHandlerCb,
   updateListenerExtension,
 } from './customizations/onUpdateHandlerExtension'
-import { defaultLanguageCapabilities, languageByAlias } from './languageUtils'
+import {
+  FileFormat,
+  FileFormatMap,
+  fileFormatMap,
+  lookupFormat,
+} from './languageUtils'
 
 export interface EditorContents {
   text: string
@@ -90,6 +95,7 @@ export class Editor {
   private el: HTMLStencilaEditorElement
 
   private editorRef: EditorView | undefined
+  private languagePickerRef: HTMLSelectElement | undefined
 
   private isReady = false
 
@@ -110,7 +116,7 @@ export class Editor {
    * List of all supported programming languages
    */
   @Prop()
-  public languageCapabilities: string[] = defaultLanguageCapabilities
+  public languageCapabilities: FileFormatMap = fileFormatMap
 
   /**
    * Disallow editing of the editor contents when set to `true`
@@ -136,10 +142,8 @@ export class Editor {
   /**
    * Programming language of the Editor
    */
-  // eslint-disable-next-line @stencil/strict-mutable
-  @Prop({ mutable: true, reflect: true })
-  public activeLanguage: string =
-    this.languageCapabilities[0]?.toLowerCase() ?? ''
+  @Prop()
+  public activeLanguage: string = this.languageCapabilities.R?.name ?? ''
 
   private dispatchEffect = (effect: StateEffect<unknown>) => {
     const docState = this.editorRef?.state
@@ -155,7 +159,7 @@ export class Editor {
   /**
    * Event emitted when the language of the editor is changed.
    */
-  @Event() setLanguage: EventEmitter<string | undefined>
+  @Event() setLanguage: EventEmitter<FileFormat>
 
   private getLang = async (language: string) => {
     switch (language.toLowerCase()) {
@@ -234,25 +238,24 @@ export class Editor {
   private languageConf = new Compartment()
 
   /**
-   * Handle logic for updated internal and external representation/state of the
-   * active language prop.
+   * Resolve and set a new active CodeMirror syntax
    */
-  private setLanguageHandler = async (language: string) => {
-    this.setLanguage.emit(language)
-
+  private setEditorSyntax = async (language: string) => {
     const lang = await this.getLang(language)
-    this.activeLanguage = language
-
     this.dispatchEffect(this.languageConf.reconfigure(lang))
   }
 
+  private setLanguagePickerRef = (el?: HTMLSelectElement) =>
+    (this.languagePickerRef = el)
+
   /**
-   * Changes the active programming language of the editor.
+   * Function to call when the user selects a new language from the language picker dropdown.
    */
-  private onSetLanguage = async (e: Event): Promise<void> => {
+  private onSelectLanguage = async (e: Event): Promise<void> => {
     const target = e.currentTarget as HTMLSelectElement
-    const language = languageByAlias(target.value)
-    return this.setLanguageHandler(language)
+    const language = lookupFormat(target.value)
+    this.setLanguage.emit(language)
+    return this.setEditorSyntax(language.name)
   }
 
   /**
@@ -260,9 +263,9 @@ export class Editor {
    * `activeLanguage` prop changes
    */
   @Watch('activeLanguage')
-  activeLanguageOnlyChanged(nextLanguage: string, prevLanguage: string): void {
+  activeLanguageChanged(nextLanguage: string, prevLanguage: string): void {
     if (nextLanguage !== prevLanguage) {
-      this.setLanguageHandler(nextLanguage).catch((err) => {
+      this.setEditorSyntax(nextLanguage).catch((err) => {
         console.log(err)
       })
     }
@@ -469,7 +472,9 @@ export class Editor {
   public getContents(): Promise<EditorContents> {
     return Promise.resolve({
       text: this.editorRef?.state.doc.toString() ?? '',
-      language: this.activeLanguage,
+      language: lookupFormat(
+        this.languagePickerRef?.value ?? this.activeLanguage
+      ).name,
     })
   }
 
@@ -601,14 +606,14 @@ export class Editor {
     }
   }
 
-  protected componentDidLoad() {
+  protected componentDidLoad(): void {
     this.attachEditorToDom()
     if (this.autofocus) {
       this.focus()
     }
   }
 
-  protected disconnectedCallback() {
+  protected disconnectedCallback(): void {
     this.editorRef?.destroy()
   }
 
@@ -630,8 +635,9 @@ export class Editor {
           <menu>
             <LanguagePicker
               activeLanguage={this.activeLanguage}
-              onSetLanguage={this.onSetLanguage}
+              onSetLanguage={this.onSelectLanguage}
               languageCapabilities={this.languageCapabilities}
+              setRef={this.setLanguagePickerRef}
             ></LanguagePicker>
           </menu>
         </div>
