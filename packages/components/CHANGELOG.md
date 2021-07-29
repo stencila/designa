@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.39.0](https://github.com/stencila/designa/compare/@stencila/components@0.38.0...@stencila/components@0.39.0) (2021-07-29)
+
+
+### Features
+
+* **Formats:** Expose file format mapping table and lookup functions ([11fbf9f](https://github.com/stencila/designa/commit/11fbf9f3b85695dd1da8fd1de1a6ddff8de805d8))
+
+
+
+
+
 # [0.38.0](https://github.com/stencila/designa/compare/@stencila/components@0.37.1...@stencila/components@0.38.0) (2021-07-27)
 
 
