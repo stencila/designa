@@ -5,13 +5,13 @@
 
 ## Properties
 
-| Property                  | Attribute                  | Description                                                                                             | Type                                                          | Default     |
-| ------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ----------- |
-| `autofocus`               | `autofocus`                | Autofocus the editor on page load                                                                       | `boolean`                                                     | `false`     |
-| `executeHandler`          | --                         | A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`. | `((codeChunk: CodeChunk) => Promise<CodeChunk>) \| undefined` | `undefined` |
-| `isCodeVisible`           | `is-code-visible`          | Whether the code section is visible or not                                                              | `boolean`                                                     | `false`     |
-| `keymap`                  | --                         | Custom keyboard shortcuts to pass along to CodeMirror                                                   | `KeyBinding[]`                                                | `[]`        |
-| `programmingLanguageProp` | `data-programminglanguage` | Programming language of the CodeChunk                                                                   | `string`                                                      | `undefined` |
+| Property              | Attribute                  | Description                                                                                             | Type                                                          | Default     |
+| --------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ----------- |
+| `autofocus`           | `autofocus`                | Autofocus the editor on page load                                                                       | `boolean`                                                     | `false`     |
+| `executeHandler`      | --                         | A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`. | `((codeChunk: CodeChunk) => Promise<CodeChunk>) \| undefined` | `undefined` |
+| `isCodeVisible`       | `is-code-visible`          | Whether the code section is visible or not                                                              | `boolean`                                                     | `false`     |
+| `keymap`              | --                         | Custom keyboard shortcuts to pass along to CodeMirror                                                   | `KeyBinding[]`                                                | `[]`        |
+| `programmingLanguage` | `data-programminglanguage` | Programming language of the CodeChunk                                                                   | `string`                                                      | `undefined` |
 
 
 ## Events

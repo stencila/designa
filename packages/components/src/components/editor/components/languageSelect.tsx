@@ -1,25 +1,26 @@
 import { FunctionalComponent, h } from '@stencil/core'
-import { languageByAlias } from '../languageUtils'
+import { lookupFormat, FileFormatMap } from '../languageUtils'
 
 interface Props {
   activeLanguage: string
-  languageCapabilities: string[]
+  languageCapabilities: FileFormatMap
   onSetLanguage: (e: Event) => void
+  setRef: (el?: HTMLSelectElement) => void
 }
 
 export const LanguagePicker = (props: Props): FunctionalComponent => {
-  const activeLanguageByAlias = languageByAlias(props.activeLanguage)
+  const activeLanguageByAlias = lookupFormat(props.activeLanguage)
 
   return (
     <label aria-label="Programming Language">
       <stencila-icon icon="terminal"></stencila-icon>
-      <select onChange={props.onSetLanguage}>
-        {props.languageCapabilities.map((language) => (
+      <select onChange={props.onSetLanguage} ref={props.setRef}>
+        {Object.values(props.languageCapabilities).map((language) => (
           <option
-            value={language.toLowerCase()}
-            selected={languageByAlias(language) === activeLanguageByAlias}
+            value={language.name}
+            selected={language.name === activeLanguageByAlias.name}
           >
-            {language}
+            {language.name}
           </option>
         ))}
       </select>

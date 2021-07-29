@@ -38,11 +38,12 @@ const executeHandler = (t) =>
       }
   )
 
-export const withExecuteHandler = () => html`
+export const withExecuteHandler = ({ programmingLanguage }) => html`
   <div style="max-width: 900px">
     <stencila-code-chunk
       .executeHandler=${executeHandler}
       .isCodeVisible=${true}
+      .programmingLanguage=${programmingLanguage}
     >
       <pre slot="text">print(a)</pre>
       <figure slot="outputs">
@@ -52,9 +53,13 @@ export const withExecuteHandler = () => html`
   </div>
 `
 
-export const singleCodeChunk = () => html`
+export const singleCodeChunk = ({ programmingLanguage }) => html`
   <div>
-    <stencila-code-chunk data-collapsed="false" itemtype="stencila:CodeChunk">
+    <stencila-code-chunk
+      data-collapsed="false"
+      itemtype="stencila:CodeChunk"
+      .programmingLanguage=${programmingLanguage}
+    >
       <pre slot="text"><code>print(a)</code></pre>
       <figure slot="outputs">
         <pre><output>10</output></pre>
@@ -62,6 +67,7 @@ export const singleCodeChunk = () => html`
     </stencila-code-chunk>
   </div>
 `
+
 export const multipleCodeChunks = () => html`
   <div>
     <stencila-code-chunk data-collapsed="false" itemtype="stencila:CodeChunk">

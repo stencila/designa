@@ -9,6 +9,7 @@ import { Colors } from "./types";
 import { IconNames } from "./components/icon/iconNames";
 import { CodeChunk, CodeError, CodeExpression, Datatable, ImageObject, Node } from "@stencila/schema";
 import { Keymap } from "./components/editor/editor";
+import { FileFormat, FileFormatMap } from "./components/editor/languageUtils";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
 import { EditorUpdateHandlerCb } from "./components/editor/customizations/onUpdateHandlerExtension";
 import { EditorView } from "@codemirror/view";
@@ -121,7 +122,7 @@ export namespace Components {
         /**
           * Programming language of the CodeChunk
          */
-        "programmingLanguageProp": string;
+        "programmingLanguage": string;
     }
     interface StencilaCodeError {
         /**
@@ -214,7 +215,7 @@ export namespace Components {
         /**
           * List of all supported programming languages
          */
-        "languageCapabilities": string[];
+        "languageCapabilities": FileFormatMap;
         /**
           * Determines the visibility of line numbers
          */
@@ -702,7 +703,7 @@ declare namespace LocalJSX {
         /**
           * Programming language of the CodeChunk
          */
-        "programmingLanguageProp"?: string;
+        "programmingLanguage"?: string;
     }
     interface StencilaCodeError {
         /**
@@ -775,7 +776,7 @@ declare namespace LocalJSX {
         /**
           * List of all supported programming languages
          */
-        "languageCapabilities"?: string[];
+        "languageCapabilities"?: FileFormatMap;
         /**
           * Determines the visibility of line numbers
          */
@@ -787,7 +788,7 @@ declare namespace LocalJSX {
         /**
           * Event emitted when the language of the editor is changed.
          */
-        "onSetLanguage"?: (event: CustomEvent<string | undefined>) => void;
+        "onSetLanguage"?: (event: CustomEvent<FileFormat>) => void;
         /**
           * Disallow editing of the editor contents when set to `true`
          */
