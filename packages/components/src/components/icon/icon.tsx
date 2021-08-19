@@ -1,5 +1,8 @@
-import { Component, h, Host, Prop, getAssetPath } from '@stencil/core'
+import { Component, getAssetPath, h, Host, Prop } from '@stencil/core'
+import wretch from 'wretch'
 import { IconNames } from './iconNames'
+
+let isFetchingIcons = false
 
 const getGlobalIconStyle = () =>
   document.getElementsByTagName('html')[0].getAttribute('data-icon-style') ===
@@ -30,14 +33,35 @@ export class Icon {
   @Prop()
   public readonly iconStyle: 'fill' | 'line' = getGlobalIconStyle()
 
+  private fetchIcons = async () => {
+    const response = await wretch()
+      .url(getAssetPath(`./assets/remixicon.symbol.svg`))
+      .options({ credentials: 'omit', mode: 'cors' })
+      .get()
+      .text()
+
+    const div = document.createElement('div')
+    div.innerHTML = response
+    document.body.append(div)
+  }
+
+  componentWillLoad() {
+    if (!isFetchingIcons) {
+      isFetchingIcons = true
+      this.fetchIcons().catch((err) => {
+        console.log('Failed to load icons', err)
+      })
+    }
+  }
+
   public render() {
     return (
       <Host icon={this.icon} aria-hidden="true">
         <svg>
           <use
-            href={`${getAssetPath(`./assets/remixicon.symbol.svg`)}#ri-${
-              this.icon
-            }-${this.iconStyle}`}
+            href={`#ri-${this.icon}${
+              this.iconStyle !== undefined ? '-' + this.iconStyle : ''
+            }`}
           ></use>
         </svg>
       </Host>
