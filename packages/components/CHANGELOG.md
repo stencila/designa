@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.39.1](https://github.com/stencila/designa/compare/@stencila/components@0.39.0...@stencila/components@0.39.1) (2021-08-19)
+
+
+### Bug Fixes
+
+* **Icons:** Fix fetching of icon sprites across origins ([e73e7aa](https://github.com/stencila/designa/commit/e73e7aac8a0bb5aa1a9f65b16fe0f99a60c97732))
+
+
+
+
+
 # [0.39.0](https://github.com/stencila/designa/compare/@stencila/components@0.38.0...@stencila/components@0.39.0) (2021-07-29)
 
 
