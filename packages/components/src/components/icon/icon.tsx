@@ -58,7 +58,11 @@ export class Icon {
     return (
       <Host icon={this.icon} aria-hidden="true">
         <svg>
-          <use href={`#ri-${this.icon}-${this.iconStyle}`}></use>
+          <use
+            href={`#ri-${this.icon}${
+              this.iconStyle !== undefined ? '-' + this.iconStyle : ''
+            }`}
+          ></use>
         </svg>
       </Host>
     )
