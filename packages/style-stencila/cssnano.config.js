@@ -8,6 +8,7 @@ module.exports = {
           return !(comment.startsWith('!') || comment.includes('@prop'))
         },
       },
+      reduceIdents: false,
     },
   ],
 }

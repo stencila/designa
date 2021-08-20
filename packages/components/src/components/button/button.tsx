@@ -154,7 +154,7 @@ export class Button {
 
   public render() {
     return (
-      <Host size={this.size} tabindex="-1" icon={this.icon}>
+      <Host size={this.size} icon={this.icon}>
         {this.tooltip === undefined ? (
           this.generateButton()
         ) : (

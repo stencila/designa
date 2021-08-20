@@ -474,7 +474,7 @@ export class Editor {
       text: this.editorRef?.state.doc.toString() ?? '',
       language: lookupFormat(
         this.languagePickerRef?.value ?? this.activeLanguage
-      ).name,
+      ).name.toLowerCase(),
     })
   }
 
