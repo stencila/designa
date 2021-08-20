@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.39.2](https://github.com/stencila/designa/compare/@stencila/components@0.39.1...@stencila/components@0.39.2) (2021-08-20)
+
+
+### Bug Fixes
+
+* **Button:** Don't persist focus ring after click ([8703a9e](https://github.com/stencila/designa/commit/8703a9e60f70ef7e2b9c05707c34c9420eee0f9b))
+* **Button:** Ensure button icon is legible even with user overrides ([e74f51e](https://github.com/stencila/designa/commit/e74f51e0afa88e34d8c114149b2a02e376d16c49))
+* **Code:** Fix language resolution when communicating with Executa ([963c52a](https://github.com/stencila/designa/commit/963c52a3d44965a247e5f7c6416bc3312af5e5fa))
+
+
+
+
+
 ## [0.39.1](https://github.com/stencila/designa/compare/@stencila/components@0.39.0...@stencila/components@0.39.1) (2021-08-19)
 
 

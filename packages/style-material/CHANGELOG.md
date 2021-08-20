@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.2](https://github.com/stencila/style/compare/@stencila/style-material@0.14.1...@stencila/style-material@0.14.2) (2021-08-20)
+
+
+### Bug Fixes
+
+* **Button:** Ensure button icon is legible even with user overrides ([e74f51e](https://github.com/stencila/style/commit/e74f51e0afa88e34d8c114149b2a02e376d16c49))
+* **CSS:** Don't rename keyframes (to avoid clashes) ([7e58ec9](https://github.com/stencila/style/commit/7e58ec9ac7c3eec3e804a0b74be30b48017cdf96))
+
+
+
+
+
 ## [0.14.1](https://github.com/stencila/style/compare/@stencila/style-material@0.14.0...@stencila/style-material@0.14.1) (2021-07-23)
 
 **Note:** Version bump only for package @stencila/style-material
