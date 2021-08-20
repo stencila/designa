@@ -59,7 +59,7 @@ a.button {
     &[disabled]:focus,
     &[disabled]:active,
     &[disabled]:hover {
-      @apply text-key;
+      color: var(--color-key, #000) !important;
       mix-blend-mode: soft-light;
       opacity: 0.65;
 
