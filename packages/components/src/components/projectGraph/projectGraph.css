@@ -4,6 +4,35 @@ stencila-project-graph,
   display: block;
   height: 100%;
   width: 100%;
+
+  --graphColor-text: var(--color-key, #000);
+  --graphColor-link: var(--color-neutral-100);
+  --graphColor-default: var(--color-neutral-300);
+  --graphColor-file: #ffec6f;
+  --graphColor-source: #ccebc5;
+  --graphColor-symbol: #bc80bd;
+  --graphColor-module: #d9d9d9;
+  --graphColor-node: #fccde5;
+  --graphColor-url: #80b1d3;
+  --graphColor-file: #b3de69;
+  --graphColor-file: #fdb462;
+  --graphColor-file: #fb7f72;
+  --graphColor-file: #bebada;
+}
+
+.linkContainer g {
+}
+
+.linkContainer line {
+  stroke: var(--graphColor-link);
+  stroke-width: 2;
+}
+
+.linkContainer text {
+  font-size: 0.5rem;
+  /* transform-box: content-box;
+  transform-origin-x: center;
+  transform-origin-y: center; */
 }
 
 svg {
@@ -13,35 +42,37 @@ svg {
 
 svg text {
   fill: var(--color-key);
-  font-size: 4px;
+  font-size: 0.75rem;
   font-family: var(--font-family-mono);
+  text-anchor: middle;
 }
 
-svg circle {
-  fill: var(--color-neutral-300);
+svg circle,
+svg path {
+  fill: var(--graphColor-default);
 }
 
-svg circle.File {
-  fill: var(--color-neutral-300);
+svg path.File {
+  fill: var(--graphColor-file);
 }
 
-svg circle.Source {
-  stroke: var(--color-neutral-500);
+svg path.Source {
+  stroke: var(--graphColor-source);
   stroke-width: 1;
 }
 
-svg circle.Symbol {
-  fill: var(--color-warn-400);
+svg path.Symbol {
+  fill: var(--graphColor-symbol);
 }
 
-svg circle.Module {
-  fill: var(--color-success-300);
+svg path.Module {
+  fill: var(--graphColor-module);
 }
 
-svg circle.Node {
-  fill: #6200ed;
+svg path.Node {
+  fill: var(--graphColor-node);
 }
 
-svg circle.Url {
-  fill: var(--color-primary-300);
+svg path.Url {
+  fill: var(--graphColor-uØrl);
 }
