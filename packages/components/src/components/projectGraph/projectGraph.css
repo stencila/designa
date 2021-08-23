@@ -1,0 +1,47 @@
+:host,
+stencila-project-graph,
+.projectGraph {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+svg {
+  height: 100%;
+  width: 100%;
+}
+
+svg text {
+  fill: var(--color-key);
+  font-size: 4px;
+  font-family: var(--font-family-mono);
+}
+
+svg circle {
+  fill: var(--color-neutral-300);
+}
+
+svg circle.File {
+  fill: var(--color-neutral-300);
+}
+
+svg circle.Source {
+  stroke: var(--color-neutral-500);
+  stroke-width: 1;
+}
+
+svg circle.Symbol {
+  fill: var(--color-warn-400);
+}
+
+svg circle.Module {
+  fill: var(--color-success-300);
+}
+
+svg circle.Node {
+  fill: #6200ed;
+}
+
+svg circle.Url {
+  fill: var(--color-primary-300);
+}
