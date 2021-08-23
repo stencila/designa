@@ -4,18 +4,18 @@ import {
   forceCollide,
   forceLink,
   forceManyBody,
-  forceRadial,
   forceSimulation,
   forceX,
   forceY,
-  SimulationLinkDatum,
-  SimulationNodeDatum,
 } from 'd3-force'
 import { Selection } from 'd3-selection'
 import { graphEdgeToLinks } from './graphs'
-import { Graph, GraphNode } from './types'
+import { Graph } from './types'
 import { GraphDatum, initGraph } from './utils'
 import { getResourceLabel } from './utils/resource'
+import { getResourceSymbol } from './utils/symbols'
+
+type NodeDragEvent = D3DragEvent<SVGGElement, GraphDatum, GraphDatum>
 
 @Component({
   tag: 'stencila-project-graph',
@@ -31,8 +31,6 @@ export class ProjectGraph {
 
   @Watch('graph')
   updateGraph(nextGraph: Graph): void {
-    this.nodes = nextGraph.nodes
-    this.links ?? graphEdgeToLinks(nextGraph.edges)
     this.drawGraph(nextGraph)
   }
 
@@ -42,25 +40,30 @@ export class ProjectGraph {
     svg: Selection<SVGGElement, unknown, null, undefined>
   }
 
-  private nodes: GraphNode[]
-  private links: SimulationLinkDatum<SimulationNodeDatum>[]
+  private nodeContainer:
+    | Selection<SVGGElement, unknown, null, unknown>
+    | undefined
+
+  private linkContainer:
+    | Selection<SVGGElement, unknown, null, unknown>
+    | undefined
 
   private drawGraph = (graph: Graph) => {
     // const { width, svg } = this.graphRef
     const { svg } = this.graphRef
 
-    const nodes = this.nodes ?? graph.nodes
-    const links = this.links ?? graphEdgeToLinks(graph.edges)
+    const nodes = graph.nodes
+    const edges = graphEdgeToLinks(graph.edges)
 
     const simulation = forceSimulation(nodes)
       .force(
         'link',
-        forceLink(links)
+        forceLink(edges)
           .id(({ index }) => index ?? 0)
-          .distance(20)
+          .distance(100)
           .strength(1)
       )
-      .force('charge', forceManyBody().strength(-25))
+      .force('charge', forceManyBody().strength(-400))
       // .force('layout', forceRadial(width / 4).strength(0.1))
       .force('collision', forceCollide())
       .force('x', forceX())
@@ -71,8 +74,6 @@ export class ProjectGraph {
       delete d.fy
       simulation.alpha(1).restart()
     }
-
-    type NodeDragEvent = D3DragEvent<SVGGElement, GraphDatum, GraphDatum>
 
     const dragFn = drag<SVGGElement, GraphDatum, GraphDatum>().on(
       'drag',
@@ -86,44 +87,68 @@ export class ProjectGraph {
       }
     )
 
-    const link = svg
-      .append('g')
-      .attr('stroke', 'var(--color-neutral-100)')
-      .selectAll('line')
-      .data(links)
-      .join('line')
+    const linkContainer =
+      this.linkContainer ?? svg.append('g').attr('class', 'linkContainer')
 
-    const node = svg
-      .append('g')
-      .attr('fill', '#fff')
+    if (!this.linkContainer) {
+      this.linkContainer = linkContainer
+    }
+
+    const links = linkContainer.selectAll('line').data(edges).join('g')
+
+    const link = links.append('line')
+
+    const linkLabels = links.append('text').text((d) => {
+      return `${d.relation.type}`
+    })
+
+    const nodeContainer =
+      this.nodeContainer ?? svg.append('g').attr('fill', '#fff')
+
+    if (!this.nodeContainer) {
+      this.nodeContainer = nodeContainer
+    }
+
+    const node = nodeContainer
       .selectAll<SVGGElement, GraphDatum>('g')
       .data<GraphDatum>(nodes)
       .join('g')
-      .attr('class', (d) => {
-        return d.type
-      })
-      .attr('r', 8)
+      .attr('class', (d) => d.type)
       .on('click', click)
       .call(dragFn)
 
     node
-      .append('circle')
+      .append('path')
+      .attr('d', (d) => getResourceSymbol(d)())
       .attr('class', (d) => {
         // console.log(d)
         return d.type
       })
-      .attr('r', 8)
 
-    node
-      .append('text')
-      .attr('text-anchor', 'middle')
-      .attr('dy', '.35em')
-      .text(getResourceLabel)
-      .exit()
+    node.append('text').attr('dy', '.35em').text(getResourceLabel).exit()
 
     node.append('title').text((d) => d.type)
 
     simulation.on('tick', () => {
+      // Position link line labels
+      linkLabels.attr('transform', (d) => {
+        if (
+          typeof d.source === 'object' &&
+          typeof d.source.y === 'number' &&
+          typeof d.source.x === 'number' &&
+          typeof d.target === 'object' &&
+          typeof d.target.y === 'number' &&
+          typeof d.target.x === 'number'
+        ) {
+          return `translate(${d.source.x - (d.source.x - d.target.x) / 2}, ${
+            d.source.y - (d.source.y - d.target.y) / 2
+          })`
+        }
+
+        return ''
+      })
+
+      // Position link lines
       link
         .attr('x1', ({ source }) =>
           typeof source === 'object' ? source.x ?? 0 : source
