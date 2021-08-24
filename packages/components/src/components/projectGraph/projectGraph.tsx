@@ -9,7 +9,7 @@ import {
   forceY,
 } from 'd3-force'
 import { Selection } from 'd3-selection'
-import { graphEdgeToLinks } from './graphs'
+import { graphEdgeToLinks, GraphLink } from './graphs'
 import { Graph } from './types'
 import { GraphDatum, initGraph } from './utils'
 import { getResourceLabel } from './utils/resource'
@@ -56,13 +56,7 @@ export class ProjectGraph {
     const edges = graphEdgeToLinks(graph.edges)
 
     const simulation = forceSimulation(nodes)
-      .force(
-        'link',
-        forceLink(edges)
-          .id(({ index }) => index ?? 0)
-          .distance(100)
-          .strength(1)
-      )
+      .force('link', forceLink(edges).distance(100).strength(1))
       .force('charge', forceManyBody().strength(-400))
       // .force('layout', forceRadial(width / 4).strength(0.1))
       .force('collision', forceCollide())
@@ -94,13 +88,20 @@ export class ProjectGraph {
       this.linkContainer = linkContainer
     }
 
-    const links = linkContainer.selectAll('line').data(edges).join('g')
+    const links = linkContainer
+      .selectAll('g')
+      .data(edges)
+      .join((enter) => {
+        const linkGroup = enter.append('g')
 
-    const link = links.append('line')
+        linkGroup.append('line').attr('marker-end', 'url(#end)')
 
-    const linkLabels = links.append('text').text((d) => {
-      return `${d.relation.type}`
-    })
+        linkGroup.append('text').text((d) => {
+          return `${d.relation.type}`
+        })
+
+        return linkGroup
+      })
 
     const nodeContainer =
       this.nodeContainer ?? svg.append('g').attr('fill', '#fff')
@@ -112,26 +113,34 @@ export class ProjectGraph {
     const node = nodeContainer
       .selectAll<SVGGElement, GraphDatum>('g')
       .data<GraphDatum>(nodes)
-      .join('g')
+      .join((enter) => {
+        const nodeGroup = enter.append('g')
+
+        nodeGroup
+          .append('path')
+          .attr('d', (d) => getResourceSymbol(d)())
+          .attr('class', (d) => {
+            // console.log(d)
+            return d.type
+          })
+
+        nodeGroup
+          .append('text')
+          .attr('dy', '.35em')
+          .text(getResourceLabel)
+          .exit()
+
+        nodeGroup.append('title').text((d) => d.type)
+
+        return nodeGroup
+      })
       .attr('class', (d) => d.type)
       .on('click', click)
       .call(dragFn)
 
-    node
-      .append('path')
-      .attr('d', (d) => getResourceSymbol(d)())
-      .attr('class', (d) => {
-        // console.log(d)
-        return d.type
-      })
-
-    node.append('text').attr('dy', '.35em').text(getResourceLabel).exit()
-
-    node.append('title').text((d) => d.type)
-
     simulation.on('tick', () => {
       // Position link line labels
-      linkLabels.attr('transform', (d) => {
+      links.select('text').attr('transform', (d) => {
         if (
           typeof d.source === 'object' &&
           typeof d.source.y === 'number' &&
@@ -149,7 +158,8 @@ export class ProjectGraph {
       })
 
       // Position link lines
-      link
+      links
+        .select('line')
         .attr('x1', ({ source }) =>
           typeof source === 'object' ? source.x ?? 0 : source
         )

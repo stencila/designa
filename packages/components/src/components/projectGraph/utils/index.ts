@@ -22,6 +22,22 @@ export const initGraph = (el: HTMLDivElement) => {
 
   svg.call(zoomFn)
 
+  svg
+    .append('svg:defs')
+    .selectAll('marker')
+    .data(['end'])
+    .enter()
+    .append('svg:marker')
+    .attr('id', String)
+    .attr('viewBox', '0 -4 10 10')
+    .attr('refX', 24)
+    .attr('refY', 0)
+    .attr('markerWidth', 4)
+    .attr('markerHeight', 4)
+    .attr('orient', 'auto')
+    .append('svg:path')
+    .attr('d', 'M0,-4L10,0L0,4')
+
   return {
     height,
     width,
