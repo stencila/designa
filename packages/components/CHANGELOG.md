@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.39.3](https://github.com/stencila/designa/compare/@stencila/components@0.39.2...@stencila/components@0.39.3) (2021-08-25)
+
+
+### Bug Fixes
+
+* **imageVega:** Use a regex instead of list of media types ([aefb4a0](https://github.com/stencila/designa/commit/aefb4a09d79d96e65e1278a14ce1a24d670302df))
+
+
+
+
+
 ## [0.39.2](https://github.com/stencila/designa/compare/@stencila/components@0.39.1...@stencila/components@0.39.2) (2021-08-20)
 
 
