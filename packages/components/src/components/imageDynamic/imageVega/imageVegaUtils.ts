@@ -1,20 +1,12 @@
 import { Node } from '@stencila/schema'
 import { EmbedOptions, VisualizationSpec } from 'vega-embed'
 
-const vegaMediaTypes = [
-  // Custom and generic Vega mimetype used by Stencila during encoding
-  'application/vnd.vega+json',
-  // Altair MIME bundle types
-  // @see https://iliatimofeev.github.io/altair-viz.github.io/user_guide/display_frontends.html#renderer-api
-  'application/vnd.vegalite.v1+json',
-  'application/vnd.vega.v3+json',
-  'application/vnd.vega.v2+json',
-]
-
+// Custom and generic Vega media type used by Stencila when encoding to HTML
 export const vegaMediaType = 'application/vnd.vega+json'
 
+// Match against any version of either the Vega or VegaLite media types 
 export const isVegaMediaType = (mimeType: string): boolean =>
-  vegaMediaTypes.includes(mimeType)
+  /^application\/vnd\.(vega|vega-?lite)\./.test(mimeType)
 
 /**
  * RegEx to parse a Vega Spec `$schema` url and find the library and version number used
