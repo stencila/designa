@@ -2,10 +2,14 @@ import { Resource } from '../types'
 
 export const getResourceLabel = (resource: Resource): string => {
   switch (resource.type) {
-    case 'Symbol':
-    case 'Module':
+    case 'Module': {
+      return `${resource.language} ${resource.name}`
+    }
     case 'Source': {
-      return resource.name
+      return `${resource.type} ${resource.name}`
+    }
+    case 'Symbol': {
+      return `${resource.kind} ${resource.name}`
     }
     case 'Node': {
       return resource.kind

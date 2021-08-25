@@ -7,7 +7,7 @@ export type GraphDatum = SimulationNodeDatum & Resource
 
 export const initGraph = (el: HTMLDivElement) => {
   const elSize = el.getBoundingClientRect()
-  const height = elSize.height >= 100 ? elSize.height : 600
+  const height = elSize.height >= 120 ? elSize.height : 600
   const width = elSize.width >= 100 ? elSize.width : 600
 
   const svg = select(el)
@@ -29,14 +29,14 @@ export const initGraph = (el: HTMLDivElement) => {
     .enter()
     .append('svg:marker')
     .attr('id', String)
-    .attr('viewBox', '0 -4 10 10')
+    .attr('viewBox', '0 -6 12 12')
     .attr('refX', 24)
     .attr('refY', 0)
-    .attr('markerWidth', 4)
-    .attr('markerHeight', 4)
+    .attr('markerWidth', 6)
+    .attr('markerHeight', 6)
     .attr('orient', 'auto')
     .append('svg:path')
-    .attr('d', 'M0,-4L10,0L0,4')
+    .attr('d', 'M0,-6L12,0L0,6')
 
   return {
     height,

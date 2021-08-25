@@ -1,46 +1,53 @@
 /**
  * A resource in a dependency graph (the nodes of the graph)
  */
+
+export type SymbolResource = {
+  type: 'Symbol'
+  /**
+   * The path of the file that the symbol is defined in
+   */
+  path: string
+  /**
+   * The name/identifier of the symbol
+   */
+  name: string
+  /**
+   * The type of the object that the symbol refers to (e.g `Number`, `Function`)
+   *
+   * Should be used as a hint only, and as such is excluded from equality and hash functions.
+   */
+  kind: string
+}
+
+export type NodeResource = {
+  type: 'Node'
+  /**
+   * The path of the file that the node is defined in
+   */
+  path: string
+  /**
+   * The id of the node with the document
+   */
+  id: string
+  /**
+   * The type of node e.g. `Parameter`, `CodeChunk`
+   */
+  kind: string
+}
+
+export type FileResource = {
+  type: 'File'
+  /**
+   * The path of the file
+   */
+  path: string
+}
+
 export type Resource =
-  | {
-      type: 'Symbol'
-      /**
-       * The path of the file that the symbol is defined in
-       */
-      path: string
-      /**
-       * The name/identifier of the symbol
-       */
-      name: string
-      /**
-       * The type of the object that the symbol refers to (e.g `Number`, `Function`)
-       *
-       * Should be used as a hint only, and as such is excluded from equality and hash functions.
-       */
-      kind: string
-    }
-  | {
-      type: 'Node'
-      /**
-       * The path of the file that the node is defined in
-       */
-      path: string
-      /**
-       * The id of the node with the document
-       */
-      id: string
-      /**
-       * The type of node e.g. `Parameter`, `CodeChunk`
-       */
-      kind: string
-    }
-  | {
-      type: 'File'
-      /**
-       * The path of the file
-       */
-      path: string
-    }
+  | SymbolResource
+  | NodeResource
+  | FileResource
   | {
       type: 'Source'
       /**

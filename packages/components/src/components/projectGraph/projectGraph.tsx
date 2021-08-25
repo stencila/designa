@@ -9,7 +9,7 @@ import {
   forceY,
 } from 'd3-force'
 import { Selection } from 'd3-selection'
-import { graphEdgeToLinks, GraphLink } from './graphs'
+import { graphEdgeToLinks, graphGroups } from './graphs'
 import { Graph } from './types'
 import { GraphDatum, initGraph } from './utils'
 import { getResourceLabel } from './utils/resource'
@@ -49,17 +49,27 @@ export class ProjectGraph {
     | undefined
 
   private drawGraph = (graph: Graph) => {
-    // const { width, svg } = this.graphRef
     const { svg } = this.graphRef
 
     const nodes = graph.nodes
-    const edges = graphEdgeToLinks(graph.edges)
+    const edges = graphEdgeToLinks(graph)
 
     const simulation = forceSimulation(nodes)
-      .force('link', forceLink(edges).distance(100).strength(1))
-      .force('charge', forceManyBody().strength(-400))
+      .force(
+        'link',
+        forceLink(edges)
+          .distance(100)
+          .strength(({ sourceGroup, targetGroup }) => {
+            if (sourceGroup !== null && sourceGroup === targetGroup) {
+              return 1
+            }
+
+            return 0.1
+          })
+      )
+      .force('charge', forceManyBody().strength(-200))
       // .force('layout', forceRadial(width / 4).strength(0.1))
-      .force('collision', forceCollide())
+      .force('collision', forceCollide(16).strength(0.75))
       .force('x', forceX())
       .force('y', forceY())
 
@@ -139,6 +149,22 @@ export class ProjectGraph {
       .call(dragFn)
 
     simulation.on('tick', () => {
+      // Position link lines
+      links
+        .select('line')
+        .attr('x1', ({ source }) =>
+          typeof source === 'object' ? source.x ?? 0 : source
+        )
+        .attr('y1', ({ source }) =>
+          typeof source === 'object' ? source.y ?? 0 : source
+        )
+        .attr('x2', ({ target }) =>
+          typeof target === 'object' ? target.x ?? 0 : target
+        )
+        .attr('y2', ({ target }) =>
+          typeof target === 'object' ? target.y ?? 0 : target
+        )
+
       // Position link line labels
       links.select('text').attr('transform', (d) => {
         if (
@@ -156,22 +182,6 @@ export class ProjectGraph {
 
         return ''
       })
-
-      // Position link lines
-      links
-        .select('line')
-        .attr('x1', ({ source }) =>
-          typeof source === 'object' ? source.x ?? 0 : source
-        )
-        .attr('y1', ({ source }) =>
-          typeof source === 'object' ? source.y ?? 0 : source
-        )
-        .attr('x2', ({ target }) =>
-          typeof target === 'object' ? target.x ?? 0 : target
-        )
-        .attr('y2', ({ target }) =>
-          typeof target === 'object' ? target.y ?? 0 : target
-        )
 
       node.attr('transform', ({ x, y }) => `translate(${x ?? 0}, ${y ?? 0})`)
     })
