@@ -16,6 +16,7 @@ import { EditorView } from "@codemirror/view";
 import { Config, Data, Layout } from "plotly.js";
 import { VisualizationSpec } from "vega-embed";
 import { VegaLoadEvent } from "./components/imageDynamic/imageVega/imageVegaUtils";
+import { Graph } from "./components/projectGraph/types";
 import { ChildTab } from "./components/tabList/tabList";
 import { ToastPosition, ToastType } from "./components/toast/toastController";
 export namespace Components {
@@ -364,6 +365,9 @@ export namespace Components {
          */
         "nodes": Node[] | undefined;
     }
+    interface StencilaProjectGraph {
+        "graph": Graph;
+    }
     interface StencilaTab {
         /**
           * The link the tab should navigate to
@@ -530,6 +534,12 @@ declare global {
         prototype: HTMLStencilaNodeListElement;
         new (): HTMLStencilaNodeListElement;
     };
+    interface HTMLStencilaProjectGraphElement extends Components.StencilaProjectGraph, HTMLStencilElement {
+    }
+    var HTMLStencilaProjectGraphElement: {
+        prototype: HTMLStencilaProjectGraphElement;
+        new (): HTMLStencilaProjectGraphElement;
+    };
     interface HTMLStencilaTabElement extends Components.StencilaTab, HTMLStencilElement {
     }
     var HTMLStencilaTabElement: {
@@ -590,6 +600,7 @@ declare global {
         "stencila-menu": HTMLStencilaMenuElement;
         "stencila-menu-item": HTMLStencilaMenuItemElement;
         "stencila-node-list": HTMLStencilaNodeListElement;
+        "stencila-project-graph": HTMLStencilaProjectGraphElement;
         "stencila-tab": HTMLStencilaTabElement;
         "stencila-tab-list": HTMLStencilaTabListElement;
         "stencila-toast": HTMLStencilaToastElement;
@@ -925,6 +936,9 @@ declare namespace LocalJSX {
          */
         "nodes"?: Node[] | undefined;
     }
+    interface StencilaProjectGraph {
+        "graph"?: Graph;
+    }
     interface StencilaTab {
         /**
           * The link the tab should navigate to
@@ -1005,6 +1019,7 @@ declare namespace LocalJSX {
         "stencila-menu": StencilaMenu;
         "stencila-menu-item": StencilaMenuItem;
         "stencila-node-list": StencilaNodeList;
+        "stencila-project-graph": StencilaProjectGraph;
         "stencila-tab": StencilaTab;
         "stencila-tab-list": StencilaTabList;
         "stencila-toast": StencilaToast;
@@ -1035,6 +1050,7 @@ declare module "@stencil/core" {
             "stencila-menu": LocalJSX.StencilaMenu & JSXBase.HTMLAttributes<HTMLStencilaMenuElement>;
             "stencila-menu-item": LocalJSX.StencilaMenuItem & JSXBase.HTMLAttributes<HTMLStencilaMenuItemElement>;
             "stencila-node-list": LocalJSX.StencilaNodeList & JSXBase.HTMLAttributes<HTMLStencilaNodeListElement>;
+            "stencila-project-graph": LocalJSX.StencilaProjectGraph & JSXBase.HTMLAttributes<HTMLStencilaProjectGraphElement>;
             "stencila-tab": LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
             "stencila-tab-list": LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;
             "stencila-toast": LocalJSX.StencilaToast & JSXBase.HTMLAttributes<HTMLStencilaToastElement>;

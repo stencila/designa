@@ -1,0 +1,103 @@
+:host,
+stencila-project-graph,
+.projectGraph {
+  display: block;
+  height: 100%;
+  width: 100%;
+
+  --graph-background: #fff;
+  --graphColor-text: var(--color-key, #000);
+  --graphColor-link: var(--color-neutral-100);
+  --graphColor-default: var(--color-neutral-300);
+  --graphColor-file: #ffec6f;
+  --graphColor-source: #ccebc5;
+  --graphColor-symbol: #bc80bd;
+  --graphColor-module: #d9d9d9;
+  --graphColor-node: #fccde5;
+  --graphColor-url: #80b1d3;
+  --graphColor-file: #b3de69;
+  --graphColor-file: #fdb462;
+  --graphColor-file: #fb7f72;
+  --graphColor-file: #bebada;
+}
+
+.hullContainer path {
+  fill: var(--graphColor-file);
+  opacity: 0.2;
+}
+
+.linkContainer line {
+  stroke: var(--graphColor-link);
+  stroke-width: 2;
+}
+
+.groupLinkContainer text,
+.groupLinkContainer line {
+  opacity: 0;
+}
+
+.groupLinkContainer line {
+  stroke: var(--graphColor-symbol);
+}
+
+.projectGraph:hover .groupLinkContainer text,
+.projectGraph:hover .groupLinkContainer line {
+  opacity: 1;
+}
+
+.linkContainer text {
+  font-size: 0.5rem;
+}
+
+svg {
+  height: 100%;
+  width: 100%;
+}
+
+svg text {
+  fill: var(--color-key);
+  font-size: 0.75rem;
+  font-family: var(--font-family-mono);
+  text-anchor: middle;
+}
+
+svg text.textBackdrop {
+  stroke: var(--graph-background);
+  stroke-width: 2px;
+}
+
+svg circle,
+svg path {
+  fill: var(--graphColor-default);
+}
+
+svg g.File text,
+svg g.Source text {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+svg path.File {
+  fill: var(--graphColor-file);
+}
+
+svg path.Source {
+  stroke: var(--graphColor-source);
+  stroke-width: 1;
+}
+
+svg path.Symbol {
+  fill: var(--graphColor-symbol);
+}
+
+svg path.Module {
+  fill: var(--graphColor-module);
+}
+
+svg path.Node {
+  fill: var(--graphColor-node);
+}
+
+svg path.Url {
+  fill: var(--graphColor-url);
+}
