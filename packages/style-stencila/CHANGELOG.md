@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.3](https://github.com/stencila/style/compare/@stencila/style-stencila@0.24.2...@stencila/style-stencila@0.24.3) (2021-08-30)
+
+
+### Bug Fixes
+
+* **dependencies:** update codemirror editor packages ([47d81a9](https://github.com/stencila/style/commit/47d81a9ca9e9403f86fac6cd895cecc7fcb89306))
+
+
+
+
+
 ## [0.24.2](https://github.com/stencila/style/compare/@stencila/style-stencila@0.24.1...@stencila/style-stencila@0.24.2) (2021-08-20)
 
 

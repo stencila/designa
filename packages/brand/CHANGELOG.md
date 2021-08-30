@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.3](https://github.com/stencila/style/compare/@stencila/brand@0.7.2...@stencila/brand@0.7.3) (2021-08-30)
+
+
+### Bug Fixes
+
+* **dependencies:** update codemirror editor packages ([47d81a9](https://github.com/stencila/style/commit/47d81a9ca9e9403f86fac6cd895cecc7fcb89306))
+
+
+
+
+
 ## [0.7.2](https://github.com/stencila/style/compare/@stencila/brand@0.7.1...@stencila/brand@0.7.2) (2021-07-01)
 
 **Note:** Version bump only for package @stencila/brand
