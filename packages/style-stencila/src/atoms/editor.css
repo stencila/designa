@@ -32,12 +32,12 @@ stencila-editor {
   }
 
   &::slotted(.editorContainer) {
-    .cm-wrap,
-    .cm-wrap * {
+    .cm-editor,
+    .cm-editor * {
       @apply font-mono;
     }
 
-    .cm-wrap {
+    .cm-editor {
       @apply leading-normal;
     }
 
