@@ -2,6 +2,8 @@
  * A resource in a dependency graph (the nodes of the graph)
  */
 
+import { SimulationNodeDatum } from 'd3-force'
+
 type ResourceBase = {
   index: number
 }
@@ -140,13 +142,19 @@ export type Relation =
        */
       range: [number, number, number, number]
     }
+  | {
+      type: ''
+    }
 
 /**
  * A subject-relation-object triple
  */
 export type Triple = [Resource, Relation, Resource]
 
-export type GraphNode = Resource & { index: number }
+export type GraphNode<R extends Resource = Resource> = R & { index: number }
+
+export type SimulationGraphNode = GraphNode & SimulationNodeDatum
+
 export type GraphEdge = {
   from: number
   index: number

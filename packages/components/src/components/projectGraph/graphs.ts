@@ -22,7 +22,7 @@ type GroupedGraph = {
   nodes: GraphNode[]
   links: GraphLink[]
   groupLinks: GraphLink[]
-  groups: FileResource[]
+  groups: (FileResource & SimulationNodeDatum)[]
 }
 
 export const graphToGroupedGraph = (graph: Graph): GroupedGraph => {
@@ -55,7 +55,7 @@ export const graphToGroupedGraph = (graph: Graph): GroupedGraph => {
           target: file.index,
           group: node.path,
           relation: {
-            type: 'Embed',
+            type: '',
           },
         })
       }

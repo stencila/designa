@@ -1,6 +1,7 @@
 import { Component, h, Host, Prop, Watch } from '@stencil/core'
 import { D3DragEvent, drag } from 'd3-drag'
 import {
+  forceCenter,
   forceCollide,
   forceLink,
   forceManyBody,
@@ -12,10 +13,11 @@ import { polygonHull } from 'd3-polygon'
 import { Selection } from 'd3-selection'
 import { curveBasisClosed, line } from 'd3-shape'
 import { graphToGroupedGraph, isInterGroupLink } from './graphs'
-import { FileResource, Graph } from './types'
+import { FileResource, Graph, SimulationGraphNode } from './types'
 import { GraphDatum, initGraph } from './utils'
 import { hasKind } from './utils/guards'
-import { getResourceLabel } from './utils/resource'
+import { getNodeX, getNodeY } from './utils/nodes'
+import { getRelationLabel, getResourceLabel } from './utils/resource'
 import { getResourceSymbol } from './utils/symbols'
 
 type NodeDragEvent = D3DragEvent<SVGGElement, GraphDatum, GraphDatum>
@@ -57,7 +59,7 @@ export class ProjectGraph {
     | undefined
 
   private drawGraph = (graph: Graph) => {
-    const { svg } = this.graphRef
+    const { svg, width, height } = this.graphRef
 
     const groupedGraph = graphToGroupedGraph(graph)
 
@@ -65,7 +67,6 @@ export class ProjectGraph {
       .force(
         'link',
         forceLink(groupedGraph.links)
-          // .distance(150)
           .strength((d) =>
             isInterGroupLink(d.source, d.target) ||
             (hasKind(d.source) && d.source.kind === 'Link') ||
@@ -81,7 +82,6 @@ export class ProjectGraph {
               : 30
           )
           .iterations(2)
-        // .distance((d) => (isInterGroupLink(d.source, d.target) ? 250 : 500))
       )
       .force(
         'link:groups',
@@ -92,24 +92,21 @@ export class ProjectGraph {
               ? 1
               : 0.375
           )
-          // .distance(60)
           .iterations(3)
       )
       .force(
         'charge',
-        // @ts-ignore
-        forceManyBody()
+        forceManyBody<SimulationGraphNode>()
           .strength((d) => {
-            // @ts-ignore
             return d.type === 'File' ? -100 : -1500
           })
           .distanceMin(10)
           .distanceMax(1500)
       )
-      // .force('layout', forceRadial(width / 4).strength(0.1))
       .force('collision', forceCollide(64).strength(1).iterations(4))
       .force('x', forceX().strength(0.02))
       .force('y', forceY().strength(0.02))
+      .force('center', forceCenter(width / 2, height / 2))
       .velocityDecay(0.4)
       .alphaDecay(0.05)
 
@@ -154,26 +151,7 @@ export class ProjectGraph {
         linkGroup.append('line').attr('marker-end', 'url(#end)')
 
         linkGroup.append('text').text((d) => {
-          return `${d.relation.type}`
-        })
-
-        return linkGroup
-      })
-
-    const groupLinksContainer = svg
-      .append('g')
-      .attr('class', 'groupLinkContainer')
-
-    const groupLinks = groupLinksContainer
-      .selectAll('g')
-      .data(groupedGraph.groupLinks)
-      .join((enter) => {
-        const linkGroup = enter.append('g')
-
-        linkGroup.append('line').attr('marker-end', 'url(#end)')
-
-        linkGroup.append('text').text((d) => {
-          return `${d.relation.type}`
+          return getRelationLabel(d.relation)
         })
 
         return linkGroup
@@ -185,69 +163,60 @@ export class ProjectGraph {
       this.nodeContainer = nodeContainer
     }
 
+    // Hulls are the container shapes surrounding clusters of nodes
+    // @see https://github.com/d3/d3-polygon/blob/main/README.md#polygonhull
     const drawHull = (
-      d: string | number | undefined | FileResource
+      fileNode: string | number | undefined | FileResource
     ): string => {
-      if (d === undefined || typeof d === 'string' || typeof d === 'number') {
+      if (
+        fileNode === undefined ||
+        typeof fileNode === 'string' ||
+        typeof fileNode === 'number'
+      ) {
         return ''
       }
 
+      // Padding amount to use when drawing shape around symbols
+      const pad = 32
+
       const hullFileNodes = groupedGraph.groupLinks.filter(
-        (node) => node.group === d.path
+        (node) => node.group === fileNode.path
       )
 
       const rootCoords: [number, number][] =
         hullFileNodes.length === 0
           ? []
           : [
-              [-32, -32],
-              [32, -32],
-              [32, 32],
-              [0, 32],
+              [-pad, -pad],
+              [pad, -pad],
+              [pad, pad],
+              [0, pad],
             ]
 
+      // The target is always the File node being linked to
+      const targetX = getNodeX(fileNode)
+      const targetY = getNodeY(fileNode)
+
       const hull = polygonHull(
-        // @ts-ignore
-        hullFileNodes.reduce(
-          // @ts-ignore
-          (nodes: [number, number], node) => [
+        hullFileNodes.reduce((nodes: [number, number][], node) => {
+          const sourceX = getNodeX(node.source)
+          const sourceY = getNodeY(node.source)
+
+          return [
             ...nodes,
-            [
-              // @ts-ignore
-              node.source.x - node.target.x - 32,
-              // @ts-ignore
-              node.source.y - node.target.y - 32,
-            ],
-            [
-              // @ts-ignore
-              node.source.x - node.target.x - 32,
-              // @ts-ignore
-              node.source.y - node.target.y + 32,
-            ],
-            [
-              // @ts-ignore
-              node.source.x - node.target.x + 32,
-              // @ts-ignore
-              node.source.y - node.target.y - 32,
-            ],
-            [
-              // @ts-ignore
-              node.source.x - node.target.x + 32,
-              // @ts-ignore
-              node.source.y - node.target.y + 32,
-            ],
-          ],
-          rootCoords
-        )
+            [sourceX - targetX - pad, sourceY - targetY - pad],
+            [sourceX - targetX - pad, sourceY - targetY + pad],
+            [sourceX - targetX + pad, sourceY - targetY - pad],
+            [sourceX - targetX + pad, sourceY - targetY + pad],
+          ]
+        }, rootCoords)
       )
 
-      // @ts-ignore
-      return hull ? line().curve(curveBasisClosed)(hull) : ''
+      return hull ? line().curve(curveBasisClosed)(hull) ?? '' : ''
     }
 
-    // @ts-ignore
     const hull = hullContainer
-      .selectAll('g')
+      .selectAll('path')
       .data(groupedGraph.groups)
       .join('path')
       .attr('d', (d) => drawHull(d) ?? '')
@@ -285,10 +254,7 @@ export class ProjectGraph {
 
         return nodeGroup
       })
-      .attr('class', (d) => {
-        // console.log(d)
-        return hasKind(d) ? `${d.type} ${d.kind}` : d.type
-      })
+      .attr('class', (d) => (hasKind(d) ? `${d.type} ${d.kind}` : d.type))
       .on('click', click)
       .call(dragFn)
 
@@ -327,51 +293,13 @@ export class ProjectGraph {
         return ''
       })
 
-      groupLinks
-        .select('line')
-        .attr('x1', ({ source }) =>
-          typeof source === 'object' ? source.x ?? 0 : source
-        )
-        .attr('y1', ({ source }) =>
-          typeof source === 'object' ? source.y ?? 0 : source
-        )
-        .attr('x2', ({ target }) =>
-          typeof target === 'object' ? target.x ?? 0 : target
-        )
-        .attr('y2', ({ target }) =>
-          typeof target === 'object' ? target.y ?? 0 : target
-        )
-
-      // Position link line labels
-      groupLinks.select('text').attr('transform', (d) => {
-        if (
-          typeof d.source === 'object' &&
-          typeof d.source.y === 'number' &&
-          typeof d.source.x === 'number' &&
-          typeof d.target === 'object' &&
-          typeof d.target.y === 'number' &&
-          typeof d.target.x === 'number'
-        ) {
-          return `translate(${d.source.x - (d.source.x - d.target.x) / 2}, ${
-            d.source.y - (d.source.y - d.target.y) / 2
-          })`
-        }
-
-        return ''
-      })
-
       node.attr('transform', ({ x, y }) => `translate(${x ?? 0}, ${y ?? 0})`)
 
+      // Update File node grouping container shape
       hull
-        .attr(
-          'transform',
-          // @ts-ignore
-          (d) => `translate(${d.x ?? 0}, ${d.y ?? 0})`
-        )
+        .attr('transform', (d) => `translate(${d.x ?? 0}, ${d.y ?? 0})`)
         .attr('d', (d) => drawHull(d) ?? '')
     })
-
-    // invalidation.then(() => simulation.stop()) */
   }
 
   componentDidLoad() {

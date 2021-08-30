@@ -5,6 +5,7 @@ stencila-project-graph,
   height: 100%;
   width: 100%;
 
+  --graph-background: #fff;
   --graphColor-text: var(--color-key, #000);
   --graphColor-link: var(--color-neutral-100);
   --graphColor-default: var(--color-neutral-300);
@@ -21,6 +22,7 @@ stencila-project-graph,
 }
 
 .hullContainer path {
+  fill: var(--graphColor-file);
   opacity: 0.2;
 }
 
@@ -45,9 +47,6 @@ stencila-project-graph,
 
 .linkContainer text {
   font-size: 0.5rem;
-  /* transform-box: content-box;
-  transform-origin-x: center;
-  transform-origin-y: center; */
 }
 
 svg {
@@ -63,7 +62,7 @@ svg text {
 }
 
 svg text.textBackdrop {
-  stroke: white;
+  stroke: var(--graph-background);
   stroke-width: 2px;
 }
 

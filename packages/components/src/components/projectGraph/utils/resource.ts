@@ -1,4 +1,4 @@
-import { Resource } from '../types'
+import { Relation, Resource } from '../types'
 
 export const getResourceLabel = (resource: Resource): string => {
   switch (resource.type) {
@@ -19,6 +19,23 @@ export const getResourceLabel = (resource: Resource): string => {
     }
     case 'Url': {
       return resource.url
+    }
+  }
+}
+
+export const getRelationLabel = (relation: Relation): string => {
+  switch (relation.type) {
+    case 'Assign':
+    case 'Read':
+    case 'Use': {
+      return `${relation.type}s`
+    }
+    case 'Convert':
+    case 'Import': {
+      return `${relation.type}s${relation.auto ? ' (auto)' : ''}`
+    }
+    default: {
+      return `${relation.type}s`
     }
   }
 }
