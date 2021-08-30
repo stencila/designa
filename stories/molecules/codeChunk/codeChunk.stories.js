@@ -57,7 +57,6 @@ export const singleCodeChunk = ({ programmingLanguage }) => html`
   <div>
     <stencila-code-chunk
       data-collapsed="false"
-      itemtype="stencila:CodeChunk"
       .programmingLanguage=${programmingLanguage}
     >
       <pre slot="text"><code>print(a)</code></pre>
@@ -70,7 +69,7 @@ export const singleCodeChunk = ({ programmingLanguage }) => html`
 
 export const multipleCodeChunks = () => html`
   <div>
-    <stencila-code-chunk data-collapsed="false" itemtype="stencila:CodeChunk">
+    <stencila-code-chunk data-collapsed="false">
       <pre slot="text"><code>print(a)</code></pre>
       <figure slot="outputs">
         <pre><output>10</output></pre>
@@ -85,8 +84,8 @@ export const multipleCodeChunks = () => html`
       therefore runs Python code.
     </p>
 
-    <stencila-code-chunk data-collapsed="false" itemtype="stencila:CodeChunk">
-      <pre slot="text" itemprop="code"><code>print(second)</code></pre>
+    <stencila-code-chunk data-collapsed="false">
+      <pre slot="text"><code>print(second)</code></pre>
 
       <figure slot="outputs">
         <img
@@ -100,8 +99,8 @@ export const multipleCodeChunks = () => html`
 
 export const withMultipleOutputs = () => html`
   <div>
-    <stencila-code-chunk data-collapsed="false" itemtype="stencila:CodeChunk">
-      <pre slot="text" itemprop="code"><code>print(second)</code></pre>
+    <stencila-code-chunk data-collapsed="false">
+      <pre slot="text"><code>print(second)</code></pre>
 
       <figure slot="outputs">
         <pre><output>10</output></pre>
@@ -122,8 +121,8 @@ export const withMultipleOutputs = () => html`
 `
 export const withNoOutputContent = () => html`
   <div>
-    <stencila-code-chunk itemtype="stencila:CodeChunk">
-      <pre slot="text" itemprop="code"><code>print(second)</code></pre>
+    <stencila-code-chunk>
+      <pre slot="text"><code>print(second)</code></pre>
 
       <figure slot="outputs"></figure>
     </stencila-code-chunk>
@@ -132,8 +131,8 @@ export const withNoOutputContent = () => html`
 
 export const withNoOutputSlot = () => html`
   <div>
-    <stencila-code-chunk itemtype="stencila:CodeChunk">
-      <pre slot="text" itemprop="code"><code>print(second)</code></pre>
+    <stencila-code-chunk>
+      <pre slot="text"><code>print(second)</code></pre>
     </stencila-code-chunk>
   </div>
 `
@@ -141,13 +140,13 @@ export const withNoOutputSlot = () => html`
 export const alongsideACodeExpression = () => html`
   <div>
     <p>
-      This is a paragraph with a code expresssion inside it
-      <stencila-code-expression itemtype="stencila:CodeExpression"
+      This is a paragraph with a code expression inside it
+      <stencila-code-expression
         ><code slot="text">x * y</code
         ><output slot="output">42</output></stencila-code-expression
       >
       followed by some more text and another
-      <stencila-code-expression itemtype="stencila:CodeExpression">
+      <stencila-code-expression>
         <code slot="text"
           >x * y - 128 * (212 - 2) x * y - 128 * (212 - 2)
           round(length(which((silent_1hr_l1-silent_0hr_l1)>0))/length(silent_0hr_l1)*100)</code
@@ -157,8 +156,8 @@ export const alongsideACodeExpression = () => html`
         > </stencila-code-expression
       >.
     </p>
-    <stencila-code-chunk itemtype="stencila:CodeChunk">
-      <pre slot="text" itemprop="code"><code>print(second)</code></pre>
+    <stencila-code-chunk>
+      <pre slot="text"><code>print(second)</code></pre>
 
       <figure slot="outputs">
         <pre><output>10</output></pre>

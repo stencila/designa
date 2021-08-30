@@ -17,27 +17,20 @@ export const codeExpression = () => html`
   <div>
     <stencila-code-expression
       programming-language="r"
-      itemscope=""
-      itemtype="http://schema.stenci.la/CodeExpression"
       .executeHandler=${handler}
     >
       <code class="r" slot="text"
         >length(subset(data2, Lot==1 &amp; Time==0)$value)</code
       >
-      <output slot="output"
-        ><span data-itemtype="http://schema.org/Number">3</span></output
-      >
+      <output slot="output">3</output>
     </stencila-code-expression>
   </div>
 `
 
 export const codeExpressionInAParagraph = () => html`
   <p>
-    This is a paragraph with a code expresssion inside it
-    <stencila-code-expression
-      data-collapsed="false"
-      itemtype="stencila:CodeChunk"
-    >
+    This is a paragraph with a code expression inside it
+    <stencila-code-expression data-collapsed="false">
       <code slot="text">x * y </code>
       <output slot="output">42</output></stencila-code-expression
     >
@@ -47,11 +40,8 @@ export const codeExpressionInAParagraph = () => html`
 
 export const multipleCodeExpressionsInAParagraph = () => html`
   <p>
-    This is a paragraph with a code expresssion inside it
-    <stencila-code-expression
-      data-collapsed="false"
-      itemtype="stencila:CodeChunk"
-    >
+    This is a paragraph with a code expression inside it
+    <stencila-code-expression data-collapsed="false">
       <code slot="text">x * y</code>
       <output slot="output">42</output></stencila-code-expression
     >
@@ -70,10 +60,8 @@ export const multipleCodeExpressionsInAParagraph = () => html`
 
 export const codeExpressionWithAnImageOutput = () => html`
   <p>
-    This is a paragraph with a code expresssion inside it
-    <stencila-code-expression
-      data-collapsed="false"
-      itemtype="stencila:CodeChunk"
+    This is a paragraph with a code expression inside it
+    <stencila-code-expression data-collapsed="false"
       ><code slot="text">x * y</code
       ><output slot="output">42</output></stencila-code-expression
     >
@@ -92,10 +80,8 @@ export const codeExpressionWithAnImageOutput = () => html`
 
 export const codeExpressionWithNoOutput = () => html`
   <p>
-    This is a paragraph with a code expresssion inside it
-    <stencila-code-expression
-      data-collapsed="false"
-      itemtype="stencila:CodeChunk"
+    This is a paragraph with a code expression inside it
+    <stencila-code-expression data-collapsed="false"
       ><code slot="text">x * y</code><output slot="output"></output
     ></stencila-code-expression>
     followed by some more text.
@@ -104,10 +90,8 @@ export const codeExpressionWithNoOutput = () => html`
 
 export const codeExpressionWithSymbolsInOutput = () => html`
   <p>
-    This is a paragraph with a code expresssion inside it
-    <stencila-code-expression
-      data-collapsed="false"
-      itemtype="stencila:CodeChunk"
+    This is a paragraph with a code expression inside it
+    <stencila-code-expression data-collapsed="false"
       ><code slot="text">x * y</code
       ><output slot="output">&lt;0.001</output></stencila-code-expression
     >
