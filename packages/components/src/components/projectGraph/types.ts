@@ -2,7 +2,11 @@
  * A resource in a dependency graph (the nodes of the graph)
  */
 
-export type SymbolResource = {
+type ResourceBase = {
+  index: number
+}
+
+export type SymbolResource = ResourceBase & {
   type: 'Symbol'
   /**
    * The path of the file that the symbol is defined in
@@ -20,7 +24,7 @@ export type SymbolResource = {
   kind: string
 }
 
-export type NodeResource = {
+export type NodeResource = ResourceBase & {
   type: 'Node'
   /**
    * The path of the file that the node is defined in
@@ -36,7 +40,7 @@ export type NodeResource = {
   kind: string
 }
 
-export type FileResource = {
+export type FileResource = ResourceBase & {
   type: 'File'
   /**
    * The path of the file
@@ -44,35 +48,37 @@ export type FileResource = {
   path: string
 }
 
-export type Resource =
-  | SymbolResource
-  | NodeResource
-  | FileResource
-  | {
-      type: 'Source'
-      /**
-       * The name of the project source
-       */
-      name: string
-    }
-  | {
-      type: 'Module'
-      /**
-       * The programming language of the module
-       */
-      language: string
-      /**
-       * The name of the module
-       */
-      name: string
-    }
-  | {
-      type: 'Url'
-      /**
-       * The URL of the external resource
-       */
-      url: string
-    }
+export type Resource = ResourceBase &
+  (
+    | SymbolResource
+    | NodeResource
+    | FileResource
+    | {
+        type: 'Source'
+        /**
+         * The name of the project source
+         */
+        name: string
+      }
+    | {
+        type: 'Module'
+        /**
+         * The programming language of the module
+         */
+        language: string
+        /**
+         * The name of the module
+         */
+        name: string
+      }
+    | {
+        type: 'Url'
+        /**
+         * The URL of the external resource
+         */
+        url: string
+      }
+  )
 
 /**
  * The relation between two resources in a dependency graph (the edges of the graph)
@@ -141,7 +147,13 @@ export type Relation =
 export type Triple = [Resource, Relation, Resource]
 
 export type GraphNode = Resource & { index: number }
-export type GraphEdge = { from: number; to: number; relation: Relation }
+export type GraphEdge = {
+  from: number
+  index: number
+  to: number
+  relation: Relation
+  group: string
+}
 
 /**
  * A project dependency graph

@@ -14,3 +14,16 @@ export const hasPath = (
 
   return false
 }
+
+export const hasKind = (
+  resource: string | number | Resource
+): resource is SymbolResource | NodeResource => {
+  if (
+    typeof resource === 'object' &&
+    (resource.type === 'Symbol' || resource.type === 'Node')
+  ) {
+    return true
+  }
+
+  return false
+}

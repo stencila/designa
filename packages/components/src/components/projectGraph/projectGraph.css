@@ -28,6 +28,20 @@ stencila-project-graph,
   stroke-width: 2;
 }
 
+.groupLinkContainer text,
+.groupLinkContainer line {
+  opacity: 0;
+}
+
+.groupLinkContainer line {
+  stroke: var(--graphColor-symbol);
+}
+
+.projectGraph:hover .groupLinkContainer text,
+.projectGraph:hover .groupLinkContainer line {
+  opacity: 1;
+}
+
 .linkContainer text {
   font-size: 0.5rem;
   /* transform-box: content-box;
@@ -74,5 +88,5 @@ svg path.Node {
 }
 
 svg path.Url {
-  fill: var(--graphColor-uØrl);
+  fill: var(--graphColor-url);
 }

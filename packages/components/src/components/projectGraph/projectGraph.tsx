@@ -9,9 +9,10 @@ import {
   forceY,
 } from 'd3-force'
 import { Selection } from 'd3-selection'
-import { graphEdgeToLinks, graphGroups } from './graphs'
+import { graphToGroupedGraph, isInterGroupLink } from './graphs'
 import { Graph } from './types'
 import { GraphDatum, initGraph } from './utils'
+import { hasKind } from './utils/guards'
 import { getResourceLabel } from './utils/resource'
 import { getResourceSymbol } from './utils/symbols'
 
@@ -23,6 +24,7 @@ type NodeDragEvent = D3DragEvent<SVGGElement, GraphDatum, GraphDatum>
     default: 'projectGraph.css',
     material: 'projectGraph.material.css',
   },
+  shadow: true,
 })
 export class ProjectGraph {
   private el?: HTMLDivElement
@@ -51,32 +53,64 @@ export class ProjectGraph {
   private drawGraph = (graph: Graph) => {
     const { svg } = this.graphRef
 
-    const nodes = graph.nodes
-    const edges = graphEdgeToLinks(graph)
+    const groupedGraph = graphToGroupedGraph(graph)
 
-    const simulation = forceSimulation(nodes)
+    const simulation = forceSimulation(groupedGraph.nodes)
       .force(
         'link',
-        forceLink(edges)
-          .distance(100)
-          .strength(({ sourceGroup, targetGroup }) => {
-            if (sourceGroup !== null && sourceGroup === targetGroup) {
-              return 1
-            }
-
-            return 0.1
-          })
+        forceLink(groupedGraph.links)
+          // .distance(150)
+          .strength((d) =>
+            isInterGroupLink(d.source, d.target) ||
+            (hasKind(d.source) && d.source.kind === 'Link') ||
+            (hasKind(d.target) && d.target.kind === 'Link')
+              ? 1
+              : 0.375
+          )
+          .iterations(2)
+          .distance((d) =>
+            (hasKind(d.source) && d.source.kind === 'Link') ||
+            (hasKind(d.target) && d.target.kind === 'Link')
+              ? 0
+              : 30
+          )
+          .iterations(2)
+        // .distance((d) => (isInterGroupLink(d.source, d.target) ? 250 : 500))
       )
-      .force('charge', forceManyBody().strength(-200))
+      .force(
+        'link:groups',
+        forceLink(groupedGraph.groupLinks)
+          .strength((d) =>
+            (hasKind(d.source) && d.source.kind === 'Link') ||
+            (hasKind(d.target) && d.target.kind === 'Link')
+              ? 1
+              : 0.375
+          )
+          // .distance(60)
+          .iterations(3)
+      )
+      .force(
+        'charge',
+        // @ts-ignore
+        forceManyBody()
+          .strength((d) => {
+            // @ts-ignore
+            return d.type === 'File' ? -100 : -1500
+          })
+          .distanceMin(10)
+          .distanceMax(1500)
+      )
       // .force('layout', forceRadial(width / 4).strength(0.1))
-      .force('collision', forceCollide(16).strength(0.75))
-      .force('x', forceX())
-      .force('y', forceY())
+      .force('collision', forceCollide(64).strength(1).iterations(4))
+      .force('x', forceX().strength(0.02))
+      .force('y', forceY().strength(0.02))
+      .velocityDecay(0.4)
+      .alphaDecay(0.05)
 
     const click = (_event: Event, d: GraphDatum) => {
       delete d.fx
       delete d.fy
-      simulation.alpha(1).restart()
+      simulation.alpha(0.5).restart()
     }
 
     const dragFn = drag<SVGGElement, GraphDatum, GraphDatum>().on(
@@ -87,7 +121,7 @@ export class ProjectGraph {
         d.fx = event.x
         d.fy = event.y
 
-        simulation.alpha(1).restart()
+        simulation.alpha(0.05).restart()
       }
     )
 
@@ -100,7 +134,26 @@ export class ProjectGraph {
 
     const links = linkContainer
       .selectAll('g')
-      .data(edges)
+      .data(groupedGraph.links)
+      .join((enter) => {
+        const linkGroup = enter.append('g')
+
+        linkGroup.append('line').attr('marker-end', 'url(#end)')
+
+        linkGroup.append('text').text((d) => {
+          return `${d.relation.type}`
+        })
+
+        return linkGroup
+      })
+
+    const groupLinksContainer = svg
+      .append('g')
+      .attr('class', 'groupLinkContainer')
+
+    const groupLinks = groupLinksContainer
+      .selectAll('g')
+      .data(groupedGraph.groupLinks)
       .join((enter) => {
         const linkGroup = enter.append('g')
 
@@ -122,7 +175,7 @@ export class ProjectGraph {
 
     const node = nodeContainer
       .selectAll<SVGGElement, GraphDatum>('g')
-      .data<GraphDatum>(nodes)
+      .data<GraphDatum>(groupedGraph.nodes)
       .join((enter) => {
         const nodeGroup = enter.append('g')
 
@@ -131,7 +184,7 @@ export class ProjectGraph {
           .attr('d', (d) => getResourceSymbol(d)())
           .attr('class', (d) => {
             // console.log(d)
-            return d.type
+            return hasKind(d) ? `${d.type} ${d.kind}` : d.type
           })
 
         nodeGroup
@@ -144,7 +197,10 @@ export class ProjectGraph {
 
         return nodeGroup
       })
-      .attr('class', (d) => d.type)
+      .attr('class', (d) => {
+        // console.log(d)
+        return hasKind(d) ? `${d.type} ${d.kind}` : d.type
+      })
       .on('click', click)
       .call(dragFn)
 
@@ -167,6 +223,39 @@ export class ProjectGraph {
 
       // Position link line labels
       links.select('text').attr('transform', (d) => {
+        if (
+          typeof d.source === 'object' &&
+          typeof d.source.y === 'number' &&
+          typeof d.source.x === 'number' &&
+          typeof d.target === 'object' &&
+          typeof d.target.y === 'number' &&
+          typeof d.target.x === 'number'
+        ) {
+          return `translate(${d.source.x - (d.source.x - d.target.x) / 2}, ${
+            d.source.y - (d.source.y - d.target.y) / 2
+          })`
+        }
+
+        return ''
+      })
+
+      groupLinks
+        .select('line')
+        .attr('x1', ({ source }) =>
+          typeof source === 'object' ? source.x ?? 0 : source
+        )
+        .attr('y1', ({ source }) =>
+          typeof source === 'object' ? source.y ?? 0 : source
+        )
+        .attr('x2', ({ target }) =>
+          typeof target === 'object' ? target.x ?? 0 : target
+        )
+        .attr('y2', ({ target }) =>
+          typeof target === 'object' ? target.y ?? 0 : target
+        )
+
+      // Position link line labels
+      groupLinks.select('text').attr('transform', (d) => {
         if (
           typeof d.source === 'object' &&
           typeof d.source.y === 'number' &&
