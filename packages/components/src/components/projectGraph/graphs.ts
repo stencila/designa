@@ -22,21 +22,23 @@ type GroupedGraph = {
   nodes: GraphNode[]
   links: GraphLink[]
   groupLinks: GraphLink[]
+  groups: FileResource[]
 }
 
 export const graphToGroupedGraph = (graph: Graph): GroupedGraph => {
   const nodes = [...graph.nodes]
 
-  const groupedGraph: GroupedGraph = {
-    nodes: graph.nodes,
-    links: graphEdgeToLinks(graph),
-    groupLinks: [],
-  }
-
   const files = nodes.filter((node) => node.type === 'File') as FileResource[]
   const fileLinkedNodes = graph.nodes.filter(
     (node) => hasPath(node) && node.type !== 'File'
   )
+
+  const groupedGraph: GroupedGraph = {
+    nodes: graph.nodes,
+    links: graphEdgeToLinks(graph),
+    groupLinks: [],
+    groups: files,
+  }
 
   const fileIndexByPath = (path: string): number | undefined =>
     files.find((file) => file.path === path)?.index

@@ -20,7 +20,8 @@ stencila-project-graph,
   --graphColor-file: #bebada;
 }
 
-.linkContainer g {
+.hullContainer path {
+  opacity: 0.2;
 }
 
 .linkContainer line {
@@ -61,9 +62,20 @@ svg text {
   text-anchor: middle;
 }
 
+svg text.textBackdrop {
+  stroke: white;
+  stroke-width: 2px;
+}
+
 svg circle,
 svg path {
   fill: var(--graphColor-default);
+}
+
+svg g.File text,
+svg g.Source text {
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 svg path.File {

@@ -8,9 +8,11 @@ import {
   forceX,
   forceY,
 } from 'd3-force'
+import { polygonHull } from 'd3-polygon'
 import { Selection } from 'd3-selection'
+import { curveBasisClosed, line } from 'd3-shape'
 import { graphToGroupedGraph, isInterGroupLink } from './graphs'
-import { Graph } from './types'
+import { FileResource, Graph } from './types'
 import { GraphDatum, initGraph } from './utils'
 import { hasKind } from './utils/guards'
 import { getResourceLabel } from './utils/resource'
@@ -47,6 +49,10 @@ export class ProjectGraph {
     | undefined
 
   private linkContainer:
+    | Selection<SVGGElement, unknown, null, unknown>
+    | undefined
+
+  private hullContainer:
     | Selection<SVGGElement, unknown, null, unknown>
     | undefined
 
@@ -125,6 +131,13 @@ export class ProjectGraph {
       }
     )
 
+    const hullContainer =
+      this.hullContainer ?? svg.append('g').attr('class', 'hullContainer')
+
+    if (!this.hullContainer) {
+      this.hullContainer = hullContainer
+    }
+
     const linkContainer =
       this.linkContainer ?? svg.append('g').attr('class', 'linkContainer')
 
@@ -166,12 +179,78 @@ export class ProjectGraph {
         return linkGroup
       })
 
-    const nodeContainer =
-      this.nodeContainer ?? svg.append('g').attr('fill', '#fff')
+    const nodeContainer = this.nodeContainer ?? svg.append('g')
 
     if (!this.nodeContainer) {
       this.nodeContainer = nodeContainer
     }
+
+    const drawHull = (
+      d: string | number | undefined | FileResource
+    ): string => {
+      if (d === undefined || typeof d === 'string' || typeof d === 'number') {
+        return ''
+      }
+
+      const hullFileNodes = groupedGraph.groupLinks.filter(
+        (node) => node.group === d.path
+      )
+
+      const rootCoords: [number, number][] =
+        hullFileNodes.length === 0
+          ? []
+          : [
+              [-32, -32],
+              [32, -32],
+              [32, 32],
+              [0, 32],
+            ]
+
+      const hull = polygonHull(
+        // @ts-ignore
+        hullFileNodes.reduce(
+          // @ts-ignore
+          (nodes: [number, number], node) => [
+            ...nodes,
+            [
+              // @ts-ignore
+              node.source.x - node.target.x - 32,
+              // @ts-ignore
+              node.source.y - node.target.y - 32,
+            ],
+            [
+              // @ts-ignore
+              node.source.x - node.target.x - 32,
+              // @ts-ignore
+              node.source.y - node.target.y + 32,
+            ],
+            [
+              // @ts-ignore
+              node.source.x - node.target.x + 32,
+              // @ts-ignore
+              node.source.y - node.target.y - 32,
+            ],
+            [
+              // @ts-ignore
+              node.source.x - node.target.x + 32,
+              // @ts-ignore
+              node.source.y - node.target.y + 32,
+            ],
+          ],
+          rootCoords
+        )
+      )
+
+      // @ts-ignore
+      return hull ? line().curve(curveBasisClosed)(hull) : ''
+    }
+
+    // @ts-ignore
+    const hull = hullContainer
+      .selectAll('g')
+      .data(groupedGraph.groups)
+      .join('path')
+      .attr('d', (d) => drawHull(d) ?? '')
 
     const node = nodeContainer
       .selectAll<SVGGElement, GraphDatum>('g')
@@ -181,11 +260,20 @@ export class ProjectGraph {
 
         nodeGroup
           .append('path')
-          .attr('d', (d) => getResourceSymbol(d)())
+          .attr('d', (d) =>
+            getResourceSymbol(d)(d.type === 'File' ? 1024 : 512)
+          )
           .attr('class', (d) => {
-            // console.log(d)
             return hasKind(d) ? `${d.type} ${d.kind}` : d.type
           })
+
+        nodeGroup
+          .append('text')
+          .attr('class', 'textBackdrop')
+          .attr('dy', '.35em')
+          .text(getResourceLabel)
+          .append('text')
+          .exit()
 
         nodeGroup
           .append('text')
@@ -273,6 +361,14 @@ export class ProjectGraph {
       })
 
       node.attr('transform', ({ x, y }) => `translate(${x ?? 0}, ${y ?? 0})`)
+
+      hull
+        .attr(
+          'transform',
+          // @ts-ignore
+          (d) => `translate(${d.x ?? 0}, ${d.y ?? 0})`
+        )
+        .attr('d', (d) => drawHull(d) ?? '')
     })
 
     // invalidation.then(() => simulation.stop()) */
