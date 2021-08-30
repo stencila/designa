@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.40.0](https://github.com/stencila/designa/compare/@stencila/components@0.39.4...@stencila/components@0.40.0) (2021-08-30)
+
+
+### Features
+
+* **Project Graph:** Add a Project Graph component ([f8dd87a](https://github.com/stencila/designa/commit/f8dd87a93e29a95162d7247c5c265144c2fafdae))
+
+
+
+
+
 ## [0.39.4](https://github.com/stencila/designa/compare/@stencila/components@0.39.3...@stencila/components@0.39.4) (2021-08-30)
 
 
