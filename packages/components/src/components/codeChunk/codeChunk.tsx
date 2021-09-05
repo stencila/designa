@@ -38,12 +38,21 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   @Prop() public autofocus = false
 
   /**
-   * Programming language of the CodeChunk
+   * @deprecated
+   * Legacy method for defining the programming language of the CodeChunk
+   * Use `programmingLanguage` prop, or `programming-language` HTML attribute instead.
    */
   @Prop({
     attribute: 'data-programmingLanguage',
   })
-  public programmingLanguage: string
+  public programmingLanguageDataAttribute: string | undefined = undefined
+
+  /**
+   * Programming language of the CodeChunk
+   */
+  @Prop()
+  public programmingLanguage: string | undefined =
+    this.programmingLanguageDataAttribute
 
   /**
    * Whether the code section is visible or not
