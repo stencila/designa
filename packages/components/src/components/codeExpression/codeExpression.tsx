@@ -8,7 +8,8 @@ import {
   Prop,
   State,
 } from '@stencil/core'
-import { codeExpression, CodeExpression } from '@stencila/schema'
+import { codeExpression, CodeExpression, isA } from '@stencila/schema'
+import { StencilaNodeUpdateEvent } from '../../globals/events'
 import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
 import { NodeRenderer } from '../nodeList/nodeRenderer'
 
@@ -26,11 +27,12 @@ const slots = {
   scoped: true,
 })
 export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
+  @Element() private el: HTMLStencilaCodeExpressionElement
+
   private emptyOutputMessage = 'No output to show'
   private hoverTimeOut: number | undefined = undefined
   private hoverStartedAt = Date.now()
-
-  @Element() private el: HTMLStencilaCodeExpressionElement
+  private outputSlot: Element
 
   /**
    * A callback function to be called with the value of the `CodeExpression` node when executing the `CodeExpression`.
@@ -45,9 +47,13 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   @Prop()
   public programmingLanguage: string
 
-  @State() output: CodeExpression['output'] | HTMLElement
-
-  @State() codeErrors: CodeExpression['errors']
+  /**
+   * Stencila CodeExpression node to render
+   */
+  @Prop({
+    mutable: true,
+  })
+  codeExpression?: CodeExpression
 
   @State() hover = false
 
@@ -57,25 +63,22 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
 
   @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED' = 'INITIAL'
 
-  private checkIfEmpty = (): void => {
+  private getOutputSlotContents = () => {
     // Checking output list to account for non-text nodes such as images.
-    const outputSlot = Array.from(this.el.children).filter(
-      (el) => el.slot === slots.output
-    )[0]
+    const output = (this.outputSlot?.childNodes ?? [])[0]
 
-    const output = (outputSlot?.childNodes ?? [])[0]
+    return output instanceof Text ? output.textContent : output
+  }
 
-    this.output =
-      output === undefined
-        ? ''
-        : output instanceof Text
-        ? output.textContent
-        : output
-
-    this.isOutputEmpty = output === undefined
+  private checkIfEmpty = (): void => {
+    this.isOutputEmpty = this.getOutputSlotContents() === undefined
   }
 
   componentWillLoad(): void {
+    this.outputSlot = Array.from(this.el.children).filter(
+      (el) => el.slot === slots.output
+    )[0]
+
     this.checkIfEmpty()
   }
 
@@ -83,6 +86,13 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   @Listen('setAllCodeVisibility', { target: 'window' })
   onSetAllCodeVisibility(event: CodeVisibilityEvent): void {
     this.collapseAllListenHandler(event)
+  }
+
+  @Listen('document:node:execute', { target: 'window' })
+  onUpdateCodeChunk({ detail }: CustomEvent<StencilaNodeUpdateEvent>): void {
+    if (detail.id === this.el.id && isA('CodeExpression', detail.value)) {
+      this.codeExpression = detail.value
+    }
   }
 
   /**
@@ -129,10 +139,9 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     if (this.executeHandler !== undefined) {
       const computed = await this.executeHandler(node)
       this.executeCodeState = 'RESOLVED'
-      /* this.updateErrors(computed.errors) */
       this.isOutputEmpty =
         computed.output === undefined || computed.output === null
-      this.output = computed.output
+      this.codeExpression = computed
       return computed
     }
 
@@ -245,8 +254,14 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
         <stencila-tooltip text={this.emptyOutputMessage} class="output">
           …
         </stencila-tooltip>
-      ) : this.output == null ? null : (
-        <NodeRenderer node={this.output}></NodeRenderer>
+      ) : (
+        <NodeRenderer
+          node={
+            this.codeExpression !== undefined
+              ? this.codeExpression.output
+              : this.getOutputSlotContents()
+          }
+        ></NodeRenderer>
       ),
     ]
   }

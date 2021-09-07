@@ -100,6 +100,10 @@ export namespace Components {
          */
         "autofocus": boolean;
         /**
+          * Stencila CodeChunk node to render
+         */
+        "codeChunk"?: CodeChunk;
+        /**
           * Run the `CodeChunk`
          */
         "execute": () => Promise<CodeChunk>;
@@ -140,6 +144,10 @@ export namespace Components {
         "kind": string | Level;
     }
     interface StencilaCodeExpression {
+        /**
+          * Stencila CodeExpression node to render
+         */
+        "codeExpression"?: CodeExpression;
         /**
           * Run the `CodeExpression`
          */
@@ -695,6 +703,10 @@ declare namespace LocalJSX {
          */
         "autofocus"?: boolean;
         /**
+          * Stencila CodeChunk node to render
+         */
+        "codeChunk"?: CodeChunk;
+        /**
           * A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
@@ -735,6 +747,10 @@ declare namespace LocalJSX {
         "kind"?: string | Level;
     }
     interface StencilaCodeExpression {
+        /**
+          * Stencila CodeExpression node to render
+         */
+        "codeExpression"?: CodeExpression;
         /**
           * A callback function to be called with the value of the `CodeExpression` node when executing the `CodeExpression`.
          */

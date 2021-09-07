@@ -10,7 +10,8 @@ import {
   Prop,
   State,
 } from '@stencil/core'
-import { codeChunk, CodeChunk } from '@stencila/schema'
+import { CodeChunk, codeChunk as makeCodeChunk, isA } from '@stencila/schema'
+import { StencilaNodeUpdateEvent } from '../../globals/events'
 import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
 import { Keymap } from '../editor/editor'
 
@@ -36,6 +37,14 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    * Autofocus the editor on page load
    */
   @Prop() public autofocus = false
+
+  /**
+   * Stencila CodeChunk node to render
+   */
+  @Prop({
+    mutable: true,
+  })
+  codeChunk?: CodeChunk
 
   /**
    * @deprecated
@@ -75,10 +84,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
 
   @State() isStacked = true
 
-  @State() outputs: CodeChunk['outputs']
-
-  @State() codeErrors: CodeChunk['errors'] = []
-
   @State() private isCodeVisibleState: boolean = this.isCodeVisible
 
   /**
@@ -115,8 +120,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     if (this.executeHandler !== undefined) {
       const computed = await this.executeHandler(node)
       this.executeCodeState = 'RESOLVED'
-      this.codeErrors = computed.errors
-      this.outputs = computed.outputs
+      this.codeChunk = computed
       return computed
     }
 
@@ -151,6 +155,13 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     }
   }
 
+  @Listen('document:node:execute', { target: 'window' })
+  onUpdateCodeChunk({ detail }: CustomEvent<StencilaNodeUpdateEvent>): void {
+    if (detail.id === this.el.id && isA('CodeChunk', detail.value)) {
+      this.codeChunk = detail.value
+    }
+  }
+
   componentWillLoad(): void {
     /** Get rendered width of component to decide whether to stack the editor and outputs or not.
      * We can’t use media queries as the component is not always full width of the viewport, and depends on the parent element width.
@@ -170,10 +181,10 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   public async getContents(): Promise<CodeChunk> {
     if (this.editorRef) {
       const { text, language } = await this.editorRef?.getContents()
-      return codeChunk({ text, programmingLanguage: language })
+      return makeCodeChunk({ text, programmingLanguage: language })
     }
 
-    return codeChunk({ text: '' })
+    return makeCodeChunk({ text: '' })
   }
 
   /**
@@ -274,13 +285,13 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
               executeHandler={this.onExecuteHandler}
               keymap={this.keymap}
               readOnly={this.executeHandler === undefined}
-              errors={this.codeErrors}
+              errors={this.codeChunk?.errors}
             >
               <slot name={CodeChunkComponent.slots.text} />
             </stencila-editor>
           </div>
 
-          <stencila-node-list nodes={this.outputs}>
+          <stencila-node-list nodes={this.codeChunk?.outputs}>
             <slot name={CodeChunkComponent.slots.outputs} />
           </stencila-node-list>
         </div>

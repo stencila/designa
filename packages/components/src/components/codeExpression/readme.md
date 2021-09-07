@@ -7,6 +7,7 @@
 
 | Property              | Attribute              | Description                                                                                                       | Type                                                                         | Default     |
 | --------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ----------- |
+| `codeExpression`      | --                     | Stencila CodeExpression node to render                                                                            | `CodeExpression \| undefined`                                                | `undefined` |
 | `executeHandler`      | --                     | A callback function to be called with the value of the `CodeExpression` node when executing the `CodeExpression`. | `((codeExpression: CodeExpression) => Promise<CodeExpression>) \| undefined` | `undefined` |
 | `programmingLanguage` | `programming-language` | Programming language of the CodeExpression                                                                        | `string`                                                                     | `undefined` |
 
