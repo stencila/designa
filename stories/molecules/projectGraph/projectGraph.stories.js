@@ -6,6 +6,7 @@ export default {
   component: 'stencila-project-graph',
   parameters: {
     layout: 'fullscreen',
+    chromatic: { disableSnapshot: true },
   },
   argTypes: {
     graph: {
