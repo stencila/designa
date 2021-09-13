@@ -10,7 +10,8 @@ import {
   Prop,
   State,
 } from '@stencil/core'
-import { codeChunk, CodeChunk } from '@stencila/schema'
+import { CodeChunk, codeChunk as makeCodeChunk, isA } from '@stencila/schema'
+import { StencilaNodeUpdateEvent } from '../../globals/events'
 import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
 import { Keymap } from '../editor/editor'
 
@@ -38,12 +39,29 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   @Prop() public autofocus = false
 
   /**
-   * Programming language of the CodeChunk
+   * Stencila CodeChunk node to render
+   */
+  @Prop({
+    mutable: true,
+  })
+  codeChunk?: CodeChunk
+
+  /**
+   * @deprecated
+   * Legacy method for defining the programming language of the CodeChunk
+   * Use `programmingLanguage` prop, or `programming-language` HTML attribute instead.
    */
   @Prop({
     attribute: 'data-programmingLanguage',
   })
-  public programmingLanguage: string
+  public programmingLanguageDataAttribute: string | undefined = undefined
+
+  /**
+   * Programming language of the CodeChunk
+   */
+  @Prop()
+  public programmingLanguage: string | undefined =
+    this.programmingLanguageDataAttribute
 
   /**
    * Whether the code section is visible or not
@@ -65,10 +83,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED' = 'INITIAL'
 
   @State() isStacked = true
-
-  @State() outputs: CodeChunk['outputs']
-
-  @State() codeErrors: CodeChunk['errors'] = []
 
   @State() private isCodeVisibleState: boolean = this.isCodeVisible
 
@@ -103,16 +117,31 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     this.executeCodeState = 'PENDING'
     const node = await this.getContents()
 
+    window.dispatchEvent(
+      new CustomEvent('document:node:execute', {
+        detail: {
+          nodeId: this.el.id,
+          value: node,
+        },
+      })
+    )
+
     if (this.executeHandler !== undefined) {
       const computed = await this.executeHandler(node)
       this.executeCodeState = 'RESOLVED'
-      this.codeErrors = computed.errors
-      this.outputs = computed.outputs
+      this.codeChunk = computed
       return computed
     }
 
     this.executeCodeState = 'RESOLVED'
     return node
+  }
+
+  @Listen('document:node:changed', { target: 'window' })
+  onUpdateCodeChunk({ detail }: CustomEvent<StencilaNodeUpdateEvent>): void {
+    if (detail.nodeId === this.el.id && isA('CodeChunk', detail.value)) {
+      this.codeChunk = detail.value
+    }
   }
 
   private setEditorLayoutHandler = (isStacked: boolean) => {
@@ -161,10 +190,10 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   public async getContents(): Promise<CodeChunk> {
     if (this.editorRef) {
       const { text, language } = await this.editorRef?.getContents()
-      return codeChunk({ text, programmingLanguage: language })
+      return makeCodeChunk({ text, programmingLanguage: language })
     }
 
-    return codeChunk({ text: '' })
+    return makeCodeChunk({ text: '' })
   }
 
   /**
@@ -265,13 +294,13 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
               executeHandler={this.onExecuteHandler}
               keymap={this.keymap}
               readOnly={this.executeHandler === undefined}
-              errors={this.codeErrors}
+              errors={this.codeChunk?.errors}
             >
               <slot name={CodeChunkComponent.slots.text} />
             </stencila-editor>
           </div>
 
-          <stencila-node-list nodes={this.outputs}>
+          <stencila-node-list nodes={this.codeChunk?.outputs}>
             <slot name={CodeChunkComponent.slots.outputs} />
           </stencila-node-list>
         </div>
