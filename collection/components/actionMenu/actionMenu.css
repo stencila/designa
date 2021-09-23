@@ -1,0 +1,66 @@
+:host{
+  /** @prop --background: Background color of the Action Menu component */
+  --background:var(--color-neutral-50,#edf2f7);
+  /** @prop --border: Border color of the Action Menu component */
+  --border:var(--color-neutral-100,#e2e8f0);
+  background-color:var(--background);
+  border-bottom-left-radius:.25rem;
+  border-color:var(--border);
+  border-style:solid;
+  border-width:0 0 1px 1px;
+  font-family:monospace;
+  font-family:var(--font-family-mono,monospace);
+  font-size:.75rem;
+  line-height:1rem;
+  line-height:1;
+  padding:1px .25rem;
+  position:absolute;
+  right:0;
+  top:0;
+  z-index:1
+}
+
+:host .hidden{
+  display:none
+}
+
+:host nav>*{
+  vertical-align:middle
+}
+
+:host ul{
+  list-style-type:none;
+  margin:0;
+  padding:0
+}
+
+:host li{
+  display:inline;
+  padding-right:.25rem
+}
+
+:host li:last-child{
+  padding-right:0
+}
+
+:host ::slotted(stencila-button),:host stencila-button{
+  display:inline-block
+}
+
+:host .actionContainer{
+  display:inline-block;
+  overflow:hidden;
+  transition:width .12s ease-in-out;
+  vertical-align:middle;
+  white-space:nowrap;
+  width:var(--max-width)
+}
+
+:host .actionContainer:not(.isAnimating):not(.isCollapsed){
+  width:auto
+}
+
+:host .secondaryActions:not(:hover):not(:focus) .actionContainer.isCollapsed{
+  width:0
+}
+

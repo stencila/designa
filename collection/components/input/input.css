@@ -1,0 +1,46 @@
+:host,stencila-input{
+  display:block;
+  font-size:1rem;
+  line-height:1.5rem;
+  line-height:1;
+  position:relative
+}
+
+:host(.inline),stencila-input.inline{
+  display:inline-block
+}
+
+:host stencila-icon,stencila-input stencila-icon{
+  color:#6e7591;
+  color:var(--color-neutral-500,#6e7591);
+  left:0;
+  padding-left:.5rem;
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%)
+}
+
+:host stencila-icon+input,stencila-input stencila-icon+input{
+  padding-left:2rem
+}
+
+:host input,stencila-input input{
+  background-color:#fff;
+  background-color:var(--color-stock,#fff);
+  border:1px solid #cfd2e1;
+  border-color:var(--color-neutral-100,#cfd2e1);
+  border-radius:.25rem;
+  font-size:1rem;
+  line-height:1.5rem;
+  line-height:1;
+  padding:.25rem .5rem;
+  width:100%
+}
+
+:host input:active,:host input:focus,stencila-input input:active,stencila-input input:focus{
+  border-color:#2069f2;
+  border-color:var(--color-primary-500,#2069f2);
+  outline:2px solid transparent;
+  outline-offset:2px
+}
+

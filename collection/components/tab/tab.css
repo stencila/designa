@@ -1,0 +1,56 @@
+a{
+  color:#4a4a4a;
+  color:var(--color-key,#4a4a4a);
+  font-family:sans-serif;
+  font-family:var(--font-family-body,sans-serif);
+  font-size:1rem;
+  line-height:1.5rem;
+  text-decoration:none
+}
+
+:host,stencila-tab{
+  flex-grow:1
+}
+
+:host li,stencila-tab li,ul[role=tablist] li{
+  border-color:#858ca8;
+  border-color:var(--color-neutral-400,#858ca8);
+  border-width:1px;
+  display:flex;
+  flex-direction:row;
+  list-style-type:none;
+  margin:0;
+  padding:0;
+  text-align:center;
+  text-transform:capitalize
+}
+
+:host li:first-of-type,stencila-tab li:first-of-type,ul[role=tablist] li:first-of-type{
+  border-bottom-left-radius:.25rem;
+  border-top-left-radius:.25rem
+}
+
+:host li:last-of-type,stencila-tab li:last-of-type,ul[role=tablist] li:last-of-type{
+  border-bottom-right-radius:.25rem;
+  border-top-right-radius:.25rem
+}
+
+:host li a,stencila-tab li a,ul[role=tablist] li a{
+  display:block;
+  line-height:1;
+  padding:.5rem 1rem;
+  width:100%
+}
+
+:host li a[aria-selected=true],stencila-tab li a[aria-selected=true],ul[role=tablist] li a[aria-selected=true]{
+  background-color:#cfd2e1;
+  background-color:var(--color-neutral-100,#cfd2e1)
+}
+
+:host li a:hover:not([aria-selected=true]),stencila-tab li a:hover:not([aria-selected=true]),ul[role=tablist] li a:hover:not([aria-selected=true]){
+  background-color:#e9eaf1;
+  background-color:var(--color-neutral-50,#e9eaf1);
+  border-color:#cfd2e1;
+  border-color:var(--color-neutral-100,#cfd2e1)
+}
+

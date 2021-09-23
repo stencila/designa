@@ -1,0 +1,96 @@
+*,:after,:before{
+  border:0 solid;
+  box-sizing:border-box
+}
+
+html{
+  font-size:16px
+}
+
+.hidden{
+  display:none
+}
+
+code,code[class*=language-],output{
+  font-family:monospace;
+  font-family:var(--font-family-mono,monospace);
+  font-size:75%
+}
+
+pre{
+  border:1px solid #cfd2e1;
+  border-color:var(--color-neutral-100,#cfd2e1);
+  border-radius:.25rem;
+  margin:.5rem;
+  overflow:auto;
+  padding:.5rem
+}
+
+:host,stencila-node-list{
+  display:block
+}
+
+:host .hidden+:nth-child(2),:host>:first-child,stencila-node-list .hidden+:nth-child(2),stencila-node-list>:first-child{
+  border-top-width:0;
+  margin-top:0;
+  padding-top:0
+}
+
+:host>:last-child,stencila-node-list>:last-child{
+  margin-bottom:0
+}
+
+:host .hidden,stencila-node-list .hidden{
+  display:none
+}
+
+:host .emptyContentMessage,stencila-node-list .emptyContentMessage{
+  color:#6e7591;
+  color:var(--color-neutral-500,#6e7591);
+  font-family:monospace;
+  font-family:var(--font-family-mono,monospace);
+  font-size:1rem;
+  line-height:1.5rem
+}
+
+:host stencila-code-error,stencila-node-list stencila-code-error{
+  border-width:0
+}
+
+:host stencila-image-object,stencila-node-list stencila-image-object{
+  display:block;
+  height:auto;
+  max-width:100%
+}
+
+:host ::slotted([slot=outputs]),:host>*,:host figure,stencila-node-list ::slotted([slot=outputs]),stencila-node-list>*,stencila-node-list figure{
+  margin:0;
+  overflow:auto;
+  padding:0
+}
+
+:host ::slotted([slot=outputs]):first-child,:host>:first-child,:host figure:first-child,stencila-node-list ::slotted([slot=outputs]):first-child,stencila-node-list>:first-child,stencila-node-list figure:first-child{
+  margin-top:0
+}
+
+:host ::slotted([slot=outputs]) pre,:host>* pre,:host figure pre,stencila-node-list ::slotted([slot=outputs]) pre,stencila-node-list>* pre,stencila-node-list figure pre{
+  border-width:0;
+  margin:0;
+  padding:0
+}
+
+:host ::slotted([slot=outputs])>:not(figcaption),:host>*>:not(figcaption),:host figure>:not(figcaption),stencila-node-list ::slotted([slot=outputs])>:not(figcaption),stencila-node-list>*>:not(figcaption),stencila-node-list figure>:not(figcaption){
+  margin-bottom:.75rem;
+  margin-top:.75rem;
+  padding-top:.75rem
+}
+
+:host ::slotted([slot=outputs])>:not(figcaption):first-child,:host>*>:not(figcaption):first-child,:host figure>:not(figcaption):first-child,stencila-node-list ::slotted([slot=outputs])>:not(figcaption):first-child,stencila-node-list>*>:not(figcaption):first-child,stencila-node-list figure>:not(figcaption):first-child{
+  margin-top:0;
+  padding-top:0
+}
+
+:host ::slotted([slot=outputs])>:not(figcaption):last-child,:host>*>:not(figcaption):last-child,:host figure>:not(figcaption):last-child,stencila-node-list ::slotted([slot=outputs])>:not(figcaption):last-child,stencila-node-list>*>:not(figcaption):last-child,stencila-node-list figure>:not(figcaption):last-child{
+  margin-bottom:0
+}
+

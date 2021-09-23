@@ -1,0 +1,83 @@
+import { d as doc, N as NAMESPACE, w as win, p as promiseResolve, b as bootstrapLazy } from './index-364020fb.js';
+import { g as globalScripts } from './app-globals-9e466474.js';
+import './_commonjsHelpers-8a9f3b18.js';
+
+/*
+ Stencil Client Patch Browser v2.8.1 | MIT Licensed | https://stenciljs.com
+ */
+const getDynamicImportFunction = (namespace) => `__sc_import_${namespace.replace(/\s|-/g, '_')}`;
+const patchBrowser = () => {
+    // @ts-ignore
+    const scriptElm = Array.from(doc.querySelectorAll('script')).find((s) => new RegExp(`\/${NAMESPACE}(\\.esm)?\\.js($|\\?|#)`).test(s.src) ||
+            s.getAttribute('data-stencil-namespace') === NAMESPACE)
+        ;
+    const opts = {};
+    if ('onbeforeload' in scriptElm && !history.scrollRestoration /* IS_ESM_BUILD */) {
+        // Safari < v11 support: This IF is true if it's Safari below v11.
+        // This fn cannot use async/await since Safari didn't support it until v11,
+        // however, Safari 10 did support modules. Safari 10 also didn't support "nomodule",
+        // so both the ESM file and nomodule file would get downloaded. Only Safari
+        // has 'onbeforeload' in the script, and "history.scrollRestoration" was added
+        // to Safari in v11. Return a noop then() so the async/await ESM code doesn't continue.
+        // IS_ESM_BUILD is replaced at build time so this check doesn't happen in systemjs builds.
+        return {
+            then() {
+                /* promise noop */
+            },
+        };
+    }
+    {
+        opts.resourcesUrl = new URL('.', new URL(scriptElm.getAttribute('data-resources-url') || scriptElm.src, win.location.href)).href;
+        {
+            patchDynamicImport(opts.resourcesUrl, scriptElm);
+        }
+        if (!win.customElements) {
+            // module support, but no custom elements support (Old Edge)
+            // @ts-ignore
+            return import(/* webpackChunkName: "polyfills-dom" */ './dom-d08ba8aa.js').then(() => opts);
+        }
+    }
+    return promiseResolve(opts);
+};
+const patchDynamicImport = (base, orgScriptElm) => {
+    const importFunctionName = getDynamicImportFunction(NAMESPACE);
+    try {
+        // test if this browser supports dynamic imports
+        // There is a caching issue in V8, that breaks using import() in Function
+        // By generating a random string, we can workaround it
+        // Check https://bugs.chromium.org/p/chromium/issues/detail?id=990810 for more info
+        win[importFunctionName] = new Function('w', `return import(w);//${Math.random()}`);
+    }
+    catch (e) {
+        // this shim is specifically for browsers that do support "esm" imports
+        // however, they do NOT support "dynamic" imports
+        // basically this code is for old Edge, v18 and below
+        const moduleMap = new Map();
+        win[importFunctionName] = (src) => {
+            const url = new URL(src, base).href;
+            let mod = moduleMap.get(url);
+            if (!mod) {
+                const script = doc.createElement('script');
+                script.type = 'module';
+                script.crossOrigin = orgScriptElm.crossOrigin;
+                script.src = URL.createObjectURL(new Blob([`import * as m from '${url}'; window.${importFunctionName}.m = m;`], {
+                    type: 'application/javascript',
+                }));
+                mod = new Promise((resolve) => {
+                    script.onload = () => {
+                        resolve(win[importFunctionName].m);
+                        script.remove();
+                    };
+                });
+                moduleMap.set(url, mod);
+                doc.head.appendChild(script);
+            }
+            return mod;
+        };
+    }
+};
+
+patchBrowser().then(options => {
+  globalScripts();
+  return bootstrapLazy([["stencila-code-chunk",[[38,"stencila-code-chunk",{"autofocus":[4],"codeChunk":[1040],"programmingLanguageDataAttribute":[1,"data-programminglanguage"],"programmingLanguage":[1,"programming-language"],"isCodeVisible":[4,"is-code-visible"],"executeHandler":[16],"keymap":[16],"executeCodeState":[32],"isStacked":[32],"isCodeVisibleState":[32],"getContents":[64],"execute":[64]},[[8,"collapseAllCode","onSetAllCodeVisibility"],[8,"setAllCodeVisibility","onSetAllCodeVisibility"],[8,"document:patched","onUpdateCodeChunk"],[8,"setEditorLayout","onSetEditorLayout"]]]]],["stencila-executable-document-toolbar",[[32,"stencila-executable-document-toolbar",{"sourceUrl":[1,"source-url"],"sessionProviderUrl":[1,"session-provider-url"],"position":[1],"session":[32],"job":[32],"executor":[32],"codeCount":[32],"statusMessage":[32]}]]],["stencila-code-expression",[[38,"stencila-code-expression",{"executeHandler":[16],"programmingLanguage":[1,"programming-language"],"codeExpression":[1040],"hover":[32],"isCodeVisible":[32],"isOutputEmpty":[32],"executeCodeState":[32],"getContents":[64],"execute":[64]},[[8,"collapseAllCode","onSetAllCodeVisibility"],[8,"setAllCodeVisibility","onSetAllCodeVisibility"],[8,"document:node:changed","onUpdateCodeChunk"]]]]],["stencila-code-error",[[38,"stencila-code-error",{"error":[16],"kind":[1],"stackIsOpen":[32]}]]],["stencila-input",[[34,"stencila-input",{"autoFocus":[4,"auto-focus"],"inputmode":[1],"type":[1],"name":[1],"label":[1],"hideLabel":[4,"hide-label"],"inline":[4],"placeholder":[1],"iconStart":[1,"icon-start"],"required":[4],"value":[8]}]]],["stencila-menu-item",[[38,"stencila-menu-item",{"icon":[1]}]]],["stencila-tab-list",[[34,"stencila-tab-list",{"tabs":[16],"activeTabIndex":[32]}]]],["animated-route-switch",[[4,"animated-route-switch",{"group":[513],"routeViewsUpdated":[16],"scrollTopOffset":[2,"scroll-top-offset"],"location":[16]}]]],["stencila-menu",[[38,"stencila-menu",{"isOpen":[1540,"is-open"]}]]],["stencila-project-graph",[[33,"stencila-project-graph",{"graph":[16]}]]],["stencila-details",[[38,"stencila-details",{"open":[4],"isOpen":[32]}]]],["stencila-tab",[[34,"stencila-tab",{"href":[1],"label":[1],"isSelected":[4,"selected"]}]]],["stencila-toolbar",[[38,"stencila-toolbar",{"position":[1],"color":[1]}]]],["stencila-icon",[[34,"stencila-icon",{"icon":[1],"iconStyle":[1,"icon-style"]}]]],["stencila-button_3",[[38,"stencila-button",{"href":[1],"rel":[1],"target":[1],"ariaLabel":[1,"aria-label"],"color":[1],"size":[1],"minimal":[4],"isSecondary":[4,"is-secondary"],"buttonType":[1,"button-type"],"disabled":[4],"icon":[1],"iconOnly":[4,"icon-only"],"isLoading":[4,"is-loading"],"fill":[4],"tooltip":[1],"dataEl":[1,"data-el"]}],[38,"stencila-tooltip",{"text":[1]}],[38,"stencila-tooltip-element"]]],["stencila-action-menu_3",[[38,"stencila-action-menu",{"actions":[16],"hasSecondaryActions":[32],"isCollapsed":[32],"width":[32],"isAnimating":[32]}],[38,"stencila-node-list",{"nodes":[16],"isEmpty":[32]}],[38,"stencila-editor",{"contents":[1],"languageCapabilities":[16],"readOnly":[4,"read-only"],"activeLanguage":[1,"active-language"],"executeHandler":[16],"contentChangeHandler":[16],"autofocus":[4],"lineNumbers":[4,"line-numbers"],"lineWrapping":[4,"line-wrapping"],"foldGutter":[4,"fold-gutter"],"keymap":[16],"errors":[16],"getContents":[64],"setContents":[64],"getState":[64],"setState":[64],"setStateFromString":[64],"getRef":[64]}]]],["animate-presence_3",[[36,"stencila-toast",{"dismissable":[4],"duration":[2],"type":[1],"position":[1]}],[4,"stencila-toast-container",{"position":[1]}],[1,"animate-presence",{"__presenceKey":[1,"__presence-key"],"descendants":[16],"observe":[1028],"registerChild":[64],"unregisterChild":[64],"exit":[64],"enter":[64]},[[0,"animatePresenceExitComplete","animatePresenceExitCompleteHandler"]]]]],["stencila-data-table_4",[[34,"stencila-image-plotly",{"data":[16],"layout":[16],"config":[16],"plotIsRendered":[32]},[[8,"plotlyLoaded","onPlotlyLoaded"]]],[34,"stencila-image-vega",{"spec":[1],"options":[16],"plotIsRendered":[32]},[[8,"vegaLoaded","onVegaLoaded"]]],[34,"stencila-data-table",{"table":[16]}],[34,"stencila-image-object",{"image":[16]}]]]], options);
+});

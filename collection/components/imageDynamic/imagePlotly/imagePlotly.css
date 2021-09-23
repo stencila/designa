@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+
+:host.imgHidden::slotted(picture) > :not(.js-plotly-plot) {
+  display: none;
+}

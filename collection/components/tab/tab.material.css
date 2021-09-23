@@ -1,0 +1,53 @@
+a{
+  color:#4a4a4a;
+  color:var(--color-key,#4a4a4a);
+  font-family:sans-serif;
+  font-family:var(--font-family-body,sans-serif);
+  font-size:1rem;
+  line-height:1.5rem;
+  text-decoration:none
+}
+
+:host,stencila-tab{
+  flex-grow:1
+}
+
+:host li,ul[role=tablist] li{
+  display:flex;
+  flex-direction:row;
+  font-size:.875rem;
+  font-weight:500;
+  letter-spacing:.05em;
+  line-height:1.25rem;
+  line-height:1;
+  list-style-type:none;
+  margin:0;
+  text-align:center;
+  text-transform:uppercase
+}
+
+:host li a,ul[role=tablist] li a{
+  border:0 solid #cfd2e1;
+  border-color:var(--color-neutral-100,#cfd2e1);
+  border-bottom:2px solid var(--color-neutral-100,#cfd2e1);
+  display:block;
+  line-height:1;
+  padding:1rem;
+  width:100%
+}
+
+:host li a[aria-selected=true],ul[role=tablist] li a[aria-selected=true]{
+  border-bottom-width:2px;
+  border-color:#2069f2;
+  border-color:var(--color-primary-500,#2069f2);
+  color:#2069f2;
+  color:var(--color-primary-500,#2069f2)
+}
+
+:host li a:hover:not([aria-selected=true]),ul[role=tablist] li a:hover:not([aria-selected=true]){
+  background-color:#e9eaf1;
+  background-color:var(--color-neutral-50,#e9eaf1);
+  border-color:#9da3bc;
+  border-color:var(--color-neutral-300,#9da3bc)
+}
+

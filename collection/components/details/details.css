@@ -1,0 +1,56 @@
+:host,stencila-details{
+  /** @prop --disclosure-icon-right: Position of the disclosure toggle icon relative to
+  * the right boundary of the closest relatively positioned parent element.
+  */
+  --disclosure-icon-right:var(--disclosure-icon-right,0);
+  /** @prop --disclosure-icon-top: Position of the disclosure toggle icon relative to
+  * the top boundary of the closest relatively positioned parent element.
+  */
+  --disclosure-icon-top:var(--disclosure-icon-top,0)
+}
+
+:host,stencila-details{
+  display:block;
+  font-family:sans-serif;
+  font-family:var(--font-family-body,sans-serif);
+  position:relative
+}
+
+:host .contents,stencila-details .contents{
+  overflow:hidden
+}
+
+:host .contents.hidden,stencila-details .contents.hidden{
+  display:none
+}
+
+:host(::slotted([slot=summary])),:host ::slotted([slot=summary]),stencila-details::slotted([slot=summary]),stencila-details ::slotted([slot=summary]){
+  cursor:pointer
+}
+
+:host .disclosure-toggle,stencila-details .disclosure-toggle{
+  cursor:pointer;
+  pointer-events:none;
+  position:absolute;
+  right:0;
+  right:var(--disclosure-icon-right,0);
+  top:0;
+  top:var(--disclosure-icon-top,0);
+  transform:rotate(0deg);
+  transition:transform .12s ease-in-out
+}
+
+:host .disclosure-toggle svg,stencila-details .disclosure-toggle svg{
+  stroke:#6e7591;
+  stroke:var(--color-neutral-500,#6e7591)
+}
+
+:host([isopen]) .disclosure-toggle,stencila-details[isopen] .disclosure-toggle{
+  transform:rotate(180deg)
+}
+
+:host(:focus) ::slotted(.disclosure-toggle>svg),:host(:focus::slotted(.disclosure-toggle)>svg),:host(:hover) ::slotted(.disclosure-toggle>svg),:host(:hover::slotted(.disclosure-toggle)>svg),stencila-details:focus::slotted(.disclosure-toggle>svg),stencila-details:focus ::slotted(.disclosure-toggle>svg),stencila-details:hover::slotted(.disclosure-toggle>svg),stencila-details:hover ::slotted(.disclosure-toggle>svg){
+  stroke:#444a5e;
+  stroke:var(--color-neutral-700,#444a5e)
+}
+

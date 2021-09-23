@@ -1,0 +1,1 @@
+var getSlotByName=function(r){return function(t){if(!r)return;var n=Array.from(r.children);var e=n.find((function(r){return r.slot===t}));if(e){return e}return n.find((function(r){return getSlotByName(r)(t)}))}};export{getSlotByName as g};

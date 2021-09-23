@@ -1,0 +1,28 @@
+:host{
+  align-items:center;
+  color:#4a4a4a;
+  color:var(--color-key,#4a4a4a);
+  cursor:pointer;
+  display:flex;
+  font-family:sans-serif;
+  font-family:var(--font-family-body,sans-serif);
+  font-size:.875rem;
+  height:2rem;
+  letter-spacing:.025em;
+  line-height:1.25rem;
+  line-height:1;
+  padding-left:.5rem;
+  padding-right:.5rem;
+  text-decoration:none;
+  text-transform:uppercase
+}
+
+:host(:hover){
+  background-color:#e9eaf1;
+  background-color:var(--color-neutral-50,#e9eaf1)
+}
+
+:host stencila-icon{
+  margin-right:.5rem
+}
+

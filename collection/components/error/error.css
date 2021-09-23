@@ -1,0 +1,75 @@
+:host,stencila-code-error{
+  background-color:#e9eaf1;
+  background-color:var(--color-neutral-50,#e9eaf1);
+  border:1px solid #6e7591;
+  border-color:var(--color-neutral-500,#6e7591);
+  border-radius:.25rem;
+  box-sizing:border-box;
+  color:#444a5e;
+  color:var(--color-neutral-700,#444a5e);
+  display:block;
+  font-family:sans-serif;
+  font-family:var(--font-family-body,sans-serif);
+  max-width:100%;
+  padding:.5rem;
+  position:relative;
+  width:100%
+}
+
+:host .overview,stencila-code-error .overview{
+  padding-right:1rem
+}
+
+:host .overview *,stencila-code-error .overview *{
+  vertical-align:middle
+}
+
+:host .overview stencila-icon,stencila-code-error .overview stencila-icon{
+  margin-right:.5rem
+}
+
+:host stencila-details,stencila-code-error stencila-details{
+  --disclosure-icon-right:0.5rem;
+  --disclosure-icon-top:0.5rem;
+  display:block;
+  position:static
+}
+
+:host [slot=stacktrace],stencila-code-error [slot=stacktrace]{
+  background-color:#fff;
+  background-color:var(--color-stock,#fff);
+  border-color:#dca435;
+  border-color:var(--color-warn-500,#dca435);
+  color:#4a4a4a;
+  color:var(--color-key,#4a4a4a);
+  margin:0
+}
+
+:host([kind=warning]),stencila-code-error[kind=warning]{
+  background-color:#fff3cc;
+  background-color:var(--color-warn-50,#fff3cc);
+  border-color:#dca435;
+  border-color:var(--color-warn-500,#dca435);
+  color:#674c15;
+  color:var(--color-warn-800,#674c15)
+}
+
+:host([kind=warning]) [slot=stacktrace],stencila-code-error[kind=warning] [slot=stacktrace]{
+  border-color:#dca435;
+  border-color:var(--color-warn-500,#dca435)
+}
+
+:host([kind=error]),stencila-code-error[kind=error]{
+  background-color:#ffeff0;
+  background-color:var(--color-danger-50,#ffeff0);
+  border-color:#cf445e;
+  border-color:var(--color-danger-500,#cf445e);
+  color:#b02d4a;
+  color:var(--color-danger-600,#b02d4a)
+}
+
+:host([kind=error]) [slot=stacktrace],stencila-code-error[kind=error] [slot=stacktrace]{
+  border-color:#cf445e;
+  border-color:var(--color-danger-500,#cf445e)
+}
+

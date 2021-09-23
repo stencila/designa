@@ -1,0 +1,1 @@
+System.register([],(function(r){"use strict";return{execute:function(){var n=r("g",(function(r){return function(t){if(!r)return;var e=Array.from(r.children);var u=e.find((function(r){return r.slot===t}));if(u){return u}return e.find((function(r){return n(r)(t)}))}}))}}}));

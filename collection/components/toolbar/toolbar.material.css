@@ -1,0 +1,85 @@
+:host{
+  /** @prop --background: Sets the background color of the component. */
+  background-color:var(--color-neutral-300);
+  background-color:var(--background,var(--color-neutral-300));
+  display:block;
+  height:3rem
+}
+
+:host([position=fixed]){
+  left:0;
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:1
+}
+
+:host([position=fixed])+*{
+  margin-top:3rem
+}
+
+:host([color=stock]) div{
+  background-color:#fff;
+  background-color:var(--color-stock,#fff)
+}
+
+:host([color=key]) div{
+  background-color:#4a4a4a;
+  background-color:var(--color-key,#4a4a4a)
+}
+
+:host([color=primary]) div{
+  background-color:#2069f2;
+  background-color:var(--color-primary-500,#2069f2)
+}
+
+:host([color=neutral]) div{
+  background-color:#6e7591;
+  background-color:var(--color-neutral-500,#6e7591)
+}
+
+:host([color=success]) div{
+  background-color:#3c8455;
+  background-color:var(--color-success-500,#3c8455)
+}
+
+:host([color=warn]) div{
+  background-color:#dca435;
+  background-color:var(--color-warn-500,#dca435)
+}
+
+:host([color=danger]) div{
+  background-color:#cf445e;
+  background-color:var(--color-danger-500,#cf445e)
+}
+
+:host div{
+  align-items:center;
+  background-color:var(--background);
+  color:#fff;
+  color:var(--color-stock,#fff);
+  display:flex;
+  flex-direction:row;
+  font-family:sans-serif;
+  font-family:var(--font-family-body,sans-serif);
+  justify-content:space-between;
+  line-height:1;
+  margin:0;
+  padding:.5rem .25rem;
+  vertical-align:middle
+}
+
+:host div>*{
+  vertical-align:middle
+}
+
+:host ::slotted([slot=middle]){
+  flex-grow:1;
+  padding-left:1rem;
+  padding-right:1rem
+}
+
+:host([color=key]::slotted(*)) stencila-button:not([disabled]):hover button.iconOnly{
+  background-color:hsla(0,0%,100%,.2)
+}
+

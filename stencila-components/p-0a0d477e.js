@@ -1,0 +1,1 @@
+const r=t=>n=>{if(!t)return;const e=Array.from(t.children);return e.find((r=>r.slot===n))||e.find((t=>r(t)(n)))};export{r as g}
