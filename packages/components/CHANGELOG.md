@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.2](https://github.com/stencila/designa/compare/@stencila/components@0.41.1...@stencila/components@0.41.2) (2021-09-23)
+
+
+### Bug Fixes
+
+* **Vega:** Fix Vega node type guard ([890383e](https://github.com/stencila/designa/commit/890383e41d83b4865c38fa528b6d364c7bb0d476))
+
+
+
+
+
 ## [0.41.1](https://github.com/stencila/designa/compare/@stencila/components@0.41.0...@stencila/components@0.41.1) (2021-09-23)
 
 **Note:** Version bump only for package @stencila/components
