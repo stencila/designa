@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.3](https://github.com/stencila/designa/compare/@stencila/components@0.41.2...@stencila/components@0.41.3) (2021-09-23)
+
+
+### Bug Fixes
+
+* **CodeExpression:** Fix rendering of HTMLElement output ([dbdd066](https://github.com/stencila/designa/commit/dbdd0664782e0259f1dde972bf08e3332ff49cf2))
+
+
+
+
+
 ## [0.41.2](https://github.com/stencila/designa/compare/@stencila/components@0.41.1...@stencila/components@0.41.2) (2021-09-23)
 
 
