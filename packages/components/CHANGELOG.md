@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.41.0](https://github.com/stencila/designa/compare/@stencila/components@0.40.2...@stencila/components@0.41.0) (2021-09-23)
+
+
+### Features
+
+* **Code:** Emit & listen for code execution events ([023a062](https://github.com/stencila/designa/commit/023a0623e43b1dd9824b505ec50b8a0719c5a167))
+* **Graph:** Add visual indicators for pan/drag interactions ([a5fd006](https://github.com/stencila/designa/commit/a5fd006f49ee0791287bdc332daf86c82e002a2f)), closes [#230](https://github.com/stencila/designa/issues/230)
+
+
+
+
+
 ## [0.40.2](https://github.com/stencila/designa/compare/@stencila/components@0.40.1...@stencila/components@0.40.2) (2021-08-31)
 
 **Note:** Version bump only for package @stencila/components
