@@ -1,11 +1,15 @@
 import { FunctionalComponent, h, VNode } from '@stencil/core'
-import { isA, isIn, isPrimitive, Node } from '@stencila/schema'
+import { isA, isIn, isPrimitive, Node as StencilaNode } from '@stencila/schema'
 
 const schemaNodeHTMLRegExp = /itemtype=".+?"/
 
-const renderNode = (node: Node): VNode => {
+const renderNode = (node: StencilaNode | Node): VNode => {
   if (typeof node === 'string' && schemaNodeHTMLRegExp.test(node)) {
     return <span innerHTML={node}></span>
+  }
+
+  if (node instanceof Node) {
+    return <span>{node}</span>
   }
 
   if (node instanceof HTMLElement) {
@@ -39,7 +43,7 @@ const renderNode = (node: Node): VNode => {
 }
 
 interface Props {
-  node?: Node
+  node?: StencilaNode | Node
 }
 
 export const NodeRenderer: FunctionalComponent<Props> = ({ node }) => (

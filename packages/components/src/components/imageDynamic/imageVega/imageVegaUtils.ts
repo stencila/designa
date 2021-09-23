@@ -1,12 +1,18 @@
-import { Node } from '@stencila/schema'
+import { Node, isIn } from '@stencila/schema'
 import { EmbedOptions, VisualizationSpec } from 'vega-embed'
 
 // Custom and generic Vega media type used by Stencila when encoding to HTML
 export const vegaMediaType = 'application/vnd.vega+json'
 
-// Match against any version of either the Vega or VegaLite media types 
-export const isVegaMediaType = (mimeType: string): boolean =>
+// Match against any version of either the Vega or VegaLite media types
+export const isVegaMediaType = (mimeType = ''): boolean =>
   /^application\/vnd\.(vega|vega-?lite)\./.test(mimeType)
+
+export const nodeHasSpec = (
+  node: unknown
+): node is Record<string, unknown> & { spec: string | null } => {
+  return Object.prototype.hasOwnProperty.call(node, 'spec')
+}
 
 /**
  * RegEx to parse a Vega Spec `$schema` url and find the library and version number used
@@ -57,17 +63,15 @@ export interface VegaObject {
   options?: Partial<EmbedOptions>
 }
 
-export interface VegaNode extends VegaObject {
+export interface VegaNode extends VegaObject, Record<string, unknown> {
   mediaType: string
 }
 
 export const isVegaObject = (node: Node): node is VegaNode => {
   return (
-    typeof node === 'object' &&
-    node !== null &&
-    'mediaType' in node &&
+    isIn('MediaObjectTypes', node) &&
     isVegaMediaType(node.mediaType) &&
-    Object.prototype.hasOwnProperty.call(node, 'spec') &&
-    (node as Record<string, unknown>).spec !== null
+    nodeHasSpec(node) &&
+    node.spec !== null
   )
 }

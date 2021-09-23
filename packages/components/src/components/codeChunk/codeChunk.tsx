@@ -195,7 +195,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
       return makeCodeChunk({ text, programmingLanguage: language })
     }
 
-    return makeCodeChunk({ text: '' })
+    throw new Error('Could not get CodeChunk contents')
   }
 
   /**
