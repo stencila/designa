@@ -114,6 +114,13 @@
           "https://github.com/codemirror/"
         ],
         "groupName": "CodeMirror editor packages"
+      },
+      {
+        "matchPackagePatterns": [
+          "^d3",
+          "^@types/d3"
+        ],
+        "groupName": "D3.js packages"
       }
     ]
   }
