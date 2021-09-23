@@ -9,7 +9,7 @@ export interface PlotlyObject {
   layout?: Partial<Layout>
 }
 
-export interface PlotlyNode extends PlotlyObject {
+export interface PlotlyNode extends PlotlyObject, Record<string, unknown> {
   mediaType: string
 }
 
