@@ -100,6 +100,10 @@ export namespace Components {
          */
         "autofocus": boolean;
         /**
+          * Stencila CodeChunk node to render
+         */
+        "codeChunk"?: CodeChunk;
+        /**
           * Run the `CodeChunk`
          */
         "execute": () => Promise<CodeChunk>;
@@ -123,7 +127,11 @@ export namespace Components {
         /**
           * Programming language of the CodeChunk
          */
-        "programmingLanguage": string;
+        "programmingLanguage": string | undefined;
+        /**
+          * @deprecated Legacy method for defining the programming language of the CodeChunk Use `programmingLanguage` prop, or `programming-language` HTML attribute instead.
+         */
+        "programmingLanguageDataAttribute": string | undefined;
     }
     interface StencilaCodeError {
         /**
@@ -136,6 +144,10 @@ export namespace Components {
         "kind": string | Level;
     }
     interface StencilaCodeExpression {
+        /**
+          * Stencila CodeExpression node to render
+         */
+        "codeExpression"?: CodeExpression;
         /**
           * Run the `CodeExpression`
          */
@@ -691,6 +703,10 @@ declare namespace LocalJSX {
          */
         "autofocus"?: boolean;
         /**
+          * Stencila CodeChunk node to render
+         */
+        "codeChunk"?: CodeChunk;
+        /**
           * A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
@@ -714,7 +730,11 @@ declare namespace LocalJSX {
         /**
           * Programming language of the CodeChunk
          */
-        "programmingLanguage"?: string;
+        "programmingLanguage"?: string | undefined;
+        /**
+          * @deprecated Legacy method for defining the programming language of the CodeChunk Use `programmingLanguage` prop, or `programming-language` HTML attribute instead.
+         */
+        "programmingLanguageDataAttribute"?: string | undefined;
     }
     interface StencilaCodeError {
         /**
@@ -727,6 +747,10 @@ declare namespace LocalJSX {
         "kind"?: string | Level;
     }
     interface StencilaCodeExpression {
+        /**
+          * Stencila CodeExpression node to render
+         */
+        "codeExpression"?: CodeExpression;
         /**
           * A callback function to be called with the value of the `CodeExpression` node when executing the `CodeExpression`.
          */

@@ -50,6 +50,7 @@ stencila-project-graph,
 }
 
 svg {
+  cursor: move;
   height: 100%;
   width: 100%;
 }
@@ -69,6 +70,14 @@ svg text.textBackdrop {
 svg circle,
 svg path {
   fill: var(--graphColor-default);
+}
+
+svg g {
+  cursor: grab;
+}
+
+svg g:active {
+  cursor: grabbing;
 }
 
 svg g.File text,

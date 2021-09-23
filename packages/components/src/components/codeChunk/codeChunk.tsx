@@ -10,7 +10,8 @@ import {
   Prop,
   State,
 } from '@stencil/core'
-import { codeChunk, CodeChunk } from '@stencila/schema'
+import { CodeChunk, codeChunk as makeCodeChunk, isA } from '@stencila/schema'
+import { StencilaNodeUpdateEvent } from '../../globals/events'
 import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
 import { Keymap } from '../editor/editor'
 
@@ -26,6 +27,8 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   private static readonly slots = {
     text: 'text',
     outputs: 'outputs',
+    caption: 'caption',
+    label: 'label',
   }
 
   @Element() private el: HTMLStencilaCodeChunkElement
@@ -38,12 +41,29 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   @Prop() public autofocus = false
 
   /**
-   * Programming language of the CodeChunk
+   * Stencila CodeChunk node to render
+   */
+  @Prop({
+    mutable: true,
+  })
+  codeChunk?: CodeChunk
+
+  /**
+   * @deprecated
+   * Legacy method for defining the programming language of the CodeChunk
+   * Use `programmingLanguage` prop, or `programming-language` HTML attribute instead.
    */
   @Prop({
     attribute: 'data-programmingLanguage',
   })
-  public programmingLanguage: string
+  public programmingLanguageDataAttribute: string | undefined = undefined
+
+  /**
+   * Programming language of the CodeChunk
+   */
+  @Prop()
+  public programmingLanguage: string | undefined =
+    this.programmingLanguageDataAttribute
 
   /**
    * Whether the code section is visible or not
@@ -65,10 +85,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED' = 'INITIAL'
 
   @State() isStacked = true
-
-  @State() outputs: CodeChunk['outputs']
-
-  @State() codeErrors: CodeChunk['errors'] = []
 
   @State() private isCodeVisibleState: boolean = this.isCodeVisible
 
@@ -103,16 +119,31 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     this.executeCodeState = 'PENDING'
     const node = await this.getContents()
 
+    window.dispatchEvent(
+      new CustomEvent('document:execute', {
+        detail: {
+          nodeId: this.el.id,
+          value: node,
+        },
+      })
+    )
+
     if (this.executeHandler !== undefined) {
       const computed = await this.executeHandler(node)
       this.executeCodeState = 'RESOLVED'
-      this.codeErrors = computed.errors
-      this.outputs = computed.outputs
+      this.codeChunk = computed
       return computed
     }
 
     this.executeCodeState = 'RESOLVED'
     return node
+  }
+
+  @Listen('document:patched', { target: 'window' })
+  onUpdateCodeChunk({ detail }: CustomEvent<StencilaNodeUpdateEvent>): void {
+    if (detail.nodeId === this.el.id && isA('CodeChunk', detail.value)) {
+      this.codeChunk = detail.value
+    }
   }
 
   private setEditorLayoutHandler = (isStacked: boolean) => {
@@ -161,10 +192,10 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   public async getContents(): Promise<CodeChunk> {
     if (this.editorRef) {
       const { text, language } = await this.editorRef?.getContents()
-      return codeChunk({ text, programmingLanguage: language })
+      return makeCodeChunk({ text, programmingLanguage: language })
     }
 
-    return codeChunk({ text: '' })
+    return makeCodeChunk({ text: '' })
   }
 
   /**
@@ -205,76 +236,83 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
           isStacked: this.isStacked,
         }}
       >
-        <stencila-action-menu>
-          {this.executeHandler !== undefined && (
-            <stencila-button
-              icon="play"
-              minimal={true}
-              color="key"
-              class="run"
-              size="xsmall"
-              tooltip="Run"
-              iconOnly={true}
-              slot="persistentActions"
-              onClick={this.executeRef}
-              isLoading={this.executeCodeState === 'PENDING'}
-            ></stencila-button>
-          )}
+        <figure>
+          <stencila-action-menu>
+            {this.executeHandler !== undefined && (
+              <stencila-button
+                icon="play"
+                minimal={true}
+                color="key"
+                class="run"
+                size="xsmall"
+                tooltip="Run"
+                iconOnly={true}
+                slot="persistentActions"
+                onClick={this.executeRef}
+                isLoading={this.executeCodeState === 'PENDING'}
+              ></stencila-button>
+            )}
 
-          <stencila-button
-            minimal={true}
-            color="key"
-            class="sourceToggle"
-            onClick={this.toggleCodeVisibility}
-            icon={this.isCodeVisibleState ? 'eye-off' : 'eye'}
-            iconOnly={true}
-            size="xsmall"
-            slot="persistentActions"
-            tooltip={`${
-              this.isCodeVisibleState ? 'Hide' : 'Show'
-            } Code\nShift click to set for all code blocks`}
-          ></stencila-button>
-
-          {this.isCodeVisibleState && (
             <stencila-button
               minimal={true}
               color="key"
-              class="layoutToggle"
-              onClick={this.toggleEditorLayout}
-              icon={this.isStacked ? 'layout-column' : 'layout-row'}
+              class="sourceToggle"
+              onClick={this.toggleCodeVisibility}
+              icon={this.isCodeVisibleState ? 'eye-off' : 'eye'}
               iconOnly={true}
               size="xsmall"
               slot="persistentActions"
               tooltip={`${
-                this.isStacked ? 'Side by side' : 'Stacked'
-              } view\nShift click to set for all code blocks`}
+                this.isCodeVisibleState ? 'Hide' : 'Show'
+              } Code\nShift click to set for all code blocks`}
             ></stencila-button>
-          )}
-        </stencila-action-menu>
 
-        <div>
-          <div
-            class={{
-              editorContainer: true,
-              hidden: !this.isCodeVisibleState,
-            }}
-          >
-            <stencila-editor
-              activeLanguage={this.programmingLanguage}
-              autofocus={this.autofocus}
-              executeHandler={this.onExecuteHandler}
-              keymap={this.keymap}
-              readOnly={this.executeHandler === undefined}
-              errors={this.codeErrors}
+            {this.isCodeVisibleState && (
+              <stencila-button
+                minimal={true}
+                color="key"
+                class="layoutToggle"
+                onClick={this.toggleEditorLayout}
+                icon={this.isStacked ? 'layout-column' : 'layout-row'}
+                iconOnly={true}
+                size="xsmall"
+                slot="persistentActions"
+                tooltip={`${
+                  this.isStacked ? 'Side by side' : 'Stacked'
+                } view\nShift click to set for all code blocks`}
+              ></stencila-button>
+            )}
+          </stencila-action-menu>
+
+          <div>
+            <div
+              class={{
+                editorContainer: true,
+                hidden: !this.isCodeVisibleState,
+              }}
             >
-              <slot name={CodeChunkComponent.slots.text} />
-            </stencila-editor>
+              <stencila-editor
+                activeLanguage={this.programmingLanguage}
+                autofocus={this.autofocus}
+                executeHandler={this.onExecuteHandler}
+                keymap={this.keymap}
+                readOnly={this.executeHandler === undefined}
+                errors={this.codeChunk?.errors}
+              >
+                <slot name={CodeChunkComponent.slots.text} />
+              </stencila-editor>
+            </div>
+
+            <stencila-node-list nodes={this.codeChunk?.outputs}>
+              <slot name={CodeChunkComponent.slots.outputs} />
+            </stencila-node-list>
           </div>
 
-          <stencila-node-list nodes={this.outputs}>
-            <slot name={CodeChunkComponent.slots.outputs} />
-          </stencila-node-list>
-        </div>
+          <figcaption>
+            <slot name={CodeChunkComponent.slots.label} />
+            <slot name={CodeChunkComponent.slots.caption} />
+          </figcaption>
+        </figure>
       </Host>
     )
   }
