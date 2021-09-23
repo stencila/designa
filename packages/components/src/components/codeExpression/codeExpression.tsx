@@ -67,7 +67,13 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     // Checking output list to account for non-text nodes such as images.
     const output = (this.outputSlot?.childNodes ?? [])[0]
 
-    return output instanceof Text ? output.textContent : output
+    return output instanceof Text
+      ? output.textContent
+      : output instanceof HTMLElement
+      ? output
+      : output === undefined
+      ? output
+      : 'Could not display the output'
   }
 
   private checkIfEmpty = (): void => {

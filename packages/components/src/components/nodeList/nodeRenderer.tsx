@@ -3,13 +3,9 @@ import { isA, isIn, isPrimitive, Node as StencilaNode } from '@stencila/schema'
 
 const schemaNodeHTMLRegExp = /itemtype=".+?"/
 
-const renderNode = (node: StencilaNode | Node): VNode => {
+const renderNode = (node: StencilaNode | HTMLElement): VNode => {
   if (typeof node === 'string' && schemaNodeHTMLRegExp.test(node)) {
     return <span innerHTML={node}></span>
-  }
-
-  if (node instanceof Node) {
-    return <span>{node}</span>
   }
 
   if (node instanceof HTMLElement) {
@@ -43,7 +39,7 @@ const renderNode = (node: StencilaNode | Node): VNode => {
 }
 
 interface Props {
-  node?: StencilaNode | Node
+  node?: StencilaNode | HTMLElement
 }
 
 export const NodeRenderer: FunctionalComponent<Props> = ({ node }) => (
