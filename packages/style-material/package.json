@@ -47,6 +47,6 @@
   "devDependencies": {
     "cssnano": "5.0.8",
     "parcel": "2.0.0-rc.0",
-    "tailwindcss": "2.2.15"
+    "tailwindcss": "2.2.16"
   }
 }
