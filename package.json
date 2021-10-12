@@ -47,7 +47,7 @@
     "@storybook/web-components": "6.3.10",
     "autoprefixer": "10.3.7",
     "babel-loader": "8.2.2",
-    "chromatic": "5.10.2",
+    "chromatic": "6.0.2",
     "core-js": "3.18.2",
     "cssnano": "5.0.8",
     "cssnano-preset-advanced": "5.1.4",
