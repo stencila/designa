@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.41.6](https://github.com/stencila/designa/compare/@stencila/components@0.41.5...@stencila/components@0.41.6) (2021-10-12)
+
+
+### Bug Fixes
+
+* **Project Graph:** Adjust centre point of graph ([da85c40](https://github.com/stencila/designa/commit/da85c40487c5ef5affa6fafa34d2a9d378430e52)), closes [#229](https://github.com/stencila/designa/issues/229)
+
+
+
+
+
 ## [0.41.5](https://github.com/stencila/designa/compare/@stencila/components@0.41.4...@stencila/components@0.41.5) (2021-10-12)
 
 **Note:** Version bump only for package @stencila/components
