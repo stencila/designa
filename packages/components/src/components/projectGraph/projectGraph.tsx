@@ -59,7 +59,7 @@ export class ProjectGraph {
     | undefined
 
   private drawGraph = (graph: Graph) => {
-    const { svg, width, height } = this.graphRef
+    const { svg } = this.graphRef
 
     const groupedGraph = graphToGroupedGraph(graph)
 
@@ -106,7 +106,7 @@ export class ProjectGraph {
       .force('collision', forceCollide(64).strength(1).iterations(4))
       .force('x', forceX().strength(0.02))
       .force('y', forceY().strength(0.02))
-      .force('center', forceCenter(width / 2, height / 2))
+      .force('center', forceCenter())
       .velocityDecay(0.4)
       .alphaDecay(0.05)
 
