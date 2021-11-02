@@ -51,7 +51,7 @@
     "core-js": "3.19.0",
     "cssnano": "5.0.9",
     "cssnano-preset-advanced": "5.1.5",
-    "eslint": "7.32.0",
+    "eslint": "8.1.0",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.26.1",
     "filewatcher-webpack-plugin": "1.2.0",
