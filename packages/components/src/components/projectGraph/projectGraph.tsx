@@ -33,6 +33,9 @@ type NodeDragEvent = D3DragEvent<SVGGElement, GraphDatum, GraphDatum>
 export class ProjectGraph {
   private el?: HTMLDivElement
 
+  /**
+   * The project graph data to render
+   */
   @Prop() graph: Graph
 
   @Watch('graph')

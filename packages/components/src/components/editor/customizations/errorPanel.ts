@@ -13,10 +13,12 @@ const renderErrors = (errors: (CodeError | string)[] = []) =>
         return `<stencila-code-error kind="warning">${error}</stencila-code-error>`
       }
 
-      return `<stencila-code-error kind=${error.errorType} has-stacktrace="${
-        error.stackTrace !== undefined
-      }">${error.errorMessage}<pre slot="stacktrace">${
-        error.stackTrace
+      return `<stencila-code-error kind=${
+        error.errorType ?? 'info'
+      } has-stacktrace="${(error.stackTrace !== undefined).toString()}">${
+        error.errorMessage
+      }<pre slot="stacktrace">${
+        error.stackTrace ?? ''
       }</pre></stencila-code-error>`
     })
     .join('\n')
@@ -28,8 +30,8 @@ const errorPanel = (): Panel => {
   return {
     dom,
     update(update) {
-      for (let transaction of update.transactions) {
-        for (let effect of transaction.effects) {
+      for (const transaction of update.transactions) {
+        for (const effect of transaction.effects) {
           if (effect.is(updateErrors)) {
             dom.innerHTML = renderErrors(effect.value)
           }

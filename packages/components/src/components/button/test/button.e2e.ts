@@ -24,12 +24,14 @@ describe('stencila-button', () => {
     // Inject a spy function into the page, and attach it to the button's click handler
     const fnSpy = jest.fn()
     await page.exposeFunction('fnSpy', fnSpy)
-    await page.$eval(el, (elm: any) => {
-      elm.onclick = fnSpy
+    await page.$eval(el, (elm) => {
+      elm.addEventListener('click', fnSpy)
     })
 
     const button = await page.find(`${el}`)
-    button.click()
+    button.click().catch((err) => {
+      console.log(err)
+    })
 
     await page.waitForChanges()
 

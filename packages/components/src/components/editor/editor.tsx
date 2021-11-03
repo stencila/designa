@@ -622,6 +622,7 @@ export class Editor {
       <Host>
         <div class={cssClasses.container}>
           <div
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
             class={cssClasses.editor}
             onKeyDown={this.stopEventPropagation}
             onClick={this.focus}

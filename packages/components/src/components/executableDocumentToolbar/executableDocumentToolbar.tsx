@@ -240,9 +240,9 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
     ),
   ]
 
-  private executeHandler = async (
-    code: CodeChunk | CodeExpression
-  ): Promise<CodeChunk | CodeExpression> => {
+  private executeHandler = async <C extends CodeChunk | CodeExpression>(
+    code: C
+  ): Promise<C> => {
     if (DE.isPending(this.session)) {
       notify.present('Please wait until a compute session is found', {
         type: ToastTypes.warn,
@@ -251,7 +251,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
       return code
     }
 
-    const failureCase = (stackTrace: string): CodeChunk | CodeExpression => ({
+    const failureCase = (stackTrace: string): C => ({
       ...code,
       errors: [
         ...(code.errors ?? []),
@@ -325,8 +325,7 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
   componentWillLoad(): void {
     const codeNodes = this.codeNodeSelector()
     this.codeCount = codeNodes.length
-    codeNodes.map((code) => {
-      // @ts-ignore
+    codeNodes.forEach((code) => {
       code.executeHandler = this.executeHandler
     })
   }

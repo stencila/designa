@@ -78,7 +78,7 @@ export namespace Components {
         "minimal": boolean;
         /**
           * Relationship of the link
-          * @see https ://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
+          * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
          */
         "rel"?: string;
         /**
@@ -121,7 +121,7 @@ export namespace Components {
         "isCodeVisible": boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
-          * @see https ://codemirror.net/6/docs/ref/#keymap
+          * @see https://codemirror.net/6/docs/ref/#keymap
          */
         "keymap": Keymap[];
         /**
@@ -222,7 +222,7 @@ export namespace Components {
         "getState": () => Promise<EditorStateJSON>;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
-          * @see https ://codemirror.net/6/docs/ref/#keymap
+          * @see https://codemirror.net/6/docs/ref/#keymap
          */
         "keymap": Keymap[];
         /**
@@ -301,12 +301,12 @@ export namespace Components {
     interface StencilaImageVega {
         /**
           * A JavaScript object containing options for embedding
-          * @see https ://github.com/vega/vega-embed#options
+          * @see https://github.com/vega/vega-embed#options
          */
         "options"?: Record<string, unknown>;
         /**
           * The Vega or Vega-Lite spec
-          * @see https ://vega.github.io/vega/docs/specification/
+          * @see https://vega.github.io/vega/docs/specification/
          */
         "spec"?: VisualizationSpec | string;
     }
@@ -369,6 +369,10 @@ export namespace Components {
         "isOpen": boolean;
     }
     interface StencilaMenuItem {
+        /**
+          * Name of the icon to show before the label
+          * @see Icon component for possible values
+         */
         "icon": IconNames | undefined;
     }
     interface StencilaNodeList {
@@ -378,6 +382,9 @@ export namespace Components {
         "nodes": Node[] | undefined;
     }
     interface StencilaProjectGraph {
+        /**
+          * The project graph data to render
+         */
         "graph": Graph;
     }
     interface StencilaTab {
@@ -402,7 +409,7 @@ export namespace Components {
     }
     interface StencilaToast {
         /**
-          * If true, shows a "close" button to immediately dismiss the toast
+          * If true, shows a "close" button to immediately dismiss the toast. Note that this prop has no effect if `duration` is set to zero, in which case the toast will always show the "close" button.
          */
         "dismissable"?: boolean | undefined;
         /**
@@ -681,7 +688,7 @@ declare namespace LocalJSX {
         "minimal"?: boolean;
         /**
           * Relationship of the link
-          * @see https ://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
+          * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
          */
         "rel"?: string;
         /**
@@ -716,7 +723,7 @@ declare namespace LocalJSX {
         "isCodeVisible"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
-          * @see https ://codemirror.net/6/docs/ref/#keymap
+          * @see https://codemirror.net/6/docs/ref/#keymap
          */
         "keymap"?: Keymap[];
         /**
@@ -805,7 +812,7 @@ declare namespace LocalJSX {
         "foldGutter"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
-          * @see https ://codemirror.net/6/docs/ref/#keymap
+          * @see https://codemirror.net/6/docs/ref/#keymap
          */
         "keymap"?: Keymap[];
         /**
@@ -884,12 +891,12 @@ declare namespace LocalJSX {
         "onVegaLoaded"?: (event: CustomEvent<VegaLoadEvent>) => void;
         /**
           * A JavaScript object containing options for embedding
-          * @see https ://github.com/vega/vega-embed#options
+          * @see https://github.com/vega/vega-embed#options
          */
         "options"?: Record<string, unknown>;
         /**
           * The Vega or Vega-Lite spec
-          * @see https ://vega.github.io/vega/docs/specification/
+          * @see https://vega.github.io/vega/docs/specification/
          */
         "spec"?: VisualizationSpec | string;
     }
@@ -952,6 +959,10 @@ declare namespace LocalJSX {
         "isOpen"?: boolean;
     }
     interface StencilaMenuItem {
+        /**
+          * Name of the icon to show before the label
+          * @see Icon component for possible values
+         */
         "icon"?: IconNames | undefined;
     }
     interface StencilaNodeList {
@@ -961,6 +972,9 @@ declare namespace LocalJSX {
         "nodes"?: Node[] | undefined;
     }
     interface StencilaProjectGraph {
+        /**
+          * The project graph data to render
+         */
         "graph"?: Graph;
     }
     interface StencilaTab {
@@ -985,7 +999,7 @@ declare namespace LocalJSX {
     }
     interface StencilaToast {
         /**
-          * If true, shows a "close" button to immediately dismiss the toast
+          * If true, shows a "close" button to immediately dismiss the toast. Note that this prop has no effect if `duration` is set to zero, in which case the toast will always show the "close" button.
          */
         "dismissable"?: boolean | undefined;
         /**

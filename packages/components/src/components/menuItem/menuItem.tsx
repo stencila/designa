@@ -10,6 +10,10 @@ import { IconNames } from '../icon/iconNames'
   scoped: true,
 })
 export class MenuItem {
+  /**
+   * Name of the icon to show before the label
+   * @see Icon component for possible values
+   */
   @Prop()
   icon: IconNames | undefined
 

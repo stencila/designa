@@ -92,7 +92,7 @@ export class ImagePlotlyComponent {
     if (plotEl) {
       try {
         const content = plotEl.textContent
-        const contentParsed: Data[] | PlotlyObject = JSON.parse(content ?? '')
+        const contentParsed = JSON.parse(content ?? '') as Data[] | PlotlyObject
         return Array.isArray(contentParsed)
           ? { data: contentParsed }
           : contentParsed

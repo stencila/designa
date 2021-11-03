@@ -30,7 +30,11 @@ export class Menu {
   public render() {
     return (
       <Host>
-        <span onClick={this.toggleMenu} aria-controls={this.menuId}>
+        <span
+          onClick={this.toggleMenu}
+          aria-controls={this.menuId}
+          aria-expanded={this.isOpen ? 'true' : 'false'}
+        >
           <slot name="toggle" />
         </span>
 
@@ -39,7 +43,6 @@ export class Menu {
           aria-hidden={!this.isOpen}
           aria-orientation="vertical"
           tabindex="-1"
-          aria-expanded="false"
           id={this.menuId}
         >
           <slot />

@@ -5,9 +5,9 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type                     | Default     |
-| -------- | --------- | ----------- | ------------------------ | ----------- |
-| `icon`   | `icon`    |             | `IconNames \| undefined` | `undefined` |
+| Property | Attribute | Description                               | Type                     | Default     |
+| -------- | --------- | ----------------------------------------- | ------------------------ | ----------- |
+| `icon`   | `icon`    | Name of the icon to show before the label | `IconNames \| undefined` | `undefined` |
 
 
 ## Dependencies

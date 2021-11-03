@@ -17,7 +17,7 @@ export const preferredImageObjectComponent = (
 ): HTMLStencilaImageObjectElement | HTMLStencilaImagePlotlyElement => {
   const { content } = image
 
-  if (content && content.length > 0) {
+  if (Array.isArray(content) && content.length > 0) {
     for (const node of content) {
       if (isPlotlyObject(node))
         return (

@@ -81,7 +81,7 @@ export class ImageVegaComponent {
     if (plotEl) {
       try {
         const content = plotEl.textContent
-        const contentParsed = JSON.parse(content ?? '')
+        const contentParsed = JSON.parse(content ?? '') as VisualizationSpec
 
         return contentParsed
       } catch (err) {
