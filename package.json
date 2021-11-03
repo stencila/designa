@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.16.0",
-    "@stencila/dev-config": "2.0.27",
+    "@stencila/dev-config": "3.0.1",
     "@stencila/renovate-config": "0.4.2",
     "@storybook/addon-a11y": "6.3.12",
     "@storybook/addon-backgrounds": "6.3.12",
