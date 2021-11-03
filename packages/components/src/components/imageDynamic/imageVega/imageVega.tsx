@@ -93,10 +93,13 @@ export class ImageVegaComponent {
   }
 
   /** Custom event emitter to indicate that the loading of the Vega JS script has finished */
-  @Event() public vegaLoaded: EventEmitter<VegaLoadEvent>
+  @Event({
+    eventName: 'stencila-vega-loaded',
+  })
+  public vegaLoaded: EventEmitter<VegaLoadEvent>
 
   /** When detecting that the Vega JS has loaded, render the data if it hasn’t been rendered already */
-  @Listen('vegaLoaded', { target: 'window' })
+  @Listen('stencila-vega-loaded', { target: 'window' })
   public onVegaLoaded(e: CustomEvent<VegaLoadEvent>): void {
     if (
       !this.plotIsRendered &&

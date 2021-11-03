@@ -159,7 +159,8 @@ export class Editor {
   /**
    * Event emitted when the language of the editor is changed.
    */
-  @Event() setLanguage: EventEmitter<FileFormat>
+  @Event({ eventName: 'stencila-set-language' })
+  setLanguage: EventEmitter<FileFormat>
 
   private getLang = async (language: string) => {
     switch (language.toLowerCase()) {

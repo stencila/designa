@@ -48,10 +48,13 @@ export class ImagePlotlyComponent {
   @State() private plotIsRendered = false
 
   /** Custom event emitter to indicate that the loading of the Plotly.js script has finished */
-  @Event() public plotlyLoaded: EventEmitter
+  @Event({
+    eventName: 'stencila-plotly-loaded',
+  })
+  public plotlyLoaded: EventEmitter
 
   /** When detecting that the Plotly.js has loaded, render the data if it hasn’t been rendered already */
-  @Listen('plotlyLoaded', { target: 'window' })
+  @Listen('stencila-plotly-loaded', { target: 'window' })
   public onPlotlyLoaded(): void {
     if (!this.plotIsRendered) {
       this.renderPlot()

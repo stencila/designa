@@ -93,12 +93,12 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    * leaving only the results visible.
    */
   @Event({
-    eventName: 'setAllCodeVisibility',
+    eventName: 'stencila-set-all-code-visibility',
   })
   public setAllCodeVisibility: EventEmitter
 
-  @Listen('collapseAllCode', { target: 'window' })
-  @Listen('setAllCodeVisibility', { target: 'window' })
+  @Listen('stencila-collapse-all-code', { target: 'window' })
+  @Listen('stencila-set-all-code-visibility', { target: 'window' })
   onSetAllCodeVisibility(event: CodeVisibilityEvent): void {
     this.setCodeVisibility(event)
   }
@@ -139,7 +139,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     return node
   }
 
-  @Listen('document:patched', { target: 'window' })
+  @Listen('stencila-document-patched', { target: 'window' })
   onUpdateCodeChunk({ detail }: CustomEvent<StencilaNodeUpdateEvent>): void {
     if (detail.nodeId === this.el.id && isA('CodeChunk', detail.value)) {
       this.codeChunk = detail.value
@@ -155,11 +155,11 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    * Can be set to either show the editor and outputs side by side or stacked vertically.
    */
   @Event({
-    eventName: 'setEditorLayout',
+    eventName: 'stencila-set-editor-layout',
   })
   public setEditorLayout: EventEmitter
 
-  @Listen('setEditorLayout', { target: 'window' })
+  @Listen('stencila-set-editor-layout', { target: 'window' })
   onSetEditorLayout(event: { detail: { isStacked: boolean } }): void {
     this.setEditorLayoutHandler(event.detail.isStacked)
   }

@@ -88,13 +88,13 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     this.checkIfEmpty()
   }
 
-  @Listen('collapseAllCode', { target: 'window' })
-  @Listen('setAllCodeVisibility', { target: 'window' })
+  @Listen('stencila-collapse-all-code', { target: 'window' })
+  @Listen('stencila-set-all-code-visibility', { target: 'window' })
   onSetAllCodeVisibility(event: CodeVisibilityEvent): void {
     this.collapseAllListenHandler(event)
   }
 
-  @Listen('document:node:changed', { target: 'window' })
+  @Listen('stencila-node-changed', { target: 'window' })
   onUpdateCodeChunk({ detail }: CustomEvent<StencilaNodeUpdateEvent>): void {
     if (detail.nodeId === this.el.id && isA('CodeExpression', detail.value)) {
       this.codeExpression = detail.value
