@@ -128,10 +128,6 @@ export namespace Components {
           * Programming language of the CodeChunk
          */
         "programmingLanguage": string | undefined;
-        /**
-          * @deprecated Legacy method for defining the programming language of the CodeChunk Use `programmingLanguage` prop, or `programming-language` HTML attribute instead.
-         */
-        "programmingLanguageDataAttribute": string | undefined;
     }
     interface StencilaCodeError {
         /**
@@ -738,10 +734,6 @@ declare namespace LocalJSX {
           * Programming language of the CodeChunk
          */
         "programmingLanguage"?: string | undefined;
-        /**
-          * @deprecated Legacy method for defining the programming language of the CodeChunk Use `programmingLanguage` prop, or `programming-language` HTML attribute instead.
-         */
-        "programmingLanguageDataAttribute"?: string | undefined;
     }
     interface StencilaCodeError {
         /**
