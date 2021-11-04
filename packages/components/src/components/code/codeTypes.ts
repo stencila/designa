@@ -7,7 +7,7 @@ export type CodeVisibilityEvent = CustomEvent<{
 // Defines a set of methods and properties that all `Code` node based components
 // must implement to ensure a unified public API and interactions
 export abstract class CodeComponent<C extends CodeChunk | CodeExpression> {
-  abstract onSetAllCodeVisibility(event: CodeVisibilityEvent): void
+  abstract onAllCodeVisibilityChange(event: CodeVisibilityEvent): void
 
   executeHandler?: (code: C) => Promise<C>
   abstract execute: () => Promise<C>

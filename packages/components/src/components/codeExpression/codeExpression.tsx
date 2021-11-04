@@ -88,14 +88,15 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     this.checkIfEmpty()
   }
 
-  @Listen('stencila-collapse-all-code', { target: 'window' })
-  @Listen('stencila-set-all-code-visibility', { target: 'window' })
-  onSetAllCodeVisibility(event: CodeVisibilityEvent): void {
-    this.collapseAllListenHandler(event)
+  @Listen('stencila-code-visibility-change', { target: 'window' })
+  onAllCodeVisibilityChange(event: CodeVisibilityEvent): void {
+    this.setCodeVisibility(event)
   }
 
-  @Listen('stencila-node-changed', { target: 'window' })
-  onUpdateCodeChunk({ detail }: CustomEvent<StencilaNodeUpdateEvent>): void {
+  @Listen('stencila-document-patch', { target: 'window' })
+  onCodeExpressionPatch({
+    detail,
+  }: CustomEvent<StencilaNodeUpdateEvent>): void {
     if (detail.nodeId === this.el.id && isA('CodeExpression', detail.value)) {
       this.codeExpression = detail.value
     }
@@ -114,7 +115,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     )
   }
 
-  private collapseAllListenHandler = (e: CodeVisibilityEvent): void => {
+  private setCodeVisibility = (e: CodeVisibilityEvent): void => {
     this.isCodeVisible = e.detail.isVisible
   }
 
@@ -141,15 +142,6 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   private onExecuteHandler = async (): Promise<CodeExpression> => {
     this.executeCodeState = 'PENDING'
     const node = await this.getContents()
-
-    window.dispatchEvent(
-      new CustomEvent('document:node:execute', {
-        detail: {
-          nodeId: this.el.id,
-          value: node,
-        },
-      })
-    )
 
     if (this.executeHandler !== undefined) {
       const computed = await this.executeHandler(node)

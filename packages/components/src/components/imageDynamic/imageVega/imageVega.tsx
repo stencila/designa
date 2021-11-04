@@ -94,13 +94,13 @@ export class ImageVegaComponent {
 
   /** Custom event emitter to indicate that the loading of the Vega JS script has finished */
   @Event({
-    eventName: 'stencila-vega-loaded',
+    eventName: 'stencila-vega-load',
   })
-  public vegaLoaded: EventEmitter<VegaLoadEvent>
+  public vegaLoad: EventEmitter<VegaLoadEvent>
 
   /** When detecting that the Vega JS has loaded, render the data if it hasn’t been rendered already */
-  @Listen('stencila-vega-loaded', { target: 'window' })
-  public onVegaLoaded(e: CustomEvent<VegaLoadEvent>): void {
+  @Listen('stencila-vega-load', { target: 'window' })
+  public onVegaLoad(e: CustomEvent<VegaLoadEvent>): void {
     if (
       !this.plotIsRendered &&
       e.detail.library === this.vegaDependency.library
@@ -142,7 +142,7 @@ export class ImageVegaComponent {
         src: getVegaLibSrc(this.vegaDependency),
         onLoad: () => {
           isLoaded[this.vegaDependency.library] = true
-          this.vegaLoaded.emit({ library: this.vegaDependency.library })
+          this.vegaLoad.emit({ library: this.vegaDependency.library })
         },
       })
     }

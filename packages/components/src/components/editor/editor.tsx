@@ -159,8 +159,8 @@ export class Editor {
   /**
    * Event emitted when the language of the editor is changed.
    */
-  @Event({ eventName: 'stencila-set-language' })
-  setLanguage: EventEmitter<FileFormat>
+  @Event({ eventName: 'stencila-language-change' })
+  languageChange: EventEmitter<FileFormat>
 
   private getLang = async (language: string) => {
     switch (language.toLowerCase()) {
@@ -255,7 +255,7 @@ export class Editor {
   private onSelectLanguage = async (e: Event): Promise<void> => {
     const target = e.currentTarget as HTMLSelectElement
     const language = lookupFormat(target.value)
-    this.setLanguage.emit(language)
+    this.languageChange.emit(language)
     return this.setEditorSyntax(language.name)
   }
 

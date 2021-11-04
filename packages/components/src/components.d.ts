@@ -729,11 +729,11 @@ declare namespace LocalJSX {
         /**
           * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.
          */
-        "onStencila-set-all-code-visibility"?: (event: CustomEvent<any>) => void;
+        "onStencila-code-visibility-change"?: (event: CustomEvent<any>) => void;
         /**
           * Trigger a global DOM event to set the layout of all `CodeChunk` component. Can be set to either show the editor and outputs side by side or stacked vertically.
          */
-        "onStencila-set-editor-layout"?: (event: CustomEvent<any>) => void;
+        "onStencila-editor-layout-change"?: (event: CustomEvent<any>) => void;
         /**
           * Programming language of the CodeChunk
          */
@@ -830,7 +830,7 @@ declare namespace LocalJSX {
         /**
           * Event emitted when the language of the editor is changed.
          */
-        "onStencila-set-language"?: (event: CustomEvent<FileFormat>) => void;
+        "onStencila-language-change"?: (event: CustomEvent<FileFormat>) => void;
         /**
           * Disallow editing of the editor contents when set to `true`
          */
@@ -882,13 +882,13 @@ declare namespace LocalJSX {
         /**
           * Custom event emitter to indicate that the loading of the Plotly.js script has finished
          */
-        "onStencila-plotly-loaded"?: (event: CustomEvent<any>) => void;
+        "onStencila-plotly-load"?: (event: CustomEvent<any>) => void;
     }
     interface StencilaImageVega {
         /**
           * Custom event emitter to indicate that the loading of the Vega JS script has finished
          */
-        "onStencila-vega-loaded"?: (event: CustomEvent<VegaLoadEvent>) => void;
+        "onStencila-vega-load"?: (event: CustomEvent<VegaLoadEvent>) => void;
         /**
           * A JavaScript object containing options for embedding
           * @see https://github.com/vega/vega-embed#options
