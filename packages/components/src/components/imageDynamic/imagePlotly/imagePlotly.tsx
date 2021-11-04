@@ -48,11 +48,14 @@ export class ImagePlotlyComponent {
   @State() private plotIsRendered = false
 
   /** Custom event emitter to indicate that the loading of the Plotly.js script has finished */
-  @Event() public plotlyLoaded: EventEmitter
+  @Event({
+    eventName: 'stencila-plotly-load',
+  })
+  public plotlyLoad: EventEmitter
 
   /** When detecting that the Plotly.js has loaded, render the data if it hasn’t been rendered already */
-  @Listen('plotlyLoaded', { target: 'window' })
-  public onPlotlyLoaded(): void {
+  @Listen('stencila-plotly-load', { target: 'window' })
+  public onPlotlyLoad(): void {
     if (!this.plotIsRendered) {
       this.renderPlot()
     }
@@ -92,7 +95,7 @@ export class ImagePlotlyComponent {
     if (plotEl) {
       try {
         const content = plotEl.textContent
-        const contentParsed: Data[] | PlotlyObject = JSON.parse(content ?? '')
+        const contentParsed = JSON.parse(content ?? '') as Data[] | PlotlyObject
         return Array.isArray(contentParsed)
           ? { data: contentParsed }
           : contentParsed
@@ -112,7 +115,7 @@ export class ImagePlotlyComponent {
         src: plotlySrc,
         onLoad: () => {
           plotlyIsLoaded = true
-          this.plotlyLoaded.emit()
+          this.plotlyLoad.emit()
         },
       })
     }

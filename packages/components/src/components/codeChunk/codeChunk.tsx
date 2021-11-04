@@ -49,21 +49,10 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   codeChunk?: CodeChunk
 
   /**
-   * @deprecated
-   * Legacy method for defining the programming language of the CodeChunk
-   * Use `programmingLanguage` prop, or `programming-language` HTML attribute instead.
-   */
-  @Prop({
-    attribute: 'data-programmingLanguage',
-  })
-  public programmingLanguageDataAttribute: string | undefined = undefined
-
-  /**
    * Programming language of the CodeChunk
    */
   @Prop()
-  public programmingLanguage: string | undefined =
-    this.programmingLanguageDataAttribute
+  public programmingLanguage: string | undefined
 
   /**
    * Whether the code section is visible or not
@@ -93,13 +82,12 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    * leaving only the results visible.
    */
   @Event({
-    eventName: 'setAllCodeVisibility',
+    eventName: 'stencila-code-visibility-change',
   })
-  public setAllCodeVisibility: EventEmitter
+  public allCodeVisibilityChange: EventEmitter
 
-  @Listen('collapseAllCode', { target: 'window' })
-  @Listen('setAllCodeVisibility', { target: 'window' })
-  onSetAllCodeVisibility(event: CodeVisibilityEvent): void {
+  @Listen('stencila-code-visibility-change', { target: 'window' })
+  onAllCodeVisibilityChange(event: CodeVisibilityEvent): void {
     this.setCodeVisibility(event)
   }
 
@@ -113,20 +101,11 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   }
 
   private toggleAllCodeVisibility = (): void =>
-    this.setAllCodeVisibilityHandler(!this.isCodeVisibleState)
+    this.allCodeVisibilityChangeHandler(!this.isCodeVisibleState)
 
   private onExecuteHandler = async (): Promise<CodeChunk> => {
     this.executeCodeState = 'PENDING'
     const node = await this.getContents()
-
-    window.dispatchEvent(
-      new CustomEvent('document:execute', {
-        detail: {
-          nodeId: this.el.id,
-          value: node,
-        },
-      })
-    )
 
     if (this.executeHandler !== undefined) {
       const computed = await this.executeHandler(node)
@@ -139,14 +118,14 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     return node
   }
 
-  @Listen('document:patched', { target: 'window' })
-  onUpdateCodeChunk({ detail }: CustomEvent<StencilaNodeUpdateEvent>): void {
+  @Listen('stencila-document-patch', { target: 'window' })
+  onCodeChunkPatch({ detail }: CustomEvent<StencilaNodeUpdateEvent>): void {
     if (detail.nodeId === this.el.id && isA('CodeChunk', detail.value)) {
       this.codeChunk = detail.value
     }
   }
 
-  private setEditorLayoutHandler = (isStacked: boolean) => {
+  private editorLayoutChangeHandler = (isStacked: boolean) => {
     this.isStacked = isStacked
   }
 
@@ -155,21 +134,21 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    * Can be set to either show the editor and outputs side by side or stacked vertically.
    */
   @Event({
-    eventName: 'setEditorLayout',
+    eventName: 'stencila-editor-layout-change',
   })
-  public setEditorLayout: EventEmitter
+  public editorLayoutChange: EventEmitter
 
-  @Listen('setEditorLayout', { target: 'window' })
+  @Listen('stencila-editor-layout-change', { target: 'window' })
   onSetEditorLayout(event: { detail: { isStacked: boolean } }): void {
-    this.setEditorLayoutHandler(event.detail.isStacked)
+    this.editorLayoutChangeHandler(event.detail.isStacked)
   }
 
   private toggleEditorLayout = (e: MouseEvent) => {
     e.preventDefault()
     if (e.shiftKey) {
-      this.setEditorLayout.emit({ isStacked: !this.isStacked })
+      this.editorLayoutChange.emit({ isStacked: !this.isStacked })
     } else {
-      this.setEditorLayoutHandler(!this.isStacked)
+      this.editorLayoutChangeHandler(!this.isStacked)
     }
   }
 
@@ -220,8 +199,8 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   // @see https://github.com/typescript-eslint/typescript-eslint/blob/v3.7.0/packages/eslint-plugin/docs/rules/unbound-method.md
   private executeRef = () => this.execute()
 
-  private setAllCodeVisibilityHandler(isVisible: boolean) {
-    this.setAllCodeVisibility.emit({ isVisible })
+  private allCodeVisibilityChangeHandler(isVisible: boolean) {
+    this.allCodeVisibilityChange.emit({ isVisible })
   }
 
   private setCodeVisibility = (e: CodeVisibilityEvent): void => {

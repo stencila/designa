@@ -5,9 +5,9 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type    | Default     |
-| -------- | --------- | ----------- | ------- | ----------- |
-| `graph`  | --        |             | `Graph` | `undefined` |
+| Property | Attribute | Description                      | Type    | Default     |
+| -------- | --------- | -------------------------------- | ------- | ----------- |
+| `graph`  | --        | The project graph data to render | `Graph` | `undefined` |
 
 
 ----------------------------------------------

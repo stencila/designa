@@ -21,7 +21,9 @@ export class StencilaToast {
   private timeout: number
 
   /**
-   * If true, shows a "close" button to immediately dismiss the toast
+   * If true, shows a "close" button to immediately dismiss the toast.
+   * Note that this prop has no effect if `duration` is set to zero, in which case
+   * the toast will always show the "close" button.
    */
   @Prop() dismissable? = false
 
@@ -89,7 +91,7 @@ export class StencilaToast {
         !el.classList.contains('closeButton')
     )
 
-    buttons.map((el, idx) => {
+    buttons.forEach((el, idx) => {
       el.setAttribute('size', 'xsmall')
 
       if (idx === 0) {
@@ -116,7 +118,7 @@ export class StencilaToast {
       <Host
         type={this.type}
         position={this.position}
-        dismissable={this.dismissable || this.duration === 0}
+        dismissable={this.dismissable === true || this.duration === 0}
         onMouseEnter={this.pauseAutoDismiss}
         onMouseLeave={this.autoDismiss}
       >
@@ -135,7 +137,7 @@ export class StencilaToast {
           <slot name="actions"></slot>
         </div>
 
-        {(this.dismissable || this.duration === 0) && (
+        {(this.dismissable === true || this.duration === 0) && (
           <stencila-button
             color="neutral"
             iconOnly={true}

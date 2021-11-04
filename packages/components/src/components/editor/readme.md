@@ -23,9 +23,9 @@
 
 ## Events
 
-| Event         | Description                                               | Type                                                                     |
-| ------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `setLanguage` | Event emitted when the language of the editor is changed. | `CustomEvent<{ name: string; ext: string \| null; aliases: string[]; }>` |
+| Event                      | Description                                               | Type                                                                     |
+| -------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `stencila-language-change` | Event emitted when the language of the editor is changed. | `CustomEvent<{ name: string; ext: string \| null; aliases: string[]; }>` |
 
 
 ## Methods

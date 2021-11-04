@@ -16,7 +16,7 @@ const isColorVariable = (color: string): color is Colors => {
   }
 }
 
-const colorValueRegex = new RegExp(/\d00/)
+const colorValueRegex = /\d00/
 
 const startsWithColorVariable = (color: string): boolean => {
   const [name, value] = color.split('-')

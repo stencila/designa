@@ -4,17 +4,15 @@ import { Component, h, Prop } from '@stencil/core'
   tag: 'stencila-tab',
   styleUrls: {
     default: 'tab.css',
-    material: 'tab.material.css'
+    material: 'tab.material.css',
   },
-  scoped: true
+  scoped: true,
 })
 export class Tab {
-  public static readonly elementName = 'stencila-tab'
-
   /**
    * The link the tab should navigate to
    */
-  @Prop() public href: string = '#'
+  @Prop() public href = '#'
 
   /**
    * The displayed text of the Tab
@@ -24,7 +22,7 @@ export class Tab {
   /**
    * Indicates whether the current tab is "selected"
    */
-  @Prop({ attribute: 'selected' }) public isSelected: boolean = false
+  @Prop({ attribute: 'selected' }) public isSelected = false
 
   public render() {
     return (

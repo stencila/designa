@@ -78,7 +78,7 @@ export namespace Components {
         "minimal": boolean;
         /**
           * Relationship of the link
-          * @see https ://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
+          * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
          */
         "rel"?: string;
         /**
@@ -121,17 +121,13 @@ export namespace Components {
         "isCodeVisible": boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
-          * @see https ://codemirror.net/6/docs/ref/#keymap
+          * @see https://codemirror.net/6/docs/ref/#keymap
          */
         "keymap": Keymap[];
         /**
           * Programming language of the CodeChunk
          */
         "programmingLanguage": string | undefined;
-        /**
-          * @deprecated Legacy method for defining the programming language of the CodeChunk Use `programmingLanguage` prop, or `programming-language` HTML attribute instead.
-         */
-        "programmingLanguageDataAttribute": string | undefined;
     }
     interface StencilaCodeError {
         /**
@@ -222,7 +218,7 @@ export namespace Components {
         "getState": () => Promise<EditorStateJSON>;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
-          * @see https ://codemirror.net/6/docs/ref/#keymap
+          * @see https://codemirror.net/6/docs/ref/#keymap
          */
         "keymap": Keymap[];
         /**
@@ -301,12 +297,12 @@ export namespace Components {
     interface StencilaImageVega {
         /**
           * A JavaScript object containing options for embedding
-          * @see https ://github.com/vega/vega-embed#options
+          * @see https://github.com/vega/vega-embed#options
          */
         "options"?: Record<string, unknown>;
         /**
           * The Vega or Vega-Lite spec
-          * @see https ://vega.github.io/vega/docs/specification/
+          * @see https://vega.github.io/vega/docs/specification/
          */
         "spec"?: VisualizationSpec | string;
     }
@@ -369,6 +365,10 @@ export namespace Components {
         "isOpen": boolean;
     }
     interface StencilaMenuItem {
+        /**
+          * Name of the icon to show before the label
+          * @see Icon component for possible values
+         */
         "icon": IconNames | undefined;
     }
     interface StencilaNodeList {
@@ -378,6 +378,9 @@ export namespace Components {
         "nodes": Node[] | undefined;
     }
     interface StencilaProjectGraph {
+        /**
+          * The project graph data to render
+         */
         "graph": Graph;
     }
     interface StencilaTab {
@@ -402,7 +405,7 @@ export namespace Components {
     }
     interface StencilaToast {
         /**
-          * If true, shows a "close" button to immediately dismiss the toast
+          * If true, shows a "close" button to immediately dismiss the toast. Note that this prop has no effect if `duration` is set to zero, in which case the toast will always show the "close" button.
          */
         "dismissable"?: boolean | undefined;
         /**
@@ -681,7 +684,7 @@ declare namespace LocalJSX {
         "minimal"?: boolean;
         /**
           * Relationship of the link
-          * @see https ://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
+          * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#rel Only applied if `href` prop is also set.
          */
         "rel"?: string;
         /**
@@ -716,25 +719,21 @@ declare namespace LocalJSX {
         "isCodeVisible"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
-          * @see https ://codemirror.net/6/docs/ref/#keymap
+          * @see https://codemirror.net/6/docs/ref/#keymap
          */
         "keymap"?: Keymap[];
         /**
           * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.
          */
-        "onSetAllCodeVisibility"?: (event: CustomEvent<any>) => void;
+        "onStencila-code-visibility-change"?: (event: CustomEvent<any>) => void;
         /**
           * Trigger a global DOM event to set the layout of all `CodeChunk` component. Can be set to either show the editor and outputs side by side or stacked vertically.
          */
-        "onSetEditorLayout"?: (event: CustomEvent<any>) => void;
+        "onStencila-editor-layout-change"?: (event: CustomEvent<any>) => void;
         /**
           * Programming language of the CodeChunk
          */
         "programmingLanguage"?: string | undefined;
-        /**
-          * @deprecated Legacy method for defining the programming language of the CodeChunk Use `programmingLanguage` prop, or `programming-language` HTML attribute instead.
-         */
-        "programmingLanguageDataAttribute"?: string | undefined;
     }
     interface StencilaCodeError {
         /**
@@ -805,7 +804,7 @@ declare namespace LocalJSX {
         "foldGutter"?: boolean;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
-          * @see https ://codemirror.net/6/docs/ref/#keymap
+          * @see https://codemirror.net/6/docs/ref/#keymap
          */
         "keymap"?: Keymap[];
         /**
@@ -823,7 +822,7 @@ declare namespace LocalJSX {
         /**
           * Event emitted when the language of the editor is changed.
          */
-        "onSetLanguage"?: (event: CustomEvent<FileFormat>) => void;
+        "onStencila-language-change"?: (event: CustomEvent<FileFormat>) => void;
         /**
           * Disallow editing of the editor contents when set to `true`
          */
@@ -875,21 +874,21 @@ declare namespace LocalJSX {
         /**
           * Custom event emitter to indicate that the loading of the Plotly.js script has finished
          */
-        "onPlotlyLoaded"?: (event: CustomEvent<any>) => void;
+        "onStencila-plotly-load"?: (event: CustomEvent<any>) => void;
     }
     interface StencilaImageVega {
         /**
           * Custom event emitter to indicate that the loading of the Vega JS script has finished
          */
-        "onVegaLoaded"?: (event: CustomEvent<VegaLoadEvent>) => void;
+        "onStencila-vega-load"?: (event: CustomEvent<VegaLoadEvent>) => void;
         /**
           * A JavaScript object containing options for embedding
-          * @see https ://github.com/vega/vega-embed#options
+          * @see https://github.com/vega/vega-embed#options
          */
         "options"?: Record<string, unknown>;
         /**
           * The Vega or Vega-Lite spec
-          * @see https ://vega.github.io/vega/docs/specification/
+          * @see https://vega.github.io/vega/docs/specification/
          */
         "spec"?: VisualizationSpec | string;
     }
@@ -952,6 +951,10 @@ declare namespace LocalJSX {
         "isOpen"?: boolean;
     }
     interface StencilaMenuItem {
+        /**
+          * Name of the icon to show before the label
+          * @see Icon component for possible values
+         */
         "icon"?: IconNames | undefined;
     }
     interface StencilaNodeList {
@@ -961,6 +964,9 @@ declare namespace LocalJSX {
         "nodes"?: Node[] | undefined;
     }
     interface StencilaProjectGraph {
+        /**
+          * The project graph data to render
+         */
         "graph"?: Graph;
     }
     interface StencilaTab {
@@ -985,7 +991,7 @@ declare namespace LocalJSX {
     }
     interface StencilaToast {
         /**
-          * If true, shows a "close" button to immediately dismiss the toast
+          * If true, shows a "close" button to immediately dismiss the toast. Note that this prop has no effect if `duration` is set to zero, in which case the toast will always show the "close" button.
          */
         "dismissable"?: boolean | undefined;
         /**

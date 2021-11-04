@@ -98,6 +98,7 @@ export class Input {
         <input
           {..._type}
           {..._label}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus={this.autoFocus}
           inputmode={this.inputmode}
           name={this.name}

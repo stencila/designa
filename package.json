@@ -17,7 +17,7 @@
     "npm": ">=6.10.0"
   },
   "scripts": {
-    "prepare": "lerna bootstrap",
+    "prepare": "lerna bootstrap && husky install",
     "build": "lerna run build --stream",
     "build:brand": "lerna run build --stream --scope '@stencila/brand'",
     "build:components": "lerna run build --stream --scope '@stencila/components'",
@@ -34,7 +34,8 @@
   },
   "devDependencies": {
     "@babel/core": "7.16.0",
-    "@stencila/dev-config": "2.0.27",
+    "@stencila/dev-config": "3.0.1",
+    "@stencila/eslint-config": "3.0.0",
     "@stencila/renovate-config": "0.4.2",
     "@storybook/addon-a11y": "6.3.12",
     "@storybook/addon-backgrounds": "6.3.12",
@@ -51,11 +52,9 @@
     "core-js": "3.19.0",
     "cssnano": "5.0.9",
     "cssnano-preset-advanced": "5.1.5",
-    "eslint": "7.32.0",
-    "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-react": "7.26.1",
     "filewatcher-webpack-plugin": "1.2.0",
     "globby": "12.0.2",
+    "husky": "7.0.4",
     "lerna": "4.0.0",
     "lit-html": "2.0.1",
     "postcss": "8.3.11",
@@ -92,12 +91,6 @@
   },
   "eslintConfig": {
     "extends": "@stencila/eslint-config"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   },
   "prettier": "@stencila/dev-config/prettier-config.json",
   "release": {

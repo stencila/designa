@@ -11,12 +11,6 @@ import { IconNames } from '../icon/iconNames'
   scoped: true,
 })
 export class Button {
-  public static readonly elementName = 'stencila-button'
-
-  public static slots = {
-    default: undefined,
-  }
-
   /**
    * If an `href` property is provided, button will be rendered using an `<a>` anchor tag.
    */

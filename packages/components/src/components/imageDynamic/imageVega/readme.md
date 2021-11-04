@@ -15,9 +15,9 @@
 
 ## Events
 
-| Event        | Description                                                                          | Type                                     |
-| ------------ | ------------------------------------------------------------------------------------ | ---------------------------------------- |
-| `vegaLoaded` | Custom event emitter to indicate that the loading of the Vega JS script has finished | `CustomEvent<{ library: VegaLibType; }>` |
+| Event                | Description                                                                          | Type                                     |
+| -------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------- |
+| `stencila-vega-load` | Custom event emitter to indicate that the loading of the Vega JS script has finished | `CustomEvent<{ library: VegaLibType; }>` |
 
 
 ## Dependencies

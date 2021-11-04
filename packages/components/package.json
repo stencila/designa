@@ -26,12 +26,15 @@
     "test": "stencil test --spec --e2e",
     "test:watch": "stencil test --spec --e2e --watchAll",
     "lint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
+    "lint:fix": "eslint 'src/**/*.{ts,tsx,js,jsx}' --fix",
+    "format": "prettier --write './src/**/*.{css,js,json,md,ts,yaml}'",
     "prepublishOnly": "node ./scripts/prepare.mjs && npm run build"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "4.0.3",
     "@stencil/core": "2.10.0",
     "@stencil/postcss": "2.1.0",
+    "@stencila/eslint-config-stencil": "2.0.2",
     "@stencila/schema": "1.12.0",
     "@types/d3": "7.1.0",
     "@types/d3-drag": "3.0.1",
@@ -106,5 +109,23 @@
     "defaults",
     "not IE 11",
     "not IE_Mob 11"
-  ]
+  ],
+  "eslintConfig": {
+    "root": true,
+    "parserOptions": {
+      "project": "./tsconfig.json",
+      "tsconfigRootDir": "."
+    },
+    "extends": "@stencila/eslint-config-stencil",
+    "rules": {
+      "array-callback-return": "off",
+      "@stencil/element-type": "off",
+      "@typescript-eslint/no-unsafe-return": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "jsx-a11y/no-static-element-interactions": "warn",
+      "jsx-a11y/click-events-have-key-events": "warn",
+      "jsx-a11y/no-onchange": "off"
+    }
+  }
 }

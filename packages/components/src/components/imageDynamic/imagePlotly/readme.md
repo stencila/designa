@@ -16,9 +16,9 @@
 
 ## Events
 
-| Event          | Description                                                                            | Type               |
-| -------------- | -------------------------------------------------------------------------------------- | ------------------ |
-| `plotlyLoaded` | Custom event emitter to indicate that the loading of the Plotly.js script has finished | `CustomEvent<any>` |
+| Event                  | Description                                                                            | Type               |
+| ---------------------- | -------------------------------------------------------------------------------------- | ------------------ |
+| `stencila-plotly-load` | Custom event emitter to indicate that the loading of the Plotly.js script has finished | `CustomEvent<any>` |
 
 
 ## Dependencies

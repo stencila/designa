@@ -18,8 +18,6 @@ import {
   scoped: true,
 })
 export class Tooltip implements ComponentInterface {
-  protected static readonly elementName = 'stencila-tooltip'
-
   @Element() el: HTMLStencilaTooltipElement
 
   /**
