@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.14](https://github.com/stencila/style/compare/@stencila/brand@0.7.13...@stencila/brand@0.7.14) (2021-11-10)
+
+**Note:** Version bump only for package @stencila/brand
+
 ## [0.7.13](https://github.com/stencila/style/compare/@stencila/brand@0.7.12...@stencila/brand@0.7.13) (2021-11-04)
 
 **Note:** Version bump only for package @stencila/brand
