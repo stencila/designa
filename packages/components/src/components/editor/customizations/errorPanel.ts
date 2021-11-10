@@ -2,9 +2,7 @@ import { Panel, showPanel } from '@codemirror/panel'
 import { Extension, StateEffect } from '@codemirror/state'
 import { CodeError } from '@stencila/schema'
 
-export const updateErrors = StateEffect.define<
-  (CodeError | string)[] | undefined
->()
+export const updateErrors = StateEffect.define<NodeListOf<ChildNode>>()
 
 const renderErrors = (errors: (CodeError | string)[] = []) =>
   errors
@@ -33,7 +31,8 @@ const errorPanel = (): Panel => {
       for (const transaction of update.transactions) {
         for (const effect of transaction.effects) {
           if (effect.is(updateErrors)) {
-            dom.innerHTML = renderErrors(effect.value)
+            // @ts-ignore
+            dom.replaceChildren(...effect.value)
           }
         }
       }

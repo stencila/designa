@@ -15,6 +15,13 @@ import { StencilaNodeUpdateEvent } from '../../globals/events'
 import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
 import { Keymap } from '../editor/editor'
 
+/**
+ * @slot text - The source code of the `CodeChunk`. Corresponds to the `text` field in the Stencila `CodeChunk` Schema.
+ * @slot outputs - The resulting output when evaluating the CodeChunk. Corresponds to the `outputs` field in the Stencila `CodeChunk` Schema.
+ * @slot errors - List of any errors encountered when compiling (e.g. syntax errors) or executing the CodeChunk.
+ * @slot label - `label` element label of the `CodeChunk`. Corresponds to the `label` field in the Stencila `CodeChunk` Schema.
+ * @slot caption - `figcaption` content of the `CodeChunk`. Corresponds to the `caption` field in the Stencila `CodeChunk` Schema.
+ */
 @Component({
   tag: 'stencila-code-chunk',
   styleUrls: {
@@ -27,6 +34,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   private static readonly slots = {
     text: 'text',
     outputs: 'outputs',
+    errors: 'errors',
     caption: 'caption',
     label: 'label',
   }
@@ -109,8 +117,8 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
 
     if (this.executeHandler !== undefined) {
       const computed = await this.executeHandler(node)
-      this.executeCodeState = 'RESOLVED'
       this.codeChunk = computed
+      this.executeCodeState = 'RESOLVED'
       return computed
     }
 
@@ -276,19 +284,20 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
                 executeHandler={this.onExecuteHandler}
                 keymap={this.keymap}
                 readOnly={this.executeHandler === undefined}
-                errors={this.codeChunk?.errors}
               >
                 <slot name={CodeChunkComponent.slots.text} />
+                <slot name={CodeChunkComponent.slots.errors} />
               </stencila-editor>
             </div>
 
-            <stencila-node-list nodes={this.codeChunk?.outputs}>
+            <stencila-node-list>
               <slot name={CodeChunkComponent.slots.outputs} />
             </stencila-node-list>
           </div>
 
+          <slot name={CodeChunkComponent.slots.label} />
+
           <figcaption>
-            <slot name={CodeChunkComponent.slots.label} />
             <slot name={CodeChunkComponent.slots.caption} />
           </figcaption>
         </figure>

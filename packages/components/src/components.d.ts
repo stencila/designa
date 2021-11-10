@@ -12,7 +12,7 @@ import { Keymap } from "./components/editor/editor";
 import { FileFormat, FileFormatMap } from "./components/editor/languageUtils";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
 import { EditorUpdateHandlerCb } from "./components/editor/customizations/onUpdateHandlerExtension";
-import { EditorView } from "@codemirror/view";
+import { EditorView, ViewUpdate } from "@codemirror/view";
 import { Config, Data, Layout } from "plotly.js";
 import { VisualizationSpec } from "vega-embed";
 import { VegaLoadEvent } from "./components/imageDynamic/imageVega/imageVegaUtils";
@@ -192,10 +192,6 @@ export namespace Components {
           * Text contents of the editor
          */
         "contents"?: string;
-        /**
-          * List of errors to display at the bottom of the code editor section. If the error is a `string`, then it will be rendered as a warning.
-         */
-        "errors"?: CodeError[] | string[];
         /**
           * Function to be evaluated over the contents of the editor.
          */
@@ -791,10 +787,6 @@ declare namespace LocalJSX {
          */
         "contents"?: string;
         /**
-          * List of errors to display at the bottom of the code editor section. If the error is a `string`, then it will be rendered as a warning.
-         */
-        "errors"?: CodeError[] | string[];
-        /**
           * Function to be evaluated over the contents of the editor.
          */
         "executeHandler"?: (contents: EditorContents) => Promise<unknown>;
@@ -819,6 +811,10 @@ declare namespace LocalJSX {
           * Control line wrapping of text inside the editor
          */
         "lineWrapping"?: boolean;
+        /**
+          * Event emitted when the content of the editor is changed.
+         */
+        "onStencila-content-change"?: (event: CustomEvent<ViewUpdate>) => void;
         /**
           * Event emitted when the language of the editor is changed.
          */

@@ -5,26 +5,26 @@
 
 ## Properties
 
-| Property               | Attribute         | Description                                                                                                                            | Type                                                             | Default                                   |
-| ---------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------- |
-| `activeLanguage`       | `active-language` | Programming language of the Editor                                                                                                     | `string`                                                         | `this.languageCapabilities.R?.name ?? ''` |
-| `autofocus`            | `autofocus`       | Autofocus the editor on page load                                                                                                      | `boolean`                                                        | `false`                                   |
-| `contentChangeHandler` | --                | Callback function to invoke whenever the editor contents are updated.                                                                  | `((updateEvent?: ViewUpdate \| undefined) => void) \| undefined` | `undefined`                               |
-| `contents`             | `contents`        | Text contents of the editor                                                                                                            | `string \| undefined`                                            | `undefined`                               |
-| `errors`               | --                | List of errors to display at the bottom of the code editor section. If the error is a `string`, then it will be rendered as a warning. | `CodeError[] \| string[] \| undefined`                           | `undefined`                               |
-| `executeHandler`       | --                | Function to be evaluated over the contents of the editor.                                                                              | `((contents: EditorContents) => Promise<unknown>) \| undefined`  | `undefined`                               |
-| `foldGutter`           | `fold-gutter`     | Enables ability to fold sections of code if the syntax package supports it                                                             | `boolean`                                                        | `true`                                    |
-| `keymap`               | --                | Custom keyboard shortcuts to pass along to CodeMirror                                                                                  | `KeyBinding[]`                                                   | `[]`                                      |
-| `languageCapabilities` | --                | List of all supported programming languages                                                                                            | `{ [x: string]: FileFormat; }`                                   | `fileFormatMap`                           |
-| `lineNumbers`          | `line-numbers`    | Determines the visibility of line numbers                                                                                              | `boolean`                                                        | `true`                                    |
-| `lineWrapping`         | `line-wrapping`   | Control line wrapping of text inside the editor                                                                                        | `boolean`                                                        | `false`                                   |
-| `readOnly`             | `read-only`       | Disallow editing of the editor contents when set to `true`                                                                             | `boolean`                                                        | `false`                                   |
+| Property               | Attribute         | Description                                                                | Type                                                             | Default                                   |
+| ---------------------- | ----------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------- |
+| `activeLanguage`       | `active-language` | Programming language of the Editor                                         | `string`                                                         | `this.languageCapabilities.R?.name ?? ''` |
+| `autofocus`            | `autofocus`       | Autofocus the editor on page load                                          | `boolean`                                                        | `false`                                   |
+| `contentChangeHandler` | --                | Callback function to invoke whenever the editor contents are updated.      | `((updateEvent?: ViewUpdate \| undefined) => void) \| undefined` | `undefined`                               |
+| `contents`             | `contents`        | Text contents of the editor                                                | `string \| undefined`                                            | `undefined`                               |
+| `executeHandler`       | --                | Function to be evaluated over the contents of the editor.                  | `((contents: EditorContents) => Promise<unknown>) \| undefined`  | `undefined`                               |
+| `foldGutter`           | `fold-gutter`     | Enables ability to fold sections of code if the syntax package supports it | `boolean`                                                        | `true`                                    |
+| `keymap`               | --                | Custom keyboard shortcuts to pass along to CodeMirror                      | `KeyBinding[]`                                                   | `[]`                                      |
+| `languageCapabilities` | --                | List of all supported programming languages                                | `{ [x: string]: FileFormat; }`                                   | `fileFormatMap`                           |
+| `lineNumbers`          | `line-numbers`    | Determines the visibility of line numbers                                  | `boolean`                                                        | `true`                                    |
+| `lineWrapping`         | `line-wrapping`   | Control line wrapping of text inside the editor                            | `boolean`                                                        | `false`                                   |
+| `readOnly`             | `read-only`       | Disallow editing of the editor contents when set to `true`                 | `boolean`                                                        | `false`                                   |
 
 
 ## Events
 
 | Event                      | Description                                               | Type                                                                     |
 | -------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `stencila-content-change`  | Event emitted when the content of the editor is changed.  | `CustomEvent<ViewUpdate>`                                                |
 | `stencila-language-change` | Event emitted when the language of the editor is changed. | `CustomEvent<{ name: string; ext: string \| null; aliases: string[]; }>` |
 
 
@@ -91,6 +91,14 @@ The string will be used as the initial contents of the editor.
 Type: `Promise<void>`
 
 
+
+
+## Slots
+
+| Slot       | Description                                                               |
+| ---------- | ------------------------------------------------------------------------- |
+| `"errors"` | List of any `stencila-code-error` elements to render in the Errors panel. |
+| `"text"`   | The contents of the editor.                                               |
 
 
 ## CSS Custom Properties

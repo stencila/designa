@@ -26,6 +26,7 @@ import {
   highlightSpecialChars,
   KeyBinding as KeymapI,
   keymap,
+  ViewUpdate,
 } from '@codemirror/view'
 import {
   Component,
@@ -38,7 +39,6 @@ import {
   Prop,
   Watch,
 } from '@stencil/core'
-import { CodeError } from '@stencila/schema'
 import { getSlotByName } from '../utils/slotSelectors'
 import { LanguagePicker } from './components/languageSelect'
 import { codeErrors, updateErrors } from './customizations/errorPanel'
@@ -64,6 +64,7 @@ type EditorStateJSON = Record<string, unknown>
 
 const slots = {
   text: 'text',
+  errors: 'errors',
 }
 
 const cssClasses = {
@@ -82,6 +83,10 @@ type EditorConfig = {
   lineWrappingEnabled?: boolean
 }
 
+/**
+ * @slot text - The contents of the editor.
+ * @slot errors - List of any `stencila-code-error` elements to render in the Errors panel.
+ */
 @Component({
   tag: 'stencila-editor',
   styleUrls: {
@@ -94,10 +99,14 @@ export class Editor {
   @Element()
   private el: HTMLStencilaEditorElement
 
+  private textSlot: HTMLDivElement | undefined
+  private errorsSlot: HTMLDivElement | undefined
+
   private editorRef: EditorView | undefined
   private languagePickerRef: HTMLSelectElement | undefined
 
   private isReady = false
+  private isUpdating = false
 
   /**
    * Text contents of the editor
@@ -161,6 +170,12 @@ export class Editor {
    */
   @Event({ eventName: 'stencila-language-change' })
   languageChange: EventEmitter<FileFormat>
+
+  /**
+   * Event emitted when the content of the editor is changed.
+   */
+  @Event({ eventName: 'stencila-content-change' })
+  contentChange: EventEmitter<ViewUpdate>
 
   private getLang = async (language: string) => {
     switch (language.toLowerCase()) {
@@ -369,19 +384,16 @@ export class Editor {
   @Prop()
   public keymap: Keymap[] = []
 
-  /**
-   * List of errors to display at the bottom of the code editor section.
-   * If the error is a `string`, then it will be rendered as a warning.
-   */
-  @Prop()
-  public errors?: CodeError[] | string[]
-
-  @Watch('errors')
-  errorsChanged(nextErrors: (CodeError | string)[]): void {
-    this.editorRef?.dispatch({
-      effects: updateErrors.of(nextErrors),
-    })
+  private setErrors = () => {
+    const nextErrors = this.errorsSlot?.childNodes
+    if (nextErrors) {
+      this.editorRef?.dispatch({
+        effects: updateErrors.of(nextErrors),
+      })
+    }
   }
+
+  private errorsSlotObserver = new MutationObserver(this.setErrors)
 
   private getCodeMirrorConfig = async (config: EditorConfig = {}) => {
     const {
@@ -435,9 +447,12 @@ export class Editor {
       ]),
       this.readOnlyConf.of(EditorView.editable.of(!this.readOnly)),
       codeErrors(),
-      this.contentChangeHandler
-        ? updateListenerExtension(this.contentChangeHandler)
-        : [],
+      updateListenerExtension((e) => {
+        this.contentChangeHandler?.(e)
+        if (!this.isUpdating) {
+          this.contentChange.emit(e)
+        }
+      }),
     ]
 
     return extensions
@@ -480,6 +495,8 @@ export class Editor {
   }
 
   private setContentsHandler = (contents: string) => {
+    this.isUpdating = true
+
     const docState = this.editorRef?.state
     const transaction =
       docState?.update({
@@ -488,10 +505,11 @@ export class Editor {
           to: docState.doc.length,
           insert: contents,
         },
-        scrollIntoView: true,
       }) ?? {}
 
     this.editorRef?.dispatch(transaction)
+
+    this.isUpdating = false
   }
 
   /**
@@ -502,6 +520,11 @@ export class Editor {
     this.setContentsHandler(contents)
     return Promise.resolve(contents)
   }
+
+  private textSlotObserver = new MutationObserver(() => {
+    const updatedText = this.textSlot?.textContent ?? ''
+    this.setContentsHandler(updatedText)
+  })
 
   /**
    * Retrieve a JSON representation of the the internal editor state.
@@ -612,6 +635,19 @@ export class Editor {
     if (this.autofocus) {
       this.focus()
     }
+
+    if (this.textSlot) {
+      this.textSlotObserver.observe(this.textSlot, {
+        childList: true,
+      })
+    }
+
+    if (this.errorsSlot) {
+      this.setErrors()
+      this.errorsSlotObserver.observe(this.errorsSlot, {
+        childList: true,
+      })
+    }
   }
 
   protected disconnectedCallback(): void {
@@ -628,9 +664,13 @@ export class Editor {
             onKeyDown={this.stopEventPropagation}
             onClick={this.focus}
           >
-            <div class="hidden">
+            <div class="hidden" ref={(el) => (this.textSlot = el)}>
               <slot name={slots.text} />
             </div>
+            <div class="hidden" ref={(el) => (this.errorsSlot = el)}>
+              <slot name={slots.errors} />
+            </div>
+
             <div id={cssIds.editorTarget} />
           </div>
 
