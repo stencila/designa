@@ -178,22 +178,18 @@ export class Editor {
   contentChange: EventEmitter<ViewUpdate>
 
   private getLang = async (language: string) => {
-    switch (language.toLowerCase()) {
+    switch (lookupFormat(language).name.toLowerCase()) {
       case 'r': {
         const { StreamLanguage } = await import('@codemirror/stream-parser')
         const { r } = await import('@codemirror/legacy-modes/mode/r')
         return StreamLanguage.define(r)
       }
-      case 'bash':
-      case 'shell':
-      case 'sh': {
+      case 'bash': {
         const { StreamLanguage } = await import('@codemirror/stream-parser')
         const { shell } = await import('@codemirror/legacy-modes/mode/shell')
         return StreamLanguage.define(shell)
       }
-      case 'latex':
-      case 'stex':
-      case 'tex': {
+      case 'latex': {
         const { StreamLanguage } = await import('@codemirror/stream-parser')
         const { stexMath } = await import('@codemirror/legacy-modes/mode/stex')
         return StreamLanguage.define(stexMath)
@@ -235,6 +231,7 @@ export class Editor {
         const { python } = await import('@codemirror/lang-python')
         return python()
       }
+      case 'r':
       case 'rmd': {
         const { markdown } = await import('@codemirror/lang-markdown')
         const { StreamLanguage } = await import('@codemirror/stream-parser')
@@ -639,6 +636,8 @@ export class Editor {
     if (this.textSlot) {
       this.textSlotObserver.observe(this.textSlot, {
         childList: true,
+        characterData: true,
+        subtree: true,
       })
     }
 

@@ -87,10 +87,6 @@ graph TD;
   stencila-button --> stencila-tooltip
   stencila-tooltip --> stencila-tooltip-element
   stencila-editor --> stencila-icon
-  stencila-node-list --> stencila-data-table
-  stencila-node-list --> stencila-image-plotly
-  stencila-node-list --> stencila-image-object
-  stencila-node-list --> stencila-image-vega
   style stencila-code-chunk fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -1,13 +1,10 @@
 import { Component, Element, h, Host, Prop, State } from '@stencil/core'
-import { isA, isIn, isPrimitive, Node } from '@stencila/schema'
-import { isEmpty } from 'fp-ts/lib/Array'
-import { preferredImageObjectComponent } from '../imageObject/imageObjectUtils'
+import { Node } from '@stencila/schema'
+import { getSlotByName } from '../utils/slotSelectors'
 
-const slots = {
-  nodes: 'outputs',
-  errors: 'errors',
-}
-
+/**
+ * @slot default - A list or collection of elements to render. If empty, a message stating "No output to show" will be rendered instead.
+ */
 @Component({
   tag: 'stencila-node-list',
   styleUrls: {
@@ -19,34 +16,20 @@ const slots = {
 export class OutputsList {
   @Element() private el: HTMLStencilaNodeListElement
 
+  private outputSlot: Element | undefined
+
   /**
    * Array of nodes to render.
    */
   @Prop() nodes: Node[] | undefined = undefined
 
-  @State() isEmpty =
-    this.nodes === undefined ||
-    (this.nodes !== undefined && isEmpty(this.nodes))
-
   private checkIfEmpty = (): boolean => {
-    let empty: boolean
-
-    /**
-     * If the `nodes` prop has been passed in, we can ignore the `<slotted>` content,
-     * and use the props as the most up to date output content.
-     */
-    if (this.nodes !== undefined) {
-      empty = isEmpty(this.nodes)
-      this.isEmpty = empty
-      return empty
-    }
-
     /**
      * If the `outputs` slot doesn't exist, or contains no content, the output is empty.
      */
-    empty =
-      this.el.children.length === 0 ||
-      Array.from(this.el.children ?? []).reduce(
+    const empty: boolean =
+      this.outputSlot?.children.length === 0 ||
+      Array.from(this.outputSlot?.children ?? []).reduce(
         (text: string, el) => text + el.innerHTML.trim(),
         ''
       ) === ''
@@ -55,61 +38,37 @@ export class OutputsList {
     return empty
   }
 
+  @State() isEmpty = true
+
+  private outputSlotObserver = new MutationObserver(this.checkIfEmpty)
+
   private emptyOutputMessage = 'No output to show'
 
   componentWillLoad(): void {
+    this.outputSlot = getSlotByName(this.el)('outputs')
     this.checkIfEmpty()
   }
 
-  componentWillUpdate(): void {
-    this.checkIfEmpty()
-  }
-
-  private renderNodes = (nodes?: Node[]) => {
-    return nodes?.map((node) => this.renderNode(node))
-  }
-
-  private renderNode = (node: Node): string | HTMLElement => {
-    if (isPrimitive(node)) {
-      const text =
-        typeof node === 'string' || typeof node === 'number'
-          ? node
-          : JSON.stringify(node)
-
-      return (
-        <pre>
-          <output>{text}</output>
-        </pre>
-      )
-    } else if (isIn('CodeTypes', node)) {
-      return (
-        <pre>
-          <output>{node.text}</output>
-        </pre>
-      )
-    } else if (isA('ImageObject', node)) {
-      return preferredImageObjectComponent(node)
-    } else if (isA('Datatable', node)) {
-      return <stencila-data-table table={node}></stencila-data-table>
+  componentDidLoad(): void {
+    if (this.outputSlot) {
+      this.outputSlotObserver.observe(this.outputSlot, {
+        subtree: true,
+        childList: true,
+        characterData: true,
+      })
     }
-
-    return JSON.stringify(node)
   }
 
   public render() {
     return (
       <Host>
-        <div class={{ hidden: this.nodes !== undefined, slot: true }}>
-          <slot name={slots.nodes} />
-        </div>
-
         {this.isEmpty && (
           <em class="emptyContentMessage">{this.emptyOutputMessage}</em>
         )}
 
-        {!this.isEmpty && <figure>{this.renderNodes(this.nodes)}</figure>}
-
-        <slot />
+        <div ref={(el) => (this.outputSlot = el)}>
+          <slot />
+        </div>
       </Host>
     )
   }

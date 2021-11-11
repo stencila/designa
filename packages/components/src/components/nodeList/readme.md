@@ -10,26 +10,22 @@
 | `nodes`  | --        | Array of nodes to render. | `Node[] \| undefined` | `undefined` |
 
 
+## Slots
+
+| Slot        | Description                                                                                                           |
+| ----------- | --------------------------------------------------------------------------------------------------------------------- |
+| `"default"` | A list or collection of elements to render. If empty, a message stating "No output to show" will be rendered instead. |
+
+
 ## Dependencies
 
 ### Used by
 
  - [stencila-code-chunk](../codeChunk)
 
-### Depends on
-
-- [stencila-data-table](../dataTable)
-- [stencila-image-plotly](../imageDynamic/imagePlotly)
-- [stencila-image-object](../imageObject)
-- [stencila-image-vega](../imageDynamic/imageVega)
-
 ### Graph
 ```mermaid
 graph TD;
-  stencila-node-list --> stencila-data-table
-  stencila-node-list --> stencila-image-plotly
-  stencila-node-list --> stencila-image-object
-  stencila-node-list --> stencila-image-vega
   stencila-code-chunk --> stencila-node-list
   style stencila-node-list fill:#f9f,stroke:#333,stroke-width:4px
 ```

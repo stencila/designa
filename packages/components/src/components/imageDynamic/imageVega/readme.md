@@ -20,19 +20,6 @@
 | `stencila-vega-load` | Custom event emitter to indicate that the loading of the Vega JS script has finished | `CustomEvent<{ library: VegaLibType; }>` |
 
 
-## Dependencies
-
-### Used by
-
- - [stencila-node-list](../../nodeList)
-
-### Graph
-```mermaid
-graph TD;
-  stencila-node-list --> stencila-image-vega
-  style stencila-image-vega fill:#f9f,stroke:#333,stroke-width:4px
-```
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*
