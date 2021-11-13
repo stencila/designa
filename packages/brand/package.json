@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@abide-community/parcel-plugin-clean-out-dir": "1.0.0",
-    "concurrently": "6.3.0",
-    "parcel": "2.0.0"
+    "concurrently": "6.4.0",
+    "parcel": "2.0.1"
   }
 }
