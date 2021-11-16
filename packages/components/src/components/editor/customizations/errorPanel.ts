@@ -31,8 +31,7 @@ const errorPanel = (): Panel => {
       for (const transaction of update.transactions) {
         for (const effect of transaction.effects) {
           if (effect.is(updateErrors)) {
-            // @ts-ignore
-            dom.replaceChildren(...effect.value)
+            dom.replaceChildren(...Array.from(effect.value))
           }
         }
       }

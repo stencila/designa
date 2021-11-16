@@ -38,37 +38,8 @@ const executeHandler = (t) =>
       }
   )
 
-const randomType = () =>
-  Math.random() >= 0.5 ? 'error' : Math.random() >= 0.5 ? 'warning' : 'info'
-
-const errors = []
-const appendError = () => {
-  const editor = document.getElementsByTagName('stencila-editor')[0]
-
-  const errEl = document.createElement('stencila-code-error')
-  errEl.setAttribute('kind', randomType())
-  errEl.setAttribute('slot', 'errors')
-  errEl.innerHTML = `We’re sorry, something has gone wrong...
-<pre slot="stacktrace"><code>Some stack trace goes here...</code></pre>`
-
-  editor.appendChild(errEl)
-}
-
-const appendOutput = () => {
-  const el = document.querySelector('stencila-code-chunk')
-  const child = document.createElement('img')
-  child.slot = 'outputs'
-  child.alt = 'This is a sample output image'
-  child.src = 'https://place-hold.it/350x500'
-  el.appendChild(child)
-}
-
 export const withExecuteHandler = ({ programmingLanguage }) => html`
   <div style="max-width: 900px">
-    <button type="button" @click=${appendOutput}>Add output</button>
-
-    <button @click=${appendError}>Add errors</button>
-
     <stencila-code-chunk
       .executeHandler=${executeHandler}
       .isCodeVisible=${true}
@@ -78,8 +49,6 @@ export const withExecuteHandler = ({ programmingLanguage }) => html`
       <figure slot="outputs">
         <pre><output>10</output></pre>
       </figure>
-
-      ${errors}
     </stencila-code-chunk>
   </div>
 `
