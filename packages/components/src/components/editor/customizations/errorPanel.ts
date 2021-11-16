@@ -31,7 +31,13 @@ const errorPanel = (): Panel => {
       for (const transaction of update.transactions) {
         for (const effect of transaction.effects) {
           if (effect.is(updateErrors)) {
-            dom.replaceChildren(...Array.from(effect.value))
+            while (dom.firstChild) {
+              dom.removeChild(dom.firstChild)
+            }
+
+            effect.value.forEach((newError) => {
+              dom.appendChild(newError)
+            })
           }
         }
       }
