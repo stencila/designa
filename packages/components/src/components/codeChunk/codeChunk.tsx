@@ -297,9 +297,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
 
           <slot name={CodeChunkComponent.slots.label} />
 
-          <figcaption>
-            <slot name={CodeChunkComponent.slots.caption} />
-          </figcaption>
+          <slot name={CodeChunkComponent.slots.caption} />
         </figure>
       </Host>
     )
