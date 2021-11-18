@@ -131,7 +131,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   }
 
   private handleKeyDown = (event: KeyboardEvent): void => {
-    if (event.key === 'Enter' && event.shiftKey) {
+    if (event.key === 'Enter' && event.ctrlKey) {
       event.preventDefault()
       this.execute().catch((err) => {
         console.error(err)

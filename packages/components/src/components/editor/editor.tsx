@@ -434,7 +434,7 @@ export class Editor {
           run: startCompletion,
         },
         {
-          key: 'Shift-Enter',
+          key: 'Ctrl-Enter',
           run: this.execute,
         },
         ...this.keymap,
