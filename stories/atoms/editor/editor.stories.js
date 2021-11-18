@@ -26,6 +26,21 @@ def add(x, y):
   },
 }
 
+const randomType = () =>
+  Math.random() >= 0.5 ? 'error' : Math.random() >= 0.5 ? 'warning' : 'info'
+
+const appendError = () => {
+  const editor = document.getElementsByTagName('stencila-editor')[0]
+
+  const errEl = document.createElement('stencila-code-error')
+  errEl.setAttribute('kind', randomType())
+  errEl.setAttribute('slot', 'errors')
+  errEl.innerHTML = `We’re sorry, something has gone wrong...
+<pre slot="stacktrace"><code>Some stack trace goes here...</code></pre>`
+
+  editor.appendChild(errEl)
+}
+
 export const editor = ({
   lineNumbers,
   text,
@@ -34,6 +49,8 @@ export const editor = ({
   foldGutter,
 }) => {
   return html`
+    <button @click=${appendError}>Add errors</button>
+
     <stencila-editor
       .lineNumbers=${lineNumbers}
       .lineWrapping=${lineWrapping}

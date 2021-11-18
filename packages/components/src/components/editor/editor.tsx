@@ -106,7 +106,7 @@ export class Editor {
   private languagePickerRef: HTMLSelectElement | undefined
 
   private isReady = false
-  private isUpdating = false
+  private isUpdatingContent = false
 
   /**
    * Text contents of the editor
@@ -382,15 +382,12 @@ export class Editor {
   public keymap: Keymap[] = []
 
   private setErrors = () => {
-    const nextErrors = this.errorsSlot?.childNodes
-    if (nextErrors) {
-      this.editorRef?.dispatch({
-        effects: updateErrors.of(nextErrors),
-      })
-    }
+    this.editorRef?.dispatch({
+      effects: updateErrors.of({
+        slotRef: this.errorsSlot,
+      }),
+    })
   }
-
-  private errorsSlotObserver = new MutationObserver(this.setErrors)
 
   private getCodeMirrorConfig = async (config: EditorConfig = {}) => {
     const {
@@ -446,7 +443,7 @@ export class Editor {
       codeErrors(),
       updateListenerExtension((e) => {
         this.contentChangeHandler?.(e)
-        if (!this.isUpdating) {
+        if (!this.isUpdatingContent) {
           this.contentChange.emit(e)
         }
       }),
@@ -492,7 +489,7 @@ export class Editor {
   }
 
   private setContentsHandler = (contents: string) => {
-    this.isUpdating = true
+    this.isUpdatingContent = true
 
     const docState = this.editorRef?.state
     const transaction =
@@ -506,7 +503,7 @@ export class Editor {
 
     this.editorRef?.dispatch(transaction)
 
-    this.isUpdating = false
+    this.isUpdatingContent = false
   }
 
   /**
@@ -643,9 +640,6 @@ export class Editor {
 
     if (this.errorsSlot) {
       this.setErrors()
-      this.errorsSlotObserver.observe(this.errorsSlot, {
-        childList: true,
-      })
     }
   }
 
@@ -666,7 +660,8 @@ export class Editor {
             <div class="hidden" ref={(el) => (this.textSlot = el)}>
               <slot name={slots.text} />
             </div>
-            <div class="hidden" ref={(el) => (this.errorsSlot = el)}>
+
+            <div ref={(el) => (this.errorsSlot = el)}>
               <slot name={slots.errors} />
             </div>
 

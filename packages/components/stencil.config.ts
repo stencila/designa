@@ -20,6 +20,7 @@ export const config: Config = {
   buildEs5: 'prod',
   extras: {
     appendChildSlotFix: true,
+    cloneNodeFix: true,
     dynamicImportShim: true,
     safari10: true,
   },
