@@ -3,25 +3,12 @@
 <!-- Auto Generated Below -->
 
 
-## Properties
+## Slots
 
-| Property | Attribute | Description                    | Type        | Default     |
-| -------- | --------- | ------------------------------ | ----------- | ----------- |
-| `table`  | --        | The `Datatable` node to render | `Datatable` | `undefined` |
+| Slot        | Description                                                                     |
+| ----------- | ------------------------------------------------------------------------------- |
+| `"default"` | The table element to render. Expects a fully formed and valid HTML `table` tag. |
 
-
-## Dependencies
-
-### Used by
-
- - [stencila-code-expression](../codeExpression)
-
-### Graph
-```mermaid
-graph TD;
-  stencila-code-expression --> stencila-data-table
-  style stencila-data-table fill:#f9f,stroke:#333,stroke-width:4px
-```
 
 ----------------------------------------------
 

@@ -31,9 +31,7 @@ stencila-node-list {
     @apply block h-auto max-w-full;
   }
 
-  & > *,
-  ::slotted([slot='outputs']),
-  figure {
+  ::slotted(*) {
     @apply p-0 m-0 overflow-auto;
 
     &:first-child {

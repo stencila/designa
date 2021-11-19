@@ -7,7 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Colors } from "./types";
 import { IconNames } from "./components/icon/iconNames";
-import { CodeChunk, CodeError, CodeExpression, Datatable, ImageObject, Node } from "@stencila/schema";
+import { CodeChunk, CodeError, CodeExpression, ImageObject } from "@stencila/schema";
 import { Keymap } from "./components/editor/editor";
 import { FileFormat, FileFormatMap } from "./components/editor/languageUtils";
 import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
@@ -164,10 +164,6 @@ export namespace Components {
         "programmingLanguage": string;
     }
     interface StencilaDataTable {
-        /**
-          * The `Datatable` node to render
-         */
-        "table": Datatable;
     }
     interface StencilaDetails {
         /**
@@ -368,10 +364,6 @@ export namespace Components {
         "icon": IconNames | undefined;
     }
     interface StencilaNodeList {
-        /**
-          * Array of nodes to render.
-         */
-        "nodes": Node[] | undefined;
     }
     interface StencilaProjectGraph {
         /**
@@ -758,10 +750,6 @@ declare namespace LocalJSX {
         "programmingLanguage"?: string;
     }
     interface StencilaDataTable {
-        /**
-          * The `Datatable` node to render
-         */
-        "table"?: Datatable;
     }
     interface StencilaDetails {
         /**
@@ -954,10 +942,6 @@ declare namespace LocalJSX {
         "icon"?: IconNames | undefined;
     }
     interface StencilaNodeList {
-        /**
-          * Array of nodes to render.
-         */
-        "nodes"?: Node[] | undefined;
     }
     interface StencilaProjectGraph {
         /**

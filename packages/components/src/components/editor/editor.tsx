@@ -454,7 +454,7 @@ export class Editor {
 
   private initCodeMirror = async (): Promise<void> => {
     const root = this.el
-    const slotEl: Element | undefined = getSlotByName(root)(slots.text)
+    const slotEl: Element = getSlotByName(root)(slots.text)[0]
 
     const textContent = this.contents ?? slotEl?.textContent ?? ''
 
@@ -644,6 +644,7 @@ export class Editor {
   }
 
   protected disconnectedCallback(): void {
+    this.textSlotObserver.disconnect()
     this.editorRef?.destroy()
   }
 

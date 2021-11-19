@@ -1,17 +1,22 @@
+stencila-data-table,
 [itemtype="https://schema.stenci.la/Datatable"]
 {
-  @apply block overflow-auto text-sm border-collapse font-body;
+  @apply block overflow-auto;
 
-  td,
-  th {
-    @apply px-2 py-1;
-  }
+  &::slotted(table) {
+    @apply border-collapse font-body text-sm;
 
-  th {
-    @apply font-bold bg-neutral-50;
-  }
+    td,
+    th {
+      @apply px-2 py-1;
+    }
 
-  tbody tr:nth-child(even) {
-    @apply bg-neutral-50;
+    th {
+      @apply font-bold bg-neutral-50;
+    }
+
+    tbody tr:nth-child(even) {
+      @apply bg-neutral-50;
+    }
   }
 }

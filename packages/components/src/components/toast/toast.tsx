@@ -83,13 +83,16 @@ export class StencilaToast {
   }
 
   private styleActionButtons = () => {
-    const buttons = Array.from(
-      getSlotByName(this.el)('actions')?.children ?? []
-    ).filter(
-      (el) =>
-        el.tagName.toLowerCase() === 'stencila-button' &&
-        !el.classList.contains('closeButton')
-    )
+    const buttons = Array.from(getSlotByName(this.el)('actions') ?? [])
+      .reduce(
+        (actions: Element[], el) => [...actions, ...Array.from(el.children)],
+        []
+      )
+      .filter(
+        (el) =>
+          el.tagName.toLowerCase() === 'stencila-button' &&
+          !el.classList.contains('closeButton')
+      )
 
     buttons.forEach((el, idx) => {
       el.setAttribute('size', 'xsmall')

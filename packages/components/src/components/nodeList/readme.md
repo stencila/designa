@@ -3,13 +3,6 @@
 <!-- Auto Generated Below -->
 
 
-## Properties
-
-| Property | Attribute | Description               | Type                  | Default     |
-| -------- | --------- | ------------------------- | --------------------- | ----------- |
-| `nodes`  | --        | Array of nodes to render. | `Node[] \| undefined` | `undefined` |
-
-
 ## Slots
 
 | Slot        | Description                                                                                                           |

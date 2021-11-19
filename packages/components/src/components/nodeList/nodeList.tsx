@@ -1,5 +1,4 @@
-import { Component, Element, h, Host, Prop, State } from '@stencil/core'
-import { Node } from '@stencila/schema'
+import { Component, Element, h, Host, State } from '@stencil/core'
 import { getSlotByName } from '../utils/slotSelectors'
 
 /**
@@ -14,61 +13,48 @@ import { getSlotByName } from '../utils/slotSelectors'
   scoped: true,
 })
 export class OutputsList {
-  @Element() private el: HTMLStencilaNodeListElement
-
-  private outputSlot: Element | undefined
-
-  /**
-   * Array of nodes to render.
-   */
-  @Prop() nodes: Node[] | undefined = undefined
-
-  private checkIfEmpty = (): boolean => {
-    /**
-     * If the `outputs` slot doesn't exist, or contains no content, the output is empty.
-     */
-    const empty: boolean =
-      this.outputSlot?.children.length === 0 ||
-      Array.from(this.outputSlot?.children ?? []).reduce(
-        (text: string, el) => text + el.innerHTML.trim(),
-        ''
-      ) === ''
-
-    this.isEmpty = empty
-    return empty
-  }
-
-  @State() isEmpty = true
-
-  private outputSlotObserver = new MutationObserver(this.checkIfEmpty)
+  @Element() el: HTMLStencilaNodeListElement
 
   private emptyOutputMessage = 'No output to show'
 
-  componentWillLoad(): void {
-    this.outputSlot = getSlotByName(this.el)('outputs')
-    this.checkIfEmpty()
-  }
+  @State() isEmpty: boolean = true
 
-  componentDidLoad(): void {
-    if (this.outputSlot) {
-      this.outputSlotObserver.observe(this.outputSlot, {
-        subtree: true,
-        childList: true,
-        characterData: true,
+  checkIfEmpty = () => {
+    const slotted = getSlotByName(this.el)(['default', 'outputs'])
+
+    if (slotted.length === 0) {
+      this.isEmpty = true
+    } else {
+      this.isEmpty = slotted.every((el) => {
+        const content = el.innerHTML?.trim()
+        return content === '' || content === this.emptyOutputMessage
       })
     }
+  }
+
+  private childObserver = new MutationObserver(this.checkIfEmpty)
+
+  componentWillLoad() {
+    this.checkIfEmpty()
+
+    this.childObserver.observe(this.el, {
+      childList: true,
+      subtree: true,
+    })
+  }
+
+  disconnectedCallback(): void {
+    this.childObserver?.disconnect
   }
 
   public render() {
     return (
       <Host>
-        {this.isEmpty && (
-          <em class="emptyContentMessage">{this.emptyOutputMessage}</em>
-        )}
+        <slot />
 
-        <div ref={(el) => (this.outputSlot = el)}>
-          <slot />
-        </div>
+        <em class={{ hidden: !this.isEmpty, emptyContentMessage: true }}>
+          {this.emptyOutputMessage}
+        </em>
       </Host>
     )
   }
