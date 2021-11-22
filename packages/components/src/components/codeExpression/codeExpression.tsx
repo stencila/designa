@@ -11,13 +11,17 @@ import {
 import { codeExpression, CodeExpression, isA } from '@stencila/schema'
 import { StencilaNodeUpdateEvent } from '../../globals/events'
 import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
-import { NodeRenderer } from '../nodeList/nodeRenderer'
+import { getSlotByName } from '../utils/slotSelectors'
 
 const slots = {
   text: 'text',
   output: 'output',
 }
 
+/**
+ * @slot text - The source code of the `CodeChunk`. Corresponds to the `text` field in the Stencila `CodeExpression` Schema.
+ * @slot output - A single output element. Corresponds to the `output` field in the Stencila `CodeExpression` Schema.
+ */
 @Component({
   tag: 'stencila-code-expression',
   styleUrls: {
@@ -67,13 +71,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     // Checking output list to account for non-text nodes such as images.
     const output = (this.outputSlot?.childNodes ?? [])[0]
 
-    return output instanceof Text
-      ? output.textContent
-      : output instanceof HTMLElement
-      ? output
-      : output === undefined
-      ? output
-      : 'Could not display the output'
+    return output instanceof Text ? output.textContent : output
   }
 
   private checkIfEmpty = (): void => {
@@ -81,9 +79,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   }
 
   componentWillLoad(): void {
-    this.outputSlot = Array.from(this.el.children).filter(
-      (el) => el.slot === slots.output
-    )[0]
+    this.outputSlot = getSlotByName(this.el)(slots.output)[0]
 
     this.checkIfEmpty()
   }
@@ -131,7 +127,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   }
 
   private handleKeyDown = (event: KeyboardEvent): void => {
-    if (event.key === 'Enter' && event.shiftKey) {
+    if (event.key === 'Enter' && event.ctrlKey) {
       event.preventDefault()
       this.execute().catch((err) => {
         console.error(err)
@@ -255,21 +251,13 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
         </span>
       </span>,
       this.dividerArrow(),
-      <span class={{ hidden: true, slot: true }}>
+      <span class={{ hidden: this.isOutputEmpty, slot: true }}>
         <slot name="output" />
       </span>,
-      this.isOutputEmpty ? (
+      this.isOutputEmpty && (
         <stencila-tooltip text={this.emptyOutputMessage} class="output">
           …
         </stencila-tooltip>
-      ) : (
-        <NodeRenderer
-          node={
-            this.codeExpression !== undefined
-              ? this.codeExpression.output
-              : this.getOutputSlotContents()
-          }
-        ></NodeRenderer>
       ),
     ]
   }

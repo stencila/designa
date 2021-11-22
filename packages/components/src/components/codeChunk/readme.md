@@ -46,6 +46,17 @@ Type: `Promise<CodeChunk>`
 
 
 
+## Slots
+
+| Slot        | Description                                                                                                                |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `"caption"` | `figcaption` content of the `CodeChunk`. Corresponds to the `caption` field in the Stencila `CodeChunk` Schema.            |
+| `"errors"`  | List of any errors encountered when compiling (e.g. syntax errors) or executing the CodeChunk.                             |
+| `"label"`   | `label` element label of the `CodeChunk`. Corresponds to the `label` field in the Stencila `CodeChunk` Schema.             |
+| `"outputs"` | The resulting output when evaluating the CodeChunk. Corresponds to the `outputs` field in the Stencila `CodeChunk` Schema. |
+| `"text"`    | The source code of the `CodeChunk`. Corresponds to the `text` field in the Stencila `CodeChunk` Schema.                    |
+
+
 ## CSS Custom Properties
 
 | Name                  | Description                                                            |
@@ -76,10 +87,6 @@ graph TD;
   stencila-button --> stencila-tooltip
   stencila-tooltip --> stencila-tooltip-element
   stencila-editor --> stencila-icon
-  stencila-node-list --> stencila-data-table
-  stencila-node-list --> stencila-image-plotly
-  stencila-node-list --> stencila-image-object
-  stencila-node-list --> stencila-image-vega
   style stencila-code-chunk fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

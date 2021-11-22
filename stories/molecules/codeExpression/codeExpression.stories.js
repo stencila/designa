@@ -78,7 +78,17 @@ export const codeExpressionWithAnImageOutput = () => html`
   </p>
 `
 
-export const codeExpressionWithNoOutput = () => html`
+export const codeExpressionWithNoOutputSlot = () => html`
+  <p>
+    This is a paragraph with a code expression inside it
+    <stencila-code-expression data-collapsed="false"
+      ><code slot="text">x * y</code></stencila-code-expression
+    >
+    followed by some more text.
+  </p>
+`
+
+export const codeExpressionWithNoOutputContent = () => html`
   <p>
     This is a paragraph with a code expression inside it
     <stencila-code-expression data-collapsed="false"

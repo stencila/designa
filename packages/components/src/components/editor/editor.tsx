@@ -26,6 +26,7 @@ import {
   highlightSpecialChars,
   KeyBinding as KeymapI,
   keymap,
+  ViewUpdate,
 } from '@codemirror/view'
 import {
   Component,
@@ -38,7 +39,6 @@ import {
   Prop,
   Watch,
 } from '@stencil/core'
-import { CodeError } from '@stencila/schema'
 import { getSlotByName } from '../utils/slotSelectors'
 import { LanguagePicker } from './components/languageSelect'
 import { codeErrors, updateErrors } from './customizations/errorPanel'
@@ -64,6 +64,7 @@ type EditorStateJSON = Record<string, unknown>
 
 const slots = {
   text: 'text',
+  errors: 'errors',
 }
 
 const cssClasses = {
@@ -82,6 +83,10 @@ type EditorConfig = {
   lineWrappingEnabled?: boolean
 }
 
+/**
+ * @slot text - The contents of the editor.
+ * @slot errors - List of any `stencila-code-error` elements to render in the Errors panel.
+ */
 @Component({
   tag: 'stencila-editor',
   styleUrls: {
@@ -94,10 +99,14 @@ export class Editor {
   @Element()
   private el: HTMLStencilaEditorElement
 
+  private textSlot: HTMLDivElement | undefined
+  private errorsSlot: HTMLDivElement | undefined
+
   private editorRef: EditorView | undefined
   private languagePickerRef: HTMLSelectElement | undefined
 
   private isReady = false
+  private isUpdatingContent = false
 
   /**
    * Text contents of the editor
@@ -162,23 +171,25 @@ export class Editor {
   @Event({ eventName: 'stencila-language-change' })
   languageChange: EventEmitter<FileFormat>
 
+  /**
+   * Event emitted when the content of the editor is changed.
+   */
+  @Event({ eventName: 'stencila-content-change' })
+  contentChange: EventEmitter<ViewUpdate>
+
   private getLang = async (language: string) => {
-    switch (language.toLowerCase()) {
+    switch (lookupFormat(language).name.toLowerCase()) {
       case 'r': {
         const { StreamLanguage } = await import('@codemirror/stream-parser')
         const { r } = await import('@codemirror/legacy-modes/mode/r')
         return StreamLanguage.define(r)
       }
-      case 'bash':
-      case 'shell':
-      case 'sh': {
+      case 'bash': {
         const { StreamLanguage } = await import('@codemirror/stream-parser')
         const { shell } = await import('@codemirror/legacy-modes/mode/shell')
         return StreamLanguage.define(shell)
       }
-      case 'latex':
-      case 'stex':
-      case 'tex': {
+      case 'latex': {
         const { StreamLanguage } = await import('@codemirror/stream-parser')
         const { stexMath } = await import('@codemirror/legacy-modes/mode/stex')
         return StreamLanguage.define(stexMath)
@@ -220,6 +231,7 @@ export class Editor {
         const { python } = await import('@codemirror/lang-python')
         return python()
       }
+      case 'r':
       case 'rmd': {
         const { markdown } = await import('@codemirror/lang-markdown')
         const { StreamLanguage } = await import('@codemirror/stream-parser')
@@ -369,17 +381,11 @@ export class Editor {
   @Prop()
   public keymap: Keymap[] = []
 
-  /**
-   * List of errors to display at the bottom of the code editor section.
-   * If the error is a `string`, then it will be rendered as a warning.
-   */
-  @Prop()
-  public errors?: CodeError[] | string[]
-
-  @Watch('errors')
-  errorsChanged(nextErrors: (CodeError | string)[]): void {
+  private setErrors = () => {
     this.editorRef?.dispatch({
-      effects: updateErrors.of(nextErrors),
+      effects: updateErrors.of({
+        slotRef: this.errorsSlot,
+      }),
     })
   }
 
@@ -428,16 +434,19 @@ export class Editor {
           run: startCompletion,
         },
         {
-          key: 'Shift-Enter',
+          key: 'Ctrl-Enter',
           run: this.execute,
         },
         ...this.keymap,
       ]),
       this.readOnlyConf.of(EditorView.editable.of(!this.readOnly)),
       codeErrors(),
-      this.contentChangeHandler
-        ? updateListenerExtension(this.contentChangeHandler)
-        : [],
+      updateListenerExtension((e) => {
+        this.contentChangeHandler?.(e)
+        if (!this.isUpdatingContent) {
+          this.contentChange.emit(e)
+        }
+      }),
     ]
 
     return extensions
@@ -445,7 +454,7 @@ export class Editor {
 
   private initCodeMirror = async (): Promise<void> => {
     const root = this.el
-    const slotEl: Element | undefined = getSlotByName(root)(slots.text)
+    const slotEl: Element = getSlotByName(root)(slots.text)[0]
 
     const textContent = this.contents ?? slotEl?.textContent ?? ''
 
@@ -480,6 +489,8 @@ export class Editor {
   }
 
   private setContentsHandler = (contents: string) => {
+    this.isUpdatingContent = true
+
     const docState = this.editorRef?.state
     const transaction =
       docState?.update({
@@ -488,10 +499,11 @@ export class Editor {
           to: docState.doc.length,
           insert: contents,
         },
-        scrollIntoView: true,
       }) ?? {}
 
     this.editorRef?.dispatch(transaction)
+
+    this.isUpdatingContent = false
   }
 
   /**
@@ -502,6 +514,11 @@ export class Editor {
     this.setContentsHandler(contents)
     return Promise.resolve(contents)
   }
+
+  private textSlotObserver = new MutationObserver(() => {
+    const updatedText = this.textSlot?.textContent ?? ''
+    this.setContentsHandler(updatedText)
+  })
 
   /**
    * Retrieve a JSON representation of the the internal editor state.
@@ -612,9 +629,22 @@ export class Editor {
     if (this.autofocus) {
       this.focus()
     }
+
+    if (this.textSlot) {
+      this.textSlotObserver.observe(this.textSlot, {
+        childList: true,
+        characterData: true,
+        subtree: true,
+      })
+    }
+
+    if (this.errorsSlot) {
+      this.setErrors()
+    }
   }
 
   protected disconnectedCallback(): void {
+    this.textSlotObserver.disconnect()
     this.editorRef?.destroy()
   }
 
@@ -628,9 +658,14 @@ export class Editor {
             onKeyDown={this.stopEventPropagation}
             onClick={this.focus}
           >
-            <div class="hidden">
+            <div class="hidden" ref={(el) => (this.textSlot = el)}>
               <slot name={slots.text} />
             </div>
+
+            <div ref={(el) => (this.errorsSlot = el)}>
+              <slot name={slots.errors} />
+            </div>
+
             <div id={cssIds.editorTarget} />
           </div>
 

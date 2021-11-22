@@ -35,6 +35,14 @@ Type: `Promise<CodeExpression>`
 
 
 
+## Slots
+
+| Slot       | Description                                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------------------------------ |
+| `"output"` | A single output element. Corresponds to the `output` field in the Stencila `CodeExpression` Schema.          |
+| `"text"`   | The source code of the `CodeChunk`. Corresponds to the `text` field in the Stencila `CodeExpression` Schema. |
+
+
 ## CSS Custom Properties
 
 | Name                   | Description                                                            |
@@ -51,16 +59,12 @@ Type: `Promise<CodeExpression>`
 
 - [stencila-button](../button)
 - [stencila-tooltip](../tooltip)
-- [stencila-image-object](../imageObject)
-- [stencila-data-table](../dataTable)
 
 ### Graph
 ```mermaid
 graph TD;
   stencila-code-expression --> stencila-button
   stencila-code-expression --> stencila-tooltip
-  stencila-code-expression --> stencila-image-object
-  stencila-code-expression --> stencila-data-table
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip
   stencila-tooltip --> stencila-tooltip-element

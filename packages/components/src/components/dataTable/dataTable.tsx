@@ -1,6 +1,8 @@
-import { Component, h, Prop } from '@stencil/core'
-import { Datatable } from '@stencila/schema'
+import { Component, h, Host } from '@stencil/core'
 
+/**
+ * @slot default - The table element to render. Expects a fully formed and valid HTML `table` tag.
+ */
 @Component({
   tag: 'stencila-data-table',
   styleUrls: {
@@ -10,34 +12,11 @@ import { Datatable } from '@stencila/schema'
   scoped: true,
 })
 export class DataTable {
-  /**
-   * The `Datatable` node to render
-   */
-  @Prop() table: Datatable
-
   public render() {
-    const cols = this.table.columns
-    const rows = cols?.[0].values.map((_, row) => row) ?? []
-
     return (
-      <table itemtype="https://schema.stenci.la/Datatable">
-        <thead>
-          <tr>
-            {cols.map((col) => (
-              <th>{col.name}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((_, row) => (
-            <tr>
-              {cols.map((col) => (
-                <td>{col.values[row]}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Host>
+        <slot />
+      </Host>
     )
   }
 }
