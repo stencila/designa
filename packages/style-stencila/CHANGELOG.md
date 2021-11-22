@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.18](https://github.com/stencila/style/compare/@stencila/style-stencila@0.24.17...@stencila/style-stencila@0.24.18) (2021-11-22)
+
+### Bug Fixes
+
+- **NodeList:** Fix rendering of NodeList items, CodeExpression usage ([005fa54](https://github.com/stencila/style/commit/005fa5419e224b9afa92c3cb6c68e4483ae1f65a))
+
 ## [0.24.17](https://github.com/stencila/style/compare/@stencila/style-stencila@0.24.16...@stencila/style-stencila@0.24.17) (2021-11-21)
 
 **Note:** Version bump only for package @stencila/style-stencila

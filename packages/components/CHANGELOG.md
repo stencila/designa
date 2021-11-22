@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0](https://github.com/stencila/designa/compare/@stencila/components@0.42.4...@stencila/components@0.43.0) (2021-11-22)
+
+### Bug Fixes
+
+- **Editor:** Fix error slot logic ([9282f78](https://github.com/stencila/designa/commit/9282f78030939fe382d496e2de645b34498e3a1a))
+- **Editor:** Fix interoperability with Web client patch updates ([3a20e98](https://github.com/stencila/designa/commit/3a20e9838f3d953fb2ec250c95f30b92b6ed74b8))
+- **Errors:** Fix error panel type signatures ([f4bdcc8](https://github.com/stencila/designa/commit/f4bdcc842feabf405a2cbf7fa12fff3f3d8adfa4))
+- **Errors:** Fix error panel type signatures ([ed53c26](https://github.com/stencila/designa/commit/ed53c266ff78628d5ee6e3fe4873664d50c17079))
+- **NodeList:** Fix rendering of NodeList items, CodeExpression usage ([005fa54](https://github.com/stencila/designa/commit/005fa5419e224b9afa92c3cb6c68e4483ae1f65a))
+
+### Features
+
+- **Components:** Don't auto-inject CSS variables and fonts ([3ce0702](https://github.com/stencila/designa/commit/3ce0702befec80c2ed30d70e040dbe729b5536ef))
+- **Components:** Update component state via slot changes ([a93f504](https://github.com/stencila/designa/commit/a93f504a856ec9215b50c8118b988f0d539f13a8))
+
+### BREAKING CHANGES
+
+- **Components:** In order to improve performance when using the Components
+  library with other stylesheets, or bundling dependencies, we now no longer
+  automatically inject webfonts or CSS variables.
+  To reinstate the previous behaviour, you can use the provided utility functions,
+  `loadFonts` and `injectThemeVariables`.
+- **Components:** Significant changes were made to how code nodes are
+  rendered. Previously we were accepting the Stencila Schema object,
+  whereas now the component is simply used to render fully formed HTML
+  tags using various slots.
+
 ## [0.42.4](https://github.com/stencila/designa/compare/@stencila/components@0.42.3...@stencila/components@0.42.4) (2021-11-21)
 
 **Note:** Version bump only for package @stencila/components
