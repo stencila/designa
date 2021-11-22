@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'fs'
 import path from 'path'
 
-// Update the Stylesheet version numbers in the 'globals/script.js' file.
+// Update the Stylesheet version numbers in the 'utils/variables.ts' file.
 
 const pkg = path.join(path.resolve(), 'package.json')
 const { dependencies } = JSON.parse(readFileSync(pkg))
@@ -9,23 +9,23 @@ const { dependencies } = JSON.parse(readFileSync(pkg))
 const stencilaVersion = dependencies['@stencila/style-stencila']
 const materialVersion = dependencies['@stencila/style-material']
 
-const globalScriptPath = path.join(
+const variablesScriptPath = path.join(
   path.resolve(),
   'src',
-  'globals',
-  'global.ts'
+  'utils',
+  'variables.ts'
 )
 
-let globalScript = readFileSync(globalScriptPath).toString()
+let variablesScript = readFileSync(variablesScriptPath).toString()
 
-globalScript = globalScript.replace(
+variablesScript = variablesScript.replace(
   /const stencilaThemeVersion = '.+'/,
   `const stencilaThemeVersion = '${stencilaVersion}'`
 )
 
-globalScript = globalScript.replace(
+variablesScript = variablesScript.replace(
   /const materialThemeVersion = '.+'/,
   `const materialThemeVersion = '${materialVersion}'`
 )
 
-writeFileSync(globalScriptPath, globalScript)
+writeFileSync(variablesScriptPath, variablesScript)
