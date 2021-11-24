@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.16.0",
-    "@stencila/dev-config": "3.0.1",
+    "@stencila/dev-config": "3.0.2",
     "@stencila/eslint-config": "3.0.0",
     "@stencila/renovate-config": "0.4.3",
     "@storybook/addon-a11y": "6.3.12",
@@ -57,7 +57,7 @@
     "husky": "7.0.4",
     "lerna": "4.0.0",
     "lit-html": "2.0.2",
-    "postcss": "8.3.11",
+    "postcss": "8.4.0",
     "postcss-cli": "9.0.2",
     "postcss-custom-properties": "12.0.0",
     "postcss-host": "2.0.1",
