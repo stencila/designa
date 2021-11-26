@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.43.2](https://github.com/stencila/designa/compare/@stencila/components@0.43.1...@stencila/components@0.43.2) (2021-11-26)
+
+### Bug Fixes
+
+- **Editor:** Ensure EditorStateJSON interface is available downstream ([d315e81](https://github.com/stencila/designa/commit/d315e813c3ed931d3afb582de2fd1c14ca959967))
+
 ## [0.43.1](https://github.com/stencila/designa/compare/@stencila/components@0.43.0...@stencila/components@0.43.1) (2021-11-24)
 
 **Note:** Version bump only for package @stencila/components
