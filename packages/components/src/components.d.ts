@@ -10,7 +10,7 @@ import { IconNames } from "./components/icon/iconNames";
 import { CodeChunk, CodeError, CodeExpression, ImageObject } from "@stencila/schema";
 import { Keymap } from "./components/editor/editor";
 import { FileFormat, FileFormatMap } from "./components/editor/languageUtils";
-import { EditorContents, Keymap as Keymap1 } from "./components/editor/editor";
+import { EditorContents, EditorStateJSON, Keymap as Keymap1 } from "./components/editor/editor";
 import { EditorUpdateHandlerCb } from "./components/editor/customizations/onUpdateHandlerExtension";
 import { EditorView, ViewUpdate } from "@codemirror/view";
 import { Config, Data, Layout } from "plotly.js";

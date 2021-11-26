@@ -60,7 +60,7 @@ export interface EditorContents {
 
 export type Keymap = KeymapI
 
-type EditorStateJSON = Record<string, unknown>
+export type EditorStateJSON = Record<string, unknown>
 
 const slots = {
   text: 'text',
@@ -76,7 +76,7 @@ const cssIds = {
   editorTarget: 'editorTarget',
 }
 
-type EditorConfig = {
+export type EditorConfig = {
   language?: string
   foldGutterEnabled?: boolean
   lineNumbersEnabled?: boolean
