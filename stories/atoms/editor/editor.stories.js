@@ -5,6 +5,16 @@ export default {
   title: 'Atoms/Editor',
   component: 'stencila-editor',
   argTypes: {
+    executableLanguages: {
+      control: { type: 'object' },
+      defaultValue: {
+        JavaScript: {
+          name: 'JavaScript',
+          ext: 'js',
+          aliases: ['javascript', 'js'],
+        },
+      },
+    },
     text: {
       defaultValue: 'JavaScript',
       options: ['JavaScript', 'Python'],
@@ -47,6 +57,7 @@ export const editor = ({
   lineWrapping,
   readOnly,
   foldGutter,
+  executableLanguages,
 }) => {
   return html`
     <button @click=${appendError}>Add errors</button>
@@ -56,6 +67,7 @@ export const editor = ({
       .lineWrapping=${lineWrapping}
       .foldGutter=${foldGutter}
       .readOnly=${readOnly}
+      .executableLanguages=${executableLanguages}
     >
       ${unsafeHTML(text)}
     </stencila-editor>
@@ -70,6 +82,7 @@ export const withoutLineNumbers = ({
   lineWrapping,
   readOnly,
   foldGutter,
+  executableLanguages,
 }) =>
   html`
     <stencila-editor
@@ -77,6 +90,7 @@ export const withoutLineNumbers = ({
       .lineWrapping=${lineWrapping}
       .foldGutter=${foldGutter}
       .readOnly=${readOnly}
+      .executableLanguages=${executableLanguages}
     >
       <pre slot="text">
 <code>print(2 + 2);

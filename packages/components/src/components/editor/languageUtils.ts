@@ -12,6 +12,11 @@ export const fileFormatMap: FileFormatMap = {
     ext: 'sh',
     aliases: ['bash', 'shell', 'sh'],
   },
+  Calc: {
+    name: 'Calc',
+    ext: 'calc',
+    aliases: ['calc'],
+  },
   Dockerfile: {
     name: 'Dockerfile',
     ext: null,
@@ -57,10 +62,10 @@ export const fileFormatMap: FileFormatMap = {
     ext: 'r',
     aliases: ['r'],
   },
-  RMD: {
-    name: 'RMD',
+  'R Markdown': {
+    name: 'R Markdown',
     ext: 'rmd',
-    aliases: ['rmd'],
+    aliases: ['rmd', 'r markdown', 'rmarkdown'],
   },
   TOML: {
     name: 'TOML',

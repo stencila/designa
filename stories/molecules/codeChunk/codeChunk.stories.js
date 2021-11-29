@@ -3,6 +3,17 @@ import { html } from 'lit-html'
 export default {
   title: 'Schema Nodes/Code Chunk',
   component: 'stencila-code-chunk',
+  argTypes: {
+    executableLanguages: {
+      defaultValue: {
+        JavaScript: {
+          name: 'JavaScript',
+          ext: 'js',
+          aliases: ['javascript', 'js'],
+        },
+      },
+    },
+  },
 }
 
 const delay = (cb) => {
@@ -38,12 +49,16 @@ const executeHandler = (t) =>
       }
   )
 
-export const withExecuteHandler = ({ programmingLanguage }) => html`
+export const withExecuteHandler = ({
+  programmingLanguage,
+  executableLanguages,
+}) => html`
   <div style="max-width: 900px">
     <stencila-code-chunk
       .executeHandler=${executeHandler}
       .isCodeVisible=${true}
       .programmingLanguage=${programmingLanguage}
+      .executableLanguages=${executableLanguages}
     >
       <pre slot="text">print(a)</pre>
       <figure slot="outputs">
@@ -53,11 +68,15 @@ export const withExecuteHandler = ({ programmingLanguage }) => html`
   </div>
 `
 
-export const singleCodeChunk = ({ programmingLanguage }) => html`
+export const singleCodeChunk = ({
+  programmingLanguage,
+  executableLanguages,
+}) => html`
   <div>
     <stencila-code-chunk
       data-collapsed="false"
       .programmingLanguage=${programmingLanguage}
+      .executableLanguages=${executableLanguages}
     >
       <pre slot="text"><code>print(a)</code></pre>
       <figure slot="outputs">
@@ -67,9 +86,17 @@ export const singleCodeChunk = ({ programmingLanguage }) => html`
   </div>
 `
 
-export const multipleCodeChunks = () => html`
+export const multipleCodeChunks = ({
+  executableLanguages,
+  programmingLanguage,
+}) => html`
   <div>
-    <stencila-code-chunk data-collapsed="false">
+    <stencila-code-chunk
+      data-collapsed="false"
+      .executeHandler=${executeHandler}
+      .programmingLanguage=${programmingLanguage}
+      .executableLanguages=${executableLanguages}
+    >
       <pre slot="text"><code>print(a)</code></pre>
       <figure slot="outputs">
         <pre><output>10</output></pre>
@@ -84,7 +111,12 @@ export const multipleCodeChunks = () => html`
       therefore runs Python code.
     </p>
 
-    <stencila-code-chunk data-collapsed="false">
+    <stencila-code-chunk
+      data-collapsed="false"
+      .executeHandler=${executeHandler}
+      .programmingLanguage=${programmingLanguage}
+      .executableLanguages=${executableLanguages}
+    >
       <pre slot="text"><code>print(second)</code></pre>
 
       <figure slot="outputs">

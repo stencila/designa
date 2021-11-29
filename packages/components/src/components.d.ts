@@ -8,8 +8,8 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Colors } from "./types";
 import { IconNames } from "./components/icon/iconNames";
 import { CodeChunk, CodeError, CodeExpression, ImageObject } from "@stencila/schema";
-import { Keymap } from "./components/editor/editor";
 import { FileFormat, FileFormatMap } from "./components/editor/languageUtils";
+import { Keymap } from "./components/editor/editor";
 import { EditorContents, EditorStateJSON, Keymap as Keymap1 } from "./components/editor/editor";
 import { EditorUpdateHandlerCb } from "./components/editor/customizations/onUpdateHandlerExtension";
 import { EditorView, ViewUpdate } from "@codemirror/view";
@@ -104,6 +104,10 @@ export namespace Components {
          */
         "codeChunk"?: CodeChunk;
         /**
+          * List of programming languages that can be executed in the current context
+         */
+        "executableLanguages": FileFormatMap;
+        /**
           * Run the `CodeChunk`
          */
         "execute": () => Promise<CodeChunk>;
@@ -188,6 +192,10 @@ export namespace Components {
           * Text contents of the editor
          */
         "contents"?: string;
+        /**
+          * List of programming languages that can be executed in the current context
+         */
+        "executableLanguages": FileFormatMap;
         /**
           * Function to be evaluated over the contents of the editor.
          */
@@ -698,6 +706,10 @@ declare namespace LocalJSX {
          */
         "codeChunk"?: CodeChunk;
         /**
+          * List of programming languages that can be executed in the current context
+         */
+        "executableLanguages"?: FileFormatMap;
+        /**
           * A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
@@ -774,6 +786,10 @@ declare namespace LocalJSX {
           * Text contents of the editor
          */
         "contents"?: string;
+        /**
+          * List of programming languages that can be executed in the current context
+         */
+        "executableLanguages"?: FileFormatMap;
         /**
           * Function to be evaluated over the contents of the editor.
          */
