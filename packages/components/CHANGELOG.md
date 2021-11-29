@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.0](https://github.com/stencila/designa/compare/@stencila/components@0.43.2...@stencila/components@0.44.0) (2021-11-29)
+
+### Features
+
+- **Editor:** Add Calc to list of available language options ([d0582e8](https://github.com/stencila/designa/commit/d0582e8683f615ae9d45d9cc6f4e9a654b51a654))
+- **Editor:** Split languages into executable and non-executable lists ([541c82a](https://github.com/stencila/designa/commit/541c82a83d3ac14f557f4b8c4957e0fdfb0a306f)), closes [#247](https://github.com/stencila/designa/issues/247)
+
 ### [0.43.2](https://github.com/stencila/designa/compare/@stencila/components@0.43.1...@stencila/components@0.43.2) (2021-11-26)
 
 ### Bug Fixes
