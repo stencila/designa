@@ -233,6 +233,7 @@ export class Editor {
         const { xml } = await import('@codemirror/lang-xml')
         return xml()
       }
+      case 'calc':
       case 'python': {
         const { python } = await import('@codemirror/lang-python')
         return python()

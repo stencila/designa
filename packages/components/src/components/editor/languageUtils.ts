@@ -12,6 +12,11 @@ export const fileFormatMap: FileFormatMap = {
     ext: 'sh',
     aliases: ['bash', 'shell', 'sh'],
   },
+  Calc: {
+    name: 'Calc',
+    ext: 'calc',
+    aliases: ['calc'],
+  },
   Dockerfile: {
     name: 'Dockerfile',
     ext: null,
