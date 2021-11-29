@@ -128,6 +128,12 @@ export class Editor {
   public languageCapabilities: FileFormatMap = fileFormatMap
 
   /**
+   * List of programming languages that can be executed in the current context
+   */
+  @Prop()
+  public executableLanguages: FileFormatMap = {}
+
+  /**
    * Disallow editing of the editor contents when set to `true`
    */
   @Prop()
@@ -674,6 +680,7 @@ export class Editor {
               activeLanguage={this.activeLanguage}
               onSetLanguage={this.onSelectLanguage}
               languageCapabilities={this.languageCapabilities}
+              executableLanguages={this.executableLanguages}
               setRef={this.setLanguagePickerRef}
             ></LanguagePicker>
           </menu>

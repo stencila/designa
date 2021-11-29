@@ -14,6 +14,11 @@ import { CodeChunk, codeChunk as makeCodeChunk, isA } from '@stencila/schema'
 import { StencilaNodeUpdateEvent } from '../../globals/events'
 import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
 import { Keymap } from '../editor/editor'
+import {
+  FileFormat,
+  FileFormatMap,
+  lookupFormat,
+} from '../editor/languageUtils'
 
 /**
  * @slot text - The source code of the `CodeChunk`. Corresponds to the `text` field in the Stencila `CodeChunk` Schema.
@@ -59,8 +64,14 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   /**
    * Programming language of the CodeChunk
    */
-  @Prop()
+  @Prop({ mutable: true })
   public programmingLanguage: string | undefined
+
+  /**
+   * List of programming languages that can be executed in the current context
+   */
+  @Prop()
+  public executableLanguages: FileFormatMap = {}
 
   /**
    * Whether the code section is visible or not
@@ -111,11 +122,43 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   private toggleAllCodeVisibility = (): void =>
     this.allCodeVisibilityChangeHandler(!this.isCodeVisibleState)
 
+  /**
+   * Determine if the CodeChunk can be executed or not.
+   * For a CodeChunk to be considered executable it must have a `executeHandler` function attached
+   * and the current `programmingLanguage` must be in the list of `executableLanguages`.
+   */
+  private isExecutable = (): boolean => {
+    if (this.programmingLanguage === undefined) {
+      return false
+    }
+
+    const activeLanguageFormat = lookupFormat(this.programmingLanguage).name
+    return (
+      this.executeHandler !== undefined &&
+      Object.values(this.executableLanguages).some(
+        (format) => format.name === activeLanguageFormat
+      )
+    )
+  }
+
+  /**
+   * Listen for the `stencila-language-change` event emitted by the language dropdown
+   * provided by the child Editor component, and update the active language if necessary.
+   */
+  private handleLanguageChange = (e: CustomEvent<FileFormat>) => {
+    if (
+      this.programmingLanguage === undefined ||
+      lookupFormat(this.programmingLanguage).name !== e.detail.name
+    ) {
+      this.programmingLanguage = e.detail.name
+    }
+  }
+
   private onExecuteHandler = async (): Promise<CodeChunk> => {
     this.executeCodeState = 'PENDING'
     const node = await this.getContents()
 
-    if (this.executeHandler !== undefined) {
+    if (this.isExecutable() && this.executeHandler) {
       const computed = await this.executeHandler(node)
       this.codeChunk = computed
       this.executeCodeState = 'RESOLVED'
@@ -225,7 +268,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
       >
         <figure>
           <stencila-action-menu>
-            {this.executeHandler !== undefined && (
+            {this.isExecutable() && (
               <stencila-button
                 icon="play"
                 minimal={true}
@@ -280,10 +323,12 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
             >
               <stencila-editor
                 activeLanguage={this.programmingLanguage}
+                executableLanguages={this.executableLanguages}
                 autofocus={this.autofocus}
                 executeHandler={this.onExecuteHandler}
                 keymap={this.keymap}
                 readOnly={this.executeHandler === undefined}
+                onStencila-language-change={this.handleLanguageChange}
               >
                 <slot name={CodeChunkComponent.slots.text} />
                 <slot name={CodeChunkComponent.slots.errors} />
