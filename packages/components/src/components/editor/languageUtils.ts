@@ -57,10 +57,10 @@ export const fileFormatMap: FileFormatMap = {
     ext: 'r',
     aliases: ['r'],
   },
-  RMD: {
-    name: 'RMD',
+  'R Markdown': {
+    name: 'R Markdown',
     ext: 'rmd',
-    aliases: ['rmd'],
+    aliases: ['rmd', 'r markdown', 'rmarkdown'],
   },
   TOML: {
     name: 'TOML',
