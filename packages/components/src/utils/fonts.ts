@@ -1,7 +1,8 @@
 import { getMode } from '@stencil/core'
-import WebFont from 'webfontloader'
 
-export const loadFonts = (fontFamilies?: string[]) => {
+export const loadFonts = async (fontFamilies?: string[]) => {
+  if (window === undefined || document === undefined) return
+  const WebFont = await import('webfontloader')
   let families = fontFamilies
 
   if (!families) {
