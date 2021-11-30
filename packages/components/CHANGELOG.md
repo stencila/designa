@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.44.1](https://github.com/stencila/designa/compare/@stencila/components@0.44.0...@stencila/components@0.44.1) (2021-11-30)
+
+### Bug Fixes
+
+- **Components:** Fix loading of library in non-browser contexts ([e419d32](https://github.com/stencila/designa/commit/e419d3226d824a84d5faf62429c7fb5b164c035b))
+
 ## [0.44.0](https://github.com/stencila/designa/compare/@stencila/components@0.43.2...@stencila/components@0.44.0) (2021-11-29)
 
 ### Features

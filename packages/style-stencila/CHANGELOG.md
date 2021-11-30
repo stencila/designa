@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.24.20](https://github.com/stencila/style/compare/@stencila/style-stencila@0.24.19...@stencila/style-stencila@0.24.20) (2021-11-30)
+
+### Bug Fixes
+
+- **Components:** Fix loading of library in non-browser contexts ([e419d32](https://github.com/stencila/style/commit/e419d3226d824a84d5faf62429c7fb5b164c035b))
+
 ## [0.24.19](https://github.com/stencila/style/compare/@stencila/style-stencila@0.24.18...@stencila/style-stencila@0.24.19) (2021-11-24)
 
 **Note:** Version bump only for package @stencila/style-stencila
