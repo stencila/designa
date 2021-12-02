@@ -5,6 +5,9 @@ export default {
   title: 'Atoms/Editor',
   component: 'stencila-editor',
   argTypes: {
+    activeLanguage: {
+      defaultValue: 'Python',
+    },
     executableLanguages: {
       control: { type: 'object' },
       defaultValue: {
@@ -52,6 +55,7 @@ const appendError = () => {
 }
 
 export const editor = ({
+  activeLanguage,
   lineNumbers,
   text,
   lineWrapping,
@@ -63,6 +67,7 @@ export const editor = ({
     <button @click=${appendError}>Add errors</button>
 
     <stencila-editor
+      .activeLanguage=${activeLanguage}
       .lineNumbers=${lineNumbers}
       .lineWrapping=${lineWrapping}
       .foldGutter=${foldGutter}
