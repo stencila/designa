@@ -1,7 +1,7 @@
 :root {
-  --font-family-display: 'Roboto', 'sans-serif';
-  --font-family-body: 'Roboto', 'sans-serif';
-  --font-family-mono: 'IBM Plex Mono', 'Fira Code', 'monospace';
+  --font-family-display: 'Roboto', sans-serif;
+  --font-family-body: 'Roboto', sans-serif;
+  --font-family-mono: 'IBM Plex Mono', 'Fira Code', monospace;
 
   --color-stock: #fff;
   --color-key: #000;

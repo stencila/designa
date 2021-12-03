@@ -1,7 +1,7 @@
 :root {
-  --font-family-display: 'Montserrat', 'sans-serif';
-  --font-family-body: 'Lato', 'sans-serif';
-  --font-family-mono: 'IBM Plex Mono', 'Fira Code', 'monospace';
+  --font-family-display: 'Montserrat', sans-serif;
+  --font-family-body: 'Lato', sans-serif;
+  --font-family-mono: 'IBM Plex Mono', 'Fira Code', monospace;
 
   --color-stock: #fff;
   --color-key: #4a4a4a;
