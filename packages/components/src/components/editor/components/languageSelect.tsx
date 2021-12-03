@@ -29,22 +29,8 @@ export const LanguagePicker = (props: Props): FunctionalComponent => {
     <label aria-label="Programming Language">
       <stencila-icon icon="terminal"></stencila-icon>
       <select onChange={props.onSetLanguage} ref={props.setRef}>
-        <optgroup label="Executable">
-          {hasExecutableLanguages ? (
-            Object.values(props.executableLanguages).map((language) => (
-              <option
-                value={language.name}
-                selected={language.name === activeLanguageByAlias.name}
-              >
-                {language.name}
-              </option>
-            ))
-          ) : (
-            <option disabled>None available</option>
-          )}
-        </optgroup>
-        <optgroup label="All languages">
-          {Object.values(filteredLanguages).map((language) => (
+        {hasExecutableLanguages &&
+          Object.values(props.executableLanguages).map((language) => (
             <option
               value={language.name}
               selected={language.name === activeLanguageByAlias.name}
@@ -52,7 +38,17 @@ export const LanguagePicker = (props: Props): FunctionalComponent => {
               {language.name}
             </option>
           ))}
-        </optgroup>
+
+        <option disabled>Non-executable</option>
+
+        {Object.values(filteredLanguages).map((language) => (
+          <option
+            value={language.name}
+            selected={language.name === activeLanguageByAlias.name}
+          >
+            {language.name}
+          </option>
+        ))}
       </select>
     </label>
   )
