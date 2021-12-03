@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.14.20](https://github.com/stencila/style/compare/@stencila/style-material@0.14.19...@stencila/style-material@0.14.20) (2021-12-03)
+
+### Bug Fixes
+
+- **CSS:** Fix fallback font names ([05ee571](https://github.com/stencila/style/commit/05ee571b41c18fd26577e68d658dc106026b6207))
+
 ### [0.14.19](https://github.com/stencila/style/compare/@stencila/style-material@0.14.18...@stencila/style-material@0.14.19) (2021-12-03)
 
 **Note:** Version bump only for package @stencila/style-material
