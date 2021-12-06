@@ -12,6 +12,13 @@
 | `programmingLanguage` | `programming-language` | Programming language of the CodeExpression                                                                        | `string`                                                                     | `undefined` |
 
 
+## Events
+
+| Event                      | Description                                               | Type                                                                     |
+| -------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `stencila-language-change` | Event emitted when the language of the editor is changed. | `CustomEvent<{ name: string; ext: string \| null; aliases: string[]; }>` |
+
+
 ## Methods
 
 ### `execute() => Promise<CodeExpression>`
@@ -59,15 +66,20 @@ Type: `Promise<CodeExpression>`
 
 - [stencila-button](../button)
 - [stencila-tooltip](../tooltip)
+- [stencila-menu](../menu)
+- [stencila-menu-item](../menuItem)
 
 ### Graph
 ```mermaid
 graph TD;
   stencila-code-expression --> stencila-button
   stencila-code-expression --> stencila-tooltip
+  stencila-code-expression --> stencila-menu
+  stencila-code-expression --> stencila-menu-item
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip
   stencila-tooltip --> stencila-tooltip-element
+  stencila-menu-item --> stencila-icon
   style stencila-code-expression fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

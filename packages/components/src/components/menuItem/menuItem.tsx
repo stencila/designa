@@ -17,9 +17,14 @@ export class MenuItem {
   @Prop()
   icon: IconNames | undefined
 
+  /**
+   * The overall size of the component.
+   */
+  @Prop() public size: 'xsmall' | 'small' | 'default' | 'large' = 'default'
+
   public render() {
     return (
-      <Host role="menuitem">
+      <Host role="menuitem" size={this.size}>
         {this.icon !== undefined && (
           <stencila-icon icon={this.icon}></stencila-icon>
         )}

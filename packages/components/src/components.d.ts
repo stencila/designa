@@ -167,6 +167,12 @@ export namespace Components {
          */
         "programmingLanguage": string;
     }
+    interface StencilaCodeFragment {
+        /**
+          * Programming language of the CodeFragment
+         */
+        "programmingLanguage": string | undefined;
+    }
     interface StencilaDataTable {
     }
     interface StencilaDetails {
@@ -360,6 +366,10 @@ export namespace Components {
     }
     interface StencilaMenu {
         /**
+          * Close the menu when losing focus
+         */
+        "autoClose": boolean;
+        /**
           * Determines whether the Menu is shown or not
          */
         "isOpen": boolean;
@@ -370,6 +380,10 @@ export namespace Components {
           * @see Icon component for possible values
          */
         "icon": IconNames | undefined;
+        /**
+          * The overall size of the component.
+         */
+        "size": 'xsmall' | 'small' | 'default' | 'large';
     }
     interface StencilaNodeList {
     }
@@ -472,6 +486,12 @@ declare global {
     var HTMLStencilaCodeExpressionElement: {
         prototype: HTMLStencilaCodeExpressionElement;
         new (): HTMLStencilaCodeExpressionElement;
+    };
+    interface HTMLStencilaCodeFragmentElement extends Components.StencilaCodeFragment, HTMLStencilElement {
+    }
+    var HTMLStencilaCodeFragmentElement: {
+        prototype: HTMLStencilaCodeFragmentElement;
+        new (): HTMLStencilaCodeFragmentElement;
     };
     interface HTMLStencilaDataTableElement extends Components.StencilaDataTable, HTMLStencilElement {
     }
@@ -599,6 +619,7 @@ declare global {
         "stencila-code-chunk": HTMLStencilaCodeChunkElement;
         "stencila-code-error": HTMLStencilaCodeErrorElement;
         "stencila-code-expression": HTMLStencilaCodeExpressionElement;
+        "stencila-code-fragment": HTMLStencilaCodeFragmentElement;
         "stencila-data-table": HTMLStencilaDataTableElement;
         "stencila-details": HTMLStencilaDetailsElement;
         "stencila-editor": HTMLStencilaEditorElement;
@@ -757,9 +778,23 @@ declare namespace LocalJSX {
     codeExpression: CodeExpression
   ) => Promise<CodeExpression>;
         /**
+          * Event emitted when the language of the editor is changed.
+         */
+        "onStencila-language-change"?: (event: CustomEvent<FileFormat>) => void;
+        /**
           * Programming language of the CodeExpression
          */
         "programmingLanguage"?: string;
+    }
+    interface StencilaCodeFragment {
+        /**
+          * Event emitted when the language of the editor is changed.
+         */
+        "onStencila-language-change"?: (event: CustomEvent<FileFormat>) => void;
+        /**
+          * Programming language of the CodeFragment
+         */
+        "programmingLanguage"?: string | undefined;
     }
     interface StencilaDataTable {
     }
@@ -946,6 +981,10 @@ declare namespace LocalJSX {
     }
     interface StencilaMenu {
         /**
+          * Close the menu when losing focus
+         */
+        "autoClose"?: boolean;
+        /**
           * Determines whether the Menu is shown or not
          */
         "isOpen"?: boolean;
@@ -956,6 +995,10 @@ declare namespace LocalJSX {
           * @see Icon component for possible values
          */
         "icon"?: IconNames | undefined;
+        /**
+          * The overall size of the component.
+         */
+        "size"?: 'xsmall' | 'small' | 'default' | 'large';
     }
     interface StencilaNodeList {
     }
@@ -1033,6 +1076,7 @@ declare namespace LocalJSX {
         "stencila-code-chunk": StencilaCodeChunk;
         "stencila-code-error": StencilaCodeError;
         "stencila-code-expression": StencilaCodeExpression;
+        "stencila-code-fragment": StencilaCodeFragment;
         "stencila-data-table": StencilaDataTable;
         "stencila-details": StencilaDetails;
         "stencila-editor": StencilaEditor;
@@ -1064,6 +1108,7 @@ declare module "@stencil/core" {
             "stencila-code-chunk": LocalJSX.StencilaCodeChunk & JSXBase.HTMLAttributes<HTMLStencilaCodeChunkElement>;
             "stencila-code-error": LocalJSX.StencilaCodeError & JSXBase.HTMLAttributes<HTMLStencilaCodeErrorElement>;
             "stencila-code-expression": LocalJSX.StencilaCodeExpression & JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement>;
+            "stencila-code-fragment": LocalJSX.StencilaCodeFragment & JSXBase.HTMLAttributes<HTMLStencilaCodeFragmentElement>;
             "stencila-data-table": LocalJSX.StencilaDataTable & JSXBase.HTMLAttributes<HTMLStencilaDataTableElement>;
             "stencila-details": LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
             "stencila-editor": LocalJSX.StencilaEditor & JSXBase.HTMLAttributes<HTMLStencilaEditorElement>;

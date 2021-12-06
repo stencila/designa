@@ -1,0 +1,34 @@
+:host,
+stencila-code-fragment {
+  /** @prop --background: Background color of the Code Fragment */
+  --background: var(--color-stock, #fff);
+
+  /** @prop --background-buttons: Background color of the Code Editor section */
+  --background-buttons: var(--color-neutral-50, #edf2f7);
+
+  /** @prop --border: Border color around the component as well as internal section dividers */
+  --border: var(--color-neutral-100, #e2e8f0);
+
+  @apply inline-flex text-sm p-0 leading-none whitespace-nowrap align-text-bottom text-key border border-solid rounded;
+  background-color: var(--background);
+  border-color: var(--border);
+
+  .actionsSecondary {
+    @apply inline-block w-0 overflow-hidden cursor-default transition ease-out duration-150;
+    background-color: var(--background-buttons);
+  }
+
+  &.hover,
+  &:focus,
+  &:focus-within,
+  &:hover {
+    .actionsSecondary {
+      @apply inline-flex w-5 max-w-full;
+    }
+  }
+
+  .text {
+    @apply p-1;
+    background-color: var(--background-editor);
+  }
+}
