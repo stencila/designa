@@ -51,6 +51,12 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   ) => Promise<CodeExpression>
 
   /**
+   * Disallow editing of the editor contents when set to `true`
+   */
+  @Prop()
+  public readOnly = false
+
+  /**
    * Programming language of the CodeExpression
    */
   @Prop({ mutable: true })
@@ -264,12 +270,12 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
             activeLanguage={this.programmingLanguage ?? ''}
             onSetLanguage={this.onSelectLanguage}
             executableLanguages={FileFormatUtils.fileFormatMap}
-            setRef={() => {}}
+            disabled={this.readOnly}
           ></LanguagePickerInline>
         </span>
         <span
           class="text"
-          contentEditable={true}
+          contentEditable={!this.readOnly}
           onBlur={this.removeHoverState}
           tabIndex={this.isCodeVisible ? 0 : -1}
           role="textbox"

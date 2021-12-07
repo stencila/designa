@@ -18,7 +18,7 @@ export const codeFragment = () => html`
     </p>
     <p>
       <span>With a language</span>
-      <stencila-code-fragment programming-language="python">
+      <stencila-code-fragment programming-language="python" .readOnly=${true}>
         <code
           itemtype="http://schema.stenci.la/CodeFragment"
           itemscope

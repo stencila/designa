@@ -3,6 +3,7 @@ import { FileFormatMap, lookupFormat } from '../languageUtils'
 
 interface Props {
   activeLanguage: string
+  disabled: boolean
   languageCapabilities: FileFormatMap
   executableLanguages: FileFormatMap
   onSetLanguage: (e: Event) => void
@@ -28,7 +29,11 @@ export const LanguagePicker = (props: Props): FunctionalComponent => {
   return (
     <label aria-label="Programming Language">
       <stencila-icon icon="terminal"></stencila-icon>
-      <select onChange={props.onSetLanguage} ref={props.setRef}>
+      <select
+        onChange={props.onSetLanguage}
+        ref={props.setRef}
+        disabled={props.disabled}
+      >
         {hasExecutableLanguages &&
           Object.values(props.executableLanguages).map((language) => (
             <option

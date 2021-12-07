@@ -166,12 +166,20 @@ export namespace Components {
           * Programming language of the CodeExpression
          */
         "programmingLanguage": string;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly": boolean;
     }
     interface StencilaCodeFragment {
         /**
           * Programming language of the CodeFragment
          */
         "programmingLanguage": string | undefined;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly": boolean;
     }
     interface StencilaDataTable {
     }
@@ -785,6 +793,10 @@ declare namespace LocalJSX {
           * Programming language of the CodeExpression
          */
         "programmingLanguage"?: string;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly"?: boolean;
     }
     interface StencilaCodeFragment {
         /**
@@ -795,6 +807,10 @@ declare namespace LocalJSX {
           * Programming language of the CodeFragment
          */
         "programmingLanguage"?: string | undefined;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly"?: boolean;
     }
     interface StencilaDataTable {
     }

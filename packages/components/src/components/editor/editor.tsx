@@ -679,6 +679,7 @@ export class Editor {
           <menu>
             <LanguagePicker
               activeLanguage={this.activeLanguage}
+              disabled={this.readOnly}
               onSetLanguage={this.onSelectLanguage}
               languageCapabilities={this.languageCapabilities}
               executableLanguages={this.executableLanguages}
