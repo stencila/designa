@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.24.22...@stencila/style-stencila@0.25.0) (2021-12-07)
+
+### Features
+
+- **Code Fragment:** Add CodeFragment component ([a909285](https://github.com/stencila/style/commit/a9092850db4381544aa0ad0bba9b63bb833de933))
+- **CodeBlock:** Add CodeBlock component ([3c1b094](https://github.com/stencila/style/commit/3c1b0945e4fe1d534115a0a878f2cb89efbbc362))
+
 ### [0.24.22](https://github.com/stencila/style/compare/@stencila/style-stencila@0.24.21...@stencila/style-stencila@0.24.22) (2021-12-03)
 
 ### Bug Fixes

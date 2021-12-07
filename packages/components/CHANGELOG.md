@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.45.0](https://github.com/stencila/designa/compare/@stencila/components@0.44.3...@stencila/components@0.45.0) (2021-12-07)
+
+### Features
+
+- **Code:** Add read only modes to CodeFragments & CodeExpressions ([fa262a4](https://github.com/stencila/designa/commit/fa262a4cf5644c913a178ade619a96c81c531b10))
+- **Code Fragment:** Add CodeFragment component ([a909285](https://github.com/stencila/designa/commit/a9092850db4381544aa0ad0bba9b63bb833de933))
+- **CodeBlock:** Add CodeBlock component ([3c1b094](https://github.com/stencila/designa/commit/3c1b0945e4fe1d534115a0a878f2cb89efbbc362))
+- **Editor:** Add TypeScript syntax support ([e1c7921](https://github.com/stencila/designa/commit/e1c792198c1d6c540fe5ad849a1caa2ec702b486))
+
 ### [0.44.3](https://github.com/stencila/designa/compare/@stencila/components@0.44.2...@stencila/components@0.44.3) (2021-12-03)
 
 **Note:** Version bump only for package @stencila/components
