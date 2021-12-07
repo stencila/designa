@@ -114,6 +114,7 @@ Type: `Promise<void>`
 
 ### Used by
 
+ - [stencila-code-block](../codeBlock)
  - [stencila-code-chunk](../codeChunk)
 
 ### Depends on
@@ -124,6 +125,7 @@ Type: `Promise<void>`
 ```mermaid
 graph TD;
   stencila-editor --> stencila-icon
+  stencila-code-block --> stencila-editor
   stencila-code-chunk --> stencila-editor
   style stencila-editor fill:#f9f,stroke:#333,stroke-width:4px
 ```

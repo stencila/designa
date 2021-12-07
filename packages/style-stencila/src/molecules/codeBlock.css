@@ -1,0 +1,40 @@
+@import '../base.css';
+@import '../atoms/code.css';
+@import '../atoms/pre.css';
+
+.preReset {
+  @apply p-0 m-0 border-0;
+}
+
+:host,
+stencila-code-block {
+  /** @prop --background-editor: Background color of the Code Editor section */
+  --background-editor: var(--color-neutral-50, #edf2f7);
+
+  /** @prop --border: Border color around the component as well as internal section dividers */
+  --border: var(--color-neutral-100, #e2e8f0);
+
+  @apply relative block w-full my-4 overflow-hidden border border-solid rounded;
+  border-color: var(--border);
+
+  & > figure {
+    @apply m-0 p-0;
+  }
+
+  stencila-editor {
+    --border-width: 0;
+    @apply flex-grow;
+  }
+}
+
+.editorContainer {
+  @apply relative flex flex-col flex-auto m-0 border-t-0 border-b border-l-0 border-r-0 rounded-none;
+  background: var(--background-editor);
+  border-color: var(--border);
+  height: intrinsic;
+
+  pre,
+  pre[class*='language-'] {
+    @apply bg-transparent;
+  }
+}
