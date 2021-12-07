@@ -1,5 +1,5 @@
 :host {
-  @apply flex items-center h-8 px-2 text-sm leading-none tracking-wide no-underline uppercase cursor-pointer font-body text-key;
+  @apply flex items-center h-8 px-2 text-sm leading-none tracking-wide no-underline cursor-pointer font-body text-key;
 
   &:hover {
     @apply bg-neutral-50;
@@ -7,5 +7,17 @@
 
   stencila-icon {
     @apply mr-2;
+  }
+
+  &[size='xsmall'] {
+    @apply h-5 text-xs;
+
+    stencila-icon {
+      @apply mr-1;
+    }
+  }
+
+  &[size='sm'] {
+    @apply h-6 text-base;
   }
 }

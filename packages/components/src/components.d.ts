@@ -7,9 +7,9 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Colors } from "./types";
 import { IconNames } from "./components/icon/iconNames";
-import { CodeChunk, CodeError, CodeExpression, ImageObject } from "@stencila/schema";
 import { FileFormat, FileFormatMap } from "./components/editor/languageUtils";
 import { Keymap } from "./components/editor/editor";
+import { CodeBlock, CodeChunk, CodeError, CodeExpression, ImageObject } from "@stencila/schema";
 import { EditorContents, EditorStateJSON, Keymap as Keymap1 } from "./components/editor/editor";
 import { EditorUpdateHandlerCb } from "./components/editor/customizations/onUpdateHandlerExtension";
 import { EditorView, ViewUpdate } from "@codemirror/view";
@@ -94,6 +94,45 @@ export namespace Components {
          */
         "tooltip"?: string;
     }
+    interface StencilaCodeBlock {
+        /**
+          * Autofocus the editor on page load
+         */
+        "autofocus": boolean;
+        /**
+          * List of programming languages that can be executed in the current context
+         */
+        "executableLanguages": FileFormatMap;
+        /**
+          * Enables ability to fold sections of code if the syntax package supports it
+         */
+        "foldGutter": boolean;
+        /**
+          * Returns the `CodeChunk` node with the updated `text` content from the editor.
+         */
+        "getContents": () => Promise<CodeBlock>;
+        /**
+          * Custom keyboard shortcuts to pass along to CodeMirror
+          * @see https://codemirror.net/6/docs/ref/#keymap
+         */
+        "keymap": Keymap[];
+        /**
+          * Determines the visibility of line numbers
+         */
+        "lineNumbers": boolean;
+        /**
+          * Control line wrapping of text inside the editor
+         */
+        "lineWrapping": boolean;
+        /**
+          * Programming language of the CodeChunk
+         */
+        "programmingLanguage": string | undefined;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly": boolean;
+    }
     interface StencilaCodeChunk {
         /**
           * Autofocus the editor on page load
@@ -166,6 +205,20 @@ export namespace Components {
           * Programming language of the CodeExpression
          */
         "programmingLanguage": string;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly": boolean;
+    }
+    interface StencilaCodeFragment {
+        /**
+          * Programming language of the CodeFragment
+         */
+        "programmingLanguage": string | undefined;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly": boolean;
     }
     interface StencilaDataTable {
     }
@@ -360,6 +413,10 @@ export namespace Components {
     }
     interface StencilaMenu {
         /**
+          * Close the menu when losing focus
+         */
+        "autoClose": boolean;
+        /**
           * Determines whether the Menu is shown or not
          */
         "isOpen": boolean;
@@ -370,6 +427,10 @@ export namespace Components {
           * @see Icon component for possible values
          */
         "icon": IconNames | undefined;
+        /**
+          * The overall size of the component.
+         */
+        "size": 'xsmall' | 'small' | 'default' | 'large';
     }
     interface StencilaNodeList {
     }
@@ -455,6 +516,12 @@ declare global {
         prototype: HTMLStencilaButtonElement;
         new (): HTMLStencilaButtonElement;
     };
+    interface HTMLStencilaCodeBlockElement extends Components.StencilaCodeBlock, HTMLStencilElement {
+    }
+    var HTMLStencilaCodeBlockElement: {
+        prototype: HTMLStencilaCodeBlockElement;
+        new (): HTMLStencilaCodeBlockElement;
+    };
     interface HTMLStencilaCodeChunkElement extends Components.StencilaCodeChunk, HTMLStencilElement {
     }
     var HTMLStencilaCodeChunkElement: {
@@ -472,6 +539,12 @@ declare global {
     var HTMLStencilaCodeExpressionElement: {
         prototype: HTMLStencilaCodeExpressionElement;
         new (): HTMLStencilaCodeExpressionElement;
+    };
+    interface HTMLStencilaCodeFragmentElement extends Components.StencilaCodeFragment, HTMLStencilElement {
+    }
+    var HTMLStencilaCodeFragmentElement: {
+        prototype: HTMLStencilaCodeFragmentElement;
+        new (): HTMLStencilaCodeFragmentElement;
     };
     interface HTMLStencilaDataTableElement extends Components.StencilaDataTable, HTMLStencilElement {
     }
@@ -596,9 +669,11 @@ declare global {
     interface HTMLElementTagNameMap {
         "stencila-action-menu": HTMLStencilaActionMenuElement;
         "stencila-button": HTMLStencilaButtonElement;
+        "stencila-code-block": HTMLStencilaCodeBlockElement;
         "stencila-code-chunk": HTMLStencilaCodeChunkElement;
         "stencila-code-error": HTMLStencilaCodeErrorElement;
         "stencila-code-expression": HTMLStencilaCodeExpressionElement;
+        "stencila-code-fragment": HTMLStencilaCodeFragmentElement;
         "stencila-data-table": HTMLStencilaDataTableElement;
         "stencila-details": HTMLStencilaDetailsElement;
         "stencila-editor": HTMLStencilaEditorElement;
@@ -696,6 +771,41 @@ declare namespace LocalJSX {
          */
         "tooltip"?: string;
     }
+    interface StencilaCodeBlock {
+        /**
+          * Autofocus the editor on page load
+         */
+        "autofocus"?: boolean;
+        /**
+          * List of programming languages that can be executed in the current context
+         */
+        "executableLanguages"?: FileFormatMap;
+        /**
+          * Enables ability to fold sections of code if the syntax package supports it
+         */
+        "foldGutter"?: boolean;
+        /**
+          * Custom keyboard shortcuts to pass along to CodeMirror
+          * @see https://codemirror.net/6/docs/ref/#keymap
+         */
+        "keymap"?: Keymap[];
+        /**
+          * Determines the visibility of line numbers
+         */
+        "lineNumbers"?: boolean;
+        /**
+          * Control line wrapping of text inside the editor
+         */
+        "lineWrapping"?: boolean;
+        /**
+          * Programming language of the CodeChunk
+         */
+        "programmingLanguage"?: string | undefined;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly"?: boolean;
+    }
     interface StencilaCodeChunk {
         /**
           * Autofocus the editor on page load
@@ -757,9 +867,31 @@ declare namespace LocalJSX {
     codeExpression: CodeExpression
   ) => Promise<CodeExpression>;
         /**
+          * Event emitted when the language of the editor is changed.
+         */
+        "onStencila-language-change"?: (event: CustomEvent<FileFormat>) => void;
+        /**
           * Programming language of the CodeExpression
          */
         "programmingLanguage"?: string;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly"?: boolean;
+    }
+    interface StencilaCodeFragment {
+        /**
+          * Event emitted when the language of the editor is changed.
+         */
+        "onStencila-language-change"?: (event: CustomEvent<FileFormat>) => void;
+        /**
+          * Programming language of the CodeFragment
+         */
+        "programmingLanguage"?: string | undefined;
+        /**
+          * Disallow editing of the editor contents when set to `true`
+         */
+        "readOnly"?: boolean;
     }
     interface StencilaDataTable {
     }
@@ -946,6 +1078,10 @@ declare namespace LocalJSX {
     }
     interface StencilaMenu {
         /**
+          * Close the menu when losing focus
+         */
+        "autoClose"?: boolean;
+        /**
           * Determines whether the Menu is shown or not
          */
         "isOpen"?: boolean;
@@ -956,6 +1092,10 @@ declare namespace LocalJSX {
           * @see Icon component for possible values
          */
         "icon"?: IconNames | undefined;
+        /**
+          * The overall size of the component.
+         */
+        "size"?: 'xsmall' | 'small' | 'default' | 'large';
     }
     interface StencilaNodeList {
     }
@@ -1030,9 +1170,11 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "stencila-action-menu": StencilaActionMenu;
         "stencila-button": StencilaButton;
+        "stencila-code-block": StencilaCodeBlock;
         "stencila-code-chunk": StencilaCodeChunk;
         "stencila-code-error": StencilaCodeError;
         "stencila-code-expression": StencilaCodeExpression;
+        "stencila-code-fragment": StencilaCodeFragment;
         "stencila-data-table": StencilaDataTable;
         "stencila-details": StencilaDetails;
         "stencila-editor": StencilaEditor;
@@ -1061,9 +1203,11 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "stencila-action-menu": LocalJSX.StencilaActionMenu & JSXBase.HTMLAttributes<HTMLStencilaActionMenuElement>;
             "stencila-button": LocalJSX.StencilaButton & JSXBase.HTMLAttributes<HTMLStencilaButtonElement>;
+            "stencila-code-block": LocalJSX.StencilaCodeBlock & JSXBase.HTMLAttributes<HTMLStencilaCodeBlockElement>;
             "stencila-code-chunk": LocalJSX.StencilaCodeChunk & JSXBase.HTMLAttributes<HTMLStencilaCodeChunkElement>;
             "stencila-code-error": LocalJSX.StencilaCodeError & JSXBase.HTMLAttributes<HTMLStencilaCodeErrorElement>;
             "stencila-code-expression": LocalJSX.StencilaCodeExpression & JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement>;
+            "stencila-code-fragment": LocalJSX.StencilaCodeFragment & JSXBase.HTMLAttributes<HTMLStencilaCodeFragmentElement>;
             "stencila-data-table": LocalJSX.StencilaDataTable & JSXBase.HTMLAttributes<HTMLStencilaDataTableElement>;
             "stencila-details": LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
             "stencila-editor": LocalJSX.StencilaEditor & JSXBase.HTMLAttributes<HTMLStencilaEditorElement>;

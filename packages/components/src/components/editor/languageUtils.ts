@@ -72,6 +72,11 @@ export const fileFormatMap: FileFormatMap = {
     ext: 'toml',
     aliases: ['toml'],
   },
+  TypeScript: {
+    name: 'TypeScript',
+    ext: 'ts',
+    aliases: ['typescript', 'ts'],
+  },
   XML: {
     name: 'XML',
     ext: 'xml',

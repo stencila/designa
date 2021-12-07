@@ -1,6 +1,8 @@
 import {
   Component,
   Element,
+  Event,
+  EventEmitter,
   h,
   Host,
   Listen,
@@ -9,9 +11,12 @@ import {
   State,
 } from '@stencil/core'
 import { codeExpression, CodeExpression, isA } from '@stencila/schema'
+import { FileFormatUtils } from '../..'
 import { StencilaNodeUpdateEvent } from '../../globals/events'
 import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
+import { FileFormat, lookupFormat } from '../editor/languageUtils'
 import { getSlotByName } from '../utils/slotSelectors'
+import { LanguagePickerInline } from './languageSelect'
 
 const slots = {
   text: 'text',
@@ -46,10 +51,30 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   ) => Promise<CodeExpression>
 
   /**
-   * Programming language of the CodeExpression
+   * Disallow editing of the editor contents when set to `true`
    */
   @Prop()
+  public readOnly = false
+
+  /**
+   * Programming language of the CodeExpression
+   */
+  @Prop({ mutable: true })
   public programmingLanguage: string
+
+  /**
+   * Event emitted when the language of the editor is changed.
+   */
+  @Event({ eventName: 'stencila-language-change' })
+  languageChange: EventEmitter<FileFormat>
+
+  /**
+   * Function to call when the user selects a new language from the language picker dropdown.
+   */
+  private onSelectLanguage = async (language: string): Promise<void> => {
+    this.languageChange.emit(lookupFormat(language))
+    this.programmingLanguage = language
+  }
 
   /**
    * Stencila CodeExpression node to render
@@ -230,8 +255,8 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
           tooltip="Run"
         ></stencila-button>
         <stencila-button
-          aria-label="Run Code"
-          class="sourceToggle"
+          aria-label={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
+          class="secondaryAction"
           onClick={this.toggleCodeVisibility}
           color="key"
           icon={this.isCodeVisible ? 'eye-off' : 'eye'}
@@ -240,9 +265,17 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
           size="xsmall"
           tooltip={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
         ></stencila-button>
+        <span class="secondaryAction">
+          <LanguagePickerInline
+            activeLanguage={this.programmingLanguage ?? ''}
+            onSetLanguage={this.onSelectLanguage}
+            executableLanguages={FileFormatUtils.fileFormatMap}
+            disabled={this.readOnly}
+          ></LanguagePickerInline>
+        </span>
         <span
           class="text"
-          contentEditable={true}
+          contentEditable={!this.readOnly}
           onBlur={this.removeHoverState}
           tabIndex={this.isCodeVisible ? 0 : -1}
           role="textbox"

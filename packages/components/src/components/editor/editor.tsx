@@ -225,6 +225,10 @@ export class Editor {
         const { javascript } = await import('@codemirror/lang-javascript')
         return javascript()
       }
+      case 'typescript': {
+        const { javascript } = await import('@codemirror/lang-javascript')
+        return javascript({ typescript: true })
+      }
       case 'json': {
         const { json } = await import('@codemirror/lang-json')
         return json()
@@ -679,6 +683,7 @@ export class Editor {
           <menu>
             <LanguagePicker
               activeLanguage={this.activeLanguage}
+              disabled={this.readOnly}
               onSetLanguage={this.onSelectLanguage}
               languageCapabilities={this.languageCapabilities}
               executableLanguages={this.executableLanguages}

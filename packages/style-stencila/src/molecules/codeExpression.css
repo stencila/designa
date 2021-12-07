@@ -77,10 +77,10 @@ stencila-code-expression {
   .actions stencila-button {
     @apply inline-flex items-stretch self-start flex-shrink-0 overflow-hidden cursor-default transition ease-out duration-150;
     transition-property: padding, width, max-width;
+  }
 
-    &.sourceToggle {
-      @apply inline-block w-0;
-    }
+  .actions .secondaryAction {
+    @apply inline-block w-0 overflow-hidden cursor-default transition ease-out duration-150;
   }
 
   &.isOutputEmpty {
@@ -96,8 +96,8 @@ stencila-code-expression {
   &:focus,
   &:focus-within,
   &:hover {
-    .actions stencila-button.sourceToggle {
-      @apply inline-flex w-8 max-w-full;
+    .actions .secondaryAction {
+      @apply inline-flex w-5 max-w-full;
     }
   }
 }

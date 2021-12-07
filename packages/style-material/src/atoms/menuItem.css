@@ -8,4 +8,16 @@
   stencila-icon {
     @apply mr-2;
   }
+
+  &[size='xsmall'] {
+    @apply h-5 text-xs;
+
+    stencila-icon {
+      @apply mr-1;
+    }
+  }
+
+  &[size='sm'] {
+    @apply h-6 text-base;
+  }
 }
