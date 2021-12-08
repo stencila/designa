@@ -63,7 +63,7 @@
     "postcss-host": "2.0.1",
     "postcss-import": "14.0.2",
     "postcss-import-url": "7.0.0",
-    "postcss-mixins": "8.1.0",
+    "postcss-mixins": "9.0.1",
     "postcss-modules": "4.2.2",
     "postcss-nested": "5.0.6",
     "postcss-url": "10.1.3",
