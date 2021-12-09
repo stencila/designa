@@ -115,13 +115,10 @@ export class Tooltip implements ComponentInterface {
   watchHandler(newText: string): void {
     if (this.tooltipRef !== undefined) {
       this.tooltipRef.innerText = newText
-      if (this.popperRef) {
-        this.popperRef
-          .update()
-          .catch((err) =>
-            console.log('could not update Tooltip position\n', err)
-          )
-      }
+
+      this.popperRef
+        ?.update()
+        .catch((err) => console.log('could not update Tooltip position\n', err))
     }
   }
 
