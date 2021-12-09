@@ -2,7 +2,7 @@ import { Component, Element, h, Host, Prop, State } from '@stencil/core'
 import { CodeError } from '@stencila/schema'
 import { IconNames } from '../icon/iconNames'
 
-type Level = 'info' | 'warning' | 'error'
+export type Level = 'info' | 'warning' | 'error'
 
 @Component({
   tag: 'stencila-code-error',
