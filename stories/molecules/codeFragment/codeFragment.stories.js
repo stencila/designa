@@ -10,22 +10,21 @@ export const codeFragment = () => html`
     <p>
       <span>Some</span>
       <stencila-code-fragment>
-        <code itemtype="http://schema.stenci.la/CodeFragment" itemscope
-          >code</code
-        >
+        <code slot="text">code</code>
       </stencila-code-fragment>
       <span>in a paragraph.</span>
     </p>
     <p>
       <span>With a language</span>
-      <stencila-code-fragment programming-language="python" .readOnly=${true}>
-        <code
-          itemtype="http://schema.stenci.la/CodeFragment"
-          itemscope
-          class="language-python"
-        >
-          <meta itemprop="programmingLanguage" content="python" />1 + 1</code
-        >
+      <stencila-code-fragment
+        programming-language="python"
+        .readOnly=${true}
+        itemtype="http://schema.stenci.la/CodeFragment"
+      >
+        <code slot="text" class="language-python">
+          <meta itemprop="programmingLanguage" content="python" />
+          1 + 1
+        </code>
       </stencila-code-fragment>
       <span>specified.</span>
     </p>

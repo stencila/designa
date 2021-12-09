@@ -11,10 +11,14 @@ import {
   State,
 } from '@stencil/core'
 import { codeExpression, CodeExpression, isA } from '@stencila/schema'
-import { FileFormatUtils } from '../..'
 import { StencilaNodeUpdateEvent } from '../../globals/events'
 import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
-import { FileFormat, lookupFormat } from '../editor/languageUtils'
+import {
+  FileFormat,
+  fileFormatMap,
+  FileFormatMap,
+  lookupFormat,
+} from '../editor/languageUtils'
 import { getSlotByName } from '../utils/slotSelectors'
 import { LanguagePickerInline } from './languageSelect'
 
@@ -61,6 +65,19 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
    */
   @Prop({ mutable: true })
   public programmingLanguage: string
+
+  /**
+   * List of all supported programming languages
+   */
+  @Prop()
+  public languageCapabilities: FileFormatMap = fileFormatMap
+
+  /**
+   * List of programming languages that can be executed in the current context
+   */
+  @Prop()
+  public executableLanguages: FileFormatMap =
+    window.stencilaWebClient?.executableLanguages ?? {}
 
   /**
    * Event emitted when the language of the editor is changed.
@@ -268,8 +285,9 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
         <span class="secondaryAction">
           <LanguagePickerInline
             activeLanguage={this.programmingLanguage ?? ''}
+            languageCapabilities={this.languageCapabilities}
+            executableLanguages={this.executableLanguages}
             onSetLanguage={this.onSelectLanguage}
-            executableLanguages={FileFormatUtils.fileFormatMap}
             disabled={this.readOnly}
           ></LanguagePickerInline>
         </span>

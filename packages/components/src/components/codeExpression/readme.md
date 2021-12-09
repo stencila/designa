@@ -5,12 +5,14 @@
 
 ## Properties
 
-| Property              | Attribute              | Description                                                                                                       | Type                                                                         | Default     |
-| --------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ----------- |
-| `codeExpression`      | --                     | Stencila CodeExpression node to render                                                                            | `CodeExpression \| undefined`                                                | `undefined` |
-| `executeHandler`      | --                     | A callback function to be called with the value of the `CodeExpression` node when executing the `CodeExpression`. | `((codeExpression: CodeExpression) => Promise<CodeExpression>) \| undefined` | `undefined` |
-| `programmingLanguage` | `programming-language` | Programming language of the CodeExpression                                                                        | `string`                                                                     | `undefined` |
-| `readOnly`            | `read-only`            | Disallow editing of the editor contents when set to `true`                                                        | `boolean`                                                                    | `false`     |
+| Property               | Attribute              | Description                                                                                                       | Type                                                                         | Default                                               |
+| ---------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `codeExpression`       | --                     | Stencila CodeExpression node to render                                                                            | `CodeExpression \| undefined`                                                | `undefined`                                           |
+| `executableLanguages`  | --                     | List of programming languages that can be executed in the current context                                         | `{ [x: string]: FileFormat; }`                                               | `window.stencilaWebClient?.executableLanguages ?? {}` |
+| `executeHandler`       | --                     | A callback function to be called with the value of the `CodeExpression` node when executing the `CodeExpression`. | `((codeExpression: CodeExpression) => Promise<CodeExpression>) \| undefined` | `undefined`                                           |
+| `languageCapabilities` | --                     | List of all supported programming languages                                                                       | `{ [x: string]: FileFormat; }`                                               | `fileFormatMap`                                       |
+| `programmingLanguage`  | `programming-language` | Programming language of the CodeExpression                                                                        | `string`                                                                     | `undefined`                                           |
+| `readOnly`             | `read-only`            | Disallow editing of the editor contents when set to `true`                                                        | `boolean`                                                                    | `false`                                               |
 
 
 ## Events

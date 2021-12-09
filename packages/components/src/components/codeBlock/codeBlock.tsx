@@ -1,5 +1,7 @@
-import { Component, Element, h, Host, Method, Prop } from '@stencil/core'
+import { EditorView } from '@codemirror/view'
+import { Component, h, Host, Method, Prop } from '@stencil/core'
 import { CodeBlock, codeBlock } from '@stencila/schema'
+import { EditorUpdateHandlerCb } from '../editor/customizations/onUpdateHandlerExtension'
 import { Keymap } from '../editor/editor'
 import {
   FileFormat,
@@ -29,9 +31,14 @@ export class CodeBlockComponent {
     label: 'label',
   }
 
-  @Element() private el: HTMLStencilaCodeBlockElement
+  public editorRef: HTMLStencilaEditorElement | undefined
 
-  private editorRef: HTMLStencilaEditorElement | null
+  /**
+   * Source code contents of the CodeChunk.
+   * Corresponds to the `text` property of the CodeBlock schema.
+   */
+  @Prop()
+  public text?: string
 
   /**
    * Autofocus the editor on page load
@@ -72,13 +79,20 @@ export class CodeBlockComponent {
    * List of programming languages that can be executed in the current context
    */
   @Prop()
-  public executableLanguages: FileFormatMap = {}
+  public executableLanguages: FileFormatMap =
+    window.stencilaWebClient?.executableLanguages ?? {}
 
   /**
    * Custom keyboard shortcuts to pass along to CodeMirror
    * @see https://codemirror.net/6/docs/ref/#keymap
    */
   @Prop() public keymap: Keymap[] = []
+
+  /**
+   * Callback function to invoke whenever the editor contents are updated.
+   */
+  @Prop()
+  public contentChangeHandler?: EditorUpdateHandlerCb
 
   /**
    * Listen for the `stencila-language-change` event emitted by the language dropdown
@@ -93,10 +107,6 @@ export class CodeBlockComponent {
     }
   }
 
-  componentDidLoad(): void {
-    this.editorRef = this.el.querySelector('stencila-editor')
-  }
-
   /**
    * Returns the `CodeChunk` node with the updated `text` content from the editor.
    */
@@ -108,6 +118,15 @@ export class CodeBlockComponent {
     }
 
     throw new Error('Could not get CodeChunk contents')
+  }
+
+  /**
+   * Retrieve a reference to the internal CodeMirror editor.
+   * Allows for maintaining state from applications making use of this component.
+   */
+  @Method()
+  public async getRef(): Promise<EditorView | undefined> {
+    return this.editorRef?.getRef()
   }
 
   public render(): HTMLElement {
@@ -130,6 +149,9 @@ export class CodeBlockComponent {
                 foldGutter={this.foldGutter}
                 lineNumbers={this.lineNumbers}
                 lineWrapping={this.lineWrapping}
+                ref={(el) => {
+                  this.editorRef = el
+                }}
               >
                 <slot name={CodeBlockComponent.slots.text} />
                 <slot name={CodeBlockComponent.slots.errors} />

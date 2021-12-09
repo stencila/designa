@@ -1,3 +1,5 @@
+import { FileFormatMap } from './components/editor/languageUtils'
+
 export enum ThemeColors {
   brand = 'brand',
   danger = 'danger',
@@ -10,3 +12,11 @@ export enum ThemeColors {
 }
 
 export type Colors = keyof typeof ThemeColors
+
+declare global {
+  interface Window {
+    stencilaWebClient?: {
+      executableLanguages: FileFormatMap
+    }
+  }
+}

@@ -9,10 +9,11 @@ import { Colors } from "./types";
 import { IconNames } from "./components/icon/iconNames";
 import { FileFormat, FileFormatMap } from "./components/editor/languageUtils";
 import { Keymap } from "./components/editor/editor";
-import { CodeBlock, CodeChunk, CodeError, CodeExpression, ImageObject } from "@stencila/schema";
-import { EditorContents, EditorStateJSON, Keymap as Keymap1 } from "./components/editor/editor";
 import { EditorUpdateHandlerCb } from "./components/editor/customizations/onUpdateHandlerExtension";
+import { CodeBlock, CodeChunk, CodeError, CodeExpression, ImageObject } from "@stencila/schema";
 import { EditorView, ViewUpdate } from "@codemirror/view";
+import { Level } from "./components/error/error";
+import { EditorContents, EditorStateJSON, Keymap as Keymap1 } from "./components/editor/editor";
 import { Config, Data, Layout } from "plotly.js";
 import { VisualizationSpec } from "vega-embed";
 import { VegaLoadEvent } from "./components/imageDynamic/imageVega/imageVegaUtils";
@@ -100,6 +101,10 @@ export namespace Components {
          */
         "autofocus": boolean;
         /**
+          * Callback function to invoke whenever the editor contents are updated.
+         */
+        "contentChangeHandler"?: EditorUpdateHandlerCb;
+        /**
           * List of programming languages that can be executed in the current context
          */
         "executableLanguages": FileFormatMap;
@@ -111,6 +116,10 @@ export namespace Components {
           * Returns the `CodeChunk` node with the updated `text` content from the editor.
          */
         "getContents": () => Promise<CodeBlock>;
+        /**
+          * Retrieve a reference to the internal CodeMirror editor. Allows for maintaining state from applications making use of this component.
+         */
+        "getRef": () => Promise<EditorView | undefined>;
         /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
@@ -132,6 +141,10 @@ export namespace Components {
           * Disallow editing of the editor contents when set to `true`
          */
         "readOnly": boolean;
+        /**
+          * Source code contents of the CodeChunk. Corresponds to the `text` property of the CodeBlock schema.
+         */
+        "text"?: string;
     }
     interface StencilaCodeChunk {
         /**
@@ -142,6 +155,10 @@ export namespace Components {
           * Stencila CodeChunk node to render
          */
         "codeChunk"?: CodeChunk;
+        /**
+          * Callback function to invoke whenever the editor contents are updated.
+         */
+        "contentChangeHandler"?: EditorUpdateHandlerCb;
         /**
           * List of programming languages that can be executed in the current context
          */
@@ -159,6 +176,10 @@ export namespace Components {
          */
         "getContents": () => Promise<CodeChunk>;
         /**
+          * Retrieve a reference to the internal CodeMirror editor. Allows for maintaining state from applications making use of this component.
+         */
+        "getRef": () => Promise<EditorView | undefined>;
+        /**
           * Whether the code section is visible or not
          */
         "isCodeVisible": boolean;
@@ -168,9 +189,14 @@ export namespace Components {
          */
         "keymap": Keymap[];
         /**
+          * List of all supported programming languages
+         */
+        "languageCapabilities": FileFormatMap;
+        /**
           * Programming language of the CodeChunk
          */
         "programmingLanguage": string | undefined;
+        "text"?: string;
     }
     interface StencilaCodeError {
         /**
@@ -188,6 +214,10 @@ export namespace Components {
          */
         "codeExpression"?: CodeExpression;
         /**
+          * List of programming languages that can be executed in the current context
+         */
+        "executableLanguages": FileFormatMap;
+        /**
           * Run the `CodeExpression`
          */
         "execute": () => Promise<CodeExpression>;
@@ -202,6 +232,10 @@ export namespace Components {
          */
         "getContents": () => Promise<CodeExpression>;
         /**
+          * List of all supported programming languages
+         */
+        "languageCapabilities": FileFormatMap;
+        /**
           * Programming language of the CodeExpression
          */
         "programmingLanguage": string;
@@ -211,6 +245,14 @@ export namespace Components {
         "readOnly": boolean;
     }
     interface StencilaCodeFragment {
+        /**
+          * List of programming languages that can be executed in the current context
+         */
+        "executableLanguages": FileFormatMap;
+        /**
+          * List of all supported programming languages
+         */
+        "languageCapabilities": FileFormatMap;
         /**
           * Programming language of the CodeFragment
          */
@@ -777,6 +819,10 @@ declare namespace LocalJSX {
          */
         "autofocus"?: boolean;
         /**
+          * Callback function to invoke whenever the editor contents are updated.
+         */
+        "contentChangeHandler"?: EditorUpdateHandlerCb;
+        /**
           * List of programming languages that can be executed in the current context
          */
         "executableLanguages"?: FileFormatMap;
@@ -805,6 +851,10 @@ declare namespace LocalJSX {
           * Disallow editing of the editor contents when set to `true`
          */
         "readOnly"?: boolean;
+        /**
+          * Source code contents of the CodeChunk. Corresponds to the `text` property of the CodeBlock schema.
+         */
+        "text"?: string;
     }
     interface StencilaCodeChunk {
         /**
@@ -815,6 +865,10 @@ declare namespace LocalJSX {
           * Stencila CodeChunk node to render
          */
         "codeChunk"?: CodeChunk;
+        /**
+          * Callback function to invoke whenever the editor contents are updated.
+         */
+        "contentChangeHandler"?: EditorUpdateHandlerCb;
         /**
           * List of programming languages that can be executed in the current context
          */
@@ -833,6 +887,10 @@ declare namespace LocalJSX {
          */
         "keymap"?: Keymap[];
         /**
+          * List of all supported programming languages
+         */
+        "languageCapabilities"?: FileFormatMap;
+        /**
           * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.
          */
         "onStencila-code-visibility-change"?: (event: CustomEvent<any>) => void;
@@ -844,6 +902,7 @@ declare namespace LocalJSX {
           * Programming language of the CodeChunk
          */
         "programmingLanguage"?: string | undefined;
+        "text"?: string;
     }
     interface StencilaCodeError {
         /**
@@ -861,11 +920,19 @@ declare namespace LocalJSX {
          */
         "codeExpression"?: CodeExpression;
         /**
+          * List of programming languages that can be executed in the current context
+         */
+        "executableLanguages"?: FileFormatMap;
+        /**
           * A callback function to be called with the value of the `CodeExpression` node when executing the `CodeExpression`.
          */
         "executeHandler"?: (
     codeExpression: CodeExpression
   ) => Promise<CodeExpression>;
+        /**
+          * List of all supported programming languages
+         */
+        "languageCapabilities"?: FileFormatMap;
         /**
           * Event emitted when the language of the editor is changed.
          */
@@ -880,6 +947,14 @@ declare namespace LocalJSX {
         "readOnly"?: boolean;
     }
     interface StencilaCodeFragment {
+        /**
+          * List of programming languages that can be executed in the current context
+         */
+        "executableLanguages"?: FileFormatMap;
+        /**
+          * List of all supported programming languages
+         */
+        "languageCapabilities"?: FileFormatMap;
         /**
           * Event emitted when the language of the editor is changed.
          */
