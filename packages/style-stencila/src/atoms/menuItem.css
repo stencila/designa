@@ -1,4 +1,5 @@
-:host {
+:host,
+stencila-menu-item {
   @apply flex items-center h-8 px-2 text-sm leading-none tracking-wide no-underline cursor-pointer font-body text-key;
 
   &:hover {

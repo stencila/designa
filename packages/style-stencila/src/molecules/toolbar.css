@@ -1,7 +1,7 @@
 :host {
   /** @prop --background: Sets the background color of the component. */
 
-  @apply block;
+  @apply block z-40;
   background-color: var(--background, var(--color-neutral-200));
 
   &[position='fixed'] {
