@@ -79,8 +79,7 @@ export class CodeBlockComponent {
    * List of programming languages that can be executed in the current context
    */
   @Prop()
-  public executableLanguages: FileFormatMap =
-    window.stencilaWebClient?.executableLanguages ?? {}
+  public executableLanguages?: FileFormatMap
 
   /**
    * Custom keyboard shortcuts to pass along to CodeMirror

@@ -35,6 +35,7 @@ import {
   EventEmitter,
   h,
   Host,
+  Listen,
   Method,
   Prop,
   Watch,
@@ -133,6 +134,13 @@ export class Editor {
   @Prop()
   public executableLanguages: FileFormatMap =
     window.stencilaWebClient?.executableLanguages ?? {}
+
+  @Listen('stencila-discover-kernels', { target: 'window' })
+  onDiscoverKernels({
+    detail,
+  }: CustomEvent<{ executableLanguages: FileFormatMap }>): void {
+    this.executableLanguages = detail.executableLanguages
+  }
 
   /**
    * Disallow editing of the editor contents when set to `true`

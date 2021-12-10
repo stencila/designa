@@ -107,7 +107,7 @@ export namespace Components {
         /**
           * List of programming languages that can be executed in the current context
          */
-        "executableLanguages": FileFormatMap;
+        "executableLanguages"?: FileFormatMap;
         /**
           * Enables ability to fold sections of code if the syntax package supports it
          */
@@ -162,7 +162,7 @@ export namespace Components {
         /**
           * List of programming languages that can be executed in the current context
          */
-        "executableLanguages": FileFormatMap;
+        "executableLanguages"?: FileFormatMap;
         /**
           * Run the `CodeChunk`
          */
@@ -465,10 +465,22 @@ export namespace Components {
     }
     interface StencilaMenuItem {
         /**
+          * Determines whether the menu item is enabled/clickable or not
+         */
+        "disabled": boolean;
+        /**
+          * Renders the menu item as a section divider. It does not have any click or hover handlers
+         */
+        "divider": boolean;
+        /**
           * Name of the icon to show before the label
           * @see Icon component for possible values
          */
         "icon": IconNames | undefined;
+        /**
+          * The overall size of the component.
+         */
+        "role": 'menuitem' | 'menuitemradio' | 'menuitemcheckbox';
         /**
           * The overall size of the component.
          */
@@ -1163,10 +1175,22 @@ declare namespace LocalJSX {
     }
     interface StencilaMenuItem {
         /**
+          * Determines whether the menu item is enabled/clickable or not
+         */
+        "disabled"?: boolean;
+        /**
+          * Renders the menu item as a section divider. It does not have any click or hover handlers
+         */
+        "divider"?: boolean;
+        /**
           * Name of the icon to show before the label
           * @see Icon component for possible values
          */
         "icon"?: IconNames | undefined;
+        /**
+          * The overall size of the component.
+         */
+        "role"?: 'menuitem' | 'menuitemradio' | 'menuitemcheckbox';
         /**
           * The overall size of the component.
          */

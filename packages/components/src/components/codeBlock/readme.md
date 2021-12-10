@@ -5,18 +5,18 @@
 
 ## Properties
 
-| Property               | Attribute              | Description                                                                                        | Type                                                             | Default                                               |
-| ---------------------- | ---------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------------------- |
-| `autofocus`            | `autofocus`            | Autofocus the editor on page load                                                                  | `boolean`                                                        | `false`                                               |
-| `contentChangeHandler` | --                     | Callback function to invoke whenever the editor contents are updated.                              | `((updateEvent?: ViewUpdate \| undefined) => void) \| undefined` | `undefined`                                           |
-| `executableLanguages`  | --                     | List of programming languages that can be executed in the current context                          | `{ [x: string]: FileFormat; }`                                   | `window.stencilaWebClient?.executableLanguages ?? {}` |
-| `foldGutter`           | `fold-gutter`          | Enables ability to fold sections of code if the syntax package supports it                         | `boolean`                                                        | `true`                                                |
-| `keymap`               | --                     | Custom keyboard shortcuts to pass along to CodeMirror                                              | `KeyBinding[]`                                                   | `[]`                                                  |
-| `lineNumbers`          | `line-numbers`         | Determines the visibility of line numbers                                                          | `boolean`                                                        | `true`                                                |
-| `lineWrapping`         | `line-wrapping`        | Control line wrapping of text inside the editor                                                    | `boolean`                                                        | `false`                                               |
-| `programmingLanguage`  | `programming-language` | Programming language of the CodeChunk                                                              | `string \| undefined`                                            | `undefined`                                           |
-| `readOnly`             | `read-only`            | Disallow editing of the editor contents when set to `true`                                         | `boolean`                                                        | `false`                                               |
-| `text`                 | `text`                 | Source code contents of the CodeChunk. Corresponds to the `text` property of the CodeBlock schema. | `string \| undefined`                                            | `undefined`                                           |
+| Property               | Attribute              | Description                                                                                        | Type                                                             | Default     |
+| ---------------------- | ---------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------- |
+| `autofocus`            | `autofocus`            | Autofocus the editor on page load                                                                  | `boolean`                                                        | `false`     |
+| `contentChangeHandler` | --                     | Callback function to invoke whenever the editor contents are updated.                              | `((updateEvent?: ViewUpdate \| undefined) => void) \| undefined` | `undefined` |
+| `executableLanguages`  | --                     | List of programming languages that can be executed in the current context                          | `undefined \| { [x: string]: FileFormat; }`                      | `undefined` |
+| `foldGutter`           | `fold-gutter`          | Enables ability to fold sections of code if the syntax package supports it                         | `boolean`                                                        | `true`      |
+| `keymap`               | --                     | Custom keyboard shortcuts to pass along to CodeMirror                                              | `KeyBinding[]`                                                   | `[]`        |
+| `lineNumbers`          | `line-numbers`         | Determines the visibility of line numbers                                                          | `boolean`                                                        | `true`      |
+| `lineWrapping`         | `line-wrapping`        | Control line wrapping of text inside the editor                                                    | `boolean`                                                        | `false`     |
+| `programmingLanguage`  | `programming-language` | Programming language of the CodeChunk                                                              | `string \| undefined`                                            | `undefined` |
+| `readOnly`             | `read-only`            | Disallow editing of the editor contents when set to `true`                                         | `boolean`                                                        | `false`     |
+| `text`                 | `text`                 | Source code contents of the CodeChunk. Corresponds to the `text` property of the CodeBlock schema. | `string \| undefined`                                            | `undefined` |
 
 
 ## Methods

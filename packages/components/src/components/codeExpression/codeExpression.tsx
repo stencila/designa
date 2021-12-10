@@ -75,9 +75,16 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   /**
    * List of programming languages that can be executed in the current context
    */
-  @Prop()
+  @Prop({ mutable: true })
   public executableLanguages: FileFormatMap =
     window.stencilaWebClient?.executableLanguages ?? {}
+
+  @Listen('stencila-discover-kernels', { target: 'window' })
+  onDiscoverKernels({
+    detail,
+  }: CustomEvent<{ executableLanguages: FileFormatMap }>): void {
+    this.executableLanguages = detail.executableLanguages
+  }
 
   /**
    * Event emitted when the language of the editor is changed.

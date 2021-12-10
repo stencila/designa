@@ -86,8 +86,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    * List of programming languages that can be executed in the current context
    */
   @Prop()
-  public executableLanguages: FileFormatMap =
-    window.stencilaWebClient?.executableLanguages ?? {}
+  public executableLanguages?: FileFormatMap
 
   /**
    * Whether the code section is visible or not
@@ -157,7 +156,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     const activeLanguageFormat = lookupFormat(this.programmingLanguage).name
     return (
       this.executeHandler !== undefined &&
-      Object.values(this.executableLanguages).some(
+      Object.values(this.executableLanguages ?? {}).some(
         (format) => format.name === activeLanguageFormat
       )
     )

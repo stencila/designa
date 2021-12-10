@@ -1,7 +1,9 @@
 :host,
 stencila-menu {
+  @apply relative inline-block;
+
   ul {
-    @apply absolute z-30 inline-block p-0 m-0 border border-solid rounded shadow-md bg-stock border-neutral-100;
+    @apply absolute left-full top-0 z-30 inline-block p-0 m-0 border border-solid rounded shadow-md bg-stock border-neutral-100;
     min-width: 112px;
 
     &[aria-hidden] {

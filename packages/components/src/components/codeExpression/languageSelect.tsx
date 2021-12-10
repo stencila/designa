@@ -57,7 +57,9 @@ export const LanguagePickerInline = (props: Props): FunctionalComponent => {
             </stencila-menu-item>
           ))}
 
-          <span>Not executable</span>
+          <stencila-menu-item size="xsmall" divider={true}>
+            Not executable
+          </stencila-menu-item>
         </Fragment>
       )}
 
