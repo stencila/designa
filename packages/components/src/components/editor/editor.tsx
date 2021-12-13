@@ -135,11 +135,11 @@ export class Editor {
   public executableLanguages: FileFormatMap =
     window.stencilaWebClient?.executableLanguages ?? {}
 
-  @Listen('stencila-discover-kernels', { target: 'window' })
+  @Listen('stencila-discover-executable-languages', { target: 'window' })
   onDiscoverKernels({
     detail,
-  }: CustomEvent<{ executableLanguages: FileFormatMap }>): void {
-    this.executableLanguages = detail.executableLanguages
+  }: CustomEvent<{ languages: FileFormatMap }>): void {
+    this.executableLanguages = detail.languages
   }
 
   /**
@@ -199,7 +199,8 @@ export class Editor {
         const { r } = await import('@codemirror/legacy-modes/mode/r')
         return StreamLanguage.define(r)
       }
-      case 'bash': {
+      case 'bash':
+      case 'zsh': {
         const { StreamLanguage } = await import('@codemirror/stream-parser')
         const { shell } = await import('@codemirror/legacy-modes/mode/shell')
         return StreamLanguage.define(shell)

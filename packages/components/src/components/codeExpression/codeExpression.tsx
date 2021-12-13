@@ -79,11 +79,11 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   public executableLanguages: FileFormatMap =
     window.stencilaWebClient?.executableLanguages ?? {}
 
-  @Listen('stencila-discover-kernels', { target: 'window' })
+  @Listen('stencila-discover-executable-languages', { target: 'window' })
   onDiscoverKernels({
     detail,
-  }: CustomEvent<{ executableLanguages: FileFormatMap }>): void {
-    this.executableLanguages = detail.executableLanguages
+  }: CustomEvent<{ languages: FileFormatMap }>): void {
+    this.executableLanguages = detail.languages
   }
 
   /**

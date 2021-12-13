@@ -87,6 +87,11 @@ export const fileFormatMap: FileFormatMap = {
     ext: 'yaml',
     aliases: ['yaml'],
   },
+  ZSH: {
+    name: 'ZSH',
+    ext: 'zsh',
+    aliases: ['zsh'],
+  },
 }
 
 /**
