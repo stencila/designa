@@ -25,6 +25,7 @@ export const config: Config = {
     safari10: true,
   },
   globalScript: './src/globals/global.ts',
+  sourceMap: true,
   outputTargets: [
     {
       type: 'dist',
