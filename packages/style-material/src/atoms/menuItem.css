@@ -1,12 +1,22 @@
-:host {
-  @apply flex items-center h-12 px-4 no-underline cursor-pointer text-key font-body;
+:host,
+stencila-menu-item {
+  @apply flex items-center h-12 no-underline cursor-pointer text-key font-body;
 
-  &:hover {
+  &:not([aria-disabled]):focus,
+  &:not([aria-disabled]):hover {
     @apply bg-neutral-50;
   }
 
   stencila-icon {
     @apply mr-2;
+  }
+
+  & > li {
+    @apply list-none m-0 py-0 px-4 w-full whitespace-nowrap;
+
+    ::slotted(stencila-menu) {
+      @apply w-full;
+    }
   }
 
   &[size='xsmall'] {
@@ -19,5 +29,14 @@
 
   &[size='sm'] {
     @apply h-6 text-base;
+  }
+
+  &[aria-disabled] {
+    @apply cursor-default;
+  }
+
+  &[divider] {
+    @apply font-bold text-xs;
+    color: var(--color-neutral-600);
   }
 }

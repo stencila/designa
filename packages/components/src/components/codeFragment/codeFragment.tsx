@@ -1,10 +1,22 @@
-import { Component, h, Host, Event, Prop, EventEmitter } from '@stencil/core'
-import { FileFormatUtils } from '../..'
+import {
+  Component,
+  Event,
+  EventEmitter,
+  h,
+  Host,
+  Listen,
+  Prop,
+} from '@stencil/core'
 import { LanguagePickerInline } from '../codeExpression/languageSelect'
-import { FileFormat, lookupFormat } from '../editor/languageUtils'
+import {
+  FileFormat,
+  fileFormatMap,
+  FileFormatMap,
+  lookupFormat,
+} from '../editor/languageUtils'
 
 /**
- * @slot default - The contents of the code fragment
+ * @slot text - The contents of the code fragment
  */
 @Component({
   tag: 'stencila-code-fragment',
@@ -28,6 +40,25 @@ export class CodeFragment {
   public programmingLanguage: string | undefined
 
   /**
+   * List of all supported programming languages
+   */
+  @Prop()
+  public languageCapabilities: FileFormatMap = fileFormatMap
+
+  /**
+   * List of programming languages that can be executed in the current context
+   */
+  @Prop({ mutable: true })
+  public executableLanguages: FileFormatMap =
+    window.stencilaWebClient?.executableLanguages ?? {}
+
+  @Listen('stencila-discover-executable-languages', { target: 'window' })
+  onDiscoverKernels({
+    detail,
+  }: CustomEvent<{ languages: FileFormatMap }>): void {
+    this.executableLanguages = detail.languages
+  }
+  /**
    * Event emitted when the language of the editor is changed.
    */
   @Event({ eventName: 'stencila-language-change' })
@@ -47,14 +78,15 @@ export class CodeFragment {
         <span class="actionsSecondary">
           <LanguagePickerInline
             activeLanguage={this.programmingLanguage ?? ''}
+            executableLanguages={this.executableLanguages}
             onSetLanguage={this.onSelectLanguage}
-            executableLanguages={FileFormatUtils.fileFormatMap}
+            languageCapabilities={this.languageCapabilities}
             disabled={this.readOnly}
           ></LanguagePickerInline>
         </span>
 
         <span class="text">
-          <slot />
+          <slot name="text" />
         </span>
       </Host>
     )

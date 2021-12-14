@@ -5,20 +5,20 @@
 
 ## Properties
 
-| Property               | Attribute         | Description                                                                | Type                                                             | Default                                   |
-| ---------------------- | ----------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------- |
-| `activeLanguage`       | `active-language` | Programming language of the Editor                                         | `string`                                                         | `this.languageCapabilities.R?.name ?? ''` |
-| `autofocus`            | `autofocus`       | Autofocus the editor on page load                                          | `boolean`                                                        | `false`                                   |
-| `contentChangeHandler` | --                | Callback function to invoke whenever the editor contents are updated.      | `((updateEvent?: ViewUpdate \| undefined) => void) \| undefined` | `undefined`                               |
-| `contents`             | `contents`        | Text contents of the editor                                                | `string \| undefined`                                            | `undefined`                               |
-| `executableLanguages`  | --                | List of programming languages that can be executed in the current context  | `{ [x: string]: FileFormat; }`                                   | `{}`                                      |
-| `executeHandler`       | --                | Function to be evaluated over the contents of the editor.                  | `((contents: EditorContents) => Promise<unknown>) \| undefined`  | `undefined`                               |
-| `foldGutter`           | `fold-gutter`     | Enables ability to fold sections of code if the syntax package supports it | `boolean`                                                        | `true`                                    |
-| `keymap`               | --                | Custom keyboard shortcuts to pass along to CodeMirror                      | `KeyBinding[]`                                                   | `[]`                                      |
-| `languageCapabilities` | --                | List of all supported programming languages                                | `{ [x: string]: FileFormat; }`                                   | `fileFormatMap`                           |
-| `lineNumbers`          | `line-numbers`    | Determines the visibility of line numbers                                  | `boolean`                                                        | `true`                                    |
-| `lineWrapping`         | `line-wrapping`   | Control line wrapping of text inside the editor                            | `boolean`                                                        | `false`                                   |
-| `readOnly`             | `read-only`       | Disallow editing of the editor contents when set to `true`                 | `boolean`                                                        | `false`                                   |
+| Property               | Attribute         | Description                                                                | Type                                                             | Default                                               |
+| ---------------------- | ----------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------------------- |
+| `activeLanguage`       | `active-language` | Programming language of the Editor                                         | `string`                                                         | `this.languageCapabilities.R?.name ?? ''`             |
+| `autofocus`            | `autofocus`       | Autofocus the editor on page load                                          | `boolean`                                                        | `false`                                               |
+| `contentChangeHandler` | --                | Callback function to invoke whenever the editor contents are updated.      | `((updateEvent?: ViewUpdate \| undefined) => void) \| undefined` | `undefined`                                           |
+| `contents`             | `contents`        | Text contents of the editor                                                | `string \| undefined`                                            | `undefined`                                           |
+| `executableLanguages`  | --                | List of programming languages that can be executed in the current context  | `{ [x: string]: FileFormat; }`                                   | `window.stencilaWebClient?.executableLanguages ?? {}` |
+| `executeHandler`       | --                | Function to be evaluated over the contents of the editor.                  | `((contents: EditorContents) => Promise<unknown>) \| undefined`  | `undefined`                                           |
+| `foldGutter`           | `fold-gutter`     | Enables ability to fold sections of code if the syntax package supports it | `boolean`                                                        | `true`                                                |
+| `keymap`               | --                | Custom keyboard shortcuts to pass along to CodeMirror                      | `KeyBinding[]`                                                   | `[]`                                                  |
+| `languageCapabilities` | --                | List of all supported programming languages                                | `{ [x: string]: FileFormat; }`                                   | `fileFormatMap`                                       |
+| `lineNumbers`          | `line-numbers`    | Determines the visibility of line numbers                                  | `boolean`                                                        | `true`                                                |
+| `lineWrapping`         | `line-wrapping`   | Control line wrapping of text inside the editor                            | `boolean`                                                        | `false`                                               |
+| `readOnly`             | `read-only`       | Disallow editing of the editor contents when set to `true`                 | `boolean`                                                        | `false`                                               |
 
 
 ## Events

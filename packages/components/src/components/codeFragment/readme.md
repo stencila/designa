@@ -5,10 +5,12 @@
 
 ## Properties
 
-| Property              | Attribute              | Description                                                | Type                  | Default     |
-| --------------------- | ---------------------- | ---------------------------------------------------------- | --------------------- | ----------- |
-| `programmingLanguage` | `programming-language` | Programming language of the CodeFragment                   | `string \| undefined` | `undefined` |
-| `readOnly`            | `read-only`            | Disallow editing of the editor contents when set to `true` | `boolean`             | `false`     |
+| Property               | Attribute              | Description                                                               | Type                           | Default                                               |
+| ---------------------- | ---------------------- | ------------------------------------------------------------------------- | ------------------------------ | ----------------------------------------------------- |
+| `executableLanguages`  | --                     | List of programming languages that can be executed in the current context | `{ [x: string]: FileFormat; }` | `window.stencilaWebClient?.executableLanguages ?? {}` |
+| `languageCapabilities` | --                     | List of all supported programming languages                               | `{ [x: string]: FileFormat; }` | `fileFormatMap`                                       |
+| `programmingLanguage`  | `programming-language` | Programming language of the CodeFragment                                  | `string \| undefined`          | `undefined`                                           |
+| `readOnly`             | `read-only`            | Disallow editing of the editor contents when set to `true`                | `boolean`                      | `false`                                               |
 
 
 ## Events
@@ -20,9 +22,9 @@
 
 ## Slots
 
-| Slot        | Description                       |
-| ----------- | --------------------------------- |
-| `"default"` | The contents of the code fragment |
+| Slot     | Description                       |
+| -------- | --------------------------------- |
+| `"text"` | The contents of the code fragment |
 
 
 ## CSS Custom Properties

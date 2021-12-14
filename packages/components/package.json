@@ -80,7 +80,7 @@
     "@codemirror/stream-parser": "^0.19.2",
     "@codemirror/view": "^0.19.7",
     "@nll/datum": "^3.5.0",
-    "@popperjs/core": "^2.10.1",
+    "@popperjs/core": "^2.11.0",
     "@stencila/executa": "^1.15.7",
     "@stencila/style-material": "0.15.1",
     "@stencila/style-stencila": "0.25.1",

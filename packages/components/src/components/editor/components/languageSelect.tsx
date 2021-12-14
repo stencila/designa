@@ -44,7 +44,7 @@ export const LanguagePicker = (props: Props): FunctionalComponent => {
             </option>
           ))}
 
-        <option disabled>Non-executable</option>
+        <option disabled>Not executable</option>
 
         {Object.values(filteredLanguages).map((language) => (
           <option

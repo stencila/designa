@@ -1,5 +1,5 @@
 :host {
-  @apply block h-12;
+  @apply block h-12 z-40;
 
   /** @prop --background: Sets the background color of the component. */
   background-color: var(--background, var(--color-neutral-300));

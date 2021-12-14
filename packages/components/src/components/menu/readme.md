@@ -7,7 +7,7 @@
 
 | Property    | Attribute    | Description                                 | Type      | Default |
 | ----------- | ------------ | ------------------------------------------- | --------- | ------- |
-| `autoClose` | `auto-close` | Close the menu when losing focus            | `boolean` | `false` |
+| `autoClose` | `auto-close` | Close the menu when losing focus            | `boolean` | `true`  |
 | `isOpen`    | `is-open`    | Determines whether the Menu is shown or not | `boolean` | `false` |
 
 

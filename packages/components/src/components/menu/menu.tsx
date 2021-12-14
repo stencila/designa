@@ -1,4 +1,5 @@
 import { Component, Element, h, Host, Prop } from '@stencil/core'
+import { createPopper, Instance } from '@popperjs/core'
 
 let menuIds = 0
 
@@ -13,6 +14,9 @@ let menuIds = 0
 export class Menu {
   @Element() private el: HTMLStencilaCodeFragmentElement
 
+  private menuEl: HTMLUListElement | undefined
+  private popperRef: Instance | null = null
+
   /**
    * Determines whether the Menu is shown or not
    */
@@ -26,15 +30,39 @@ export class Menu {
    * Close the menu when losing focus
    */
   @Prop()
-  public autoClose = false
+  public autoClose = true
+
+  initMenu = () => {
+    if (this.menuEl) {
+      this.popperRef = createPopper(this.el, this.menuEl, {
+        placement: 'right-start',
+        strategy: 'fixed',
+        modifiers: [{ name: 'preventOverflow' }],
+      })
+    }
+  }
+
+  private computeMenuLocation = () => {
+    this.popperRef ? this.popperRef.update() : this.initMenu()
+  }
 
   private toggleMenu = (e: MouseEvent) => {
     e.preventDefault()
-    this.isOpen = !this.isOpen
+    if (this.autoClose) {
+      e.stopPropagation()
+    }
+    this.isOpen ? this.closeMenu() : this.openMenu()
+  }
+
+  private openMenu = () => {
+    this.computeMenuLocation()
+    this.isOpen = true
   }
 
   private closeMenu = () => {
-    this.isOpen = false
+    if (this.autoClose) {
+      this.isOpen = false
+    }
   }
 
   private autoCloseTimeoutRef: number
@@ -57,6 +85,16 @@ export class Menu {
     }
   }
 
+  public disconnectedCallback(): void {
+    this.el.removeEventListener('mouseout', this.closeOnBlur)
+    this.el.removeEventListener('mouseenter', this.clearTimeout)
+
+    if (this.popperRef) {
+      this.popperRef.destroy()
+      this.popperRef = null
+    }
+  }
+
   public render() {
     return (
       <Host>
@@ -75,6 +113,7 @@ export class Menu {
           tabindex="-1"
           id={this.menuId}
           onClick={this.closeMenu}
+          ref={(el) => (this.menuEl = el)}
         >
           <slot />
         </ul>

@@ -24,7 +24,7 @@ import {
   drawSelection,
   EditorView,
   highlightSpecialChars,
-  KeyBinding as KeymapI,
+  KeyBinding,
   keymap,
   ViewUpdate,
 } from '@codemirror/view'
@@ -35,6 +35,7 @@ import {
   EventEmitter,
   h,
   Host,
+  Listen,
   Method,
   Prop,
   Watch,
@@ -58,7 +59,7 @@ export interface EditorContents {
   language: string
 }
 
-export type Keymap = KeymapI
+export type Keymap = KeyBinding
 
 export type EditorStateJSON = Record<string, unknown>
 
@@ -102,7 +103,7 @@ export class Editor {
   private textSlot: HTMLDivElement | undefined
   private errorsSlot: HTMLDivElement | undefined
 
-  private editorRef: EditorView | undefined
+  public editorRef: EditorView | undefined
   private languagePickerRef: HTMLSelectElement | undefined
 
   private isReady = false
@@ -131,7 +132,15 @@ export class Editor {
    * List of programming languages that can be executed in the current context
    */
   @Prop()
-  public executableLanguages: FileFormatMap = {}
+  public executableLanguages: FileFormatMap =
+    window.stencilaWebClient?.executableLanguages ?? {}
+
+  @Listen('stencila-discover-executable-languages', { target: 'window' })
+  onDiscoverKernels({
+    detail,
+  }: CustomEvent<{ languages: FileFormatMap }>): void {
+    this.executableLanguages = detail.languages
+  }
 
   /**
    * Disallow editing of the editor contents when set to `true`
@@ -190,7 +199,8 @@ export class Editor {
         const { r } = await import('@codemirror/legacy-modes/mode/r')
         return StreamLanguage.define(r)
       }
-      case 'bash': {
+      case 'bash':
+      case 'zsh': {
         const { StreamLanguage } = await import('@codemirror/stream-parser')
         const { shell } = await import('@codemirror/legacy-modes/mode/shell')
         return StreamLanguage.define(shell)
