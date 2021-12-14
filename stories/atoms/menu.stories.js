@@ -48,7 +48,7 @@ export const withDivider = ({ isOpen }) =>
       <stencila-menu-item icon="home">Home</stencila-menu-item>
       <stencila-menu-item icon="user">Profile</stencila-menu-item>
 
-      <stencila-menu-item .disabled=${true}>Non executable</stencila-menu-item>
+      <stencila-menu-item .divider=${true}>Non executable</stencila-menu-item>
 
       <stencila-menu-item icon="settings">Settings</stencila-menu-item>
     </stencila-menu>
