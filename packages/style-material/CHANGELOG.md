@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.0](https://github.com/stencila/style/compare/@stencila/style-material@0.15.1...@stencila/style-material@0.16.0) (2021-12-14)
+
+### Features
+
+- **Code:** Set executable languages from Stencila WebClient if present ([c944aba](https://github.com/stencila/style/commit/c944aba01689a201f3022165307fc1d2d04ce416))
+
+### Bug Fixes
+
+- **CSS:** Fix mangling of z-index values across components ([18e06f0](https://github.com/stencila/style/commit/18e06f02aca3c17c263f454c7f7e794b8bae2a2c))
+- **Menu Item:** Don't break items across multiple lines ([f2005bd](https://github.com/stencila/style/commit/f2005bddadea3f2501fcbbe548f077a11e5befd7))
+
 ### [0.15.1](https://github.com/stencila/style/compare/@stencila/style-material@0.15.0...@stencila/style-material@0.15.1) (2021-12-08)
 
 **Note:** Version bump only for package @stencila/style-material

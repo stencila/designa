@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.0](https://github.com/stencila/designa/compare/@stencila/components@0.45.2...@stencila/components@0.46.0) (2021-12-14)
+
+### Features
+
+- **Code:** Set executable languages from Stencila WebClient if present ([c944aba](https://github.com/stencila/designa/commit/c944aba01689a201f3022165307fc1d2d04ce416))
+- **Components:** Enable source maps ([54df5c3](https://github.com/stencila/designa/commit/54df5c3ea26df4217aa011750d5560ea8a3c0cbd))
+
+### Bug Fixes
+
+- **Types:** Expose the error type value options ([6ef3b17](https://github.com/stencila/designa/commit/6ef3b17a4179a8d22546ef4f972c12eb6a092d81))
+
 ### [0.45.2](https://github.com/stencila/designa/compare/@stencila/components@0.45.1...@stencila/components@0.45.2) (2021-12-10)
 
 ### Bug Fixes
