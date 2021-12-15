@@ -81,3 +81,48 @@ export const enumParameter = ({ mode, validator }) => html`<stencila-parameter
 enumParameter.args = {
   validator: 'EnumValidator',
 }
+
+export const withoutValidatorProp = ({ mode }) => html`
+  <stencila-parameter .mode=${mode}>
+    <label slot="name" for="input-id">pars</label>
+    <meta
+      itemprop="validator"
+      itemtype="http://schema.stenci.la/IntegerValidator"
+      itemscope
+    />
+    <meta
+      itemprop="value"
+      itemtype="http://schema.stenci.la/Integer"
+      itemscope
+      content="50"
+    />
+    <input
+      id="input-id"
+      slot="value"
+      type="number"
+      min="0"
+      max="100"
+      value="50"
+    />
+  </stencila-parameter>
+`
+
+export const withoutAValidator = ({ mode }) => html`
+  <stencila-parameter .mode=${mode}>
+    <label slot="name" for="input-id">pars</label>
+    <meta
+      itemprop="value"
+      itemtype="http://schema.stenci.la/Integer"
+      itemscope
+      content="50"
+    />
+    <input
+      id="input-id"
+      slot="value"
+      type="number"
+      min="0"
+      max="100"
+      value="50"
+    />
+  </stencila-parameter>
+`

@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property    | Attribute   | Description                                                                                               | Type                                                                                                                                                                   | Default     |
-| ----------- | ----------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `mode`      | `mode`      | The context of the component. In `read` mode the parameter validator and its properties cannot be edited. | `"edit" \| "read"`                                                                                                                                                     | `'edit'`    |
-| `validator` | `validator` | The Stencila `Validator` Schema with which to configure and validate the parameter.                       | `"ArrayValidator" \| "BooleanValidator" \| "ConstantValidator" \| "EnumValidator" \| "IntegerValidator" \| "NumberValidator" \| "StringValidator" \| "TupleValidator"` | `undefined` |
+| Property    | Attribute   | Description                                                                                               | Type                                                                                                                                                                                | Default     |
+| ----------- | ----------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `mode`      | `mode`      | The context of the component. In `read` mode the parameter validator and its properties cannot be edited. | `"edit" \| "read"`                                                                                                                                                                  | `'edit'`    |
+| `validator` | `validator` | The Stencila `Validator` Schema with which to configure and validate the parameter.                       | `"ArrayValidator" \| "BooleanValidator" \| "ConstantValidator" \| "EnumValidator" \| "IntegerValidator" \| "NumberValidator" \| "StringValidator" \| "TupleValidator" \| undefined` | `undefined` |
 
 
 ## Events

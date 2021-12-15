@@ -8,7 +8,8 @@ import { StringValidator } from './stringValidator'
 
 interface Props {
   onValidatorChange: (e: Event) => void
-  type: ValidatorTypes
+  type?: ValidatorTypes
+  valueElRef?: Element
 }
 
 const validateField = (e: Event) => {
@@ -16,27 +17,31 @@ const validateField = (e: Event) => {
   target.reportValidity()
 }
 
-export const Validator = (props: Props): FunctionalComponent => {
-  const getValidator = () => {
-    switch (props.type) {
+const getValidator =
+  (valueElRef?: Element) => (validatorType: Props['type']) => {
+    switch (validatorType) {
       case 'NumberValidator': {
-        return <NumberValidator></NumberValidator>
+        return <NumberValidator valueEl={valueElRef}></NumberValidator>
       }
       case 'IntegerValidator': {
-        return <IntegerValidator></IntegerValidator>
+        return <IntegerValidator valueEl={valueElRef}></IntegerValidator>
       }
       case 'StringValidator': {
-        return <StringValidator></StringValidator>
+        return <StringValidator valueEl={valueElRef}></StringValidator>
       }
       case 'ConstantValidator': {
-        return <ConstantValidator></ConstantValidator>
+        return <ConstantValidator valueEl={valueElRef}></ConstantValidator>
+      }
+      case 'BooleanValidator': {
+        return <BooleanValidator valueEl={valueElRef}></BooleanValidator>
       }
       default: {
-        return <BooleanValidator></BooleanValidator>
+        return
       }
     }
   }
 
+export const Validator = (props: Props): FunctionalComponent => {
   return (
     <stencila-menu autoClose={false} menuPosition="bottom-start">
       <stencila-button
@@ -57,8 +62,11 @@ export const Validator = (props: Props): FunctionalComponent => {
         <label>
           Type
           <select name="validator">
+            <option disabled selected={props.type === undefined}>
+              Select…
+            </option>
             <option
-              value="ArrayValidatorr"
+              value="ArrayValidator"
               selected={props.type === 'ArrayValidator'}
             >
               Array
@@ -108,7 +116,7 @@ export const Validator = (props: Props): FunctionalComponent => {
           </select>
         </label>
 
-        {getValidator()}
+        {getValidator(props.valueElRef)(props.type)}
       </form>
     </stencila-menu>
   )

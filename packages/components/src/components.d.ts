@@ -502,7 +502,7 @@ export namespace Components {
         /**
           * The Stencila `Validator` Schema with which to configure and validate the parameter.
          */
-        "validator": ValidatorTypes;
+        "validator"?: ValidatorTypes;
     }
     interface StencilaProjectGraph {
         /**

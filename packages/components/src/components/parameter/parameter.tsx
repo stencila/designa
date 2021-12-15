@@ -30,6 +30,7 @@ export class Parameter {
   @Element() el: HTMLStencilaParameterElement
 
   private labelSlotRef: Element | undefined = undefined
+  private valueSlotRef: Element | undefined = undefined
 
   /**
    * The context of the component. In `read` mode the parameter validator and its
@@ -40,7 +41,7 @@ export class Parameter {
   /**
    * The Stencila `Validator` Schema with which to configure and validate the parameter.
    */
-  @Prop({ mutable: true }) validator: ValidatorTypes
+  @Prop({ mutable: true }) validator?: ValidatorTypes
 
   @State() paramName: string = ''
 
@@ -112,10 +113,27 @@ export class Parameter {
     return target.reportValidity()
   }
 
+  private getValidatorFromMetaEl = (): ValidatorTypes | undefined => {
+    const validatorMetaEl = this.el.querySelector('meta[itemprop="validator"]')
+    const validatorAttrParts =
+      validatorMetaEl?.getAttribute('itemtype')?.split('/') ?? []
+
+    const validatorAttr = validatorAttrParts[validatorAttrParts.length - 1]
+
+    return validatorAttr && isValidatorType(validatorAttr)
+      ? validatorAttr
+      : undefined
+  }
+
   componentWillLoad() {
+    if (!this.validator) {
+      this.validator = this.getValidatorFromMetaEl()
+    }
+
     this.labelSlotRef = getSlotByName(this.el)('name')[0]
 
     const valueEl = getSlotByName(this.el)('value')
+    this.valueSlotRef = valueEl[0]
     for (const input of valueEl) {
       input.addEventListener('input', this.onParamChange)
       input.addEventListener('focus', this.onParamChange)
@@ -140,6 +158,7 @@ export class Parameter {
             <Validator
               type={this.validator}
               onValidatorChange={this.onValidatorChange}
+              valueElRef={this.valueSlotRef}
             ></Validator>
           )}
 
