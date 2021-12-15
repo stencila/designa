@@ -18,6 +18,7 @@ import { Config, Data, Layout } from "plotly.js";
 import { VisualizationSpec } from "vega-embed";
 import { VegaLoadEvent } from "./components/imageDynamic/imageVega/imageVegaUtils";
 import { Placement } from "@popperjs/core";
+import { ValidatorTypes } from "./components/parameter/types";
 import { Graph } from "./components/projectGraph/types";
 import { ChildTab } from "./components/tabList/tabList";
 import { ToastPosition, ToastType } from "./components/toast/toastController";
@@ -493,6 +494,16 @@ export namespace Components {
     }
     interface StencilaNodeList {
     }
+    interface StencilaParameter {
+        /**
+          * The context of the component. In `read` mode the parameter validator and its properties cannot be edited.
+         */
+        "mode": 'read' | 'edit';
+        /**
+          * The Stencila `Validator` Schema with which to configure and validate the parameter.
+         */
+        "validator": ValidatorTypes;
+    }
     interface StencilaProjectGraph {
         /**
           * The project graph data to render
@@ -677,6 +688,12 @@ declare global {
         prototype: HTMLStencilaNodeListElement;
         new (): HTMLStencilaNodeListElement;
     };
+    interface HTMLStencilaParameterElement extends Components.StencilaParameter, HTMLStencilElement {
+    }
+    var HTMLStencilaParameterElement: {
+        prototype: HTMLStencilaParameterElement;
+        new (): HTMLStencilaParameterElement;
+    };
     interface HTMLStencilaProjectGraphElement extends Components.StencilaProjectGraph, HTMLStencilElement {
     }
     var HTMLStencilaProjectGraphElement: {
@@ -745,6 +762,7 @@ declare global {
         "stencila-menu": HTMLStencilaMenuElement;
         "stencila-menu-item": HTMLStencilaMenuItemElement;
         "stencila-node-list": HTMLStencilaNodeListElement;
+        "stencila-parameter": HTMLStencilaParameterElement;
         "stencila-project-graph": HTMLStencilaProjectGraphElement;
         "stencila-tab": HTMLStencilaTabElement;
         "stencila-tab-list": HTMLStencilaTabListElement;
@@ -1207,6 +1225,24 @@ declare namespace LocalJSX {
     }
     interface StencilaNodeList {
     }
+    interface StencilaParameter {
+        /**
+          * The context of the component. In `read` mode the parameter validator and its properties cannot be edited.
+         */
+        "mode"?: 'read' | 'edit';
+        /**
+          * Event emitted when either the name of value of the parameter changes. You can use the `type` property of the event detail to determine the type of change, it will be either `value` or `name`.
+         */
+        "onStencila-parameter-change"?: (event: CustomEvent<any>) => void;
+        /**
+          * Event emitted when either the type or property of the parameter validator changes. You can use the `type` property of the event detail to determine the type of change, it will be either `validator` or `property`.
+         */
+        "onStencila-validator-change"?: (event: CustomEvent<any>) => void;
+        /**
+          * The Stencila `Validator` Schema with which to configure and validate the parameter.
+         */
+        "validator"?: ValidatorTypes;
+    }
     interface StencilaProjectGraph {
         /**
           * The project graph data to render
@@ -1295,6 +1331,7 @@ declare namespace LocalJSX {
         "stencila-menu": StencilaMenu;
         "stencila-menu-item": StencilaMenuItem;
         "stencila-node-list": StencilaNodeList;
+        "stencila-parameter": StencilaParameter;
         "stencila-project-graph": StencilaProjectGraph;
         "stencila-tab": StencilaTab;
         "stencila-tab-list": StencilaTabList;
@@ -1328,6 +1365,7 @@ declare module "@stencil/core" {
             "stencila-menu": LocalJSX.StencilaMenu & JSXBase.HTMLAttributes<HTMLStencilaMenuElement>;
             "stencila-menu-item": LocalJSX.StencilaMenuItem & JSXBase.HTMLAttributes<HTMLStencilaMenuItemElement>;
             "stencila-node-list": LocalJSX.StencilaNodeList & JSXBase.HTMLAttributes<HTMLStencilaNodeListElement>;
+            "stencila-parameter": LocalJSX.StencilaParameter & JSXBase.HTMLAttributes<HTMLStencilaParameterElement>;
             "stencila-project-graph": LocalJSX.StencilaProjectGraph & JSXBase.HTMLAttributes<HTMLStencilaProjectGraphElement>;
             "stencila-tab": LocalJSX.StencilaTab & JSXBase.HTMLAttributes<HTMLStencilaTabElement>;
             "stencila-tab-list": LocalJSX.StencilaTabList & JSXBase.HTMLAttributes<HTMLStencilaTabListElement>;

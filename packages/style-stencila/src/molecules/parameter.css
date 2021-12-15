@@ -1,0 +1,75 @@
+:host,
+stencila-parameter {
+  /** @prop --background: Background color of the Parameter component */
+  --background: var(--color-stock, #fff);
+
+  /** @prop --background-buttons: Background color of the parameter validator section */
+  --background-buttons: var(--color-neutral-50, #edf2f7);
+
+  /** @prop --border: Border color around the component as well as internal section dividers */
+  --border: var(--color-neutral-100, #e2e8f0);
+
+  @apply inline-flex text-sm p-0 leading-none whitespace-nowrap align-text-bottom text-key border border-solid rounded;
+  background-color: var(--background);
+  border-color: var(--border);
+
+  .actions {
+    @apply inline-block w-0 overflow-hidden cursor-default transition ease-out duration-150;
+    background-color: var(--background-buttons);
+  }
+
+  &[mode='edit'].hover,
+  &[mode='edit']:focus,
+  &[mode='edit']:focus-within,
+  &[mode='edit']:hover {
+    .actions {
+      @apply inline-flex w-full max-w-full;
+    }
+  }
+
+  .actions {
+    form {
+      @apply flex flex-col p-2;
+
+      label {
+        @apply block text-xs font-body;
+        color: var(--color-neutral-600);
+
+        &:not(:first-of-type) {
+          @apply mt-2;
+        }
+
+        input,
+        select {
+          @apply block text-sm font-mono mt-1 border border-solid rounded w-full;
+          border-color: var(--border);
+        }
+      }
+    }
+  }
+
+  .name {
+    @apply p-1 font-mono cursor-text;
+    background-color: var(--background-buttons);
+
+    &::slotted(label) {
+      @apply cursor-text;
+    }
+  }
+
+  .value {
+    @apply py-0 px-1 m-0 font-mono;
+    background-color: var(--background);
+
+    &::slotted(input),
+    &::slotted(select) {
+      @apply inline-block font-mono border-0;
+    }
+  }
+
+  ::slotted(input:invalid),
+  input:invalid {
+    @apply rounded;
+    box-shadow: 0px 0px 0px 2px var(--color-danger-500);
+  }
+}
