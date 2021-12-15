@@ -60,8 +60,7 @@ export class Parameter {
     const isValid = this.validateValue(target)
     if (isValid) {
       this.parameterChange.emit({
-        type: 'value',
-        parameter: target.name,
+        property: 'value',
         value: target.value,
       })
     }
@@ -70,7 +69,7 @@ export class Parameter {
   private onParamNameChange = (e: Event) => {
     const target = e.currentTarget as HTMLSpanElement
     this.parameterChange.emit({
-      type: 'name',
+      property: 'name',
       value: target.textContent,
     })
   }

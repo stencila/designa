@@ -46,7 +46,7 @@ export const Validator = (props: Props): FunctionalComponent => {
     <stencila-menu autoClose={false} menuPosition="bottom-start">
       <stencila-button
         iconOnly={true}
-        icon="toggle"
+        icon="equalizer"
         size="xsmall"
         slot="toggle"
         aria-label="Toggle menu"
