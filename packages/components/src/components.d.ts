@@ -17,6 +17,7 @@ import { EditorContents, EditorStateJSON, Keymap as Keymap1 } from "./components
 import { Config, Data, Layout } from "plotly.js";
 import { VisualizationSpec } from "vega-embed";
 import { VegaLoadEvent } from "./components/imageDynamic/imageVega/imageVegaUtils";
+import { Placement } from "@popperjs/core";
 import { Graph } from "./components/projectGraph/types";
 import { ChildTab } from "./components/tabList/tabList";
 import { ToastPosition, ToastType } from "./components/toast/toastController";
@@ -462,6 +463,10 @@ export namespace Components {
           * Determines whether the Menu is shown or not
          */
         "isOpen": boolean;
+        /**
+          * The position relative to the toggle button where the menu should appear.
+         */
+        "menuPosition": Placement;
     }
     interface StencilaMenuItem {
         /**
@@ -1172,6 +1177,10 @@ declare namespace LocalJSX {
           * Determines whether the Menu is shown or not
          */
         "isOpen"?: boolean;
+        /**
+          * The position relative to the toggle button where the menu should appear.
+         */
+        "menuPosition"?: Placement;
     }
     interface StencilaMenuItem {
         /**
