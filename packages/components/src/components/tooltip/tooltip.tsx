@@ -126,6 +126,7 @@ export class Tooltip implements ComponentInterface {
     return (
       <Host>
         <slot />
+        <slot name="content" />
       </Host>
     )
   }

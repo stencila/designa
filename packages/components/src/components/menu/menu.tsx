@@ -1,5 +1,5 @@
 import { Component, Element, h, Host, Prop } from '@stencil/core'
-import { createPopper, Instance } from '@popperjs/core'
+import { createPopper, Instance, Placement } from '@popperjs/core'
 
 let menuIds = 0
 
@@ -32,10 +32,16 @@ export class Menu {
   @Prop()
   public autoClose = true
 
+  /**
+   * The position relative to the toggle button where the menu should appear.
+   */
+  @Prop()
+  public menuPosition: Placement = 'right-start'
+
   initMenu = () => {
     if (this.menuEl) {
       this.popperRef = createPopper(this.el, this.menuEl, {
-        placement: 'right-start',
+        placement: this.menuPosition,
         strategy: 'fixed',
         modifiers: [{ name: 'preventOverflow' }],
       })
@@ -51,7 +57,7 @@ export class Menu {
     if (this.autoClose) {
       e.stopPropagation()
     }
-    this.isOpen ? this.closeMenu() : this.openMenu()
+    this.isOpen ? (this.isOpen = false) : this.openMenu()
   }
 
   private openMenu = () => {

@@ -3,5 +3,6 @@
 @import './codeExpression';
 @import './dataTable';
 @import './details';
+@import './parameter';
 @import './tabList';
 @import './toolbar';
