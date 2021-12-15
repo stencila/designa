@@ -51,7 +51,7 @@ export class Menu {
     if (this.autoClose) {
       e.stopPropagation()
     }
-    this.isOpen ? this.closeMenu() : this.openMenu()
+    this.isOpen ? (this.isOpen = false) : this.openMenu()
   }
 
   private openMenu = () => {
