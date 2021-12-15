@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.27.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.26.0...@stencila/style-stencila@0.27.0) (2021-12-15)
+
+### Features
+
+- **Parameter:** Add parameter component ([9eb549e](https://github.com/stencila/style/commit/9eb549e79ed2b426c8688db0a2634c4c4f6156b0)), closes [#236](https://github.com/stencila/style/issues/236)
+
 ## [0.26.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.25.1...@stencila/style-stencila@0.26.0) (2021-12-14)
 
 ### Features

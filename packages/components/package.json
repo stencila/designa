@@ -1,6 +1,6 @@
 {
   "name": "@stencila/components",
-  "version": "0.46.0",
+  "version": "0.47.0",
   "description": "Stencila Web Components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -83,7 +83,7 @@
     "@popperjs/core": "^2.11.0",
     "@stencila/executa": "^1.15.7",
     "@stencila/style-material": "0.16.0",
-    "@stencila/style-stencila": "0.26.0",
+    "@stencila/style-stencila": "0.27.0",
     "animate-presence": "^0.2.1",
     "d3": "^7.0.1",
     "d3-drag": "^3.0.0",

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.47.0](https://github.com/stencila/designa/compare/@stencila/components@0.46.0...@stencila/components@0.47.0) (2021-12-15)
+
+### Features
+
+- **Menu:** Allow setting menu position via props ([5589910](https://github.com/stencila/designa/commit/55899108467600b4a89c021c2176e3ad8e6fc0be))
+- **Parameter:** Add parameter component ([9eb549e](https://github.com/stencila/designa/commit/9eb549e79ed2b426c8688db0a2634c4c4f6156b0)), closes [#236](https://github.com/stencila/designa/issues/236)
+- **Parameter:** Read validator type & properties from slotted elements ([2d1aacb](https://github.com/stencila/designa/commit/2d1aacbdf6833ce8f6f0fab3764c4be45572822d))
+
+### Bug Fixes
+
+- **Menu:** Fix bug preventing closing of menus with autoClose = false ([84b5bb2](https://github.com/stencila/designa/commit/84b5bb2f4b38b4878c54c5ec4a95b98d3a491c71))
+
 ## [0.46.0](https://github.com/stencila/designa/compare/@stencila/components@0.45.2...@stencila/components@0.46.0) (2021-12-14)
 
 ### Features
