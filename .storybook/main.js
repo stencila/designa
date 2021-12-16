@@ -10,6 +10,12 @@ module.exports = {
     '@storybook/addon-outline',
     '@storybook/addon-viewport',
   ],
+  staticDirs: [
+    '../packages/components/dist',
+    '../packages/style-stencila/dist',
+    // TODO: Allow switching between themes via Storybook toolbar
+    // '../packages/style-material/dist',
+  ],
   features: {
     postcss: false,
   },
