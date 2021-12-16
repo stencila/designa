@@ -7,7 +7,7 @@ module.exports = {
     '@storybook/addon-backgrounds',
     '@storybook/addon-storysource',
     '@storybook/addon-measure',
-    'storybook-addon-outline',
+    '@storybook/addon-outline',
     '@storybook/addon-viewport',
   ],
   features: {
