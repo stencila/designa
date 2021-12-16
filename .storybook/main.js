@@ -11,12 +11,14 @@ module.exports = {
     '@storybook/addon-viewport',
   ],
   staticDirs: [
-    '../packages/components/dist',
-    '../packages/style-stencila/dist',
-    // TODO: Allow switching between themes via Storybook toolbar
-    // '../packages/style-material/dist',
+    { from: '../packages/components/dist', to: '/components' },
+    { from: '../packages/style-stencila/dist', to: '/style-stencila' },
+    { from: '../packages/style-stencila/dist', to: '/style-material' },
   ],
   features: {
     postcss: false,
+  },
+  core: {
+    builder: 'webpack5',
   },
 }

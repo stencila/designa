@@ -22,6 +22,7 @@
   "scripts": {
     "build": "stencil build --docs",
     "build:watch": "stencil build --dev --watch --docs",
+    "build:docs": "custom-elements-manifest analyze --stencil --globs 'src/**/*.tsx' --outdir dist",
     "kill": "pkill -f \"Stencil: stencila-components\"",
     "test": "stencil test --spec --e2e",
     "test:watch": "stencil test --spec --e2e --watchAll",
@@ -31,6 +32,7 @@
     "prepublishOnly": "node ./scripts/prepare.mjs && npm run build"
   },
   "devDependencies": {
+    "@custom-elements-manifest/analyzer": "0.5.7",
     "@fullhuman/postcss-purgecss": "4.1.3",
     "@stencil/core": "2.12.0",
     "@stencil/postcss": "2.1.0",
@@ -127,5 +129,6 @@
       "jsx-a11y/click-events-have-key-events": "warn",
       "jsx-a11y/no-onchange": "off"
     }
-  }
+  },
+  "customElements": "dist/custom-elements.json"
 }
