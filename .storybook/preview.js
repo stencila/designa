@@ -1,5 +1,8 @@
 import { create } from '@storybook/theming'
-import { addParameters, setCustomElements } from '@storybook/web-components'
+import {
+  addParameters,
+  setCustomElementsManifest,
+} from '@storybook/web-components'
 import customElements from '../packages/components/dist/custom-elements.json'
 
 // https://storybook.js.org/docs/configurations/theming/
@@ -39,7 +42,7 @@ const atomicSort = ([a], [b]) => {
   return 0
 }
 
-setCustomElements(customElements)
+setCustomElementsManifest(customElements)
 
 addParameters({
   a11y: {

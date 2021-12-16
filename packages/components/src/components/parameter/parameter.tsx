@@ -8,6 +8,7 @@ import {
   Prop,
   State,
 } from '@stencil/core'
+import { getInputValue } from '../utils/input'
 import { getSlotByName } from '../utils/slotSelectors'
 import { isValidatorType, ValidatorTypes } from './types'
 import { Validator } from './validators'
@@ -61,7 +62,7 @@ export class Parameter {
     if (isValid) {
       this.parameterChange.emit({
         property: 'value',
-        value: target.value,
+        value: getInputValue(target),
       })
     }
   }
@@ -87,9 +88,11 @@ export class Parameter {
 
   onValidatorChange = (e: Event) => {
     const target = e.target as HTMLInputElement | HTMLSelectElement
-    const value = target.value
+    const value = getInputValue(target)
+
     if (
       target.name === 'validator' &&
+      typeof value === 'string' &&
       target.value !== this.validator &&
       isValidatorType(value)
     ) {

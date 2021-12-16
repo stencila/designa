@@ -25,12 +25,23 @@ export const StringValidator = ({
 
       <label>
         Minimum length
-        <input type="number" name="minLength" value={values.minLength} />
+        <input
+          type="number"
+          step="1"
+          name="minLength"
+          value={values.minLength}
+          min="0"
+        />
       </label>
 
       <label>
         Maximum length
-        <input type="number" name="maxLength" value={values.maxLength} />
+        <input
+          type="number"
+          step="1"
+          name="maxLength"
+          value={values.maxLength}
+        />
       </label>
 
       <label>
