@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.47.2](https://github.com/stencila/designa/compare/@stencila/components@0.47.1...@stencila/components@0.47.2) (2021-12-16)
+
+### Bug Fixes
+
+- **Parameter:** Parse values and set min value for string validator ([6891568](https://github.com/stencila/designa/commit/689156829c91f01955670aa111003ffeb3a4df34))
+
 ### [0.47.1](https://github.com/stencila/designa/compare/@stencila/components@0.47.0...@stencila/components@0.47.1) (2021-12-16)
 
 **Note:** Version bump only for package @stencila/components
