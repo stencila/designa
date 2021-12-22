@@ -1,6 +1,10 @@
 import { EditorView } from '@codemirror/view'
-import { Component, h, Host, Method, Prop } from '@stencil/core'
+import { Component, h, Host, Listen, Method, Prop } from '@stencil/core'
 import { CodeBlock, codeBlock } from '@stencila/schema'
+import {
+  CodeComponent,
+  DiscoverExecutableLanguagesEvent,
+} from '../code/codeTypes'
 import { EditorUpdateHandlerCb } from '../editor/customizations/onUpdateHandlerExtension'
 import { Keymap } from '../editor/editor'
 import {
@@ -22,7 +26,7 @@ import {
   },
   scoped: true,
 })
-export class CodeBlockComponent {
+export class CodeBlockComponent implements CodeComponent<CodeBlock> {
   private static readonly slots = {
     text: 'text',
     outputs: 'outputs',
@@ -81,6 +85,13 @@ export class CodeBlockComponent {
   @Prop()
   public executableLanguages?: FileFormatMap
 
+  @Listen('stencila-discover-executable-languages', { target: 'window' })
+  onDiscoverExecutableLanguages({
+    detail,
+  }: DiscoverExecutableLanguagesEvent): void {
+    this.executableLanguages = detail.languages
+  }
+
   /**
    * Custom keyboard shortcuts to pass along to CodeMirror
    * @see https://codemirror.net/6/docs/ref/#keymap
@@ -117,6 +128,19 @@ export class CodeBlockComponent {
     }
 
     throw new Error('Could not get CodeChunk contents')
+  }
+
+  /**
+   * Returns the text contents from the editor
+   */
+  @Method()
+  public async getTextContents(): Promise<string> {
+    if (this.editorRef) {
+      const { text } = await this.editorRef?.getContents()
+      return text
+    }
+
+    throw new Error('Could not get CodeBlock contents')
   }
 
   /**

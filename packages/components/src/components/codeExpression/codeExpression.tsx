@@ -10,9 +10,12 @@ import {
   Prop,
   State,
 } from '@stencil/core'
-import { codeExpression, CodeExpression, isA } from '@stencila/schema'
-import { StencilaNodeUpdateEvent } from '../../globals/events'
-import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
+import { codeExpression, CodeExpression } from '@stencila/schema'
+import {
+  CodeComponent,
+  CodeVisibilityEvent,
+  DiscoverExecutableLanguagesEvent,
+} from '../code/codeTypes'
 import {
   FileFormat,
   fileFormatMap,
@@ -80,9 +83,9 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     window.stencilaWebClient?.executableLanguages ?? {}
 
   @Listen('stencila-discover-executable-languages', { target: 'window' })
-  onDiscoverKernels({
+  onDiscoverExecutableLanguages({
     detail,
-  }: CustomEvent<{ languages: FileFormatMap }>): void {
+  }: DiscoverExecutableLanguagesEvent): void {
     this.executableLanguages = detail.languages
   }
 
@@ -138,13 +141,13 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     this.setCodeVisibility(event)
   }
 
-  @Listen('stencila-document-patch', { target: 'window' })
-  onCodeExpressionPatch({
-    detail,
-  }: CustomEvent<StencilaNodeUpdateEvent>): void {
-    if (detail.nodeId === this.el.id && isA('CodeExpression', detail.value)) {
-      this.codeExpression = detail.value
-    }
+  /**
+   * Returns the text contents from the inline code editor
+   */
+  @Method()
+  public async getTextContents(): Promise<string> {
+    const slot = this.selectTextSlot()
+    return Promise.resolve(slot?.textContent ?? '')
   }
 
   /**
@@ -154,7 +157,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   public async getContents(): Promise<CodeExpression> {
     return Promise.resolve(
       codeExpression({
-        text: this.getTextSlotContents(),
+        text: await this.getTextContents(),
         programmingLanguage: this.programmingLanguage,
       })
     )
@@ -170,9 +173,15 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   private selectTextSlot = (): HTMLElement | null =>
     this.el.querySelector(`.${slots.text}`)
 
-  private getTextSlotContents = (): string => {
-    const slot = this.selectTextSlot()
-    return slot?.textContent ?? ''
+  /**
+   * Event emitted when the source code of the `CodeExpression` node is changed.
+   */
+  @Event({ eventName: 'stencila-content-change' })
+  contentChange: EventEmitter<string>
+
+  private contentChangeHandler = (e: Event) => {
+    const target = e.currentTarget as HTMLSpanElement
+    this.contentChange.emit(target.textContent ?? '')
   }
 
   private handleKeyDown = (event: KeyboardEvent): void => {
@@ -302,6 +311,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
           class="text"
           contentEditable={!this.readOnly}
           onBlur={this.removeHoverState}
+          onInput={this.contentChangeHandler}
           tabIndex={this.isCodeVisible ? 0 : -1}
           role="textbox"
         >

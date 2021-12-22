@@ -17,9 +17,10 @@
 
 ## Events
 
-| Event                      | Description                                               | Type                                                                     |
-| -------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `stencila-language-change` | Event emitted when the language of the editor is changed. | `CustomEvent<{ name: string; ext: string \| null; aliases: string[]; }>` |
+| Event                      | Description                                                                 | Type                                                                     |
+| -------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `stencila-content-change`  | Event emitted when the source code of the `CodeExpression` node is changed. | `CustomEvent<string>`                                                    |
+| `stencila-language-change` | Event emitted when the language of the editor is changed.                   | `CustomEvent<{ name: string; ext: string \| null; aliases: string[]; }>` |
 
 
 ## Methods
@@ -41,6 +42,16 @@ Returns the `CodeExpression` node with the updated `text` contents from the edit
 #### Returns
 
 Type: `Promise<CodeExpression>`
+
+
+
+### `getTextContents() => Promise<string>`
+
+Returns the text contents from the inline code editor
+
+#### Returns
+
+Type: `Promise<string>`
 
 
 

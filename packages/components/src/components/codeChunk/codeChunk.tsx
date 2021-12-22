@@ -11,9 +11,12 @@ import {
   Prop,
   State,
 } from '@stencil/core'
-import { CodeChunk, codeChunk as makeCodeChunk, isA } from '@stencila/schema'
-import { StencilaNodeUpdateEvent } from '../../globals/events'
-import { CodeComponent, CodeVisibilityEvent } from '../code/codeTypes'
+import { CodeChunk, codeChunk as makeCodeChunk } from '@stencila/schema'
+import {
+  CodeComponent,
+  CodeVisibilityEvent,
+  DiscoverExecutableLanguagesEvent,
+} from '../code/codeTypes'
 import { EditorUpdateHandlerCb } from '../editor/customizations/onUpdateHandlerExtension'
 import { Keymap } from '../editor/editor'
 import {
@@ -87,6 +90,13 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    */
   @Prop()
   public executableLanguages?: FileFormatMap
+
+  @Listen('stencila-discover-executable-languages', { target: 'window' })
+  onDiscoverExecutableLanguages({
+    detail,
+  }: DiscoverExecutableLanguagesEvent): void {
+    this.executableLanguages = detail.languages
+  }
 
   /**
    * Whether the code section is visible or not
@@ -190,13 +200,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     return node
   }
 
-  @Listen('stencila-document-patch', { target: 'window' })
-  onCodeChunkPatch({ detail }: CustomEvent<StencilaNodeUpdateEvent>): void {
-    if (detail.nodeId === this.el.id && isA('CodeChunk', detail.value)) {
-      this.codeChunk = detail.value
-    }
-  }
-
   private editorLayoutChangeHandler = (isStacked: boolean) => {
     this.isStacked = isStacked
   }
@@ -232,6 +235,19 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     if (this.editorRef) {
       const { text, language } = await this.editorRef?.getContents()
       return makeCodeChunk({ text, programmingLanguage: language })
+    }
+
+    throw new Error('Could not get CodeChunk contents')
+  }
+
+  /**
+   * Returns the text contents from the editor
+   */
+  @Method()
+  public async getTextContents(): Promise<string> {
+    if (this.editorRef) {
+      const { text } = await this.editorRef?.getContents()
+      return text
     }
 
     throw new Error('Could not get CodeChunk contents')

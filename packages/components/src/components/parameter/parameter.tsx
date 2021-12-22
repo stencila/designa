@@ -166,7 +166,7 @@ export class Parameter {
 
           <span
             class="name"
-            contenteditable={this.mode === 'edit'}
+            contentEditable={this.mode === 'edit'}
             onClick={(e) => {
               if (this.mode === 'edit') {
                 e.preventDefault()

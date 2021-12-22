@@ -40,6 +40,7 @@ import {
   Prop,
   Watch,
 } from '@stencil/core'
+import { DiscoverExecutableLanguagesEvent } from '../code/codeTypes'
 import { getSlotByName } from '../utils/slotSelectors'
 import { LanguagePicker } from './components/languageSelect'
 import { codeErrors, updateErrors } from './customizations/errorPanel'
@@ -136,9 +137,9 @@ export class Editor {
     window.stencilaWebClient?.executableLanguages ?? {}
 
   @Listen('stencila-discover-executable-languages', { target: 'window' })
-  onDiscoverKernels({
+  onDiscoverExecutableLanguages({
     detail,
-  }: CustomEvent<{ languages: FileFormatMap }>): void {
+  }: DiscoverExecutableLanguagesEvent): void {
     this.executableLanguages = detail.languages
   }
 
