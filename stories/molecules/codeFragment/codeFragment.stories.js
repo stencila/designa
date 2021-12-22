@@ -3,13 +3,22 @@ import { html } from 'lit-html'
 export default {
   title: 'Schema Nodes/Code Fragment',
   component: 'stencila-code-fragment',
+  argTypes: {
+    mode: {
+      defaultValue: 'read',
+      control: {
+        type: 'select',
+      },
+      options: ['read', 'edit'],
+    },
+  },
 }
 
-export const codeFragment = () => html`
+export const codeFragment = ({ mode }) => html`
   <div>
     <p>
       <span>Some</span>
-      <stencila-code-fragment>
+      <stencila-code-fragment .mode=${mode}>
         <code slot="text">code</code>
       </stencila-code-fragment>
       <span>in a paragraph.</span>
@@ -18,7 +27,7 @@ export const codeFragment = () => html`
       <span>With a language</span>
       <stencila-code-fragment
         programming-language="python"
-        .readOnly=${true}
+        .mode=${mode}
         itemtype="http://schema.stenci.la/CodeFragment"
       >
         <code slot="text" class="language-python">

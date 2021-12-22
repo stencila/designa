@@ -60,6 +60,16 @@ Type: `Promise<EditorView | undefined>`
 
 
 
+### `getTextContents() => Promise<string>`
+
+Returns the text contents from the editor
+
+#### Returns
+
+Type: `Promise<string>`
+
+
+
 
 ## Slots
 

@@ -1,12 +1,19 @@
 import {
   Component,
+  Element,
   Event,
   EventEmitter,
   h,
   Host,
   Listen,
+  Method,
   Prop,
 } from '@stencil/core'
+import { CodeFragment } from '@stencila/schema'
+import {
+  CodeComponent,
+  DiscoverExecutableLanguagesEvent,
+} from '../code/codeTypes'
 import { LanguagePickerInline } from '../codeExpression/languageSelect'
 import {
   FileFormat,
@@ -26,12 +33,15 @@ import {
   },
   scoped: true,
 })
-export class CodeFragment {
+export class CodeFragmentComponent implements CodeComponent<CodeFragment> {
+  @Element() private el: HTMLStencilaCodeExpressionElement
+
   /**
-   * Disallow editing of the editor contents when set to `true`
+   * The context of the component. In `read` mode the code content and its
+   * language cannot be edited.
    */
-  @Prop()
-  public readOnly = false
+  @Prop({ reflect: true })
+  mode: 'read' | 'edit' = 'read'
 
   /**
    * Programming language of the CodeFragment
@@ -53,9 +63,9 @@ export class CodeFragment {
     window.stencilaWebClient?.executableLanguages ?? {}
 
   @Listen('stencila-discover-executable-languages', { target: 'window' })
-  onDiscoverKernels({
+  onDiscoverExecutableLanguages({
     detail,
-  }: CustomEvent<{ languages: FileFormatMap }>): void {
+  }: DiscoverExecutableLanguagesEvent): void {
     this.executableLanguages = detail.languages
   }
   /**
@@ -72,6 +82,29 @@ export class CodeFragment {
     this.programmingLanguage = language
   }
 
+  /**
+   * Event emitted when the source code of the `CodeExpression` node is changed.
+   */
+  @Event({ eventName: 'stencila-content-change' })
+  contentChange: EventEmitter<string>
+
+  private contentChangeHandler = (e: Event) => {
+    const target = e.currentTarget as HTMLSpanElement
+    this.contentChange.emit(target.textContent ?? '')
+  }
+
+  private selectTextSlot = (): HTMLElement | null =>
+    this.el.querySelector(`.text`)
+
+  /**
+   * Returns the text contents from the inline code editor
+   */
+  @Method()
+  public async getTextContents(): Promise<string> {
+    const slot = this.selectTextSlot()
+    return Promise.resolve(slot?.textContent ?? '')
+  }
+
   public render() {
     return (
       <Host class="text">
@@ -81,11 +114,16 @@ export class CodeFragment {
             executableLanguages={this.executableLanguages}
             onSetLanguage={this.onSelectLanguage}
             languageCapabilities={this.languageCapabilities}
-            disabled={this.readOnly}
+            disabled={this.mode === 'read'}
           ></LanguagePickerInline>
         </span>
 
-        <span class="text">
+        <span
+          class="text"
+          contentEditable={this.mode === 'edit'}
+          onInput={this.contentChangeHandler}
+          role="textbox"
+        >
           <slot name="text" />
         </span>
       </Host>

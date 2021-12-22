@@ -123,6 +123,10 @@ export namespace Components {
          */
         "getRef": () => Promise<EditorView | undefined>;
         /**
+          * Returns the text contents from the editor
+         */
+        "getTextContents": () => Promise<string>;
+        /**
           * Custom keyboard shortcuts to pass along to CodeMirror
           * @see https://codemirror.net/6/docs/ref/#keymap
          */
@@ -182,6 +186,10 @@ export namespace Components {
          */
         "getRef": () => Promise<EditorView | undefined>;
         /**
+          * Returns the text contents from the editor
+         */
+        "getTextContents": () => Promise<string>;
+        /**
           * Whether the code section is visible or not
          */
         "isCodeVisible": boolean;
@@ -234,6 +242,10 @@ export namespace Components {
          */
         "getContents": () => Promise<CodeExpression>;
         /**
+          * Returns the text contents from the inline code editor
+         */
+        "getTextContents": () => Promise<string>;
+        /**
           * List of all supported programming languages
          */
         "languageCapabilities": FileFormatMap;
@@ -252,17 +264,21 @@ export namespace Components {
          */
         "executableLanguages": FileFormatMap;
         /**
+          * Returns the text contents from the inline code editor
+         */
+        "getTextContents": () => Promise<string>;
+        /**
           * List of all supported programming languages
          */
         "languageCapabilities": FileFormatMap;
         /**
+          * The context of the component. In `read` mode the code content and its language cannot be edited.
+         */
+        "mode": 'read' | 'edit';
+        /**
           * Programming language of the CodeFragment
          */
         "programmingLanguage": string | undefined;
-        /**
-          * Disallow editing of the editor contents when set to `true`
-         */
-        "readOnly": boolean;
     }
     interface StencilaDataTable {
     }
@@ -969,6 +985,10 @@ declare namespace LocalJSX {
          */
         "languageCapabilities"?: FileFormatMap;
         /**
+          * Event emitted when the source code of the `CodeExpression` node is changed.
+         */
+        "onStencila-content-change"?: (event: CustomEvent<string>) => void;
+        /**
           * Event emitted when the language of the editor is changed.
          */
         "onStencila-language-change"?: (event: CustomEvent<FileFormat>) => void;
@@ -991,6 +1011,14 @@ declare namespace LocalJSX {
          */
         "languageCapabilities"?: FileFormatMap;
         /**
+          * The context of the component. In `read` mode the code content and its language cannot be edited.
+         */
+        "mode"?: 'read' | 'edit';
+        /**
+          * Event emitted when the source code of the `CodeExpression` node is changed.
+         */
+        "onStencila-content-change"?: (event: CustomEvent<string>) => void;
+        /**
           * Event emitted when the language of the editor is changed.
          */
         "onStencila-language-change"?: (event: CustomEvent<FileFormat>) => void;
@@ -998,10 +1026,6 @@ declare namespace LocalJSX {
           * Programming language of the CodeFragment
          */
         "programmingLanguage"?: string | undefined;
-        /**
-          * Disallow editing of the editor contents when set to `true`
-         */
-        "readOnly"?: boolean;
     }
     interface StencilaDataTable {
     }
