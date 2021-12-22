@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.47.3](https://github.com/stencila/designa/compare/@stencila/components@0.47.2...@stencila/components@0.47.3) (2021-12-22)
+
+### Bug Fixes
+
+- **Code:** Ensure code components have unified interfaces and methods ([6ff4a0d](https://github.com/stencila/designa/commit/6ff4a0d4725ec5529e9d5053ed0ce441a2f910d0))
+
 ### [0.47.2](https://github.com/stencila/designa/compare/@stencila/components@0.47.1...@stencila/components@0.47.2) (2021-12-16)
 
 ### Bug Fixes
