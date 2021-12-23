@@ -445,7 +445,7 @@ export class Editor {
       searchConfig({ top: true }),
       highlightSpecialChars(),
       keymap.of([
-        ...defaultKeymap,
+        ...this.keymap,
         ...commentKeymap,
         ...closeBracketsKeymap,
         ...historyKeymap,
@@ -459,7 +459,7 @@ export class Editor {
           key: 'Ctrl-Enter',
           run: this.execute,
         },
-        ...this.keymap,
+        ...defaultKeymap,
       ]),
       this.readOnlyConf.of(EditorView.editable.of(!this.readOnly)),
       codeErrors(),
