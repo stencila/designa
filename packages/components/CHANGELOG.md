@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.47.4](https://github.com/stencila/designa/compare/@stencila/components@0.47.3...@stencila/components@0.47.4) (2021-12-23)
+
+### Bug Fixes
+
+- **Editor:** Update precedence of keymaps ([1aadd51](https://github.com/stencila/designa/commit/1aadd51a1403b591e5b52bceaf19f9a5d3f61302))
+
 ### [0.47.3](https://github.com/stencila/designa/compare/@stencila/components@0.47.2...@stencila/components@0.47.3) (2021-12-22)
 
 ### Bug Fixes
