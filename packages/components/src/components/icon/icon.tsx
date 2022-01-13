@@ -55,14 +55,21 @@ export class Icon {
   }
 
   public render() {
+    const iconSuffix = this.iconStyle !== undefined ? this.iconStyle : ''
+
+    const iconName =
+      this.icon.endsWith('-line') || this.icon.endsWith('-fill')
+        ? this.icon
+        : `${this.icon}-${iconSuffix}`
+
     return (
       <Host icon={this.icon} aria-hidden="true">
-        <svg>
-          <use
-            href={`#ri-${this.icon}${
-              this.iconStyle !== undefined ? '-' + this.iconStyle : ''
-            }`}
-          ></use>
+        <svg
+          style={{
+            fill: this.color ? `var(--color-${this.color})` : undefined,
+          }}
+        >
+          <use href={`#ri-${iconName}`}></use>
         </svg>
       </Host>
     )
