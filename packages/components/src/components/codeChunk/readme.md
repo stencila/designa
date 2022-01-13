@@ -5,18 +5,23 @@
 
 ## Properties
 
-| Property               | Attribute              | Description                                                                                             | Type                                                             | Default         |
-| ---------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | --------------- |
-| `autofocus`            | `autofocus`            | Autofocus the editor on page load                                                                       | `boolean`                                                        | `false`         |
-| `codeChunk`            | --                     | Stencila CodeChunk node to render                                                                       | `CodeChunk \| undefined`                                         | `undefined`     |
-| `contentChangeHandler` | --                     | Callback function to invoke whenever the editor contents are updated.                                   | `((updateEvent?: ViewUpdate \| undefined) => void) \| undefined` | `undefined`     |
-| `executableLanguages`  | --                     | List of programming languages that can be executed in the current context                               | `undefined \| { [x: string]: FileFormat; }`                      | `undefined`     |
-| `executeHandler`       | --                     | A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`. | `((codeChunk: CodeChunk) => Promise<CodeChunk>) \| undefined`    | `undefined`     |
-| `isCodeVisible`        | `is-code-visible`      | Whether the code section is visible or not                                                              | `boolean`                                                        | `false`         |
-| `keymap`               | --                     | Custom keyboard shortcuts to pass along to CodeMirror                                                   | `KeyBinding[]`                                                   | `[]`            |
-| `languageCapabilities` | --                     | List of all supported programming languages                                                             | `{ [x: string]: FileFormat; }`                                   | `fileFormatMap` |
-| `programmingLanguage`  | `programming-language` | Programming language of the CodeChunk                                                                   | `string \| undefined`                                            | `undefined`     |
-| `text`                 | `text`                 |                                                                                                         | `string \| undefined`                                            | `undefined`     |
+| Property               | Attribute              | Description                                                                                             | Type                                                                                                                                          | Default         |
+| ---------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| `autofocus`            | `autofocus`            | Autofocus the editor on page load                                                                       | `boolean`                                                                                                                                     | `false`         |
+| `compileDigest`        | `compile-digest`       | A digest representing the state of a [`Resource`] and its dependencies at compile time.                 | `string`                                                                                                                                      | `undefined`     |
+| `contentChangeHandler` | --                     | Callback function to invoke whenever the editor contents are updated.                                   | `((updateEvent?: ViewUpdate \| undefined) => void) \| undefined`                                                                              | `undefined`     |
+| `executableLanguages`  | --                     | List of programming languages that can be executed in the current context                               | `undefined \| { [x: string]: FileFormat; }`                                                                                                   | `undefined`     |
+| `executeDigest`        | `execute-digest`       | A digest representing the state of a [`Resource`] and its dependencies from the latest execution.       | `string`                                                                                                                                      | `undefined`     |
+| `executeDuration`      | `execute-duration`     | Duration of the latest code execition                                                                   | `string`                                                                                                                                      | `undefined`     |
+| `executeEnded`         | `execute-ended`        | Time when the latest code execution ended                                                               | `string`                                                                                                                                      | `undefined`     |
+| `executeHandler`       | --                     | A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`. | `((codeChunk: CodeChunk) => Promise<CodeChunk>) \| undefined`                                                                                 | `undefined`     |
+| `executeRequired`      | `execute-required`     | Status of upstream dependencies, and whether the node needs to be re-executed                           | `"DependenciesChanged" \| "DependenciesFailed" \| "NeverExecuted" \| "No" \| "SemanticsChanged"`                                              | `undefined`     |
+| `executeStatus`        | `execute-status`       | The execution status of the code node                                                                   | `"Cancelled" \| "Failed" \| "Running" \| "RunningPreviouslyFailed" \| "Scheduled" \| "ScheduledPreviouslyFailed" \| "Succeeded" \| undefined` | `undefined`     |
+| `isCodeVisible`        | `is-code-visible`      | Whether the code section is visible or not                                                              | `boolean`                                                                                                                                     | `false`         |
+| `keymap`               | --                     | Custom keyboard shortcuts to pass along to CodeMirror                                                   | `KeyBinding[]`                                                                                                                                | `[]`            |
+| `languageCapabilities` | --                     | List of all supported programming languages                                                             | `{ [x: string]: FileFormat; }`                                                                                                                | `fileFormatMap` |
+| `programmingLanguage`  | `programming-language` | Programming language of the CodeChunk                                                                   | `string \| undefined`                                                                                                                         | `undefined`     |
+| `text`                 | `text`                 |                                                                                                         | `string \| undefined`                                                                                                                         | `undefined`     |
 
 
 ## Events
@@ -99,6 +104,8 @@ Type: `Promise<string>`
 - [stencila-button](../button)
 - [stencila-editor](../editor)
 - [stencila-node-list](../nodeList)
+- [stencila-tooltip](../tooltip)
+- [stencila-icon](../icon)
 
 ### Graph
 ```mermaid
@@ -107,6 +114,8 @@ graph TD;
   stencila-code-chunk --> stencila-button
   stencila-code-chunk --> stencila-editor
   stencila-code-chunk --> stencila-node-list
+  stencila-code-chunk --> stencila-tooltip
+  stencila-code-chunk --> stencila-icon
   stencila-action-menu --> stencila-button
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip

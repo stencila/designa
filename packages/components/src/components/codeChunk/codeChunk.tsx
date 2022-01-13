@@ -12,10 +12,13 @@ import {
   State,
 } from '@stencil/core'
 import { CodeChunk, codeChunk as makeCodeChunk } from '@stencila/schema'
+import { CodeExecuteStatus } from '../code/codeExecuteStatus'
 import {
   CodeComponent,
   CodeVisibilityEvent,
   DiscoverExecutableLanguagesEvent,
+  ExecuteRequired,
+  ExecuteStatus,
 } from '../code/codeTypes'
 import { EditorUpdateHandlerCb } from '../editor/customizations/onUpdateHandlerExtension'
 import { Keymap } from '../editor/editor'
@@ -66,14 +69,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   @Prop() public autofocus = false
 
   /**
-   * Stencila CodeChunk node to render
-   */
-  @Prop({
-    mutable: true,
-  })
-  codeChunk?: CodeChunk
-
-  /**
    * Programming language of the CodeChunk
    */
   @Prop({ mutable: true })
@@ -107,13 +102,53 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   /**
    * A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`.
    */
-  @Prop() public executeHandler?: (codeChunk: CodeChunk) => Promise<CodeChunk>
+  @Prop()
+  public executeHandler?: (codeChunk: CodeChunk) => Promise<CodeChunk>
 
   /**
    * Callback function to invoke whenever the editor contents are updated.
    */
   @Prop()
   public contentChangeHandler?: EditorUpdateHandlerCb
+
+  /**
+   * The execution status of the code node
+   */
+  @Prop()
+  executeStatus: ExecuteStatus
+
+  /**
+   * A digest representing the state of a [`Resource`] and its dependencies at
+   * compile time.
+   */
+  @Prop()
+  compileDigest: string
+
+  /**
+   * Status of upstream dependencies, and whether the node needs to be
+   * re-executed
+   */
+  @Prop()
+  executeRequired: ExecuteRequired
+
+  /**
+   * A digest representing the state of a [`Resource`] and its dependencies from
+   * the latest execution.
+   */
+  @Prop()
+  executeDigest: string
+
+  /**
+   * Time when the latest code execution ended
+   */
+  @Prop()
+  executeEnded: string
+
+  /**
+   * Duration of the latest code execition
+   */
+  @Prop()
+  executeDuration: string
 
   /**
    * Custom keyboard shortcuts to pass along to CodeMirror
@@ -191,7 +226,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
 
     if (this.isExecutable() && this.executeHandler) {
       const computed = await this.executeHandler(node)
-      this.codeChunk = computed
       this.executeCodeState = 'RESOLVED'
       return computed
     }
@@ -324,7 +358,12 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
                 isLoading={this.executeCodeState === 'PENDING'}
               ></stencila-button>
             )}
-
+            <span slot="persistentActions">
+              <CodeExecuteStatus
+                executeStatus={this.executeStatus}
+                executeRequired={this.executeRequired}
+              ></CodeExecuteStatus>
+            </span>
             <stencila-button
               minimal={true}
               color="key"
@@ -338,7 +377,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
                 this.isCodeVisibleState ? 'Hide' : 'Show'
               } Code\nShift click to set for all code blocks`}
             ></stencila-button>
-
+            )
             {this.isCodeVisibleState && (
               <stencila-button
                 minimal={true}

@@ -26,6 +26,16 @@ stencila-code-chunk {
 
   stencila-action-menu {
     @apply relative block w-full p-0 border-l-0 border-r-0 rounded-none;
+
+    .executeStatus {
+      --height: 0.875rem;
+      --width: 0.875rem;
+      @apply p-1 cursor-help;
+
+      &.scheduled {
+        @apply cursor-wait;
+      }
+    }
   }
 
   stencila-editor {

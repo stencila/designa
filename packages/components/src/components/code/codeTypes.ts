@@ -12,6 +12,23 @@ export type CodeVisibilityEvent = CustomEvent<{
   isVisible: boolean
 }>
 
+export type ExecuteStatus =
+  | undefined
+  | 'Scheduled'
+  | 'ScheduledPreviouslyFailed'
+  | 'Running'
+  | 'RunningPreviouslyFailed'
+  | 'Succeeded'
+  | 'Failed'
+  | 'Cancelled'
+
+export type ExecuteRequired =
+  | 'NeverExecuted'
+  | 'SemanticsChanged'
+  | 'DependenciesChanged'
+  | 'DependenciesFailed'
+  | 'No'
+
 export type DiscoverExecutableLanguagesEvent = CustomEvent<{
   languages: FileFormatMap
 }>
@@ -41,6 +58,18 @@ abstract class ExecutableCodeComponent<C extends CodeChunk | CodeExpression> {
   // Event Listeners
   // `stencila-code-visibility-change`
   abstract onAllCodeVisibilityChange(event: CodeVisibilityEvent): void
+
+  abstract executeStatus: ExecuteStatus
+
+  abstract executeRequired: ExecuteRequired
+
+  abstract compileDigest: string
+
+  abstract executeDigest: string
+
+  abstract executeEnded: string
+
+  abstract executeDuration: string
 }
 
 /**

@@ -1,5 +1,6 @@
 import { Component, getAssetPath, h, Host, Prop } from '@stencil/core'
 import wretch from 'wretch'
+import { Colors } from '../../types'
 import { IconNames } from './iconNames'
 
 let isFetchingIcons = false
@@ -32,6 +33,9 @@ export class Icon {
    */
   @Prop()
   public readonly iconStyle: 'fill' | 'line' = getGlobalIconStyle()
+
+  @Prop()
+  public readonly color?: Colors | string
 
   private fetchIcons = async () => {
     const response = await wretch()
