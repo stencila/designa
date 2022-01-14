@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.48.0](https://github.com/stencila/designa/compare/@stencila/components@0.47.7...@stencila/components@0.48.0) (2022-01-14)
+
+### Features
+
+- **Code:** Expose code execution status ([e233fbd](https://github.com/stencila/designa/commit/e233fbd6c157d876b8df5545edeb15f06f5b3956)), closes [#250](https://github.com/stencila/designa/issues/250)
+
+### Bug Fixes
+
+- **Icon:** Allow overriding icon style ([8edcb66](https://github.com/stencila/designa/commit/8edcb66154c426068244b760f2965722a31551bb))
+
 ### [0.47.7](https://github.com/stencila/designa/compare/@stencila/components@0.47.6...@stencila/components@0.47.7) (2022-01-12)
 
 **Note:** Version bump only for package @stencila/components

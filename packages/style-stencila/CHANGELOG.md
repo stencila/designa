@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.27.4...@stencila/style-stencila@0.28.0) (2022-01-14)
+
+### Features
+
+- **Code:** Expose code execution status ([e233fbd](https://github.com/stencila/style/commit/e233fbd6c157d876b8df5545edeb15f06f5b3956)), closes [#250](https://github.com/stencila/style/issues/250)
+
 ### [0.27.4](https://github.com/stencila/style/compare/@stencila/style-stencila@0.27.3...@stencila/style-stencila@0.27.4) (2022-01-12)
 
 **Note:** Version bump only for package @stencila/style-stencila
