@@ -11,10 +11,13 @@ import {
   State,
 } from '@stencil/core'
 import { codeExpression, CodeExpression } from '@stencila/schema'
+import { CodeExecuteStatus } from '../code/codeExecuteStatus'
 import {
   CodeComponent,
   CodeVisibilityEvent,
   DiscoverExecutableLanguagesEvent,
+  ExecuteRequired,
+  ExecuteStatus,
 } from '../code/codeTypes'
 import {
   FileFormat,
@@ -31,8 +34,10 @@ const slots = {
 }
 
 /**
- * @slot text - The source code of the `CodeChunk`. Corresponds to the `text` field in the Stencila `CodeExpression` Schema.
- * @slot output - A single output element. Corresponds to the `output` field in the Stencila `CodeExpression` Schema.
+ * @slot text - The source code of the `CodeChunk`. Corresponds to the `text`
+ *              field in the Stencila `CodeExpression` Schema.
+ * @slot output - A single output element. Corresponds to the `output` field in
+ *                the Stencila `CodeExpression` Schema.
  */
 @Component({
   tag: 'stencila-code-expression',
@@ -51,7 +56,8 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   private outputSlot: Element
 
   /**
-   * A callback function to be called with the value of the `CodeExpression` node when executing the `CodeExpression`.
+   * A callback function to be called with the value of the `CodeExpression`
+   * node when executing the `CodeExpression`.
    */
   @Prop() public executeHandler?: (
     codeExpression: CodeExpression
@@ -90,13 +96,53 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   }
 
   /**
+   * The execution status of the code node
+   */
+  @Prop()
+  executeStatus: ExecuteStatus
+
+  /**
+   * A digest representing the state of a [`Resource`] and its dependencies at
+   * compile time.
+   */
+  @Prop()
+  compileDigest: string
+
+  /**
+   * Status of upstream dependencies, and whether the node needs to be
+   * re-executed
+   */
+  @Prop()
+  executeRequired: ExecuteRequired
+
+  /**
+   * A digest representing the state of a [`Resource`] and its dependencies from
+   * the latest execution.
+   */
+  @Prop()
+  executeDigest: string
+
+  /**
+   * Time when the latest code execution ended
+   */
+  @Prop()
+  executeEnded: string
+
+  /**
+   * Duration of the latest code execition
+   */
+  @Prop()
+  executeDuration: string
+
+  /**
    * Event emitted when the language of the editor is changed.
    */
   @Event({ eventName: 'stencila-language-change' })
   languageChange: EventEmitter<FileFormat>
 
   /**
-   * Function to call when the user selects a new language from the language picker dropdown.
+   * Function to call when the user selects a new language from the language
+   * picker dropdown.
    */
   private onSelectLanguage = async (language: string): Promise<void> => {
     this.languageChange.emit(lookupFormat(language))
@@ -151,7 +197,8 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   }
 
   /**
-   * Returns the `CodeExpression` node with the updated `text` contents from the editor.
+   * Returns the `CodeExpression` node with the updated `text` contents from the
+   * editor.
    */
   @Method()
   public async getContents(): Promise<CodeExpression> {
@@ -274,13 +321,20 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   private generateContent = (): HTMLElement[] => {
     return [
       <span class="actions">
+        <CodeExecuteStatus
+          executeStatus={this.executeStatus}
+          executeRequired={this.executeRequired}
+        ></CodeExecuteStatus>
         <stencila-button
           aria-label="Run Code"
           class="run"
           onClick={this.executeRef}
           color="key"
           disabled={!this.executeHandler}
-          isLoading={this.executeCodeState === 'PENDING'}
+          isLoading={
+            this.executeCodeState === 'PENDING' ||
+            this.executeStatus === 'Scheduled'
+          }
           icon="play"
           iconOnly={true}
           minimal={true}

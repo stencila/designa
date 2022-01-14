@@ -12,7 +12,7 @@ stencila-code-expression {
   /** @prop --border: Border color around the component as well as internal section dividers */
   --border: var(--color-neutral-100, #e2e8f0);
 
-  @apply inline-flex items-stretch p-0 text-sm leading-none align-text-bottom border border-solid rounded;
+  @apply inline-flex relative items-stretch p-0 text-sm leading-none align-text-bottom border border-solid rounded;
   background-color: var(--background);
   border-color: var(--border);
 
@@ -98,6 +98,16 @@ stencila-code-expression {
   &:hover {
     .actions .secondaryAction {
       @apply inline-flex w-5 max-w-full;
+    }
+  }
+
+  .executeStatus {
+    --height: 0.875rem;
+    --width: 0.875rem;
+    @apply p-1 cursor-help;
+
+    &.scheduled {
+      @apply cursor-wait;
     }
   }
 }

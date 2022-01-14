@@ -59,6 +59,11 @@ export const withExecuteHandler = ({
       .isCodeVisible=${true}
       .programmingLanguage=${programmingLanguage}
       .executableLanguages=${executableLanguages}
+      compile-digest="tbwf_ZCRL7GL7259gJCRksemSSiWMgFW1n-68QTGVEo.6n7aj6ejT9qhLyTucvtLVqYbqy0bkcxA-y7azALl03M..0"
+      execute-digest="tbwf_ZCRL7GL7259gJCRksemSSiWMgFW1n-68QTGVEo.6n7aj6ejT9qhLyTucvtLVqYbqy0bkcxA-y7azALl03M..0"
+      execute-status="Succeeded"
+      execute-ended="2022-01-10T08:43:39.417734048+00:00"
+      execute-duration="0.002131382"
     >
       <pre slot="text">print(a)</pre>
       <figure slot="outputs">

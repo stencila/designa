@@ -12,6 +12,7 @@ import { Keymap } from "./components/editor/editor";
 import { EditorUpdateHandlerCb } from "./components/editor/customizations/onUpdateHandlerExtension";
 import { CodeBlock, CodeChunk, CodeError, CodeExpression, ImageObject } from "@stencila/schema";
 import { EditorView, ViewUpdate } from "@codemirror/view";
+import { ExecuteRequired, ExecuteStatus } from "./components/code/codeTypes";
 import { Level } from "./components/error/error";
 import { EditorContents, EditorStateJSON, Keymap as Keymap1 } from "./components/editor/editor";
 import { Config, Data, Layout } from "plotly.js";
@@ -158,9 +159,9 @@ export namespace Components {
          */
         "autofocus": boolean;
         /**
-          * Stencila CodeChunk node to render
+          * A digest representing the state of a [`Resource`] and its dependencies at compile time.
          */
-        "codeChunk"?: CodeChunk;
+        "compileDigest": string;
         /**
           * Callback function to invoke whenever the editor contents are updated.
          */
@@ -174,9 +175,29 @@ export namespace Components {
          */
         "execute": () => Promise<CodeChunk>;
         /**
+          * A digest representing the state of a [`Resource`] and its dependencies from the latest execution.
+         */
+        "executeDigest": string;
+        /**
+          * Duration of the latest code execition
+         */
+        "executeDuration": string;
+        /**
+          * Time when the latest code execution ended
+         */
+        "executeEnded": string;
+        /**
           * A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
+        /**
+          * Status of upstream dependencies, and whether the node needs to be re-executed
+         */
+        "executeRequired": ExecuteRequired;
+        /**
+          * The execution status of the code node
+         */
+        "executeStatus": ExecuteStatus;
         /**
           * Returns the `CodeChunk` node with the updated `text` content from the editor.
          */
@@ -224,6 +245,10 @@ export namespace Components {
          */
         "codeExpression"?: CodeExpression;
         /**
+          * A digest representing the state of a [`Resource`] and its dependencies at compile time.
+         */
+        "compileDigest": string;
+        /**
           * List of programming languages that can be executed in the current context
          */
         "executableLanguages": FileFormatMap;
@@ -232,11 +257,31 @@ export namespace Components {
          */
         "execute": () => Promise<CodeExpression>;
         /**
+          * A digest representing the state of a [`Resource`] and its dependencies from the latest execution.
+         */
+        "executeDigest": string;
+        /**
+          * Duration of the latest code execition
+         */
+        "executeDuration": string;
+        /**
+          * Time when the latest code execution ended
+         */
+        "executeEnded": string;
+        /**
           * A callback function to be called with the value of the `CodeExpression` node when executing the `CodeExpression`.
          */
         "executeHandler"?: (
     codeExpression: CodeExpression
   ) => Promise<CodeExpression>;
+        /**
+          * Status of upstream dependencies, and whether the node needs to be re-executed
+         */
+        "executeRequired": ExecuteRequired;
+        /**
+          * The execution status of the code node
+         */
+        "executeStatus": ExecuteStatus;
         /**
           * Returns the `CodeExpression` node with the updated `text` contents from the editor.
          */
@@ -378,6 +423,7 @@ export namespace Components {
         "sourceUrl": string;
     }
     interface StencilaIcon {
+        "color"?: Colors | string;
         /**
           * Name of the icon to be rendered. Corresponds to icon names from the [Remix Icon set](http://remixicon.com)
          */
@@ -913,9 +959,9 @@ declare namespace LocalJSX {
          */
         "autofocus"?: boolean;
         /**
-          * Stencila CodeChunk node to render
+          * A digest representing the state of a [`Resource`] and its dependencies at compile time.
          */
-        "codeChunk"?: CodeChunk;
+        "compileDigest"?: string;
         /**
           * Callback function to invoke whenever the editor contents are updated.
          */
@@ -925,9 +971,29 @@ declare namespace LocalJSX {
          */
         "executableLanguages"?: FileFormatMap;
         /**
+          * A digest representing the state of a [`Resource`] and its dependencies from the latest execution.
+         */
+        "executeDigest"?: string;
+        /**
+          * Duration of the latest code execition
+         */
+        "executeDuration"?: string;
+        /**
+          * Time when the latest code execution ended
+         */
+        "executeEnded"?: string;
+        /**
           * A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`.
          */
         "executeHandler"?: (codeChunk: CodeChunk) => Promise<CodeChunk>;
+        /**
+          * Status of upstream dependencies, and whether the node needs to be re-executed
+         */
+        "executeRequired"?: ExecuteRequired;
+        /**
+          * The execution status of the code node
+         */
+        "executeStatus"?: ExecuteStatus;
         /**
           * Whether the code section is visible or not
          */
@@ -971,15 +1037,39 @@ declare namespace LocalJSX {
          */
         "codeExpression"?: CodeExpression;
         /**
+          * A digest representing the state of a [`Resource`] and its dependencies at compile time.
+         */
+        "compileDigest"?: string;
+        /**
           * List of programming languages that can be executed in the current context
          */
         "executableLanguages"?: FileFormatMap;
+        /**
+          * A digest representing the state of a [`Resource`] and its dependencies from the latest execution.
+         */
+        "executeDigest"?: string;
+        /**
+          * Duration of the latest code execition
+         */
+        "executeDuration"?: string;
+        /**
+          * Time when the latest code execution ended
+         */
+        "executeEnded"?: string;
         /**
           * A callback function to be called with the value of the `CodeExpression` node when executing the `CodeExpression`.
          */
         "executeHandler"?: (
     codeExpression: CodeExpression
   ) => Promise<CodeExpression>;
+        /**
+          * Status of upstream dependencies, and whether the node needs to be re-executed
+         */
+        "executeRequired"?: ExecuteRequired;
+        /**
+          * The execution status of the code node
+         */
+        "executeStatus"?: ExecuteStatus;
         /**
           * List of all supported programming languages
          */
@@ -1109,6 +1199,7 @@ declare namespace LocalJSX {
         "sourceUrl"?: string;
     }
     interface StencilaIcon {
+        "color"?: Colors | string;
         /**
           * Name of the icon to be rendered. Corresponds to icon names from the [Remix Icon set](http://remixicon.com)
          */

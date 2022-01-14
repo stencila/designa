@@ -9,4 +9,16 @@ export enum ThemeColors {
   warn = 'warn',
 }
 
-export type Colors = keyof typeof ThemeColors
+type ThemeColorNames =
+  | 'brand'
+  | 'danger'
+  | 'key'
+  | 'neutral'
+  | 'primary'
+  | 'stock'
+  | 'success'
+  | 'warn'
+
+type ThemeColorScale = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+
+export type Colors = ThemeColorNames | `${ThemeColorNames}-${ThemeColorScale}`
