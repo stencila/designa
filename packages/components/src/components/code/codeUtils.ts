@@ -19,11 +19,25 @@ export const executionIconByStatus = (
           title: 'Scheduled',
         }
       }
+      case 'ScheduledPreviouslyFailed': {
+        return {
+          icon: 'timer-2',
+          color: 'danger-500, #cf445e',
+          title: 'Scheduled (previously failed)',
+        }
+      }
       case 'Running': {
         return {
           icon: 'loader-2',
           color: 'neutral-500, #6e7591',
           title: 'Running',
+        }
+      }
+      case 'RunningPreviouslyFailed': {
+        return {
+          icon: 'loader-2',
+          color: 'danger-500, #cf445e',
+          title: 'Running (previously failed)',
         }
       }
       case 'Succeeded': {
@@ -36,7 +50,7 @@ export const executionIconByStatus = (
       case 'Failed': {
         return {
           icon: 'close-circle',
-          color: 'danger-500, #cf445e ',
+          color: 'danger-500, #cf445e',
           title: 'Failed',
         }
       }
