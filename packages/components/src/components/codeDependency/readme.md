@@ -22,14 +22,14 @@
 
 ### Depends on
 
-- [stencila-tooltip](../tooltip)
 - [stencila-icon](../icon)
+- [stencila-tooltip](../tooltip)
 
 ### Graph
 ```mermaid
 graph TD;
-  stencila-code-dependency --> stencila-tooltip
   stencila-code-dependency --> stencila-icon
+  stencila-code-dependency --> stencila-tooltip
   stencila-tooltip --> stencila-tooltip-element
   style stencila-code-dependency fill:#f9f,stroke:#333,stroke-width:4px
 ```

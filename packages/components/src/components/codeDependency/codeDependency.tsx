@@ -60,6 +60,7 @@ export class CodeDependency {
           <CodeExecuteStatus
             executeStatus={this.executeStatus}
             executeRequired={this.executeRequired}
+            nodeKind={this.nodeKind}
           ></CodeExecuteStatus>
           <div class="content">
             <div class="label">

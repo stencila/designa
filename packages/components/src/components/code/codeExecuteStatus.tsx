@@ -1,14 +1,30 @@
-import { FunctionalComponent, h } from '@stencil/core'
+import { Fragment, FunctionalComponent, h } from '@stencil/core'
 import { ExecuteRequired, ExecuteStatus } from './codeTypes'
 import { executionIconByStatus } from './codeUtils'
 
 interface Props {
-  executeStatus: ExecuteStatus
-  executeRequired: ExecuteRequired
+  executeStatus?: ExecuteStatus
+  executeRequired?: ExecuteRequired
+  nodeKind?: string
   slot?: string
 }
 
 export const CodeExecuteStatus = (props: Props): FunctionalComponent => {
+  if (props.nodeKind === 'Parameter') {
+    return (
+      <stencila-icon
+        icon="asterisk"
+        iconStyle={null}
+        color="neutral-500, #6e7591"
+        class="executeStatus"
+      ></stencila-icon>
+    )
+  }
+
+  if (!props.executeRequired || !props.executeStatus) {
+    return <Fragment></Fragment>
+  }
+
   const status = executionIconByStatus(
     props.executeStatus,
     props.executeRequired
