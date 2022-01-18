@@ -632,6 +632,10 @@ export namespace Components {
     }
     interface StencilaTooltip {
         /**
+          * The placement of the tooltip
+         */
+        "position": Placement;
+        /**
           * The text content of the Tooltip.
          */
         "text": string;
@@ -1427,6 +1431,10 @@ declare namespace LocalJSX {
         "position"?: 'static' | 'fixed';
     }
     interface StencilaTooltip {
+        /**
+          * The placement of the tooltip
+         */
+        "position"?: Placement;
         /**
           * The text content of the Tooltip.
          */
