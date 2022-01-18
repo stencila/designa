@@ -523,6 +523,10 @@ export namespace Components {
          */
         "autoClose": boolean;
         /**
+          * Open the menu on hover or when gaining focus
+         */
+        "autoOpen": boolean;
+        /**
           * Determines whether the Menu is shown or not
          */
         "isOpen": boolean;
@@ -1306,6 +1310,10 @@ declare namespace LocalJSX {
           * Close the menu when losing focus
          */
         "autoClose"?: boolean;
+        /**
+          * Open the menu on hover or when gaining focus
+         */
+        "autoOpen"?: boolean;
         /**
           * Determines whether the Menu is shown or not
          */

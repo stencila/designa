@@ -33,6 +33,12 @@ export class Menu {
   public autoClose = true
 
   /**
+   * Open the menu on hover or when gaining focus
+   */
+  @Prop()
+  public autoOpen = false
+
+  /**
    * The position relative to the toggle button where the menu should appear.
    */
   @Prop()
@@ -89,11 +95,18 @@ export class Menu {
       this.el.addEventListener('mouseout', this.closeOnBlur)
       this.el.addEventListener('mouseenter', this.clearTimeout)
     }
+
+    if (this.autoOpen) {
+      this.el.addEventListener('mouseenter', this.openMenu)
+      this.el.addEventListener('focus', this.openMenu)
+    }
   }
 
   public disconnectedCallback(): void {
     this.el.removeEventListener('mouseout', this.closeOnBlur)
     this.el.removeEventListener('mouseenter', this.clearTimeout)
+    this.el.removeEventListener('mouseenter', this.openMenu)
+    this.el.removeEventListener('focus', this.openMenu)
 
     if (this.popperRef) {
       this.popperRef.destroy()
