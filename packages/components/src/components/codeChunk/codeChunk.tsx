@@ -344,11 +344,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
       >
         <figure>
           <stencila-action-menu>
-            <stencila-menu
-              autoOpen={true}
-              menuPosition="bottom-start"
-              slot="persistentActions"
-            >
+            <stencila-menu menuPosition="bottom-start" slot="persistentActions">
               <CodeExecuteStatus
                 executeStatus={this.executeStatus}
                 executeRequired={this.executeRequired}

@@ -30,7 +30,7 @@ stencila-code-chunk {
     .executeStatus {
       --height: 0.875rem;
       --width: 0.875rem;
-      @apply p-1 cursor-help;
+      @apply p-1 cursor-pointer;
 
       &.scheduled {
         @apply cursor-wait;

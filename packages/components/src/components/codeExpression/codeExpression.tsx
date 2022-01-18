@@ -321,7 +321,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   private generateContent = (): HTMLElement[] => {
     return [
       <span class="actions">
-        <stencila-menu autoOpen={true} menuPosition="bottom-start">
+        <stencila-menu menuPosition="bottom-start">
           <CodeExecuteStatus
             executeStatus={this.executeStatus}
             executeRequired={this.executeRequired}
