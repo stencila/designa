@@ -14,23 +14,18 @@ export class CodeDependencies {
   public render() {
     return (
       <Host>
-        {this.el?.slot === 'code-dependencies' ? (
-          <stencila-menu-item divider={true}>
-            Upstream dependencies
-          </stencila-menu-item>
-        ) : (
-          <stencila-menu-item divider={true}>
-            Downstream dependencies
-          </stencila-menu-item>
-        )}
+        {(this.el?.children.length ?? 0) > 0 &&
+          (this.el?.slot === 'code-dependencies' ? (
+            <stencila-menu-item divider={true}>
+              Upstream dependencies
+            </stencila-menu-item>
+          ) : this.el?.slot === 'code-dependents' ? (
+            <stencila-menu-item divider={true}>
+              Downstream dependents
+            </stencila-menu-item>
+          ) : null)}
 
-        <slot>
-          {this.el?.slot === 'code-dependencies'
-            ? 'No upstream dependencies'
-            : this.el?.slot === 'code-dependents'
-            ? 'No downtsream dependencies'
-            : this.el?.slot ?? null}
-        </slot>
+        <slot />
       </Host>
     )
   }

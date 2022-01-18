@@ -354,8 +354,8 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
                 executeRequired={this.executeRequired}
                 slot="toggle"
               ></CodeExecuteStatus>
-              <slot name="code-dependencies">No upstream dependencies</slot>
-              <slot name="code-dependents">No downstream dependencies</slot>
+              <slot name="code-dependencies"></slot>
+              <slot name="code-dependents"></slot>
             </stencila-menu>
             {this.isExecutable() && (
               <stencila-button
