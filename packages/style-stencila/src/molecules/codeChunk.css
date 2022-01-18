@@ -76,8 +76,8 @@ stencila-code-chunk {
 }
 
 @screen lg {
-  :host:not(.isStacked) > div,
-  stencila-code-chunk:not(.isStacked) > div {
+  :host:not(.isStacked) > figure > div,
+  stencila-code-chunk:not(.isStacked) > figure > div {
     @apply flex flex-row items-stretch w-full;
 
     .editorContainer {
