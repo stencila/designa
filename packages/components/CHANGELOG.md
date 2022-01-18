@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.49.0](https://github.com/stencila/designa/compare/@stencila/components@0.48.0...@stencila/components@0.49.0) (2022-01-18)
+
+### Features
+
+- **Code:** Add statuses for `Scheduled/RunningPreviouslyFailed` status ([af25c61](https://github.com/stencila/designa/commit/af25c61651d8f31caaf9a0dcb672b8e157bf72a3))
+- **Code:** Expose code dependency list in UI ([d3b59d0](https://github.com/stencila/designa/commit/d3b59d03c60bf02e7174274fd96768aa951bb98d))
+- **Menu:** Add ability to open on focus/hover ([8da55f0](https://github.com/stencila/designa/commit/8da55f068373c67d0ed0b3401fe64f5111395ede))
+- **Tooltip:** Add ability to configure position of tooltip ([c8b004f](https://github.com/stencila/designa/commit/c8b004fc4f0ceb7d221accc59286410da96e8cf9))
+
+### Bug Fixes
+
+- **Code Chunk:** Hide dependency list if empty ([5c86ef2](https://github.com/stencila/designa/commit/5c86ef26ac307a0432f2229145042d8f378f80c7))
+- **Code Dependency:** Add icon for Parameter nodes ([c09c8b9](https://github.com/stencila/designa/commit/c09c8b929ebfc09d5f78254305e36615a39902a1))
+- **Code Status:** Add messages for DependenciesFailed status ([b651694](https://github.com/stencila/designa/commit/b651694b35ccb9377d1819558ee6fcd00d83aa98))
+
 ## [0.48.0](https://github.com/stencila/designa/compare/@stencila/components@0.47.7...@stencila/components@0.48.0) (2022-01-14)
 
 ### Features

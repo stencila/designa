@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.28.0...@stencila/style-stencila@0.29.0) (2022-01-18)
+
+### Features
+
+- **Code:** Expose code dependency list in UI ([d3b59d0](https://github.com/stencila/style/commit/d3b59d03c60bf02e7174274fd96768aa951bb98d))
+
+### Bug Fixes
+
+- **Action Menu:** Fix child element z-index layering ([23ab706](https://github.com/stencila/style/commit/23ab706332953a4d812a3e8250573d83a2ecb9a3))
+- **Code Chunk:** Fix side-by-side layout toggle ([f05763f](https://github.com/stencila/style/commit/f05763f9bc537aca1fdb724d82b94ee28033765b))
+
 ## [0.28.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.27.4...@stencila/style-stencila@0.28.0) (2022-01-14)
 
 ### Features
