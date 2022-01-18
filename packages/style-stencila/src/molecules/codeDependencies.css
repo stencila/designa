@@ -1,0 +1,6 @@
+:host,
+stencila-code-dependencies {
+  stencila-menu-item[divider] {
+    @apply text-xs h-auto leading-loose bg-neutral-50;
+  }
+}

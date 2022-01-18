@@ -229,6 +229,35 @@ export namespace Components {
         "programmingLanguage": string | undefined;
         "text"?: string;
     }
+    interface StencilaCodeDependencies {
+    }
+    interface StencilaCodeDependency {
+        "executeAuto": 'Always' | 'Auto' | 'Never';
+        /**
+          * Status of upstream dependencies, and whether the node needs to be re-executed
+         */
+        "executeRequired": ExecuteRequired;
+        /**
+          * The execution status of the code node
+         */
+        "executeStatus"?: ExecuteStatus;
+        /**
+          * User assigned label for the node
+         */
+        "label": string;
+        /**
+          * The Node ID, should match the HTML `id` attribute.
+         */
+        "nodeId": string;
+        /**
+          * Node kind, such as `CodeChunk`, `CodeExpression`, `Parameter`, etc. Aligns with the Stencila Schema node types.
+         */
+        "nodeKind": string;
+        /**
+          * Programming language of the CodeExpression, note that not all nodes have this property (`Parameter` for example).
+         */
+        "programmingLanguage": string;
+    }
     interface StencilaCodeError {
         /**
           * The `CodeError` object
@@ -431,7 +460,7 @@ export namespace Components {
         /**
           * Style with which to render the icon
          */
-        "iconStyle": 'fill' | 'line';
+        "iconStyle": 'fill' | 'line' | null;
     }
     interface StencilaImageObject {
         /**
@@ -522,6 +551,10 @@ export namespace Components {
           * Close the menu when losing focus
          */
         "autoClose": boolean;
+        /**
+          * Open the menu on hover or when gaining focus
+         */
+        "autoOpen": boolean;
         /**
           * Determines whether the Menu is shown or not
          */
@@ -628,6 +661,10 @@ export namespace Components {
     }
     interface StencilaTooltip {
         /**
+          * The placement of the tooltip
+         */
+        "position": Placement;
+        /**
           * The text content of the Tooltip.
          */
         "text": string;
@@ -659,6 +696,18 @@ declare global {
     var HTMLStencilaCodeChunkElement: {
         prototype: HTMLStencilaCodeChunkElement;
         new (): HTMLStencilaCodeChunkElement;
+    };
+    interface HTMLStencilaCodeDependenciesElement extends Components.StencilaCodeDependencies, HTMLStencilElement {
+    }
+    var HTMLStencilaCodeDependenciesElement: {
+        prototype: HTMLStencilaCodeDependenciesElement;
+        new (): HTMLStencilaCodeDependenciesElement;
+    };
+    interface HTMLStencilaCodeDependencyElement extends Components.StencilaCodeDependency, HTMLStencilElement {
+    }
+    var HTMLStencilaCodeDependencyElement: {
+        prototype: HTMLStencilaCodeDependencyElement;
+        new (): HTMLStencilaCodeDependencyElement;
     };
     interface HTMLStencilaCodeErrorElement extends Components.StencilaCodeError, HTMLStencilElement {
     }
@@ -809,6 +858,8 @@ declare global {
         "stencila-button": HTMLStencilaButtonElement;
         "stencila-code-block": HTMLStencilaCodeBlockElement;
         "stencila-code-chunk": HTMLStencilaCodeChunkElement;
+        "stencila-code-dependencies": HTMLStencilaCodeDependenciesElement;
+        "stencila-code-dependency": HTMLStencilaCodeDependencyElement;
         "stencila-code-error": HTMLStencilaCodeErrorElement;
         "stencila-code-expression": HTMLStencilaCodeExpressionElement;
         "stencila-code-fragment": HTMLStencilaCodeFragmentElement;
@@ -1021,6 +1072,35 @@ declare namespace LocalJSX {
         "programmingLanguage"?: string | undefined;
         "text"?: string;
     }
+    interface StencilaCodeDependencies {
+    }
+    interface StencilaCodeDependency {
+        "executeAuto"?: 'Always' | 'Auto' | 'Never';
+        /**
+          * Status of upstream dependencies, and whether the node needs to be re-executed
+         */
+        "executeRequired"?: ExecuteRequired;
+        /**
+          * The execution status of the code node
+         */
+        "executeStatus"?: ExecuteStatus;
+        /**
+          * User assigned label for the node
+         */
+        "label"?: string;
+        /**
+          * The Node ID, should match the HTML `id` attribute.
+         */
+        "nodeId"?: string;
+        /**
+          * Node kind, such as `CodeChunk`, `CodeExpression`, `Parameter`, etc. Aligns with the Stencila Schema node types.
+         */
+        "nodeKind"?: string;
+        /**
+          * Programming language of the CodeExpression, note that not all nodes have this property (`Parameter` for example).
+         */
+        "programmingLanguage"?: string;
+    }
     interface StencilaCodeError {
         /**
           * The `CodeError` object
@@ -1207,7 +1287,7 @@ declare namespace LocalJSX {
         /**
           * Style with which to render the icon
          */
-        "iconStyle"?: 'fill' | 'line';
+        "iconStyle"?: 'fill' | 'line' | null;
     }
     interface StencilaImageObject {
         /**
@@ -1306,6 +1386,10 @@ declare namespace LocalJSX {
           * Close the menu when losing focus
          */
         "autoClose"?: boolean;
+        /**
+          * Open the menu on hover or when gaining focus
+         */
+        "autoOpen"?: boolean;
         /**
           * Determines whether the Menu is shown or not
          */
@@ -1420,6 +1504,10 @@ declare namespace LocalJSX {
     }
     interface StencilaTooltip {
         /**
+          * The placement of the tooltip
+         */
+        "position"?: Placement;
+        /**
           * The text content of the Tooltip.
          */
         "text": string;
@@ -1431,6 +1519,8 @@ declare namespace LocalJSX {
         "stencila-button": StencilaButton;
         "stencila-code-block": StencilaCodeBlock;
         "stencila-code-chunk": StencilaCodeChunk;
+        "stencila-code-dependencies": StencilaCodeDependencies;
+        "stencila-code-dependency": StencilaCodeDependency;
         "stencila-code-error": StencilaCodeError;
         "stencila-code-expression": StencilaCodeExpression;
         "stencila-code-fragment": StencilaCodeFragment;
@@ -1465,6 +1555,8 @@ declare module "@stencil/core" {
             "stencila-button": LocalJSX.StencilaButton & JSXBase.HTMLAttributes<HTMLStencilaButtonElement>;
             "stencila-code-block": LocalJSX.StencilaCodeBlock & JSXBase.HTMLAttributes<HTMLStencilaCodeBlockElement>;
             "stencila-code-chunk": LocalJSX.StencilaCodeChunk & JSXBase.HTMLAttributes<HTMLStencilaCodeChunkElement>;
+            "stencila-code-dependencies": LocalJSX.StencilaCodeDependencies & JSXBase.HTMLAttributes<HTMLStencilaCodeDependenciesElement>;
+            "stencila-code-dependency": LocalJSX.StencilaCodeDependency & JSXBase.HTMLAttributes<HTMLStencilaCodeDependencyElement>;
             "stencila-code-error": LocalJSX.StencilaCodeError & JSXBase.HTMLAttributes<HTMLStencilaCodeErrorElement>;
             "stencila-code-expression": LocalJSX.StencilaCodeExpression & JSXBase.HTMLAttributes<HTMLStencilaCodeExpressionElement>;
             "stencila-code-fragment": LocalJSX.StencilaCodeFragment & JSXBase.HTMLAttributes<HTMLStencilaCodeFragmentElement>;

@@ -1,4 +1,4 @@
-import { createPopper, Instance } from '@popperjs/core'
+import { createPopper, Instance, Placement } from '@popperjs/core'
 import {
   Component,
   ComponentInterface,
@@ -25,6 +25,12 @@ export class Tooltip implements ComponentInterface {
    */
   @Prop() text!: string
 
+  /**
+   * The placement of the tooltip
+   */
+  @Prop()
+  position: Placement = 'bottom'
+
   private tooltipRef?: HTMLSpanElement
   private popperRef: Instance | null = null
 
@@ -43,7 +49,7 @@ export class Tooltip implements ComponentInterface {
     target.appendChild(this.tooltipRef)
 
     this.popperRef = createPopper(this.el, this.tooltipRef, {
-      placement: 'bottom',
+      placement: this.position,
       modifiers: [
         {
           name: 'offset',

@@ -101,21 +101,23 @@ Type: `Promise<string>`
 ### Depends on
 
 - [stencila-action-menu](../actionMenu)
+- [stencila-menu](../menu)
 - [stencila-button](../button)
 - [stencila-editor](../editor)
 - [stencila-node-list](../nodeList)
-- [stencila-tooltip](../tooltip)
 - [stencila-icon](../icon)
+- [stencila-tooltip](../tooltip)
 
 ### Graph
 ```mermaid
 graph TD;
   stencila-code-chunk --> stencila-action-menu
+  stencila-code-chunk --> stencila-menu
   stencila-code-chunk --> stencila-button
   stencila-code-chunk --> stencila-editor
   stencila-code-chunk --> stencila-node-list
-  stencila-code-chunk --> stencila-tooltip
   stencila-code-chunk --> stencila-icon
+  stencila-code-chunk --> stencila-tooltip
   stencila-action-menu --> stencila-button
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip

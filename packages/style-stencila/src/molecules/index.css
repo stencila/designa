@@ -1,5 +1,7 @@
 @import './codeChunk';
 @import './codeChunk';
+@import './codeDependency';
+@import './codeDependencies';
 @import './codeExpression';
 @import './dataTable';
 @import './details';

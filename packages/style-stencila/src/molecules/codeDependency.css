@@ -1,0 +1,30 @@
+:host,
+stencila-code-dependency {
+  @apply block p-2 font-body text-xs;
+
+  a,
+  a:link,
+  a:visited {
+    @apply flex flex-row flex-nowrap w-full no-underline text-neutral-700;
+  }
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid var(--color-neutral-100);
+  }
+
+  stencila-tooltip {
+    @apply align-middle leading-loose;
+  }
+
+  .content {
+    @apply pl-2 flex-grow leading-none;
+  }
+
+  .label {
+    @apply flex justify-between font-bold;
+
+    code {
+      @apply p-px font-normal font-mono rounded bg-neutral-50 border border-solid border-neutral-200;
+    }
+  }
+}

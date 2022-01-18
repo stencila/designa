@@ -19,11 +19,25 @@ export const executionIconByStatus = (
           title: 'Scheduled',
         }
       }
+      case 'ScheduledPreviouslyFailed': {
+        return {
+          icon: 'timer-2',
+          color: 'danger-500, #cf445e',
+          title: 'Scheduled (previously failed)',
+        }
+      }
       case 'Running': {
         return {
           icon: 'loader-2',
           color: 'neutral-500, #6e7591',
           title: 'Running',
+        }
+      }
+      case 'RunningPreviouslyFailed': {
+        return {
+          icon: 'loader-2',
+          color: 'danger-500, #cf445e',
+          title: 'Running (previously failed)',
         }
       }
       case 'Succeeded': {
@@ -36,7 +50,7 @@ export const executionIconByStatus = (
       case 'Failed': {
         return {
           icon: 'close-circle',
-          color: 'danger-500, #cf445e ',
+          color: 'danger-500, #cf445e',
           title: 'Failed',
         }
       }
@@ -57,20 +71,34 @@ export const executionIconByStatus = (
     }
   }
 
-  if (executeRequired === 'NeverExecuted') {
-    return {
-      icon: 'indeterminate-circle',
-      color: 'neutral-500, #6e7591',
-      title: 'Not run yet',
+  switch (executeRequired) {
+    case 'NeverExecuted': {
+      return {
+        icon: 'indeterminate-circle',
+        color: 'neutral-500, #6e7591',
+        title: 'Not run yet',
+      }
     }
-  }
-
-  return {
-    icon: 'refresh',
-    color: 'warn-600, #ba8925',
-    title:
-      executeRequired === 'DependenciesChanged'
-        ? 'Dependencies changed, re-run to update value'
-        : 'Semantics changed, re-run to update value',
+    case 'DependenciesFailed': {
+      return {
+        icon: 'refresh',
+        color: 'danger-500, #cf445e',
+        title: 'Dependencies failed, re-run to update value',
+      }
+    }
+    case 'DependenciesChanged': {
+      return {
+        icon: 'refresh',
+        color: 'warn-600, #ba8925',
+        title: 'Dependencies changed, re-run to update value',
+      }
+    }
+    case 'SemanticsChanged': {
+      return {
+        icon: 'refresh',
+        color: 'warn-600, #ba8925',
+        title: 'Semantics changed, re-run to update value',
+      }
+    }
   }
 }
