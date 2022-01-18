@@ -460,7 +460,7 @@ export namespace Components {
         /**
           * Style with which to render the icon
          */
-        "iconStyle": 'fill' | 'line';
+        "iconStyle": 'fill' | 'line' | null;
     }
     interface StencilaImageObject {
         /**
@@ -1287,7 +1287,7 @@ declare namespace LocalJSX {
         /**
           * Style with which to render the icon
          */
-        "iconStyle"?: 'fill' | 'line';
+        "iconStyle"?: 'fill' | 'line' | null;
     }
     interface StencilaImageObject {
         /**

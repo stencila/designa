@@ -32,7 +32,7 @@ export class Icon {
    * Style with which to render the icon
    */
   @Prop()
-  public readonly iconStyle: 'fill' | 'line' = getGlobalIconStyle()
+  public readonly iconStyle: 'fill' | 'line' | null = getGlobalIconStyle()
 
   @Prop()
   public readonly color?: Colors | string
@@ -59,12 +59,16 @@ export class Icon {
   }
 
   public render() {
-    const iconSuffix = this.iconStyle !== undefined ? this.iconStyle : ''
+    const iconSuffix = typeof this.iconStyle === 'string' ? this.iconStyle : ''
 
     const iconName =
       this.icon.endsWith('-line') || this.icon.endsWith('-fill')
         ? this.icon
-        : `${this.icon}-${iconSuffix}`
+        : `${this.icon}${
+            iconSuffix === 'fill' || iconSuffix === 'line'
+              ? `-${iconSuffix}`
+              : iconSuffix
+          }`
 
     return (
       <Host icon={this.icon} aria-hidden="true">
