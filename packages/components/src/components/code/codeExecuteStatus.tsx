@@ -5,6 +5,7 @@ import { executionIconByStatus } from './codeUtils'
 interface Props {
   executeStatus: ExecuteStatus
   executeRequired: ExecuteRequired
+  slot?: string
 }
 
 export const CodeExecuteStatus = (props: Props): FunctionalComponent => {
@@ -14,7 +15,11 @@ export const CodeExecuteStatus = (props: Props): FunctionalComponent => {
   )
 
   return (
-    <stencila-tooltip text={status.title}>
+    <stencila-tooltip
+      text={status.title}
+      slot={props.slot}
+      position="right-end"
+    >
       <stencila-icon
         icon={status.icon}
         color={status.color}

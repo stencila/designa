@@ -18,6 +18,7 @@
 
  - [stencila-button](../button)
  - [stencila-code-chunk](../codeChunk)
+ - [stencila-code-dependency](../codeDependency)
  - [stencila-code-error](../error)
  - [stencila-code-expression](../codeExpression)
  - [stencila-details](../details)
@@ -32,6 +33,7 @@
 graph TD;
   stencila-button --> stencila-icon
   stencila-code-chunk --> stencila-icon
+  stencila-code-dependency --> stencila-icon
   stencila-code-error --> stencila-icon
   stencila-code-expression --> stencila-icon
   stencila-details --> stencila-icon

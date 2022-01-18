@@ -629,3 +629,643 @@ b</pre
     </p>
   </div>
 `
+
+export const dependencyNodes = () => html`
+  <article
+    data-itemscope="root"
+    itemtype="http://schema.org/Article"
+    itemscope=""
+  >
+    <div data-itemprop="content">
+      <p itemtype="http://schema.stenci.la/Paragraph" itemscope="">
+        <span>This fixture is focussed on dependency relations between </span
+        ><stencila-code-fragment
+          itemtype="http://schema.stenci.la/CodeFragment"
+          itemscope=""
+          id="cf-1"
+          ><code itemprop="text" slot="text"
+            >CodeChunk</code
+          ></stencila-code-fragment
+        ><span>, </span
+        ><stencila-code-fragment
+          itemtype="http://schema.stenci.la/CodeFragment"
+          itemscope=""
+          id="cf-2"
+          ><code itemprop="text" slot="text"
+            >CodeExpression</code
+          ></stencila-code-fragment
+        ><span> and </span
+        ><stencila-code-fragment
+          itemtype="http://schema.stenci.la/CodeFragment"
+          itemscope=""
+          id="cf-3"
+          ><code itemprop="text" slot="text"
+            >Parameter</code
+          ></stencila-code-fragment
+        ><span>
+          nodes within a document. Relations are established by assignment and
+          usage of variables. For simplicity, it only uses </span
+        ><stencila-code-fragment
+          itemtype="http://schema.stenci.la/CodeFragment"
+          itemscope=""
+          id="cf-4"
+          ><code itemprop="text" slot="text">Calc</code></stencila-code-fragment
+        ><span> as a language in code nodes.</span>
+      </p>
+      <p itemtype="http://schema.stenci.la/Paragraph" itemscope="">
+        <span>A </span
+        ><stencila-code-fragment
+          itemtype="http://schema.stenci.la/CodeFragment"
+          itemscope=""
+          id="cf-5"
+          ><code itemprop="text" slot="text"
+            >CodeChunk</code
+          ></stencila-code-fragment
+        ><span> that assigns a variable </span
+        ><stencila-code-fragment
+          itemtype="http://schema.stenci.la/CodeFragment"
+          itemscope=""
+          id="cf-6"
+          ><code itemprop="text" slot="text">a</code></stencila-code-fragment
+        ><span
+          >, and which is always autorun when downstream dependents are run.
+          When manual testing you may wish to set </span
+        ><stencila-code-fragment
+          itemtype="http://schema.stenci.la/CodeFragment"
+          itemscope=""
+          id="cf-7"
+          ><code itemprop="text" slot="text"
+            >a = now()</code
+          ></stencila-code-fragment
+        ><span>
+          to see the effect of this (for deterministic test snapshots this is
+          not done by default).</span
+        >
+      </p>
+      <stencila-code-chunk
+        itemtype="http://schema.stenci.la/CodeChunk"
+        itemscope=""
+        id="cc-1"
+        programming-language="calc"
+        compile-digest="Tvt1ilqkzMqkbonWFun97yUtcI6unFBZMKXzFK3A0QQ.cSI6l7J-C3NXWHVLVurgbQlumKe3QjGqYN6zrFfMhMM..0.0"
+        execute-digest="Tvt1ilqkzMqkbonWFun97yUtcI6unFBZMKXzFK3A0QQ.cSI6l7J-C3NXWHVLVurgbQlumKe3QjGqYN6zrFfMhMM..0.0"
+        execute-auto="Always"
+        execute-required="No"
+        execute-status="Succeeded"
+        execute-ended="2022-01-18T18:33:07.821794+00:00"
+        execute-duration="0.000166"
+        ><meta itemprop="programmingLanguage" content="calc" /><meta
+          itemprop="compileDigest"
+          content="Tvt1ilqkzMqkbonWFun97yUtcI6unFBZMKXzFK3A0QQ.cSI6l7J-C3NXWHVLVurgbQlumKe3QjGqYN6zrFfMhMM..0.0" /><meta
+          itemprop="executeDigest"
+          content="Tvt1ilqkzMqkbonWFun97yUtcI6unFBZMKXzFK3A0QQ.cSI6l7J-C3NXWHVLVurgbQlumKe3QjGqYN6zrFfMhMM..0.0" /><meta
+          itemprop="executeAuto"
+          content="Always" /><meta
+          itemprop="executeRequired"
+          content="No" /><meta
+          itemprop="executeStatus"
+          content="Succeeded" /><meta
+          itemprop="executeEnded"
+          content="2022-01-18T18:33:07.821794+00:00" /><meta
+          itemprop="executeDuration"
+          content="0.000166" />
+        <pre data-itemprop="text" slot="text">
+# @autorun always
+ a = 1
+ a</pre
+        >
+        <stencila-code-dependencies
+          data-itemprop="codeDependencies"
+          slot="code-dependencies"
+        ></stencila-code-dependencies
+        ><stencila-code-dependencies
+          data-itemprop="codeDependents"
+          slot="code-dependents"
+          ><stencila-code-dependency
+            node-kind="CodeChunk"
+            node-id="cc-2"
+            programming-language="calc"
+            execute-auto="Needed"
+            execute-required="No"
+            execute-status="Succeeded"
+          ></stencila-code-dependency
+          ><stencila-code-dependency
+            node-kind="CodeExpression"
+            node-id="ce-1"
+            programming-language="calc"
+            execute-auto="Needed"
+            execute-required="No"
+            execute-status="Succeeded"
+          ></stencila-code-dependency
+          ><stencila-code-dependency
+            node-kind="CodeExpression"
+            node-id="ce-2"
+            programming-language="calc"
+            execute-auto="Needed"
+            execute-required="No"
+            execute-status="Succeeded"
+          ></stencila-code-dependency
+          ><stencila-code-dependency
+            node-kind="CodeChunk"
+            node-id="cc-3"
+            programming-language="calc"
+            execute-auto="Never"
+            execute-required="No"
+            execute-status="Succeeded"
+          ></stencila-code-dependency
+          ><stencila-code-dependency
+            node-kind="CodeExpression"
+            node-id="ce-3"
+            programming-language="calc"
+            execute-auto="Needed"
+            execute-required="No"
+            execute-status="Running"
+          ></stencila-code-dependency
+          ><stencila-code-dependency
+            node-kind="CodeExpression"
+            node-id="ce-3"
+            programming-language="calc"
+            execute-auto="Needed"
+            execute-required="No"
+            execute-status="Succeeded"
+          ></stencila-code-dependency
+          ><stencila-code-dependency
+            node-kind="CodeChunk"
+            node-id="cc-4"
+            programming-language="calc"
+            execute-auto="Needed"
+            execute-required="No"
+            execute-status="Succeeded"
+          ></stencila-code-dependency
+        ></stencila-code-dependencies>
+        <div data-itemprop="outputs" slot="outputs">
+          <span itemtype="http://schema.stenci.la/Number" itemscope="">1</span>
+        </div>
+        <div data-itemprop="errors" slot="errors"></div>
+        <span data-itemprop="label" slot="label"></span>
+        <figcaption data-itemprop="caption" slot="caption"></figcaption
+      ></stencila-code-chunk>
+      <p itemtype="http://schema.stenci.la/Paragraph" itemscope="">
+        <span>Another chunk that uses </span
+        ><stencila-code-fragment
+          itemtype="http://schema.stenci.la/CodeFragment"
+          itemscope=""
+          id="cf-8"
+          ><code itemprop="text" slot="text">a</code></stencila-code-fragment
+        ><span>:</span>
+      </p>
+      <stencila-code-chunk
+        itemtype="http://schema.stenci.la/CodeChunk"
+        itemscope=""
+        id="cc-2"
+        programming-language="calc"
+        compile-digest="GXkR7WzluQeHlWpgFstC1vLFs35veOtBe9QfEDuhjLI.nh_hPQhnXRlBiSBOhC-26iqBQeRPMBA4OJ1Ml9T33IY.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.0.0"
+        execute-digest="GXkR7WzluQeHlWpgFstC1vLFs35veOtBe9QfEDuhjLI.nh_hPQhnXRlBiSBOhC-26iqBQeRPMBA4OJ1Ml9T33IY.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.1.0"
+        execute-required="No"
+        execute-status="Succeeded"
+        execute-ended="2022-01-18T18:32:20.158918+00:00"
+        execute-duration="0.000456"
+        ><meta itemprop="programmingLanguage" content="calc" /><meta
+          itemprop="compileDigest"
+          content="GXkR7WzluQeHlWpgFstC1vLFs35veOtBe9QfEDuhjLI.nh_hPQhnXRlBiSBOhC-26iqBQeRPMBA4OJ1Ml9T33IY.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.0.0" /><meta
+          itemprop="executeDigest"
+          content="GXkR7WzluQeHlWpgFstC1vLFs35veOtBe9QfEDuhjLI.nh_hPQhnXRlBiSBOhC-26iqBQeRPMBA4OJ1Ml9T33IY.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.1.0" /><meta
+          itemprop="executeRequired"
+          content="No" /><meta
+          itemprop="executeStatus"
+          content="Succeeded" /><meta
+          itemprop="executeEnded"
+          content="2022-01-18T18:32:20.158918+00:00" /><meta
+          itemprop="executeDuration"
+          content="0.000456" />
+        <pre data-itemprop="text" slot="text">a * 2</pre>
+        <stencila-code-dependencies
+          data-itemprop="codeDependencies"
+          slot="code-dependencies"
+          ><stencila-code-dependency
+            node-kind="CodeChunk"
+            node-id="cc-1"
+            programming-language="calc"
+            execute-auto="Always"
+            execute-required="No"
+            execute-status="Succeeded"
+          ></stencila-code-dependency></stencila-code-dependencies
+        ><stencila-code-dependencies
+          data-itemprop="codeDependents"
+          slot="code-dependents"
+        ></stencila-code-dependencies>
+        <div data-itemprop="outputs" slot="outputs">
+          <span itemtype="http://schema.stenci.la/Number" itemscope="">2</span>
+        </div>
+        <div data-itemprop="errors" slot="errors"></div>
+        <span data-itemprop="label" slot="label"></span>
+        <figcaption data-itemprop="caption" slot="caption"></figcaption
+      ></stencila-code-chunk>
+      <p itemtype="http://schema.stenci.la/Paragraph" itemscope="">
+        <span>and some </span
+        ><stencila-code-fragment
+          itemtype="http://schema.stenci.la/CodeFragment"
+          itemscope=""
+          id="cf-9"
+          ><code itemprop="text" slot="text"
+            >CodeExpression</code
+          ></stencila-code-fragment
+        ><span>s that also use it: </span
+        ><stencila-code-expression
+          itemtype="http://schema.stenci.la/CodeExpression"
+          itemscope=""
+          id="ce-1"
+          programming-language="calc"
+          compile-digest="5vFFLK9PlUPQ_3BqZ6mmkwOS6N3mAbgK2RgSSmMFCJ0.v8xJ_Bw14WouYXGUyTn2bePyCsd7eCYvhEmLHNimv10.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.0.0"
+          execute-digest="5vFFLK9PlUPQ_3BqZ6mmkwOS6N3mAbgK2RgSSmMFCJ0.v8xJ_Bw14WouYXGUyTn2bePyCsd7eCYvhEmLHNimv10.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.1.0"
+          execute-required="No"
+          execute-status="Succeeded"
+          execute-ended="2022-01-18T18:32:20.163256+00:00"
+          execute-duration="0.000651"
+          ><meta itemprop="programmingLanguage" content="calc" /><meta
+            itemprop="compileDigest"
+            content="5vFFLK9PlUPQ_3BqZ6mmkwOS6N3mAbgK2RgSSmMFCJ0.v8xJ_Bw14WouYXGUyTn2bePyCsd7eCYvhEmLHNimv10.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.0.0" /><meta
+            itemprop="executeDigest"
+            content="5vFFLK9PlUPQ_3BqZ6mmkwOS6N3mAbgK2RgSSmMFCJ0.v8xJ_Bw14WouYXGUyTn2bePyCsd7eCYvhEmLHNimv10.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.1.0" /><meta
+            itemprop="executeRequired"
+            content="No" /><meta
+            itemprop="executeStatus"
+            content="Succeeded" /><meta
+            itemprop="executeEnded"
+            content="2022-01-18T18:32:20.163256+00:00" /><meta
+            itemprop="executeDuration"
+            content="0.000651" /><code data-itemprop="text" slot="text"
+            >a * 3</code
+          ><stencila-code-dependencies
+            data-itemprop="codeDependencies"
+            slot="code-dependencies"
+            ><stencila-code-dependency
+              node-kind="CodeChunk"
+              node-id="cc-1"
+              programming-language="calc"
+              execute-auto="Always"
+              execute-required="No"
+              execute-status="Succeeded"
+            ></stencila-code-dependency></stencila-code-dependencies
+          ><output data-itemprop="output" slot="output"
+            ><span itemtype="http://schema.stenci.la/Number" itemscope=""
+              >3</span
+            ></output
+          ><span
+            data-itemprop="errors"
+            slot="errors"
+          ></span></stencila-code-expression
+        ><span> and </span
+        ><stencila-code-expression
+          itemtype="http://schema.stenci.la/CodeExpression"
+          itemscope=""
+          id="ce-2"
+          programming-language="calc"
+          compile-digest="MbSHMsqe4WgCFlwGviQpo7ie6BFo2eJXiebtlL8MBbI.u-ZxGlUEKMqo4UdU997v5JUeHzEbqxrxpiqqqKEjgBo.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.0.0"
+          execute-digest="MbSHMsqe4WgCFlwGviQpo7ie6BFo2eJXiebtlL8MBbI.u-ZxGlUEKMqo4UdU997v5JUeHzEbqxrxpiqqqKEjgBo.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.1.0"
+          execute-required="No"
+          execute-status="Succeeded"
+          execute-ended="2022-01-18T18:32:20.155165+00:00"
+          execute-duration="0.000265"
+          ><meta itemprop="programmingLanguage" content="calc" /><meta
+            itemprop="compileDigest"
+            content="MbSHMsqe4WgCFlwGviQpo7ie6BFo2eJXiebtlL8MBbI.u-ZxGlUEKMqo4UdU997v5JUeHzEbqxrxpiqqqKEjgBo.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.0.0" /><meta
+            itemprop="executeDigest"
+            content="MbSHMsqe4WgCFlwGviQpo7ie6BFo2eJXiebtlL8MBbI.u-ZxGlUEKMqo4UdU997v5JUeHzEbqxrxpiqqqKEjgBo.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.1.0" /><meta
+            itemprop="executeRequired"
+            content="No" /><meta
+            itemprop="executeStatus"
+            content="Succeeded" /><meta
+            itemprop="executeEnded"
+            content="2022-01-18T18:32:20.155165+00:00" /><meta
+            itemprop="executeDuration"
+            content="0.000265" /><code data-itemprop="text" slot="text"
+            >a * 4</code
+          ><stencila-code-dependencies
+            data-itemprop="codeDependencies"
+            slot="code-dependencies"
+            ><stencila-code-dependency
+              node-kind="CodeChunk"
+              node-id="cc-1"
+              programming-language="calc"
+              execute-auto="Always"
+              execute-required="No"
+              execute-status="Succeeded"
+            ></stencila-code-dependency></stencila-code-dependencies
+          ><output data-itemprop="output" slot="output"
+            ><span itemtype="http://schema.stenci.la/Number" itemscope=""
+              >4</span
+            ></output
+          ><span
+            data-itemprop="errors"
+            slot="errors"
+          ></span></stencila-code-expression
+        ><span>.</span>
+      </p>
+      <p itemtype="http://schema.stenci.la/Paragraph" itemscope="">
+        <span>A chunk that derives another variable </span
+        ><stencila-code-fragment
+          itemtype="http://schema.stenci.la/CodeFragment"
+          itemscope=""
+          id="cf-10"
+          ><code itemprop="text" slot="text">b</code></stencila-code-fragment
+        ><span> from </span
+        ><stencila-code-fragment
+          itemtype="http://schema.stenci.la/CodeFragment"
+          itemscope=""
+          id="cf-11"
+          ><code itemprop="text" slot="text">a</code></stencila-code-fragment
+        ><span> and never gets autorun (must be explicitly run):</span>
+      </p>
+      <stencila-code-chunk
+        itemtype="http://schema.stenci.la/CodeChunk"
+        itemscope=""
+        id="cc-3"
+        programming-language="calc"
+        compile-digest="8fu7AlpXiNp1R2KwSLy_SWs_iZzx8CY3eL-wVpofNAQ.nfQpoBKEuoIW8JVJVcp7gA35783IoA_ciPFWPFSaed8.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.0.0"
+        execute-digest="8fu7AlpXiNp1R2KwSLy_SWs_iZzx8CY3eL-wVpofNAQ.nfQpoBKEuoIW8JVJVcp7gA35783IoA_ciPFWPFSaed8.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.0.0"
+        execute-auto="Never"
+        execute-required="No"
+        execute-status="Succeeded"
+        execute-ended="2022-01-18T18:33:07.838724+00:00"
+        execute-duration="0.0002"
+        ><meta itemprop="programmingLanguage" content="calc" /><meta
+          itemprop="compileDigest"
+          content="8fu7AlpXiNp1R2KwSLy_SWs_iZzx8CY3eL-wVpofNAQ.nfQpoBKEuoIW8JVJVcp7gA35783IoA_ciPFWPFSaed8.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.0.0" /><meta
+          itemprop="executeDigest"
+          content="8fu7AlpXiNp1R2KwSLy_SWs_iZzx8CY3eL-wVpofNAQ.nfQpoBKEuoIW8JVJVcp7gA35783IoA_ciPFWPFSaed8.HhVSCU6G4nyKhaM3OrePODVEvGKILAcIBHeL5KeJlIQ.0.0" /><meta
+          itemprop="executeAuto"
+          content="Never" /><meta
+          itemprop="executeRequired"
+          content="No" /><meta
+          itemprop="executeStatus"
+          content="Succeeded" /><meta
+          itemprop="executeEnded"
+          content="2022-01-18T18:33:07.838724+00:00" /><meta
+          itemprop="executeDuration"
+          content="0.0002" />
+        <pre data-itemprop="text" slot="text">
+# @autorun never
+ b = a + 1
+ b</pre
+        >
+        <stencila-code-dependencies
+          data-itemprop="codeDependencies"
+          slot="code-dependencies"
+          ><stencila-code-dependency
+            node-kind="CodeChunk"
+            node-id="cc-1"
+            programming-language="calc"
+            execute-auto="Always"
+            execute-required="No"
+            execute-status="Succeeded"
+          ></stencila-code-dependency></stencila-code-dependencies
+        ><stencila-code-dependencies
+          data-itemprop="codeDependents"
+          slot="code-dependents"
+          ><stencila-code-dependency
+            node-kind="CodeExpression"
+            node-id="ce-3"
+            programming-language="calc"
+            execute-auto="Needed"
+            execute-required="No"
+            execute-status="Running"
+          ></stencila-code-dependency
+          ><stencila-code-dependency
+            node-kind="CodeExpression"
+            node-id="ce-3"
+            programming-language="calc"
+            execute-auto="Needed"
+            execute-required="No"
+            execute-status="Succeeded"
+          ></stencila-code-dependency
+          ><stencila-code-dependency
+            node-kind="CodeChunk"
+            node-id="cc-4"
+            programming-language="calc"
+            execute-auto="Needed"
+            execute-required="No"
+            execute-status="Succeeded"
+          ></stencila-code-dependency
+        ></stencila-code-dependencies>
+        <div data-itemprop="outputs" slot="outputs">
+          <span itemtype="http://schema.stenci.la/Number" itemscope="">2</span>
+        </div>
+        <div data-itemprop="errors" slot="errors"></div>
+        <span data-itemprop="label" slot="label"></span>
+        <figcaption data-itemprop="caption" slot="caption"></figcaption
+      ></stencila-code-chunk>
+      <p itemtype="http://schema.stenci.la/Paragraph" itemscope="">
+        <span>and some expressions that also use it: </span
+        ><stencila-code-expression
+          itemtype="http://schema.stenci.la/CodeExpression"
+          itemscope=""
+          id="ce-3"
+          programming-language="calc"
+          compile-digest="4wxAgWB65X0l0qR31Eezb9f6FRJ3J2VJATd5amdGD1o.NEwPns0Ln5AvblNQiOxE55WuSp3Lq1AcFVodSUvJiL8.D3hcVVpy-IvARfm9AuHwoX5Gu6XDD-QA07pHJJvfRvM.0.0"
+          execute-digest="4wxAgWB65X0l0qR31Eezb9f6FRJ3J2VJATd5amdGD1o.NEwPns0Ln5AvblNQiOxE55WuSp3Lq1AcFVodSUvJiL8.D3hcVVpy-IvARfm9AuHwoX5Gu6XDD-QA07pHJJvfRvM.0.0"
+          execute-required="No"
+          execute-status="Succeeded"
+          execute-ended="2022-01-18T18:33:07.875939+00:00"
+          execute-duration="0.000163"
+          ><meta itemprop="programmingLanguage" content="calc" /><meta
+            itemprop="compileDigest"
+            content="4wxAgWB65X0l0qR31Eezb9f6FRJ3J2VJATd5amdGD1o.NEwPns0Ln5AvblNQiOxE55WuSp3Lq1AcFVodSUvJiL8.D3hcVVpy-IvARfm9AuHwoX5Gu6XDD-QA07pHJJvfRvM.0.0" /><meta
+            itemprop="executeDigest"
+            content="4wxAgWB65X0l0qR31Eezb9f6FRJ3J2VJATd5amdGD1o.NEwPns0Ln5AvblNQiOxE55WuSp3Lq1AcFVodSUvJiL8.D3hcVVpy-IvARfm9AuHwoX5Gu6XDD-QA07pHJJvfRvM.0.0" /><meta
+            itemprop="executeRequired"
+            content="No" /><meta
+            itemprop="executeStatus"
+            content="Succeeded" /><meta
+            itemprop="executeEnded"
+            content="2022-01-18T18:33:07.875939+00:00" /><meta
+            itemprop="executeDuration"
+            content="0.000163" /><code data-itemprop="text" slot="text"
+            >b * 1</code
+          ><stencila-code-dependencies
+            data-itemprop="codeDependencies"
+            slot="code-dependencies"
+            ><stencila-code-dependency
+              node-kind="CodeChunk"
+              node-id="cc-1"
+              programming-language="calc"
+              execute-auto="Always"
+              execute-required="No"
+              execute-status="Succeeded"
+            ></stencila-code-dependency
+            ><stencila-code-dependency
+              node-kind="CodeChunk"
+              node-id="cc-3"
+              programming-language="calc"
+              execute-auto="Never"
+              execute-required="No"
+              execute-status="Succeeded"
+            ></stencila-code-dependency></stencila-code-dependencies
+          ><output data-itemprop="output" slot="output"
+            ><span itemtype="http://schema.stenci.la/Number" itemscope=""
+              >2</span
+            ></output
+          ><span
+            data-itemprop="errors"
+            slot="errors"
+          ></span></stencila-code-expression
+        ><span> and </span
+        ><stencila-code-expression
+          itemtype="http://schema.stenci.la/CodeExpression"
+          itemscope=""
+          id="ce-4"
+          programming-language="calc"
+          compile-digest="QKuMwjpkYoQH-jlp9EcheEeb38xk_Rf0UhOxgNmnnAk.G34cpLFC4Fi3PXZ5ql3bZ5_qpNPh7QGanFH7UBmOA7g.D3hcVVpy-IvARfm9AuHwoX5Gu6XDD-QA07pHJJvfRvM.0.0"
+          execute-digest="QKuMwjpkYoQH-jlp9EcheEeb38xk_Rf0UhOxgNmnnAk.G34cpLFC4Fi3PXZ5ql3bZ5_qpNPh7QGanFH7UBmOA7g.D3hcVVpy-IvARfm9AuHwoX5Gu6XDD-QA07pHJJvfRvM.0.0"
+          execute-required="No"
+          execute-status="Succeeded"
+          execute-ended="2022-01-18T18:33:07.858721+00:00"
+          execute-duration="0.000226"
+          ><meta itemprop="programmingLanguage" content="calc" /><meta
+            itemprop="compileDigest"
+            content="QKuMwjpkYoQH-jlp9EcheEeb38xk_Rf0UhOxgNmnnAk.G34cpLFC4Fi3PXZ5ql3bZ5_qpNPh7QGanFH7UBmOA7g.D3hcVVpy-IvARfm9AuHwoX5Gu6XDD-QA07pHJJvfRvM.0.0" /><meta
+            itemprop="executeDigest"
+            content="QKuMwjpkYoQH-jlp9EcheEeb38xk_Rf0UhOxgNmnnAk.G34cpLFC4Fi3PXZ5ql3bZ5_qpNPh7QGanFH7UBmOA7g.D3hcVVpy-IvARfm9AuHwoX5Gu6XDD-QA07pHJJvfRvM.0.0" /><meta
+            itemprop="executeRequired"
+            content="No" /><meta
+            itemprop="executeStatus"
+            content="Succeeded" /><meta
+            itemprop="executeEnded"
+            content="2022-01-18T18:33:07.858721+00:00" /><meta
+            itemprop="executeDuration"
+            content="0.000226" /><code data-itemprop="text" slot="text"
+            >b * 2</code
+          ><stencila-code-dependencies
+            data-itemprop="codeDependencies"
+            slot="code-dependencies"
+            ><stencila-code-dependency
+              node-kind="CodeChunk"
+              node-id="cc-1"
+              programming-language="calc"
+              execute-auto="Always"
+              execute-required="No"
+              execute-status="Succeeded"
+            ></stencila-code-dependency
+            ><stencila-code-dependency
+              node-kind="CodeChunk"
+              node-id="cc-3"
+              programming-language="calc"
+              execute-auto="Never"
+              execute-required="No"
+              execute-status="Succeeded"
+            ></stencila-code-dependency></stencila-code-dependencies
+          ><output data-itemprop="output" slot="output"
+            ><span itemtype="http://schema.stenci.la/Number" itemscope=""
+              >4</span
+            ></output
+          ><span
+            data-itemprop="errors"
+            slot="errors"
+          ></span></stencila-code-expression
+        ><span>.</span>
+      </p>
+      <p itemtype="http://schema.stenci.la/Paragraph" itemscope="">
+        <span>A </span
+        ><stencila-code-fragment
+          itemtype="http://schema.stenci.la/CodeFragment"
+          itemscope=""
+          id="cf-12"
+          ><code itemprop="text" slot="text"
+            >Parameter</code
+          ></stencila-code-fragment
+        ><span> that sets a third symbol </span
+        ><stencila-code-fragment
+          itemtype="http://schema.stenci.la/CodeFragment"
+          itemscope=""
+          id="cf-13"
+          ><code itemprop="text" slot="text">c</code></stencila-code-fragment
+        ><span> : </span
+        ><stencila-parameter
+          itemtype="http://schema.stenci.la/Parameter"
+          itemscope=""
+          id="pa-1"
+          ><label data-itemprop="name" slot="name" for="in-LMzRAaOSmJgw2YgHq2FB"
+            >c</label
+          ><meta
+            itemprop="validator"
+            itemtype="http://schema.stenci.la/NumberValidator"
+            itemscope="" /><meta
+            itemprop="default"
+            itemtype="http://schema.stenci.la/Integer"
+            itemscope=""
+            content="1" /><meta itemprop="value" /><input
+            id="in-LMzRAaOSmJgw2YgHq2FB"
+            slot="value"
+            type="number"
+            min="0"
+            max="10"
+            placeholder="1"
+        /></stencila-parameter>
+      </p>
+      <p itemtype="http://schema.stenci.la/Paragraph" itemscope="">
+        <span>And a code chunk that uses all three variables:</span>
+      </p>
+      <stencila-code-chunk
+        itemtype="http://schema.stenci.la/CodeChunk"
+        itemscope=""
+        id="cc-4"
+        programming-language="calc"
+        compile-digest="gb5HoVcTF46uTQDbkikofGxBKPtBmF74X8w0Z-S9gzk.M6AC6G3o9zXmDvh2_Zw0SZXwdm8ihrO9A1kRbEFlwm0.iHdGgGRifAVlA4p5T25ajwR0rVMlpiXFyHZsuVjyfQs.0.0"
+        execute-digest="gb5HoVcTF46uTQDbkikofGxBKPtBmF74X8w0Z-S9gzk.M6AC6G3o9zXmDvh2_Zw0SZXwdm8ihrO9A1kRbEFlwm0.iHdGgGRifAVlA4p5T25ajwR0rVMlpiXFyHZsuVjyfQs.0.0"
+        execute-required="No"
+        execute-status="Succeeded"
+        execute-ended="2022-01-18T18:33:07.867498+00:00"
+        execute-duration="0.00019"
+        ><meta itemprop="programmingLanguage" content="calc" /><meta
+          itemprop="compileDigest"
+          content="gb5HoVcTF46uTQDbkikofGxBKPtBmF74X8w0Z-S9gzk.M6AC6G3o9zXmDvh2_Zw0SZXwdm8ihrO9A1kRbEFlwm0.iHdGgGRifAVlA4p5T25ajwR0rVMlpiXFyHZsuVjyfQs.0.0" /><meta
+          itemprop="executeDigest"
+          content="gb5HoVcTF46uTQDbkikofGxBKPtBmF74X8w0Z-S9gzk.M6AC6G3o9zXmDvh2_Zw0SZXwdm8ihrO9A1kRbEFlwm0.iHdGgGRifAVlA4p5T25ajwR0rVMlpiXFyHZsuVjyfQs.0.0" /><meta
+          itemprop="executeRequired"
+          content="No" /><meta
+          itemprop="executeStatus"
+          content="Succeeded" /><meta
+          itemprop="executeEnded"
+          content="2022-01-18T18:33:07.867498+00:00" /><meta
+          itemprop="executeDuration"
+          content="0.00019" />
+        <pre data-itemprop="text" slot="text">a + b + c</pre>
+        <stencila-code-dependencies
+          data-itemprop="codeDependencies"
+          slot="code-dependencies"
+          ><stencila-code-dependency
+            node-kind="CodeChunk"
+            node-id="cc-1"
+            programming-language="calc"
+            execute-auto="Always"
+            execute-required="No"
+            execute-status="Succeeded"
+          ></stencila-code-dependency
+          ><stencila-code-dependency
+            node-kind="CodeChunk"
+            node-id="cc-3"
+            programming-language="calc"
+            execute-auto="Never"
+            execute-required="No"
+            execute-status="Succeeded"
+          ></stencila-code-dependency
+          ><stencila-code-dependency
+            node-kind="Parameter"
+            node-id="pa-1"
+            label="c"
+            execute-auto="Needed"
+          ></stencila-code-dependency></stencila-code-dependencies
+        ><stencila-code-dependencies
+          data-itemprop="codeDependents"
+          slot="code-dependents"
+        ></stencila-code-dependencies>
+        <div data-itemprop="outputs" slot="outputs">
+          <span itemtype="http://schema.stenci.la/Number" itemscope="">4</span>
+        </div>
+        <div data-itemprop="errors" slot="errors"></div>
+        <span data-itemprop="label" slot="label"></span>
+        <figcaption data-itemprop="caption" slot="caption"></figcaption
+      ></stencila-code-chunk>
+    </div>
+  </article>
+`

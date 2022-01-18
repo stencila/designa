@@ -18,6 +18,7 @@
 
 ### Used by
 
+ - [stencila-code-dependencies](../codeDependencies)
  - [stencila-code-expression](../codeExpression)
  - [stencila-code-fragment](../codeFragment)
 
@@ -29,6 +30,7 @@
 ```mermaid
 graph TD;
   stencila-menu-item --> stencila-icon
+  stencila-code-dependencies --> stencila-menu-item
   stencila-code-expression --> stencila-menu-item
   stencila-code-fragment --> stencila-menu-item
   style stencila-menu-item fill:#f9f,stroke:#333,stroke-width:4px

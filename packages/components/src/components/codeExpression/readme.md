@@ -85,19 +85,19 @@ Type: `Promise<string>`
 
 ### Depends on
 
+- [stencila-menu](../menu)
 - [stencila-button](../button)
 - [stencila-tooltip](../tooltip)
 - [stencila-icon](../icon)
-- [stencila-menu](../menu)
 - [stencila-menu-item](../menuItem)
 
 ### Graph
 ```mermaid
 graph TD;
+  stencila-code-expression --> stencila-menu
   stencila-code-expression --> stencila-button
   stencila-code-expression --> stencila-tooltip
   stencila-code-expression --> stencila-icon
-  stencila-code-expression --> stencila-menu
   stencila-code-expression --> stencila-menu-item
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip

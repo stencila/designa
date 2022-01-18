@@ -101,6 +101,7 @@ Type: `Promise<string>`
 ### Depends on
 
 - [stencila-action-menu](../actionMenu)
+- [stencila-menu](../menu)
 - [stencila-button](../button)
 - [stencila-editor](../editor)
 - [stencila-node-list](../nodeList)
@@ -111,6 +112,7 @@ Type: `Promise<string>`
 ```mermaid
 graph TD;
   stencila-code-chunk --> stencila-action-menu
+  stencila-code-chunk --> stencila-menu
   stencila-code-chunk --> stencila-button
   stencila-code-chunk --> stencila-editor
   stencila-code-chunk --> stencila-node-list

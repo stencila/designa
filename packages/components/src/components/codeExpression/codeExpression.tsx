@@ -321,10 +321,15 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   private generateContent = (): HTMLElement[] => {
     return [
       <span class="actions">
-        <CodeExecuteStatus
-          executeStatus={this.executeStatus}
-          executeRequired={this.executeRequired}
-        ></CodeExecuteStatus>
+        <stencila-menu autoOpen={true} menuPosition="bottom-start">
+          <CodeExecuteStatus
+            executeStatus={this.executeStatus}
+            executeRequired={this.executeRequired}
+            slot="toggle"
+          ></CodeExecuteStatus>
+          <slot name="code-dependencies" />
+          <slot name="code-dependents" />
+        </stencila-menu>
         <stencila-button
           aria-label="Run Code"
           class="run"

@@ -344,6 +344,19 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
       >
         <figure>
           <stencila-action-menu>
+            <stencila-menu
+              autoOpen={true}
+              menuPosition="bottom-start"
+              slot="persistentActions"
+            >
+              <CodeExecuteStatus
+                executeStatus={this.executeStatus}
+                executeRequired={this.executeRequired}
+                slot="toggle"
+              ></CodeExecuteStatus>
+              <slot name="code-dependencies">No upstream dependencies</slot>
+              <slot name="code-dependents">No downstream dependencies</slot>
+            </stencila-menu>
             {this.isExecutable() && (
               <stencila-button
                 icon="play"
@@ -358,12 +371,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
                 isLoading={this.executeCodeState === 'PENDING'}
               ></stencila-button>
             )}
-            <span slot="persistentActions">
-              <CodeExecuteStatus
-                executeStatus={this.executeStatus}
-                executeRequired={this.executeRequired}
-              ></CodeExecuteStatus>
-            </span>
             <stencila-button
               minimal={true}
               color="key"
