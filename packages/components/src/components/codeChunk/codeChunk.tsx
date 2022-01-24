@@ -15,6 +15,8 @@ import { CodeChunk, codeChunk as makeCodeChunk } from '@stencila/schema'
 import { CodeExecuteStatus } from '../code/codeExecuteStatus'
 import {
   CodeComponent,
+  CodeExecuteCancelEvent,
+  CodeExecuteEvent,
   CodeVisibilityEvent,
   DiscoverExecutableLanguagesEvent,
   ExecuteRequired,
@@ -106,6 +108,23 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   public executeHandler?: (codeChunk: CodeChunk) => Promise<CodeChunk>
 
   /**
+   * Emitted to indicate that code node should be executed
+   *
+   */
+  @Event({
+    eventName: 'stencila-code-execute',
+  })
+  public codeExecuteEvent: EventEmitter<CodeExecuteEvent['detail']>
+
+  /**
+   * Emitted to indicate that the execution of the code node should be cancelled/interrupted.
+   */
+  @Event({
+    eventName: 'stencila-code-execute-cancel',
+  })
+  public codeExecuteCancelEvent: EventEmitter<CodeExecuteCancelEvent['detail']>
+
+  /**
    * Callback function to invoke whenever the editor contents are updated.
    */
   @Prop()
@@ -194,7 +213,11 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    * and the current `programmingLanguage` must be in the list of `executableLanguages`.
    */
   private isExecutable = (): boolean => {
-    if (this.programmingLanguage === undefined) {
+    if (
+      this.programmingLanguage === undefined ||
+      !this.executeHandler ||
+      Object.keys(this.executableLanguages ?? {}).length <= 0
+    ) {
       return false
     }
 
@@ -218,20 +241,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     ) {
       this.programmingLanguage = e.detail.name
     }
-  }
-
-  private onExecuteHandler = async (): Promise<CodeChunk> => {
-    this.executeCodeState = 'PENDING'
-    const node = await this.getContents()
-
-    if (this.isExecutable() && this.executeHandler) {
-      const computed = await this.executeHandler(node)
-      this.executeCodeState = 'RESOLVED'
-      return computed
-    }
-
-    this.executeCodeState = 'RESOLVED'
-    return node
   }
 
   private editorLayoutChangeHandler = (isStacked: boolean) => {
@@ -287,12 +296,39 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     throw new Error('Could not get CodeChunk contents')
   }
 
+  private onExecuteHandler = async (): Promise<CodeChunk> => {
+    const node = await this.getContents()
+
+    // If node is running, emit cancel event and terminate early
+    if (this.executeCodeState === 'PENDING') {
+      this.codeExecuteCancelEvent.emit({
+        nodeId: this.el.id,
+        scope: 'All',
+      })
+      this.executeCodeState = 'RESOLVED'
+      return node
+    }
+
+    this.executeCodeState = 'PENDING'
+    this.codeExecuteEvent.emit({
+      nodeId: this.el.id,
+    })
+
+    if (this.isExecutable() && this.executeHandler) {
+      const computed = await this.executeHandler(node)
+      this.executeCodeState = 'RESOLVED'
+      return computed
+    }
+
+    this.executeCodeState = 'RESOLVED'
+    return node
+  }
+
   /**
    * Run the `CodeChunk`
    */
   @Method()
-  public async execute(): Promise<CodeChunk> {
-    this.executeCodeState = 'PENDING'
+  public async execute(): Promise<CodeChunk | Error> {
     try {
       const res = await this.onExecuteHandler()
       // Add artificial delay to allow user to register the spinner
@@ -301,7 +337,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     } catch (err) {
       console.error(err)
       this.executeCodeState = 'RESOLVED'
-      return err
+      return new Error('Could not execute CodeChunk')
     }
   }
 
@@ -355,16 +391,29 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
             </stencila-menu>
             {this.isExecutable() && (
               <stencila-button
-                icon="play"
+                icon={
+                  this.executeStatus?.includes('Running') ||
+                  this.executeStatus?.includes('Scheduled')
+                    ? 'loader-2'
+                    : 'play'
+                }
                 minimal={true}
                 color="key"
                 class="run"
                 size="xsmall"
-                tooltip="Run"
+                tooltip={
+                  this.executeStatus?.includes('Running') ||
+                  this.executeStatus?.includes('Scheduled')
+                    ? 'Cancel'
+                    : 'Run'
+                }
                 iconOnly={true}
                 slot="persistentActions"
                 onClick={this.executeRef}
-                isLoading={this.executeCodeState === 'PENDING'}
+                isLoading={
+                  this.executeStatus?.includes('Running') ||
+                  this.executeStatus?.includes('Scheduled')
+                }
               ></stencila-button>
             )}
             <stencila-button

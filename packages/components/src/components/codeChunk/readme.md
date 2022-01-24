@@ -26,21 +26,23 @@
 
 ## Events
 
-| Event                             | Description                                                                                                                                                     | Type               |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `stencila-code-visibility-change` | Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.                           | `CustomEvent<any>` |
-| `stencila-editor-layout-change`   | Trigger a global DOM event to set the layout of all `CodeChunk` component. Can be set to either show the editor and outputs side by side or stacked vertically. | `CustomEvent<any>` |
+| Event                             | Description                                                                                                                                                     | Type                                                         |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `stencila-code-execute`           | Emitted to indicate that code node should be executed                                                                                                           | `CustomEvent<{ nodeId: string; }>`                           |
+| `stencila-code-execute-cancel`    | Emitted to indicate that the execution of the code node should be cancelled/interrupted.                                                                        | `CustomEvent<{ nodeId: string; scope: "Single" \| "All"; }>` |
+| `stencila-code-visibility-change` | Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.                           | `CustomEvent<any>`                                           |
+| `stencila-editor-layout-change`   | Trigger a global DOM event to set the layout of all `CodeChunk` component. Can be set to either show the editor and outputs side by side or stacked vertically. | `CustomEvent<any>`                                           |
 
 
 ## Methods
 
-### `execute() => Promise<CodeChunk>`
+### `execute() => Promise<CodeChunk | Error>`
 
 Run the `CodeChunk`
 
 #### Returns
 
-Type: `Promise<CodeChunk>`
+Type: `Promise<CodeChunk | Error>`
 
 
 

@@ -12,7 +12,7 @@ import { Keymap } from "./components/editor/editor";
 import { EditorUpdateHandlerCb } from "./components/editor/customizations/onUpdateHandlerExtension";
 import { CodeBlock, CodeChunk, CodeError, CodeExpression, ImageObject } from "@stencila/schema";
 import { EditorView, ViewUpdate } from "@codemirror/view";
-import { ExecuteRequired, ExecuteStatus } from "./components/code/codeTypes";
+import { CodeExecuteCancelEvent, CodeExecuteEvent, ExecuteRequired, ExecuteStatus } from "./components/code/codeTypes";
 import { Level } from "./components/error/error";
 import { EditorContents, EditorStateJSON, Keymap as Keymap1 } from "./components/editor/editor";
 import { Config, Data, Layout } from "plotly.js";
@@ -173,7 +173,7 @@ export namespace Components {
         /**
           * Run the `CodeChunk`
          */
-        "execute": () => Promise<CodeChunk>;
+        "execute": () => Promise<CodeChunk | Error>;
         /**
           * A digest representing the state of a [`Resource`] and its dependencies from the latest execution.
          */
@@ -284,7 +284,7 @@ export namespace Components {
         /**
           * Run the `CodeExpression`
          */
-        "execute": () => Promise<CodeExpression>;
+        "execute": () => Promise<CodeExpression | Error>;
         /**
           * A digest representing the state of a [`Resource`] and its dependencies from the latest execution.
          */
@@ -1059,6 +1059,14 @@ declare namespace LocalJSX {
          */
         "languageCapabilities"?: FileFormatMap;
         /**
+          * Emitted to indicate that code node should be executed
+         */
+        "onStencila-code-execute"?: (event: CustomEvent<CodeExecuteEvent['detail']>) => void;
+        /**
+          * Emitted to indicate that the execution of the code node should be cancelled/interrupted.
+         */
+        "onStencila-code-execute-cancel"?: (event: CustomEvent<CodeExecuteCancelEvent['detail']>) => void;
+        /**
           * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.
          */
         "onStencila-code-visibility-change"?: (event: CustomEvent<any>) => void;
@@ -1154,6 +1162,14 @@ declare namespace LocalJSX {
           * List of all supported programming languages
          */
         "languageCapabilities"?: FileFormatMap;
+        /**
+          * Emitted to indicate that code node should be executed
+         */
+        "onStencila-code-execute"?: (event: CustomEvent<CodeExecuteEvent['detail']>) => void;
+        /**
+          * Emitted to indicate that the execution of the code node should be cancelled/interrupted.
+         */
+        "onStencila-code-execute-cancel"?: (event: CustomEvent<CodeExecuteCancelEvent['detail']>) => void;
         /**
           * Event emitted when the source code of the `CodeExpression` node is changed.
          */

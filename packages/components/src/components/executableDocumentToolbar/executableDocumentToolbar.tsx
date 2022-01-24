@@ -304,7 +304,10 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
             } code ${pluralize('node', this.codeCount)}`
 
             const res = await node.execute()
-            results.push(res)
+
+            if (!(res instanceof Error)) {
+              results.push(res)
+            }
 
             if (idx >= this.codeCount) {
               this.statusMessage = ''
