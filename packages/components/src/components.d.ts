@@ -439,6 +439,10 @@ export namespace Components {
     }
     interface StencilaExecutableDocumentToolbar {
         /**
+          * The execution status of the document
+         */
+        "executeStatus": ExecuteStatus;
+        /**
           * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
          */
         "position": 'fixed' | 'static';
@@ -1281,6 +1285,18 @@ declare namespace LocalJSX {
         "readOnly"?: boolean;
     }
     interface StencilaExecutableDocumentToolbar {
+        /**
+          * The execution status of the document
+         */
+        "executeStatus"?: ExecuteStatus;
+        /**
+          * Emitted to indicate that code node should be executed
+         */
+        "onStencila-code-execute"?: (event: CustomEvent<CodeExecuteEvent['detail']>) => void;
+        /**
+          * Emitted to indicate that the execution of the code node should be cancelled/interrupted.
+         */
+        "onStencila-code-execute-cancel"?: (event: CustomEvent<CodeExecuteCancelEvent['detail']>) => void;
         /**
           * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
          */

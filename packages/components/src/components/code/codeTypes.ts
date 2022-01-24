@@ -14,12 +14,12 @@ export type CodeVisibilityEvent = CustomEvent<{
 
 export type CodeExecuteEvent = CustomEvent<{
   nodeId: string
-}>
+} | null>
 
 export type CodeExecuteCancelEvent = CustomEvent<{
   nodeId: string
   scope: 'Single' | 'All'
-}>
+} | null>
 
 export type ExecuteStatus =
   | undefined
