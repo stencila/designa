@@ -1,5 +1,5 @@
 :host,
-stencila-executable-document-toolbar {
+stencila-document-toolbar {
   /** @prop --background: Sets the background color of the component. */
   --background: var(--color-neutral-100);
 

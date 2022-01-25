@@ -23,7 +23,6 @@
  - [stencila-code-expression](../codeExpression)
  - [stencila-details](../details)
  - [stencila-editor](../editor)
- - [stencila-executable-document-toolbar](../executableDocumentToolbar)
  - [stencila-input](../input)
  - [stencila-menu-item](../menuItem)
  - [stencila-toast](../toast)
@@ -38,7 +37,6 @@ graph TD;
   stencila-code-expression --> stencila-icon
   stencila-details --> stencila-icon
   stencila-editor --> stencila-icon
-  stencila-executable-document-toolbar --> stencila-icon
   stencila-input --> stencila-icon
   stencila-menu-item --> stencila-icon
   stencila-toast --> stencila-icon

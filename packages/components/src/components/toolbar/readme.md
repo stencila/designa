@@ -22,12 +22,12 @@
 
 ### Used by
 
- - [stencila-executable-document-toolbar](../executableDocumentToolbar)
+ - [stencila-document-toolbar](../executableDocumentToolbar)
 
 ### Graph
 ```mermaid
 graph TD;
-  stencila-executable-document-toolbar --> stencila-toolbar
+  stencila-document-toolbar --> stencila-toolbar
   style stencila-toolbar fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

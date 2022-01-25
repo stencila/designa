@@ -33,7 +33,7 @@
  - [stencila-code-chunk](../codeChunk)
  - [stencila-code-expression](../codeExpression)
  - [stencila-code-fragment](../codeFragment)
- - [stencila-executable-document-toolbar](../executableDocumentToolbar)
+ - [stencila-document-toolbar](../executableDocumentToolbar)
  - [stencila-toast](../toast)
 
 ### Depends on
@@ -51,7 +51,7 @@ graph TD;
   stencila-code-chunk --> stencila-button
   stencila-code-expression --> stencila-button
   stencila-code-fragment --> stencila-button
-  stencila-executable-document-toolbar --> stencila-button
+  stencila-document-toolbar --> stencila-button
   stencila-toast --> stencila-button
   style stencila-button fill:#f9f,stroke:#333,stroke-width:4px
 ```

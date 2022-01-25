@@ -12,7 +12,7 @@ import { Keymap } from "./components/editor/editor";
 import { EditorUpdateHandlerCb } from "./components/editor/customizations/onUpdateHandlerExtension";
 import { CodeBlock, CodeChunk, CodeError, CodeExpression, ImageObject } from "@stencila/schema";
 import { EditorView, ViewUpdate } from "@codemirror/view";
-import { ExecuteRequired, ExecuteStatus } from "./components/code/codeTypes";
+import { CodeExecuteCancelEvent, CodeExecuteEvent, ExecuteRequired, ExecuteStatus } from "./components/code/codeTypes";
 import { Level } from "./components/error/error";
 import { EditorContents, EditorStateJSON, Keymap as Keymap1 } from "./components/editor/editor";
 import { Config, Data, Layout } from "plotly.js";
@@ -173,7 +173,7 @@ export namespace Components {
         /**
           * Run the `CodeChunk`
          */
-        "execute": () => Promise<CodeChunk>;
+        "execute": () => Promise<CodeChunk | Error>;
         /**
           * A digest representing the state of a [`Resource`] and its dependencies from the latest execution.
          */
@@ -284,7 +284,7 @@ export namespace Components {
         /**
           * Run the `CodeExpression`
          */
-        "execute": () => Promise<CodeExpression>;
+        "execute": () => Promise<CodeExpression | Error>;
         /**
           * A digest representing the state of a [`Resource`] and its dependencies from the latest execution.
          */
@@ -362,6 +362,20 @@ export namespace Components {
          */
         "open"?: boolean;
     }
+    interface StencilaDocumentToolbar {
+        /**
+          * The execution status of the document
+         */
+        "executeStatus": ExecuteStatus;
+        /**
+          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
+         */
+        "position": 'fixed' | 'static';
+        /**
+          * The URL of the document being decorated. Could be a Snapshot from Stencila Hub, a Project URL, or something else.
+         */
+        "sourceUrl": string;
+    }
     interface StencilaEditor {
         /**
           * Programming language of the Editor
@@ -436,20 +450,6 @@ export namespace Components {
           * Create a new editor state from a given string. The string will be used as the initial contents of the editor.
          */
         "setStateFromString": (content: string) => Promise<void>;
-    }
-    interface StencilaExecutableDocumentToolbar {
-        /**
-          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
-         */
-        "position": 'fixed' | 'static';
-        /**
-          * The URL for requesting a SoftwareSession as defined in Stencila Schema. Passed to Stencila Executa for instantiating the session. TODO: If undefined user should be able to set one themselves (e.g. running a local machine)
-         */
-        "sessionProviderUrl": string;
-        /**
-          * The URL of the document being decorated. Could be a Snapshot from Stencila Hub, a Project URL, or something else.
-         */
-        "sourceUrl": string;
     }
     interface StencilaIcon {
         "color"?: Colors | string;
@@ -739,17 +739,17 @@ declare global {
         prototype: HTMLStencilaDetailsElement;
         new (): HTMLStencilaDetailsElement;
     };
+    interface HTMLStencilaDocumentToolbarElement extends Components.StencilaDocumentToolbar, HTMLStencilElement {
+    }
+    var HTMLStencilaDocumentToolbarElement: {
+        prototype: HTMLStencilaDocumentToolbarElement;
+        new (): HTMLStencilaDocumentToolbarElement;
+    };
     interface HTMLStencilaEditorElement extends Components.StencilaEditor, HTMLStencilElement {
     }
     var HTMLStencilaEditorElement: {
         prototype: HTMLStencilaEditorElement;
         new (): HTMLStencilaEditorElement;
-    };
-    interface HTMLStencilaExecutableDocumentToolbarElement extends Components.StencilaExecutableDocumentToolbar, HTMLStencilElement {
-    }
-    var HTMLStencilaExecutableDocumentToolbarElement: {
-        prototype: HTMLStencilaExecutableDocumentToolbarElement;
-        new (): HTMLStencilaExecutableDocumentToolbarElement;
     };
     interface HTMLStencilaIconElement extends Components.StencilaIcon, HTMLStencilElement {
     }
@@ -865,8 +865,8 @@ declare global {
         "stencila-code-fragment": HTMLStencilaCodeFragmentElement;
         "stencila-data-table": HTMLStencilaDataTableElement;
         "stencila-details": HTMLStencilaDetailsElement;
+        "stencila-document-toolbar": HTMLStencilaDocumentToolbarElement;
         "stencila-editor": HTMLStencilaEditorElement;
-        "stencila-executable-document-toolbar": HTMLStencilaExecutableDocumentToolbarElement;
         "stencila-icon": HTMLStencilaIconElement;
         "stencila-image-object": HTMLStencilaImageObjectElement;
         "stencila-image-plotly": HTMLStencilaImagePlotlyElement;
@@ -1059,6 +1059,14 @@ declare namespace LocalJSX {
          */
         "languageCapabilities"?: FileFormatMap;
         /**
+          * Emitted to indicate that code node should be executed
+         */
+        "onStencila-code-execute"?: (event: CustomEvent<CodeExecuteEvent['detail']>) => void;
+        /**
+          * Emitted to indicate that the execution of the code node should be cancelled/interrupted.
+         */
+        "onStencila-code-execute-cancel"?: (event: CustomEvent<CodeExecuteCancelEvent['detail']>) => void;
+        /**
           * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.
          */
         "onStencila-code-visibility-change"?: (event: CustomEvent<any>) => void;
@@ -1155,6 +1163,14 @@ declare namespace LocalJSX {
          */
         "languageCapabilities"?: FileFormatMap;
         /**
+          * Emitted to indicate that code node should be executed
+         */
+        "onStencila-code-execute"?: (event: CustomEvent<CodeExecuteEvent['detail']>) => void;
+        /**
+          * Emitted to indicate that the execution of the code node should be cancelled/interrupted.
+         */
+        "onStencila-code-execute-cancel"?: (event: CustomEvent<CodeExecuteCancelEvent['detail']>) => void;
+        /**
           * Event emitted when the source code of the `CodeExpression` node is changed.
          */
         "onStencila-content-change"?: (event: CustomEvent<string>) => void;
@@ -1204,6 +1220,32 @@ declare namespace LocalJSX {
           * Determines whether the contents are visible or not.
          */
         "open"?: boolean;
+    }
+    interface StencilaDocumentToolbar {
+        /**
+          * The execution status of the document
+         */
+        "executeStatus"?: ExecuteStatus;
+        /**
+          * Emitted to indicate that code node should be executed
+         */
+        "onStencila-code-execute"?: (event: CustomEvent<CodeExecuteEvent['detail']>) => void;
+        /**
+          * Emitted to indicate that the execution of the code node should be cancelled/interrupted.
+         */
+        "onStencila-code-execute-cancel"?: (event: CustomEvent<CodeExecuteCancelEvent['detail']>) => void;
+        /**
+          * Emitted to indicate that language kernels should be restarted
+         */
+        "onStencila-kernel-restart"?: (event: CustomEvent<{}>) => void;
+        /**
+          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
+         */
+        "position"?: 'fixed' | 'static';
+        /**
+          * The URL of the document being decorated. Could be a Snapshot from Stencila Hub, a Project URL, or something else.
+         */
+        "sourceUrl"?: string;
     }
     interface StencilaEditor {
         /**
@@ -1263,20 +1305,6 @@ declare namespace LocalJSX {
           * Disallow editing of the editor contents when set to `true`
          */
         "readOnly"?: boolean;
-    }
-    interface StencilaExecutableDocumentToolbar {
-        /**
-          * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
-         */
-        "position"?: 'fixed' | 'static';
-        /**
-          * The URL for requesting a SoftwareSession as defined in Stencila Schema. Passed to Stencila Executa for instantiating the session. TODO: If undefined user should be able to set one themselves (e.g. running a local machine)
-         */
-        "sessionProviderUrl"?: string;
-        /**
-          * The URL of the document being decorated. Could be a Snapshot from Stencila Hub, a Project URL, or something else.
-         */
-        "sourceUrl"?: string;
     }
     interface StencilaIcon {
         "color"?: Colors | string;
@@ -1526,8 +1554,8 @@ declare namespace LocalJSX {
         "stencila-code-fragment": StencilaCodeFragment;
         "stencila-data-table": StencilaDataTable;
         "stencila-details": StencilaDetails;
+        "stencila-document-toolbar": StencilaDocumentToolbar;
         "stencila-editor": StencilaEditor;
-        "stencila-executable-document-toolbar": StencilaExecutableDocumentToolbar;
         "stencila-icon": StencilaIcon;
         "stencila-image-object": StencilaImageObject;
         "stencila-image-plotly": StencilaImagePlotly;
@@ -1562,8 +1590,8 @@ declare module "@stencil/core" {
             "stencila-code-fragment": LocalJSX.StencilaCodeFragment & JSXBase.HTMLAttributes<HTMLStencilaCodeFragmentElement>;
             "stencila-data-table": LocalJSX.StencilaDataTable & JSXBase.HTMLAttributes<HTMLStencilaDataTableElement>;
             "stencila-details": LocalJSX.StencilaDetails & JSXBase.HTMLAttributes<HTMLStencilaDetailsElement>;
+            "stencila-document-toolbar": LocalJSX.StencilaDocumentToolbar & JSXBase.HTMLAttributes<HTMLStencilaDocumentToolbarElement>;
             "stencila-editor": LocalJSX.StencilaEditor & JSXBase.HTMLAttributes<HTMLStencilaEditorElement>;
-            "stencila-executable-document-toolbar": LocalJSX.StencilaExecutableDocumentToolbar & JSXBase.HTMLAttributes<HTMLStencilaExecutableDocumentToolbarElement>;
             "stencila-icon": LocalJSX.StencilaIcon & JSXBase.HTMLAttributes<HTMLStencilaIconElement>;
             "stencila-image-object": LocalJSX.StencilaImageObject & JSXBase.HTMLAttributes<HTMLStencilaImageObjectElement>;
             "stencila-image-plotly": LocalJSX.StencilaImagePlotly & JSXBase.HTMLAttributes<HTMLStencilaImagePlotlyElement>;

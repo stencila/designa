@@ -14,6 +14,8 @@ import { codeExpression, CodeExpression } from '@stencila/schema'
 import { CodeExecuteStatus } from '../code/codeExecuteStatus'
 import {
   CodeComponent,
+  CodeExecuteCancelEvent,
+  CodeExecuteEvent,
   CodeVisibilityEvent,
   DiscoverExecutableLanguagesEvent,
   ExecuteRequired,
@@ -93,7 +95,10 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     detail,
   }: DiscoverExecutableLanguagesEvent): void {
     this.executableLanguages = detail.languages
+    this.checkIfExecutable()
   }
+
+  @State() isExecutable: boolean = false
 
   /**
    * The execution status of the code node
@@ -163,8 +168,6 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
 
   @State() isOutputEmpty = false
 
-  @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED' = 'INITIAL'
-
   private getOutputSlotContents = () => {
     // Checking output list to account for non-text nodes such as images.
     const output = (this.outputSlot?.childNodes ?? [])[0]
@@ -180,6 +183,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     this.outputSlot = getSlotByName(this.el)(slots.output)[0]
 
     this.checkIfEmpty()
+    this.checkIfExecutable()
   }
 
   @Listen('stencila-code-visibility-change', { target: 'window' })
@@ -240,20 +244,74 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     }
   }
 
+  /**
+   * Emitted to indicate that code node should be executed
+   *
+   */
+  @Event({
+    eventName: 'stencila-code-execute',
+  })
+  public codeExecuteEvent: EventEmitter<CodeExecuteEvent['detail']>
+
+  /**
+   * Emitted to indicate that the execution of the code node should be cancelled/interrupted.
+   */
+  @Event({
+    eventName: 'stencila-code-execute-cancel',
+  })
+  public codeExecuteCancelEvent: EventEmitter<CodeExecuteCancelEvent['detail']>
+
+  /**
+   * Determine if the CodeChunk can be executed or not.
+   * For a CodeChunk to be considered executable it must have a `executeHandler` function attached
+   * and the current `programmingLanguage` must be in the list of `executableLanguages`.
+   */
+  private checkIfExecutable = (): void => {
+    if (
+      this.programmingLanguage === undefined ||
+      !this.executeHandler ||
+      Object.keys(this.executableLanguages ?? {}).length <= 0
+    ) {
+      this.isExecutable = false
+      return
+    }
+
+    const activeLanguageFormat = lookupFormat(this.programmingLanguage).name
+    this.isExecutable =
+      this.executeHandler !== undefined &&
+      Object.values(this.executableLanguages ?? {}).some(
+        (format) => format.name === activeLanguageFormat
+      )
+    return
+  }
+
+  private isPending = (): boolean => {
+    return (
+      this.executeStatus?.includes('Running') ||
+      this.executeStatus?.includes('Scheduled') ||
+      false
+    )
+  }
+
   private onExecuteHandler = async (): Promise<CodeExpression> => {
-    this.executeCodeState = 'PENDING'
     const node = await this.getContents()
 
-    if (this.executeHandler !== undefined) {
+    // If node is running, emit cancel event and terminate early
+    if (this.isPending()) {
+      this.codeExecuteCancelEvent.emit({ nodeId: this.el.id, scope: 'All' })
+      return node
+    }
+
+    this.codeExecuteEvent.emit({ nodeId: this.el.id, ordering: 'Topological' })
+
+    if (this.isExecutable && this.executeHandler) {
       const computed = await this.executeHandler(node)
-      this.executeCodeState = 'RESOLVED'
       this.isOutputEmpty =
         computed.output === undefined || computed.output === null
       this.codeExpression = computed
       return computed
     }
 
-    this.executeCodeState = 'RESOLVED'
     return node
   }
 
@@ -261,17 +319,14 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
    * Run the `CodeExpression`
    */
   @Method()
-  public async execute(): Promise<CodeExpression> {
-    this.executeCodeState = 'PENDING'
+  public async execute(): Promise<CodeExpression | Error> {
     try {
       const res = await this.onExecuteHandler()
       // Add artificial delay to allow user to register the spinner
-      window.setTimeout(() => (this.executeCodeState = 'RESOLVED'), 250)
       return res
     } catch (err) {
       console.error(err)
-      this.executeCodeState = 'RESOLVED'
-      return err
+      return new Error('Could not execute CodeExpression')
     }
   }
 
@@ -335,16 +390,11 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
           class="run"
           onClick={this.executeRef}
           color="key"
-          disabled={!this.executeHandler}
-          isLoading={
-            this.executeCodeState === 'PENDING' ||
-            this.executeStatus === 'Scheduled'
-          }
-          icon="play"
+          icon={this.isPending() ? 'loader-2' : 'play'}
           iconOnly={true}
           minimal={true}
           size="xsmall"
-          tooltip="Run"
+          tooltip={this.isPending() ? 'Cancel' : 'Run'}
         ></stencila-button>
         <stencila-button
           aria-label={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
