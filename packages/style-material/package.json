@@ -1,6 +1,6 @@
 {
   "name": "@stencila/style-material",
-  "version": "0.16.5",
+  "version": "0.16.6",
   "description": "Material Design theme for Stencila components",
   "keywords": [
     "Stencila",
@@ -42,7 +42,7 @@
     "not IE_Mob 11"
   ],
   "dependencies": {
-    "@stencila/brand": "0.7.24"
+    "@stencila/brand": "0.7.25"
   },
   "devDependencies": {
     "cssnano": "5.0.15",
