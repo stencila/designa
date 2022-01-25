@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.50.0](https://github.com/stencila/designa/compare/@stencila/components@0.49.0...@stencila/components@0.50.0) (2022-01-25)
+
+### Features
+
+- **Code:** Emit execute and cancel events ([bcc4da0](https://github.com/stencila/designa/commit/bcc4da03b570f16ef9e2800406c73636d1aeb419))
+- **Exec Toolbar:** Emit execution events ([2338991](https://github.com/stencila/designa/commit/2338991c61672b71dd4651516334d6bc128ce630))
+
+### Bug Fixes
+
+- **Code:** Fix executable state not being updated ([430e37f](https://github.com/stencila/designa/commit/430e37f736f16ed1c3c5e9f6f8576e6ed976870a))
+
 ## [0.49.0](https://github.com/stencila/designa/compare/@stencila/components@0.48.0...@stencila/components@0.49.0) (2022-01-18)
 
 ### Features
