@@ -410,10 +410,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
                 iconOnly={true}
                 slot="persistentActions"
                 onClick={this.executeRef}
-                isLoading={
-                  this.executeStatus?.includes('Running') ||
-                  this.executeStatus?.includes('Scheduled')
-                }
               ></stencila-button>
             )}
             <stencila-button
