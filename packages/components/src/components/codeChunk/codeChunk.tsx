@@ -93,7 +93,10 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     detail,
   }: DiscoverExecutableLanguagesEvent): void {
     this.executableLanguages = detail.languages
+    this.checkIfExecutable()
   }
+
+  @State() isExecutable: boolean = false
 
   /**
    * Whether the code section is visible or not
@@ -210,22 +213,20 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    * For a CodeChunk to be considered executable it must have a `executeHandler` function attached
    * and the current `programmingLanguage` must be in the list of `executableLanguages`.
    */
-  private isExecutable = (): boolean => {
+  private checkIfExecutable = (): void => {
     if (
       this.programmingLanguage === undefined ||
-      !this.executeHandler ||
       Object.keys(this.executableLanguages ?? {}).length <= 0
     ) {
-      return false
+      this.isExecutable = false
+      return
     }
 
     const activeLanguageFormat = lookupFormat(this.programmingLanguage).name
-    return (
-      this.executeHandler !== undefined &&
-      Object.values(this.executableLanguages ?? {}).some(
-        (format) => format.name === activeLanguageFormat
-      )
+    this.isExecutable = Object.values(this.executableLanguages ?? {}).some(
+      (format) => format.name === activeLanguageFormat
     )
+    return
   }
 
   private isPending = (): boolean => {
@@ -319,7 +320,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
       ordering: 'Topological',
     })
 
-    if (this.isExecutable() && this.executeHandler) {
+    if (this.isExecutable && this.executeHandler) {
       const computed = await this.executeHandler(node)
       return computed
     }
@@ -369,6 +370,8 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
      */
     const minWidth = 1200 // A non-scientific value below which the side-by-side layout looks too narrow.
     this.isStacked = this.el.getBoundingClientRect().width < minWidth
+
+    this.checkIfExecutable()
   }
 
   public render(): HTMLElement {
@@ -390,7 +393,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
               <slot name="code-dependencies"></slot>
               <slot name="code-dependents"></slot>
             </stencila-menu>
-            {this.isExecutable() && (
+            {this.isExecutable && (
               <stencila-button
                 icon={this.isPending() ? 'loader-2' : 'play'}
                 minimal={true}
@@ -447,7 +450,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
                 autofocus={this.autofocus}
                 executeHandler={this.onExecuteHandler}
                 keymap={this.keymap}
-                readOnly={this.executeHandler === undefined}
+                readOnly={!this.isExecutable}
                 onStencila-language-change={this.handleLanguageChange}
                 ref={(el) => {
                   this.editorRef = el

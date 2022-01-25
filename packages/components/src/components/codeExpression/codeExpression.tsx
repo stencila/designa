@@ -95,7 +95,10 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     detail,
   }: DiscoverExecutableLanguagesEvent): void {
     this.executableLanguages = detail.languages
+    this.checkIfExecutable()
   }
+
+  @State() isExecutable: boolean = false
 
   /**
    * The execution status of the code node
@@ -180,6 +183,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     this.outputSlot = getSlotByName(this.el)(slots.output)[0]
 
     this.checkIfEmpty()
+    this.checkIfExecutable()
   }
 
   @Listen('stencila-code-visibility-change', { target: 'window' })
@@ -262,22 +266,23 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
    * For a CodeChunk to be considered executable it must have a `executeHandler` function attached
    * and the current `programmingLanguage` must be in the list of `executableLanguages`.
    */
-  private isExecutable = (): boolean => {
+  private checkIfExecutable = (): void => {
     if (
       this.programmingLanguage === undefined ||
       !this.executeHandler ||
       Object.keys(this.executableLanguages ?? {}).length <= 0
     ) {
-      return false
+      this.isExecutable = false
+      return
     }
 
     const activeLanguageFormat = lookupFormat(this.programmingLanguage).name
-    return (
+    this.isExecutable =
       this.executeHandler !== undefined &&
       Object.values(this.executableLanguages ?? {}).some(
         (format) => format.name === activeLanguageFormat
       )
-    )
+    return
   }
 
   private isPending = (): boolean => {
@@ -299,7 +304,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
 
     this.codeExecuteEvent.emit({ nodeId: this.el.id, ordering: 'Topological' })
 
-    if (this.isExecutable() && this.executeHandler) {
+    if (this.isExecutable && this.executeHandler) {
       const computed = await this.executeHandler(node)
       this.isOutputEmpty =
         computed.output === undefined || computed.output === null
@@ -385,21 +390,11 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
           class="run"
           onClick={this.executeRef}
           color="key"
-          icon={
-            this.executeStatus?.includes('Running') ||
-            this.executeStatus?.includes('Scheduled')
-              ? 'loader-2'
-              : 'play'
-          }
+          icon={this.isPending() ? 'loader-2' : 'play'}
           iconOnly={true}
           minimal={true}
           size="xsmall"
-          tooltip={
-            this.executeStatus?.includes('Running') ||
-            this.executeStatus?.includes('Scheduled')
-              ? 'Cancel'
-              : 'Run'
-          }
+          tooltip={this.isPending() ? 'Cancel' : 'Run'}
         ></stencila-button>
         <stencila-button
           aria-label={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}

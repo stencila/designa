@@ -115,8 +115,6 @@ export class StencilaDocumentToolbar implements ComponentInterface {
   }
 
   private runDocument = (e: MouseEvent) => {
-    console.log('running document: ', e.ctrlKey, e.shiftKey)
-
     if (this.isPending()) {
       this.codeExecuteCancelEvent.emit({
         nodeId: null,
