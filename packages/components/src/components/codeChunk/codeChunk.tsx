@@ -175,8 +175,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    */
   @Prop() public keymap: Keymap[] = []
 
-  @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED' = 'INITIAL'
-
   @State() isStacked = true
 
   @State() private isCodeVisibleState: boolean = this.isCodeVisible
@@ -227,6 +225,14 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
       Object.values(this.executableLanguages ?? {}).some(
         (format) => format.name === activeLanguageFormat
       )
+    )
+  }
+
+  private isPending = (): boolean => {
+    return (
+      this.executeStatus?.includes('Running') ||
+      this.executeStatus?.includes('Scheduled') ||
+      false
     )
   }
 
@@ -300,27 +306,24 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     const node = await this.getContents()
 
     // If node is running, emit cancel event and terminate early
-    if (this.executeCodeState === 'PENDING') {
+    if (this.isPending()) {
       this.codeExecuteCancelEvent.emit({
         nodeId: this.el.id,
         scope: 'All',
       })
-      this.executeCodeState = 'RESOLVED'
       return node
     }
 
-    this.executeCodeState = 'PENDING'
     this.codeExecuteEvent.emit({
       nodeId: this.el.id,
+      ordering: 'Topological',
     })
 
     if (this.isExecutable() && this.executeHandler) {
       const computed = await this.executeHandler(node)
-      this.executeCodeState = 'RESOLVED'
       return computed
     }
 
-    this.executeCodeState = 'RESOLVED'
     return node
   }
 
@@ -332,11 +335,9 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     try {
       const res = await this.onExecuteHandler()
       // Add artificial delay to allow user to register the spinner
-      window.setTimeout(() => (this.executeCodeState = 'RESOLVED'), 250)
       return res
     } catch (err) {
       console.error(err)
-      this.executeCodeState = 'RESOLVED'
       return new Error('Could not execute CodeChunk')
     }
   }
@@ -391,22 +392,12 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
             </stencila-menu>
             {this.isExecutable() && (
               <stencila-button
-                icon={
-                  this.executeStatus?.includes('Running') ||
-                  this.executeStatus?.includes('Scheduled')
-                    ? 'loader-2'
-                    : 'play'
-                }
+                icon={this.isPending() ? 'loader-2' : 'play'}
                 minimal={true}
                 color="key"
                 class="run"
                 size="xsmall"
-                tooltip={
-                  this.executeStatus?.includes('Running') ||
-                  this.executeStatus?.includes('Scheduled')
-                    ? 'Cancel'
-                    : 'Run'
-                }
+                tooltip={this.isPending() ? 'Cancel' : 'Run'}
                 iconOnly={true}
                 slot="persistentActions"
                 onClick={this.executeRef}

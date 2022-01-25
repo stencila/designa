@@ -21,7 +21,6 @@
  - [stencila-code-chunk](../codeChunk)
  - [stencila-code-dependency](../codeDependency)
  - [stencila-code-expression](../codeExpression)
- - [stencila-executable-document-toolbar](../executableDocumentToolbar)
 
 ### Depends on
 
@@ -35,7 +34,6 @@ graph TD;
   stencila-code-chunk --> stencila-tooltip
   stencila-code-dependency --> stencila-tooltip
   stencila-code-expression --> stencila-tooltip
-  stencila-executable-document-toolbar --> stencila-tooltip
   style stencila-tooltip fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

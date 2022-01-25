@@ -19,26 +19,18 @@ import {
 // =============================================================================
 
 @Component({
-  tag: 'stencila-executable-document-toolbar',
+  tag: 'stencila-document-toolbar',
   styleUrls: {
     default: 'executableDocumentToolbar.css',
     material: 'executableDocumentToolbar.css',
   },
 })
-export class StencilaExecutableDocumentToolbar implements ComponentInterface {
+export class StencilaDocumentToolbar implements ComponentInterface {
   /**
    * The URL of the document being decorated. Could be a Snapshot from Stencila Hub, a Project URL, or something else.
    */
   @Prop()
   sourceUrl: string
-
-  /**
-   * The URL for requesting a SoftwareSession as defined in Stencila Schema.
-   * Passed to Stencila Executa for instantiating the session.
-   * TODO: If undefined user should be able to set one themselves (e.g. running a local machine)
-   */
-  @Prop()
-  sessionProviderUrl: string
 
   /**
    * When `fixed` the Navbar will remain pinned to the top of the screen.
@@ -58,6 +50,29 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
   isExecutable: boolean =
     Object.keys(window.stencilaWebClient?.executableLanguages || {}).length > 0
 
+  @State()
+  shiftIsPressed: boolean = false
+
+  @State()
+  altIsPressed: boolean = false
+
+  private onKeyPress = (e: KeyboardEvent): void => {
+    this.shiftIsPressed = e.shiftKey
+    this.altIsPressed = e.altKey
+  }
+
+  private addKeyListeners = () => {
+    window.addEventListener('keydown', this.onKeyPress)
+    window.addEventListener('keyup', this.onKeyPress)
+  }
+
+  private removeKeyListeners = () => {
+    window.removeEventListener('keydown', this.onKeyPress)
+    window.removeEventListener('keyup', this.onKeyPress)
+    this.shiftIsPressed = false
+    this.altIsPressed = false
+  }
+
   @Listen('stencila-discover-executable-languages', { target: 'window' })
   onDiscoverExecutableLanguages({
     detail,
@@ -75,6 +90,15 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
   public codeExecuteEvent: EventEmitter<CodeExecuteEvent['detail']>
 
   /**
+   * Emitted to indicate that language kernels should be restarted
+   *
+   */
+  @Event({
+    eventName: 'stencila-kernel-restart',
+  })
+  public kernelRestart: EventEmitter<{}>
+
+  /**
    * Emitted to indicate that the execution of the code node should be cancelled/interrupted.
    */
   @Event({
@@ -82,14 +106,33 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
   })
   public codeExecuteCancelEvent: EventEmitter<CodeExecuteCancelEvent['detail']>
 
-  private runDocument = () => {
-    if (
+  private isPending = (): boolean => {
+    return (
       this.executeStatus?.includes('Running') ||
-      this.executeStatus?.includes('Scheduled')
-    ) {
-      this.codeExecuteCancelEvent.emit(null)
+      this.executeStatus?.includes('Scheduled') ||
+      false
+    )
+  }
+
+  private runDocument = (e: MouseEvent) => {
+    console.log('running document: ', e.ctrlKey, e.shiftKey)
+
+    if (this.isPending()) {
+      this.codeExecuteCancelEvent.emit({
+        nodeId: null,
+        scope: 'All',
+      })
     } else {
-      this.codeExecuteEvent.emit(null)
+      if (this.altIsPressed) {
+        // Restart kernel
+        this.kernelRestart.emit()
+      } else {
+        // Execute document
+        this.codeExecuteEvent.emit({
+          nodeId: null,
+          ordering: e.shiftKey ? 'Appearance' : 'Topological',
+        })
+      }
     }
   }
 
@@ -99,20 +142,33 @@ export class StencilaExecutableDocumentToolbar implements ComponentInterface {
         <stencila-toolbar>
           <span slot="start">
             <stencila-button
+              onKeyDown={this.onKeyPress}
               color="stock"
-              icon="play"
+              icon={
+                this.altIsPressed
+                  ? 'restart'
+                  : this.isPending()
+                  ? 'loader-2'
+                  : 'play'
+              }
               size="small"
               onClick={this.runDocument}
               disabled={!this.isExecutable}
-              isLoading={
-                this.executeStatus?.includes('Running') ||
-                this.executeStatus?.includes('Scheduled')
-              }
               dataEl="Toolbar/Run Document"
+              onMouseEnter={this.addKeyListeners}
+              onMouseLeave={this.removeKeyListeners}
+              tooltip={
+                this.altIsPressed
+                  ? undefined
+                  : this.shiftIsPressed
+                  ? 'Run sequentially'
+                  : 'Run topologically'
+              }
             >
-              {this.executeStatus?.includes('Running') ||
-              this.executeStatus?.includes('Scheduled')
-                ? 'Running'
+              {this.altIsPressed
+                ? 'Restart kernel'
+                : this.isPending()
+                ? 'Cancel'
                 : ['Run', <span class="hidden-sm"> Document</span>]}
             </stencila-button>
           </span>

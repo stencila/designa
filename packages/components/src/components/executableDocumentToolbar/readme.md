@@ -1,4 +1,4 @@
-# stencila-executable-document-toolbar
+# stencila-document-toolbar
 
 
 
@@ -7,11 +7,20 @@
 
 ## Properties
 
-| Property             | Attribute              | Description                                                                                                                                                                                                                   | Type                  | Default     |
-| -------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ----------- |
-| `position`           | `position`             | When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.       | `"fixed" \| "static"` | `'fixed'`   |
-| `sessionProviderUrl` | `session-provider-url` | The URL for requesting a SoftwareSession as defined in Stencila Schema. Passed to Stencila Executa for instantiating the session. TODO: If undefined user should be able to set one themselves (e.g. running a local machine) | `string`              | `undefined` |
-| `sourceUrl`          | `source-url`           | The URL of the document being decorated. Could be a Snapshot from Stencila Hub, a Project URL, or something else.                                                                                                             | `string`              | `undefined` |
+| Property        | Attribute        | Description                                                                                                                                                                                                             | Type                                                                                                                                          | Default     |
+| --------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `executeStatus` | `execute-status` | The execution status of the document                                                                                                                                                                                    | `"Cancelled" \| "Failed" \| "Running" \| "RunningPreviouslyFailed" \| "Scheduled" \| "ScheduledPreviouslyFailed" \| "Succeeded" \| undefined` | `undefined` |
+| `position`      | `position`       | When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself. | `"fixed" \| "static"`                                                                                                                         | `'fixed'`   |
+| `sourceUrl`     | `source-url`     | The URL of the document being decorated. Could be a Snapshot from Stencila Hub, a Project URL, or something else.                                                                                                       | `string`                                                                                                                                      | `undefined` |
+
+
+## Events
+
+| Event                          | Description                                                                              | Type                                                                                            |
+| ------------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `stencila-code-execute`        | Emitted to indicate that code node should be executed                                    | `CustomEvent<{ nodeId: string \| null; ordering: "Single" \| "Appearance" \| "Topological"; }>` |
+| `stencila-code-execute-cancel` | Emitted to indicate that the execution of the code node should be cancelled/interrupted. | `CustomEvent<{ nodeId: string \| null; scope: "Single" \| "All"; }>`                            |
+| `stencila-kernel-restart`      | Emitted to indicate that language kernels should be restarted                            | `CustomEvent<{}>`                                                                               |
 
 
 ## CSS Custom Properties
@@ -25,33 +34,18 @@
 
 ### Depends on
 
-- [stencila-tooltip](../tooltip)
-- [stencila-icon](../icon)
 - [stencila-toolbar](../toolbar)
 - [stencila-button](../button)
-- [stencila-toast-container](../toastContainer)
-- [stencila-toast](../toast)
 
 ### Graph
 ```mermaid
 graph TD;
-  stencila-executable-document-toolbar --> stencila-tooltip
-  stencila-executable-document-toolbar --> stencila-icon
-  stencila-executable-document-toolbar --> stencila-toolbar
-  stencila-executable-document-toolbar --> stencila-button
-  stencila-executable-document-toolbar --> stencila-toast-container
-  stencila-executable-document-toolbar --> stencila-toast
-  stencila-tooltip --> stencila-tooltip-element
+  stencila-document-toolbar --> stencila-toolbar
+  stencila-document-toolbar --> stencila-button
   stencila-button --> stencila-icon
   stencila-button --> stencila-tooltip
-  stencila-toast-container --> animate-presence
-  stencila-toast-container --> stencila-toast-container
-  stencila-toast-container --> stencila-toast
-  stencila-toast --> stencila-icon
-  stencila-toast --> stencila-button
-  stencila-toast --> stencila-toast-container
-  stencila-toast --> stencila-toast
-  style stencila-executable-document-toolbar fill:#f9f,stroke:#333,stroke-width:4px
+  stencila-tooltip --> stencila-tooltip-element
+  style stencila-document-toolbar fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

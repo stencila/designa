@@ -13,13 +13,14 @@ export type CodeVisibilityEvent = CustomEvent<{
 }>
 
 export type CodeExecuteEvent = CustomEvent<{
-  nodeId: string
-} | null>
+  nodeId: string | null
+  ordering: 'Single' | 'Appearance' | 'Topological'
+}>
 
 export type CodeExecuteCancelEvent = CustomEvent<{
-  nodeId: string
+  nodeId: string | null
   scope: 'Single' | 'All'
-} | null>
+}>
 
 export type ExecuteStatus =
   | undefined

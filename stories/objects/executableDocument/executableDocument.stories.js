@@ -2,7 +2,7 @@ import { html } from 'lit-html'
 
 export default {
   title: 'Objects/ExecutableDocument',
-  component: 'stencila-executable-document-toolbar',
+  component: 'stencila-document-toolbar',
   argTypes: {
     position: {
       defaultValue: 'fixed',
@@ -17,8 +17,8 @@ export default {
 export const articleControls = ({ position }) => {
   return html`
     <div>
-      <stencila-executable-document-toolbar .position=${position}>
-      </stencila-executable-document-toolbar>
+      <stencila-document-toolbar .position=${position}>
+      </stencila-document-toolbar>
     </div>
   `
 }
@@ -26,11 +26,8 @@ export const articleControls = ({ position }) => {
 export const articleControlsActive = ({ position, sourceUrl }) => {
   return html`
     <article>
-      <stencila-executable-document-toolbar
-        .position=${position}
-        .sourceUrl=${sourceUrl}
-      >
-      </stencila-executable-document-toolbar>
+      <stencila-document-toolbar .position=${position} .sourceUrl=${sourceUrl}>
+      </stencila-document-toolbar>
 
       <p>
         This is a paragraph with a code expresssion inside it

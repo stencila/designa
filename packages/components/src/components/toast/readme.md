@@ -27,7 +27,6 @@
 
 ### Used by
 
- - [stencila-executable-document-toolbar](../executableDocumentToolbar)
  - [stencila-toast](.)
  - [stencila-toast-container](../toastContainer)
 
@@ -46,7 +45,6 @@ graph TD;
   stencila-button --> stencila-tooltip
   stencila-tooltip --> stencila-tooltip-element
   stencila-toast-container --> stencila-toast
-  stencila-executable-document-toolbar --> stencila-toast
   style stencila-toast fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

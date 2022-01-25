@@ -165,8 +165,6 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
 
   @State() isOutputEmpty = false
 
-  @State() executeCodeState: 'INITIAL' | 'PENDING' | 'RESOLVED' = 'INITIAL'
-
   private getOutputSlotContents = () => {
     // Checking output list to account for non-text nodes such as images.
     const output = (this.outputSlot?.childNodes ?? [])[0]
@@ -282,29 +280,33 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     )
   }
 
+  private isPending = (): boolean => {
+    return (
+      this.executeStatus?.includes('Running') ||
+      this.executeStatus?.includes('Scheduled') ||
+      false
+    )
+  }
+
   private onExecuteHandler = async (): Promise<CodeExpression> => {
     const node = await this.getContents()
 
     // If node is running, emit cancel event and terminate early
-    if (this.executeCodeState === 'PENDING') {
+    if (this.isPending()) {
       this.codeExecuteCancelEvent.emit({ nodeId: this.el.id, scope: 'All' })
-      this.executeCodeState = 'RESOLVED'
       return node
     }
 
-    this.executeCodeState = 'PENDING'
-    this.codeExecuteEvent.emit({ nodeId: this.el.id })
+    this.codeExecuteEvent.emit({ nodeId: this.el.id, ordering: 'Topological' })
 
     if (this.isExecutable() && this.executeHandler) {
       const computed = await this.executeHandler(node)
-      this.executeCodeState = 'RESOLVED'
       this.isOutputEmpty =
         computed.output === undefined || computed.output === null
       this.codeExpression = computed
       return computed
     }
 
-    this.executeCodeState = 'RESOLVED'
     return node
   }
 
@@ -313,15 +315,12 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
    */
   @Method()
   public async execute(): Promise<CodeExpression | Error> {
-    this.executeCodeState = 'PENDING'
     try {
       const res = await this.onExecuteHandler()
       // Add artificial delay to allow user to register the spinner
-      window.setTimeout(() => (this.executeCodeState = 'RESOLVED'), 250)
       return res
     } catch (err) {
       console.error(err)
-      this.executeCodeState = 'RESOLVED'
       return new Error('Could not execute CodeExpression')
     }
   }
