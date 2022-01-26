@@ -14,7 +14,6 @@ export const CodeExecuteStatus = (props: Props): FunctionalComponent => {
     return (
       <stencila-icon
         icon="asterisk"
-        iconStyle={null}
         color="neutral-500, #6e7591"
         class="executeStatus"
       ></stencila-icon>
