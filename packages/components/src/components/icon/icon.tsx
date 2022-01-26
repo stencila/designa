@@ -1,7 +1,11 @@
 import { Component, getAssetPath, h, Host, Prop } from '@stencil/core'
 import wretch from 'wretch'
 import { Colors } from '../../types'
-import { IconNames } from './iconNames'
+import {
+  IconNames,
+  isSuffixedIconName,
+  isUnsuffixedIconName,
+} from './iconNames'
 
 let isFetchingIcons = false
 
@@ -32,14 +36,25 @@ export class Icon {
    * Style with which to render the icon
    */
   @Prop()
-  public readonly iconStyle: 'fill' | 'line' | null = getGlobalIconStyle()
+  public readonly iconStyle: 'fill' | 'line' = getGlobalIconStyle()
 
+  /**
+   * The fill color of the icon
+   */
   @Prop()
   public readonly color?: Colors | string
 
+  /**
+   * The URL of the SVG file containing icon symbols
+   */
+  @Prop()
+  public readonly iconUrl: string = getAssetPath(
+    `./assets/remixicon.symbol.svg`
+  )
+
   private fetchIcons = async () => {
     const response = await wretch()
-      .url(getAssetPath(`./assets/remixicon.symbol.svg`))
+      .url(this.iconUrl)
       .options({ credentials: 'omit', mode: 'cors' })
       .get()
       .text()
@@ -59,16 +74,11 @@ export class Icon {
   }
 
   public render() {
-    const iconSuffix = typeof this.iconStyle === 'string' ? this.iconStyle : ''
-
-    const iconName =
-      this.icon.endsWith('-line') || this.icon.endsWith('-fill')
-        ? this.icon
-        : `${this.icon}${
-            iconSuffix === 'fill' || iconSuffix === 'line'
-              ? `-${iconSuffix}`
-              : iconSuffix
-          }`
+    const iconName = isSuffixedIconName(this.icon)
+      ? `#ri-${this.icon}-${this.iconStyle}`
+      : isUnsuffixedIconName(this.icon)
+      ? `#ri-${this.icon}`
+      : this.icon
 
     return (
       <Host icon={this.icon} aria-hidden="true">
@@ -77,7 +87,7 @@ export class Icon {
             fill: this.color ? `var(--color-${this.color})` : undefined,
           }}
         >
-          <use href={`#ri-${iconName}`}></use>
+          <use href={iconName}></use>
         </svg>
       </Host>
     )
