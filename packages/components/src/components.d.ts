@@ -452,6 +452,9 @@ export namespace Components {
         "setStateFromString": (content: string) => Promise<void>;
     }
     interface StencilaIcon {
+        /**
+          * The fill color of the icon
+         */
         "color"?: Colors | string;
         /**
           * Name of the icon to be rendered. Corresponds to icon names from the [Remix Icon set](http://remixicon.com)
@@ -461,6 +464,10 @@ export namespace Components {
           * Style with which to render the icon
          */
         "iconStyle": 'fill' | 'line';
+        /**
+          * The URL of the SVG file containing icon symbols
+         */
+        "iconUrl": string;
     }
     interface StencilaImageObject {
         /**
@@ -1307,6 +1314,9 @@ declare namespace LocalJSX {
         "readOnly"?: boolean;
     }
     interface StencilaIcon {
+        /**
+          * The fill color of the icon
+         */
         "color"?: Colors | string;
         /**
           * Name of the icon to be rendered. Corresponds to icon names from the [Remix Icon set](http://remixicon.com)
@@ -1316,6 +1326,10 @@ declare namespace LocalJSX {
           * Style with which to render the icon
          */
         "iconStyle"?: 'fill' | 'line';
+        /**
+          * The URL of the SVG file containing icon symbols
+         */
+        "iconUrl"?: string;
     }
     interface StencilaImageObject {
         /**
