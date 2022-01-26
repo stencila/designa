@@ -139,4 +139,5 @@ module.exports = {
     placeholderOpacity: false,
     textOpacity: false,
   },
+  content: ['./packages/components/src/**/*.{ts,tsx}'],
 }
