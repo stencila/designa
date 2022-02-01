@@ -398,7 +398,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
         ></stencila-button>
         <stencila-button
           aria-label={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
-          class="secondaryAction"
+          class="secondaryAction sourceToggle"
           onClick={this.toggleCodeVisibility}
           color="key"
           icon={this.isCodeVisible ? 'eye-off' : 'eye'}
