@@ -49,7 +49,7 @@
   }
 
   div {
-    @apply flex flex-row items-center justify-between p-2 m-0 leading-none align-middle text-stock font-body;
+    @apply h-full flex flex-row items-center justify-between p-2 m-0 leading-none align-middle text-stock font-body;
     background-color: var(--background, var(--color-neutral-200));
 
     & > * {
