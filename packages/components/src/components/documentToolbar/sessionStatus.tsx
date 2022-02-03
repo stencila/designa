@@ -1,7 +1,7 @@
 import { datumEither as DE } from '@nll/datum'
 import { FunctionalComponent, h, VNode } from '@stencil/core'
 import { array as A } from 'fp-ts'
-import { pipe } from 'fp-ts/lib/function'
+import { pipe } from 'fp-ts/function'
 import { isErrorGuard, JobDatum, JobError, SessionDatum } from './executa'
 
 interface HelloProps {
@@ -34,7 +34,7 @@ export const SessionStatus: FunctionalComponent<HelloProps> = (
 ) => (
   <span
     class={{
-      executableDocumentStatus: true,
+      documentStatus: true,
       danger: DE.isFailure(session),
       success: DE.isSuccess(session),
     }}

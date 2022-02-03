@@ -2,6 +2,14 @@ import { Colors } from '../../types'
 import { IconNames } from '../icon/iconNames'
 import { ExecuteRequired, ExecuteStatus } from './codeTypes'
 
+export const isPending = (status: ExecuteStatus): boolean => {
+  return (
+    (status?.includes('Running') === true ||
+      status?.includes('Scheduled') === true) ??
+    false
+  )
+}
+
 export const executionIconByStatus = (
   executeStatus: ExecuteStatus,
   executeRequired: ExecuteRequired

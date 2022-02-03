@@ -195,11 +195,6 @@ export class Editor {
 
   private getLang = async (language: string) => {
     switch (lookupFormat(language).name.toLowerCase()) {
-      case 'r': {
-        const { StreamLanguage } = await import('@codemirror/stream-parser')
-        const { r } = await import('@codemirror/legacy-modes/mode/r')
-        return StreamLanguage.define(r)
-      }
       case 'bash':
       case 'zsh': {
         const { StreamLanguage } = await import('@codemirror/stream-parser')
@@ -253,7 +248,11 @@ export class Editor {
         const { python } = await import('@codemirror/lang-python')
         return python()
       }
-      case 'r':
+      case 'r': {
+        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { r } = await import('@codemirror/legacy-modes/mode/r')
+        return StreamLanguage.define(r)
+      }
       case 'rmd': {
         const { markdown } = await import('@codemirror/lang-markdown')
         const { StreamLanguage } = await import('@codemirror/stream-parser')

@@ -1,6 +1,6 @@
 import { datumEither as DE } from '@nll/datum'
 import { SoftwareSession } from '@stencila/schema'
-import { pipe } from 'fp-ts/lib/function'
+import { pipe } from 'fp-ts/function'
 import wretch from 'wretch'
 
 enum JobStatus {

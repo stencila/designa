@@ -68,6 +68,7 @@ export class CodeFragmentComponent implements CodeComponent<CodeFragment> {
   }: DiscoverExecutableLanguagesEvent): void {
     this.executableLanguages = detail.languages
   }
+
   /**
    * Event emitted when the language of the editor is changed.
    */
@@ -77,7 +78,7 @@ export class CodeFragmentComponent implements CodeComponent<CodeFragment> {
   /**
    * Function to call when the user selects a new language from the language picker dropdown.
    */
-  private onSelectLanguage = async (language: string): Promise<void> => {
+  private onSelectLanguage = (language: string): void => {
     this.languageChange.emit(lookupFormat(language))
     this.programmingLanguage = language
   }

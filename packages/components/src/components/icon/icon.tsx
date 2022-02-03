@@ -84,7 +84,10 @@ export class Icon {
       <Host icon={this.icon} aria-hidden="true">
         <svg
           style={{
-            fill: this.color ? `var(--color-${this.color})` : undefined,
+            fill:
+              this.color !== undefined
+                ? `var(--color-${this.color})`
+                : undefined,
           }}
         >
           <use href={iconName}></use>

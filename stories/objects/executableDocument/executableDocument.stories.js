@@ -1,7 +1,7 @@
 import { html } from 'lit-html'
 
 export default {
-  title: 'Objects/ExecutableDocument',
+  title: 'Objects/Document Toolbar',
   component: 'stencila-document-toolbar',
   argTypes: {
     position: {

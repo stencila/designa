@@ -23,17 +23,17 @@
 
 ## Events
 
-| Event                          | Description                                                                              | Type                                                                                            |
-| ------------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `stencila-code-execute`        | Emitted to indicate that code node should be executed                                    | `CustomEvent<{ nodeId: string \| null; ordering: "Single" \| "Appearance" \| "Topological"; }>` |
-| `stencila-code-execute-cancel` | Emitted to indicate that the execution of the code node should be cancelled/interrupted. | `CustomEvent<{ nodeId: string \| null; scope: "Single" \| "All"; }>`                            |
-| `stencila-content-change`      | Event emitted when the source code of the `CodeExpression` node is changed.              | `CustomEvent<string>`                                                                           |
-| `stencila-language-change`     | Event emitted when the language of the editor is changed.                                | `CustomEvent<{ name: string; ext: string \| null; aliases: string[]; }>`                        |
+| Event                          | Description                                                                              | Type                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `stencila-code-execute`        | Emitted to indicate that code node should be executed                                    | `CustomEvent<{ nodeId: string \| null; ordering: CodeExecuteOrdering; }>` |
+| `stencila-code-execute-cancel` | Emitted to indicate that the execution of the code node should be cancelled/interrupted. | `CustomEvent<{ nodeId: string \| null; scope: "Single" \| "All"; }>`      |
+| `stencila-content-change`      | Event emitted when the source code of the `CodeExpression` node is changed.              | `CustomEvent<string>`                                                     |
+| `stencila-language-change`     | Event emitted when the language of the editor is changed.                                | `CustomEvent<{ name: string; ext: string \| null; aliases: string[]; }>`  |
 
 
 ## Methods
 
-### `execute() => Promise<CodeExpression | Error>`
+### `execute(ordering?: CodeExecuteOrdering) => Promise<CodeExpression | Error>`
 
 Run the `CodeExpression`
 

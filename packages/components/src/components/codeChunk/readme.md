@@ -21,22 +21,22 @@
 | `keymap`               | --                     | Custom keyboard shortcuts to pass along to CodeMirror                                                   | `KeyBinding[]`                                                                                                                                | `[]`            |
 | `languageCapabilities` | --                     | List of all supported programming languages                                                             | `{ [x: string]: FileFormat; }`                                                                                                                | `fileFormatMap` |
 | `programmingLanguage`  | `programming-language` | Programming language of the CodeChunk                                                                   | `string \| undefined`                                                                                                                         | `undefined`     |
-| `text`                 | `text`                 |                                                                                                         | `string \| undefined`                                                                                                                         | `undefined`     |
+| `text`                 | `text`                 | Source code contents of the CodeChunk. Corresponds to the `text` property of the CodeChunk schema.      | `string \| undefined`                                                                                                                         | `undefined`     |
 
 
 ## Events
 
-| Event                             | Description                                                                                                                                                     | Type                                                                                            |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `stencila-code-execute`           | Emitted to indicate that code node should be executed                                                                                                           | `CustomEvent<{ nodeId: string \| null; ordering: "Single" \| "Appearance" \| "Topological"; }>` |
-| `stencila-code-execute-cancel`    | Emitted to indicate that the execution of the code node should be cancelled/interrupted.                                                                        | `CustomEvent<{ nodeId: string \| null; scope: "Single" \| "All"; }>`                            |
-| `stencila-code-visibility-change` | Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.                           | `CustomEvent<any>`                                                                              |
-| `stencila-editor-layout-change`   | Trigger a global DOM event to set the layout of all `CodeChunk` component. Can be set to either show the editor and outputs side by side or stacked vertically. | `CustomEvent<any>`                                                                              |
+| Event                             | Description                                                                                                                                                     | Type                                                                      |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `stencila-code-execute`           | Emitted to indicate that code node should be executed                                                                                                           | `CustomEvent<{ nodeId: string \| null; ordering: CodeExecuteOrdering; }>` |
+| `stencila-code-execute-cancel`    | Emitted to indicate that the execution of the code node should be cancelled/interrupted.                                                                        | `CustomEvent<{ nodeId: string \| null; scope: "Single" \| "All"; }>`      |
+| `stencila-code-visibility-change` | Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.                           | `CustomEvent<any>`                                                        |
+| `stencila-editor-layout-change`   | Trigger a global DOM event to set the layout of all `CodeChunk` component. Can be set to either show the editor and outputs side by side or stacked vertically. | `CustomEvent<any>`                                                        |
 
 
 ## Methods
 
-### `execute() => Promise<CodeChunk | Error>`
+### `execute(ordering?: CodeExecuteOrdering) => Promise<CodeChunk | Error>`
 
 Run the `CodeChunk`
 

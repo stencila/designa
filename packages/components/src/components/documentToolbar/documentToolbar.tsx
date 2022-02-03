@@ -15,14 +15,15 @@ import {
   DiscoverExecutableLanguagesEvent,
   ExecuteStatus,
 } from '../code/codeTypes'
+import { isPending } from '../code/codeUtils'
 
 // =============================================================================
 
 @Component({
   tag: 'stencila-document-toolbar',
   styleUrls: {
-    default: 'executableDocumentToolbar.css',
-    material: 'executableDocumentToolbar.css',
+    default: 'documentToolbar.css',
+    material: 'documentToolbar.css',
   },
 })
 export class StencilaDocumentToolbar implements ComponentInterface {
@@ -48,13 +49,13 @@ export class StencilaDocumentToolbar implements ComponentInterface {
 
   @State()
   isExecutable: boolean =
-    Object.keys(window.stencilaWebClient?.executableLanguages || {}).length > 0
+    Object.keys(window.stencilaWebClient?.executableLanguages ?? {}).length > 0
 
   @State()
-  shiftIsPressed: boolean = false
+  shiftIsPressed = false
 
   @State()
-  altIsPressed: boolean = false
+  altIsPressed = false
 
   private onKeyPress = (e: KeyboardEvent): void => {
     this.shiftIsPressed = e.shiftKey
@@ -96,7 +97,7 @@ export class StencilaDocumentToolbar implements ComponentInterface {
   @Event({
     eventName: 'stencila-kernel-restart',
   })
-  public kernelRestart: EventEmitter<{}>
+  public kernelRestart: EventEmitter<Record<string, never>>
 
   /**
    * Emitted to indicate that the execution of the code node should be cancelled/interrupted.
@@ -106,16 +107,8 @@ export class StencilaDocumentToolbar implements ComponentInterface {
   })
   public codeExecuteCancelEvent: EventEmitter<CodeExecuteCancelEvent['detail']>
 
-  private isPending = (): boolean => {
-    return (
-      this.executeStatus?.includes('Running') ||
-      this.executeStatus?.includes('Scheduled') ||
-      false
-    )
-  }
-
   private runDocument = (e: MouseEvent) => {
-    if (this.isPending()) {
+    if (isPending(this.executeStatus)) {
       this.codeExecuteCancelEvent.emit({
         nodeId: null,
         scope: 'All',
@@ -145,7 +138,7 @@ export class StencilaDocumentToolbar implements ComponentInterface {
               icon={
                 this.altIsPressed
                   ? 'restart'
-                  : this.isPending()
+                  : isPending(this.executeStatus)
                   ? 'loader-2'
                   : 'play'
               }
@@ -165,7 +158,7 @@ export class StencilaDocumentToolbar implements ComponentInterface {
             >
               {this.altIsPressed
                 ? 'Restart kernel'
-                : this.isPending()
+                : isPending(this.executeStatus)
                 ? 'Cancel'
                 : ['Run', <span class="hidden-sm"> Document</span>]}
             </stencila-button>

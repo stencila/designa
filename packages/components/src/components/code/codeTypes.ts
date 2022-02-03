@@ -12,9 +12,12 @@ export type CodeVisibilityEvent = CustomEvent<{
   isVisible: boolean
 }>
 
+export type CodeExecuteOrdering = 'Single' | 'Appearance' | 'Topological'
+export type CodeExecuteCancelOrdering = 'Single' | 'Appearance' | 'Topological'
+
 export type CodeExecuteEvent = CustomEvent<{
   nodeId: string | null
-  ordering: 'Single' | 'Appearance' | 'Topological'
+  ordering: CodeExecuteOrdering
 }>
 
 export type CodeExecuteCancelEvent = CustomEvent<{
@@ -63,7 +66,7 @@ abstract class SharedCodeInterface<C extends Code> {
 // visibility of the `code` part.
 abstract class ExecutableCodeComponent<C extends CodeChunk | CodeExpression> {
   // Methods
-  abstract execute: () => Promise<C | Error>
+  abstract execute: (ordering?: CodeExecuteOrdering) => Promise<C | Error>
 
   // Event Emitters
   // `stencila-code-execute`

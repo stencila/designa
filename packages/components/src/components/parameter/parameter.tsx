@@ -44,7 +44,7 @@ export class Parameter {
    */
   @Prop({ mutable: true }) validator?: ValidatorTypes
 
-  @State() paramName: string = ''
+  @State() paramName = ''
 
   /**
    * Event emitted when either the name of value of the parameter changes.
@@ -122,13 +122,11 @@ export class Parameter {
 
     const validatorAttr = validatorAttrParts[validatorAttrParts.length - 1]
 
-    return validatorAttr && isValidatorType(validatorAttr)
-      ? validatorAttr
-      : undefined
+    return isValidatorType(validatorAttr) ? validatorAttr : undefined
   }
 
   componentWillLoad() {
-    if (!this.validator) {
+    if (this.validator === undefined) {
       this.validator = this.getValidatorFromMetaEl()
     }
 
@@ -151,7 +149,7 @@ export class Parameter {
   }
 
   public render() {
-    let labelText = this.labelSlotRef?.textContent ?? 'parameter'
+    const labelText = this.labelSlotRef?.textContent ?? 'parameter'
 
     return (
       <Host>

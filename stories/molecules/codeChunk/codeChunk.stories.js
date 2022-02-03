@@ -73,6 +73,10 @@ export const withExecuteHandler = ({
   </div>
 `
 
+withExecuteHandler.args = {
+  programmingLanguage: 'js',
+}
+
 export const singleCodeChunk = ({
   programmingLanguage,
   executableLanguages,

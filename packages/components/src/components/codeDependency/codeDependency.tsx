@@ -21,7 +21,7 @@ export class CodeDependency {
    * User assigned label for the node
    */
   @Prop()
-  label: string
+  label: string | undefined
 
   /**
    * Node kind, such as `CodeChunk`, `CodeExpression`, `Parameter`, etc.
@@ -30,6 +30,10 @@ export class CodeDependency {
   @Prop()
   nodeKind: string
 
+  /**
+   * Whether the dependency should be automatically re-executed based on semantic
+   * analysis of the code.
+   */
   @Prop()
   executeAuto: 'Always' | 'Auto' | 'Never'
 
@@ -51,7 +55,7 @@ export class CodeDependency {
    * property (`Parameter` for example).
    */
   @Prop()
-  programmingLanguage: string
+  programmingLanguage?: string
 
   public render() {
     return (
@@ -66,7 +70,7 @@ export class CodeDependency {
             <div class="label">
               {this.label ?? this.nodeId}
 
-              {this.programmingLanguage && (
+              {this.programmingLanguage !== undefined && (
                 <code>{this.programmingLanguage}</code>
               )}
             </div>

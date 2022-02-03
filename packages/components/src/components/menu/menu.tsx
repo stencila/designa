@@ -55,7 +55,11 @@ export class Menu {
   }
 
   private computeMenuLocation = () => {
-    this.popperRef ? this.popperRef.update() : this.initMenu()
+    this.popperRef
+      ? this.popperRef.update().catch((err) => {
+          console.error('Could not update menu position', err)
+        })
+      : this.initMenu()
   }
 
   private toggleMenu = (e: MouseEvent) => {
