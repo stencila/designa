@@ -22,7 +22,7 @@
 
 ### Used by
 
- - [stencila-document-toolbar](../executableDocumentToolbar)
+ - [stencila-document-toolbar](../documentToolbar)
 
 ### Graph
 ```mermaid

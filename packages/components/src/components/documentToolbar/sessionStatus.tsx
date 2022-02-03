@@ -34,7 +34,7 @@ export const SessionStatus: FunctionalComponent<HelloProps> = (
 ) => (
   <span
     class={{
-      executableDocumentStatus: true,
+      documentStatus: true,
       danger: DE.isFailure(session),
       success: DE.isSuccess(session),
     }}

@@ -21,8 +21,8 @@ import {
 @Component({
   tag: 'stencila-document-toolbar',
   styleUrls: {
-    default: 'executableDocumentToolbar.css',
-    material: 'executableDocumentToolbar.css',
+    default: 'documentToolbar.css',
+    material: 'documentToolbar.css',
   },
 })
 export class StencilaDocumentToolbar implements ComponentInterface {

@@ -22,7 +22,7 @@ stencila-document-toolbar {
     }
   }
 
-  .executableDocumentStatus {
+  .documentStatus {
     @apply text-sm leading-none text-key;
 
     &.success {

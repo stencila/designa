@@ -33,7 +33,7 @@
  - [stencila-code-chunk](../codeChunk)
  - [stencila-code-expression](../codeExpression)
  - [stencila-code-fragment](../codeFragment)
- - [stencila-document-toolbar](../executableDocumentToolbar)
+ - [stencila-document-toolbar](../documentToolbar)
  - [stencila-toast](../toast)
 
 ### Depends on
