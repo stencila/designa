@@ -15,6 +15,7 @@ import {
   DiscoverExecutableLanguagesEvent,
   ExecuteStatus,
 } from '../code/codeTypes'
+import { isPending } from '../code/codeUtils'
 
 // =============================================================================
 
@@ -106,16 +107,8 @@ export class StencilaDocumentToolbar implements ComponentInterface {
   })
   public codeExecuteCancelEvent: EventEmitter<CodeExecuteCancelEvent['detail']>
 
-  private isPending = (): boolean => {
-    return (
-      this.executeStatus?.includes('Running') ||
-      this.executeStatus?.includes('Scheduled') ||
-      false
-    )
-  }
-
   private runDocument = (e: MouseEvent) => {
-    if (this.isPending()) {
+    if (isPending(this.executeStatus)) {
       this.codeExecuteCancelEvent.emit({
         nodeId: null,
         scope: 'All',
@@ -145,7 +138,7 @@ export class StencilaDocumentToolbar implements ComponentInterface {
               icon={
                 this.altIsPressed
                   ? 'restart'
-                  : this.isPending()
+                  : isPending(this.executeStatus)
                   ? 'loader-2'
                   : 'play'
               }
@@ -165,7 +158,7 @@ export class StencilaDocumentToolbar implements ComponentInterface {
             >
               {this.altIsPressed
                 ? 'Restart kernel'
-                : this.isPending()
+                : isPending(this.executeStatus)
                 ? 'Cancel'
                 : ['Run', <span class="hidden-sm"> Document</span>]}
             </stencila-button>

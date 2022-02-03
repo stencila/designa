@@ -16,11 +16,13 @@ import {
   CodeComponent,
   CodeExecuteCancelEvent,
   CodeExecuteEvent,
+  CodeExecuteOrdering,
   CodeVisibilityEvent,
   DiscoverExecutableLanguagesEvent,
   ExecuteRequired,
   ExecuteStatus,
 } from '../code/codeTypes'
+import { isPending } from '../code/codeUtils'
 import {
   FileFormat,
   fileFormatMap,
@@ -99,6 +101,9 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   }
 
   @State() isExecutable = false
+
+  @State()
+  shiftIsPressed = false
 
   /**
    * The execution status of the code node
@@ -282,27 +287,20 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
       Object.values(this.executableLanguages ?? {}).some(
         (format) => format.name === activeLanguageFormat
       )
-    return
   }
 
-  private isPending = (): boolean => {
-    return (
-      this.executeStatus?.includes('Running') ||
-      this.executeStatus?.includes('Scheduled') ||
-      false
-    )
-  }
-
-  private onExecuteHandler = async (): Promise<CodeExpression> => {
+  private onExecuteHandler = async (
+    ordering: CodeExecuteOrdering = 'Topological'
+  ): Promise<CodeExpression> => {
     const node = await this.getContents()
 
     // If node is running, emit cancel event and terminate early
-    if (this.isPending()) {
+    if (isPending(this.executeStatus)) {
       this.codeExecuteCancelEvent.emit({ nodeId: this.el.id, scope: 'All' })
       return node
     }
 
-    this.codeExecuteEvent.emit({ nodeId: this.el.id, ordering: 'Topological' })
+    this.codeExecuteEvent.emit({ nodeId: this.el.id, ordering })
 
     if (this.isExecutable && this.executeHandler) {
       const computed = await this.executeHandler(node)
@@ -319,9 +317,11 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
    * Run the `CodeExpression`
    */
   @Method()
-  public async execute(): Promise<CodeExpression | Error> {
+  public async execute(
+    ordering: CodeExecuteOrdering = 'Topological'
+  ): Promise<CodeExpression | Error> {
     try {
-      const res = await this.onExecuteHandler()
+      const res = await this.onExecuteHandler(ordering)
       // Add artificial delay to allow user to register the spinner
       return res
     } catch (err) {
@@ -332,7 +332,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
 
   // Create an execute handler bound to this instance
   // @see https://github.com/typescript-eslint/typescript-eslint/blob/v3.7.0/packages/eslint-plugin/docs/rules/unbound-method.md
-  private executeRef = () => this.execute()
+  private executeRef = (ordering: CodeExecuteOrdering) => this.execute(ordering)
 
   private dividerArrow = (): SVGElement => (
     <svg
@@ -373,6 +373,21 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     }
   }
 
+  private onKeyPress = (e: KeyboardEvent): void => {
+    this.shiftIsPressed = e.shiftKey
+  }
+
+  private addKeyListeners = () => {
+    window.addEventListener('keydown', this.onKeyPress)
+    window.addEventListener('keyup', this.onKeyPress)
+  }
+
+  private removeKeyListeners = () => {
+    window.removeEventListener('keydown', this.onKeyPress)
+    window.removeEventListener('keyup', this.onKeyPress)
+    this.shiftIsPressed = false
+  }
+
   private generateContent = (): HTMLElement[] => {
     return [
       <span class="actions">
@@ -388,13 +403,23 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
         <stencila-button
           aria-label="Run Code"
           class="run"
-          onClick={this.executeRef}
+          onClick={(e: MouseEvent) =>
+            this.executeRef(e.shiftKey ? 'Single' : 'Topological')
+          }
           color="key"
-          icon={this.isPending() ? 'loader-2' : 'play'}
+          icon={isPending(this.executeStatus) ? 'loader-2' : 'play'}
           iconOnly={true}
           minimal={true}
           size="xsmall"
-          tooltip={this.isPending() ? 'Cancel' : 'Run'}
+          tooltip={
+            isPending(this.executeStatus)
+              ? 'Cancel'
+              : this.shiftIsPressed
+              ? 'Run only this code'
+              : 'Run'
+          }
+          onMouseEnter={this.addKeyListeners}
+          onMouseLeave={this.removeKeyListeners}
         ></stencila-button>
         <stencila-button
           aria-label={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}

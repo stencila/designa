@@ -17,11 +17,13 @@ import {
   CodeComponent,
   CodeExecuteCancelEvent,
   CodeExecuteEvent,
+  CodeExecuteOrdering,
   CodeVisibilityEvent,
   DiscoverExecutableLanguagesEvent,
   ExecuteRequired,
   ExecuteStatus,
 } from '../code/codeTypes'
+import { isPending } from '../code/codeUtils'
 import { EditorUpdateHandlerCb } from '../editor/customizations/onUpdateHandlerExtension'
 import { Keymap } from '../editor/editor'
 import {
@@ -110,6 +112,9 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    */
   @Prop()
   public executeHandler?: (codeChunk: CodeChunk) => Promise<CodeChunk>
+
+  @State()
+  shiftIsPressed = false
 
   /**
    * Emitted to indicate that code node should be executed
@@ -227,15 +232,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     this.isExecutable = Object.values(this.executableLanguages ?? {}).some(
       (format) => format.name === activeLanguageFormat
     )
-    return
-  }
-
-  private isPending = (): boolean => {
-    return (
-      this.executeStatus?.includes('Running') ||
-      this.executeStatus?.includes('Scheduled') ||
-      false
-    )
   }
 
   /**
@@ -304,11 +300,13 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     throw new Error('Could not get CodeChunk contents')
   }
 
-  private onExecuteHandler = async (): Promise<CodeChunk> => {
+  private onExecuteHandler = async (
+    ordering: CodeExecuteOrdering = 'Topological'
+  ): Promise<CodeChunk> => {
     const node = await this.getContents()
 
     // If node is running, emit cancel event and terminate early
-    if (this.isPending()) {
+    if (isPending(this.executeStatus)) {
       this.codeExecuteCancelEvent.emit({
         nodeId: this.el.id,
         scope: 'All',
@@ -318,7 +316,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
 
     this.codeExecuteEvent.emit({
       nodeId: this.el.id,
-      ordering: 'Topological',
+      ordering,
     })
 
     if (this.isExecutable && this.executeHandler) {
@@ -333,9 +331,11 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
    * Run the `CodeChunk`
    */
   @Method()
-  public async execute(): Promise<CodeChunk | Error> {
+  public async execute(
+    ordering: CodeExecuteOrdering = 'Topological'
+  ): Promise<CodeChunk | Error> {
     try {
-      const res = await this.onExecuteHandler()
+      const res = await this.onExecuteHandler(ordering)
       // Add artificial delay to allow user to register the spinner
       return res
     } catch (err) {
@@ -353,9 +353,20 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     return this.editorRef?.getRef()
   }
 
-  // Create an execute handler bound to this instance
-  // @see https://github.com/typescript-eslint/typescript-eslint/blob/v3.7.0/packages/eslint-plugin/docs/rules/unbound-method.md
-  private executeRef = () => this.execute()
+  private onKeyPress = (e: KeyboardEvent): void => {
+    this.shiftIsPressed = e.shiftKey
+  }
+
+  private addKeyListeners = () => {
+    window.addEventListener('keydown', this.onKeyPress)
+    window.addEventListener('keyup', this.onKeyPress)
+  }
+
+  private removeKeyListeners = () => {
+    window.removeEventListener('keydown', this.onKeyPress)
+    window.removeEventListener('keyup', this.onKeyPress)
+    this.shiftIsPressed = false
+  }
 
   private allCodeVisibilityChangeHandler(isVisible: boolean) {
     this.allCodeVisibilityChange.emit({ isVisible })
@@ -396,15 +407,25 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
             </stencila-menu>
             {this.isExecutable && (
               <stencila-button
-                icon={this.isPending() ? 'loader-2' : 'play'}
+                icon={isPending(this.executeStatus) ? 'loader-2' : 'play'}
                 minimal={true}
                 color="key"
                 class="run"
                 size="xsmall"
-                tooltip={this.isPending() ? 'Cancel' : 'Run'}
+                tooltip={
+                  isPending(this.executeStatus)
+                    ? 'Cancel'
+                    : this.shiftIsPressed
+                    ? 'Run only this code'
+                    : 'Run'
+                }
                 iconOnly={true}
                 slot="persistentActions"
-                onClick={this.executeRef}
+                onClick={(e) =>
+                  this.execute(e.shiftKey ? 'Single' : 'Topological')
+                }
+                onMouseEnter={this.addKeyListeners}
+                onMouseLeave={this.removeKeyListeners}
               ></stencila-button>
             )}
             <stencila-button
@@ -449,7 +470,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
                 activeLanguage={this.programmingLanguage}
                 executableLanguages={this.executableLanguages}
                 autofocus={this.autofocus}
-                executeHandler={this.onExecuteHandler}
+                executeHandler={() => this.onExecuteHandler()}
                 keymap={this.keymap}
                 readOnly={!this.isExecutable}
                 onStencila-language-change={this.handleLanguageChange}

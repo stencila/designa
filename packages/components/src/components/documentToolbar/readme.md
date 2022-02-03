@@ -16,11 +16,11 @@
 
 ## Events
 
-| Event                          | Description                                                                              | Type                                                                                            |
-| ------------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `stencila-code-execute`        | Emitted to indicate that code node should be executed                                    | `CustomEvent<{ nodeId: string \| null; ordering: "Single" \| "Appearance" \| "Topological"; }>` |
-| `stencila-code-execute-cancel` | Emitted to indicate that the execution of the code node should be cancelled/interrupted. | `CustomEvent<{ nodeId: string \| null; scope: "Single" \| "All"; }>`                            |
-| `stencila-kernel-restart`      | Emitted to indicate that language kernels should be restarted                            | `CustomEvent<{}>`                                                                               |
+| Event                          | Description                                                                              | Type                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `stencila-code-execute`        | Emitted to indicate that code node should be executed                                    | `CustomEvent<{ nodeId: string \| null; ordering: CodeExecuteOrdering; }>` |
+| `stencila-code-execute-cancel` | Emitted to indicate that the execution of the code node should be cancelled/interrupted. | `CustomEvent<{ nodeId: string \| null; scope: "Single" \| "All"; }>`      |
+| `stencila-kernel-restart`      | Emitted to indicate that language kernels should be restarted                            | `CustomEvent<{ [x: string]: never; }>`                                    |
 
 
 ## CSS Custom Properties

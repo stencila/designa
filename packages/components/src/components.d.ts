@@ -12,7 +12,7 @@ import { Keymap } from "./components/editor/editor";
 import { EditorUpdateHandlerCb } from "./components/editor/customizations/onUpdateHandlerExtension";
 import { CodeBlock, CodeChunk, CodeError, CodeExpression, ImageObject } from "@stencila/schema";
 import { EditorView, ViewUpdate } from "@codemirror/view";
-import { CodeExecuteCancelEvent, CodeExecuteEvent, ExecuteRequired, ExecuteStatus } from "./components/code/codeTypes";
+import { CodeExecuteCancelEvent, CodeExecuteEvent, CodeExecuteOrdering, ExecuteRequired, ExecuteStatus } from "./components/code/codeTypes";
 import { Level } from "./components/error/error";
 import { EditorContents, EditorStateJSON, Keymap as Keymap1 } from "./components/editor/editor";
 import { Config, Data, Layout } from "plotly.js";
@@ -173,7 +173,7 @@ export namespace Components {
         /**
           * Run the `CodeChunk`
          */
-        "execute": () => Promise<CodeChunk | Error>;
+        "execute": (ordering?: CodeExecuteOrdering) => Promise<CodeChunk | Error>;
         /**
           * A digest representing the state of a [`Resource`] and its dependencies from the latest execution.
          */
@@ -290,7 +290,7 @@ export namespace Components {
         /**
           * Run the `CodeExpression`
          */
-        "execute": () => Promise<CodeExpression | Error>;
+        "execute": (ordering?: CodeExecuteOrdering) => Promise<CodeExpression | Error>;
         /**
           * A digest representing the state of a [`Resource`] and its dependencies from the latest execution.
          */
