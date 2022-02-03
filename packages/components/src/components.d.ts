@@ -227,11 +227,17 @@ export namespace Components {
           * Programming language of the CodeChunk
          */
         "programmingLanguage": string | undefined;
+        /**
+          * Source code contents of the CodeChunk. Corresponds to the `text` property of the CodeChunk schema.
+         */
         "text"?: string;
     }
     interface StencilaCodeDependencies {
     }
     interface StencilaCodeDependency {
+        /**
+          * Whether the dependency should be automatically re-executed based on semantic analysis of the code.
+         */
         "executeAuto": 'Always' | 'Auto' | 'Never';
         /**
           * Status of upstream dependencies, and whether the node needs to be re-executed
@@ -244,7 +250,7 @@ export namespace Components {
         /**
           * User assigned label for the node
          */
-        "label": string;
+        "label": string | undefined;
         /**
           * The Node ID, should match the HTML `id` attribute.
          */
@@ -256,7 +262,7 @@ export namespace Components {
         /**
           * Programming language of the CodeExpression, note that not all nodes have this property (`Parameter` for example).
          */
-        "programmingLanguage": string;
+        "programmingLanguage"?: string;
     }
     interface StencilaCodeError {
         /**
@@ -1085,11 +1091,17 @@ declare namespace LocalJSX {
           * Programming language of the CodeChunk
          */
         "programmingLanguage"?: string | undefined;
+        /**
+          * Source code contents of the CodeChunk. Corresponds to the `text` property of the CodeChunk schema.
+         */
         "text"?: string;
     }
     interface StencilaCodeDependencies {
     }
     interface StencilaCodeDependency {
+        /**
+          * Whether the dependency should be automatically re-executed based on semantic analysis of the code.
+         */
         "executeAuto"?: 'Always' | 'Auto' | 'Never';
         /**
           * Status of upstream dependencies, and whether the node needs to be re-executed
@@ -1102,7 +1114,7 @@ declare namespace LocalJSX {
         /**
           * User assigned label for the node
          */
-        "label"?: string;
+        "label"?: string | undefined;
         /**
           * The Node ID, should match the HTML `id` attribute.
          */
@@ -1244,7 +1256,7 @@ declare namespace LocalJSX {
         /**
           * Emitted to indicate that language kernels should be restarted
          */
-        "onStencila-kernel-restart"?: (event: CustomEvent<{}>) => void;
+        "onStencila-kernel-restart"?: (event: CustomEvent<Record<string, never>>) => void;
         /**
           * When `fixed` the Navbar will remain pinned to the top of the screen. Note that if the Navbar component is not followed by a sibling element, you will have to set `margin-top: 3rem` on the following element yourself.
          */

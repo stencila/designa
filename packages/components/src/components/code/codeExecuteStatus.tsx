@@ -20,7 +20,10 @@ export const CodeExecuteStatus = (props: Props): FunctionalComponent => {
     )
   }
 
-  if (!props.executeRequired || !props.executeStatus) {
+  if (
+    props.executeRequired === undefined ||
+    props.executeStatus === undefined
+  ) {
     return <Fragment></Fragment>
   }
 

@@ -17,7 +17,7 @@ export class OutputsList {
 
   private emptyOutputMessage = 'No output to show'
 
-  @State() isEmpty: boolean = true
+  @State() isEmpty = true
 
   checkIfEmpty = () => {
     const slotted = getSlotByName(this.el)(['default', 'outputs'])
@@ -44,7 +44,7 @@ export class OutputsList {
   }
 
   disconnectedCallback(): void {
-    this.childObserver?.disconnect
+    this.childObserver?.disconnect()
   }
 
   public render() {

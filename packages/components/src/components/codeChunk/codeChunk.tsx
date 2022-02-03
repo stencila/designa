@@ -57,8 +57,9 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
 
   @Element() private el: HTMLStencilaCodeChunkElement
 
-  public editorRef: HTMLStencilaEditorElement | undefined /**
+  public editorRef: HTMLStencilaEditorElement | undefined
 
+  /**
    * Source code contents of the CodeChunk.
    * Corresponds to the `text` property of the CodeChunk schema.
    */
@@ -96,7 +97,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     this.checkIfExecutable()
   }
 
-  @State() isExecutable: boolean = false
+  @State() isExecutable = false
 
   /**
    * Whether the code section is visible or not

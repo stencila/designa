@@ -35,9 +35,6 @@ const getValidator =
       case 'BooleanValidator': {
         return <BooleanValidator valueEl={valueElRef}></BooleanValidator>
       }
-      default: {
-        return
-      }
     }
   }
 

@@ -48,13 +48,13 @@ export class StencilaDocumentToolbar implements ComponentInterface {
 
   @State()
   isExecutable: boolean =
-    Object.keys(window.stencilaWebClient?.executableLanguages || {}).length > 0
+    Object.keys(window.stencilaWebClient?.executableLanguages ?? {}).length > 0
 
   @State()
-  shiftIsPressed: boolean = false
+  shiftIsPressed = false
 
   @State()
-  altIsPressed: boolean = false
+  altIsPressed = false
 
   private onKeyPress = (e: KeyboardEvent): void => {
     this.shiftIsPressed = e.shiftKey
@@ -96,7 +96,7 @@ export class StencilaDocumentToolbar implements ComponentInterface {
   @Event({
     eventName: 'stencila-kernel-restart',
   })
-  public kernelRestart: EventEmitter<{}>
+  public kernelRestart: EventEmitter<Record<string, never>>
 
   /**
    * Emitted to indicate that the execution of the code node should be cancelled/interrupted.

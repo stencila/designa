@@ -98,7 +98,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
     this.checkIfExecutable()
   }
 
-  @State() isExecutable: boolean = false
+  @State() isExecutable = false
 
   /**
    * The execution status of the code node
@@ -149,7 +149,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
    * Function to call when the user selects a new language from the language
    * picker dropdown.
    */
-  private onSelectLanguage = async (language: string): Promise<void> => {
+  private onSelectLanguage = (language: string): void => {
     this.languageChange.emit(lookupFormat(language))
     this.programmingLanguage = language
   }
