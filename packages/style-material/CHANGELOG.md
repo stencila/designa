@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.16.8](https://github.com/stencila/style/compare/@stencila/style-material@0.16.7...@stencila/style-material@0.16.8) (2022-02-03)
+
+### Bug Fixes
+
+- **Toolbar:** Ensure toolbar content is always full height ([8a46d53](https://github.com/stencila/style/commit/8a46d5371d1427a4f4c9bce9addff58bd26485d1))
+
 ### [0.16.7](https://github.com/stencila/style/compare/@stencila/style-material@0.16.6...@stencila/style-material@0.16.7) (2022-01-26)
 
 **Note:** Version bump only for package @stencila/style-material

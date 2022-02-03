@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.0](https://github.com/stencila/designa/compare/@stencila/components@0.50.3...@stencila/components@0.51.0) (2022-02-03)
+
+### Features
+
+- **Code Chunk:** Add ability to run only a single code node ([36ebef0](https://github.com/stencila/designa/commit/36ebef091da446dc485a982834dde2c52d720d49))
+
+### Bug Fixes
+
+- **Code Expression:** Add targetable class name to code view button ([3a01f76](https://github.com/stencila/designa/commit/3a01f76ee7292a9c2b3fc81666c3cea1a4d04097))
+
 ### [0.50.3](https://github.com/stencila/designa/compare/@stencila/components@0.50.2...@stencila/components@0.50.3) (2022-01-26)
 
 **Note:** Version bump only for package @stencila/components
