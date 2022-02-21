@@ -55,7 +55,7 @@
     "cssnano": "5.0.17",
     "cssnano-preset-advanced": "5.1.12",
     "filewatcher-webpack-plugin": "1.2.0",
-    "globby": "12.2.0",
+    "globby": "13.1.1",
     "husky": "7.0.4",
     "lerna": "4.0.0",
     "lit-html": "2.2.0",
