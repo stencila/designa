@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.52.0](https://github.com/stencila/designa/compare/@stencila/components@0.51.1...@stencila/components@0.52.0) (2022-02-21)
+
+### Features
+
+- **Code:** Export code execution status component ([fda96cf](https://github.com/stencila/designa/commit/fda96cf1a0363619837b6d818e5cc307750b1378))
+
 ### [0.51.1](https://github.com/stencila/designa/compare/@stencila/components@0.51.0...@stencila/components@0.51.1) (2022-02-14)
 
 **Note:** Version bump only for package @stencila/components
