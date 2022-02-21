@@ -5,10 +5,10 @@
 
 ## Properties
 
-| Property | Attribute | Description                       | Type                     | Default     |
-| -------- | --------- | --------------------------------- | ------------------------ | ----------- |
-| `error`  | --        | The `CodeError` object            | `CodeError \| undefined` | `undefined` |
-| `kind`   | `kind`    | The severity of the error message | `string`                 | `'info'`    |
+| Property | Attribute | Description                       | Type                                                                                                                                    | Default     |
+| -------- | --------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `error`  | --        | The `CodeError` object            | `Entity & { type: "CodeError"; errorMessage: string; errorType?: string \| undefined; stackTrace?: string \| undefined; } \| undefined` | `undefined` |
+| `kind`   | `kind`    | The severity of the error message | `string`                                                                                                                                | `'info'`    |
 
 
 ## Dependencies
