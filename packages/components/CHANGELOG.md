@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.52.1](https://github.com/stencila/designa/compare/@stencila/components@0.52.0...@stencila/components@0.52.1) (2022-03-23)
+
+### Bug Fixes
+
+- **Deps:** Update dependencies across packages ([c98e236](https://github.com/stencila/designa/commit/c98e23610251080611a1f8caad031d40375ee057))
+- **Deps:** Update package imports with new names ([8d260aa](https://github.com/stencila/designa/commit/8d260aa1535d16c53cf98d6974cccd69e7f067b4))
+
 ## [0.52.0](https://github.com/stencila/designa/compare/@stencila/components@0.51.1...@stencila/components@0.52.0) (2022-02-21)
 
 ### Features
