@@ -1,4 +1,4 @@
-import { Node, isIn } from '@stencila/schema'
+import { Node, isIn, MediaObject } from '@stencila/schema'
 import { EmbedOptions, VisualizationSpec } from 'vega-embed'
 
 // Custom and generic Vega media type used by Stencila when encoding to HTML
@@ -63,7 +63,10 @@ export interface VegaObject {
   options?: Partial<EmbedOptions>
 }
 
-export interface VegaNode extends VegaObject, Record<string, unknown> {
+export interface VegaNode
+  extends VegaObject,
+    MediaObject,
+    Record<string, unknown> {
   mediaType: string
 }
 

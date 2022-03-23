@@ -1,4 +1,4 @@
-import { Node } from '@stencila/schema'
+import { MediaObject, Node } from '@stencila/schema'
 import { Data, Layout, Config } from 'plotly.js'
 
 export const plotlyMediaType = 'application/vnd.plotly.v1+json'
@@ -9,7 +9,10 @@ export interface PlotlyObject {
   layout?: Partial<Layout>
 }
 
-export interface PlotlyNode extends PlotlyObject, Record<string, unknown> {
+export interface PlotlyNode
+  extends PlotlyObject,
+    MediaObject,
+    Record<string, unknown> {
   mediaType: string
 }
 

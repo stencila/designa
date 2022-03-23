@@ -11,7 +11,7 @@ import { lineNumbers } from '@codemirror/gutter'
 import { defaultHighlightStyle } from '@codemirror/highlight'
 import { history, historyField, historyKeymap } from '@codemirror/history'
 import { bracketMatching } from '@codemirror/matchbrackets'
-import { searchConfig, searchKeymap } from '@codemirror/search'
+import { searchKeymap, search } from '@codemirror/search'
 import {
   Compartment,
   EditorState,
@@ -441,7 +441,7 @@ export class Editor {
       this.foldGutterConf.of(foldGutterEnabled ? foldGutter() : []),
       drawSelection(),
       EditorState.allowMultipleSelections.of(true),
-      searchConfig({ top: true }),
+      search({ top: true }),
       highlightSpecialChars(),
       keymap.of([
         ...this.keymap,
