@@ -30,7 +30,8 @@ export class Input {
   /**
    * Type of input field.
    */
-  @Prop() public type: 'text' | 'password' | 'number' | 'search' = 'text'
+  @Prop() public type: 'text' | 'password' | 'number' | 'file' | 'search' =
+    'text'
 
   /**
    * The name of the input, submitted as the value's label inside the form data.
@@ -69,6 +70,11 @@ export class Input {
   @Prop() required = false
 
   /**
+   * Indicate that this is a controlled input, preventing user editing of the value
+   */
+  @Prop() public readOnly = false
+
+  /**
    * Text value of the input.
    */
   @Prop() value?: number | string = ''
@@ -105,6 +111,7 @@ export class Input {
           placeholder={this.placeholder}
           required={this.required}
           value={this.value}
+          readOnly={this.readOnly}
         />
       </Host>
     )
