@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.0](https://github.com/stencila/designa/compare/@stencila/components@0.52.1...@stencila/components@0.53.0) (2022-04-19)
+
+### Features
+
+- **Input:** Support file input type and readonly inputs ([510931f](https://github.com/stencila/designa/commit/510931ff2e0528ab298e32868c3ead2188313bd7))
+
 ### [0.52.1](https://github.com/stencila/designa/compare/@stencila/components@0.52.0...@stencila/components@0.52.1) (2022-03-23)
 
 ### Bug Fixes
