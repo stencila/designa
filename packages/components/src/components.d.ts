@@ -547,13 +547,17 @@ export namespace Components {
          */
         "placeholder"?: string;
         /**
+          * Indicate that this is a controlled input, preventing user editing of the value
+         */
+        "readOnly": boolean;
+        /**
           * When `true` value must be provided before submitting.
          */
         "required": boolean;
         /**
           * Type of input field.
          */
-        "type": 'text' | 'password' | 'number' | 'search';
+        "type": 'text' | 'password' | 'number' | 'file' | 'search';
         /**
           * Text value of the input.
          */
@@ -1423,13 +1427,17 @@ declare namespace LocalJSX {
          */
         "placeholder"?: string;
         /**
+          * Indicate that this is a controlled input, preventing user editing of the value
+         */
+        "readOnly"?: boolean;
+        /**
           * When `true` value must be provided before submitting.
          */
         "required"?: boolean;
         /**
           * Type of input field.
          */
-        "type"?: 'text' | 'password' | 'number' | 'search';
+        "type"?: 'text' | 'password' | 'number' | 'file' | 'search';
         /**
           * Text value of the input.
          */

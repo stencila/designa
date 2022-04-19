@@ -15,8 +15,9 @@
 | `label`             | `label`       | Accessible text label for the input field. Defaults to the input's `name` prop.                         | `string \| undefined`                                                                    | `undefined` |
 | `name` _(required)_ | `name`        | The name of the input, submitted as the value's label inside the form data.                             | `string`                                                                                 | `undefined` |
 | `placeholder`       | `placeholder` | Short hint demonstrating expected input value. Shown when the input is empty.                           | `string \| undefined`                                                                    | `undefined` |
+| `readOnly`          | `read-only`   | Indicate that this is a controlled input, preventing user editing of the value                          | `boolean`                                                                                | `false`     |
 | `required`          | `required`    | When `true` value must be provided before submitting.                                                   | `boolean`                                                                                | `false`     |
-| `type`              | `type`        | Type of input field.                                                                                    | `"number" \| "password" \| "search" \| "text"`                                           | `'text'`    |
+| `type`              | `type`        | Type of input field.                                                                                    | `"file" \| "number" \| "password" \| "search" \| "text"`                                 | `'text'`    |
 | `value`             | `value`       | Text value of the input.                                                                                | `number \| string \| undefined`                                                          | `''`        |
 
 
