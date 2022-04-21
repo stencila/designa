@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.0](https://github.com/stencila/designa/compare/@stencila/components@0.53.0...@stencila/components@0.54.0) (2022-04-21)
+
+### Features
+
+- **Toast:** Return created Toast element ([ea0fbb0](https://github.com/stencila/designa/commit/ea0fbb030ccd11aa59135e6592d44f30377c5e2c))
+
 ## [0.53.0](https://github.com/stencila/designa/compare/@stencila/components@0.52.1...@stencila/components@0.53.0) (2022-04-19)
 
 ### Features
