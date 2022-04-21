@@ -43,7 +43,7 @@ const init = (options: ToastOptions): Element | HTMLElement => {
 // ==============================================================================
 
 interface ToastController {
-  present: (message: string, options?: ToastOptions) => void
+  present: (message: string, options?: ToastOptions) => HTMLStencilaToastElement
 }
 
 // Base Toast controller function for managing the presentation of `stencila-toast` components
@@ -53,17 +53,18 @@ export const toastController = (
   const present = (
     message: string,
     options: ToastOptions | undefined = {}
-  ): void => {
-    const el = document.createElement('stencila-toast')
+  ): HTMLStencilaToastElement => {
+    const toastEl = document.createElement('stencila-toast')
 
-    el.type = options.type ?? baseOptions.type ?? ToastTypes.neutral
-    el.position =
+    toastEl.type = options.type ?? baseOptions.type ?? ToastTypes.neutral
+    toastEl.position =
       options.position ?? baseOptions.position ?? ToastPositions.topCenter
-    el.dismissable = options.dismissable ?? baseOptions.dismissable
-    el.duration = options.duration ?? baseOptions.duration
+    toastEl.dismissable = options.dismissable ?? baseOptions.dismissable
+    toastEl.duration = options.duration ?? baseOptions.duration
 
-    el.innerText = message
-    init(baseOptions).append(el)
+    toastEl.innerText = message
+    init(baseOptions).append(toastEl)
+    return toastEl
   }
 
   /** Memoize the notification function based on the message string and options to avoid showing
