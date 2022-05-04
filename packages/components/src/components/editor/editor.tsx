@@ -1,17 +1,24 @@
 import {
   autocompletion,
+  closeBrackets,
+  closeBracketsKeymap,
   completeAnyWord,
   startCompletion,
 } from '@codemirror/autocomplete'
-import { closeBrackets, closeBracketsKeymap } from '@codemirror/closebrackets'
-import { defaultKeymap } from '@codemirror/commands'
-import { commentKeymap } from '@codemirror/comment'
-import { foldGutter, foldKeymap } from '@codemirror/fold'
-import { lineNumbers } from '@codemirror/gutter'
-import { defaultHighlightStyle } from '@codemirror/highlight'
-import { history, historyField, historyKeymap } from '@codemirror/history'
-import { bracketMatching } from '@codemirror/matchbrackets'
-import { searchKeymap, search } from '@codemirror/search'
+import {
+  defaultKeymap,
+  history,
+  historyField,
+  historyKeymap,
+} from '@codemirror/commands'
+import {
+  bracketMatching,
+  defaultHighlightStyle,
+  foldGutter,
+  foldKeymap,
+  syntaxHighlighting,
+} from '@codemirror/language'
+import { search, searchKeymap } from '@codemirror/search'
 import {
   Compartment,
   EditorState,
@@ -26,6 +33,7 @@ import {
   highlightSpecialChars,
   KeyBinding,
   keymap,
+  lineNumbers,
   ViewUpdate,
 } from '@codemirror/view'
 import {
@@ -197,27 +205,27 @@ export class Editor {
     switch (lookupFormat(language).name.toLowerCase()) {
       case 'bash':
       case 'zsh': {
-        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { StreamLanguage } = await import('@codemirror/language')
         const { shell } = await import('@codemirror/legacy-modes/mode/shell')
         return StreamLanguage.define(shell)
       }
       case 'latex': {
-        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { StreamLanguage } = await import('@codemirror/language')
         const { stexMath } = await import('@codemirror/legacy-modes/mode/stex')
         return StreamLanguage.define(stexMath)
       }
       case 'toml': {
-        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { StreamLanguage } = await import('@codemirror/language')
         const { toml } = await import('@codemirror/legacy-modes/mode/toml')
         return StreamLanguage.define(toml)
       }
       case 'yaml': {
-        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { StreamLanguage } = await import('@codemirror/language')
         const { yaml } = await import('@codemirror/legacy-modes/mode/yaml')
         return StreamLanguage.define(yaml)
       }
       case 'dockerfile': {
-        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { StreamLanguage } = await import('@codemirror/language')
         const { dockerFile } = await import(
           '@codemirror/legacy-modes/mode/dockerfile'
         )
@@ -249,13 +257,13 @@ export class Editor {
         return python()
       }
       case 'r': {
-        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { StreamLanguage } = await import('@codemirror/language')
         const { r } = await import('@codemirror/legacy-modes/mode/r')
         return StreamLanguage.define(r)
       }
       case 'rmd': {
         const { markdown } = await import('@codemirror/lang-markdown')
-        const { StreamLanguage } = await import('@codemirror/stream-parser')
+        const { StreamLanguage } = await import('@codemirror/language')
         const { r } = await import('@codemirror/legacy-modes/mode/r')
         return markdown({ defaultCodeLanguage: StreamLanguage.define(r) })
       }
@@ -432,7 +440,7 @@ export class Editor {
       EditorState.languageData.of(() => [{ autocomplete: completeAnyWord }]),
       bracketMatching(),
       closeBrackets(),
-      Prec.fallback(defaultHighlightStyle),
+      Prec.default(syntaxHighlighting(defaultHighlightStyle)),
       this.languageConf.of(languageSyntax),
       this.lineWrappingConf.of(
         lineWrappingEnabled ? EditorView.lineWrapping : []
@@ -445,7 +453,6 @@ export class Editor {
       highlightSpecialChars(),
       keymap.of([
         ...this.keymap,
-        ...commentKeymap,
         ...closeBracketsKeymap,
         ...historyKeymap,
         ...foldKeymap,

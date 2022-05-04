@@ -1,4 +1,4 @@
-import { Panel, showPanel } from '@codemirror/panel'
+import { Panel, showPanel } from '@codemirror/view'
 import { Extension, StateEffect } from '@codemirror/state'
 
 export const updateErrors = StateEffect.define<{
