@@ -520,6 +520,7 @@ export class Editor {
           to: docState.doc.length,
           insert: contents,
         },
+        selection: this.editorRef?.state.selection,
       }) ?? {}
 
     this.editorRef?.dispatch(transaction)
