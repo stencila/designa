@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.54.1](https://github.com/stencila/designa/compare/@stencila/components@0.54.0...@stencila/components@0.54.1) (2022-05-05)
+
+### Bug Fixes
+
+- **dependencies:** update codemirror editor packages to ^0.20.0 ([7771d05](https://github.com/stencila/designa/commit/7771d05e53b6bc29c025d072aef179ca3db037b2))
+- **Editor:** Persist editor selection range when updating state ([e62dc90](https://github.com/stencila/designa/commit/e62dc9040583dbed567d26cca5bb93df74dcdc3c))
+
 ## [0.54.0](https://github.com/stencila/designa/compare/@stencila/components@0.53.0...@stencila/components@0.54.0) (2022-04-21)
 
 ### Features

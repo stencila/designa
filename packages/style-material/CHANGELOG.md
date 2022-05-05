@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.16.12](https://github.com/stencila/style/compare/@stencila/style-material@0.16.11...@stencila/style-material@0.16.12) (2022-05-05)
+
+### Bug Fixes
+
+- **dependencies:** update codemirror editor packages to ^0.20.0 ([7771d05](https://github.com/stencila/style/commit/7771d05e53b6bc29c025d072aef179ca3db037b2))
+
 ### [0.16.11](https://github.com/stencila/style/compare/@stencila/style-material@0.16.10...@stencila/style-material@0.16.11) (2022-03-23)
 
 ### Bug Fixes
