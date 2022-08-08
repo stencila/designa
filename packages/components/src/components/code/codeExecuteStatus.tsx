@@ -18,6 +18,14 @@ export const CodeExecuteStatus = (props: Props): FunctionalComponent => {
         class="executeStatus"
       ></stencila-icon>
     )
+  } else if (props.nodeKind === 'File') {
+    return (
+      <stencila-icon
+        icon="file"
+        color="neutral-500, #6e7591"
+        class="executeStatus"
+      ></stencila-icon>
+    )
   }
 
   if (
