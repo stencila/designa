@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.7.31](https://github.com/stencila/style/compare/@stencila/brand@0.7.30...@stencila/brand@0.7.31) (2022-08-08)
+
+### Bug Fixes
+
+- **Dependencies:** Run `npm audit fix` across packages ([0786b40](https://github.com/stencila/style/commit/0786b407599e757295976157e564e5d0855f4531))
+
 ### [0.7.30](https://github.com/stencila/style/compare/@stencila/brand@0.7.29...@stencila/brand@0.7.30) (2022-05-25)
 
 **Note:** Version bump only for package @stencila/brand

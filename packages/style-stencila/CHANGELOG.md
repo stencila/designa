@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.29.10](https://github.com/stencila/style/compare/@stencila/style-stencila@0.29.9...@stencila/style-stencila@0.29.10) (2022-08-08)
+
+### Bug Fixes
+
+- **Dependencies:** Run `npm audit fix` across packages ([0786b40](https://github.com/stencila/style/commit/0786b407599e757295976157e564e5d0855f4531))
+- **Parameters:** Give inputs a minimum size ([5743f7d](https://github.com/stencila/style/commit/5743f7d52ae6327f5f01d57eb23f57e1a8691e1b))
+
 ### [0.29.9](https://github.com/stencila/style/compare/@stencila/style-stencila@0.29.8...@stencila/style-stencila@0.29.9) (2022-05-25)
 
 **Note:** Version bump only for package @stencila/style-stencila

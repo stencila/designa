@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.54.3](https://github.com/stencila/designa/compare/@stencila/components@0.54.2...@stencila/components@0.54.3) (2022-08-08)
+
+### Bug Fixes
+
+- **Code dependencies:** Add icon for `File` dependencies ([2c0f66b](https://github.com/stencila/designa/commit/2c0f66b775c53c7b9ee9dbf00074f59e50ff150b))
+- **Dependencies:** Run `npm audit fix` across packages ([0786b40](https://github.com/stencila/designa/commit/0786b407599e757295976157e564e5d0855f4531))
+- **Parameters:** Remove validator types that are currently unsupported ([15e5001](https://github.com/stencila/designa/commit/15e5001bb71f4cbe1c37d7058453a5cfeaf3bca2))
+
 ### [0.54.2](https://github.com/stencila/designa/compare/@stencila/components@0.54.1...@stencila/components@0.54.2) (2022-05-25)
 
 **Note:** Version bump only for package @stencila/components
