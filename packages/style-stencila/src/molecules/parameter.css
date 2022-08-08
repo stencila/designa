@@ -67,6 +67,12 @@ stencila-parameter {
     }
   }
 
+  ::slotted(input),
+  input {
+    /* Avoid inputs being too small to usefully use e.g. when size=1 because a single digit number */
+    min-width: 4rem;
+  }
+
   ::slotted(input:invalid),
   input:invalid {
     @apply rounded;
