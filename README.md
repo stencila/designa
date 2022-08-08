@@ -34,25 +34,37 @@ See the [guide](./packages/components) for getting started with integrating our 
 
 To get started with development, clone this repo:
 
-`git clone git@github.com:stencila/designa.git`
+```sh
+git clone git@github.com:stencila/designa.git
+```
 
-Then install the necessary Node packages:
+Then install the necessary Node.js packages:
 
-`npm install`
+```sh
+npm install
+```
 
-Build packages and watch for changes:
+Build the styles:
 
-- `components`: `npm run build:components:watch`
-- Styles:
-  - `style-stencila`: `npm run build:styles:stencila:watch`
-  - `style-material` `npm run build:styles:stencila:watch`
-  - 🏎 Note: To significantly reduce development build times you can disable the `cssnano` PostCSS plugins from the respective project’s `.postcssrs.json` file
+```sh
+npm run build:styles
+```
+
+Then build the components on changes,
+
+```sh
+npm run build:components:watch
+```
+
+> 👩‍💻 There are also `build:styles:stencila:watch` and `build:styles:material:watch` scripts for building styles on changes.
 
 In a _separate terminal window_ start Storybook:
 
-`npm run storybook`
+```sh
+npm run storybook
+```
 
-> An issue to improve the development experience when using Storybook [can be seen here](https://github.com/stencila/designa/issues/113)
+> 🏎 Note: To significantly reduce development build times you can disable the `cssnano` PostCSS plugins from the the `.postcssrs.json` files in `packages/style-stencila` and `packages/style-material`.
 
 ### Adding Components
 
@@ -78,10 +90,6 @@ any `feat(...)` commits are pushed, patch version releases are done if any
 `fix(...)` commits are pushed. See [the
 specifications](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) for
 full details.
-
-Package builds and Storybook generation are done on [Travis
-CI](https://travis-ci.org/stencila/designa). Releases are made to the sub-packages
-found inside the packages directory.
 
 ### External Resources
 
