@@ -63,28 +63,10 @@ export const Validator = (props: Props): FunctionalComponent => {
               Select…
             </option>
             <option
-              value="ArrayValidator"
-              selected={props.type === 'ArrayValidator'}
-            >
-              Array
-            </option>
-            <option
               value="BooleanValidator"
               selected={props.type === 'BooleanValidator'}
             >
               Boolean
-            </option>
-            <option
-              value="ConstantValidator"
-              selected={props.type === 'ConstantValidator'}
-            >
-              Constant
-            </option>
-            <option
-              value="EnumValidator"
-              selected={props.type === 'EnumValidator'}
-            >
-              Enum
             </option>
             <option
               value="IntegerValidator"
@@ -105,10 +87,10 @@ export const Validator = (props: Props): FunctionalComponent => {
               String
             </option>
             <option
-              value="TupleValidator"
-              selected={props.type === 'TupleValidator'}
+              value="EnumValidator"
+              selected={props.type === 'EnumValidator'}
             >
-              Tuple
+              Enum
             </option>
           </select>
         </label>

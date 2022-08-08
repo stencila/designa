@@ -12,14 +12,11 @@ export default {
     validator: {
       defaultValue: 'NumberValidator',
       options: [
-        'ArrayValidator',
         'BooleanValidator',
-        'ConstantValidator',
         'EnumValidator',
         'IntegerValidator',
         'NumberValidator',
         'StringValidator',
-        'TupleValidator',
       ],
     },
   },
