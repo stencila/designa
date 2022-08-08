@@ -108,5 +108,21 @@ export const executionIconByStatus = (
         title: 'Semantics changed, re-run to update value',
       }
     }
+    case 'Failed': {
+      return {
+        icon: 'close-circle',
+        color: 'danger-500, #cf445e',
+        title: 'Failed',
+      }
+    }
+  }
+
+  // Although this is redundant, it avoids this function every returning undefined
+  // which causes other errors (e.g. if there is a patching error or a new variant added to
+  // the above enums)
+  return {
+    icon: 'question',
+    color: 'neutral-500, #6e7591',
+    title: 'Unknown status',
   }
 }

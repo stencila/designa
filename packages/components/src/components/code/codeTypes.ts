@@ -40,6 +40,7 @@ export type ExecuteRequired =
   | 'SemanticsChanged'
   | 'DependenciesChanged'
   | 'DependenciesFailed'
+  | 'Failed'
   | 'No'
 
 export type DiscoverExecutableLanguagesEvent = CustomEvent<{
