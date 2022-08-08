@@ -152,15 +152,15 @@ export class StencilaDocumentToolbar implements ComponentInterface {
                 this.altIsPressed
                   ? undefined
                   : this.shiftIsPressed
-                  ? 'Run sequentially'
-                  : 'Run topologically'
+                  ? 'Run in sequentially, in order of appearance'
+                  : 'Run in topological order'
               }
             >
               {this.altIsPressed
-                ? 'Restart kernel'
+                ? 'Restart kernels'
                 : isPending(this.executeStatus)
-                ? 'Cancel'
-                : ['Run', <span class="hidden-sm"> Document</span>]}
+                ? 'Cancel all'
+                : 'Run all'}
             </stencila-button>
           </span>
 
