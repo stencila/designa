@@ -407,7 +407,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
             this.executeRef(e.shiftKey ? 'Single' : 'Topological')
           }
           color="key"
-          icon={isPending(this.executeStatus) ? 'loader-2' : 'play'}
+          icon={isPending(this.executeStatus) ? 'stop' : 'play'}
           iconOnly={true}
           minimal={true}
           size="xsmall"

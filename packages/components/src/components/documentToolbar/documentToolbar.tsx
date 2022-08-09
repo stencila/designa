@@ -139,7 +139,7 @@ export class StencilaDocumentToolbar implements ComponentInterface {
                 this.altIsPressed
                   ? 'restart'
                   : isPending(this.executeStatus)
-                  ? 'loader-2'
+                  ? 'stop'
                   : 'play'
               }
               size="small"

@@ -407,7 +407,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
             </stencila-menu>
             {this.isExecutable && (
               <stencila-button
-                icon={isPending(this.executeStatus) ? 'loader-2' : 'play'}
+                icon={isPending(this.executeStatus) ? 'stop' : 'play'}
                 minimal={true}
                 color="key"
                 class="run"
