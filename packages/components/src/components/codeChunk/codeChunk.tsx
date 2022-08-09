@@ -483,9 +483,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
               </stencila-editor>
             </div>
 
-            <stencila-node-list>
-              <slot name={CodeChunkComponent.slots.outputs} />
-            </stencila-node-list>
+            <slot name={CodeChunkComponent.slots.outputs} />
           </div>
 
           <slot name={CodeChunkComponent.slots.label} />

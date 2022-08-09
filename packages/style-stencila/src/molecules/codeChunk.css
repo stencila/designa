@@ -8,10 +8,10 @@
 
 :host,
 stencila-code-chunk {
-  /** @prop --background: Background color of the Code Output section */
+  /** @prop --background: Background color of the `outputs` section */
   --background: var(--color-stock, #fff);
 
-  /** @prop --background-editor: Background color of the Code Editor section */
+  /** @prop --background-editor: Background color of the code editor section */
   --background-editor: var(--color-neutral-50, #edf2f7);
 
   /** @prop --border: Border color around the component as well as internal section dividers */
@@ -36,24 +36,29 @@ stencila-code-chunk {
         @apply cursor-wait;
       }
     }
+
+    .layoutToggle {
+      display: none;
+
+      @screen lg {
+        @apply inline-block;
+      }
+    }
   }
 
   stencila-editor {
     --border-width: 0;
     @apply flex-grow;
+    background-color: var(--background-editor);
   }
 
-  stencila-node-list {
+  ::slotted([slot='outputs']),
+  [slot='outputs'] {
     @apply p-2 m-0;
     background-color: var(--background);
-  }
 
-  .layoutToggle {
-    /* @apply hidden; */
-    display: none;
-
-    @screen lg {
-      @apply inline-block;
+    &:empty {
+      display: none;
     }
   }
 }
@@ -70,7 +75,6 @@ stencila-code-chunk {
   }
 
   &.hidden {
-    /* @apply hidden; */
     display: none;
   }
 }
