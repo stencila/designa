@@ -36,6 +36,7 @@ export type ExecuteStatus =
   | 'Cancelled'
 
 export type ExecuteRequired =
+  | undefined
   | 'NeverExecuted'
   | 'SemanticsChanged'
   | 'DependenciesChanged'
