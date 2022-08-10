@@ -29,7 +29,6 @@ import {
   FileFormatMap,
   lookupFormat,
 } from '../editor/languageUtils'
-import { getSlotByName } from '../utils/slotSelectors'
 import { LanguagePickerInline } from './languageSelect'
 
 const slots = {
@@ -54,10 +53,8 @@ const slots = {
 export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   @Element() private el: HTMLStencilaCodeExpressionElement
 
-  private emptyOutputMessage = 'No output to show'
   private hoverTimeOut: number | undefined = undefined
   private hoverStartedAt = Date.now()
-  private outputSlot: Element
 
   /**
    * A callback function to be called with the value of the `CodeExpression`
@@ -171,23 +168,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
 
   @State() isCodeVisible = false
 
-  @State() isOutputEmpty = false
-
-  private getOutputSlotContents = () => {
-    // Checking output list to account for non-text nodes such as images.
-    const output = (this.outputSlot?.childNodes ?? [])[0]
-
-    return output instanceof Text ? output.textContent : output
-  }
-
-  private checkIfEmpty = (): void => {
-    this.isOutputEmpty = this.getOutputSlotContents() === undefined
-  }
-
   componentWillLoad(): void {
-    this.outputSlot = getSlotByName(this.el)(slots.output)[0]
-
-    this.checkIfEmpty()
     this.checkIfExecutable()
   }
 
@@ -304,8 +285,6 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
 
     if (this.isExecutable && this.executeHandler) {
       const computed = await this.executeHandler(node)
-      this.isOutputEmpty =
-        computed.output === undefined || computed.output === null
       this.codeExpression = computed
       return computed
     }
@@ -333,17 +312,6 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
   // Create an execute handler bound to this instance
   // @see https://github.com/typescript-eslint/typescript-eslint/blob/v3.7.0/packages/eslint-plugin/docs/rules/unbound-method.md
   private executeRef = (ordering: CodeExecuteOrdering) => this.execute(ordering)
-
-  private dividerArrow = (): SVGElement => (
-    <svg
-      class="divider"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 8 24"
-      preserveAspectRatio="xMinYMin"
-    >
-      <path d="M8 12L1 0H0v24h1l7-12z" />
-    </svg>
-  )
 
   private onMouseOutHandler = (e: MouseEvent): void => {
     const target = e.target as Node | null
@@ -452,15 +420,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
           <slot name={slots.text} />
         </span>
       </span>,
-      this.dividerArrow(),
-      <span class={{ hidden: this.isOutputEmpty, slot: true }}>
-        <slot name="output" />
-      </span>,
-      this.isOutputEmpty && (
-        <stencila-tooltip text={this.emptyOutputMessage} class="output">
-          …
-        </stencila-tooltip>
-      ),
+      <slot name={slots.output} />,
     ]
   }
 
@@ -470,7 +430,6 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
         class={{
           hover: this.hover,
           isCodeVisible: this.isCodeVisible,
-          isOutputEmpty: this.isOutputEmpty,
         }}
         onMouseEnter={this.addHoverState}
         onMouseOut={this.onMouseOutHandler}

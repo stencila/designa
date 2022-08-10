@@ -1,12 +1,12 @@
 :host,
 stencila-code-expression {
-  /** @prop --background: Background color of the Code Output section */
+  /** @prop --background: Background color of the `output` section */
   --background: var(--color-stock, #fff);
 
-  /** @prop --background-buttons: Background color of the Code Editor section */
+  /** @prop --background-buttons: Background color of the buttons */
   --background-buttons: var(--color-neutral-50, #edf2f7);
 
-  /** @prop --background-editor: Background color of the Code Editor section */
+  /** @prop --background-editor: Background color of the cod editor section */
   --background-editor: var(--color-neutral-50, #edf2f7);
 
   /** @prop --border: Border color around the component as well as internal section dividers */
@@ -23,72 +23,14 @@ stencila-code-expression {
   .actions {
     @apply relative inline-flex flex-initial whitespace-nowrap rounded-l;
     background-color: var(--background-buttons);
-  }
 
-  .text {
-    @apply inline-block w-0 min-w-0 px-0 py-1 overflow-hidden font-mono text-xs leading-none whitespace-nowrap duration-150 ease-out text-key;
-    background-color: var(--background-editor);
-    transition-property: width;
-  }
-
-  ::slotted([slot='output']),
-  [slot='output'],
-  .output {
-    @apply inline-block py-1 pl-1 pr-2 font-mono text-xs leading-none border-none bg-stock text-key;
-    background-color: var(--background);
-    transition: padding 120ms ease-out;
-
-    stencila-icon {
-      --height: 1rem;
-      @apply h-4;
-
-      svg {
-        @apply h-4 stroke-warn-600;
-      }
-    }
-  }
-
-  .slot.hidden {
-    /* @apply hidden; */
-    display: none;
-  }
-
-  .output {
-    & > * {
-      @apply inline-block p-0 m-0 font-mono text-xs leading-none border-none bg-stock text-key whitespace-normal;
-    }
-  }
-
-  .divider {
-    @apply self-center inline-block w-2 max-h-em;
-    fill: var(--background-buttons);
-  }
-
-  &.isCodeVisible {
-    .text {
-      @apply inline-block w-auto px-2 py-1 whitespace-pre-line min-w-em;
+    stencila-button {
+      @apply inline-flex items-stretch self-start flex-shrink-0 overflow-hidden cursor-default transition ease-out duration-150;
+      transition-property: padding, width, max-width;
     }
 
-    .divider {
-      fill: var(--background-editor);
-    }
-  }
-
-  .actions stencila-button {
-    @apply inline-flex items-stretch self-start flex-shrink-0 overflow-hidden cursor-default transition ease-out duration-150;
-    transition-property: padding, width, max-width;
-  }
-
-  .actions .secondaryAction {
-    @apply inline-block w-0 overflow-hidden cursor-default transition ease-out duration-150;
-  }
-
-  &.isOutputEmpty {
-    ::slotted([slot='output']),
-    [slot='output'],
-    .output,
-    stencila-tooltip {
-      @apply text-neutral-500;
+    .secondaryAction {
+      @apply inline-block w-0 overflow-hidden cursor-default transition ease-out duration-150;
     }
   }
 
@@ -108,6 +50,42 @@ stencila-code-expression {
 
     &.scheduled {
       @apply cursor-wait;
+    }
+  }
+
+  .text {
+    @apply inline-block w-0 min-w-0 px-0 py-1 overflow-hidden font-mono text-sm leading-none whitespace-nowrap duration-150 ease-out text-key;
+    background-color: var(--background-editor);
+    transition-property: width;
+  }
+
+  &.isCodeVisible {
+    .text {
+      @apply inline-block w-auto px-2 py-1 whitespace-pre-line min-w-em;
+    }
+  }
+
+  ::slotted([slot='output']),
+  [slot='output'] {
+    background-color: var(--background);
+    transition: padding 120ms ease-out;
+
+    stencila-icon {
+      --height: 1rem;
+      @apply h-4;
+
+      svg {
+        @apply h-4 stroke-warn-600;
+      }
+    }
+
+    &:empty {
+      display: none;
+    }
+
+    @apply inline-block p-0 m-0 border-none bg-stock leading-normal text-base text-key whitespace-normal;
+    & > * {
+      @apply inline-block p-0 m-0 border-none bg-stock leading-normal text-base text-key whitespace-normal;
     }
   }
 }
