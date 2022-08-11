@@ -1,18 +1,18 @@
 :host,
 stencila-code-expression {
-  /** @prop --background: Background color of the `output` section */
-  --background: var(--color-stock, #fff);
+  /** @prop --background: Background color of element as a whole */
+  --background: var(--color-neutral-50, #edf2f7);
 
-  /** @prop --background-buttons: Background color of the buttons */
-  --background-buttons: var(--color-neutral-50, #edf2f7);
+  /** @prop --background-editor: Background color of the code editor section */
+  --background-editor: var(--color-stock, #fff);
 
-  /** @prop --background-editor: Background color of the cod editor section */
-  --background-editor: var(--color-neutral-50, #edf2f7);
+  /** @prop --background-output: Background color of the output section */
+  --background-output: var(--color-stock, #fff);
 
-  /** @prop --border: Border color around the component as well as internal section dividers */
+  /** @prop --border: Border color around the component and internal section dividers */
   --border: var(--color-neutral-100, #e2e8f0);
 
-  @apply inline-flex relative items-stretch p-0 text-sm leading-none align-text-bottom border border-solid rounded;
+  @apply inline-flex relative items-center p-0 text-sm leading-none align-text-bottom border border-solid rounded;
   background-color: var(--background);
   border-color: var(--border);
 
@@ -22,7 +22,6 @@ stencila-code-expression {
 
   .actions {
     @apply relative inline-flex flex-initial whitespace-nowrap rounded-l;
-    background-color: var(--background-buttons);
 
     stencila-button {
       @apply inline-flex items-stretch self-start flex-shrink-0 overflow-hidden cursor-default transition ease-out duration-150;
@@ -37,7 +36,8 @@ stencila-code-expression {
   &.hover,
   &:focus,
   &:focus-within,
-  &:hover {
+  &:hover,
+  &.isCodeVisible {
     .actions .secondaryAction {
       @apply inline-flex w-5 max-w-full;
     }
@@ -54,38 +54,65 @@ stencila-code-expression {
   }
 
   .text {
-    @apply inline-block w-0 min-w-0 px-0 py-1 overflow-hidden font-mono text-sm leading-none whitespace-nowrap duration-150 ease-out text-key;
+    @apply inline-block w-0 min-w-0 px-0 py-0 overflow-hidden font-mono text-sm leading-none whitespace-nowrap duration-150 ease-out text-key;
     background-color: var(--background-editor);
+    border-color: var(--border);
     transition-property: width;
   }
 
   &.isCodeVisible {
     .text {
-      @apply inline-block w-auto px-2 py-1 whitespace-pre-line min-w-em;
+      @apply inline-block w-auto px-2 py-1 whitespace-pre-line min-w-em rounded border mr-1;
     }
+  }
+
+  ::slotted([slot='errors']),
+  [slot='errors'] {
+    display: none;
+
+    stencila-code-error {
+      @apply border-none p-0 font-mono text-sm leading-normal;
+      background: none;
+
+      stencila-icon,
+      stencila-details {
+        display: none;
+      }
+    }
+  }
+
+  &.isCodeVisible {
+    ::slotted([slot='errors']),
+    [slot='errors'] {
+      display: inline-block;
+    }
+  }
+
+  .divider {
+    @apply self-center inline-block w-2;
+    display: none;
+    fill: var(--background);
+    background-color: var(--background-output);
+  }
+
+  &.isCodeVisible .divider {
+    display: inline-block;
   }
 
   ::slotted([slot='output']),
   [slot='output'] {
-    background-color: var(--background);
+    @apply inline-block m-0 py-0 pl-2 pr-1 border-none bg-stock leading-normal text-base text-key whitespace-normal;
+
+    background-color: var(--background-output);
     transition: padding 120ms ease-out;
-
-    stencila-icon {
-      --height: 1rem;
-      @apply h-4;
-
-      svg {
-        @apply h-4 stroke-warn-600;
-      }
-    }
 
     &:empty {
       display: none;
     }
 
-    @apply inline-block p-0 m-0 border-none bg-stock leading-normal text-base text-key whitespace-normal;
-    & > * {
-      @apply inline-block p-0 m-0 border-none bg-stock leading-normal text-base text-key whitespace-normal;
+    /* All children are forced to be as inliny as possible */
+    & * {
+      @apply inline p-0 m-0 border-none bg-stock leading-normal text-base text-key whitespace-normal;
     }
   }
 }
