@@ -50,6 +50,20 @@ const defaultColors = {
     1000: '#071009',
   },
 
+  info: {
+    50: '#ebecff',
+    100: '#cacfff',
+    200: '#a7b3ff',
+    300: '#7f98ff',
+    400: '#527fff',
+    500: '#2069f2',
+    600: '#0054cf',
+    700: '#0041a2',
+    800: '#132f71',
+    900: '#161e41',
+    1000: '#0c0d18',
+  },
+
   warn: {
     50: '#fff3cc',
     100: '#ffeaaa',
@@ -103,6 +117,7 @@ const colors = {
   primary: generateColors('primary', 'primary'),
   neutral: generateColors('neutral', 'neutral'),
   success: generateColors('success', 'success'),
+  info: generateColors('info', 'info'),
   warn: generateColors('warn', 'warn'),
   danger: generateColors('danger', 'danger'),
 }

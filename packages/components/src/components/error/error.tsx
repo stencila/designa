@@ -1,8 +1,8 @@
 import { Component, Element, h, Host, Prop, State } from '@stencil/core'
 import { CodeError } from '@stencila/schema'
-import { IconNames } from '../icon/iconNames'
+import { getSlotByName } from '../utils/slotSelectors'
 
-export type Level = 'info' | 'warning' | 'error'
+export type Level = 'info' | 'warn' | 'error'
 
 @Component({
   tag: 'stencila-code-error',
@@ -12,72 +12,95 @@ export type Level = 'info' | 'warning' | 'error'
   },
   scoped: true,
 })
-export class ErrorComponent {
-  @Element()
-  private el: HTMLStencilaCodeErrorElement | null
-
+export class CodeErrorComponent {
   /**
-   * The `CodeError` object
+   * The `CodeError` node
    */
-  @Prop() error?: CodeError
+  @Prop()
+  error?: CodeError
 
   /**
    * The severity of the error message
    */
-  @Prop() kind: string | Level = 'info'
+  @Prop({ mutable: true, reflect: true })
+  level?: Level
 
-  @State() stackIsOpen = false
+  /**
+   * Update the level, if not defined, based on the content of the `type` slot
+   *
+   * In the future, `CodeError` is likely to be replace with `CodeNotification` (or similar)
+   * and `level` will be a property (so it does not need to be derived here)
+   */
+  private updateLevel() {
+    if (this.level !== undefined) {
+      return
+    }
 
-  private hasStack = false
+    const errorType = getSlotByName(this.el)(
+      'type'
+    )[0]?.textContent?.toLowerCase()
 
-  private toggleStackVisibility = (e: MouseEvent) => {
+    if (typeof errorType === 'string' && errorType !== '') {
+      this.level = errorType.includes('info')
+        ? 'info'
+        : errorType.includes('warn')
+        ? 'warn'
+        : 'error'
+    } else {
+      this.level = 'error'
+    }
+  }
+
+  /**
+   * Flag for whether there is a stack trace
+   */
+  @State()
+  private hasStackTrace = false
+
+  /**
+   * Determine if the `stacktrace` slot has content
+   */
+  private updateHasStackTrace() {
+    const stackTrace = getSlotByName(this.el)('stacktrace')[0]?.textContent
+    this.hasStackTrace = typeof stackTrace === 'string' && stackTrace !== ''
+  }
+
+  /**
+   * Toggle for visibility of the stack trace
+   */
+  @State()
+  private stackTraceIsOpen = false
+
+  private toggleStackTraceIsOpen = (e: MouseEvent) => {
     e.preventDefault()
-    this.stackIsOpen = !this.stackIsOpen
+    this.stackTraceIsOpen = !this.stackTraceIsOpen
   }
 
-  private getIcon(severity: Level): IconNames {
-    switch (severity) {
-      case 'error':
-        return 'forbid'
-      case 'warning':
-        return 'error-warning'
-      default:
-        return 'information'
-    }
-  }
-
-  private getLevel(kind: string): Level {
-    switch (kind) {
-      case 'error':
-      case 'incapable':
-        return 'error'
-      case 'warning':
-      case 'warn':
-        return 'warning'
-      default:
-        return 'info'
-    }
-  }
+  @Element()
+  private el: HTMLStencilaCodeErrorElement | null
 
   componentWillLoad() {
-    this.hasStack = !!this.el?.querySelector('[slot="stacktrace"]')
+    this.updateLevel()
+    this.updateHasStackTrace()
   }
 
-  public render() {
-    const severity = this.getLevel(this.error?.errorType ?? this.kind)
-
+  render() {
     return (
-      <Host kind={severity}>
-        <div class="overview" onClick={this.toggleStackVisibility}>
-          <stencila-icon icon={this.getIcon(severity)}></stencila-icon>
-          <slot />
+      <Host>
+        <div class="overview" onClick={this.toggleStackTraceIsOpen}>
+          <slot name="type" />
+          <slot name="message" />
+          <stencila-icon
+            icon="stack"
+            class={`stacktrace-icon ${this.hasStackTrace ? '' : 'hide'}`}
+          ></stencila-icon>
         </div>
-
-        {this.hasStack && (
-          <stencila-details open={this.stackIsOpen}>
-            <slot name="stacktrace" />
-          </stencila-details>
-        )}
+        <stencila-details
+          open={this.stackTraceIsOpen}
+          class={`stacktrace-details ${this.hasStackTrace ? '' : 'hide'}`}
+        >
+          <slot name="stacktrace" />
+        </stencila-details>
       </Host>
     )
   }

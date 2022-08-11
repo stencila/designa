@@ -5,39 +5,63 @@ stencila-code-error {
   .overview {
     @apply pr-4;
 
+    .stacktrace-icon {
+      float: right;
+      cursor: pointer;
+
+      &.hide {
+        display: none;
+      }
+    }
+
     * {
       @apply align-middle;
     }
+  }
 
-    stencila-icon {
-      @apply mr-2;
-    }
+  ::slotted([slot='type']),
+  [slot='type'] {
+    @apply mr-2 rounded border border-solid py-0 px-0.5;
   }
 
   stencila-details {
-    @apply block static;
+    @apply block static whitespace-pre;
 
     --disclosure-icon-right: 0.5rem;
     --disclosure-icon-top: 0.5rem;
-  }
 
-  [slot='stacktrace'] {
-    @apply m-0 bg-stock border-warn-500 text-key;
-  }
-
-  &[kind='warning'] {
-    @apply border-warn-500 bg-warn-50 text-warn-800;
-
-    [slot='stacktrace'] {
-      @apply border-warn-500;
+    &.hide {
+      display: none;
     }
   }
 
-  &[kind='error'] {
+  &[level='info'] {
+    @apply border-info-500 bg-info-50 text-info-800;
+
+    ::slotted([slot='type']),
+    [slot='type'] {
+      @apply border-info-500 bg-info-100 text-info-800;
+      background-color: var(--color-info-100, #cacfff);
+    }
+  }
+
+  &[level='warn'] {
+    @apply border-warn-500 bg-warn-50 text-warn-800;
+
+    ::slotted([slot='type']),
+    [slot='type'] {
+      @apply border-warn-500 text-warn-800;
+      background-color: var(--color-warn-100, #ffeaaa);
+    }
+  }
+
+  &[level='error'] {
     @apply border-danger-500 bg-danger-50 text-danger-600;
 
-    [slot='stacktrace'] {
-      @apply border-danger-500;
+    ::slotted([slot='type']),
+    [slot='type'] {
+      @apply border-danger-500 text-danger-600;
+      background-color: var(--color-danger-100, #ffcace);
     }
   }
 }
