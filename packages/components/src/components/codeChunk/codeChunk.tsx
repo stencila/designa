@@ -104,7 +104,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
   /**
    * Whether the code section is visible or not
    */
-  @Prop()
+  @Prop({ mutable: true })
   public isCodeVisible = false
 
   /**
@@ -186,33 +186,33 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
 
   @State() isStacked = true
 
-  @State() private isCodeVisibleState: boolean = this.isCodeVisible
-
   /**
-   * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code,
-   * leaving only the results visible.
+   * A global event emitter to show/hide code in all `CodeChunk` or `CodeExpression` components
    */
   @Event({
     eventName: 'stencila-code-visibility-change',
   })
-  public allCodeVisibilityChange: EventEmitter
+  allCodeVisibilityChange: EventEmitter
 
+  /**
+   * A global event listener to show/hide code in this component
+   */
   @Listen('stencila-code-visibility-change', { target: 'window' })
   onAllCodeVisibilityChange(event: CodeVisibilityEvent): void {
-    this.setCodeVisibility(event)
+    this.isCodeVisible = event.detail.isVisible
   }
 
+  /**
+   * Toggle code visibility, either locally, or globally
+   */
   private toggleCodeVisibility = (e: MouseEvent): void => {
     e.preventDefault()
     if (e.shiftKey) {
-      this.toggleAllCodeVisibility()
+      this.allCodeVisibilityChange.emit({ isVisible: !this.isCodeVisible })
     } else {
-      this.isCodeVisibleState = !this.isCodeVisibleState
+      this.isCodeVisible = !this.isCodeVisible
     }
   }
-
-  private toggleAllCodeVisibility = (): void =>
-    this.allCodeVisibilityChangeHandler(!this.isCodeVisibleState)
 
   /**
    * Determine if the CodeChunk can be executed or not.
@@ -368,14 +368,6 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     this.shiftIsPressed = false
   }
 
-  private allCodeVisibilityChangeHandler(isVisible: boolean) {
-    this.allCodeVisibilityChange.emit({ isVisible })
-  }
-
-  private setCodeVisibility = (e: CodeVisibilityEvent): void => {
-    this.isCodeVisibleState = e.detail.isVisible
-  }
-
   componentWillLoad(): void {
     /** Get rendered width of component to decide whether to stack the editor and outputs or not.
      * We can’t use media queries as the component is not always full width of the viewport, and depends on the parent element width.
@@ -390,7 +382,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
     return (
       <Host
         class={{
-          isCodeVisible: this.isCodeVisibleState,
+          isCodeVisible: this.isCodeVisible,
           isStacked: this.isStacked,
         }}
       >
@@ -433,16 +425,16 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
               color="key"
               class="sourceToggle"
               onClick={this.toggleCodeVisibility}
-              icon={this.isCodeVisibleState ? 'eye-off' : 'eye'}
+              icon={this.isCodeVisible ? 'eye-off' : 'eye'}
               iconOnly={true}
               size="xsmall"
               slot="persistentActions"
               tooltip={`${
-                this.isCodeVisibleState ? 'Hide' : 'Show'
+                this.isCodeVisible ? 'Hide' : 'Show'
               } Code\nShift click to set for all code blocks`}
             ></stencila-button>
             )
-            {this.isCodeVisibleState && (
+            {this.isCodeVisible && (
               <stencila-button
                 minimal={true}
                 color="key"
@@ -463,7 +455,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
             <div
               class={{
                 editorContainer: true,
-                hidden: !this.isCodeVisibleState,
+                hidden: !this.isCodeVisible,
               }}
             >
               <stencila-editor
