@@ -34,6 +34,7 @@ import { LanguagePickerInline } from './languageSelect'
 const slots = {
   text: 'text',
   output: 'output',
+  errors: 'errors',
 }
 
 /**
@@ -166,15 +167,42 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
 
   @State() hover = false
 
-  @State() isCodeVisible = false
+  /**
+   * Whether the code section starts out visible or not
+   */
+  @Prop({ mutable: true })
+  isCodeVisible = false
+
+  /**
+   * A global event emitter to show/hide code in all `CodeChunk` or `CodeExpression` components
+   */
+  @Event({
+    eventName: 'stencila-code-visibility-change',
+  })
+  private allCodeVisibilityChange: EventEmitter
+
+  /**
+   * A global event listener to show/hide code in this component
+   */
+  @Listen('stencila-code-visibility-change', { target: 'window' })
+  onAllCodeVisibilityChange(event: CodeVisibilityEvent): void {
+    this.isCodeVisible = event.detail.isVisible
+  }
+
+  /**
+   * Toggle code visibility, either locally, or globally
+   */
+  private toggleCodeVisibility = (event: MouseEvent): void => {
+    event.preventDefault()
+    if (event.shiftKey) {
+      this.allCodeVisibilityChange.emit({ isVisible: !this.isCodeVisible })
+    } else {
+      this.isCodeVisible = !this.isCodeVisible
+    }
+  }
 
   componentWillLoad(): void {
     this.checkIfExecutable()
-  }
-
-  @Listen('stencila-code-visibility-change', { target: 'window' })
-  onAllCodeVisibilityChange(event: CodeVisibilityEvent): void {
-    this.setCodeVisibility(event)
   }
 
   /**
@@ -199,13 +227,6 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
       })
     )
   }
-
-  private setCodeVisibility = (e: CodeVisibilityEvent): void => {
-    this.isCodeVisible = e.detail.isVisible
-  }
-
-  private toggleCodeVisibility = (): boolean =>
-    (this.isCodeVisible = !this.isCodeVisible)
 
   private selectTextSlot = (): HTMLElement | null =>
     this.el.querySelector(`.${slots.text}`)
@@ -412,6 +433,7 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
         <span
           class="text"
           contentEditable={!this.readOnly}
+          spellcheck="false"
           onBlur={this.removeHoverState}
           onInput={this.contentChangeHandler}
           tabIndex={this.isCodeVisible ? 0 : -1}
@@ -419,7 +441,16 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
         >
           <slot name={slots.text} />
         </span>
+        <slot name={slots.errors} />
       </span>,
+      <svg
+        class="divider"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 8 24"
+        preserveAspectRatio="xMinYMin"
+      >
+        <path d="M8 12L1 0H0v24h1l7-12z" />
+      </svg>,
       <slot name={slots.output} />,
     ]
   }
