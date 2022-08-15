@@ -431,7 +431,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
               slot="persistentActions"
               tooltip={`${
                 this.isCodeVisible ? 'Hide' : 'Show'
-              } Code\nShift click to set for all code blocks`}
+              } Code\nShift click to set for all code`}
             ></stencila-button>
             )
             {this.isCodeVisible && (
@@ -446,7 +446,7 @@ export class CodeChunkComponent implements CodeComponent<CodeChunk> {
                 slot="persistentActions"
                 tooltip={`${
                   this.isStacked ? 'Side by side' : 'Stacked'
-                } view\nShift click to set for all code blocks`}
+                } view\nShift click to set for all code`}
               ></stencila-button>
             )}
           </stencila-action-menu>

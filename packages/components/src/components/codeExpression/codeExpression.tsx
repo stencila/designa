@@ -419,7 +419,9 @@ export class CodeExpressionComponent implements CodeComponent<CodeExpression> {
           iconOnly={true}
           minimal={true}
           size="xsmall"
-          tooltip={`${this.isCodeVisible ? 'Hide' : 'Show'} Code`}
+          tooltip={`${
+            this.isCodeVisible ? 'Hide' : 'Show'
+          } Code\nShift click to set for all code`}
         ></stencila-button>
         <span class="secondaryAction">
           <LanguagePickerInline
