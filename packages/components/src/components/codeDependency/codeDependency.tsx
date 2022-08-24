@@ -58,9 +58,13 @@ export class CodeDependency {
   programmingLanguage?: string
 
   public render() {
+    const [href, target] =
+      this.nodeKind === 'File' && this.label
+        ? [this.label, 'blank']
+        : [`#${this.nodeId}`, '']
     return (
       <Host>
-        <a href={`#${this.nodeId}`}>
+        <a href={href} target={target}>
           <CodeExecuteStatus
             executeStatus={this.executeStatus}
             executeRequired={this.executeRequired}
