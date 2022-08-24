@@ -3,4 +3,7 @@ stencila-code-dependencies {
   stencila-menu-item[divider] {
     @apply text-xs h-auto leading-loose bg-neutral-50;
   }
+  .none {
+    @apply block p-2 font-body font-extralight text-xs italic;
+  }
 }

@@ -25,6 +25,10 @@ export class CodeDependencies {
             </stencila-menu-item>
           ) : null)}
 
+        {this.el?.querySelectorAll('stencila-code-dependency').length == 0 ? (
+          <div class="none">None</div>
+        ) : null}
+
         <slot />
       </Host>
     )
