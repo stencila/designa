@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.0](https://github.com/stencila/style/compare/@stencila/style-stencila@0.29.10...@stencila/style-stencila@0.30.0) (2022-09-09)
+
+### Features
+
+- **Code chunks:** Simplify layout when no outputs ([d6685e9](https://github.com/stencila/style/commit/d6685e90a32eeeb5b12d402ac1f23e6de589b1d0))
+- **Code dependencies:** Show `None` if empty ([cb75952](https://github.com/stencila/style/commit/cb75952ce77a5ad1b08084a41ce6594d280307e8))
+
+### Bug Fixes
+
+- **Code expressions:** Outputs more similar to surrounding text ([385ec6e](https://github.com/stencila/style/commit/385ec6e6de84c960cc211cdec3bc2832f678ced6))
+- **CodeError:** Improve display of stack trace and level ([e1ea88e](https://github.com/stencila/style/commit/e1ea88e91b09a58015aaeceb432c47a509e06bed))
+- **CodeExpression:** Display of errors ([ee4a0e4](https://github.com/stencila/style/commit/ee4a0e46779037663caa6ce265ea069a3ab93af8))
+
 ### [0.29.10](https://github.com/stencila/style/compare/@stencila/style-stencila@0.29.9...@stencila/style-stencila@0.29.10) (2022-08-08)
 
 ### Bug Fixes

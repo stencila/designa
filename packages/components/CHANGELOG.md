@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.55.0](https://github.com/stencila/designa/compare/@stencila/components@0.54.3...@stencila/components@0.55.0) (2022-09-09)
+
+### Features
+
+- **Code chunks:** Simplify layout when no outputs ([d6685e9](https://github.com/stencila/designa/commit/d6685e90a32eeeb5b12d402ac1f23e6de589b1d0))
+- **Code dependencies:** Show `None` if empty ([cb75952](https://github.com/stencila/designa/commit/cb75952ce77a5ad1b08084a41ce6594d280307e8))
+- **Code dependency:** Use different links for files ([77e7aab](https://github.com/stencila/designa/commit/77e7aab94bbec9a6df0c59ad9999d3ddc99028a1))
+- **Editor:** Register SQL and PrQL as editor languages ([c08bd25](https://github.com/stencila/designa/commit/c08bd25577939bf463c2acf48b4d0a858aa0c4ff))
+
+### Bug Fixes
+
+- **Code expressions:** Outputs more similar to surrounding text ([385ec6e](https://github.com/stencila/designa/commit/385ec6e6de84c960cc211cdec3bc2832f678ced6))
+- **Code status:** Add `Failed` variant for `executeRequired` ([c1f1cc1](https://github.com/stencila/designa/commit/c1f1cc194d615afb25645f3dfac69e66dc9837a2))
+- **CodeError:** Improve display of stack trace and level ([e1ea88e](https://github.com/stencila/designa/commit/e1ea88e91b09a58015aaeceb432c47a509e06bed))
+- **CodeExpression:** Emit global `stencila-code-visibility-change` event ([d978d51](https://github.com/stencila/designa/commit/d978d511ecd1933340cb178b6107fbf89cff7269))
+- **Executable code:** Change cancel icon from spinner to `stop` ([ef9b8f2](https://github.com/stencila/designa/commit/ef9b8f263ca0d45fa9ab084bf63a70be1ae5004e))
+- **Executable code:** Improve which execution status is shown ([dcd241d](https://github.com/stencila/designa/commit/dcd241daf6feca5af977d20b906963e427cd4be8))
+
 ### [0.54.3](https://github.com/stencila/designa/compare/@stencila/components@0.54.2...@stencila/components@0.54.3) (2022-08-08)
 
 ### Bug Fixes
