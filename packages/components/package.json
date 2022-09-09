@@ -75,6 +75,7 @@
     "@codemirror/lang-markdown": "^0.19.6",
     "@codemirror/lang-python": "^0.19.5",
     "@codemirror/lang-xml": "^0.19.2",
+    "@codemirror/lang-sql": "^0.19.4",
     "@codemirror/legacy-modes": "^0.19.1",
     "@codemirror/matchbrackets": "^0.19.4",
     "@codemirror/panel": "^0.19.0",

@@ -52,6 +52,11 @@ export const fileFormatMap: FileFormatMap = {
     ext: 'txt',
     aliases: ['txt'],
   },
+  PrQL: {
+    name: 'PrQL',
+    ext: 'prql',
+    aliases: ['prql'],
+  },
   Python: {
     name: 'Python',
     ext: 'py',
@@ -66,6 +71,11 @@ export const fileFormatMap: FileFormatMap = {
     name: 'R Markdown',
     ext: 'rmd',
     aliases: ['rmd', 'r markdown', 'rmarkdown'],
+  },
+  SQL: {
+    name: 'SQL',
+    ext: 'sql',
+    aliases: ['sql'],
   },
   TOML: {
     name: 'TOML',

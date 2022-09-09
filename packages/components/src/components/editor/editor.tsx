@@ -265,6 +265,10 @@ export class Editor {
         const { markdown } = await import('@codemirror/lang-markdown')
         return markdown()
       }
+      case 'sql': {
+        const { sql } = await import('@codemirror/lang-sql')
+        return sql()
+      }
     }
   }
 
