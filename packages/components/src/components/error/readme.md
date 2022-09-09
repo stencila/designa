@@ -7,8 +7,8 @@
 
 | Property | Attribute | Description                       | Type                                                                                                                                    | Default     |
 | -------- | --------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `error`  | --        | The `CodeError` object            | `Entity & { type: "CodeError"; errorMessage: string; errorType?: string \| undefined; stackTrace?: string \| undefined; } \| undefined` | `undefined` |
-| `kind`   | `kind`    | The severity of the error message | `string`                                                                                                                                | `'info'`    |
+| `error`  | --        | The `CodeError` node              | `Entity & { type: "CodeError"; errorMessage: string; errorType?: string \| undefined; stackTrace?: string \| undefined; } \| undefined` | `undefined` |
+| `level`  | `level`   | The severity of the error message | `"error" \| "info" \| "warn" \| undefined`                                                                                              | `undefined` |
 
 
 ## Dependencies

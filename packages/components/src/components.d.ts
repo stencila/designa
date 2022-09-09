@@ -266,13 +266,13 @@ export namespace Components {
     }
     interface StencilaCodeError {
         /**
-          * The `CodeError` object
+          * The `CodeError` node
          */
         "error"?: CodeError;
         /**
           * The severity of the error message
          */
-        "kind": string | Level;
+        "level"?: Level;
     }
     interface StencilaCodeExpression {
         /**
@@ -325,6 +325,10 @@ export namespace Components {
           * Returns the text contents from the inline code editor
          */
         "getTextContents": () => Promise<string>;
+        /**
+          * Whether the code section starts out visible or not
+         */
+        "isCodeVisible": boolean;
         /**
           * List of all supported programming languages
          */
@@ -1084,7 +1088,7 @@ declare namespace LocalJSX {
          */
         "onStencila-code-execute-cancel"?: (event: CustomEvent<CodeExecuteCancelEvent['detail']>) => void;
         /**
-          * Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.
+          * A global event emitter to show/hide code in all `CodeChunk` or `CodeExpression` components
          */
         "onStencila-code-visibility-change"?: (event: CustomEvent<any>) => void;
         /**
@@ -1134,13 +1138,13 @@ declare namespace LocalJSX {
     }
     interface StencilaCodeError {
         /**
-          * The `CodeError` object
+          * The `CodeError` node
          */
         "error"?: CodeError;
         /**
           * The severity of the error message
          */
-        "kind"?: string | Level;
+        "level"?: Level;
     }
     interface StencilaCodeExpression {
         /**
@@ -1182,6 +1186,10 @@ declare namespace LocalJSX {
          */
         "executeStatus"?: ExecuteStatus;
         /**
+          * Whether the code section starts out visible or not
+         */
+        "isCodeVisible"?: boolean;
+        /**
           * List of all supported programming languages
          */
         "languageCapabilities"?: FileFormatMap;
@@ -1193,6 +1201,10 @@ declare namespace LocalJSX {
           * Emitted to indicate that the execution of the code node should be cancelled/interrupted.
          */
         "onStencila-code-execute-cancel"?: (event: CustomEvent<CodeExecuteCancelEvent['detail']>) => void;
+        /**
+          * A global event emitter to show/hide code in all `CodeChunk` or `CodeExpression` components
+         */
+        "onStencila-code-visibility-change"?: (event: CustomEvent<any>) => void;
         /**
           * Event emitted when the source code of the `CodeExpression` node is changed.
          */

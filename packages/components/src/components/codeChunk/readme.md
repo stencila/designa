@@ -15,7 +15,7 @@
 | `executeDuration`      | `execute-duration`     | Duration of the latest code execition                                                                   | `string`                                                                                                                                      | `undefined`     |
 | `executeEnded`         | `execute-ended`        | Time when the latest code execution ended                                                               | `string`                                                                                                                                      | `undefined`     |
 | `executeHandler`       | --                     | A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`. | `((codeChunk: CodeChunk) => Promise<CodeChunk>) \| undefined`                                                                                 | `undefined`     |
-| `executeRequired`      | `execute-required`     | Status of upstream dependencies, and whether the node needs to be re-executed                           | `"DependenciesChanged" \| "DependenciesFailed" \| "Failed" \| "NeverExecuted" \| "No" \| "SemanticsChanged"`                                  | `undefined`     |
+| `executeRequired`      | `execute-required`     | Status of upstream dependencies, and whether the node needs to be re-executed                           | `"DependenciesChanged" \| "DependenciesFailed" \| "Failed" \| "NeverExecuted" \| "No" \| "SemanticsChanged" \| undefined`                     | `undefined`     |
 | `executeStatus`        | `execute-status`       | The execution status of the code node                                                                   | `"Cancelled" \| "Failed" \| "Running" \| "RunningPreviouslyFailed" \| "Scheduled" \| "ScheduledPreviouslyFailed" \| "Succeeded" \| undefined` | `undefined`     |
 | `isCodeVisible`        | `is-code-visible`      | Whether the code section is visible or not                                                              | `boolean`                                                                                                                                     | `false`         |
 | `keymap`               | --                     | Custom keyboard shortcuts to pass along to CodeMirror                                                   | `KeyBinding[]`                                                                                                                                | `[]`            |
@@ -30,7 +30,7 @@
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | `stencila-code-execute`           | Emitted to indicate that code node should be executed                                                                                                           | `CustomEvent<{ nodeId: string \| null; ordering: CodeExecuteOrdering; }>` |
 | `stencila-code-execute-cancel`    | Emitted to indicate that the execution of the code node should be cancelled/interrupted.                                                                        | `CustomEvent<{ nodeId: string \| null; scope: "Single" \| "All"; }>`      |
-| `stencila-code-visibility-change` | Trigger a global DOM event to hide or show all `CodeChunk` and `CodeExpress` component source code, leaving only the results visible.                           | `CustomEvent<any>`                                                        |
+| `stencila-code-visibility-change` | A global event emitter to show/hide code in all `CodeChunk` or `CodeExpression` components                                                                      | `CustomEvent<any>`                                                        |
 | `stencila-editor-layout-change`   | Trigger a global DOM event to set the layout of all `CodeChunk` component. Can be set to either show the editor and outputs side by side or stacked vertically. | `CustomEvent<any>`                                                        |
 
 
@@ -93,8 +93,8 @@ Type: `Promise<string>`
 
 | Name                  | Description                                                            |
 | --------------------- | ---------------------------------------------------------------------- |
-| `--background`        | Background color of the Code Output section                            |
-| `--background-editor` | Background color of the Code Editor section                            |
+| `--background`        | Background color of the `outputs` section                              |
+| `--background-editor` | Background color of the code editor section                            |
 | `--border`            | Border color around the component as well as internal section dividers |
 
 
@@ -106,7 +106,6 @@ Type: `Promise<string>`
 - [stencila-menu](../menu)
 - [stencila-button](../button)
 - [stencila-editor](../editor)
-- [stencila-node-list](../nodeList)
 - [stencila-icon](../icon)
 - [stencila-tooltip](../tooltip)
 
@@ -117,7 +116,6 @@ graph TD;
   stencila-code-chunk --> stencila-menu
   stencila-code-chunk --> stencila-button
   stencila-code-chunk --> stencila-editor
-  stencila-code-chunk --> stencila-node-list
   stencila-code-chunk --> stencila-icon
   stencila-code-chunk --> stencila-tooltip
   stencila-action-menu --> stencila-button
