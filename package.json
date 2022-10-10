@@ -57,7 +57,7 @@
     "filewatcher-webpack-plugin": "1.2.0",
     "globby": "12.2.0",
     "husky": "7.0.4",
-    "lerna": "4.0.0",
+    "lerna": "5.1.8",
     "lit-html": "2.2.1",
     "postcss": "8.4.12",
     "postcss-cli": "9.1.0",
