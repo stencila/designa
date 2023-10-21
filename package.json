@@ -59,7 +59,7 @@
     "husky": "7.0.4",
     "lerna": "4.0.0",
     "lit-html": "2.2.1",
-    "postcss": "8.4.12",
+    "postcss": "8.4.31",
     "postcss-cli": "9.1.0",
     "postcss-custom-properties": "12.1.5",
     "postcss-host": "2.0.1",
