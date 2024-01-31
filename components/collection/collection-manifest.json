@@ -1,0 +1,50 @@
+{
+  "entries": [
+    "./components/editor/editor.js",
+    "./components/error/error.js",
+    "./components/tabList/tabList.js",
+    "./components/actionMenu/actionMenu.js",
+    "./components/button/button.js",
+    "./components/codeBlock/codeBlock.js",
+    "./components/codeChunk/codeChunk.js",
+    "./components/codeDependencies/codeDependencies.js",
+    "./components/codeDependency/codeDependency.js",
+    "./components/codeExpression/codeExpression.js",
+    "./components/codeFragment/codeFragment.js",
+    "./components/dataTable/dataTable.js",
+    "./components/details/details.js",
+    "./components/documentToolbar/documentToolbar.js",
+    "./components/icon/icon.js",
+    "./components/imageDynamic/imagePlotly/imagePlotly.js",
+    "./components/imageDynamic/imageVega/imageVega.js",
+    "./components/imageObject/imageObject.js",
+    "./components/input/input.js",
+    "./components/menu/menu.js",
+    "./components/menuItem/menuItem.js",
+    "./components/nodeList/nodeList.js",
+    "./components/parameter/parameter.js",
+    "./components/projectGraph/projectGraph.js",
+    "./components/tab/tab.js",
+    "./components/toast/toast.js",
+    "./components/toastContainer/toastContainer.js",
+    "./components/toolbar/toolbar.js",
+    "./components/tooltip/tooltip.js",
+    "./components/tooltipElement/tooltipElement.js"
+  ],
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "2.14.2",
+    "typescriptVersion": "4.5.4"
+  },
+  "collections": [
+    {
+      "name": "animate-presence",
+      "tags": [
+        "animate-presence",
+        "animated-route-switch"
+      ]
+    }
+  ],
+  "bundles": [],
+  "global": "./globals/global.js"
+}

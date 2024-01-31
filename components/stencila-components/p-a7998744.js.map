@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/globals/global.ts"],"names":["setMode","el","getMode"],"mappings":"mEAGAA,GAASC,GAAOC,EAAQD","sourcesContent":["import { setMode } from '@stencil/core'\nimport { getMode } from '../utils/mode'\n\nsetMode((el) => getMode(el))\n\nexport default function (): void {}\n"]}

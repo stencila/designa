@@ -1,0 +1,2 @@
+@keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}:host{--height:1.25em;--width:1.25em;color:currentColor;display:inline-block;line-height:1;vertical-align:middle}:host svg{fill:currentColor;display:block;height:auto;height:var(--height);max-height:100%;position:relative;width:100%;width:var(--width)}:host[icon^=loader] svg{animation:spin 3s linear infinite}
+

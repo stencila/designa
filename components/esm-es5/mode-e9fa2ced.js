@@ -1,0 +1,2 @@
+var getMode=function(e){var t,o,d;return(d=(t=e.getAttribute("mode"))!==null&&t!==void 0?t:(o=document.querySelector("html"))===null||o===void 0?void 0:o.getAttribute("mode"))!==null&&d!==void 0?d:"default"};export{getMode as g};
+//# sourceMappingURL=mode-e9fa2ced.js.map

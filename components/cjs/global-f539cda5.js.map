@@ -1,0 +1,1 @@
+{"file":"global-f539cda5.js","mappings":";;;;;AAGAA,aAAO,CAAC,CAAC,EAAE,KAAKC,YAAO,CAAC,EAAE,CAAC,CAAC;;","names":["setMode","getMode"],"sources":["./src/globals/global.ts"],"sourcesContent":["import { setMode } from '@stencil/core'\nimport { getMode } from '../utils/mode'\n\nsetMode((el) => getMode(el))\n\nexport default function (): void {}\n"],"version":3}
