@@ -1,0 +1,2 @@
+const r=r=>t=>{if(!r)return[];const n=Array.isArray(t)?t:[t];if(t.includes("default")){n.push("")}const o=Array.from(r.children);const s=o.filter((r=>n.includes(r.slot)));return s};export{r as g};
+//# sourceMappingURL=p-725b0d42.js.map

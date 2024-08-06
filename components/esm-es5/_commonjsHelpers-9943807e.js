@@ -1,0 +1,2 @@
+var commonjsGlobal=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined"?window:typeof global!=="undefined"?global:typeof self!=="undefined"?self:{};function createCommonjsModule(o,e,n){return n={path:e,exports:{},require:function(o,e){return commonjsRequire()}},o(n,n.exports),n.exports}function commonjsRequire(){throw new Error("Dynamic requires are not currently supported by @rollup/plugin-commonjs")}export{commonjsGlobal as a,createCommonjsModule as c};
+//# sourceMappingURL=_commonjsHelpers-9943807e.js.map

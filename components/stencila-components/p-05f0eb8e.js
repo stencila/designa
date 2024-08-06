@@ -1,0 +1,2 @@
+const o=o=>{var d,l,e;return(e=(d=o.getAttribute("mode"))!==null&&d!==void 0?d:(l=document.querySelector("html"))===null||l===void 0?void 0:l.getAttribute("mode"))!==null&&e!==void 0?e:"default"};export{o as g};
+//# sourceMappingURL=p-05f0eb8e.js.map

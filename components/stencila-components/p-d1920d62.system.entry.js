@@ -1,0 +1,2 @@
+System.register(["./p-2e66c77c.system.js","./p-6cc918a4.system.js","./p-33366d5a.system.js","./p-5cd8524a.system.js"],(function(t){"use strict";return{setters:[function(s){t("stencila_editor",s.A)},function(){},function(){},function(){}],execute:function(){}}}));
+//# sourceMappingURL=p-d1920d62.system.entry.js.map

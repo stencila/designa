@@ -1,0 +1,1 @@
+{"file":"global-ea913b4d.js","mappings":";;;AAGA,OAAO,CAAC,CAAC,EAAE,KAAK,OAAO,CAAC,EAAE,CAAC,CAAC","names":[],"sources":["./src/globals/global.ts"],"sourcesContent":["import { setMode } from '@stencil/core'\nimport { getMode } from '../utils/mode'\n\nsetMode((el) => getMode(el))\n\nexport default function (): void {}\n"],"version":3}

@@ -1,0 +1,5526 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/actionMenu/actionMenu.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ActionMenu",
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaActionMenuElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "actions",
+              "type": {
+                "text": "HTMLButtonElement[]"
+              },
+              "privacy": "public",
+              "description": "List of buttons to include in Action Menu."
+            },
+            {
+              "kind": "field",
+              "name": "hasSecondaryActions",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "isCollapsed",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "toggleActionMenu",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "'auto'"
+            },
+            {
+              "kind": "field",
+              "name": "isAnimating",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "actionContainerRef",
+              "type": {
+                "text": "HTMLSpanElement | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "isTransitioning",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "calculateWidth",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "observer",
+              "privacy": "private",
+              "default": "new window.MutationObserver(this.calculateWidth)"
+            },
+            {
+              "kind": "field",
+              "name": "checkForSecondaryActions",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "actions",
+              "fieldName": "actions",
+              "type": {
+                "text": "HTMLButtonElement[]"
+              }
+            }
+          ],
+          "tagName": "stencila-action-menu",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ActionMenu",
+          "declaration": {
+            "name": "ActionMenu",
+            "module": "src/components/actionMenu/actionMenu.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-action-menu",
+          "declaration": {
+            "name": "ActionMenu",
+            "module": "src/components/actionMenu/actionMenu.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/button/button.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Button",
+          "members": [
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "public",
+              "description": "If an `href` property is provided, button will be rendered using an `<a>` anchor tag."
+            },
+            {
+              "kind": "field",
+              "name": "rel",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "public",
+              "description": "Relationship of the link"
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": {
+                "text": "HTMLAnchorElement['target'] | undefined"
+              },
+              "privacy": "public",
+              "description": "Determines where to display the linked URL, options correspond to HTML Anchor `target` attribute.\nOnly applies if the button is an anchor link.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target"
+            },
+            {
+              "kind": "field",
+              "name": "ariaLabel",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "public",
+              "description": "Screen-reader accessible label to read out."
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "Colors"
+              },
+              "privacy": "public",
+              "default": "'primary'",
+              "description": "The color of the button"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'xsmall' | 'small' | 'default' | 'large'"
+              },
+              "privacy": "public",
+              "default": "'default'",
+              "description": "The overall size of the Button."
+            },
+            {
+              "kind": "field",
+              "name": "minimal",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Renders the button without initial background color or border."
+            },
+            {
+              "kind": "field",
+              "name": "isSecondary",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Renders the button using a secondory, and usually less visually prominent, Button CSS stylesheet."
+            },
+            {
+              "kind": "field",
+              "name": "buttonType",
+              "type": {
+                "text": "'button' | 'submit' | 'reset'"
+              },
+              "privacy": "public",
+              "description": "The type of button to render, options correspond to HTML Button `type` attribute.\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/button\nOnly applies if the button is not an anchor link."
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "If true, prevents the user from interacting with the button.\nNote: Not all browser prevent the click handler from firing on disabled buttons."
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": {
+                "text": "HTMLElement | IconNames | undefined"
+              },
+              "privacy": "public",
+              "description": "Name of the icon to render inside the button"
+            },
+            {
+              "kind": "field",
+              "name": "iconOnly",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "If true, removes extra padding from Icon inside the button\nTODO: See if we can automatically infer removal of padding through CSS"
+            },
+            {
+              "kind": "field",
+              "name": "isLoading",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "If true, shows a loading spinner icon and sets a `disabled` attribute on the button.\nNote: Not all browser prevent the click handler from firing on disabled buttons."
+            },
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "If true, the button will take up the full width of the parent container"
+            },
+            {
+              "kind": "field",
+              "name": "tooltip",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "public",
+              "description": "An optional help text to display for button focus and hover states."
+            },
+            {
+              "kind": "field",
+              "name": "dataEl",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "public",
+              "description": "An optional data attribute set on the button element for easier targeting using JavaScript."
+            },
+            {
+              "kind": "field",
+              "name": "generateButton",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "fieldName": "href",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "rel",
+              "fieldName": "rel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "target",
+              "fieldName": "target",
+              "type": {
+                "text": "HTMLAnchorElement['target']"
+              }
+            },
+            {
+              "name": "aria-label",
+              "fieldName": "ariaLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "color",
+              "fieldName": "color",
+              "type": {
+                "text": "Colors"
+              }
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'xsmall' | 'small' | 'default' | 'large'"
+              }
+            },
+            {
+              "name": "minimal",
+              "fieldName": "minimal"
+            },
+            {
+              "name": "is-secondary",
+              "fieldName": "isSecondary"
+            },
+            {
+              "name": "button-type",
+              "fieldName": "buttonType",
+              "type": {
+                "text": "'button' | 'submit' | 'reset'"
+              }
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "icon",
+              "fieldName": "icon",
+              "type": {
+                "text": "HTMLElement | IconNames"
+              }
+            },
+            {
+              "name": "icon-only",
+              "fieldName": "iconOnly"
+            },
+            {
+              "name": "is-loading",
+              "fieldName": "isLoading"
+            },
+            {
+              "name": "fill",
+              "fieldName": "fill"
+            },
+            {
+              "name": "tooltip",
+              "fieldName": "tooltip",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "data-el",
+              "fieldName": "dataEl",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "tagName": "stencila-button",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Button",
+          "declaration": {
+            "name": "Button",
+            "module": "src/components/button/button.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-button",
+          "declaration": {
+            "name": "Button",
+            "module": "src/components/button/button.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/code/codeExecuteStatus.tsx",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "CodeExecuteStatus",
+          "return": {
+            "type": {
+              "text": "FunctionalComponent"
+            }
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "type": {
+                "text": "Props"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CodeExecuteStatus",
+          "declaration": {
+            "name": "CodeExecuteStatus",
+            "module": "src/components/code/codeExecuteStatus.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/codeBlock/codeBlock.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "CodeBlockComponent",
+          "slots": [
+            {
+              "description": "The source code of the `CodeChunk`. Corresponds to the `text` field in the Stencila `CodeChunk` Schema.",
+              "name": "text"
+            },
+            {
+              "description": "`label` element label of the `CodeChunk`. Corresponds to the `label` field in the Stencila `CodeChunk` Schema.",
+              "name": "label"
+            },
+            {
+              "description": "`figcaption` content of the `CodeChunk`. Corresponds to the `caption` field in the Stencila `CodeChunk` Schema.",
+              "name": "caption"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "slots",
+              "type": {
+                "text": "object"
+              },
+              "privacy": "private",
+              "static": true,
+              "default": "{\n    text: 'text',\n    outputs: 'outputs',\n    errors: 'errors',\n    caption: 'caption',\n    label: 'label',\n  }"
+            },
+            {
+              "kind": "field",
+              "name": "editorRef",
+              "type": {
+                "text": "HTMLStencilaEditorElement | undefined"
+              },
+              "privacy": "public"
+            },
+            {
+              "kind": "field",
+              "name": "text",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "public",
+              "description": "Source code contents of the CodeChunk.\nCorresponds to the `text` property of the CodeBlock schema."
+            },
+            {
+              "kind": "field",
+              "name": "autofocus",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Autofocus the editor on page load"
+            },
+            {
+              "kind": "field",
+              "name": "lineWrapping",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Control line wrapping of text inside the editor"
+            },
+            {
+              "kind": "field",
+              "name": "lineNumbers",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "true",
+              "description": "Determines the visibility of line numbers"
+            },
+            {
+              "kind": "field",
+              "name": "foldGutter",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "true",
+              "description": "Enables ability to fold sections of code if the syntax package supports it"
+            },
+            {
+              "kind": "field",
+              "name": "programmingLanguage",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "public",
+              "description": "Programming language of the CodeChunk"
+            },
+            {
+              "kind": "field",
+              "name": "readOnly",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Disallow editing of the editor contents when set to `true`"
+            },
+            {
+              "kind": "field",
+              "name": "executableLanguages",
+              "type": {
+                "text": "FileFormatMap | undefined"
+              },
+              "privacy": "public",
+              "description": "List of programming languages that can be executed in the current context"
+            },
+            {
+              "kind": "method",
+              "name": "onDiscoverExecutableLanguages",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "{\n    detail,\n  }",
+                  "type": {
+                    "text": "DiscoverExecutableLanguagesEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "keymap",
+              "type": {
+                "text": "Keymap[]"
+              },
+              "privacy": "public",
+              "default": "[]",
+              "description": "Custom keyboard shortcuts to pass along to CodeMirror"
+            },
+            {
+              "kind": "field",
+              "name": "contentChangeHandler",
+              "type": {
+                "text": "EditorUpdateHandlerCb | undefined"
+              },
+              "privacy": "public",
+              "description": "Callback function to invoke whenever the editor contents are updated."
+            },
+            {
+              "kind": "field",
+              "name": "handleLanguageChange",
+              "privacy": "private",
+              "description": "Listen for the `stencila-language-change` event emitted by the language dropdown\nprovided by the child Editor component, and update the active language if necessary."
+            },
+            {
+              "kind": "method",
+              "name": "getContents",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<CodeBlock>"
+                }
+              },
+              "description": "Returns the `CodeChunk` node with the updated `text` content from the editor."
+            },
+            {
+              "kind": "method",
+              "name": "getTextContents",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<string>"
+                }
+              },
+              "description": "Returns the text contents from the editor"
+            },
+            {
+              "kind": "method",
+              "name": "getRef",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<EditorView | undefined>"
+                }
+              },
+              "description": "Retrieve a reference to the internal CodeMirror editor.\nAllows for maintaining state from applications making use of this component."
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "HTMLElement"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "text",
+              "fieldName": "text",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "autofocus",
+              "fieldName": "autofocus"
+            },
+            {
+              "name": "line-wrapping",
+              "fieldName": "lineWrapping"
+            },
+            {
+              "name": "line-numbers",
+              "fieldName": "lineNumbers"
+            },
+            {
+              "name": "fold-gutter",
+              "fieldName": "foldGutter"
+            },
+            {
+              "name": "programming-language",
+              "fieldName": "programmingLanguage",
+              "type": {
+                "text": "string | undefined"
+              }
+            },
+            {
+              "name": "read-only",
+              "fieldName": "readOnly"
+            },
+            {
+              "name": "executable-languages",
+              "fieldName": "executableLanguages",
+              "type": {
+                "text": "FileFormatMap"
+              }
+            },
+            {
+              "name": "keymap",
+              "fieldName": "keymap",
+              "type": {
+                "text": "Keymap[]"
+              }
+            },
+            {
+              "name": "content-change-handler",
+              "fieldName": "contentChangeHandler",
+              "type": {
+                "text": "EditorUpdateHandlerCb"
+              }
+            }
+          ],
+          "tagName": "stencila-code-block",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CodeBlockComponent",
+          "declaration": {
+            "name": "CodeBlockComponent",
+            "module": "src/components/codeBlock/codeBlock.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-code-block",
+          "declaration": {
+            "name": "CodeBlockComponent",
+            "module": "src/components/codeBlock/codeBlock.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/codeChunk/codeChunk.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "CodeChunkComponent",
+          "slots": [
+            {
+              "description": "The source code of the `CodeChunk`. Corresponds to the `text` field in the Stencila `CodeChunk` Schema.",
+              "name": "text"
+            },
+            {
+              "description": "The resulting output when evaluating the CodeChunk. Corresponds to the `outputs` field in the Stencila `CodeChunk` Schema.",
+              "name": "outputs"
+            },
+            {
+              "description": "List of any errors encountered when compiling (e.g. syntax errors) or executing the CodeChunk.",
+              "name": "errors"
+            },
+            {
+              "description": "`label` element label of the `CodeChunk`. Corresponds to the `label` field in the Stencila `CodeChunk` Schema.",
+              "name": "label"
+            },
+            {
+              "description": "`figcaption` content of the `CodeChunk`. Corresponds to the `caption` field in the Stencila `CodeChunk` Schema.",
+              "name": "caption"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "slots",
+              "type": {
+                "text": "object"
+              },
+              "privacy": "private",
+              "static": true,
+              "default": "{\n    text: 'text',\n    outputs: 'outputs',\n    errors: 'errors',\n    caption: 'caption',\n    label: 'label',\n  }"
+            },
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaCodeChunkElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "editorRef",
+              "type": {
+                "text": "HTMLStencilaEditorElement | undefined"
+              },
+              "privacy": "public"
+            },
+            {
+              "kind": "field",
+              "name": "text",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "public",
+              "description": "Source code contents of the CodeChunk.\nCorresponds to the `text` property of the CodeChunk schema."
+            },
+            {
+              "kind": "field",
+              "name": "autofocus",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Autofocus the editor on page load"
+            },
+            {
+              "kind": "field",
+              "name": "programmingLanguage",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "public",
+              "description": "Programming language of the CodeChunk"
+            },
+            {
+              "kind": "field",
+              "name": "languageCapabilities",
+              "type": {
+                "text": "FileFormatMap"
+              },
+              "privacy": "public",
+              "default": "fileFormatMap",
+              "description": "List of all supported programming languages"
+            },
+            {
+              "kind": "field",
+              "name": "executableLanguages",
+              "type": {
+                "text": "FileFormatMap | undefined"
+              },
+              "privacy": "public",
+              "description": "List of programming languages that can be executed in the current context"
+            },
+            {
+              "kind": "method",
+              "name": "onDiscoverExecutableLanguages",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "{\n    detail,\n  }",
+                  "type": {
+                    "text": "DiscoverExecutableLanguagesEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "isExecutable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "isCodeVisible",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Whether the code section is visible or not"
+            },
+            {
+              "kind": "field",
+              "name": "executeHandler",
+              "type": {
+                "text": "(codeChunk: CodeChunk) => Promise<CodeChunk> | undefined"
+              },
+              "privacy": "public",
+              "description": "A callback function to be called with the value of the `CodeChunk` node when executing the `CodeChunk`."
+            },
+            {
+              "kind": "field",
+              "name": "shiftIsPressed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "contentChangeHandler",
+              "type": {
+                "text": "EditorUpdateHandlerCb | undefined"
+              },
+              "privacy": "public",
+              "description": "Callback function to invoke whenever the editor contents are updated."
+            },
+            {
+              "kind": "field",
+              "name": "executeStatus",
+              "type": {
+                "text": "ExecuteStatus"
+              },
+              "description": "The execution status of the code node"
+            },
+            {
+              "kind": "field",
+              "name": "compileDigest",
+              "type": {
+                "text": "string"
+              },
+              "description": "A digest representing the state of a [`Resource`] and its dependencies at\ncompile time."
+            },
+            {
+              "kind": "field",
+              "name": "executeRequired",
+              "type": {
+                "text": "ExecuteRequired"
+              },
+              "description": "Status of upstream dependencies, and whether the node needs to be\nre-executed"
+            },
+            {
+              "kind": "field",
+              "name": "executeDigest",
+              "type": {
+                "text": "string"
+              },
+              "description": "A digest representing the state of a [`Resource`] and its dependencies from\nthe latest execution."
+            },
+            {
+              "kind": "field",
+              "name": "executeEnded",
+              "type": {
+                "text": "string"
+              },
+              "description": "Time when the latest code execution ended"
+            },
+            {
+              "kind": "field",
+              "name": "executeDuration",
+              "type": {
+                "text": "string"
+              },
+              "description": "Duration of the latest code execition"
+            },
+            {
+              "kind": "field",
+              "name": "keymap",
+              "type": {
+                "text": "Keymap[]"
+              },
+              "privacy": "public",
+              "default": "[]",
+              "description": "Custom keyboard shortcuts to pass along to CodeMirror"
+            },
+            {
+              "kind": "field",
+              "name": "isStacked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "kind": "method",
+              "name": "onAllCodeVisibilityChange",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CodeVisibilityEvent"
+                  }
+                }
+              ],
+              "description": "A global event listener to show/hide code in this component"
+            },
+            {
+              "kind": "field",
+              "name": "toggleCodeVisibility",
+              "privacy": "private",
+              "description": "Toggle code visibility, either locally, or globally"
+            },
+            {
+              "kind": "field",
+              "name": "checkIfExecutable",
+              "privacy": "private",
+              "description": "Determine if the CodeChunk can be executed or not.\nFor a CodeChunk to be considered executable it must have a `executeHandler` function attached\nand the current `programmingLanguage` must be in the list of `executableLanguages`."
+            },
+            {
+              "kind": "field",
+              "name": "handleLanguageChange",
+              "privacy": "private",
+              "description": "Listen for the `stencila-language-change` event emitted by the language dropdown\nprovided by the child Editor component, and update the active language if necessary."
+            },
+            {
+              "kind": "field",
+              "name": "editorLayoutChangeHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "onSetEditorLayout",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "{ detail: { isStacked: boolean } }"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "toggleEditorLayout",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getContents",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<CodeChunk>"
+                }
+              },
+              "description": "Returns the `CodeChunk` node with the updated `text` content from the editor."
+            },
+            {
+              "kind": "method",
+              "name": "getTextContents",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<string>"
+                }
+              },
+              "description": "Returns the text contents from the editor"
+            },
+            {
+              "kind": "field",
+              "name": "onExecuteHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "execute",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<CodeChunk | Error>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "ordering",
+                  "default": "'Topological'",
+                  "type": {
+                    "text": "CodeExecuteOrdering"
+                  }
+                }
+              ],
+              "description": "Run the `CodeChunk`"
+            },
+            {
+              "kind": "method",
+              "name": "getRef",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<EditorView | undefined>"
+                }
+              },
+              "description": "Retrieve a reference to the internal CodeMirror editor.\nAllows for maintaining state from applications making use of this component."
+            },
+            {
+              "kind": "field",
+              "name": "onKeyPress",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "addKeyListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "removeKeyListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "HTMLElement"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "text",
+              "fieldName": "text",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "autofocus",
+              "fieldName": "autofocus"
+            },
+            {
+              "name": "programming-language",
+              "fieldName": "programmingLanguage",
+              "type": {
+                "text": "string | undefined"
+              }
+            },
+            {
+              "name": "language-capabilities",
+              "fieldName": "languageCapabilities",
+              "type": {
+                "text": "FileFormatMap"
+              }
+            },
+            {
+              "name": "executable-languages",
+              "fieldName": "executableLanguages",
+              "type": {
+                "text": "FileFormatMap"
+              }
+            },
+            {
+              "name": "is-code-visible",
+              "fieldName": "isCodeVisible"
+            },
+            {
+              "name": "execute-handler",
+              "fieldName": "executeHandler",
+              "type": {
+                "text": "(codeChunk: CodeChunk) => Promise<CodeChunk>"
+              }
+            },
+            {
+              "name": "content-change-handler",
+              "fieldName": "contentChangeHandler",
+              "type": {
+                "text": "EditorUpdateHandlerCb"
+              }
+            },
+            {
+              "name": "execute-status",
+              "fieldName": "executeStatus",
+              "type": {
+                "text": "ExecuteStatus"
+              }
+            },
+            {
+              "name": "compile-digest",
+              "fieldName": "compileDigest",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "execute-required",
+              "fieldName": "executeRequired",
+              "type": {
+                "text": "ExecuteRequired"
+              }
+            },
+            {
+              "name": "execute-digest",
+              "fieldName": "executeDigest",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "execute-ended",
+              "fieldName": "executeEnded",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "execute-duration",
+              "fieldName": "executeDuration",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "keymap",
+              "fieldName": "keymap",
+              "type": {
+                "text": "Keymap[]"
+              }
+            }
+          ],
+          "tagName": "stencila-code-chunk",
+          "events": [
+            {
+              "name": "stencila-code-execute",
+              "type": {
+                "text": "EventEmitter<CodeExecuteEvent['detail']>"
+              },
+              "description": "Emitted to indicate that code node should be executed"
+            },
+            {
+              "name": "stencila-code-execute-cancel",
+              "type": {
+                "text": "EventEmitter<CodeExecuteCancelEvent['detail']>"
+              },
+              "description": "Emitted to indicate that the execution of the code node should be cancelled/interrupted."
+            },
+            {
+              "name": "stencila-code-visibility-change",
+              "type": {
+                "text": "EventEmitter"
+              },
+              "description": "A global event emitter to show/hide code in all `CodeChunk` or `CodeExpression` components"
+            },
+            {
+              "name": "stencila-editor-layout-change",
+              "type": {
+                "text": "EventEmitter"
+              },
+              "description": "Trigger a global DOM event to set the layout of all `CodeChunk` component.\nCan be set to either show the editor and outputs side by side or stacked vertically."
+            }
+          ],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CodeChunkComponent",
+          "declaration": {
+            "name": "CodeChunkComponent",
+            "module": "src/components/codeChunk/codeChunk.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-code-chunk",
+          "declaration": {
+            "name": "CodeChunkComponent",
+            "module": "src/components/codeChunk/codeChunk.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/codeDependencies/codeDependencies.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "CodeDependencies",
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaCodeDependenciesElement | null"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "tagName": "stencila-code-dependencies",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CodeDependencies",
+          "declaration": {
+            "name": "CodeDependencies",
+            "module": "src/components/codeDependencies/codeDependencies.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-code-dependencies",
+          "declaration": {
+            "name": "CodeDependencies",
+            "module": "src/components/codeDependencies/codeDependencies.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/codeDependency/codeDependency.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "CodeDependency",
+          "members": [
+            {
+              "kind": "field",
+              "name": "nodeId",
+              "type": {
+                "text": "string"
+              },
+              "description": "The Node ID, should match the HTML `id` attribute."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "User assigned label for the node"
+            },
+            {
+              "kind": "field",
+              "name": "nodeKind",
+              "type": {
+                "text": "string"
+              },
+              "description": "Node kind, such as `CodeChunk`, `CodeExpression`, `Parameter`, etc.\nAligns with the Stencila Schema node types."
+            },
+            {
+              "kind": "field",
+              "name": "executeAuto",
+              "type": {
+                "text": "'Always' | 'Auto' | 'Never'"
+              },
+              "description": "Whether the dependency should be automatically re-executed based on semantic\nanalysis of the code."
+            },
+            {
+              "kind": "field",
+              "name": "executeRequired",
+              "type": {
+                "text": "ExecuteRequired"
+              },
+              "description": "Status of upstream dependencies, and whether the node needs to be\nre-executed"
+            },
+            {
+              "kind": "field",
+              "name": "executeStatus",
+              "type": {
+                "text": "ExecuteStatus | undefined"
+              },
+              "description": "The execution status of the code node"
+            },
+            {
+              "kind": "field",
+              "name": "programmingLanguage",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Programming language of the CodeExpression, note that not all nodes have this\nproperty (`Parameter` for example)."
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "node-id",
+              "fieldName": "nodeId",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string | undefined"
+              }
+            },
+            {
+              "name": "node-kind",
+              "fieldName": "nodeKind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "execute-auto",
+              "fieldName": "executeAuto",
+              "type": {
+                "text": "'Always' | 'Auto' | 'Never'"
+              }
+            },
+            {
+              "name": "execute-required",
+              "fieldName": "executeRequired",
+              "type": {
+                "text": "ExecuteRequired"
+              }
+            },
+            {
+              "name": "execute-status",
+              "fieldName": "executeStatus",
+              "type": {
+                "text": "ExecuteStatus"
+              }
+            },
+            {
+              "name": "programming-language",
+              "fieldName": "programmingLanguage",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "tagName": "stencila-code-dependency",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CodeDependency",
+          "declaration": {
+            "name": "CodeDependency",
+            "module": "src/components/codeDependency/codeDependency.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-code-dependency",
+          "declaration": {
+            "name": "CodeDependency",
+            "module": "src/components/codeDependency/codeDependency.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/codeExpression/codeExpression.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "CodeExpressionComponent",
+          "slots": [
+            {
+              "description": "The source code of the `CodeChunk`. Corresponds to the `text` field in the Stencila `CodeExpression` Schema.",
+              "name": "text"
+            },
+            {
+              "description": "A single output element. Corresponds to the `output` field in the Stencila `CodeExpression` Schema.",
+              "name": "output"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaCodeExpressionElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "hoverTimeOut",
+              "type": {
+                "text": "number | undefined"
+              },
+              "privacy": "private",
+              "default": "undefined"
+            },
+            {
+              "kind": "field",
+              "name": "hoverStartedAt",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "executeHandler",
+              "type": {
+                "text": "(\n    codeExpression: CodeExpression\n  ) => Promise<CodeExpression> | undefined"
+              },
+              "privacy": "public",
+              "description": "A callback function to be called with the value of the `CodeExpression`\nnode when executing the `CodeExpression`."
+            },
+            {
+              "kind": "field",
+              "name": "readOnly",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Disallow editing of the editor contents when set to `true`"
+            },
+            {
+              "kind": "field",
+              "name": "programmingLanguage",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "public",
+              "description": "Programming language of the CodeExpression"
+            },
+            {
+              "kind": "field",
+              "name": "languageCapabilities",
+              "type": {
+                "text": "FileFormatMap"
+              },
+              "privacy": "public",
+              "default": "fileFormatMap",
+              "description": "List of all supported programming languages"
+            },
+            {
+              "kind": "field",
+              "name": "executableLanguages",
+              "type": {
+                "text": "FileFormatMap"
+              },
+              "privacy": "public",
+              "description": "List of programming languages that can be executed in the current context"
+            },
+            {
+              "kind": "method",
+              "name": "onDiscoverExecutableLanguages",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "{\n    detail,\n  }",
+                  "type": {
+                    "text": "DiscoverExecutableLanguagesEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "isExecutable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "shiftIsPressed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "executeStatus",
+              "type": {
+                "text": "ExecuteStatus"
+              },
+              "description": "The execution status of the code node"
+            },
+            {
+              "kind": "field",
+              "name": "compileDigest",
+              "type": {
+                "text": "string"
+              },
+              "description": "A digest representing the state of a [`Resource`] and its dependencies at\ncompile time."
+            },
+            {
+              "kind": "field",
+              "name": "executeRequired",
+              "type": {
+                "text": "ExecuteRequired"
+              },
+              "description": "Status of upstream dependencies, and whether the node needs to be\nre-executed"
+            },
+            {
+              "kind": "field",
+              "name": "executeDigest",
+              "type": {
+                "text": "string"
+              },
+              "description": "A digest representing the state of a [`Resource`] and its dependencies from\nthe latest execution."
+            },
+            {
+              "kind": "field",
+              "name": "executeEnded",
+              "type": {
+                "text": "string"
+              },
+              "description": "Time when the latest code execution ended"
+            },
+            {
+              "kind": "field",
+              "name": "executeDuration",
+              "type": {
+                "text": "string"
+              },
+              "description": "Duration of the latest code execition"
+            },
+            {
+              "kind": "field",
+              "name": "onSelectLanguage",
+              "privacy": "private",
+              "description": "Function to call when the user selects a new language from the language\npicker dropdown."
+            },
+            {
+              "kind": "field",
+              "name": "codeExpression",
+              "type": {
+                "text": "CodeExpression | undefined"
+              },
+              "description": "Stencila CodeExpression node to render"
+            },
+            {
+              "kind": "field",
+              "name": "hover",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "isCodeVisible",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the code section starts out visible or not"
+            },
+            {
+              "kind": "method",
+              "name": "onAllCodeVisibilityChange",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CodeVisibilityEvent"
+                  }
+                }
+              ],
+              "description": "A global event listener to show/hide code in this component"
+            },
+            {
+              "kind": "field",
+              "name": "toggleCodeVisibility",
+              "privacy": "private",
+              "description": "Toggle code visibility, either locally, or globally"
+            },
+            {
+              "kind": "method",
+              "name": "getTextContents",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<string>"
+                }
+              },
+              "description": "Returns the text contents from the inline code editor"
+            },
+            {
+              "kind": "method",
+              "name": "getContents",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<CodeExpression>"
+                }
+              },
+              "description": "Returns the `CodeExpression` node with the updated `text` contents from the\neditor."
+            },
+            {
+              "kind": "field",
+              "name": "selectTextSlot",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "contentChangeHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "handleKeyDown",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "checkIfExecutable",
+              "privacy": "private",
+              "description": "Determine if the CodeChunk can be executed or not.\nFor a CodeChunk to be considered executable it must have a `executeHandler` function attached\nand the current `programmingLanguage` must be in the list of `executableLanguages`."
+            },
+            {
+              "kind": "field",
+              "name": "onExecuteHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "execute",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<CodeExpression | Error>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "ordering",
+                  "default": "'Topological'",
+                  "type": {
+                    "text": "CodeExecuteOrdering"
+                  }
+                }
+              ],
+              "description": "Run the `CodeExpression`"
+            },
+            {
+              "kind": "field",
+              "name": "executeRef",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onMouseOutHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "addHoverState",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "removeHoverState",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onKeyPress",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "addKeyListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "removeKeyListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "generateContent",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "HTMLElement"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "execute-handler",
+              "fieldName": "executeHandler",
+              "type": {
+                "text": "(\n    codeExpression: CodeExpression\n  ) => Promise<CodeExpression>"
+              }
+            },
+            {
+              "name": "read-only",
+              "fieldName": "readOnly"
+            },
+            {
+              "name": "programming-language",
+              "fieldName": "programmingLanguage",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "language-capabilities",
+              "fieldName": "languageCapabilities",
+              "type": {
+                "text": "FileFormatMap"
+              }
+            },
+            {
+              "name": "executable-languages",
+              "fieldName": "executableLanguages",
+              "type": {
+                "text": "FileFormatMap"
+              }
+            },
+            {
+              "name": "execute-status",
+              "fieldName": "executeStatus",
+              "type": {
+                "text": "ExecuteStatus"
+              }
+            },
+            {
+              "name": "compile-digest",
+              "fieldName": "compileDigest",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "execute-required",
+              "fieldName": "executeRequired",
+              "type": {
+                "text": "ExecuteRequired"
+              }
+            },
+            {
+              "name": "execute-digest",
+              "fieldName": "executeDigest",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "execute-ended",
+              "fieldName": "executeEnded",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "execute-duration",
+              "fieldName": "executeDuration",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "code-expression",
+              "fieldName": "codeExpression",
+              "type": {
+                "text": "CodeExpression"
+              }
+            },
+            {
+              "name": "is-code-visible",
+              "fieldName": "isCodeVisible"
+            }
+          ],
+          "tagName": "stencila-code-expression",
+          "events": [
+            {
+              "name": "stencila-language-change",
+              "type": {
+                "text": "EventEmitter<FileFormat>"
+              },
+              "description": "Event emitted when the language of the editor is changed."
+            },
+            {
+              "name": "stencila-code-visibility-change",
+              "type": {
+                "text": "EventEmitter"
+              },
+              "description": "A global event emitter to show/hide code in all `CodeChunk` or `CodeExpression` components"
+            },
+            {
+              "name": "stencila-content-change",
+              "type": {
+                "text": "EventEmitter<string>"
+              },
+              "description": "Event emitted when the source code of the `CodeExpression` node is changed."
+            },
+            {
+              "name": "stencila-code-execute",
+              "type": {
+                "text": "EventEmitter<CodeExecuteEvent['detail']>"
+              },
+              "description": "Emitted to indicate that code node should be executed"
+            },
+            {
+              "name": "stencila-code-execute-cancel",
+              "type": {
+                "text": "EventEmitter<CodeExecuteCancelEvent['detail']>"
+              },
+              "description": "Emitted to indicate that the execution of the code node should be cancelled/interrupted."
+            }
+          ],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CodeExpressionComponent",
+          "declaration": {
+            "name": "CodeExpressionComponent",
+            "module": "src/components/codeExpression/codeExpression.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-code-expression",
+          "declaration": {
+            "name": "CodeExpressionComponent",
+            "module": "src/components/codeExpression/codeExpression.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/codeExpression/languageSelect.tsx",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "LanguagePickerInline",
+          "return": {
+            "type": {
+              "text": "FunctionalComponent"
+            }
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "type": {
+                "text": "Props"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LanguagePickerInline",
+          "declaration": {
+            "name": "LanguagePickerInline",
+            "module": "src/components/codeExpression/languageSelect.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/codeFragment/codeFragment.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "CodeFragmentComponent",
+          "slots": [
+            {
+              "description": "The contents of the code fragment",
+              "name": "text"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaCodeExpressionElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "'read' | 'edit'"
+              },
+              "default": "'read'",
+              "description": "The context of the component. In `read` mode the code content and its\nlanguage cannot be edited."
+            },
+            {
+              "kind": "field",
+              "name": "programmingLanguage",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "public",
+              "description": "Programming language of the CodeFragment"
+            },
+            {
+              "kind": "field",
+              "name": "languageCapabilities",
+              "type": {
+                "text": "FileFormatMap"
+              },
+              "privacy": "public",
+              "default": "fileFormatMap",
+              "description": "List of all supported programming languages"
+            },
+            {
+              "kind": "field",
+              "name": "executableLanguages",
+              "type": {
+                "text": "FileFormatMap"
+              },
+              "privacy": "public",
+              "description": "List of programming languages that can be executed in the current context"
+            },
+            {
+              "kind": "method",
+              "name": "onDiscoverExecutableLanguages",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "{\n    detail,\n  }",
+                  "type": {
+                    "text": "DiscoverExecutableLanguagesEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onSelectLanguage",
+              "privacy": "private",
+              "description": "Function to call when the user selects a new language from the language picker dropdown."
+            },
+            {
+              "kind": "field",
+              "name": "contentChangeHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "selectTextSlot",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getTextContents",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<string>"
+                }
+              },
+              "description": "Returns the text contents from the inline code editor"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "mode",
+              "fieldName": "mode",
+              "type": {
+                "text": "'read' | 'edit'"
+              }
+            },
+            {
+              "name": "programming-language",
+              "fieldName": "programmingLanguage",
+              "type": {
+                "text": "string | undefined"
+              }
+            },
+            {
+              "name": "language-capabilities",
+              "fieldName": "languageCapabilities",
+              "type": {
+                "text": "FileFormatMap"
+              }
+            },
+            {
+              "name": "executable-languages",
+              "fieldName": "executableLanguages",
+              "type": {
+                "text": "FileFormatMap"
+              }
+            }
+          ],
+          "tagName": "stencila-code-fragment",
+          "events": [
+            {
+              "name": "stencila-language-change",
+              "type": {
+                "text": "EventEmitter<FileFormat>"
+              },
+              "description": "Event emitted when the language of the editor is changed."
+            },
+            {
+              "name": "stencila-content-change",
+              "type": {
+                "text": "EventEmitter<string>"
+              },
+              "description": "Event emitted when the source code of the `CodeExpression` node is changed."
+            }
+          ],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CodeFragmentComponent",
+          "declaration": {
+            "name": "CodeFragmentComponent",
+            "module": "src/components/codeFragment/codeFragment.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-code-fragment",
+          "declaration": {
+            "name": "CodeFragmentComponent",
+            "module": "src/components/codeFragment/codeFragment.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/dataTable/dataTable.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "DataTable",
+          "slots": [
+            {
+              "description": "The table element to render. Expects a fully formed and valid HTML `table` tag.",
+              "name": "default"
+            }
+          ],
+          "members": [
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "tagName": "stencila-data-table",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DataTable",
+          "declaration": {
+            "name": "DataTable",
+            "module": "src/components/dataTable/dataTable.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-data-table",
+          "declaration": {
+            "name": "DataTable",
+            "module": "src/components/dataTable/dataTable.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/details/details.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Details",
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "undefined",
+              "description": "Determines whether the contents are visible or not."
+            },
+            {
+              "kind": "field",
+              "name": "clickHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "isOpen",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "fieldName": "open",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "tagName": "stencila-details",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Details",
+          "declaration": {
+            "name": "Details",
+            "module": "src/components/details/details.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-details",
+          "declaration": {
+            "name": "Details",
+            "module": "src/components/details/details.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/documentToolbar/documentToolbar.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "StencilaDocumentToolbar",
+          "members": [
+            {
+              "kind": "field",
+              "name": "sourceUrl",
+              "type": {
+                "text": "string"
+              },
+              "description": "The URL of the document being decorated. Could be a Snapshot from Stencila Hub, a Project URL, or something else."
+            },
+            {
+              "kind": "field",
+              "name": "position",
+              "type": {
+                "text": "'fixed' | 'static'"
+              },
+              "privacy": "public",
+              "default": "'fixed'",
+              "description": "When `fixed` the Navbar will remain pinned to the top of the screen.\nNote that if the Navbar component is not followed by a sibling element,\nyou will have to set `margin-top: 3rem` on the following element yourself."
+            },
+            {
+              "kind": "field",
+              "name": "executeStatus",
+              "type": {
+                "text": "ExecuteStatus"
+              },
+              "description": "The execution status of the document"
+            },
+            {
+              "kind": "field",
+              "name": "isExecutable",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "shiftIsPressed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "altIsPressed",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "onKeyPress",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "addKeyListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "removeKeyListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "onDiscoverExecutableLanguages",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "{\n    detail,\n  }",
+                  "type": {
+                    "text": "DiscoverExecutableLanguagesEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "runDocument",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "return": {
+                "type": {
+                  "text": "HTMLElement"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "source-url",
+              "fieldName": "sourceUrl",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "position",
+              "fieldName": "position",
+              "type": {
+                "text": "'fixed' | 'static'"
+              }
+            },
+            {
+              "name": "execute-status",
+              "fieldName": "executeStatus",
+              "type": {
+                "text": "ExecuteStatus"
+              }
+            }
+          ],
+          "tagName": "stencila-document-toolbar",
+          "events": [
+            {
+              "name": "stencila-code-execute",
+              "type": {
+                "text": "EventEmitter<CodeExecuteEvent['detail']>"
+              },
+              "description": "Emitted to indicate that code node should be executed"
+            },
+            {
+              "name": "stencila-kernel-restart",
+              "type": {
+                "text": "EventEmitter<Record<string, never>>"
+              },
+              "description": "Emitted to indicate that language kernels should be restarted"
+            },
+            {
+              "name": "stencila-code-execute-cancel",
+              "type": {
+                "text": "EventEmitter<CodeExecuteCancelEvent['detail']>"
+              },
+              "description": "Emitted to indicate that the execution of the code node should be cancelled/interrupted."
+            }
+          ],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "StencilaDocumentToolbar",
+          "declaration": {
+            "name": "StencilaDocumentToolbar",
+            "module": "src/components/documentToolbar/documentToolbar.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-document-toolbar",
+          "declaration": {
+            "name": "StencilaDocumentToolbar",
+            "module": "src/components/documentToolbar/documentToolbar.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/documentToolbar/sessionStatus.tsx",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "SessionStatus",
+          "parameters": [
+            {
+              "name": "{ session, job }"
+            },
+            {
+              "name": "children"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SessionStatus",
+          "declaration": {
+            "name": "SessionStatus",
+            "module": "src/components/documentToolbar/sessionStatus.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/editor/editor.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Editor",
+          "slots": [
+            {
+              "description": "The contents of the editor.",
+              "name": "text"
+            },
+            {
+              "description": "List of any `stencila-code-error` elements to render in the Errors panel.",
+              "name": "errors"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaEditorElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "textSlot",
+              "type": {
+                "text": "HTMLDivElement | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "errorsSlot",
+              "type": {
+                "text": "HTMLDivElement | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "editorRef",
+              "type": {
+                "text": "EditorView | undefined"
+              },
+              "privacy": "public"
+            },
+            {
+              "kind": "field",
+              "name": "languagePickerRef",
+              "type": {
+                "text": "HTMLSelectElement | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "isReady",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "isUpdatingContent",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "contents",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "public",
+              "description": "Text contents of the editor"
+            },
+            {
+              "kind": "method",
+              "name": "contentsChanged",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "nextValue",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "prevValue",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "languageCapabilities",
+              "type": {
+                "text": "FileFormatMap"
+              },
+              "privacy": "public",
+              "default": "fileFormatMap",
+              "description": "List of all supported programming languages"
+            },
+            {
+              "kind": "field",
+              "name": "executableLanguages",
+              "type": {
+                "text": "FileFormatMap"
+              },
+              "privacy": "public",
+              "description": "List of programming languages that can be executed in the current context"
+            },
+            {
+              "kind": "method",
+              "name": "onDiscoverExecutableLanguages",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "{\n    detail,\n  }",
+                  "type": {
+                    "text": "DiscoverExecutableLanguagesEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "readOnly",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Disallow editing of the editor contents when set to `true`"
+            },
+            {
+              "kind": "method",
+              "name": "readOnlyChanged",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "nextReadOnly",
+                  "type": {
+                    "text": "boolean"
+                  }
+                },
+                {
+                  "name": "prevReadOnly",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "description": "Update the CodeMirror internal state when the `readOnly` prop changes"
+            },
+            {
+              "kind": "field",
+              "name": "readOnlyConf",
+              "privacy": "private",
+              "default": "new Compartment()"
+            },
+            {
+              "kind": "field",
+              "name": "activeLanguage",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "public",
+              "description": "Programming language of the Editor"
+            },
+            {
+              "kind": "field",
+              "name": "dispatchEffect",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "getLang",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "languageConf",
+              "privacy": "private",
+              "default": "new Compartment()"
+            },
+            {
+              "kind": "field",
+              "name": "setEditorSyntax",
+              "privacy": "private",
+              "description": "Resolve and set a new active CodeMirror syntax"
+            },
+            {
+              "kind": "field",
+              "name": "setLanguagePickerRef",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onSelectLanguage",
+              "privacy": "private",
+              "description": "Function to call when the user selects a new language from the language picker dropdown."
+            },
+            {
+              "kind": "method",
+              "name": "activeLanguageChanged",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "nextLanguage",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "prevLanguage",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Update the internal state, for both the component and CodeMirror, when the\n`activeLanguage` prop changes"
+            },
+            {
+              "kind": "field",
+              "name": "executeHandler",
+              "type": {
+                "text": "(contents: EditorContents) => Promise<unknown> | undefined"
+              },
+              "privacy": "public",
+              "description": "Function to be evaluated over the contents of the editor."
+            },
+            {
+              "kind": "field",
+              "name": "execute",
+              "type": {
+                "text": "Command"
+              },
+              "privacy": "private",
+              "description": "Wrapper around the `executeHandler` function, needed to run using CodeMirror keyboard shortcuts."
+            },
+            {
+              "kind": "field",
+              "name": "contentChangeHandler",
+              "type": {
+                "text": "EditorUpdateHandlerCb | undefined"
+              },
+              "privacy": "public",
+              "description": "Callback function to invoke whenever the editor contents are updated."
+            },
+            {
+              "kind": "field",
+              "name": "autofocus",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Autofocus the editor on page load"
+            },
+            {
+              "kind": "field",
+              "name": "lineNumbersConf",
+              "privacy": "private",
+              "default": "new Compartment()"
+            },
+            {
+              "kind": "field",
+              "name": "lineNumbers",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "true",
+              "description": "Determines the visibility of line numbers"
+            },
+            {
+              "kind": "method",
+              "name": "onSetLineNumbers",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "nextValue",
+                  "type": {
+                    "text": "boolean"
+                  }
+                },
+                {
+                  "name": "prevValue",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "lineWrappingConf",
+              "privacy": "private",
+              "default": "new Compartment()"
+            },
+            {
+              "kind": "field",
+              "name": "lineWrapping",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Control line wrapping of text inside the editor"
+            },
+            {
+              "kind": "method",
+              "name": "onSetLineWrapping",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "nextValue",
+                  "type": {
+                    "text": "boolean"
+                  }
+                },
+                {
+                  "name": "prevValue",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "foldGutterConf",
+              "privacy": "private",
+              "default": "new Compartment()"
+            },
+            {
+              "kind": "field",
+              "name": "foldGutter",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "true",
+              "description": "Enables ability to fold sections of code if the syntax package supports it"
+            },
+            {
+              "kind": "method",
+              "name": "onSetfoldGutter",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "nextValue",
+                  "type": {
+                    "text": "boolean"
+                  }
+                },
+                {
+                  "name": "prevValue",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "keymap",
+              "type": {
+                "text": "Keymap[]"
+              },
+              "privacy": "public",
+              "default": "[]",
+              "description": "Custom keyboard shortcuts to pass along to CodeMirror"
+            },
+            {
+              "kind": "field",
+              "name": "setErrors",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "getCodeMirrorConfig",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "initCodeMirror",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "attachEditorToDom",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getContents",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<EditorContents>"
+                }
+              },
+              "description": "Retrieve the Editor contents and active language."
+            },
+            {
+              "kind": "field",
+              "name": "setContentsHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "setContents",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<string>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "contents",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Replace the contents of the Editor with a supplied string."
+            },
+            {
+              "kind": "field",
+              "name": "textSlotObserver",
+              "privacy": "private",
+              "default": "new MutationObserver(() => {\n    const updatedText = this.textSlot?.textContent ?? ''\n    this.setContentsHandler(updatedText)\n  })"
+            },
+            {
+              "kind": "method",
+              "name": "getState",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<EditorStateJSON>"
+                }
+              },
+              "description": "Retrieve a JSON representation of the the internal editor state."
+            },
+            {
+              "kind": "method",
+              "name": "setState",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "EditorStateJSON"
+                  }
+                }
+              ],
+              "description": "Update the internal editor state with the given JSON object."
+            },
+            {
+              "kind": "method",
+              "name": "setStateFromString",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "content",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Create a new editor state from a given string.\nThe string will be used as the initial contents of the editor."
+            },
+            {
+              "kind": "method",
+              "name": "getRef",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "Promise<EditorView>"
+                }
+              },
+              "description": "Retrieve a reference to the internal CodeMirror editor.\nAllows for maintaining state from applications making use of this component."
+            },
+            {
+              "kind": "field",
+              "name": "stopEventPropagation",
+              "privacy": "private",
+              "description": "Prevents keyboard event listeners attached to parent DOM elements from firing.\nThis is to avoid conflicts when user has focused on the editor."
+            },
+            {
+              "kind": "field",
+              "name": "focus",
+              "privacy": "private",
+              "description": "Brings DOM focus to the editor"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "contents",
+              "fieldName": "contents",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "language-capabilities",
+              "fieldName": "languageCapabilities",
+              "type": {
+                "text": "FileFormatMap"
+              }
+            },
+            {
+              "name": "executable-languages",
+              "fieldName": "executableLanguages",
+              "type": {
+                "text": "FileFormatMap"
+              }
+            },
+            {
+              "name": "read-only",
+              "fieldName": "readOnly"
+            },
+            {
+              "name": "active-language",
+              "fieldName": "activeLanguage",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "execute-handler",
+              "fieldName": "executeHandler",
+              "type": {
+                "text": "(contents: EditorContents) => Promise<unknown>"
+              }
+            },
+            {
+              "name": "content-change-handler",
+              "fieldName": "contentChangeHandler",
+              "type": {
+                "text": "EditorUpdateHandlerCb"
+              }
+            },
+            {
+              "name": "autofocus",
+              "fieldName": "autofocus"
+            },
+            {
+              "name": "line-numbers",
+              "fieldName": "lineNumbers"
+            },
+            {
+              "name": "line-wrapping",
+              "fieldName": "lineWrapping"
+            },
+            {
+              "name": "fold-gutter",
+              "fieldName": "foldGutter"
+            },
+            {
+              "name": "keymap",
+              "fieldName": "keymap",
+              "type": {
+                "text": "Keymap[]"
+              }
+            }
+          ],
+          "tagName": "stencila-editor",
+          "events": [
+            {
+              "name": "stencila-language-change",
+              "type": {
+                "text": "EventEmitter<FileFormat>"
+              },
+              "description": "Event emitted when the language of the editor is changed."
+            },
+            {
+              "name": "stencila-content-change",
+              "type": {
+                "text": "EventEmitter<ViewUpdate>"
+              },
+              "description": "Event emitted when the content of the editor is changed."
+            }
+          ],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Editor",
+          "declaration": {
+            "name": "Editor",
+            "module": "src/components/editor/editor.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-editor",
+          "declaration": {
+            "name": "Editor",
+            "module": "src/components/editor/editor.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/error/error.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "CodeErrorComponent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "CodeError | undefined"
+              },
+              "description": "The `CodeError` node"
+            },
+            {
+              "kind": "field",
+              "name": "level",
+              "type": {
+                "text": "Level | undefined"
+              },
+              "description": "The severity of the error message"
+            },
+            {
+              "kind": "method",
+              "name": "updateLevel",
+              "privacy": "private",
+              "description": "Update the level, if not defined, based on the content of the `type` slot\n\nIn the future, `CodeError` is likely to be replace with `CodeNotification` (or similar)\nand `level` will be a property (so it does not need to be derived here)"
+            },
+            {
+              "kind": "field",
+              "name": "hasStackTrace",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "description": "Flag for whether there is a stack trace"
+            },
+            {
+              "kind": "method",
+              "name": "updateHasStackTrace",
+              "privacy": "private",
+              "description": "Determine if the `stacktrace` slot has content"
+            },
+            {
+              "kind": "field",
+              "name": "stackTraceIsOpen",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "description": "Toggle for visibility of the stack trace"
+            },
+            {
+              "kind": "field",
+              "name": "toggleStackTraceIsOpen",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaCodeErrorElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "CodeError"
+              }
+            },
+            {
+              "name": "level",
+              "fieldName": "level",
+              "type": {
+                "text": "Level"
+              }
+            }
+          ],
+          "tagName": "stencila-code-error",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "CodeErrorComponent",
+          "declaration": {
+            "name": "CodeErrorComponent",
+            "module": "src/components/error/error.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-code-error",
+          "declaration": {
+            "name": "CodeErrorComponent",
+            "module": "src/components/error/error.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/icon/icon.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Icon",
+          "members": [
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": {
+                "text": "IconNames"
+              },
+              "privacy": "public",
+              "description": "Name of the icon to be rendered.\nCorresponds to icon names from the [Remix Icon set](http://remixicon.com)"
+            },
+            {
+              "kind": "field",
+              "name": "iconStyle",
+              "type": {
+                "text": "'fill' | 'line'"
+              },
+              "privacy": "public",
+              "description": "Style with which to render the icon"
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "Colors | string | undefined"
+              },
+              "privacy": "public",
+              "description": "The fill color of the icon"
+            },
+            {
+              "kind": "field",
+              "name": "iconUrl",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "public",
+              "description": "The URL of the SVG file containing icon symbols"
+            },
+            {
+              "kind": "field",
+              "name": "fetchIcons",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "icon",
+              "fieldName": "icon",
+              "type": {
+                "text": "IconNames"
+              }
+            },
+            {
+              "name": "icon-style",
+              "fieldName": "iconStyle",
+              "type": {
+                "text": "'fill' | 'line'"
+              }
+            },
+            {
+              "name": "color",
+              "fieldName": "color",
+              "type": {
+                "text": "Colors | string"
+              }
+            },
+            {
+              "name": "icon-url",
+              "fieldName": "iconUrl",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "tagName": "stencila-icon",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Icon",
+          "declaration": {
+            "name": "Icon",
+            "module": "src/components/icon/icon.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-icon",
+          "declaration": {
+            "name": "Icon",
+            "module": "src/components/icon/icon.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/imageObject/imageObject.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ImageObjectComponent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "image",
+              "type": {
+                "text": "ImageObject"
+              },
+              "description": "The `ImageObject` node to render"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "HTMLImageElement"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "image",
+              "fieldName": "image",
+              "type": {
+                "text": "ImageObject"
+              }
+            }
+          ],
+          "tagName": "stencila-image-object",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ImageObjectComponent",
+          "declaration": {
+            "name": "ImageObjectComponent",
+            "module": "src/components/imageObject/imageObject.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-image-object",
+          "declaration": {
+            "name": "ImageObjectComponent",
+            "module": "src/components/imageObject/imageObject.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/imageObject/imageObjectUtils.tsx",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "preferredImageObjectComponent",
+          "return": {
+            "type": {
+              "text": "HTMLStencilaImageObjectElement | HTMLStencilaImagePlotlyElement"
+            }
+          },
+          "parameters": [
+            {
+              "name": "image",
+              "type": {
+                "text": "ImageObject"
+              },
+              "description": "The image to return a component for"
+            }
+          ],
+          "description": "Return the preferred component for an `ImageObject`.\n\nLooks in the `content` property of the image (if any) and returns\na component for the first recognized node in that array. Similar\nin behaviour to the HTML `<picture>` element."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "preferredImageObjectComponent",
+          "declaration": {
+            "name": "preferredImageObjectComponent",
+            "module": "src/components/imageObject/imageObjectUtils.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/input/input.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Input",
+          "members": [
+            {
+              "kind": "field",
+              "name": "autoFocus",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Automatically bring cursor focus to the input field on render."
+            },
+            {
+              "kind": "field",
+              "name": "inputmode",
+              "type": {
+                "text": "| 'text'\n    | 'tel'\n    | 'url'\n    | 'email'\n    | 'numeric'\n    | 'decimal'\n    | 'search' | undefined"
+              },
+              "description": "A hint to the browser for which keyboard to display."
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "'text' | 'password' | 'number' | 'file' | 'search'"
+              },
+              "privacy": "public",
+              "default": "'text'",
+              "description": "Type of input field."
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "The name of the input, submitted as the value's label inside the form data."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Accessible text label for the input field. Defaults to the input's `name` prop."
+            },
+            {
+              "kind": "field",
+              "name": "hideLabel",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Visually conceal the input label.\nUse sparingly for simple forms only with a descriptive action button."
+            },
+            {
+              "kind": "field",
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Render the label and input field as inline elements."
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "public",
+              "description": "Short hint demonstrating expected input value. Shown when the input is empty."
+            },
+            {
+              "kind": "field",
+              "name": "iconStart",
+              "type": {
+                "text": "IconNames | undefined"
+              },
+              "privacy": "public",
+              "description": "Icon to show at the start of the input field."
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "When `true` value must be provided before submitting."
+            },
+            {
+              "kind": "field",
+              "name": "readOnly",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Indicate that this is a controlled input, preventing user editing of the value"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number | string | undefined"
+              },
+              "default": "''",
+              "description": "Text value of the input."
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "auto-focus",
+              "fieldName": "autoFocus"
+            },
+            {
+              "name": "inputmode",
+              "fieldName": "inputmode",
+              "type": {
+                "text": "| 'text'\n    | 'tel'\n    | 'url'\n    | 'email'\n    | 'numeric'\n    | 'decimal'\n    | 'search'"
+              }
+            },
+            {
+              "name": "type",
+              "fieldName": "type",
+              "type": {
+                "text": "'text' | 'password' | 'number' | 'file' | 'search'"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "hide-label",
+              "fieldName": "hideLabel"
+            },
+            {
+              "name": "inline",
+              "fieldName": "inline"
+            },
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "icon-start",
+              "fieldName": "iconStart",
+              "type": {
+                "text": "IconNames"
+              }
+            },
+            {
+              "name": "required",
+              "fieldName": "required"
+            },
+            {
+              "name": "read-only",
+              "fieldName": "readOnly"
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "number | string"
+              }
+            }
+          ],
+          "tagName": "stencila-input",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Input",
+          "declaration": {
+            "name": "Input",
+            "module": "src/components/input/input.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-input",
+          "declaration": {
+            "name": "Input",
+            "module": "src/components/input/input.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/menu/menu.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Menu",
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaCodeFragmentElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "menuEl",
+              "type": {
+                "text": "HTMLUListElement | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "popperRef",
+              "type": {
+                "text": "Instance | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "isOpen",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Determines whether the Menu is shown or not"
+            },
+            {
+              "kind": "field",
+              "name": "autoClose",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "true",
+              "description": "Close the menu when losing focus"
+            },
+            {
+              "kind": "field",
+              "name": "autoOpen",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Open the menu on hover or when gaining focus"
+            },
+            {
+              "kind": "field",
+              "name": "menuPosition",
+              "type": {
+                "text": "Placement"
+              },
+              "privacy": "public",
+              "default": "'right-start'",
+              "description": "The position relative to the toggle button where the menu should appear."
+            },
+            {
+              "kind": "field",
+              "name": "initMenu"
+            },
+            {
+              "kind": "field",
+              "name": "computeMenuLocation",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "toggleMenu",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "openMenu",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "closeMenu",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "autoCloseTimeoutRef",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "closeOnBlur",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "clearTimeout",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "menuId",
+              "privacy": "private",
+              "default": "`stencila-menu-${menuIds++}`"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "is-open",
+              "fieldName": "isOpen"
+            },
+            {
+              "name": "auto-close",
+              "fieldName": "autoClose"
+            },
+            {
+              "name": "auto-open",
+              "fieldName": "autoOpen"
+            },
+            {
+              "name": "menu-position",
+              "fieldName": "menuPosition",
+              "type": {
+                "text": "Placement"
+              }
+            }
+          ],
+          "tagName": "stencila-menu",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Menu",
+          "declaration": {
+            "name": "Menu",
+            "module": "src/components/menu/menu.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-menu",
+          "declaration": {
+            "name": "Menu",
+            "module": "src/components/menu/menu.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/menuItem/menuItem.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "MenuItem",
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaMenuItemElement | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": {
+                "text": "IconNames | undefined"
+              },
+              "description": "Name of the icon to show before the label"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'xsmall' | 'small' | 'default' | 'large'"
+              },
+              "privacy": "public",
+              "default": "'default'",
+              "description": "The overall size of the component."
+            },
+            {
+              "kind": "field",
+              "name": "role",
+              "type": {
+                "text": "'menuitem' | 'menuitemradio' | 'menuitemcheckbox'"
+              },
+              "privacy": "public",
+              "default": "'menuitem'",
+              "description": "The overall size of the component."
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Determines whether the menu item is enabled/clickable or not"
+            },
+            {
+              "kind": "field",
+              "name": "divider",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Renders the menu item as a section divider.\nIt does not have any click or hover handlers"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "icon",
+              "fieldName": "icon",
+              "type": {
+                "text": "IconNames | undefined"
+              }
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'xsmall' | 'small' | 'default' | 'large'"
+              }
+            },
+            {
+              "name": "role",
+              "fieldName": "role",
+              "type": {
+                "text": "'menuitem' | 'menuitemradio' | 'menuitemcheckbox'"
+              }
+            },
+            {
+              "name": "disabled",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "divider",
+              "fieldName": "divider"
+            }
+          ],
+          "tagName": "stencila-menu-item",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "MenuItem",
+          "declaration": {
+            "name": "MenuItem",
+            "module": "src/components/menuItem/menuItem.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-menu-item",
+          "declaration": {
+            "name": "MenuItem",
+            "module": "src/components/menuItem/menuItem.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/nodeList/nodeList.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "OutputsList",
+          "slots": [
+            {
+              "description": "A list or collection of elements to render. If empty, a message stating \"No output to show\" will be rendered instead.",
+              "name": "default"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaNodeListElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "emptyOutputMessage",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "'No output to show'"
+            },
+            {
+              "kind": "field",
+              "name": "isEmpty",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "kind": "field",
+              "name": "checkIfEmpty"
+            },
+            {
+              "kind": "field",
+              "name": "childObserver",
+              "privacy": "private",
+              "default": "new MutationObserver(this.checkIfEmpty)"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "tagName": "stencila-node-list",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "OutputsList",
+          "declaration": {
+            "name": "OutputsList",
+            "module": "src/components/nodeList/nodeList.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-node-list",
+          "declaration": {
+            "name": "OutputsList",
+            "module": "src/components/nodeList/nodeList.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/parameter/parameter.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Stencila Parameter component",
+          "name": "Parameter",
+          "slots": [
+            {
+              "description": "The name of the parameter",
+              "name": "name"
+            },
+            {
+              "description": "The current value of the parameter",
+              "name": "value"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaParameterElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labelSlotRef",
+              "type": {
+                "text": "Element | undefined"
+              },
+              "privacy": "private",
+              "default": "undefined"
+            },
+            {
+              "kind": "field",
+              "name": "valueSlotRef",
+              "type": {
+                "text": "Element | undefined"
+              },
+              "privacy": "private",
+              "default": "undefined"
+            },
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "'read' | 'edit'"
+              },
+              "default": "'edit'",
+              "description": "The context of the component. In `read` mode the parameter validator and its\nproperties cannot be edited."
+            },
+            {
+              "kind": "field",
+              "name": "validator",
+              "type": {
+                "text": "ValidatorTypes | undefined"
+              },
+              "description": "The Stencila `Validator` Schema with which to configure and validate the parameter."
+            },
+            {
+              "kind": "field",
+              "name": "paramName",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "onParamChange",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onParamNameChange",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onValidatorChange"
+            },
+            {
+              "kind": "field",
+              "name": "validateValue",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "getValidatorFromMetaEl",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "mode",
+              "fieldName": "mode",
+              "type": {
+                "text": "'read' | 'edit'"
+              }
+            },
+            {
+              "name": "validator",
+              "fieldName": "validator",
+              "type": {
+                "text": "ValidatorTypes"
+              }
+            }
+          ],
+          "tagName": "stencila-parameter",
+          "events": [
+            {
+              "name": "stencila-parameter-change",
+              "type": {
+                "text": "EventEmitter"
+              },
+              "description": "Event emitted when either the name of value of the parameter changes.\nYou can use the `type` property of the event detail to determine the type\nof change, it will be either `value` or `name`."
+            },
+            {
+              "name": "stencila-validator-change",
+              "type": {
+                "text": "EventEmitter"
+              },
+              "description": "Event emitted when either the type or property of the parameter validator\nchanges.\nYou can use the `type` property of the event detail to determine the type\nof change, it will be either `validator` or `property`."
+            }
+          ],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Parameter",
+          "declaration": {
+            "name": "Parameter",
+            "module": "src/components/parameter/parameter.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-parameter",
+          "declaration": {
+            "name": "Parameter",
+            "module": "src/components/parameter/parameter.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/projectGraph/projectGraph.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ProjectGraph",
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLDivElement | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "graph",
+              "type": {
+                "text": "Graph"
+              },
+              "description": "The project graph data to render"
+            },
+            {
+              "kind": "method",
+              "name": "updateGraph",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "nextGraph",
+                  "type": {
+                    "text": "Graph"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "graphRef",
+              "type": {
+                "text": "{\n    height: number\n    width: number\n    svg: Selection<SVGGElement, unknown, null, undefined>\n  }"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "nodeContainer",
+              "type": {
+                "text": "| Selection<SVGGElement, unknown, null, unknown>\n    | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "linkContainer",
+              "type": {
+                "text": "| Selection<SVGGElement, unknown, null, unknown>\n    | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "hullContainer",
+              "type": {
+                "text": "| Selection<SVGGElement, unknown, null, unknown>\n    | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "drawGraph",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "graph",
+              "fieldName": "graph",
+              "type": {
+                "text": "Graph"
+              }
+            }
+          ],
+          "tagName": "stencila-project-graph",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ProjectGraph",
+          "declaration": {
+            "name": "ProjectGraph",
+            "module": "src/components/projectGraph/projectGraph.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-project-graph",
+          "declaration": {
+            "name": "ProjectGraph",
+            "module": "src/components/projectGraph/projectGraph.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tab/tab.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Tab",
+          "members": [
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "public",
+              "default": "'#'",
+              "description": "The link the tab should navigate to"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "public",
+              "description": "The displayed text of the Tab"
+            },
+            {
+              "kind": "field",
+              "name": "isSelected",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Indicates whether the current tab is \"selected\""
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "fieldName": "href"
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "selected",
+              "fieldName": "isSelected"
+            }
+          ],
+          "tagName": "stencila-tab",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Tab",
+          "declaration": {
+            "name": "Tab",
+            "module": "src/components/tab/tab.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-tab",
+          "declaration": {
+            "name": "Tab",
+            "module": "src/components/tab/tab.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tabList/tabList.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "TabList",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tabs",
+              "type": {
+                "text": "ChildTab[]"
+              },
+              "privacy": "public",
+              "description": "A list of string values to use as tab labels"
+            },
+            {
+              "kind": "field",
+              "name": "activeTabIndex",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0"
+            },
+            {
+              "kind": "method",
+              "name": "selectTab",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onKeyboardNavigateTabs",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "clickHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "HTMLUListElement"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "tabs",
+              "fieldName": "tabs",
+              "type": {
+                "text": "ChildTab[]"
+              }
+            }
+          ],
+          "tagName": "stencila-tab-list",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TabList",
+          "declaration": {
+            "name": "TabList",
+            "module": "src/components/tabList/tabList.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-tab-list",
+          "declaration": {
+            "name": "TabList",
+            "module": "src/components/tabList/tabList.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/toast/toast.spec.tsx",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/toast/toast.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "StencilaToast",
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaToastElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "timeout",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "dismissable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "If true, shows a \"close\" button to immediately dismiss the toast.\nNote that this prop has no effect if `duration` is set to zero, in which case\nthe toast will always show the \"close\" button."
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "4_000",
+              "description": "Duration in milliseconds for how long the toast should be display\nSetting `duration` to `0` will disable auto-dismissal of the toast."
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "ToastType"
+              },
+              "description": "Type of the toast to show. Affects the component colour scheme."
+            },
+            {
+              "kind": "field",
+              "name": "position",
+              "type": {
+                "text": "ToastPosition | undefined"
+              },
+              "description": "Where on the screen to show the Toast. Overrides the base position set in the `ToastController` instance."
+            },
+            {
+              "kind": "field",
+              "name": "getIconByType",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "dismiss",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "pauseAutoDismiss",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "autoDismiss",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "styleActionButtons",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "dismissable",
+              "fieldName": "dismissable"
+            },
+            {
+              "name": "duration",
+              "fieldName": "duration"
+            },
+            {
+              "name": "type",
+              "fieldName": "type",
+              "type": {
+                "text": "ToastType"
+              }
+            },
+            {
+              "name": "position",
+              "fieldName": "position",
+              "type": {
+                "text": "ToastPosition | undefined"
+              }
+            }
+          ],
+          "tagName": "stencila-toast",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "StencilaToast",
+          "declaration": {
+            "name": "StencilaToast",
+            "module": "src/components/toast/toast.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-toast",
+          "declaration": {
+            "name": "StencilaToast",
+            "module": "src/components/toast/toast.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/toastContainer/toastContainer.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "StencilaToastContainer",
+          "members": [
+            {
+              "kind": "field",
+              "name": "position",
+              "type": {
+                "text": "ToastPosition"
+              },
+              "description": "Default position of Toasts on the screen.\nCan be overridden by individual Toast instances."
+            },
+            {
+              "kind": "method",
+              "name": "render"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "position",
+              "fieldName": "position",
+              "type": {
+                "text": "ToastPosition"
+              }
+            }
+          ],
+          "tagName": "stencila-toast-container",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "StencilaToastContainer",
+          "declaration": {
+            "name": "StencilaToastContainer",
+            "module": "src/components/toastContainer/toastContainer.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-toast-container",
+          "declaration": {
+            "name": "StencilaToastContainer",
+            "module": "src/components/toastContainer/toastContainer.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/toolbar/toolbar.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Toolbar",
+          "members": [
+            {
+              "kind": "field",
+              "name": "position",
+              "type": {
+                "text": "'static' | 'fixed'"
+              },
+              "privacy": "public",
+              "default": "'static'",
+              "description": "When `fixed` the Navbar will remain pinned to the top of the screen.\nNote that if the Navbar component is not followed by a sibling element,\nyou will have to set `margin-top: 3rem` on the following element yourself."
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "Colors | string"
+              },
+              "privacy": "public",
+              "description": "The background fill color of the Navbar"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "position",
+              "fieldName": "position",
+              "type": {
+                "text": "'static' | 'fixed'"
+              }
+            },
+            {
+              "name": "color",
+              "fieldName": "color",
+              "type": {
+                "text": "Colors | string"
+              }
+            }
+          ],
+          "tagName": "stencila-toolbar",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Toolbar",
+          "declaration": {
+            "name": "Toolbar",
+            "module": "src/components/toolbar/toolbar.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-toolbar",
+          "declaration": {
+            "name": "Toolbar",
+            "module": "src/components/toolbar/toolbar.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tooltip/tooltip.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Tooltip",
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaTooltipElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "text",
+              "type": {
+                "text": "string"
+              },
+              "description": "The text content of the Tooltip."
+            },
+            {
+              "kind": "field",
+              "name": "position",
+              "type": {
+                "text": "Placement"
+              },
+              "default": "'bottom'",
+              "description": "The placement of the tooltip"
+            },
+            {
+              "kind": "field",
+              "name": "tooltipRef",
+              "type": {
+                "text": "HTMLSpanElement | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "popperRef",
+              "type": {
+                "text": "Instance | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "showTooltip",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onMouseMoveHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "onMouseOutHandler",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "destroyTooltip",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "loadComponent",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "unloadComponent",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "watchHandler",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "newText",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "HTMLElement"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "text",
+              "fieldName": "text",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "position",
+              "fieldName": "position",
+              "type": {
+                "text": "Placement"
+              }
+            }
+          ],
+          "tagName": "stencila-tooltip",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Tooltip",
+          "declaration": {
+            "name": "Tooltip",
+            "module": "src/components/tooltip/tooltip.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-tooltip",
+          "declaration": {
+            "name": "Tooltip",
+            "module": "src/components/tooltip/tooltip.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tooltipElement/tooltipElement.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "TooltipElement",
+          "members": [
+            {
+              "kind": "method",
+              "name": "render",
+              "privacy": "public"
+            }
+          ],
+          "tagName": "stencila-tooltip-element",
+          "events": [],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TooltipElement",
+          "declaration": {
+            "name": "TooltipElement",
+            "module": "src/components/tooltipElement/tooltipElement.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-tooltip-element",
+          "declaration": {
+            "name": "TooltipElement",
+            "module": "src/components/tooltipElement/tooltipElement.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/button/test/button.spec.tsx",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/editor/components/languageSelect.tsx",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "LanguagePicker",
+          "return": {
+            "type": {
+              "text": "FunctionalComponent"
+            }
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "type": {
+                "text": "Props"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LanguagePicker",
+          "declaration": {
+            "name": "LanguagePicker",
+            "module": "src/components/editor/components/languageSelect.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/imageDynamic/imagePlotly/imagePlotly.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ImagePlotlyComponent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaImagePlotlyElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "plotContainer",
+              "type": {
+                "text": "HTMLDivElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "data",
+              "type": {
+                "text": "Data[] | undefined"
+              },
+              "description": "The Plotly data to render as an interactive visualization."
+            },
+            {
+              "kind": "field",
+              "name": "layout",
+              "type": {
+                "text": "Partial<Layout> | undefined"
+              },
+              "description": "The Plotly layout settings object"
+            },
+            {
+              "kind": "field",
+              "name": "config",
+              "type": {
+                "text": "Partial<Config> | undefined"
+              },
+              "description": "The Plotly configuration object"
+            },
+            {
+              "kind": "field",
+              "name": "plotIsRendered",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "onPlotlyLoad",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "When detecting that the Plotly.js has loaded, render the data if it hasn’t been rendered already"
+            },
+            {
+              "kind": "field",
+              "name": "renderPlot",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "getPlotContent",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "return": {
+                "type": {
+                  "text": "HTMLStencilaImagePlotlyElement"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "data",
+              "fieldName": "data",
+              "type": {
+                "text": "Data[]"
+              }
+            },
+            {
+              "name": "layout",
+              "fieldName": "layout",
+              "type": {
+                "text": "Partial<Layout>"
+              }
+            },
+            {
+              "name": "config",
+              "fieldName": "config",
+              "type": {
+                "text": "Partial<Config>"
+              }
+            }
+          ],
+          "tagName": "stencila-image-plotly",
+          "events": [
+            {
+              "name": "stencila-plotly-load",
+              "type": {
+                "text": "EventEmitter"
+              },
+              "description": "Custom event emitter to indicate that the loading of the Plotly.js script has finished"
+            }
+          ],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ImagePlotlyComponent",
+          "declaration": {
+            "name": "ImagePlotlyComponent",
+            "module": "src/components/imageDynamic/imagePlotly/imagePlotly.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-image-plotly",
+          "declaration": {
+            "name": "ImagePlotlyComponent",
+            "module": "src/components/imageDynamic/imagePlotly/imagePlotly.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/imageDynamic/imageVega/imageVega.tsx",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ImageVegaComponent",
+          "members": [
+            {
+              "kind": "field",
+              "name": "el",
+              "type": {
+                "text": "HTMLStencilaImageVegaElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "plotContainer",
+              "type": {
+                "text": "HTMLDivElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "vegaDependency",
+              "type": {
+                "text": "VegaDependency"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "detectVegaDependency",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "spec",
+              "type": {
+                "text": "VisualizationSpec | string | undefined"
+              },
+              "description": "The Vega or Vega-Lite spec"
+            },
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "Record<string, unknown> | undefined"
+              },
+              "default": "{}",
+              "description": "A JavaScript object containing options for embedding"
+            },
+            {
+              "kind": "field",
+              "name": "plotIsRendered",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "getPlotContent",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "onVegaLoad",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent<VegaLoadEvent>"
+                  }
+                }
+              ],
+              "description": "When detecting that the Vega JS has loaded, render the data if it hasn’t been rendered already"
+            },
+            {
+              "kind": "field",
+              "name": "renderPlot",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "return": {
+                "type": {
+                  "text": "HTMLStencilaImageVegaElement"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "spec",
+              "fieldName": "spec",
+              "type": {
+                "text": "VisualizationSpec | string"
+              }
+            },
+            {
+              "name": "options",
+              "fieldName": "options",
+              "type": {
+                "text": "Record<string, unknown>"
+              }
+            }
+          ],
+          "tagName": "stencila-image-vega",
+          "events": [
+            {
+              "name": "stencila-vega-load",
+              "type": {
+                "text": "EventEmitter<VegaLoadEvent>"
+              },
+              "description": "Custom event emitter to indicate that the loading of the Vega JS script has finished"
+            }
+          ],
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ImageVegaComponent",
+          "declaration": {
+            "name": "ImageVegaComponent",
+            "module": "src/components/imageDynamic/imageVega/imageVega.tsx"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "stencila-image-vega",
+          "declaration": {
+            "name": "ImageVegaComponent",
+            "module": "src/components/imageDynamic/imageVega/imageVega.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/parameter/validators/booleanValidator.tsx",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "BooleanValidator",
+          "return": {
+            "type": {
+              "text": "FunctionalComponent"
+            }
+          },
+          "parameters": [
+            {
+              "name": "{\n  valueEl,\n}",
+              "type": {
+                "text": "{\n  valueEl?: Element\n}"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "BooleanValidator",
+          "declaration": {
+            "name": "BooleanValidator",
+            "module": "src/components/parameter/validators/booleanValidator.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/parameter/validators/constantValidator.tsx",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "ConstantValidator",
+          "return": {
+            "type": {
+              "text": "FunctionalComponent"
+            }
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ConstantValidator",
+          "declaration": {
+            "name": "ConstantValidator",
+            "module": "src/components/parameter/validators/constantValidator.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/parameter/validators/index.tsx",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "Validator",
+          "return": {
+            "type": {
+              "text": "FunctionalComponent"
+            }
+          },
+          "parameters": [
+            {
+              "name": "props",
+              "type": {
+                "text": "Props"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Validator",
+          "declaration": {
+            "name": "Validator",
+            "module": "src/components/parameter/validators/index.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/parameter/validators/integerValidator.tsx",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "IntegerValidator",
+          "return": {
+            "type": {
+              "text": "FunctionalComponent"
+            }
+          },
+          "parameters": [
+            {
+              "name": "{\n  valueEl,\n}",
+              "type": {
+                "text": "{\n  valueEl?: Element\n}"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "IntegerValidator",
+          "declaration": {
+            "name": "IntegerValidator",
+            "module": "src/components/parameter/validators/integerValidator.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/parameter/validators/numberValidator.tsx",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "NumberValidator",
+          "return": {
+            "type": {
+              "text": "FunctionalComponent"
+            }
+          },
+          "parameters": [
+            {
+              "name": "{\n  valueEl,\n}",
+              "type": {
+                "text": "{\n  valueEl?: Element\n}"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "NumberValidator",
+          "declaration": {
+            "name": "NumberValidator",
+            "module": "src/components/parameter/validators/numberValidator.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/parameter/validators/stringValidator.tsx",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "StringValidator",
+          "return": {
+            "type": {
+              "text": "FunctionalComponent"
+            }
+          },
+          "parameters": [
+            {
+              "name": "{\n  valueEl,\n}",
+              "type": {
+                "text": "{\n  valueEl?: Element\n}"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "StringValidator",
+          "declaration": {
+            "name": "StringValidator",
+            "module": "src/components/parameter/validators/stringValidator.tsx"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/imageDynamic/imagePlotly/test/imagePlotly.spec.tsx",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/imageDynamic/imageVega/test/imageVega.spec.tsx",
+      "declarations": [],
+      "exports": []
+    }
+  ]
+}

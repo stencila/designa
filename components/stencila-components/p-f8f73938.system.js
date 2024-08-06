@@ -1,0 +1,2 @@
+System.register([],(function(t){"use strict";return{execute:function(){var e=t("g",(function(t){var e,u,r;return(r=(e=t.getAttribute("mode"))!==null&&e!==void 0?e:(u=document.querySelector("html"))===null||u===void 0?void 0:u.getAttribute("mode"))!==null&&r!==void 0?r:"default"}))}}}));
+//# sourceMappingURL=p-f8f73938.system.js.map

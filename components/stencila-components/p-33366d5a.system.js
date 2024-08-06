@@ -1,0 +1,2 @@
+System.register([],(function(r){"use strict";return{execute:function(){var n=r("g",(function(r){return function(n){if(!r)return[];var t=Array.isArray(n)?n:[n];if(n.includes("default")){t.push("")}var e=Array.from(r.children);var u=e.filter((function(r){return t.includes(r.slot)}));return u}}))}}}));
+//# sourceMappingURL=p-33366d5a.system.js.map

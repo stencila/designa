@@ -1,0 +1,2 @@
+const o=o=>document.querySelector(`head script[src="${o}"]`)!==null;const n=({src:n,onInit:c,onLoad:t})=>{var d;if(o(n))return;const s=document.createElement("script");s.setAttribute("src",n);c===null||c===void 0?void 0:c();s.addEventListener("load",t);(d=document.querySelector("head"))===null||d===void 0?void 0:d.appendChild(s)};const c=o=>{const n=document.createElement("div");const c=o.querySelector("picture");const t=c!==null&&c!==void 0?c:o;t.appendChild(n);return n};export{c,n as i};
+//# sourceMappingURL=p-bfd527b9.js.map
