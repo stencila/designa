@@ -44,7 +44,7 @@
     "@stencila/brand": "0.7.31"
   },
   "devDependencies": {
-    "cssnano": "5.1.5",
+    "cssnano": "7.0.6",
     "parcel": "2.3.2",
     "tailwindcss": "3.0.23"
   }
