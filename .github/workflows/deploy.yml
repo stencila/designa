@@ -51,7 +51,7 @@ jobs:
       - name: Publish Storybook to Chromatic
         # Don’t send package update PRs to Chromatic
         if: success() && startsWith(github.head_ref, 'renovate/dev') != true
-        uses: chromaui/action@v1
+        uses: chromaui/action@v13
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
