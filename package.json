@@ -33,7 +33,7 @@
     "chromatic": "chromatic --storybook-build-dir docs"
   },
   "devDependencies": {
-    "@babel/core": "7.17.8",
+    "@babel/core": "7.29.6",
     "@stencila/dev-config": "3.0.4",
     "@stencila/eslint-config": "3.0.4",
     "@stencila/renovate-config": "0.4.3",
